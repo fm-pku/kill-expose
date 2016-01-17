@@ -1,0 +1,61 @@
+public class org.gjt.sp.jedit.msg.DynamicMenuChanged extends org.gjt.sp.jedit.EBMessage
+{
+    private java.lang.String name;
+
+    public void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.msg.DynamicMenuChanged r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(null);
+
+        r0.name = r1;
+
+        return;
+    }
+
+    public java.lang.String getMenuName()
+    {
+        org.gjt.sp.jedit.msg.DynamicMenuChanged r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.name;
+
+        return $r1;
+    }
+
+    public java.lang.String paramString()
+    {
+        org.gjt.sp.jedit.msg.DynamicMenuChanged r0;
+        java.lang.StringBuilder $r1, $r2, $r4, $r5, $r7;
+        java.lang.String $r3, $r6, $r8;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("menu=");
+
+        $r3 = r0.name;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.append(",");
+
+        $r6 = specialinvoke r0.paramString();
+
+        $r7 = $r5.append($r6);
+
+        $r8 = $r7.toString();
+
+        return $r8;
+    }
+}

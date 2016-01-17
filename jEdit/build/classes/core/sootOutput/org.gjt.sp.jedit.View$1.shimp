@@ -1,0 +1,49 @@
+class org.gjt.sp.jedit.View$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final javax.swing.JSplitPane val$newSplitPane;
+    final int val$dividerPosition;
+    final org.gjt.sp.jedit.View this$0;
+
+    void <init>(org.gjt.sp.jedit.View, javax.swing.JSplitPane, int)
+    {
+        org.gjt.sp.jedit.View$1 r0;
+        org.gjt.sp.jedit.View r1;
+        javax.swing.JSplitPane r2;
+        int i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        r0.this$0 = r1;
+
+        r0.val$newSplitPane = r2;
+
+        r0.val$dividerPosition = i0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.View$1 r0;
+        int $i0;
+        javax.swing.JSplitPane $r1;
+
+        r0 := @this;
+
+        $r1 = r0.val$newSplitPane;
+
+        $i0 = r0.val$dividerPosition;
+
+        $r1.setDividerLocation($i0);
+
+        return;
+    }
+}

@@ -1,0 +1,97 @@
+class org.gjt.sp.jedit.help.HelpViewer$PropertyChangeHandler extends java.lang.Object implements java.beans.PropertyChangeListener
+{
+    final org.gjt.sp.jedit.help.HelpViewer this$0;
+
+    void <init>(org.gjt.sp.jedit.help.HelpViewer)
+    {
+        org.gjt.sp.jedit.help.HelpViewer$PropertyChangeHandler r0;
+        org.gjt.sp.jedit.help.HelpViewer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void propertyChange(java.beans.PropertyChangeEvent)
+    {
+        org.gjt.sp.jedit.help.HelpViewer$PropertyChangeHandler r0;
+        java.beans.PropertyChangeEvent r1;
+        java.lang.String $r2, $r3, $r15, $r19, r20, r20_1, r20_2, r20_3;
+        boolean $z0;
+        org.gjt.sp.jedit.help.HelpViewer $r4, $r8, $r10, $r12, $r16;
+        javax.swing.JEditorPane $r5, $r13, $r17;
+        javax.swing.text.Document $r6;
+        java.lang.Object $r7;
+        javax.swing.JLabel $r9;
+        org.gjt.sp.jedit.help.HelpHistoryModel $r11;
+        java.net.URL $r14, $r18;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = "page";
+
+        $r3 = r1.getPropertyName();
+
+        $z0 = $r2.equals($r3);
+
+(0)     if $z0 == 0 goto label2;
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.help.HelpViewer.access$300($r4);
+
+        $r6 = $r5.getDocument();
+
+        $r7 = $r6.getProperty("title");
+
+        r20 = (java.lang.String) $r7;
+
+(1)     if r20 != null goto label1;
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.help.HelpViewer.access$300($r16);
+
+        $r18 = $r17.getPage();
+
+        $r19 = $r18.toString();
+
+(2)     r20_1 = org.gjt.sp.jedit.MiscUtilities.getFileName($r19);
+
+     label1:
+        r20_2 = Phi(r20 #1, r20_1 #2);
+
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.help.HelpViewer.access$1200($r8);
+
+        $r9.setText(r20_2);
+
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.help.HelpViewer.access$600($r10);
+
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.help.HelpViewer.access$300($r12);
+
+        $r14 = $r13.getPage();
+
+        $r15 = $r14.toString();
+
+(3)     $r11.updateTitle($r15, r20_2);
+
+     label2:
+        r20_3 = Phi(r20 #0, r20_2 #3);
+
+        return;
+    }
+}

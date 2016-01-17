@@ -1,0 +1,238 @@
+public class org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs extends java.lang.Object
+{
+    public static org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs DEFAULT;
+    public int selector;
+    java.lang.Object[] args;
+    int arg;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        r0.selector = -1;
+
+        r0.arg = 0;
+
+        return;
+    }
+
+    void <init>(int, java.lang.Object[])
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs r0;
+        int i0;
+        java.lang.Object[] r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.selector = -1;
+
+        r0.arg = 0;
+
+        r0.selector = i0;
+
+        r0.args = r1;
+
+        return;
+    }
+
+    java.lang.Object next()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs r0;
+        int $i0, $i1;
+        java.lang.Object[] $r1;
+        java.lang.Object $r2;
+
+        r0 := @this;
+
+        $r1 = r0.args;
+
+        $i0 = r0.arg;
+
+        $i1 = $i0 + 1;
+
+        r0.arg = $i1;
+
+        $r2 = $r1[$i0];
+
+        return $r2;
+    }
+
+    public boolean getBoolean()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs r0;
+        java.lang.Object $r1;
+        java.lang.Boolean $r2;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r1 = r0.next();
+
+        $r2 = (java.lang.Boolean) $r1;
+
+        $z0 = $r2.booleanValue();
+
+        return $z0;
+    }
+
+    public byte getByte()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs r0;
+        java.lang.Object $r1;
+        java.lang.Byte $r2;
+        byte $b0;
+
+        r0 := @this;
+
+        $r1 = r0.next();
+
+        $r2 = (java.lang.Byte) $r1;
+
+        $b0 = $r2.byteValue();
+
+        return $b0;
+    }
+
+    public char getChar()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs r0;
+        java.lang.Object $r1;
+        java.lang.Character $r2;
+        char $c0;
+
+        r0 := @this;
+
+        $r1 = r0.next();
+
+        $r2 = (java.lang.Character) $r1;
+
+        $c0 = $r2.charValue();
+
+        return $c0;
+    }
+
+    public short getShort()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs r0;
+        java.lang.Object $r1;
+        java.lang.Short $r2;
+        short $s0;
+
+        r0 := @this;
+
+        $r1 = r0.next();
+
+        $r2 = (java.lang.Short) $r1;
+
+        $s0 = $r2.shortValue();
+
+        return $s0;
+    }
+
+    public int getInt()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs r0;
+        java.lang.Object $r1;
+        java.lang.Integer $r2;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.next();
+
+        $r2 = (java.lang.Integer) $r1;
+
+        $i0 = $r2.intValue();
+
+        return $i0;
+    }
+
+    public long getLong()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs r0;
+        java.lang.Object $r1;
+        java.lang.Long $r2;
+        long $l0;
+
+        r0 := @this;
+
+        $r1 = r0.next();
+
+        $r2 = (java.lang.Long) $r1;
+
+        $l0 = $r2.longValue();
+
+        return $l0;
+    }
+
+    public double getDouble()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs r0;
+        java.lang.Object $r1;
+        java.lang.Double $r2;
+        double $d0;
+
+        r0 := @this;
+
+        $r1 = r0.next();
+
+        $r2 = (java.lang.Double) $r1;
+
+        $d0 = $r2.doubleValue();
+
+        return $d0;
+    }
+
+    public float getFloat()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs r0;
+        java.lang.Object $r1;
+        java.lang.Float $r2;
+        float $f0;
+
+        r0 := @this;
+
+        $r1 = r0.next();
+
+        $r2 = (java.lang.Float) $r1;
+
+        $f0 = $r2.floatValue();
+
+        return $f0;
+    }
+
+    public java.lang.Object getObject()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs r0;
+        java.lang.Object $r1;
+
+        r0 := @this;
+
+        $r1 = r0.next();
+
+        return $r1;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs $r0;
+
+        $r0 = new org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs;
+
+        specialinvoke $r0.<init>();
+
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs.DEFAULT = $r0;
+
+        return;
+    }
+}

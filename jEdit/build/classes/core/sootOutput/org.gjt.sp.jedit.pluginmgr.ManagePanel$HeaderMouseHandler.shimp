@@ -1,0 +1,168 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler extends java.awt.event.MouseAdapter
+{
+    final org.gjt.sp.jedit.pluginmgr.ManagePanel this$0;
+
+    private void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mouseClicked(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        javax.swing.JMenuItem r2;
+        java.lang.Object $r3;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r4, $r7, $r10, $r12, $r14, $r17, $r20, $r23, $r25, $r27, $r31, $r33;
+        javax.swing.JTable $r5, $r8, $r15, $r24, $r26, $r28;
+        javax.swing.table.JTableHeader $r6, $r29;
+        boolean $z0, $z1;
+        java.awt.Point $r9, $r30;
+        javax.swing.JPopupMenu $r11, $r13, $r16, $r21;
+        int $i0, $i1, i3, i4;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler$CleanupActionListener $r19;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel $r32, $r34;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r1.getSource();
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r4);
+
+        $r6 = $r5.getTableHeader();
+
+        if $r3 != $r6 goto label1;
+
+        $r27 = r0.this$0;
+
+        $r28 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r27);
+
+        $r29 = $r28.getTableHeader();
+
+        $r30 = r1.getPoint();
+
+        i3 = $r29.columnAtPoint($r30);
+
+        $r31 = r0.this$0;
+
+        $r32 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$600($r31);
+
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel.access$1328($r32, -1);
+
+        $r33 = r0.this$0;
+
+        $r34 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$600($r33);
+
+        $r34.sort(i3);
+
+        goto label4;
+
+     label1:
+        $z0 = org.gjt.sp.jedit.GUIUtilities.isPopupTrigger(r1);
+
+        if $z0 == 0 goto label4;
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r7);
+
+        $r9 = r1.getPoint();
+
+        i4 = $r8.rowAtPoint($r9);
+
+        if i4 == -1 goto label2;
+
+        $r23 = r0.this$0;
+
+        $r24 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r23);
+
+        $z1 = $r24.isRowSelected(i4);
+
+        if $z1 != 0 goto label2;
+
+        $r25 = r0.this$0;
+
+        $r26 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r25);
+
+        $r26.setRowSelectionInterval(i4, i4);
+
+     label2:
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1400($r10);
+
+        if $r11 != null goto label3;
+
+        $r17 = r0.this$0;
+
+        $r16 = new javax.swing.JPopupMenu;
+
+        specialinvoke $r16.<init>();
+
+        org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1402($r17, $r16);
+
+        r2 = org.gjt.sp.jedit.GUIUtilities.loadMenuItem("plugin-manager.cleanup");
+
+        $r19 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler$CleanupActionListener;
+
+        specialinvoke $r19.<init>(r0, null);
+
+        r2.addActionListener($r19);
+
+        $r20 = r0.this$0;
+
+        $r21 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1400($r20);
+
+        $r21.add(r2);
+
+     label3:
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1400($r12);
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r14);
+
+        $i0 = r1.getX();
+
+        $i1 = r1.getY();
+
+        org.gjt.sp.jedit.GUIUtilities.showPopupMenu($r13, $r15, $i0, $i1);
+
+     label4:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel, org.gjt.sp.jedit.pluginmgr.ManagePanel$1)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

@@ -1,0 +1,133 @@
+public class PersonMain extends java.lang.Object
+{
+    Person man;
+    Person woman;
+
+    public void <init>()
+    {
+        PersonMain r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    void Demo()
+    {
+        PersonMain r0;
+        Account r1, r2;
+        java.lang.Throwable r3, $r12, $r13;
+        Person $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11;
+        int $i0, $i1, $i2;
+
+        r0 := @this;
+
+        $r4 = new Person;
+
+        Packer.Unpack(r0);
+
+        specialinvoke $r4.<init>();
+
+        r0.man = $r4;
+
+        $r5 = new Person;
+
+        specialinvoke $r5.<init>();
+
+        r0.woman = $r5;
+
+        $r7 = r0.man;
+
+        $r6 = r0.woman;
+
+        $r7.spouse = $r6;
+
+        $r9 = r0.woman;
+
+        $r8 = r0.man;
+
+        $r9.spouse = $r8;
+
+        $r10 = r0.man;
+
+        r1 = $r10.account;
+
+        $r11 = r0.woman;
+
+        r2 = $r11.account;
+
+        Packer.Unpack($r4);
+
+        Packer.Unpack(r1);
+
+        r1.value = 50;
+
+        Packer.Pack(r1);
+
+        Packer.Pack($r4);
+
+        $i0 = r2.value;
+
+        $i1 = $i0 + 20;
+
+        Packer.Unpack($r5);
+
+        Packer.Unpack(r2);
+
+        r2.value = $i1;
+
+     label1:
+        Packer.Pack(r2);
+
+        Packer.Pack($r5);
+
+        Packer.Pack(r0);
+
+        $i2 = r1.value;
+
+        if $i2 <= 0 goto label2;
+
+        $r12 = new java.lang.Throwable;
+
+        specialinvoke $r12.<init>();
+
+        throw $r12;
+
+     label2:
+        Packer.Unpack(r0);
+
+        Packer.Unpack($r5);
+
+        Packer.Unpack(r2);
+
+        goto label4;
+
+     label3:
+        $r13 := @caughtexception;
+
+        r3 = $r13;
+
+        r3.toString();
+
+     label4:
+        Packer.Unpack(r0);
+
+        Packer.Unpack($r5);
+
+        Packer.Unpack(r2);
+
+        r2.value = 20;
+
+        Packer.Pack(r2);
+
+        Packer.Pack($r5);
+
+        Packer.Pack(r0);
+
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+    }
+}

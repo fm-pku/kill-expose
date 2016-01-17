@@ -1,0 +1,132 @@
+class org.gjt.sp.jedit.gui.statusbar.IndentWidgetFactory$IndentWidget extends java.lang.Object implements org.gjt.sp.jedit.gui.statusbar.Widget
+{
+    private final javax.swing.JLabel indent;
+    private final org.gjt.sp.jedit.View view;
+
+    public void <init>(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.statusbar.IndentWidgetFactory$IndentWidget r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.gui.statusbar.ToolTipLabel $r2;
+        javax.swing.JLabel $r3, $r5;
+        org.gjt.sp.jedit.gui.statusbar.IndentWidgetFactory$IndentWidget$1 $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        $r2 = new org.gjt.sp.jedit.gui.statusbar.ToolTipLabel;
+
+        specialinvoke $r2.<init>();
+
+        r0.indent = $r2;
+
+        $r3 = r0.indent;
+
+        $r3.setHorizontalAlignment(0);
+
+        r0.view = r1;
+
+        $r5 = r0.indent;
+
+        $r4 = new org.gjt.sp.jedit.gui.statusbar.IndentWidgetFactory$IndentWidget$1;
+
+        specialinvoke $r4.<init>(r0, r1);
+
+        $r5.addMouseListener($r4);
+
+        return;
+    }
+
+    public javax.swing.JComponent getComponent()
+    {
+        org.gjt.sp.jedit.gui.statusbar.IndentWidgetFactory$IndentWidget r0;
+        javax.swing.JLabel $r1;
+
+        r0 := @this;
+
+        $r1 = r0.indent;
+
+        return $r1;
+    }
+
+    public void update()
+    {
+        org.gjt.sp.jedit.gui.statusbar.IndentWidgetFactory$IndentWidget r0;
+        org.gjt.sp.jedit.Buffer r1;
+        java.lang.String r2, $r5, $r6, $r7;
+        org.gjt.sp.jedit.View $r3;
+        javax.swing.JLabel $r4, $r8, $r9, $r10, $r11, $r12, $r13;
+        boolean $z0, $z1;
+
+        r0 := @this;
+
+        $r3 = r0.view;
+
+        r1 = $r3.getBuffer();
+
+        r2 = r1.getStringProperty("autoIndent");
+
+        $r4 = r0.indent;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("view.status.indent-tooltip");
+
+        $r4.setToolTipText($r5);
+
+        $r6 = "full";
+
+        $z0 = $r6.equals(r2);
+
+        if $z0 == 0 goto label1;
+
+        $r12 = r0.indent;
+
+        $r12.setEnabled(1);
+
+        $r13 = r0.indent;
+
+        $r13.setText("F");
+
+        goto label3;
+
+     label1:
+        $r7 = "simple";
+
+        $z1 = $r7.equals(r2);
+
+        if $z1 == 0 goto label2;
+
+        $r10 = r0.indent;
+
+        $r10.setEnabled(1);
+
+        $r11 = r0.indent;
+
+        $r11.setText("S");
+
+        goto label3;
+
+     label2:
+        $r8 = r0.indent;
+
+        $r8.setEnabled(0);
+
+        $r9 = r0.indent;
+
+        $r9.setText("n");
+
+     label3:
+        return;
+    }
+
+    public void propertiesChanged()
+    {
+        org.gjt.sp.jedit.gui.statusbar.IndentWidgetFactory$IndentWidget r0;
+
+        r0 := @this;
+
+        return;
+    }
+}

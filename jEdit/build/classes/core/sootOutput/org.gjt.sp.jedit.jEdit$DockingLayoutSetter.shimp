@@ -1,0 +1,78 @@
+class org.gjt.sp.jedit.jEdit$DockingLayoutSetter extends java.lang.Object implements java.lang.Runnable
+{
+    private final org.gjt.sp.jedit.View view;
+    private final org.gjt.sp.jedit.View$ViewConfig config;
+    private final int startupDoneIndex;
+
+    void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.View$ViewConfig, int)
+    {
+        org.gjt.sp.jedit.jEdit$DockingLayoutSetter r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.View$ViewConfig r2;
+        int i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.view = r1;
+
+        r0.config = r2;
+
+        r0.startupDoneIndex = i0;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.jEdit$DockingLayoutSetter r0;
+        org.gjt.sp.jedit.gui.DockableWindowManager r1;
+        org.gjt.sp.jedit.View $r2;
+        org.gjt.sp.jedit.View$ViewConfig $r3;
+        org.gjt.sp.jedit.gui.DockableWindowManager$DockingLayout $r4;
+        java.util.List $r5;
+        int $i0;
+        java.lang.Boolean $r6;
+
+        r0 := @this;
+
+        $r2 = r0.view;
+
+        Packer.Unpack(r0);
+
+        r1 = $r2.getDockableWindowManager();
+
+        $r3 = r0.config;
+
+        $r4 = $r3.docking;
+
+        Packer.Unpack($r3);
+
+        r1.setDockingLayout($r4);
+
+        Packer.Pack($r3);
+
+        $r5 = org.gjt.sp.jedit.jEdit.access$500();
+
+        $i0 = r0.startupDoneIndex;
+
+        $r6 = java.lang.Boolean.valueOf(1);
+
+        $r5.set($i0, $r6);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+}

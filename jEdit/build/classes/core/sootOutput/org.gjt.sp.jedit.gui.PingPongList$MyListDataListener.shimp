@@ -1,0 +1,139 @@
+class org.gjt.sp.jedit.gui.PingPongList$MyListDataListener extends java.lang.Object implements javax.swing.event.ListDataListener
+{
+    final org.gjt.sp.jedit.gui.PingPongList this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.PingPongList)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyListDataListener r0;
+        org.gjt.sp.jedit.gui.PingPongList r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void intervalAdded(javax.swing.event.ListDataEvent)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyListDataListener r0;
+        javax.swing.event.ListDataEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.dataUpdated(r1);
+
+        return;
+    }
+
+    public void intervalRemoved(javax.swing.event.ListDataEvent)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyListDataListener r0;
+        javax.swing.event.ListDataEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.dataUpdated(r1);
+
+        return;
+    }
+
+    public void contentsChanged(javax.swing.event.ListDataEvent)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyListDataListener r0;
+        javax.swing.event.ListDataEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.dataUpdated(r1);
+
+        return;
+    }
+
+    private void dataUpdated(javax.swing.event.ListDataEvent)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyListDataListener r0;
+        javax.swing.event.ListDataEvent r1;
+        org.gjt.sp.jedit.gui.PingPongList $r2, $r4, $r5, $r7;
+        javax.swing.JButton $r3, $r6;
+        int $i0, $i1;
+        boolean $z0, $z1, $z0_1, $z0_2, $z1_1, $z1_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.PingPongList.access$800($r2);
+
+        $r4 = r0.this$0;
+
+        $i0 = $r4.getLeftSize();
+
+        if $i0 == 0 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        $r3.setEnabled($z0_2);
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.PingPongList.access$900($r5);
+
+        $r7 = r0.this$0;
+
+        $i1 = $r7.getRightSize();
+
+        if $i1 == 0 goto label3;
+
+        $z1 = 1;
+
+(2)     goto label4;
+
+     label3:
+(3)     $z1_1 = 0;
+
+     label4:
+        $z1_2 = Phi($z1 #2, $z1_1 #3);
+
+        $r6.setEnabled($z1_2);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.PingPongList, org.gjt.sp.jedit.gui.PingPongList$1)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyListDataListener r0;
+        org.gjt.sp.jedit.gui.PingPongList r1;
+        org.gjt.sp.jedit.gui.PingPongList$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

@@ -1,0 +1,78 @@
+class org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetListCellRenderer extends javax.swing.DefaultListCellRenderer
+{
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetListCellRenderer r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.awt.Component getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetListCellRenderer r0;
+        javax.swing.JList r1;
+        java.lang.Object r2;
+        int i0;
+        boolean z0, z1;
+        java.lang.String r3, r4, $r10;
+        java.lang.StringBuilder $r6, $r7, $r8, $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        specialinvoke r0.getListCellRendererComponent(r1, r2, i0, z0, z1);
+
+        if r2 != null goto label1;
+
+        return r0;
+
+     label1:
+        r3 = java.lang.String.valueOf(r2);
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("statusbar.");
+
+        $r8 = $r7.append(r3);
+
+        $r9 = $r8.append(".label");
+
+        $r10 = $r9.toString();
+
+        r4 = org.gjt.sp.jedit.jEdit.getProperty($r10, r3);
+
+        r0.setText(r4);
+
+        return r0;
+    }
+
+    void <init>(org.gjt.sp.jedit.options.StatusBarOptionPane$1)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetListCellRenderer r0;
+        org.gjt.sp.jedit.options.StatusBarOptionPane$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

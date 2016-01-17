@@ -1,0 +1,324 @@
+class org.gjt.sp.jedit.gui.CheckBoxListModel extends javax.swing.table.AbstractTableModel
+{
+    java.util.Vector items;
+
+    void <init>(java.util.Vector)
+    {
+        org.gjt.sp.jedit.gui.CheckBoxListModel r0;
+        java.util.Vector r1, $r2, $r3;
+        int $i0, $i1, i2;
+        java.lang.Object $r4;
+        org.gjt.sp.jedit.gui.JCheckBoxList$Entry $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        $r2 = new java.util.Vector;
+
+        $i0 = r1.size();
+
+        specialinvoke $r2.<init>($i0);
+
+        r0.items = $r2;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $i1 = r1.size();
+
+        if i2 >= $i1 goto label2;
+
+        $r3 = r0.items;
+
+        $r4 = r1.elementAt(i2);
+
+        $r5 = org.gjt.sp.jedit.gui.CheckBoxListModel.createEntry($r4);
+
+        $r3.add($r5);
+
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return;
+    }
+
+    void <init>(java.lang.Object[])
+    {
+        org.gjt.sp.jedit.gui.CheckBoxListModel r0;
+        java.lang.Object[] r1, r2;
+        int i0, $i1, i2;
+        java.lang.Object r3;
+        java.util.Vector $r4, $r5;
+        org.gjt.sp.jedit.gui.JCheckBoxList$Entry $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        $r4 = new java.util.Vector;
+
+        $i1 = lengthof r1;
+
+        specialinvoke $r4.<init>($i1);
+
+        r0.items = $r4;
+
+        r2 = r1;
+
+        i0 = lengthof r2;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 >= i0 goto label2;
+
+        r3 = r2[i2];
+
+        $r5 = r0.items;
+
+        $r6 = org.gjt.sp.jedit.gui.CheckBoxListModel.createEntry(r3);
+
+        $r5.add($r6);
+
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return;
+    }
+
+    private static org.gjt.sp.jedit.gui.JCheckBoxList$Entry createEntry(java.lang.Object)
+    {
+        java.lang.Object r0;
+        boolean $z0;
+        org.gjt.sp.jedit.gui.JCheckBoxList$Entry $r1, $r2;
+
+        r0 := @parameter0;
+
+        $z0 = r0 instanceof org.gjt.sp.jedit.gui.JCheckBoxList$Entry;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = (org.gjt.sp.jedit.gui.JCheckBoxList$Entry) r0;
+
+        return $r2;
+
+     label1:
+        $r1 = new org.gjt.sp.jedit.gui.JCheckBoxList$Entry;
+
+        specialinvoke $r1.<init>(0, r0);
+
+        return $r1;
+    }
+
+    public int getRowCount()
+    {
+        org.gjt.sp.jedit.gui.CheckBoxListModel r0;
+        java.util.Vector $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.items;
+
+        $i0 = $r1.size();
+
+        return $i0;
+    }
+
+    public int getColumnCount()
+    {
+        org.gjt.sp.jedit.gui.CheckBoxListModel r0;
+
+        r0 := @this;
+
+        return 2;
+    }
+
+    public java.lang.String getColumnName(int)
+    {
+        org.gjt.sp.jedit.gui.CheckBoxListModel r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        return null;
+    }
+
+    public java.lang.Object getValueAt(int, int)
+    {
+        org.gjt.sp.jedit.gui.CheckBoxListModel r0;
+        int i0, i1;
+        org.gjt.sp.jedit.gui.JCheckBoxList$Entry r1;
+        java.util.Vector $r2;
+        java.lang.Object $r3, $r4;
+        boolean $z0;
+        java.lang.Boolean $r5;
+        java.lang.InternalError $r6;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $r2 = r0.items;
+
+        $r3 = $r2.get(i0);
+
+        r1 = (org.gjt.sp.jedit.gui.JCheckBoxList$Entry) $r3;
+
+        lookupswitch(i1)
+        {
+            case 0: goto label1;
+            case 1: goto label2;
+            default: goto label3;
+        };
+
+     label1:
+        $z0 = r1.checked;
+
+        $r5 = java.lang.Boolean.valueOf($z0);
+
+        return $r5;
+
+     label2:
+        $r4 = r1.value;
+
+        return $r4;
+
+     label3:
+        $r6 = new java.lang.InternalError;
+
+        specialinvoke $r6.<init>();
+
+        throw $r6;
+    }
+
+    public java.lang.Class getColumnClass(int)
+    {
+        org.gjt.sp.jedit.gui.CheckBoxListModel r0;
+        int i0;
+        java.lang.InternalError $r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        lookupswitch(i0)
+        {
+            case 0: goto label1;
+            case 1: goto label2;
+            default: goto label3;
+        };
+
+     label1:
+        return class "java/lang/Boolean";
+
+     label2:
+        return class "java/lang/String";
+
+     label3:
+        $r1 = new java.lang.InternalError;
+
+        specialinvoke $r1.<init>();
+
+        throw $r1;
+    }
+
+    public boolean isCellEditable(int, int)
+    {
+        org.gjt.sp.jedit.gui.CheckBoxListModel r0;
+        int i0, i1;
+        org.gjt.sp.jedit.gui.JCheckBoxList$Entry r1;
+        java.util.Vector $r2;
+        java.lang.Object $r3;
+        boolean $z0, $z1, $z1_1, $z1_2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $r2 = r0.items;
+
+        $r3 = $r2.get(i0);
+
+        r1 = (org.gjt.sp.jedit.gui.JCheckBoxList$Entry) $r3;
+
+        if i1 != 0 goto label1;
+
+        $z0 = r1.caption;
+
+        if $z0 != 0 goto label1;
+
+        $z1 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z1_1 = 0;
+
+     label2:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        return $z1_2;
+    }
+
+    public void setValueAt(java.lang.Object, int, int)
+    {
+        org.gjt.sp.jedit.gui.CheckBoxListModel r0;
+        java.lang.Object r1, $r4;
+        int i0, i1;
+        org.gjt.sp.jedit.gui.JCheckBoxList$Entry r2;
+        java.util.Vector $r3;
+        boolean $z0, $z1;
+        java.lang.Boolean $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        if i1 != 0 goto label1;
+
+        $r3 = r0.items;
+
+        $r4 = $r3.get(i0);
+
+        r2 = (org.gjt.sp.jedit.gui.JCheckBoxList$Entry) $r4;
+
+        $z0 = r2.caption;
+
+        if $z0 != 0 goto label1;
+
+        $r5 = java.lang.Boolean.TRUE;
+
+        $z1 = r1.equals($r5);
+
+        r2.checked = $z1;
+
+        r0.fireTableRowsUpdated(i0, i0);
+
+     label1:
+        return;
+    }
+}

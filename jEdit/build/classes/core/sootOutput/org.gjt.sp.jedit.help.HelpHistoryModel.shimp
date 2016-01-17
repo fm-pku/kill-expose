@@ -1,0 +1,618 @@
+public class org.gjt.sp.jedit.help.HelpHistoryModel extends java.lang.Object
+{
+    private int historyPos;
+    private org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry[] history;
+    private java.util.List listeners;
+
+    public void <init>(int)
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel r0;
+        int i0;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry[] $r1;
+        java.util.ArrayList $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        $r1 = newarray (org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry)[i0];
+
+        r0.history = $r1;
+
+        $r2 = new java.util.ArrayList;
+
+        specialinvoke $r2.<init>();
+
+        r0.listeners = $r2;
+
+        return;
+    }
+
+    org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry forward(org.gjt.sp.jedit.help.HelpViewer)
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel r0;
+        org.gjt.sp.jedit.help.HelpViewer r1;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry r2, $r5, $r7, $r9;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry[] $r3, $r4, $r8;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7;
+        java.net.URL $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.history;
+
+        $i1 = lengthof $r3;
+
+        $i0 = r0.historyPos;
+
+        $i2 = $i1 - $i0;
+
+        if $i2 > 1 goto label1;
+
+        return null;
+
+     label1:
+        $r4 = r0.history;
+
+        $i3 = r0.historyPos;
+
+        $r5 = $r4[$i3];
+
+        if $r5 != null goto label2;
+
+        return null;
+
+     label2:
+        $r6 = r1.getCurrentPage();
+
+        $i4 = r1.getCurrentScrollPosition();
+
+        r0.setCurrentScrollPosition($r6, $i4);
+
+        $r7 = new org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry;
+
+        $r8 = r0.history;
+
+        $i5 = r0.historyPos;
+
+        $r9 = $r8[$i5];
+
+        specialinvoke $r7.<init>($r9);
+
+        r2 = $r7;
+
+        $i6 = r0.historyPos;
+
+        $i7 = $i6 + 1;
+
+        r0.historyPos = $i7;
+
+        r0.fireUpdate();
+
+        return r2;
+    }
+
+    public boolean hasNext()
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel r0;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry[] $r1, $r2;
+        int $i0, $i1, $i2, $i3;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry $r3;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        $r1 = r0.history;
+
+        $i1 = lengthof $r1;
+
+        $i0 = r0.historyPos;
+
+        $i2 = $i1 - $i0;
+
+        if $i2 <= 1 goto label1;
+
+        $r2 = r0.history;
+
+        $i3 = r0.historyPos;
+
+        $r3 = $r2[$i3];
+
+        if $r3 == null goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry back(org.gjt.sp.jedit.help.HelpViewer)
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel r0;
+        org.gjt.sp.jedit.help.HelpViewer r1;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry r2, $r4, $r6;
+        int $i0, $i1, $i2, $i3, $i4;
+        java.net.URL $r3;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry[] $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r0.historyPos;
+
+        if $i0 > 1 goto label1;
+
+        return null;
+
+     label1:
+        $r3 = r1.getCurrentPage();
+
+        $i1 = r1.getCurrentScrollPosition();
+
+        r0.setCurrentScrollPosition($r3, $i1);
+
+        $r4 = new org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry;
+
+        $r5 = r0.history;
+
+        $i2 = r0.historyPos;
+
+        $i3 = $i2 - 1;
+
+        r0.historyPos = $i3;
+
+        $i4 = $i3 - 1;
+
+        $r6 = $r5[$i4];
+
+        specialinvoke $r4.<init>($r6);
+
+        r2 = $r4;
+
+        r0.fireUpdate();
+
+        return r2;
+    }
+
+    public boolean hasPrevious()
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel r0;
+        int $i0;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        $i0 = r0.historyPos;
+
+        if $i0 <= 1 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    public void addToHistory(java.lang.String)
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry $r2;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry[] $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, i10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.history;
+
+        $i0 = r0.historyPos;
+
+        $r2 = new org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry;
+
+        specialinvoke $r2.<init>(r1, r1, 0);
+
+        $r3[$i0] = $r2;
+
+        $i1 = r0.historyPos;
+
+        $i3 = $i1 + 1;
+
+        $r4 = r0.history;
+
+        $i2 = lengthof $r4;
+
+        if $i3 != $i2 goto label1;
+
+        $r9 = r0.history;
+
+        $r8 = r0.history;
+
+        $r7 = r0.history;
+
+        $i7 = lengthof $r7;
+
+        $i8 = $i7 - 1;
+
+        java.lang.System.arraycopy($r9, 1, $r8, 0, $i8);
+
+        $r10 = r0.history;
+
+        $i9 = r0.historyPos;
+
+        $r10[$i9] = null;
+
+(0)     goto label3;
+
+     label1:
+        $i4 = r0.historyPos;
+
+        $i5 = $i4 + 1;
+
+        r0.historyPos = $i5;
+
+(1)     i10 = r0.historyPos;
+
+     label2:
+        i10 = Phi(i10 #1, i10 #3);
+
+        $r5 = r0.history;
+
+        $i6 = lengthof $r5;
+
+(2)     if i10 >= $i6 goto label3;
+
+        $r6 = r0.history;
+
+        $r6[i10] = null;
+
+        i10 = i10 + 1;
+
+(3)     goto label2;
+
+     label3:
+        i10 = Phi(i10 #0, i10 #2);
+
+        r0.fireUpdate();
+
+        return;
+    }
+
+    public void setCurrentScrollPosition(java.net.URL, int)
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel r0;
+        java.net.URL r1;
+        int i0, $i1, $i2, $i3, $i4, $i5;
+        java.lang.String $r2, $r5;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry[] $r3, $r6;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry $r4, $r7;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        if null == r1 goto label1;
+
+        $i1 = r0.historyPos;
+
+        if $i1 < 1 goto label1;
+
+        $r2 = r1.toString();
+
+        $r3 = r0.history;
+
+        $i2 = r0.historyPos;
+
+        $i3 = $i2 - 1;
+
+        $r4 = $r3[$i3];
+
+        $r5 = $r4.url;
+
+        $z0 = $r2.equals($r5);
+
+        if $z0 == 0 goto label1;
+
+        $r6 = r0.history;
+
+        $i4 = r0.historyPos;
+
+        $i5 = $i4 - 1;
+
+        $r7 = $r6[$i5];
+
+        $r7.scrollPosition = i0;
+
+     label1:
+        return;
+    }
+
+    public void setCurrentEntry(org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry)
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel r0;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry r1, $r4, $r6;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry[] $r2, $r3, $r5;
+        int $i0, $i1, i2;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $r2 = r0.history;
+
+        $i0 = lengthof $r2;
+
+        if i2 >= $i0 goto label3;
+
+        $r3 = r0.history;
+
+        $r4 = $r3[i2];
+
+        if $r4 == null goto label2;
+
+        $r5 = r0.history;
+
+        $r6 = $r5[i2];
+
+        $z0 = $r6.equals(r1);
+
+        if $z0 == 0 goto label2;
+
+        $i1 = i2 + 1;
+
+        r0.historyPos = $i1;
+
+        r0.fireUpdate();
+
+        goto label3;
+
+     label2:
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label3:
+        return;
+    }
+
+    public void updateTitle(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel r0;
+        java.lang.String r1, r2, $r5;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry[] r3;
+        int i0, i1;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry r4;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 = r0.history;
+
+        i0 = lengthof r3;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label3;
+
+        r4 = r3[i1];
+
+        if r4 == null goto label2;
+
+        $r5 = r4.url;
+
+        $z0 = $r5.equals(r1);
+
+        if $z0 == 0 goto label2;
+
+        r4.title = r2;
+
+     label2:
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        r0.fireUpdate();
+
+        return;
+    }
+
+    org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry[] getPreviousURLs()
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel r0;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry[] r1, $r2, $r3;
+        int $i0, $i1, $i2, $i3, $i4;
+
+        r0 := @this;
+
+        $i0 = r0.historyPos;
+
+        if $i0 > 1 goto label1;
+
+        $r3 = newarray (org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry)[0];
+
+        return $r3;
+
+     label1:
+        $i1 = r0.historyPos;
+
+        $i2 = $i1 - 1;
+
+        r1 = newarray (org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry)[$i2];
+
+        $r2 = r0.history;
+
+        $i3 = r0.historyPos;
+
+        $i4 = $i3 - 1;
+
+        java.lang.System.arraycopy($r2, 0, r1, 0, $i4);
+
+        return r1;
+    }
+
+    org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry[] getNextURLs()
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel r0;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry[] r1, $r2, $r3, $r5, $r6, $r7, $r8, $r9;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry $r4;
+
+        r0 := @this;
+
+        $r2 = r0.history;
+
+        $i1 = lengthof $r2;
+
+        $i0 = r0.historyPos;
+
+        $i2 = $i1 - $i0;
+
+        if $i2 > 1 goto label1;
+
+        $r9 = newarray (org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry)[0];
+
+        return $r9;
+
+     label1:
+        $r3 = r0.history;
+
+        $i3 = r0.historyPos;
+
+        $r4 = $r3[$i3];
+
+        if $r4 != null goto label2;
+
+        $r8 = newarray (org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry)[0];
+
+        return $r8;
+
+     label2:
+        $r5 = r0.history;
+
+        $i5 = lengthof $r5;
+
+        $i4 = r0.historyPos;
+
+        $i6 = $i5 - $i4;
+
+        r1 = newarray (org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry)[$i6];
+
+        $r7 = r0.history;
+
+        $i10 = r0.historyPos;
+
+        $r6 = r0.history;
+
+        $i8 = lengthof $r6;
+
+        $i7 = r0.historyPos;
+
+        $i9 = $i8 - $i7;
+
+        java.lang.System.arraycopy($r7, $i10, r1, 0, $i9);
+
+        return r1;
+    }
+
+    public void addHelpHistoryModelListener(org.gjt.sp.jedit.help.HelpHistoryModelListener)
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel r0;
+        org.gjt.sp.jedit.help.HelpHistoryModelListener r1;
+        java.util.List $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.listeners;
+
+        $r2.add(r1);
+
+        return;
+    }
+
+    public void removeHelpHistoryModelListener(org.gjt.sp.jedit.help.HelpHistoryModelListener)
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel r0;
+        org.gjt.sp.jedit.help.HelpHistoryModelListener r1;
+        java.util.List $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.listeners;
+
+        $r2.remove(r1);
+
+        return;
+    }
+
+    public void fireUpdate()
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel r0;
+        java.util.Iterator r1;
+        org.gjt.sp.jedit.help.HelpHistoryModelListener r2;
+        java.util.List $r3;
+        boolean $z0;
+        java.lang.Object $r4;
+
+        r0 := @this;
+
+        $r3 = r0.listeners;
+
+        r1 = $r3.iterator();
+
+     label1:
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r4 = r1.next();
+
+        r2 = (org.gjt.sp.jedit.help.HelpHistoryModelListener) $r4;
+
+        r2.historyUpdated();
+
+        goto label1;
+
+     label2:
+        return;
+    }
+}

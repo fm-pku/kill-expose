@@ -1,0 +1,168 @@
+class org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginInfoBox extends javax.swing.JEditorPane implements javax.swing.event.ListSelectionListener
+{
+    final org.gjt.sp.jedit.pluginmgr.InstallPanel this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginInfoBox r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r1;
+        java.awt.Color $r2, $r3;
+        java.lang.Boolean $r4;
+        javax.swing.JTable $r5;
+        javax.swing.ListSelectionModel $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r2 = org.gjt.sp.jedit.jEdit.getColorProperty("view.bgColor");
+
+        r0.setBackground($r2);
+
+        $r3 = org.gjt.sp.jedit.jEdit.getColorProperty("view.fgColor");
+
+        r0.setForeground($r3);
+
+        $r4 = java.lang.Boolean.valueOf(1);
+
+        r0.putClientProperty("JEditorPane.honorDisplayProperties", $r4);
+
+        r0.setContentType("text/html");
+
+        r0.setEditable(0);
+
+        $r5 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300(r1);
+
+        $r6 = $r5.getSelectionModel();
+
+        $r6.addListSelectionListener(r0);
+
+        return;
+    }
+
+    public void valueChanged(javax.swing.event.ListSelectionEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginInfoBox r0;
+        javax.swing.event.ListSelectionEvent r1;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry r2;
+        java.util.ArrayList r3, $r13;
+        org.gjt.sp.util.StringList r4;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r5, $r7, $r10;
+        javax.swing.JTable $r6, $r11;
+        int $i0, $i1;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel $r8;
+        java.util.List $r9;
+        java.lang.Object $r12;
+        java.lang.String $r14, $r15, $r16, $r17, $r18, $r19, $r21, $r22, $r23, $r24, r25, r26, r26_1, r26_2, r25_1, r26_3, r25_2;
+        java.lang.Object[] $r20;
+        boolean $z5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r25 = r0.getText();
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300($r5);
+
+        $i0 = $r6.getSelectedRowCount();
+
+(0)     if $i0 != 1 goto label4;
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$500($r7);
+
+        $r9 = org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel.access$1400($r8);
+
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300($r10);
+
+        $i1 = $r11.getSelectedRow();
+
+        $r12 = $r9.get($i1);
+
+        r2 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) $r12;
+
+        r26 = "<b>{0}</b>: {1}<br><b>{2}</b>: {3}<br>{4}<br><br><b>{5}</b>:<br>{6}";
+
+        $r13 = new java.util.ArrayList;
+
+        specialinvoke $r13.<init>();
+
+        r3 = $r13;
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("install-plugins.info.author", "Author");
+
+        r3.add($r14);
+
+        $r15 = r2.author;
+
+        r3.add($r15);
+
+        $r16 = org.gjt.sp.jedit.jEdit.getProperty("install-plugins.info.released", "Released");
+
+        r3.add($r16);
+
+        $r17 = r2.date;
+
+        r3.add($r17);
+
+        $r18 = r2.description;
+
+        r3.add($r18);
+
+        $r19 = r2.dependencies;
+
+        if $r19 == null goto label1;
+
+        $r21 = r2.dependencies;
+
+        $z5 = $r21.isEmpty();
+
+        if $z5 == 0 goto label2;
+
+     label1:
+        r26_1 = "<b>{0}</b>: {1}<br><b>{2}</b>: {3} {4}";
+
+(1)     goto label3;
+
+     label2:
+        $r22 = org.gjt.sp.jedit.jEdit.getProperty("install-plugins.info.depends", "Depends on");
+
+        r3.add($r22);
+
+        $r23 = r2.dependencies;
+
+        r4 = org.gjt.sp.util.StringList.split($r23, "\n");
+
+        $r24 = r4.join(", ");
+
+(2)     r3.add($r24);
+
+     label3:
+        r26_2 = Phi(r26_1 #1, r26 #2);
+
+        $r20 = r3.toArray();
+
+(3)     r25_1 = java.text.MessageFormat.format(r26_2, $r20);
+
+     label4:
+        r26_3 = Phi(r26 #0, r26_2 #3);
+
+        r25_2 = Phi(r25 #0, r25_1 #3);
+
+        r0.setText(r25_2);
+
+        r0.setCaretPosition(0);
+
+        return;
+    }
+}

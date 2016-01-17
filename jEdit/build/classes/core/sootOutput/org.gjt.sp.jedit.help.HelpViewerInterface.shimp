@@ -1,0 +1,19 @@
+public interface  org.gjt.sp.jedit.help.HelpViewerInterface extends java.lang.Object
+{
+
+    public abstract void gotoURL(java.lang.String, boolean, int);
+
+    public abstract java.lang.String getBaseURL();
+
+    public abstract void addPropertyChangeListener(java.beans.PropertyChangeListener);
+
+    public abstract void dispose();
+
+    public abstract java.awt.Component getComponent();
+
+    public abstract java.lang.String getShortURL();
+
+    public abstract void queueTOCReload();
+
+    public abstract void setTitle(java.lang.String);
+}

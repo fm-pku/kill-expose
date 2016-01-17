@@ -1,0 +1,216 @@
+class org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$EntryCompare extends java.lang.Object implements java.util.Comparator
+{
+    private boolean sortIgnoreCase;
+    private boolean sortMixFilesAndDirs;
+    private boolean sortAscending;
+    private java.lang.String sortAttribute;
+
+    void <init>(java.lang.String, boolean)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$EntryCompare r0;
+        java.lang.String r1;
+        boolean z0, $z1, $z2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.sortMixFilesAndDirs");
+
+        r0.sortMixFilesAndDirs = $z1;
+
+        $z2 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.sortIgnoreCase");
+
+        r0.sortIgnoreCase = $z2;
+
+        r0.sortAscending = z0;
+
+        r0.sortAttribute = r1;
+
+        return;
+    }
+
+    public int compare(org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry, org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$EntryCompare r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry r1, r2, $r5, $r6, $r18, $r19, $r20, $r21;
+        org.gjt.sp.jedit.io.VFSFile r3, r4;
+        int $i0, $i1, $i2, $i3, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, i16, $i17, i16_1, i16_2, i16_3, i16_4, $i17_1, $i17_2;
+        boolean $z0, $z1, $z2, $z3;
+        java.lang.String $r7, $r8, $r9, $r10, $r11, $r12, $r13;
+        long $l4, $l5, $l6, $l7;
+        java.lang.Long $r14, $r15, $r16, $r17;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $i1 = r1.level;
+
+        $i0 = r2.level;
+
+        if $i1 >= $i0 goto label01;
+
+        $r21 = r2.parent;
+
+        $i15 = r0.compare(r1, $r21);
+
+        return $i15;
+
+     label01:
+        $i3 = r1.level;
+
+        $i2 = r2.level;
+
+        if $i3 <= $i2 goto label02;
+
+        $r20 = r1.parent;
+
+        $i14 = r0.compare($r20, r2);
+
+        return $i14;
+
+     label02:
+        $r6 = r1.parent;
+
+        $r5 = r2.parent;
+
+        if $r6 == $r5 goto label03;
+
+        $r19 = r1.parent;
+
+        $r18 = r2.parent;
+
+        $i13 = r0.compare($r19, $r18);
+
+        return $i13;
+
+     label03:
+        r3 = r1.dirEntry;
+
+        r4 = r2.dirEntry;
+
+        $z0 = r0.sortMixFilesAndDirs;
+
+        if $z0 != 0 goto label04;
+
+        $i8 = r3.getType();
+
+        $i9 = r4.getType();
+
+        if $i8 == $i9 goto label04;
+
+        $i10 = r4.getType();
+
+        $i11 = r3.getType();
+
+        $i12 = $i10 - $i11;
+
+        return $i12;
+
+     label04:
+        $r7 = r0.sortAttribute;
+
+        if $r7 != "modified" goto label05;
+
+        $l6 = r3.getModified();
+
+        $r16 = java.lang.Long.valueOf($l6);
+
+        $l7 = r4.getModified();
+
+        $r17 = java.lang.Long.valueOf($l7);
+
+        i16 = $r16.compareTo($r17);
+
+(0)     goto label08;
+
+     label05:
+        $r8 = r0.sortAttribute;
+
+        if $r8 != "size" goto label06;
+
+        $l4 = r3.getLength();
+
+        $r14 = java.lang.Long.valueOf($l4);
+
+        $l5 = r4.getLength();
+
+        $r15 = java.lang.Long.valueOf($l5);
+
+        i16_1 = $r14.compareTo($r15);
+
+(1)     goto label08;
+
+     label06:
+        $r9 = r0.sortAttribute;
+
+        if $r9 != "type" goto label07;
+
+        $r13 = r1.extension;
+
+        $r12 = r2.extension;
+
+        $z3 = r0.sortIgnoreCase;
+
+        i16_2 = org.gjt.sp.util.StandardUtilities.compareStrings($r13, $r12, $z3);
+
+(2)     goto label08;
+
+     label07:
+        $r10 = r3.getName();
+
+        $r11 = r4.getName();
+
+        $z1 = r0.sortIgnoreCase;
+
+(3)     i16_3 = org.gjt.sp.util.StandardUtilities.compareStrings($r10, $r11, $z1);
+
+     label08:
+        i16_4 = Phi(i16 #0, i16_1 #1, i16_2 #2, i16_3 #3);
+
+        $z2 = r0.sortAscending;
+
+        if $z2 == 0 goto label09;
+
+        $i17 = i16_4;
+
+(4)     goto label10;
+
+     label09:
+(5)     $i17_1 = neg i16_4;
+
+     label10:
+        $i17_2 = Phi($i17 #4, $i17_1 #5);
+
+        return $i17_2;
+    }
+
+    public volatile int compare(java.lang.Object, java.lang.Object)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$EntryCompare r0;
+        java.lang.Object r1, r2;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry $r3, $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry) r1;
+
+        $r3 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry) r2;
+
+        $i0 = r0.compare($r4, $r3);
+
+        return $i0;
+    }
+}

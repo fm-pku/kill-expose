@@ -1,0 +1,369 @@
+class org.gjt.sp.jedit.gui.LogViewer$LogSettings extends javax.swing.JDialog
+{
+    private javax.swing.JSpinner maxLines;
+    private javax.swing.JCheckBox debug;
+    private javax.swing.JCheckBox message;
+    private javax.swing.JCheckBox notice;
+    private javax.swing.JCheckBox warning;
+    private javax.swing.JCheckBox error;
+    private org.gjt.sp.jedit.gui.ColorWellButton debugColor;
+    private org.gjt.sp.jedit.gui.ColorWellButton messageColor;
+    private org.gjt.sp.jedit.gui.ColorWellButton noticeColor;
+    private org.gjt.sp.jedit.gui.ColorWellButton warningColor;
+    private org.gjt.sp.jedit.gui.ColorWellButton errorColor;
+    private javax.swing.JCheckBox beep;
+    final org.gjt.sp.jedit.gui.LogViewer this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.LogViewer)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        org.gjt.sp.jedit.gui.LogViewer r1;
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings$1 r2, $r5;
+        org.gjt.sp.jedit.View $r3;
+        java.lang.String $r4, $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        $r3 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("log-viewer.dialog.title");
+
+        specialinvoke r0.<init>($r3, $r4);
+
+        $r5 = new org.gjt.sp.jedit.gui.LogViewer$LogSettings$1;
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("log-viewer.settings.label");
+
+        specialinvoke $r5.<init>(r0, $r6, r1);
+
+        r2 = $r5;
+
+        r0.setContentPane(r2);
+
+        r2.init();
+
+        r0.pack();
+
+        r0.setLocationRelativeTo(r1);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    static javax.swing.JSpinner access$1502(org.gjt.sp.jedit.gui.LogViewer$LogSettings, javax.swing.JSpinner)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        javax.swing.JSpinner r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.maxLines = r1;
+
+        return r1;
+    }
+
+    static javax.swing.JSpinner access$1500(org.gjt.sp.jedit.gui.LogViewer$LogSettings)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        javax.swing.JSpinner $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.maxLines;
+
+        return $r1;
+    }
+
+    static javax.swing.JCheckBox access$1602(org.gjt.sp.jedit.gui.LogViewer$LogSettings, javax.swing.JCheckBox)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        javax.swing.JCheckBox r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.debug = r1;
+
+        return r1;
+    }
+
+    static javax.swing.JCheckBox access$1702(org.gjt.sp.jedit.gui.LogViewer$LogSettings, javax.swing.JCheckBox)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        javax.swing.JCheckBox r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.message = r1;
+
+        return r1;
+    }
+
+    static javax.swing.JCheckBox access$1802(org.gjt.sp.jedit.gui.LogViewer$LogSettings, javax.swing.JCheckBox)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        javax.swing.JCheckBox r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.notice = r1;
+
+        return r1;
+    }
+
+    static javax.swing.JCheckBox access$1902(org.gjt.sp.jedit.gui.LogViewer$LogSettings, javax.swing.JCheckBox)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        javax.swing.JCheckBox r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.warning = r1;
+
+        return r1;
+    }
+
+    static javax.swing.JCheckBox access$2002(org.gjt.sp.jedit.gui.LogViewer$LogSettings, javax.swing.JCheckBox)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        javax.swing.JCheckBox r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.error = r1;
+
+        return r1;
+    }
+
+    static javax.swing.JCheckBox access$1600(org.gjt.sp.jedit.gui.LogViewer$LogSettings)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.debug;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.ColorWellButton access$2102(org.gjt.sp.jedit.gui.LogViewer$LogSettings, org.gjt.sp.jedit.gui.ColorWellButton)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        org.gjt.sp.jedit.gui.ColorWellButton r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.debugColor = r1;
+
+        return r1;
+    }
+
+    static javax.swing.JCheckBox access$1700(org.gjt.sp.jedit.gui.LogViewer$LogSettings)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.message;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.ColorWellButton access$2202(org.gjt.sp.jedit.gui.LogViewer$LogSettings, org.gjt.sp.jedit.gui.ColorWellButton)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        org.gjt.sp.jedit.gui.ColorWellButton r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.messageColor = r1;
+
+        return r1;
+    }
+
+    static javax.swing.JCheckBox access$1800(org.gjt.sp.jedit.gui.LogViewer$LogSettings)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.notice;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.ColorWellButton access$2302(org.gjt.sp.jedit.gui.LogViewer$LogSettings, org.gjt.sp.jedit.gui.ColorWellButton)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        org.gjt.sp.jedit.gui.ColorWellButton r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.noticeColor = r1;
+
+        return r1;
+    }
+
+    static javax.swing.JCheckBox access$1900(org.gjt.sp.jedit.gui.LogViewer$LogSettings)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.warning;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.ColorWellButton access$2402(org.gjt.sp.jedit.gui.LogViewer$LogSettings, org.gjt.sp.jedit.gui.ColorWellButton)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        org.gjt.sp.jedit.gui.ColorWellButton r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.warningColor = r1;
+
+        return r1;
+    }
+
+    static javax.swing.JCheckBox access$2000(org.gjt.sp.jedit.gui.LogViewer$LogSettings)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.error;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.ColorWellButton access$2502(org.gjt.sp.jedit.gui.LogViewer$LogSettings, org.gjt.sp.jedit.gui.ColorWellButton)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        org.gjt.sp.jedit.gui.ColorWellButton r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.errorColor = r1;
+
+        return r1;
+    }
+
+    static javax.swing.JCheckBox access$2602(org.gjt.sp.jedit.gui.LogViewer$LogSettings, javax.swing.JCheckBox)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        javax.swing.JCheckBox r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.beep = r1;
+
+        return r1;
+    }
+
+    static javax.swing.JCheckBox access$2600(org.gjt.sp.jedit.gui.LogViewer$LogSettings)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.beep;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.ColorWellButton access$2100(org.gjt.sp.jedit.gui.LogViewer$LogSettings)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        org.gjt.sp.jedit.gui.ColorWellButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.debugColor;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.ColorWellButton access$2200(org.gjt.sp.jedit.gui.LogViewer$LogSettings)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        org.gjt.sp.jedit.gui.ColorWellButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.messageColor;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.ColorWellButton access$2300(org.gjt.sp.jedit.gui.LogViewer$LogSettings)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        org.gjt.sp.jedit.gui.ColorWellButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.noticeColor;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.ColorWellButton access$2400(org.gjt.sp.jedit.gui.LogViewer$LogSettings)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        org.gjt.sp.jedit.gui.ColorWellButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.warningColor;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.ColorWellButton access$2500(org.gjt.sp.jedit.gui.LogViewer$LogSettings)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r0;
+        org.gjt.sp.jedit.gui.ColorWellButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.errorColor;
+
+        return $r1;
+    }
+}

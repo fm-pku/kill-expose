@@ -1,0 +1,354 @@
+public class org.gjt.sp.jedit.gui.DefaultInputHandler extends org.gjt.sp.jedit.gui.InputHandler
+{
+
+    public void <init>(org.gjt.sp.jedit.View, java.util.Hashtable)
+    {
+        org.gjt.sp.jedit.gui.DefaultInputHandler r0;
+        org.gjt.sp.jedit.View r1;
+        java.util.Hashtable r2;
+        java.lang.NullPointerException $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        if r2 != null goto label1;
+
+        $r3 = new java.lang.NullPointerException;
+
+        specialinvoke $r3.<init>();
+
+        throw $r3;
+
+     label1:
+        r0.currentBindings = r2;
+
+        r0.bindings = r2;
+
+        return;
+    }
+
+    public void <init>(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.DefaultInputHandler r0;
+        org.gjt.sp.jedit.View r1;
+        java.util.Hashtable $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.util.Hashtable;
+
+        specialinvoke $r2.<init>();
+
+        specialinvoke r0.<init>(r1, $r2);
+
+        return;
+    }
+
+    public void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.gui.DefaultInputHandler)
+    {
+        org.gjt.sp.jedit.gui.DefaultInputHandler r0, r2;
+        org.gjt.sp.jedit.View r1;
+        java.util.Hashtable $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r2.bindings;
+
+        specialinvoke r0.<init>(r1, $r3);
+
+        return;
+    }
+
+    public boolean isPrefixActive()
+    {
+        org.gjt.sp.jedit.gui.DefaultInputHandler r0;
+        java.util.Hashtable $r1, $r2;
+        boolean $z0, $z1, $z1_1, $z1_2;
+
+        r0 := @this;
+
+        $r2 = r0.bindings;
+
+        $r1 = r0.currentBindings;
+
+        if $r2 != $r1 goto label1;
+
+        $z0 = specialinvoke r0.isPrefixActive();
+
+        if $z0 == 0 goto label2;
+
+     label1:
+        $z1_1 = 1;
+
+(0)     goto label3;
+
+     label2:
+(1)     $z1 = 0;
+
+     label3:
+        $z1_2 = Phi($z1_1 #0, $z1 #1);
+
+        return $z1_2;
+    }
+
+    public void setCurrentBindings(java.util.Hashtable)
+    {
+        org.gjt.sp.jedit.gui.DefaultInputHandler r0;
+        java.util.Hashtable r1;
+        org.gjt.sp.jedit.View $r2;
+        org.gjt.sp.jedit.gui.StatusBar $r3;
+        java.lang.Object $r4, $r5;
+        java.lang.String $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.view;
+
+        $r3 = $r2.getStatus();
+
+        $r4 = org.gjt.sp.jedit.gui.DefaultInputHandler.PREFIX_STR;
+
+        $r5 = r1.get($r4);
+
+        $r6 = (java.lang.String) $r5;
+
+        $r3.setMessage($r6);
+
+        r0.currentBindings = r1;
+
+        return;
+    }
+
+    public boolean handleKey(org.gjt.sp.jedit.gui.KeyEventTranslator$Key, boolean)
+    {
+        org.gjt.sp.jedit.gui.DefaultInputHandler r0;
+        org.gjt.sp.jedit.gui.KeyEventTranslator$Key r1;
+        boolean z0, $z1, $z2, $z3, $z4, $z5;
+        java.lang.Object r2;
+        java.lang.String $r3, $r4, $r9, $r19;
+        int $i0, $i1;
+        java.util.Hashtable $r5, $r6, $r8, $r10, $r11, $r12, $r13, $r15, $r18;
+        org.gjt.sp.jedit.EditAction $r7;
+        java.awt.Toolkit $r14;
+        org.gjt.sp.jedit.View $r16;
+        org.gjt.sp.jedit.gui.StatusBar $r17;
+        char c2, c2_1, c2_2, c2_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        c2 = 0;
+
+        $r3 = r1.modifiers;
+
+        if $r3 == null goto label01;
+
+        $r19 = r1.modifiers;
+
+        $z5 = $r19.equals("S");
+
+(0)     if $z5 == 0 goto label04;
+
+     label01:
+        $i0 = r1.key;
+
+        lookupswitch($i0)
+        {
+            case 9: goto label02;
+            case 10: goto label02;
+            default: goto label03;
+        };
+
+     label02:
+        $i1 = r1.key;
+
+        c2_1 = (char) $i1;
+
+(1)     goto label04;
+
+     label03:
+(2)     c2_2 = r1.input;
+
+     label04:
+        c2_3 = Phi(c2 #0, c2_1 #1, c2_2 #2);
+
+        $r4 = r0.readNextChar;
+
+        if $r4 == null goto label07;
+
+        if c2_3 == 0 goto label06;
+
+        if z0 != 0 goto label05;
+
+        $r18 = r0.bindings;
+
+        r0.setCurrentBindings($r18);
+
+        r0.invokeReadNextChar(c2_3);
+
+        r0.repeatCount = 1;
+
+     label05:
+        return 1;
+
+     label06:
+        if z0 != 0 goto label07;
+
+        r0.readNextChar = null;
+
+        $r16 = r0.view;
+
+        $r17 = $r16.getStatus();
+
+        $r17.setMessage(null);
+
+     label07:
+        $r5 = r0.currentBindings;
+
+        r2 = $r5.get(r1);
+
+        if r2 != null goto label10;
+
+        if z0 != 0 goto label16;
+
+        $r13 = r0.currentBindings;
+
+        $r12 = r0.bindings;
+
+        if $r13 == $r12 goto label08;
+
+        $r14 = java.awt.Toolkit.getDefaultToolkit();
+
+        $r14.beep();
+
+        r0.repeatCount = 1;
+
+        $r15 = r0.bindings;
+
+        r0.setCurrentBindings($r15);
+
+        goto label09;
+
+     label08:
+        if c2_3 == 0 goto label09;
+
+        $z4 = r1.isFromGlobalContext();
+
+        if $z4 != 0 goto label09;
+
+        r0.userInput(c2_3);
+
+     label09:
+        r0.sendShortcutPrefixOff();
+
+        goto label16;
+
+     label10:
+        $z1 = r2 instanceof java.util.Hashtable;
+
+        if $z1 == 0 goto label12;
+
+        if z0 != 0 goto label11;
+
+        $r10 = (java.util.Hashtable) r2;
+
+        r0.setCurrentBindings($r10);
+
+        $r11 = r0.currentBindings;
+
+        org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent.firePrefixStateChange($r11, 1);
+
+        r0.shortcutOn = 1;
+
+     label11:
+        return 1;
+
+     label12:
+        $z2 = r2 instanceof java.lang.String;
+
+        if $z2 == 0 goto label14;
+
+        if z0 != 0 goto label13;
+
+        $r8 = r0.bindings;
+
+        r0.setCurrentBindings($r8);
+
+        r0.sendShortcutPrefixOff();
+
+        $r9 = (java.lang.String) r2;
+
+        r0.invokeAction($r9);
+
+     label13:
+        return 1;
+
+     label14:
+        $z3 = r2 instanceof org.gjt.sp.jedit.EditAction;
+
+        if $z3 == 0 goto label16;
+
+        if z0 != 0 goto label15;
+
+        $r6 = r0.bindings;
+
+        r0.setCurrentBindings($r6);
+
+        r0.sendShortcutPrefixOff();
+
+        $r7 = (org.gjt.sp.jedit.EditAction) r2;
+
+        r0.invokeAction($r7);
+
+     label15:
+        return 1;
+
+     label16:
+        if z0 != 0 goto label17;
+
+        r0.sendShortcutPrefixOff();
+
+     label17:
+        return 0;
+    }
+
+    public static char getSymbolicModifierName(int)
+    {
+        int i0;
+        char $c1;
+
+        i0 := @parameter0;
+
+        $c1 = org.gjt.sp.jedit.gui.KeyEventTranslator.getSymbolicModifierName(i0);
+
+        return $c1;
+    }
+
+    public static java.lang.String getModifierString(java.awt.event.InputEvent)
+    {
+        java.awt.event.InputEvent r0;
+        java.lang.String $r1;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.gui.KeyEventTranslator.getModifierString(r0);
+
+        return $r1;
+    }
+}

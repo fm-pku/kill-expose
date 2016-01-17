@@ -1,0 +1,43 @@
+public class org.gjt.sp.jedit.options.BrowserContextOptionPane extends org.gjt.sp.jedit.gui.AbstractContextOptionPane
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.BrowserContextOptionPane r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.context.caption");
+
+        specialinvoke r0.<init>("browser.custom.context", $r1);
+
+        return;
+    }
+
+    protected java.lang.String getContextMenu()
+    {
+        org.gjt.sp.jedit.options.BrowserContextOptionPane r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = org.gjt.sp.jedit.jEdit.getProperty("browser.custom.context");
+
+        return $r1;
+    }
+
+    protected void saveContextMenu(java.lang.String)
+    {
+        org.gjt.sp.jedit.options.BrowserContextOptionPane r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        org.gjt.sp.jedit.jEdit.setProperty("browser.custom.context", r1);
+
+        return;
+    }
+}

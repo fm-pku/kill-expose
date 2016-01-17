@@ -1,0 +1,242 @@
+public class org.gjt.sp.jedit.datatransfer.ListVFSFileTransferable extends java.lang.Object implements java.awt.datatransfer.Transferable
+{
+    public static final java.awt.datatransfer.DataFlavor jEditFileList;
+    public static final java.awt.datatransfer.DataFlavor[] supported;
+    private final java.util.List files;
+
+    public void <init>(org.gjt.sp.jedit.io.VFSFile[])
+    {
+        org.gjt.sp.jedit.datatransfer.ListVFSFileTransferable r0;
+        org.gjt.sp.jedit.io.VFSFile[] r1;
+        java.util.List $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        $r2 = java.util.Arrays.asList(r1);
+
+        $r3 = java.util.Collections.unmodifiableList($r2);
+
+        r0.files = $r3;
+
+        return;
+    }
+
+    public java.awt.datatransfer.DataFlavor[] getTransferDataFlavors()
+    {
+        org.gjt.sp.jedit.datatransfer.ListVFSFileTransferable r0;
+        java.awt.datatransfer.DataFlavor[] $r1;
+
+        r0 := @this;
+
+        $r1 = org.gjt.sp.jedit.datatransfer.ListVFSFileTransferable.supported;
+
+        return $r1;
+    }
+
+    public boolean isDataFlavorSupported(java.awt.datatransfer.DataFlavor)
+    {
+        org.gjt.sp.jedit.datatransfer.ListVFSFileTransferable r0;
+        java.awt.datatransfer.DataFlavor r1, $r2, $r3;
+        boolean $z0, $z1, $z2, $z2_1, $z2_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.datatransfer.ListVFSFileTransferable.jEditFileList;
+
+        $z0 = $r2.equals(r1);
+
+        if $z0 != 0 goto label1;
+
+        $r3 = java.awt.datatransfer.DataFlavor.stringFlavor;
+
+        $z1 = $r3.equals(r1);
+
+        if $z1 == 0 goto label2;
+
+     label1:
+        $z2_1 = 1;
+
+(0)     goto label3;
+
+     label2:
+(1)     $z2 = 0;
+
+     label3:
+        $z2_2 = Phi($z2_1 #0, $z2 #1);
+
+        return $z2_2;
+    }
+
+    public java.lang.Object getTransferData(java.awt.datatransfer.DataFlavor) throws java.awt.datatransfer.UnsupportedFlavorException, java.io.IOException
+    {
+        org.gjt.sp.jedit.datatransfer.ListVFSFileTransferable r0;
+        java.awt.datatransfer.DataFlavor r1, $r2, $r3, $r4;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        java.awt.datatransfer.UnsupportedFlavorException $r5;
+        java.util.ArrayList $r6, r24;
+        java.util.List $r7, $r8, $r14, $r16, $r21;
+        int $i0, $i1, i2;
+        java.lang.Object $r9, $r17;
+        org.gjt.sp.jedit.io.VFS $r10;
+        java.io.File $r11;
+        java.lang.String $r12, $r15, $r18;
+        java.lang.StringBuilder $r13, r22;
+        org.gjt.sp.jedit.io.VFSFile r23, r26;
+        java.util.Iterator r25;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.datatransfer.ListVFSFileTransferable.jEditFileList;
+
+        $z0 = $r2.equals(r1);
+
+        if $z0 == 0 goto label1;
+
+        $r21 = r0.files;
+
+        return $r21;
+
+     label1:
+        $r3 = java.awt.datatransfer.DataFlavor.stringFlavor;
+
+        $z1 = $r3.equals(r1);
+
+        if $z1 == 0 goto label5;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        r22 = $r13;
+
+(0)     i2 = 0;
+
+     label2:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $r14 = r0.files;
+
+        $i1 = $r14.size();
+
+        if i2 >= $i1 goto label4;
+
+        $r16 = r0.files;
+
+        $r17 = $r16.get(i2);
+
+        r23 = (org.gjt.sp.jedit.io.VFSFile) $r17;
+
+        if i2 == 0 goto label3;
+
+        r22.append(10);
+
+     label3:
+        $r18 = r23.getPath();
+
+        r22.append($r18);
+
+        i2 = i2 + 1;
+
+(1)     goto label2;
+
+     label4:
+        $r15 = r22.toString();
+
+        return $r15;
+
+     label5:
+        $r4 = java.awt.datatransfer.DataFlavor.javaFileListFlavor;
+
+        $z2 = $r4.equals(r1);
+
+        if $z2 == 0 goto label9;
+
+        $r6 = new java.util.ArrayList;
+
+        $r7 = r0.files;
+
+        $i0 = $r7.size();
+
+        specialinvoke $r6.<init>($i0);
+
+        r24 = $r6;
+
+        $r8 = r0.files;
+
+        r25 = $r8.iterator();
+
+     label6:
+        $z3 = r25.hasNext();
+
+        if $z3 == 0 goto label8;
+
+        $r9 = r25.next();
+
+        r26 = (org.gjt.sp.jedit.io.VFSFile) $r9;
+
+        $r10 = r26.getVFS();
+
+        $z4 = $r10 instanceof org.gjt.sp.jedit.io.FileVFS;
+
+        if $z4 == 0 goto label7;
+
+        $r11 = new java.io.File;
+
+        $r12 = r26.getPath();
+
+        specialinvoke $r11.<init>($r12);
+
+        r24.add($r11);
+
+     label7:
+        goto label6;
+
+     label8:
+        return r24;
+
+     label9:
+        $r5 = new java.awt.datatransfer.UnsupportedFlavorException;
+
+        specialinvoke $r5.<init>(r1);
+
+        throw $r5;
+    }
+
+    static void <clinit>()
+    {
+        java.awt.datatransfer.DataFlavor $r0, $r2, $r3, $r4;
+        java.awt.datatransfer.DataFlavor[] $r1;
+
+        $r0 = new java.awt.datatransfer.DataFlavor;
+
+        specialinvoke $r0.<init>(class "java/util/List", "application/x-java-jEdit-list-vfsfile");
+
+        org.gjt.sp.jedit.datatransfer.ListVFSFileTransferable.jEditFileList = $r0;
+
+        $r1 = newarray (java.awt.datatransfer.DataFlavor)[3];
+
+        $r2 = org.gjt.sp.jedit.datatransfer.ListVFSFileTransferable.jEditFileList;
+
+        $r1[0] = $r2;
+
+        $r3 = java.awt.datatransfer.DataFlavor.stringFlavor;
+
+        $r1[1] = $r3;
+
+        $r4 = java.awt.datatransfer.DataFlavor.javaFileListFlavor;
+
+        $r1[2] = $r4;
+
+        org.gjt.sp.jedit.datatransfer.ListVFSFileTransferable.supported = $r1;
+
+        return;
+    }
+}

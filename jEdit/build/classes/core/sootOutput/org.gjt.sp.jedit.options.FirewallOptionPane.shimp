@@ -1,0 +1,379 @@
+public class org.gjt.sp.jedit.options.FirewallOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private javax.swing.JCheckBox httpEnabled;
+    private javax.swing.JTextField httpHost;
+    private javax.swing.JTextField httpPort;
+    private javax.swing.JTextField httpUser;
+    private javax.swing.JPasswordField httpPass;
+    private javax.swing.JTextField httpNonProxy;
+    private javax.swing.JCheckBox socksEnabled;
+    private javax.swing.JTextField socksHost;
+    private javax.swing.JTextField socksPort;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.FirewallOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("firewall");
+
+        return;
+    }
+
+    public void _init()
+    {
+        org.gjt.sp.jedit.options.FirewallOptionPane r0;
+        javax.swing.JCheckBox $r1, $r18, $r25, $r26, $r34, $r38;
+        java.lang.String $r2, $r3, $r5, $r6, $r8, $r9, $r11, $r12, $r14, $r15, $r17, $r27, $r28, $r30, $r31, $r33;
+        javax.swing.JTextField $r4, $r7, $r10, $r16, $r19, $r20, $r21, $r23, $r29, $r32, $r35, $r36;
+        javax.swing.JPasswordField $r13, $r22;
+        org.gjt.sp.jedit.options.FirewallOptionPane$ActionHandler $r24, $r37;
+        boolean z0, z1;
+
+        r0 := @this;
+
+        $r1 = new javax.swing.JCheckBox;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("options.firewall.http.enabled");
+
+        specialinvoke $r1.<init>($r2);
+
+        r0.httpEnabled = $r1;
+
+        r0.addComponent($r1);
+
+        $r3 = org.gjt.sp.jedit.jEdit.getProperty("options.firewall.http.host");
+
+        $r4 = new javax.swing.JTextField;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("firewall.host");
+
+        specialinvoke $r4.<init>($r5, 15);
+
+        r0.httpHost = $r4;
+
+        r0.addComponent($r3, $r4);
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("options.firewall.http.port");
+
+        $r7 = new javax.swing.JTextField;
+
+        $r8 = org.gjt.sp.jedit.jEdit.getProperty("firewall.port");
+
+        specialinvoke $r7.<init>($r8, 15);
+
+        r0.httpPort = $r7;
+
+        r0.addComponent($r6, $r7);
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("options.firewall.http.user");
+
+        $r10 = new javax.swing.JTextField;
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty("firewall.user");
+
+        specialinvoke $r10.<init>($r11, 15);
+
+        r0.httpUser = $r10;
+
+        r0.addComponent($r9, $r10);
+
+        $r12 = org.gjt.sp.jedit.jEdit.getProperty("options.firewall.http.password");
+
+        $r13 = new javax.swing.JPasswordField;
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("firewall.password");
+
+        specialinvoke $r13.<init>($r14, 15);
+
+        r0.httpPass = $r13;
+
+        r0.addComponent($r12, $r13);
+
+        $r15 = org.gjt.sp.jedit.jEdit.getProperty("options.firewall.http.nonProxy");
+
+        $r16 = new javax.swing.JTextField;
+
+        $r17 = org.gjt.sp.jedit.jEdit.getProperty("firewall.nonProxyHosts");
+
+        specialinvoke $r16.<init>($r17, 15);
+
+        r0.httpNonProxy = $r16;
+
+        r0.addComponent($r15, $r16);
+
+        z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("firewall.enabled");
+
+        $r18 = r0.httpEnabled;
+
+        $r18.setSelected(z0);
+
+        $r19 = r0.httpHost;
+
+        $r19.setEnabled(z0);
+
+        $r20 = r0.httpPort;
+
+        $r20.setEnabled(z0);
+
+        $r21 = r0.httpUser;
+
+        $r21.setEnabled(z0);
+
+        $r22 = r0.httpPass;
+
+        $r22.setEnabled(z0);
+
+        $r23 = r0.httpNonProxy;
+
+        $r23.setEnabled(z0);
+
+        $r25 = r0.httpEnabled;
+
+        $r24 = new org.gjt.sp.jedit.options.FirewallOptionPane$ActionHandler;
+
+        specialinvoke $r24.<init>(r0);
+
+        $r25.addActionListener($r24);
+
+        $r26 = new javax.swing.JCheckBox;
+
+        $r27 = org.gjt.sp.jedit.jEdit.getProperty("options.firewall.socks.enabled");
+
+        specialinvoke $r26.<init>($r27);
+
+        r0.socksEnabled = $r26;
+
+        r0.addComponent($r26);
+
+        $r28 = org.gjt.sp.jedit.jEdit.getProperty("options.firewall.socks.host");
+
+        $r29 = new javax.swing.JTextField;
+
+        $r30 = org.gjt.sp.jedit.jEdit.getProperty("firewall.socks.host");
+
+        specialinvoke $r29.<init>($r30, 15);
+
+        r0.socksHost = $r29;
+
+        r0.addComponent($r28, $r29);
+
+        $r31 = org.gjt.sp.jedit.jEdit.getProperty("options.firewall.socks.port");
+
+        $r32 = new javax.swing.JTextField;
+
+        $r33 = org.gjt.sp.jedit.jEdit.getProperty("firewall.socks.port");
+
+        specialinvoke $r32.<init>($r33, 15);
+
+        r0.socksPort = $r32;
+
+        r0.addComponent($r31, $r32);
+
+        z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("firewall.socks.enabled");
+
+        $r34 = r0.socksEnabled;
+
+        $r34.setSelected(z1);
+
+        $r35 = r0.socksHost;
+
+        $r35.setEnabled(z1);
+
+        $r36 = r0.socksPort;
+
+        $r36.setEnabled(z1);
+
+        $r38 = r0.socksEnabled;
+
+        $r37 = new org.gjt.sp.jedit.options.FirewallOptionPane$ActionHandler;
+
+        specialinvoke $r37.<init>(r0);
+
+        $r38.addActionListener($r37);
+
+        return;
+    }
+
+    public void _save()
+    {
+        org.gjt.sp.jedit.options.FirewallOptionPane r0;
+        javax.swing.JCheckBox $r1, $r13;
+        boolean $z0, $z1;
+        javax.swing.JTextField $r2, $r4, $r6, $r11, $r14, $r16;
+        java.lang.String $r3, $r5, $r7, $r8, $r12, $r15, $r17;
+        javax.swing.JPasswordField $r9;
+        char[] $r10;
+
+        r0 := @this;
+
+        $r1 = r0.httpEnabled;
+
+        $z0 = $r1.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("firewall.enabled", $z0);
+
+        $r2 = r0.httpHost;
+
+        $r3 = $r2.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("firewall.host", $r3);
+
+        $r4 = r0.httpPort;
+
+        $r5 = $r4.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("firewall.port", $r5);
+
+        $r6 = r0.httpUser;
+
+        $r7 = $r6.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("firewall.user", $r7);
+
+        $r8 = new java.lang.String;
+
+        $r9 = r0.httpPass;
+
+        $r10 = $r9.getPassword();
+
+        specialinvoke $r8.<init>($r10);
+
+        org.gjt.sp.jedit.jEdit.setProperty("firewall.password", $r8);
+
+        $r11 = r0.httpNonProxy;
+
+        $r12 = $r11.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("firewall.nonProxyHosts", $r12);
+
+        $r13 = r0.socksEnabled;
+
+        $z1 = $r13.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("firewall.socks.enabled", $z1);
+
+        $r14 = r0.socksHost;
+
+        $r15 = $r14.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("firewall.socks.host", $r15);
+
+        $r16 = r0.socksPort;
+
+        $r17 = $r16.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("firewall.socks.port", $r17);
+
+        return;
+    }
+
+    static javax.swing.JCheckBox access$000(org.gjt.sp.jedit.options.FirewallOptionPane)
+    {
+        org.gjt.sp.jedit.options.FirewallOptionPane r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.httpEnabled;
+
+        return $r1;
+    }
+
+    static javax.swing.JTextField access$100(org.gjt.sp.jedit.options.FirewallOptionPane)
+    {
+        org.gjt.sp.jedit.options.FirewallOptionPane r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.httpHost;
+
+        return $r1;
+    }
+
+    static javax.swing.JTextField access$200(org.gjt.sp.jedit.options.FirewallOptionPane)
+    {
+        org.gjt.sp.jedit.options.FirewallOptionPane r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.httpPort;
+
+        return $r1;
+    }
+
+    static javax.swing.JTextField access$300(org.gjt.sp.jedit.options.FirewallOptionPane)
+    {
+        org.gjt.sp.jedit.options.FirewallOptionPane r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.httpUser;
+
+        return $r1;
+    }
+
+    static javax.swing.JPasswordField access$400(org.gjt.sp.jedit.options.FirewallOptionPane)
+    {
+        org.gjt.sp.jedit.options.FirewallOptionPane r0;
+        javax.swing.JPasswordField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.httpPass;
+
+        return $r1;
+    }
+
+    static javax.swing.JTextField access$500(org.gjt.sp.jedit.options.FirewallOptionPane)
+    {
+        org.gjt.sp.jedit.options.FirewallOptionPane r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.httpNonProxy;
+
+        return $r1;
+    }
+
+    static javax.swing.JCheckBox access$600(org.gjt.sp.jedit.options.FirewallOptionPane)
+    {
+        org.gjt.sp.jedit.options.FirewallOptionPane r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.socksEnabled;
+
+        return $r1;
+    }
+
+    static javax.swing.JTextField access$700(org.gjt.sp.jedit.options.FirewallOptionPane)
+    {
+        org.gjt.sp.jedit.options.FirewallOptionPane r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.socksHost;
+
+        return $r1;
+    }
+
+    static javax.swing.JTextField access$800(org.gjt.sp.jedit.options.FirewallOptionPane)
+    {
+        org.gjt.sp.jedit.options.FirewallOptionPane r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.socksPort;
+
+        return $r1;
+    }
+}

@@ -1,0 +1,50 @@
+class org.gjt.sp.jedit.gui.statusbar.MemoryStatusWidgetFactory$MemoryStatus$MouseHandler extends java.awt.event.MouseAdapter
+{
+    final org.gjt.sp.jedit.gui.statusbar.MemoryStatusWidgetFactory$MemoryStatus this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.statusbar.MemoryStatusWidgetFactory$MemoryStatus)
+    {
+        org.gjt.sp.jedit.gui.statusbar.MemoryStatusWidgetFactory$MemoryStatus$MouseHandler r0;
+        org.gjt.sp.jedit.gui.statusbar.MemoryStatusWidgetFactory$MemoryStatus r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mousePressed(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.statusbar.MemoryStatusWidgetFactory$MemoryStatus$MouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        int $i0;
+        org.gjt.sp.jedit.gui.statusbar.MemoryStatusWidgetFactory$MemoryStatus $r2, $r4;
+        org.gjt.sp.jedit.View $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r1.getClickCount();
+
+        if $i0 != 2 goto label1;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.statusbar.MemoryStatusWidgetFactory$MemoryStatus.access$000($r2);
+
+        org.gjt.sp.jedit.jEdit.showMemoryDialog($r3);
+
+        $r4 = r0.this$0;
+
+        $r4.repaint();
+
+     label1:
+        return;
+    }
+}

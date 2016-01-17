@@ -1,0 +1,81 @@
+class org.gjt.sp.jedit.pluginmgr.InstallPanel$HeaderMouseHandler extends java.awt.event.MouseAdapter
+{
+    final org.gjt.sp.jedit.pluginmgr.InstallPanel this$0;
+
+    private void <init>(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$HeaderMouseHandler r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mouseClicked(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$HeaderMouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        int i0, $i1, $i2;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r2, $r6, $r8;
+        javax.swing.JTable $r3;
+        javax.swing.table.JTableHeader $r4;
+        java.awt.Point $r5;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel $r7, $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300($r2);
+
+        $r4 = $r3.getTableHeader();
+
+        $r5 = r1.getPoint();
+
+        i0 = $r4.columnAtPoint($r5);
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$500($r6);
+
+        $i1 = $r7.sortDirection;
+
+        $i2 = $i1 * -1;
+
+        $r7.sortDirection = $i2;
+
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$500($r8);
+
+        $r9.sort(i0);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.InstallPanel, org.gjt.sp.jedit.pluginmgr.InstallPanel$1)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$HeaderMouseHandler r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r1;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

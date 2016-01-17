@@ -1,0 +1,386 @@
+class org.gjt.sp.jedit.options.StatusBarOptionPane$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.options.StatusBarOptionPane this$0;
+
+    private void <init>(org.gjt.sp.jedit.options.StatusBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$ActionHandler r0;
+        org.gjt.sp.jedit.options.StatusBarOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2, r87, r88, r89;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, i10, i11, i12, i13, i14, i11_1, i11_2, i11_3;
+        org.gjt.sp.jedit.options.StatusBarOptionPane $r3, $r5, $r7, $r9, $r11, $r13, $r16, $r17, $r19, $r21, $r24, $r26, $r28, $r30, $r31, $r33, $r35, $r37, $r39, $r41, $r43, $r44, $r46, $r48, $r50, $r52, $r54, $r56, $r57, $r59, $r61, $r63, $r64, $r65, $r67, $r69, $r72, $r73, $r74, $r76, $r78, $r80, $r82, $r83;
+        org.gjt.sp.jedit.gui.RolloverButton $r4, $r6, $r8, $r10, $r12;
+        javax.swing.JList $r14, $r20, $r27, $r29, $r32, $r34, $r40, $r42, $r45, $r47, $r53, $r55, $r58, $r68, $r70, $r75, $r79, $r81;
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog $r15, $r71, r85, r90;
+        java.lang.String $r18, r86, r91;
+        boolean $z0, $z1;
+        javax.swing.DefaultListModel $r22, $r25, $r36, $r38, $r49, $r51, $r60, $r62, $r66, $r77, $r84;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$300($r3);
+
+        if r2 != $r4 goto label05;
+
+        $r71 = new org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog;
+
+        $r73 = r0.this$0;
+
+        $r72 = r0.this$0;
+
+        specialinvoke $r71.<init>($r73, $r72);
+
+        r85 = $r71;
+
+        r86 = r85.getValue();
+
+        if r86 == null goto label01;
+
+        $z1 = r86.isEmpty();
+
+        if $z1 == 0 goto label02;
+
+     label01:
+        return;
+
+     label02:
+        $r74 = r0.this$0;
+
+        $r75 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r74);
+
+        i10 = $r75.getSelectedIndex();
+
+        if i10 != -1 goto label03;
+
+        $r83 = r0.this$0;
+
+        $r84 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$500($r83);
+
+        i11 = $r84.getSize();
+
+(0)     goto label04;
+
+     label03:
+(1)     i11_1 = i10 + 1;
+
+     label04:
+        i11_2 = Phi(i11 #0, i11_1 #1);
+
+        $r76 = r0.this$0;
+
+        $r77 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$500($r76);
+
+        $r77.insertElementAt(r86, i11_2);
+
+        $r78 = r0.this$0;
+
+        $r79 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r78);
+
+        $r79.setSelectedIndex(i11_2);
+
+        $r80 = r0.this$0;
+
+        $r81 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r80);
+
+        $r81.ensureIndexIsVisible(i11_2);
+
+        $r82 = r0.this$0;
+
+        org.gjt.sp.jedit.options.StatusBarOptionPane.access$600($r82);
+
+(2)     goto label14;
+
+     label05:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$700($r5);
+
+        if r2 != $r6 goto label08;
+
+        $r57 = r0.this$0;
+
+        $r58 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r57);
+
+        i12 = $r58.getSelectedIndex();
+
+        $r59 = r0.this$0;
+
+        $r60 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$500($r59);
+
+        $r60.removeElementAt(i12);
+
+        $r61 = r0.this$0;
+
+        $r62 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$500($r61);
+
+        $i7 = $r62.getSize();
+
+        if $i7 == 0 goto label07;
+
+        $r65 = r0.this$0;
+
+        $r66 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$500($r65);
+
+        $i8 = $r66.getSize();
+
+        if $i8 != i12 goto label06;
+
+        $r69 = r0.this$0;
+
+        $r70 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r69);
+
+        $i9 = i12 - 1;
+
+        $r70.setSelectedIndex($i9);
+
+        goto label07;
+
+     label06:
+        $r67 = r0.this$0;
+
+        $r68 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r67);
+
+        $r68.setSelectedIndex(i12);
+
+     label07:
+        $r63 = r0.this$0;
+
+        org.gjt.sp.jedit.options.StatusBarOptionPane.access$800($r63);
+
+        $r64 = r0.this$0;
+
+        org.gjt.sp.jedit.options.StatusBarOptionPane.access$600($r64);
+
+(3)     goto label14;
+
+     label08:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$900($r7);
+
+        if r2 != $r8 goto label09;
+
+        $r44 = r0.this$0;
+
+        $r45 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r44);
+
+        i13 = $r45.getSelectedIndex();
+
+        $r46 = r0.this$0;
+
+        $r47 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r46);
+
+        r87 = $r47.getSelectedValue();
+
+        $r48 = r0.this$0;
+
+        $r49 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$500($r48);
+
+        $r49.removeElementAt(i13);
+
+        $r50 = r0.this$0;
+
+        $r51 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$500($r50);
+
+        $i4 = i13 - 1;
+
+        $r51.insertElementAt(r87, $i4);
+
+        $r52 = r0.this$0;
+
+        $r53 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r52);
+
+        $i5 = i13 - 1;
+
+        $r53.setSelectedIndex($i5);
+
+        $r54 = r0.this$0;
+
+        $r55 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r54);
+
+        $i6 = i13 - 1;
+
+        $r55.ensureIndexIsVisible($i6);
+
+        $r56 = r0.this$0;
+
+        org.gjt.sp.jedit.options.StatusBarOptionPane.access$600($r56);
+
+(4)     goto label14;
+
+     label09:
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$1000($r9);
+
+        if r2 != $r10 goto label10;
+
+        $r31 = r0.this$0;
+
+        $r32 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r31);
+
+        i14 = $r32.getSelectedIndex();
+
+        $r33 = r0.this$0;
+
+        $r34 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r33);
+
+        r88 = $r34.getSelectedValue();
+
+        $r35 = r0.this$0;
+
+        $r36 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$500($r35);
+
+        $r36.removeElementAt(i14);
+
+        $r37 = r0.this$0;
+
+        $r38 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$500($r37);
+
+        $i1 = i14 + 1;
+
+        $r38.insertElementAt(r88, $i1);
+
+        $r39 = r0.this$0;
+
+        $r40 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r39);
+
+        $i2 = i14 + 1;
+
+        $r40.setSelectedIndex($i2);
+
+        $r41 = r0.this$0;
+
+        $r42 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r41);
+
+        $i3 = i14 + 1;
+
+        $r42.ensureIndexIsVisible($i3);
+
+        $r43 = r0.this$0;
+
+        org.gjt.sp.jedit.options.StatusBarOptionPane.access$600($r43);
+
+(5)     goto label14;
+
+     label10:
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$1100($r11);
+
+(6)     if r2 != $r12 goto label14;
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r13);
+
+        r89 = $r14.getSelectedValue();
+
+        if r89 != null goto label11;
+
+        return;
+
+     label11:
+        $r15 = new org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog;
+
+        $r16 = r0.this$0;
+
+        $r17 = r0.this$0;
+
+        $r18 = java.lang.String.valueOf(r89);
+
+        specialinvoke $r15.<init>($r16, $r17, $r18);
+
+        r90 = $r15;
+
+        r91 = r90.getValue();
+
+        if r91 == null goto label12;
+
+        $z0 = r91.isEmpty();
+
+        if $z0 == 0 goto label13;
+
+     label12:
+        return;
+
+     label13:
+        $r19 = r0.this$0;
+
+        $r20 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r19);
+
+        i0 = $r20.getSelectedIndex();
+
+        $r21 = r0.this$0;
+
+        $r22 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$500($r21);
+
+        $r22.remove(i0);
+
+        $r24 = r0.this$0;
+
+        $r25 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$500($r24);
+
+        $r25.insertElementAt(r91, i0);
+
+        $r26 = r0.this$0;
+
+        $r27 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r26);
+
+        $r27.setSelectedIndex(i0);
+
+        $r28 = r0.this$0;
+
+        $r29 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$400($r28);
+
+        $r29.ensureIndexIsVisible(i0);
+
+        $r30 = r0.this$0;
+
+(7)     org.gjt.sp.jedit.options.StatusBarOptionPane.access$600($r30);
+
+     label14:
+        i11_3 = Phi(i11_2 #2, i11 #3, i11 #4, i11 #5, i11 #6, i11 #7);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.options.StatusBarOptionPane, org.gjt.sp.jedit.options.StatusBarOptionPane$1)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$ActionHandler r0;
+        org.gjt.sp.jedit.options.StatusBarOptionPane r1;
+        org.gjt.sp.jedit.options.StatusBarOptionPane$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

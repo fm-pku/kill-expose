@@ -1,0 +1,137 @@
+class org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel$KeyCompare extends java.lang.Object implements java.util.Comparator
+{
+    private final int col;
+    final org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel this$1;
+
+    void <init>(org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel, int)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel$KeyCompare r0;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel r1;
+        int i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        r0.this$1 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.col = i0;
+
+        return;
+    }
+
+    public int compare(org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding[], org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding[])
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel$KeyCompare r0;
+        org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding[] r1, r2;
+        java.lang.String r3, r4, $r6, $r8, r13, r14, r13_1, r14_1, r13_2, r14_2;
+        org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding $r5, $r7, $r9, $r10, $r11, $r12;
+        int $i0, $i1, $i2, $i3, $i4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r5 = r1[0];
+
+        $r6 = $r5.label;
+
+        r3 = $r6.toLowerCase();
+
+        $r7 = r2[0];
+
+        $r8 = $r7.label;
+
+        r4 = $r8.toLowerCase();
+
+        $i0 = r0.col;
+
+        if $i0 != 0 goto label1;
+
+        $i4 = org.gjt.sp.util.StandardUtilities.compareStrings(r3, r4, 1);
+
+        return $i4;
+
+     label1:
+        $i1 = r0.col;
+
+        if $i1 != 1 goto label2;
+
+        $r11 = r1[0];
+
+        r13 = $r11.shortcut;
+
+        $r12 = r2[0];
+
+        r14 = $r12.shortcut;
+
+(0)     goto label3;
+
+     label2:
+        $r9 = r1[1];
+
+        r13_1 = $r9.shortcut;
+
+        $r10 = r2[1];
+
+(1)     r14_1 = $r10.shortcut;
+
+     label3:
+        r13_2 = Phi(r13 #0, r13_1 #1);
+
+        r14_2 = Phi(r14 #0, r14_1 #1);
+
+        if r13_2 != null goto label4;
+
+        if r14_2 == null goto label4;
+
+        return 1;
+
+     label4:
+        if r14_2 != null goto label5;
+
+        if r13_2 == null goto label5;
+
+        return -1;
+
+     label5:
+        if r13_2 != null goto label6;
+
+        $i3 = org.gjt.sp.util.StandardUtilities.compareStrings(r3, r4, 1);
+
+        return $i3;
+
+     label6:
+        $i2 = org.gjt.sp.util.StandardUtilities.compareStrings(r13_2, r14_2, 1);
+
+        return $i2;
+    }
+
+    public volatile int compare(java.lang.Object, java.lang.Object)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel$KeyCompare r0;
+        java.lang.Object r1, r2;
+        org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding[] $r3, $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = (org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding[]) r1;
+
+        $r3 = (org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding[]) r2;
+
+        $i0 = r0.compare($r4, $r3);
+
+        return $i0;
+    }
+}

@@ -1,0 +1,95 @@
+final enum class org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize extends java.lang.Enum
+{
+    public static final enum org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize MINIMUM;
+    public static final enum org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize PREFERRED;
+    public static final enum org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize MAXIMUM;
+    private static final org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize[] $VALUES;
+
+    public static org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize[] values()
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize[] $r0, $r2;
+        java.lang.Object $r1;
+
+        $r0 = org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize.$VALUES;
+
+        $r1 = $r0.clone();
+
+        $r2 = (org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize[]) $r1;
+
+        return $r2;
+    }
+
+    public static org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize valueOf(java.lang.String)
+    {
+        java.lang.String r0;
+        java.lang.Enum $r1;
+        org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize $r2;
+
+        r0 := @parameter0;
+
+        $r1 = java.lang.Enum.valueOf(class "org/gjt/sp/jedit/gui/ExtendedGridLayout$LayoutSize", r0);
+
+        $r2 = (org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize) $r1;
+
+        return $r2;
+    }
+
+    private void <init>(java.lang.String, int)
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize r0;
+        java.lang.String r1;
+        int i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        specialinvoke r0.<init>(r1, i0);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize $r0, $r1, $r2, $r4, $r5, $r6;
+        org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize[] $r3;
+
+        $r0 = new org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize;
+
+        specialinvoke $r0.<init>("MINIMUM", 0);
+
+        org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize.MINIMUM = $r0;
+
+        $r1 = new org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize;
+
+        specialinvoke $r1.<init>("PREFERRED", 1);
+
+        org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize.PREFERRED = $r1;
+
+        $r2 = new org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize;
+
+        specialinvoke $r2.<init>("MAXIMUM", 2);
+
+        org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize.MAXIMUM = $r2;
+
+        $r3 = newarray (org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize)[3];
+
+        $r4 = org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize.MINIMUM;
+
+        $r3[0] = $r4;
+
+        $r5 = org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize.PREFERRED;
+
+        $r3[1] = $r5;
+
+        $r6 = org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize.MAXIMUM;
+
+        $r3[2] = $r6;
+
+        org.gjt.sp.jedit.gui.ExtendedGridLayout$LayoutSize.$VALUES = $r3;
+
+        return;
+    }
+}

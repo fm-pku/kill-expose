@@ -1,0 +1,11 @@
+public interface  org.gjt.sp.jedit.OptionPane extends java.lang.Object
+{
+
+    public abstract java.lang.String getName();
+
+    public abstract java.awt.Component getComponent();
+
+    public abstract void init();
+
+    public abstract void save();
+}

@@ -1,0 +1,5255 @@
+public class org.gjt.sp.jedit.View extends javax.swing.JFrame implements org.gjt.sp.jedit.input.InputHandlerProvider
+{
+    public static final java.lang.String VIEW_DOCKING_FRAMEWORK_PROPERTY;
+    private static final java.lang.String ORIGINAL_DOCKING_FRAMEWORK;
+    public static final java.lang.String DOCKING_FRAMEWORK_PROVIDER_SERVICE;
+    private static org.gjt.sp.jedit.gui.DockingFrameworkProvider dockingFrameworkProvider;
+    public static final int TOP_GROUP;
+    public static final int BOTTOM_GROUP;
+    public static final int DEFAULT_GROUP;
+    public static final int TOP_LAYER;
+    public static final int DEFAULT_LAYER;
+    public static final int BOTTOM_LAYER;
+    public static final int ABOVE_SYSTEM_BAR_LAYER;
+    public static final int SYSTEM_BAR_LAYER;
+    public static final int BELOW_SYSTEM_BAR_LAYER;
+    public static final int SEARCH_BAR_LAYER;
+    public static final int BELOW_SEARCH_BAR_LAYER;
+    public static final int ACTION_BAR_LAYER;
+    public static final int STATUS_BAR_LAYER;
+    public static final int BELOW_STATUS_BAR_LAYER;
+    public static final int VIEW;
+    public static final int TEXT_AREA;
+    public static final int ACTION_BAR;
+    org.gjt.sp.jedit.View prev;
+    org.gjt.sp.jedit.View next;
+    private boolean closed;
+    private final org.gjt.sp.jedit.gui.DockableWindowManager dockableWindowManager;
+    private final javax.swing.JPanel mainPanel;
+    private final javax.swing.JPanel topToolBars;
+    private final javax.swing.JPanel bottomToolBars;
+    private org.gjt.sp.jedit.gui.ToolBarManager toolBarManager;
+    private java.awt.Container toolBar;
+    private org.gjt.sp.jedit.search.SearchBar searchBar;
+    private org.gjt.sp.jedit.gui.ActionBar actionBar;
+    private org.gjt.sp.jedit.EditPane editPane;
+    private javax.swing.JSplitPane splitPane;
+    private java.lang.String lastSplitConfig;
+    private final org.gjt.sp.jedit.gui.StatusBar status;
+    private org.gjt.sp.jedit.gui.InputHandler inputHandler;
+    private org.gjt.sp.jedit.Macros$Recorder recorder;
+    private java.awt.Component prefixFocusOwner;
+    private int waitCount;
+    private boolean showFullPath;
+    private final boolean plainView;
+    private java.net.Socket waitSocket;
+    private java.awt.Component mainContent;
+    private boolean fullScreenMode;
+    private java.awt.Rectangle windowedBounds;
+    private javax.swing.JMenuBar menuBar;
+    private java.lang.String userTitle;
+
+    public org.gjt.sp.jedit.gui.DockableWindowManager getDockableWindowManager()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.gui.DockableWindowManager $r1;
+
+        r0 := @this;
+
+        $r1 = r0.dockableWindowManager;
+
+        return $r1;
+    }
+
+    public static java.lang.String getDockingFrameworkName()
+    {
+        java.lang.String r0;
+
+        r0 = org.gjt.sp.jedit.jEdit.getProperty("view.docking.framework", "Original");
+
+        return r0;
+    }
+
+    public static org.gjt.sp.jedit.gui.DockingFrameworkProvider getDockingFrameworkProvider()
+    {
+        java.lang.String r0, $r10;
+        org.gjt.sp.jedit.gui.DockingFrameworkProvider $r1, $r2, $r4, $r5, $r12;
+        java.lang.Object $r3, $r11;
+        java.lang.StringBuilder $r6, $r7, $r8, $r9;
+
+        $r1 = org.gjt.sp.jedit.View.dockingFrameworkProvider;
+
+        if $r1 != null goto label1;
+
+        r0 = org.gjt.sp.jedit.View.getDockingFrameworkName();
+
+        $r3 = org.gjt.sp.jedit.ServiceManager.getService("org.gjt.sp.jedit.gui.DockingFrameworkProvider", r0);
+
+        $r4 = (org.gjt.sp.jedit.gui.DockingFrameworkProvider) $r3;
+
+        org.gjt.sp.jedit.View.dockingFrameworkProvider = $r4;
+
+        $r5 = org.gjt.sp.jedit.View.dockingFrameworkProvider;
+
+        if $r5 != null goto label1;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("No docking framework ");
+
+        $r8 = $r7.append(r0);
+
+        $r9 = $r8.append(" available, using the original one");
+
+        $r10 = $r9.toString();
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/View", $r10);
+
+        $r11 = org.gjt.sp.jedit.ServiceManager.getService("org.gjt.sp.jedit.gui.DockingFrameworkProvider", "Original");
+
+        $r12 = (org.gjt.sp.jedit.gui.DockingFrameworkProvider) $r11;
+
+        org.gjt.sp.jedit.View.dockingFrameworkProvider = $r12;
+
+     label1:
+        $r2 = org.gjt.sp.jedit.View.dockingFrameworkProvider;
+
+        return $r2;
+    }
+
+    public java.awt.Container getToolBar()
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.Container $r1;
+
+        r0 := @this;
+
+        $r1 = r0.toolBar;
+
+        return $r1;
+    }
+
+    public void addToolBar(java.awt.Component)
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.Component r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.addToolBar(0, 0, r1);
+
+        return;
+    }
+
+    public void addToolBar(int, java.awt.Component)
+    {
+        org.gjt.sp.jedit.View r0;
+        int i0;
+        java.awt.Component r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.addToolBar(i0, 0, r1);
+
+        return;
+    }
+
+    public void addToolBar(int, int, java.awt.Component)
+    {
+        org.gjt.sp.jedit.View r0;
+        int i0, i1;
+        java.awt.Component r1;
+        org.gjt.sp.jedit.gui.ToolBarManager $r2;
+        javax.swing.JRootPane $r3;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        r1 := @parameter2;
+
+        $r2 = r0.toolBarManager;
+
+        Packer.Unpack(r0);
+
+        $r2.addToolBar(i0, i1, r1);
+
+        Packer.Pack(r0);
+
+        $r3 = r0.getRootPane();
+
+        $r3.revalidate();
+
+        return;
+    }
+
+    public void removeToolBar(java.awt.Component)
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.Component r1;
+        org.gjt.sp.jedit.gui.ToolBarManager $r2, $r3;
+        javax.swing.JRootPane $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.toolBarManager;
+
+        if $r2 != null goto label1;
+
+        return;
+
+     label1:
+        if r1 != null goto label2;
+
+        return;
+
+     label2:
+        $r3 = r0.toolBarManager;
+
+        Packer.Unpack(r0);
+
+        $r3.removeToolBar(r1);
+
+        Packer.Pack(r0);
+
+        $r4 = r0.getRootPane();
+
+        $r4.revalidate();
+
+        return;
+    }
+
+    public synchronized void showWaitCursor()
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.Cursor r1;
+        int $i0, $i1;
+        org.gjt.sp.jedit.View$SetCursorVisitor $r2;
+
+        r0 := @this;
+
+        $i0 = r0.waitCount;
+
+        $i1 = $i0 + 1;
+
+        Packer.Unpack(r0);
+
+        r0.waitCount = $i1;
+
+        Packer.Pack(r0);
+
+        if $i0 != 0 goto label1;
+
+        r1 = java.awt.Cursor.getPredefinedCursor(3);
+
+        r0.setCursor(r1);
+
+        $r2 = new org.gjt.sp.jedit.View$SetCursorVisitor;
+
+        specialinvoke $r2.<init>(r1);
+
+        r0.visit($r2);
+
+     label1:
+        return;
+    }
+
+    public synchronized void hideWaitCursor()
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.Cursor r1;
+        int $i0, $i1, $i2, $i3;
+        org.gjt.sp.jedit.View$SetCursorVisitor $r2;
+
+        r0 := @this;
+
+        $i0 = r0.waitCount;
+
+        if $i0 <= 0 goto label1;
+
+        $i2 = r0.waitCount;
+
+        $i3 = $i2 - 1;
+
+        Packer.Unpack(r0);
+
+        r0.waitCount = $i3;
+
+     label1:
+        Packer.Pack(r0);
+
+        $i1 = r0.waitCount;
+
+        if $i1 != 0 goto label2;
+
+        r1 = java.awt.Cursor.getPredefinedCursor(0);
+
+        r0.setCursor(r1);
+
+        $r2 = new org.gjt.sp.jedit.View$SetCursorVisitor;
+
+        specialinvoke $r2.<init>(r1);
+
+        r0.visit($r2);
+
+     label2:
+        return;
+    }
+
+    public final org.gjt.sp.jedit.search.SearchBar getSearchBar()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.search.SearchBar $r1;
+
+        r0 := @this;
+
+        $r1 = r0.searchBar;
+
+        return $r1;
+    }
+
+    public final org.gjt.sp.jedit.gui.ActionBar getActionBar()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.gui.ActionBar $r1;
+
+        r0 := @this;
+
+        $r1 = r0.actionBar;
+
+        return $r1;
+    }
+
+    public org.gjt.sp.jedit.gui.StatusBar getStatus()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.gui.StatusBar $r1;
+
+        r0 := @this;
+
+        $r1 = r0.status;
+
+        return $r1;
+    }
+
+    public void quickIncrementalSearch(boolean)
+    {
+        org.gjt.sp.jedit.View r0;
+        boolean z0, $z1;
+        org.gjt.sp.jedit.textarea.JEditTextArea r1;
+        org.gjt.sp.jedit.search.SearchBar $r2, $r3, $r5, $r6, $r8, $r10, $r12, $r13;
+        java.awt.Container $r4;
+        org.gjt.sp.jedit.gui.HistoryTextField $r7, $r9, $r11;
+        int $i0;
+        java.lang.String r14, r14_1, r14_2, r14_3, r14_4, r14_5, r14_6;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        $r2 = r0.searchBar;
+
+        if $r2 != null goto label1;
+
+        $r13 = new org.gjt.sp.jedit.search.SearchBar;
+
+        specialinvoke $r13.<init>(r0, 1);
+
+        Packer.Unpack(r0);
+
+        r0.searchBar = $r13;
+
+     label1:
+        Packer.Unpack(r0);
+
+        $r3 = r0.searchBar;
+
+        $r4 = $r3.getParent();
+
+        if $r4 != null goto label2;
+
+        $r12 = r0.searchBar;
+
+        r0.addToolBar(0, 75, $r12);
+
+     label2:
+        $r5 = r0.searchBar;
+
+        $r5.setHyperSearch(0);
+
+        Packer.Pack(r0);
+
+        r1 = r0.getTextArea();
+
+(0)     if z0 == 0 goto label6;
+
+        r14 = r1.getSelectedText();
+
+        if r14 != null goto label3;
+
+        r1.selectWord();
+
+        r14_1 = r1.getSelectedText();
+
+(1)     goto label4;
+
+     label3:
+        $i0 = r14.indexOf(10);
+
+(2)     if $i0 == -1 goto label4;
+
+(3)     r14_2 = null;
+
+     label4:
+        r14_3 = Phi(r14_1 #1, r14 #2, r14_2 #3);
+
+(4)     if r14_3 == null goto label5;
+
+        $z1 = org.gjt.sp.jedit.search.SearchAndReplace.getRegexp();
+
+(5)     if $z1 == 0 goto label5;
+
+(6)     r14_4 = org.gjt.sp.jedit.search.SearchAndReplace.escapeRegexp(r14_3, 0);
+
+     label5:
+        r14_5 = Phi(r14_3 #4, r14_3 #5, r14_4 #6);
+
+        $r10 = r0.searchBar;
+
+        Packer.Unpack(r0);
+
+        $r11 = $r10.getField();
+
+(7)     $r11.setText(r14_5);
+
+     label6:
+        Packer.Unpack(r0);
+
+        r14_6 = Phi(r14 #0, r14_5 #7);
+
+        $r6 = r0.searchBar;
+
+        $r7 = $r6.getField();
+
+        $r7.requestFocus();
+
+        $r8 = r0.searchBar;
+
+        $r9 = $r8.getField();
+
+        Packer.Pack(r0);
+
+        $r9.selectAll();
+
+        return;
+    }
+
+    public void quickHyperSearch(boolean)
+    {
+        org.gjt.sp.jedit.View r0;
+        boolean z0, $z1;
+        org.gjt.sp.jedit.textarea.JEditTextArea r1;
+        org.gjt.sp.jedit.search.SearchBar $r2, $r3, $r5, $r6, $r8, $r10, $r12, $r13;
+        java.awt.Container $r4;
+        org.gjt.sp.jedit.gui.HistoryTextField $r7, $r9, $r11;
+        int $i0;
+        org.gjt.sp.jedit.gui.HistoryModel $r14;
+        org.gjt.sp.jedit.search.CurrentBufferSet $r15;
+        java.lang.String r16, r16_1, r16_2, r16_3, r16_4, r16_5;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        r1 = r0.getTextArea();
+
+(0)     if z0 == 0 goto label3;
+
+        r16 = r1.getSelectedText();
+
+(1)     if r16 != null goto label1;
+
+        r1.selectWord();
+
+(2)     r16_1 = r1.getSelectedText();
+
+     label1:
+        r16_2 = Phi(r16 #1, r16_1 #2);
+
+(3)     if r16_2 == null goto label3;
+
+        $i0 = r16_2.indexOf(10);
+
+(4)     if $i0 != -1 goto label3;
+
+        $z1 = org.gjt.sp.jedit.search.SearchAndReplace.getRegexp();
+
+(5)     if $z1 == 0 goto label2;
+
+(6)     r16_3 = org.gjt.sp.jedit.search.SearchAndReplace.escapeRegexp(r16_2, 0);
+
+     label2:
+        r16_4 = Phi(r16_2 #5, r16_3 #6);
+
+        $r14 = org.gjt.sp.jedit.gui.HistoryModel.getModel("find");
+
+        $r14.addItem(r16_4);
+
+        org.gjt.sp.jedit.search.SearchAndReplace.setSearchString(r16_4);
+
+        $r15 = new org.gjt.sp.jedit.search.CurrentBufferSet;
+
+        specialinvoke $r15.<init>();
+
+        org.gjt.sp.jedit.search.SearchAndReplace.setSearchFileSet($r15);
+
+        org.gjt.sp.jedit.search.SearchAndReplace.hyperSearch(r0);
+
+        return;
+
+     label3:
+        r16_5 = Phi(r16 #0, r16_2 #3, r16_2 #4);
+
+        $r2 = r0.searchBar;
+
+        if $r2 != null goto label4;
+
+        $r13 = new org.gjt.sp.jedit.search.SearchBar;
+
+        specialinvoke $r13.<init>(r0, 1);
+
+        Packer.Unpack(r0);
+
+        r0.searchBar = $r13;
+
+     label4:
+        Packer.Unpack(r0);
+
+        $r3 = r0.searchBar;
+
+        $r4 = $r3.getParent();
+
+        if $r4 != null goto label5;
+
+        $r12 = r0.searchBar;
+
+        r0.addToolBar(0, 75, $r12);
+
+     label5:
+        $r5 = r0.searchBar;
+
+        $r5.setHyperSearch(1);
+
+        $r6 = r0.searchBar;
+
+        $r7 = $r6.getField();
+
+        $r7.setText(null);
+
+        $r8 = r0.searchBar;
+
+        $r9 = $r8.getField();
+
+        $r9.requestFocus();
+
+        $r10 = r0.searchBar;
+
+        $r11 = $r10.getField();
+
+        Packer.Pack(r0);
+
+        $r11.selectAll();
+
+        return;
+    }
+
+    public void actionBar()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.gui.ActionBar $r1, $r2, $r4, $r5, $r6;
+        java.awt.Container $r3;
+
+        r0 := @this;
+
+        $r1 = r0.actionBar;
+
+        if $r1 != null goto label1;
+
+        $r6 = new org.gjt.sp.jedit.gui.ActionBar;
+
+        specialinvoke $r6.<init>(r0, 1);
+
+        Packer.Unpack(r0);
+
+        r0.actionBar = $r6;
+
+     label1:
+        Packer.Unpack(r0);
+
+        $r2 = r0.actionBar;
+
+        $r3 = $r2.getParent();
+
+        if $r3 != null goto label2;
+
+        $r5 = r0.actionBar;
+
+        r0.addToolBar(1, -75, $r5);
+
+     label2:
+        $r4 = r0.actionBar;
+
+        $r4.goToActionBar();
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public java.awt.event.KeyListener getKeyEventInterceptor()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.gui.InputHandler $r1;
+        java.awt.event.KeyListener $r2;
+
+        r0 := @this;
+
+        $r1 = r0.inputHandler;
+
+        Packer.Unpack(r0);
+
+        $r2 = $r1.getKeyEventInterceptor();
+
+        Packer.Pack(r0);
+
+        return $r2;
+    }
+
+    public void setKeyEventInterceptor(java.awt.event.KeyListener)
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.event.KeyListener r1;
+        org.gjt.sp.jedit.gui.InputHandler $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.inputHandler;
+
+        Packer.Unpack(r0);
+
+        $r2.setKeyEventInterceptor(r1);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.gui.InputHandler getInputHandler()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.gui.InputHandler $r1;
+
+        r0 := @this;
+
+        $r1 = r0.inputHandler;
+
+        return $r1;
+    }
+
+    public void setInputHandler(org.gjt.sp.jedit.gui.InputHandler)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.gui.InputHandler r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        Packer.Unpack(r0);
+
+        r0.inputHandler = r1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.Macros$Recorder getMacroRecorder()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.Macros$Recorder $r1;
+
+        r0 := @this;
+
+        $r1 = r0.recorder;
+
+        return $r1;
+    }
+
+    public void setMacroRecorder(org.gjt.sp.jedit.Macros$Recorder)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.Macros$Recorder r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        Packer.Unpack(r0);
+
+        r0.recorder = r1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void processKeyEvent(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.event.KeyEvent r1;
+        org.gjt.sp.jedit.gui.InputHandler $r2;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.inputHandler;
+
+        Packer.Unpack(r0);
+
+        $r2.processKeyEvent(r1, 0, 0);
+
+        Packer.Pack(r0);
+
+        $z0 = r1.isConsumed();
+
+        if $z0 != 0 goto label1;
+
+        specialinvoke r0.processKeyEvent(r1);
+
+     label1:
+        return;
+    }
+
+    public void processKeyEvent(java.awt.event.KeyEvent, boolean)
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.event.KeyEvent r1;
+        boolean z0;
+        byte $b0, $b0_1, $b0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        if z0 == 0 goto label1;
+
+        $b0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $b0_1 = 0;
+
+     label2:
+        $b0_2 = Phi($b0 #0, $b0_1 #1);
+
+        r0.processKeyEvent(r1, $b0_2);
+
+        return;
+    }
+
+    public void processKeyEvent(java.awt.event.KeyEvent, int)
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.event.KeyEvent r1;
+        int i0;
+        org.gjt.sp.jedit.gui.InputHandler $r2;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        $r2 = r0.inputHandler;
+
+        Packer.Unpack(r0);
+
+        $r2.processKeyEvent(r1, i0, 0);
+
+        Packer.Pack(r0);
+
+        $z0 = r1.isConsumed();
+
+        if $z0 != 0 goto label1;
+
+        specialinvoke r0.processKeyEvent(r1);
+
+     label1:
+        return;
+    }
+
+    public org.gjt.sp.jedit.EditPane splitHorizontally()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.EditPane $r1;
+
+        r0 := @this;
+
+        $r1 = r0.split(0);
+
+        return $r1;
+    }
+
+    public org.gjt.sp.jedit.EditPane splitVertically()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.EditPane $r1;
+
+        r0 := @this;
+
+        $r1 = r0.split(1);
+
+        return $r1;
+    }
+
+    public org.gjt.sp.jedit.EditPane split(int)
+    {
+        org.gjt.sp.jedit.View r0;
+        int i0, i1, i2, i3, $i4, $i5, $i6, $i6_1, $i6_2;
+        org.gjt.sp.jedit.EditPane r1, r2, $r7;
+        javax.swing.JComponent r3;
+        javax.swing.JSplitPane r4, r5, $r11;
+        java.awt.Component r6;
+        org.gjt.sp.jedit.bufferset.BufferSet $r8;
+        org.gjt.sp.jedit.Buffer $r9;
+        java.awt.Container $r10;
+        java.awt.Dimension $r12;
+        double $d0, $d1;
+        boolean $z0;
+        org.gjt.sp.jedit.View$1 $r13;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        org.gjt.sp.jedit.PerspectiveManager.setPerspectiveDirty(1);
+
+        $r7 = r0.editPane;
+
+        Packer.Unpack(r0);
+
+        $r7.saveCaretInfo();
+
+        r1 = r0.editPane;
+
+        $r8 = r1.getBufferSet();
+
+        $r9 = r1.getBuffer();
+
+        Packer.Pack(r0);
+
+        r2 = specialinvoke r0.createEditPane($r8, $r9);
+
+        r2.loadCaretInfo();
+
+        Packer.Unpack(r0);
+
+        $r10 = r1.getParent();
+
+        r3 = (javax.swing.JComponent) $r10;
+
+        $r11 = new javax.swing.JSplitPane;
+
+        specialinvoke $r11.<init>(i0);
+
+        r4 = $r11;
+
+        r4.setOneTouchExpandable(1);
+
+        r4.setBorder(null);
+
+        $r12 = new java.awt.Dimension;
+
+        specialinvoke $r12.<init>(0, 0);
+
+        r4.setMinimumSize($r12);
+
+        r4.setResizeWeight(0.5);
+
+        if i0 != 0 goto label1;
+
+        $i6 = r1.getHeight();
+
+(0)     goto label2;
+
+     label1:
+(1)     $i6_1 = r1.getWidth();
+
+     label2:
+        $i6_2 = Phi($i6 #0, $i6_1 #1);
+
+        i1 = $i6_2;
+
+        $i4 = r4.getDividerSize();
+
+        $i5 = i1 - $i4;
+
+        $d0 = (double) $i5;
+
+        $d1 = $d0 * 0.5;
+
+        i2 = (int) $d1;
+
+        r4.setDividerLocation(i2);
+
+        $z0 = r3 instanceof javax.swing.JSplitPane;
+
+        if $z0 == 0 goto label5;
+
+        r5 = (javax.swing.JSplitPane) r3;
+
+        i3 = r5.getDividerLocation();
+
+        r6 = r5.getLeftComponent();
+
+        if r6 != r1 goto label3;
+
+        r5.setLeftComponent(r4);
+
+        goto label4;
+
+     label3:
+        r5.setRightComponent(r4);
+
+     label4:
+        r4.setLeftComponent(r1);
+
+        r4.setRightComponent(r2);
+
+        r5.setDividerLocation(i3);
+
+        goto label6;
+
+     label5:
+        r0.splitPane = r4;
+
+        r4.setLeftComponent(r1);
+
+        r4.setRightComponent(r2);
+
+        specialinvoke r0.setMainContent(r4);
+
+     label6:
+        $r13 = new org.gjt.sp.jedit.View$1;
+
+        specialinvoke $r13.<init>(r0, r4, i2);
+
+        Packer.Pack(r0);
+
+        java.awt.EventQueue.invokeLater($r13);
+
+        r2.focusOnTextArea();
+
+        return r2;
+    }
+
+    public void unsplit()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.bufferset.BufferSet$Scope r1, $r11;
+        org.gjt.sp.jedit.EditPane[] r2;
+        int i0, i1;
+        org.gjt.sp.jedit.EditPane r3, $r8, $r9, $r10, $r12;
+        javax.swing.JSplitPane $r4;
+        java.awt.Toolkit $r5;
+        java.lang.String $r6;
+        org.gjt.sp.jedit.bufferset.BufferSetManager $r7;
+
+        r0 := @this;
+
+        $r4 = r0.splitPane;
+
+        if $r4 == null goto label5;
+
+        $r6 = r0.getSplitConfig();
+
+        Packer.Unpack(r0);
+
+        r0.lastSplitConfig = $r6;
+
+        Packer.Pack(r0);
+
+        org.gjt.sp.jedit.PerspectiveManager.setPerspectiveDirty(1);
+
+        $r7 = org.gjt.sp.jedit.jEdit.getBufferSetManager();
+
+        r1 = $r7.getScope();
+
+        r2 = r0.getEditPanes();
+
+        i0 = lengthof r2;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label4;
+
+        r3 = r2[i1];
+
+        $r10 = r0.editPane;
+
+        if $r10 == r3 goto label3;
+
+        $r11 = org.gjt.sp.jedit.bufferset.BufferSet$Scope.editpane;
+
+        if r1 != $r11 goto label2;
+
+        Packer.Unpack(r0);
+
+        $r12 = r0.editPane;
+
+        org.gjt.sp.jedit.View.mergeBufferSets($r12, r3);
+
+     label2:
+        Packer.Pack(r0);
+
+        r3.close();
+
+     label3:
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label4:
+        Packer.Unpack(r0);
+
+        $r8 = r0.editPane;
+
+        specialinvoke r0.setMainContent($r8);
+
+        r0.splitPane = null;
+
+        Packer.Pack(r0);
+
+        r0.updateTitle();
+
+        $r9 = r0.editPane;
+
+        Packer.Unpack(r0);
+
+        $r9.focusOnTextArea();
+
+        Packer.Pack(r0);
+
+(2)     goto label6;
+
+     label5:
+        $r5 = r0.getToolkit();
+
+(3)     $r5.beep();
+
+     label6:
+        i1 = Phi(i1 #2, i1 #3);
+
+        return;
+    }
+
+    public void unsplitCurrent()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.bufferset.BufferSet$Scope r1, $r14;
+        org.gjt.sp.jedit.EditPane r2, $r8, $r9, $r11, $r12, $r13, $r15;
+        javax.swing.JSplitPane $r3, r20;
+        java.awt.Toolkit $r4;
+        java.lang.String $r5;
+        boolean $z0, $z1, $z2;
+        org.gjt.sp.jedit.bufferset.BufferSetManager $r6;
+        java.awt.Container $r7, r16;
+        java.awt.Component $r10;
+        org.gjt.sp.jedit.EditPane[] r17;
+        int i0, i1, i2;
+        javax.swing.JComponent $r18, r19;
+
+        r0 := @this;
+
+        $r3 = r0.splitPane;
+
+        if $r3 == null goto label13;
+
+        $r5 = r0.getSplitConfig();
+
+        Packer.Unpack(r0);
+
+        r0.lastSplitConfig = $r5;
+
+        Packer.Pack(r0);
+
+        org.gjt.sp.jedit.PerspectiveManager.setPerspectiveDirty(1);
+
+(0)     r16 = r0.editPane;
+
+     label01:
+        r16 = Phi(r16 #0, r16 #1);
+
+        $z0 = r16 instanceof javax.swing.JSplitPane;
+
+        if $z0 != 0 goto label02;
+
+        if r16 == null goto label02;
+
+        r16 = r16.getParent();
+
+(1)     goto label01;
+
+     label02:
+        $r6 = org.gjt.sp.jedit.jEdit.getBufferSetManager();
+
+        r1 = $r6.getScope();
+
+        r17 = r0.getEditPanes();
+
+        i0 = lengthof r17;
+
+(2)     i1 = 0;
+
+     label03:
+        i1 = Phi(i1 #2, i1 #3);
+
+        r16 = Phi(r16 #2, r16 #3);
+
+        if i1 >= i0 goto label06;
+
+        r2 = r17[i1];
+
+        $z2 = org.gjt.sp.jedit.GUIUtilities.isAncestorOf(r16, r2);
+
+        if $z2 == 0 goto label05;
+
+        $r13 = r0.editPane;
+
+        if r2 == $r13 goto label05;
+
+        $r14 = org.gjt.sp.jedit.bufferset.BufferSet$Scope.editpane;
+
+        if r1 != $r14 goto label04;
+
+        Packer.Unpack(r0);
+
+        $r15 = r0.editPane;
+
+        org.gjt.sp.jedit.View.mergeBufferSets($r15, r2);
+
+     label04:
+        Packer.Pack(r0);
+
+        r2.close();
+
+     label05:
+        i1 = i1 + 1;
+
+(3)     goto label03;
+
+     label06:
+        Packer.Unpack(r0);
+
+        if r16 != null goto label07;
+
+        $r18 = null;
+
+(4)     goto label08;
+
+     label07:
+        $r7 = r16.getParent();
+
+(5)     $r18 = (javax.swing.JComponent) $r7;
+
+     label08:
+        $r18 = Phi($r18 #4, $r18 #5);
+
+        r19 = $r18;
+
+        $z1 = r19 instanceof javax.swing.JSplitPane;
+
+        if $z1 == 0 goto label11;
+
+        r20 = (javax.swing.JSplitPane) r19;
+
+        i2 = r20.getDividerLocation();
+
+        $r10 = r20.getLeftComponent();
+
+        if $r10 != r16 goto label09;
+
+        $r12 = r0.editPane;
+
+        r20.setLeftComponent($r12);
+
+        Packer.Pack(r0);
+
+        goto label10;
+
+     label09:
+        $r11 = r0.editPane;
+
+        r20.setRightComponent($r11);
+
+     label10:
+        Packer.Pack(r0);
+
+        r20.setDividerLocation(i2);
+
+        r19.revalidate();
+
+        goto label12;
+
+     label11:
+        $r8 = r0.editPane;
+
+        specialinvoke r0.setMainContent($r8);
+
+        r0.splitPane = null;
+
+     label12:
+        Packer.Pack(r0);
+
+        r0.updateTitle();
+
+        $r9 = r0.editPane;
+
+        Packer.Unpack(r0);
+
+        $r9.focusOnTextArea();
+
+        Packer.Pack(r0);
+
+(6)     goto label14;
+
+     label13:
+        $r4 = r0.getToolkit();
+
+(7)     $r4.beep();
+
+     label14:
+        $r18 = Phi($r18 #6, $r18 #7);
+
+        i1 = Phi(i1 #6, i1 #7);
+
+        r16 = Phi(r16 #6, r16 #7);
+
+        return;
+    }
+
+    public void resplit()
+    {
+        org.gjt.sp.jedit.View r0;
+        java.lang.String $r1, $r2;
+        java.awt.Toolkit $r3;
+
+        r0 := @this;
+
+        $r1 = r0.lastSplitConfig;
+
+        if $r1 != null goto label1;
+
+        $r3 = r0.getToolkit();
+
+        $r3.beep();
+
+        goto label2;
+
+     label1:
+        $r2 = r0.lastSplitConfig;
+
+        Packer.Unpack(r0);
+
+        r0.setSplitConfig(null, $r2);
+
+     label2:
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public java.lang.String getSplitConfig()
+    {
+        org.gjt.sp.jedit.View r0;
+        java.lang.StringBuilder r1, $r2;
+        javax.swing.JSplitPane $r3, $r6;
+        org.gjt.sp.jedit.EditPane $r4;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+        $r3 = r0.splitPane;
+
+        if $r3 == null goto label1;
+
+        $r6 = r0.splitPane;
+
+        Packer.Unpack(r0);
+
+        org.gjt.sp.jedit.View.getSplitConfig($r6, r1);
+
+        Packer.Pack(r0);
+
+        goto label2;
+
+     label1:
+        $r4 = r0.editPane;
+
+        Packer.Unpack(r0);
+
+        org.gjt.sp.jedit.View.appendToSplitConfig(r1, $r4);
+
+     label2:
+        Packer.Pack(r0);
+
+        $r5 = r1.toString();
+
+        return $r5;
+    }
+
+    public void setSplitConfig(org.gjt.sp.jedit.Buffer, java.lang.String)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.Buffer r1;
+        java.lang.String r2;
+        java.io.IOException $r3, r6;
+        java.lang.InternalError $r4;
+        java.awt.Component r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+     label1:
+        r5 = specialinvoke r0.restoreSplitConfig(r1, r2);
+
+        specialinvoke r0.setMainContent(r5);
+
+        r0.updateTitle();
+
+     label2:
+        goto label4;
+
+     label3:
+        $r3 := @caughtexception;
+
+        r6 = $r3;
+
+        $r4 = new java.lang.InternalError;
+
+        specialinvoke $r4.<init>();
+
+        throw $r4;
+
+     label4:
+        return;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    public void nextTextArea()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.EditPane[] r1;
+        int $i0, $i1, $i2, $i3, i4;
+        org.gjt.sp.jedit.EditPane $r2, $r3, $r4, $r5;
+
+        r0 := @this;
+
+        r1 = r0.getEditPanes();
+
+(0)     i4 = 0;
+
+     label1:
+        i4 = Phi(i4 #0, i4 #1);
+
+        $i0 = lengthof r1;
+
+        if i4 >= $i0 goto label4;
+
+        $r3 = r0.editPane;
+
+        $r2 = r1[i4];
+
+        if $r3 != $r2 goto label3;
+
+        $i1 = lengthof r1;
+
+        $i2 = $i1 - 1;
+
+        if i4 != $i2 goto label2;
+
+        $r5 = r1[0];
+
+        $r5.focusOnTextArea();
+
+        goto label4;
+
+     label2:
+        $i3 = i4 + 1;
+
+        $r4 = r1[$i3];
+
+        $r4.focusOnTextArea();
+
+        goto label4;
+
+     label3:
+        i4 = i4 + 1;
+
+(1)     goto label1;
+
+     label4:
+        return;
+    }
+
+    public void prevTextArea()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.EditPane[] r1;
+        int $i0, $i1, $i2, $i3, i4;
+        org.gjt.sp.jedit.EditPane $r2, $r3, $r4, $r5;
+
+        r0 := @this;
+
+        r1 = r0.getEditPanes();
+
+(0)     i4 = 0;
+
+     label1:
+        i4 = Phi(i4 #0, i4 #1);
+
+        $i0 = lengthof r1;
+
+        if i4 >= $i0 goto label4;
+
+        $r3 = r0.editPane;
+
+        $r2 = r1[i4];
+
+        if $r3 != $r2 goto label3;
+
+        if i4 != 0 goto label2;
+
+        $i2 = lengthof r1;
+
+        $i3 = $i2 - 1;
+
+        $r5 = r1[$i3];
+
+        $r5.focusOnTextArea();
+
+        goto label4;
+
+     label2:
+        $i1 = i4 - 1;
+
+        $r4 = r1[$i1];
+
+        $r4.focusOnTextArea();
+
+        goto label4;
+
+     label3:
+        i4 = i4 + 1;
+
+(1)     goto label1;
+
+     label4:
+        return;
+    }
+
+    public javax.swing.JSplitPane getSplitPane()
+    {
+        org.gjt.sp.jedit.View r0;
+        javax.swing.JSplitPane $r1;
+
+        r0 := @this;
+
+        $r1 = r0.splitPane;
+
+        return $r1;
+    }
+
+    public org.gjt.sp.jedit.Buffer getBuffer()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.EditPane $r1, $r2;
+        org.gjt.sp.jedit.Buffer $r3;
+
+        r0 := @this;
+
+        $r1 = r0.editPane;
+
+        if $r1 != null goto label1;
+
+        return null;
+
+     label1:
+        $r2 = r0.editPane;
+
+        Packer.Unpack(r0);
+
+        $r3 = $r2.getBuffer();
+
+        Packer.Pack(r0);
+
+        return $r3;
+    }
+
+    public org.gjt.sp.jedit.Buffer[] getBuffers()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.bufferset.BufferSetManager r1;
+        int i0, $i1, i2;
+        org.gjt.sp.jedit.EditPane r2;
+        org.gjt.sp.jedit.bufferset.BufferSet r3;
+        java.util.Comparator r4;
+        org.gjt.sp.jedit.Buffer[] $r6, r13;
+        org.gjt.sp.jedit.bufferset.BufferSet$Scope $r7, $r8;
+        java.util.TreeSet $r9;
+        java.util.LinkedHashSet $r10;
+        java.util.AbstractSet r11;
+        org.gjt.sp.jedit.EditPane[] r12;
+
+        r0 := @this;
+
+        r1 = org.gjt.sp.jedit.jEdit.getBufferSetManager();
+
+        r11 = null;
+
+        r12 = r0.getEditPanes();
+
+        i0 = lengthof r12;
+
+(0)     i2 = 0;
+
+     label1:
+        r11 = Phi(r11 #0, r11 #6);
+
+        i2 = Phi(i2 #0, i2 #6);
+
+(1)     if i2 >= i0 goto label5;
+
+        r2 = r12[i2];
+
+        r3 = r2.getBufferSet();
+
+(2)     if r11 != null goto label3;
+
+        r4 = r3.getSorter();
+
+        if r4 != null goto label2;
+
+        $r10 = new java.util.LinkedHashSet;
+
+        specialinvoke $r10.<init>();
+
+        r11 = $r10;
+
+(3)     goto label3;
+
+     label2:
+        $r9 = new java.util.TreeSet;
+
+        specialinvoke $r9.<init>(r4);
+
+(4)     r11 = $r9;
+
+     label3:
+        r11 = Phi(r11 #2, r11 #3, r11 #4);
+
+        $r6 = r3.getAllBuffers();
+
+        java.util.Collections.addAll(r11, $r6);
+
+        $r7 = r1.getScope();
+
+        $r8 = org.gjt.sp.jedit.bufferset.BufferSet$Scope.editpane;
+
+        if $r7 == $r8 goto label4;
+
+(5)     goto label5;
+
+     label4:
+        i2 = i2 + 1;
+
+(6)     goto label1;
+
+     label5:
+        r11 = Phi(r11 #1, r11 #5);
+
+        $i1 = r11.size();
+
+        r13 = newarray (org.gjt.sp.jedit.Buffer)[$i1];
+
+        r11.toArray(r13);
+
+        return r13;
+    }
+
+    public void setBuffer(org.gjt.sp.jedit.Buffer)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.Buffer r1;
+        org.gjt.sp.jedit.EditPane $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.editPane;
+
+        Packer.Unpack(r0);
+
+        $r2.setBuffer(r1);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.EditPane goToBuffer(org.gjt.sp.jedit.Buffer)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.Buffer r1;
+        org.gjt.sp.jedit.EditPane $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = specialinvoke r0.showBuffer(r1, 1);
+
+        return $r2;
+    }
+
+    public org.gjt.sp.jedit.EditPane showBuffer(org.gjt.sp.jedit.Buffer)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.Buffer r1;
+        org.gjt.sp.jedit.EditPane $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = specialinvoke r0.showBuffer(r1, 0);
+
+        return $r2;
+    }
+
+    public org.gjt.sp.jedit.textarea.JEditTextArea getTextArea()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.EditPane $r1, $r2;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r3;
+
+        r0 := @this;
+
+        $r1 = r0.editPane;
+
+        if $r1 != null goto label1;
+
+        return null;
+
+     label1:
+        $r2 = r0.editPane;
+
+        Packer.Unpack(r0);
+
+        $r3 = $r2.getTextArea();
+
+        Packer.Pack(r0);
+
+        return $r3;
+    }
+
+    public org.gjt.sp.jedit.EditPane getEditPane()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.EditPane $r1;
+
+        r0 := @this;
+
+        $r1 = r0.editPane;
+
+        return $r1;
+    }
+
+    public org.gjt.sp.jedit.EditPane[] getEditPanes()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.EditPane[] r1, $r6, r8;
+        javax.swing.JSplitPane $r2, $r4;
+        java.util.ArrayList $r3, r9;
+        int $i0;
+        org.gjt.sp.jedit.EditPane $r7;
+
+        r0 := @this;
+
+        $r2 = r0.splitPane;
+
+        if $r2 != null goto label1;
+
+        $r6 = newarray (org.gjt.sp.jedit.EditPane)[1];
+
+        $r7 = r0.editPane;
+
+        $r6[0] = $r7;
+
+        r8 = $r6;
+
+        return r8;
+
+     label1:
+        $r3 = new java.util.ArrayList;
+
+        specialinvoke $r3.<init>();
+
+        r9 = $r3;
+
+        $r4 = r0.splitPane;
+
+        Packer.Unpack(r0);
+
+        org.gjt.sp.jedit.View.getEditPanes(r9, $r4);
+
+        Packer.Pack(r0);
+
+        $i0 = r9.size();
+
+        r1 = newarray (org.gjt.sp.jedit.EditPane)[$i0];
+
+        r9.toArray(r1);
+
+        return r1;
+    }
+
+    public org.gjt.sp.jedit.View$ViewConfig getViewConfig()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.View$ViewConfig r1, $r3;
+        java.lang.String r2, $r4, $r7, $r11, $r15, $r19, $r23, $r27, $r31, $r35, $r39, $r40, $r40_1, $r40_2;
+        boolean $z0, $z1;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i20, $i21, $i22, $i23, $i24, $i25;
+        org.gjt.sp.jedit.gui.DockableWindowManager $r5;
+        org.gjt.sp.jedit.gui.DockableWindowManager$DockingLayout $r6;
+        java.lang.StringBuilder $r8, $r9, $r10, $r12, $r13, $r14, $r16, $r17, $r18, $r20, $r21, $r22, $r24, $r25, $r26, $r28, $r29, $r30, $r32, $r33, $r34, $r36, $r37, $r38;
+
+        r0 := @this;
+
+        $r3 = new org.gjt.sp.jedit.View$ViewConfig;
+
+        specialinvoke $r3.<init>();
+
+        r1 = $r3;
+
+        $z0 = r0.isPlainView();
+
+        r1.plainView = $z0;
+
+        $r4 = r0.getSplitConfig();
+
+        Packer.Unpack(r1);
+
+        r1.splitConfig = $r4;
+
+        $i0 = r0.getExtendedState();
+
+        r1.extState = $i0;
+
+        Packer.Pack(r1);
+
+        $r5 = r0.dockableWindowManager;
+
+        Packer.Unpack(r0);
+
+        $r6 = $r5.getDockingLayout(r1);
+
+        Packer.Unpack(r1);
+
+        r1.docking = $r6;
+
+        $r7 = r0.userTitle;
+
+        r1.title = $r7;
+
+        Packer.Pack(r0);
+
+        $z1 = r1.plainView;
+
+        if $z1 == 0 goto label1;
+
+        $r40 = "plain-view";
+
+(0)     goto label2;
+
+     label1:
+(1)     $r40_1 = "view";
+
+     label2:
+        $r40_2 = Phi($r40 #0, $r40_1 #1);
+
+        r2 = $r40_2;
+
+        $i1 = r1.extState;
+
+        tableswitch($i1)
+        {
+            case 0: goto label6;
+            case 1: goto label3;
+            case 2: goto label5;
+            case 3: goto label6;
+            case 4: goto label4;
+            case 5: goto label6;
+            case 6: goto label3;
+            default: goto label6;
+        };
+
+     label3:
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append(r2);
+
+        $r10 = $r9.append(".x");
+
+        $r11 = $r10.toString();
+
+        $i2 = r0.getX();
+
+        $i3 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r11, $i2);
+
+        r1.x = $i3;
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = $r12.append(r2);
+
+        $r14 = $r13.append(".y");
+
+        $r15 = $r14.toString();
+
+        $i4 = r0.getY();
+
+        $i5 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r15, $i4);
+
+        r1.y = $i5;
+
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<init>();
+
+        $r17 = $r16.append(r2);
+
+        $r18 = $r17.append(".width");
+
+        $r19 = $r18.toString();
+
+        $i6 = r0.getWidth();
+
+        $i7 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r19, $i6);
+
+        r1.width = $i7;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<init>();
+
+        $r21 = $r20.append(r2);
+
+        $r22 = $r21.append(".height");
+
+        $r23 = $r22.toString();
+
+        $i8 = r0.getHeight();
+
+        $i9 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r23, $i8);
+
+        r1.height = $i9;
+
+        Packer.Pack(r1);
+
+        goto label7;
+
+     label4:
+        $i10 = r0.getX();
+
+        r1.x = $i10;
+
+        $r24 = new java.lang.StringBuilder;
+
+        specialinvoke $r24.<init>();
+
+        $r25 = $r24.append(r2);
+
+        $r26 = $r25.append(".y");
+
+        $r27 = $r26.toString();
+
+        $i11 = r0.getY();
+
+        $i12 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r27, $i11);
+
+        r1.y = $i12;
+
+        $i13 = r0.getWidth();
+
+        r1.width = $i13;
+
+        $r28 = new java.lang.StringBuilder;
+
+        specialinvoke $r28.<init>();
+
+        $r29 = $r28.append(r2);
+
+        $r30 = $r29.append(".height");
+
+        $r31 = $r30.toString();
+
+        $i14 = r0.getHeight();
+
+        $i15 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r31, $i14);
+
+        r1.height = $i15;
+
+        Packer.Pack(r1);
+
+        goto label7;
+
+     label5:
+        $r32 = new java.lang.StringBuilder;
+
+        specialinvoke $r32.<init>();
+
+        $r33 = $r32.append(r2);
+
+        $r34 = $r33.append(".x");
+
+        $r35 = $r34.toString();
+
+        $i16 = r0.getX();
+
+        $i17 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r35, $i16);
+
+        r1.x = $i17;
+
+        $i18 = r0.getY();
+
+        r1.y = $i18;
+
+        $r36 = new java.lang.StringBuilder;
+
+        specialinvoke $r36.<init>();
+
+        $r37 = $r36.append(r2);
+
+        $r38 = $r37.append(".width");
+
+        $r39 = $r38.toString();
+
+        $i19 = r0.getWidth();
+
+        $i20 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r39, $i19);
+
+        r1.width = $i20;
+
+        $i21 = r0.getHeight();
+
+        r1.height = $i21;
+
+        Packer.Pack(r1);
+
+        goto label7;
+
+     label6:
+        $i22 = r0.getX();
+
+        r1.x = $i22;
+
+        $i23 = r0.getY();
+
+        r1.y = $i23;
+
+        $i24 = r0.getWidth();
+
+        r1.width = $i24;
+
+        $i25 = r0.getHeight();
+
+        r1.height = $i25;
+
+     label7:
+        Packer.Pack(r1);
+
+        return r1;
+    }
+
+    public boolean isClosed()
+    {
+        org.gjt.sp.jedit.View r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.closed;
+
+        return $z0;
+    }
+
+    public boolean isPlainView()
+    {
+        org.gjt.sp.jedit.View r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.plainView;
+
+        return $z0;
+    }
+
+    public org.gjt.sp.jedit.View getNext()
+    {
+        org.gjt.sp.jedit.View r0, $r1;
+
+        r0 := @this;
+
+        $r1 = r0.next;
+
+        return $r1;
+    }
+
+    public org.gjt.sp.jedit.View getPrev()
+    {
+        org.gjt.sp.jedit.View r0, $r1;
+
+        r0 := @this;
+
+        $r1 = r0.prev;
+
+        return $r1;
+    }
+
+    public void handlePropertiesChanged(org.gjt.sp.jedit.msg.PropertiesChanged)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.msg.PropertiesChanged r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.propertiesChanged();
+
+        return;
+    }
+
+    public void handleSearchSettingsChanged(org.gjt.sp.jedit.msg.SearchSettingsChanged)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.msg.SearchSettingsChanged r1;
+        org.gjt.sp.jedit.search.SearchBar $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.searchBar;
+
+        if $r2 == null goto label1;
+
+        $r3 = r0.searchBar;
+
+        Packer.Unpack(r0);
+
+        $r3.update();
+
+     label1:
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public java.awt.Dimension getMinimumSize()
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.Dimension $r1;
+
+        r0 := @this;
+
+        $r1 = new java.awt.Dimension;
+
+        specialinvoke $r1.<init>(0, 0);
+
+        return $r1;
+    }
+
+    public void setWaitSocket(java.net.Socket)
+    {
+        org.gjt.sp.jedit.View r0;
+        java.net.Socket r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        Packer.Unpack(r0);
+
+        r0.waitSocket = r1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.View r0, $r6;
+        java.lang.StringBuilder $r1, $r4, $r5, $r7, $r8;
+        java.lang.Class $r2;
+        java.lang.String $r3, $r9, $r10, $r10_1, $r10_2;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = r0.getClass();
+
+        $r3 = $r2.getName();
+
+        $r4 = $r1.append($r3);
+
+        $r5 = $r4.append(91);
+
+        $r6 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        if $r6 != r0 goto label1;
+
+        $r10 = "active";
+
+(0)     goto label2;
+
+     label1:
+(1)     $r10_1 = "inactive";
+
+     label2:
+        $r10_2 = Phi($r10 #0, $r10_1 #1);
+
+        $r7 = $r5.append($r10_2);
+
+        $r8 = $r7.append(93);
+
+        $r9 = $r8.toString();
+
+        return $r9;
+    }
+
+    public void updateTitle()
+    {
+        org.gjt.sp.jedit.View r0;
+        java.util.ArrayList r1, $r5;
+        org.gjt.sp.jedit.EditPane[] r2, r19;
+        org.gjt.sp.jedit.EditPane r3;
+        org.gjt.sp.jedit.Buffer r4, r21;
+        java.lang.StringBuilder $r6, r20;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        int $i0, i1, i2, i3;
+        java.lang.String $r7, $r10, $r14, $r15, $r17, $r22;
+        java.lang.Object $r8;
+        java.lang.Boolean $r12;
+
+        r0 := @this;
+
+        $r5 = new java.util.ArrayList;
+
+        specialinvoke $r5.<init>();
+
+        r1 = $r5;
+
+        r2 = r0.getEditPanes();
+
+        r19 = r2;
+
+        i1 = lengthof r19;
+
+(0)     i2 = 0;
+
+     label01:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 >= i1 goto label03;
+
+        r3 = r19[i2];
+
+        r4 = r3.getBuffer();
+
+        $z4 = r1.contains(r4);
+
+        if $z4 != 0 goto label02;
+
+        r1.add(r4);
+
+     label02:
+        i2 = i2 + 1;
+
+(1)     goto label01;
+
+     label03:
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        r20 = $r6;
+
+        $z0 = org.gjt.sp.jedit.OperatingSystem.isMacOS();
+
+        if $z0 != 0 goto label05;
+
+        $r14 = r0.userTitle;
+
+        if $r14 == null goto label04;
+
+        $r17 = r0.userTitle;
+
+        Packer.Unpack(r0);
+
+        r20.append($r17);
+
+        Packer.Pack(r0);
+
+        goto label05;
+
+     label04:
+        $r15 = org.gjt.sp.jedit.jEdit.getProperty("view.title");
+
+        r20.append($r15);
+
+     label05:
+(2)     i3 = 0;
+
+     label06:
+        i2 = Phi(i2 #2, i2 #5);
+
+        $r22 = Phi($r22 #2, $r22 #5);
+
+        i3 = Phi(i3 #2, i3 #5);
+
+        $i0 = r1.size();
+
+        if i3 >= $i0 goto label11;
+
+        if i3 == 0 goto label07;
+
+        r20.append(", ");
+
+     label07:
+        $r8 = r1.get(i3);
+
+        r21 = (org.gjt.sp.jedit.Buffer) $r8;
+
+        $z1 = r0.showFullPath;
+
+        if $z1 == 0 goto label08;
+
+        $z3 = r21.isNewFile();
+
+        if $z3 != 0 goto label08;
+
+        $r12 = java.lang.Boolean.valueOf(1);
+
+        $r22 = r21.getPath($r12);
+
+(3)     goto label09;
+
+     label08:
+(4)     $r22 = r21.getName();
+
+     label09:
+        $r22 = Phi($r22 #3, $r22 #4);
+
+        r20.append($r22);
+
+        $z2 = r21.isDirty();
+
+        if $z2 == 0 goto label10;
+
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty("view.title.dirty");
+
+        r20.append($r10);
+
+     label10:
+        i3 = i3 + 1;
+
+(5)     goto label06;
+
+     label11:
+        $r7 = r20.toString();
+
+        r0.setTitle($r7);
+
+        return;
+    }
+
+    public void setUserTitle(java.lang.String)
+    {
+        org.gjt.sp.jedit.View r0;
+        java.lang.String r1, $r5;
+        java.lang.StringBuilder $r2, $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append(r1);
+
+        $r4 = $r3.append(" - ");
+
+        $r5 = $r4.toString();
+
+        Packer.Unpack(r0);
+
+        r0.userTitle = $r5;
+
+        Packer.Pack(r0);
+
+        r0.updateTitle();
+
+        return;
+    }
+
+    public void showUserTitleDialog()
+    {
+        org.gjt.sp.jedit.View r0;
+        java.lang.String r1, $r2;
+
+        r0 := @this;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("view.title.select");
+
+        r1 = javax.swing.JOptionPane.showInputDialog(r0, $r2);
+
+        if r1 != null goto label1;
+
+        return;
+
+     label1:
+        r0.setUserTitle(r1);
+
+        return;
+    }
+
+    public java.awt.Component getPrefixFocusOwner()
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.Component $r1;
+
+        r0 := @this;
+
+        $r1 = r0.prefixFocusOwner;
+
+        return $r1;
+    }
+
+    public void setPrefixFocusOwner(java.awt.Component)
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.Component r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        Packer.Unpack(r0);
+
+        r0.prefixFocusOwner = r1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void visit(org.gjt.sp.jedit.visitors.JEditVisitor)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.visitors.JEditVisitor r1;
+        org.gjt.sp.jedit.EditPane[] r2, r3;
+        int i0, i1;
+        org.gjt.sp.jedit.EditPane r4;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r0.getEditPanes();
+
+        r3 = r2;
+
+        i0 = lengthof r3;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label2;
+
+        r4 = r3[i1];
+
+        r1.visit(r4);
+
+        $r5 = r4.getTextArea();
+
+        r1.visit($r5);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return;
+    }
+
+    public void closeAllMenus()
+    {
+        org.gjt.sp.jedit.View r0;
+        javax.swing.MenuSelectionManager $r1;
+        java.awt.KeyboardFocusManager $r2;
+
+        r0 := @this;
+
+        $r1 = javax.swing.MenuSelectionManager.defaultManager();
+
+        $r1.clearSelectedPath();
+
+        $r2 = java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager();
+
+        $r2.clearGlobalFocusOwner();
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.Buffer, org.gjt.sp.jedit.View$ViewConfig)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.Buffer r1;
+        org.gjt.sp.jedit.View$ViewConfig r2;
+        boolean $z0, $z1, $z2;
+        javax.swing.JPanel $r3, $r5, $r10, $r12, $r14, $r17, $r18;
+        java.awt.BorderLayout $r4;
+        org.gjt.sp.jedit.gui.DockingFrameworkProvider $r6;
+        org.gjt.sp.jedit.gui.DockableWindowFactory $r7;
+        org.gjt.sp.jedit.gui.DockableWindowManager $r8, $r11, $r25, $r27;
+        java.lang.String $r9, $r23, $r31, $r31_1, $r31_2;
+        org.gjt.sp.jedit.gui.VariableGridLayout $r13, $r15;
+        org.gjt.sp.jedit.gui.ToolBarManager $r16;
+        org.gjt.sp.jedit.gui.StatusBar $r19;
+        org.gjt.sp.jedit.gui.DefaultInputHandler $r20, $r22;
+        org.gjt.sp.jedit.gui.InputHandler $r21;
+        java.awt.Container $r24;
+        org.gjt.sp.jedit.View$WindowHandler $r28;
+        org.gjt.sp.jedit.View$MyFocusTraversalPolicy $r29;
+        java.awt.Image $r30;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.fullScreenMode = 0;
+
+        r0.menuBar = null;
+
+        $z0 = r2.plainView;
+
+        r0.plainView = $z0;
+
+        Packer.Pack(r0);
+
+        r0.enableEvents(8L);
+
+        $z1 = org.gjt.sp.jedit.OperatingSystem.isMacOS();
+
+        if $z1 != 0 goto label1;
+
+        $r30 = org.gjt.sp.jedit.GUIUtilities.getEditorIcon();
+
+        r0.setIconImage($r30);
+
+     label1:
+        $r3 = new javax.swing.JPanel;
+
+        Packer.Unpack(r0);
+
+        specialinvoke $r3.<init>();
+
+        r0.mainPanel = $r3;
+
+        $r5 = r0.mainPanel;
+
+        $r4 = new java.awt.BorderLayout;
+
+        specialinvoke $r4.<init>();
+
+        $r5.setLayout($r4);
+
+        Packer.Pack(r0);
+
+        $r6 = org.gjt.sp.jedit.View.getDockingFrameworkProvider();
+
+        $r7 = org.gjt.sp.jedit.gui.DockableWindowFactory.getInstance();
+
+        $r8 = $r6.create(r0, $r7, r2);
+
+        Packer.Unpack(r0);
+
+        r0.dockableWindowManager = $r8;
+
+        $r9 = r2.title;
+
+        r0.userTitle = $r9;
+
+        $r11 = r0.dockableWindowManager;
+
+        $r10 = r0.mainPanel;
+
+        $r11.setMainPanel($r10);
+
+        $r12 = new javax.swing.JPanel;
+
+        $r13 = new org.gjt.sp.jedit.gui.VariableGridLayout;
+
+        specialinvoke $r13.<init>(2, 1);
+
+        specialinvoke $r12.<init>($r13);
+
+        r0.topToolBars = $r12;
+
+        $r14 = new javax.swing.JPanel;
+
+        $r15 = new org.gjt.sp.jedit.gui.VariableGridLayout;
+
+        specialinvoke $r15.<init>(2, 1);
+
+        specialinvoke $r14.<init>($r15);
+
+        r0.bottomToolBars = $r14;
+
+        $r16 = new org.gjt.sp.jedit.gui.ToolBarManager;
+
+        $r18 = r0.topToolBars;
+
+        $r17 = r0.bottomToolBars;
+
+        specialinvoke $r16.<init>($r18, $r17);
+
+        r0.toolBarManager = $r16;
+
+        Packer.Pack(r0);
+
+        $r19 = new org.gjt.sp.jedit.gui.StatusBar;
+
+        specialinvoke $r19.<init>(r0);
+
+        Packer.Unpack(r0);
+
+        r0.status = $r19;
+
+        Packer.Pack(r0);
+
+        $r20 = new org.gjt.sp.jedit.gui.DefaultInputHandler;
+
+        $r21 = org.gjt.sp.jedit.jEdit.getInputHandler();
+
+        $r22 = (org.gjt.sp.jedit.gui.DefaultInputHandler) $r21;
+
+        specialinvoke $r20.<init>(r0, $r22);
+
+        Packer.Unpack(r0);
+
+        r0.inputHandler = $r20;
+
+        Packer.Pack(r0);
+
+        $r23 = r2.splitConfig;
+
+        Packer.Unpack(r2);
+
+        r0.setSplitConfig(r1, $r23);
+
+        Packer.Pack(r2);
+
+        $r24 = r0.getContentPane();
+
+        $r25 = r0.dockableWindowManager;
+
+        Packer.Unpack(r0);
+
+        $r24.add("Center", $r25);
+
+        $r27 = r0.dockableWindowManager;
+
+        $r27.init();
+
+        Packer.Pack(r0);
+
+        specialinvoke r0.propertiesChanged();
+
+        r0.setDefaultCloseOperation(0);
+
+        $r28 = new org.gjt.sp.jedit.View$WindowHandler;
+
+        specialinvoke $r28.<init>(r0, null);
+
+        r0.addWindowListener($r28);
+
+        $r29 = new org.gjt.sp.jedit.View$MyFocusTraversalPolicy;
+
+        specialinvoke $r29.<init>(null);
+
+        r0.setFocusTraversalPolicy($r29);
+
+        org.gjt.sp.jedit.EditBus.addToBus(r0);
+
+        $z2 = r0.plainView;
+
+        if $z2 == 0 goto label2;
+
+        $r31 = "plain-view";
+
+(0)     goto label3;
+
+     label2:
+(1)     $r31_1 = "view";
+
+     label3:
+        $r31_2 = Phi($r31 #0, $r31_1 #1);
+
+        org.gjt.sp.jedit.GUIUtilities.addSizeSaver(r0, null, $r31_2);
+
+        return;
+    }
+
+    public void updateFullScreenProps()
+    {
+        org.gjt.sp.jedit.View r0;
+        boolean z0, z1, z3;
+        javax.swing.JMenuBar $r1, $r9, $r10;
+        java.awt.Container $r2, $r5;
+        org.gjt.sp.jedit.gui.StatusBar $r3, $r6, $r7, $r8;
+
+        r0 := @this;
+
+        z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.toolbar.alternateLayout");
+
+        z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("fullScreenIncludesMenu");
+
+        org.gjt.sp.jedit.jEdit.getBooleanProperty("fullScreenIncludesToolbar");
+
+        z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty("fullScreenIncludesStatus");
+
+        if z1 != 0 goto label1;
+
+        $r10 = r0.getJMenuBar();
+
+        Packer.Unpack(r0);
+
+        r0.menuBar = $r10;
+
+        Packer.Pack(r0);
+
+        r0.setJMenuBar(null);
+
+        goto label2;
+
+     label1:
+        $r1 = r0.menuBar;
+
+        if $r1 == null goto label2;
+
+        $r9 = r0.menuBar;
+
+        Packer.Unpack(r0);
+
+        r0.setJMenuBar($r9);
+
+     label2:
+        Packer.Pack(r0);
+
+        specialinvoke r0.loadToolBars();
+
+        if z0 == 0 goto label4;
+
+        if z3 != 0 goto label3;
+
+        $r8 = r0.status;
+
+        Packer.Unpack(r0);
+
+        r0.removeToolBar($r8);
+
+        Packer.Pack(r0);
+
+        goto label6;
+
+     label3:
+        $r7 = r0.status;
+
+        Packer.Unpack(r0);
+
+        r0.addToolBar(1, -100, $r7);
+
+        Packer.Pack(r0);
+
+        goto label6;
+
+     label4:
+        if z3 != 0 goto label5;
+
+        $r5 = r0.getContentPane();
+
+        $r6 = r0.status;
+
+        Packer.Unpack(r0);
+
+        $r5.remove($r6);
+
+        Packer.Pack(r0);
+
+        goto label6;
+
+     label5:
+        $r2 = r0.getContentPane();
+
+        $r3 = r0.status;
+
+        Packer.Unpack(r0);
+
+        $r2.add("South", $r3);
+
+     label6:
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public boolean isFullScreenMode()
+    {
+        org.gjt.sp.jedit.View r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.fullScreenMode;
+
+        return $z0;
+    }
+
+    public void toggleFullScreen()
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.GraphicsDevice r1;
+        boolean z0, z1, $z2, $z3, $z4, $z5, $z6, $z5_1, $z5_2, $z6_1, $z6_2, $z6_3;
+        java.awt.GraphicsConfiguration $r2, $r17;
+        javax.swing.JMenuBar $r3, $r13, $r14, $r15;
+        java.awt.Rectangle $r4, $r16, $r18;
+        org.gjt.sp.jedit.EditPane $r5;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r6;
+        org.gjt.sp.jedit.msg.ViewUpdate $r7;
+        java.lang.Object $r8;
+        java.awt.Container $r9;
+        org.gjt.sp.jedit.gui.StatusBar $r10, $r12;
+
+        r0 := @this;
+
+        $z2 = r0.fullScreenMode;
+
+        if $z2 != 0 goto label1;
+
+        $z5 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z5_1 = 0;
+
+     label2:
+        $z5_2 = Phi($z5 #0, $z5_1 #1);
+
+        Packer.Unpack(r0);
+
+        r0.fullScreenMode = $z5_2;
+
+        Packer.Pack(r0);
+
+        $r2 = r0.getGraphicsConfiguration();
+
+        r1 = $r2.getDevice();
+
+        r0.dispose();
+
+        $z3 = r0.fullScreenMode;
+
+        if $z3 == 0 goto label3;
+
+        r0.updateFullScreenProps();
+
+        $r16 = r0.getBounds();
+
+        Packer.Unpack(r0);
+
+        r0.windowedBounds = $r16;
+
+        Packer.Pack(r0);
+
+        r0.setUndecorated(1);
+
+        $r17 = r1.getDefaultConfiguration();
+
+        $r18 = $r17.getBounds();
+
+        r0.setBounds($r18);
+
+        r0.validate();
+
+(2)     goto label9;
+
+     label3:
+        $z4 = r0.plainView;
+
+        if $z4 == 0 goto label4;
+
+        $z6 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.plainview.visible");
+
+(3)     goto label5;
+
+     label4:
+(4)     $z6_1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.visible");
+
+     label5:
+        $z6_2 = Phi($z6 #3, $z6_1 #4);
+
+        z0 = $z6_2;
+
+        $r3 = r0.menuBar;
+
+        if $r3 == null goto label6;
+
+        $r13 = r0.getJMenuBar();
+
+        $r14 = r0.menuBar;
+
+        if $r13 == $r14 goto label6;
+
+        $r15 = r0.menuBar;
+
+        Packer.Unpack(r0);
+
+        r0.setJMenuBar($r15);
+
+     label6:
+        Packer.Pack(r0);
+
+        z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.toolbar.alternateLayout");
+
+        specialinvoke r0.loadToolBars();
+
+        if z0 == 0 goto label8;
+
+        if z1 == 0 goto label7;
+
+        $r12 = r0.status;
+
+        Packer.Unpack(r0);
+
+        r0.addToolBar(1, -100, $r12);
+
+        Packer.Pack(r0);
+
+        goto label8;
+
+     label7:
+        $r9 = r0.getContentPane();
+
+        $r10 = r0.status;
+
+        Packer.Unpack(r0);
+
+        $r9.add("South", $r10);
+
+     label8:
+        Packer.Pack(r0);
+
+        r0.setUndecorated(0);
+
+        $r4 = r0.windowedBounds;
+
+        Packer.Unpack(r0);
+
+(5)     r0.setBounds($r4);
+
+     label9:
+        Packer.Pack(r0);
+
+        $z6_3 = Phi($z6 #2, $z6_2 #5);
+
+        r0.setVisible(1);
+
+        r0.toFront();
+
+        r0.closeAllMenus();
+
+        $r5 = r0.editPane;
+
+        Packer.Unpack(r0);
+
+        $r6 = $r5.getTextArea();
+
+        Packer.Pack(r0);
+
+        $r6.requestFocus();
+
+        $r7 = new org.gjt.sp.jedit.msg.ViewUpdate;
+
+        $r8 = org.gjt.sp.jedit.msg.ViewUpdate.FULL_SCREEN_TOGGLED;
+
+        specialinvoke $r7.<init>(r0, $r8);
+
+        org.gjt.sp.jedit.EditBus.send($r7);
+
+        return;
+    }
+
+    boolean confirmToCloseDirty()
+    {
+        org.gjt.sp.jedit.View r0, r2;
+        java.util.Set r1, $r5;
+        boolean $z0, $z1, $z2;
+        java.lang.Object $r3;
+        org.gjt.sp.jedit.gui.CloseDialog $r4;
+        org.gjt.sp.jedit.View[] r6;
+        int i0, i1;
+        java.util.Iterator r7;
+        org.gjt.sp.jedit.Buffer r8;
+
+        r0 := @this;
+
+        r1 = specialinvoke r0.getOpenBuffers();
+
+        r6 = org.gjt.sp.jedit.jEdit.getViews();
+
+        i0 = lengthof r6;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label3;
+
+        r2 = r6[i1];
+
+        if r2 == r0 goto label2;
+
+        $r5 = specialinvoke r2.getOpenBuffers();
+
+        r1.removeAll($r5);
+
+     label2:
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+(2)     r7 = r1.iterator();
+
+     label4:
+        i1 = Phi(i1 #2, i1 #3);
+
+        $z0 = r7.hasNext();
+
+        if $z0 == 0 goto label6;
+
+        $r3 = r7.next();
+
+        r8 = (org.gjt.sp.jedit.Buffer) $r3;
+
+        $z1 = r8.isDirty();
+
+        if $z1 == 0 goto label5;
+
+        $r4 = new org.gjt.sp.jedit.gui.CloseDialog;
+
+        specialinvoke $r4.<init>(r0, r1);
+
+        $z2 = $r4.isOK();
+
+        return $z2;
+
+     label5:
+(3)     goto label4;
+
+     label6:
+        return 1;
+    }
+
+    void close()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.EditPane[] r1, r18;
+        int i0, i1;
+        org.gjt.sp.jedit.EditPane r2;
+        org.gjt.sp.jedit.msg.ViewUpdate $r3;
+        java.lang.Object $r4;
+        org.gjt.sp.jedit.gui.DockableWindowManager $r5;
+        java.awt.Container $r6;
+        java.net.Socket $r7, $r8, $r10, $r12, $r14, $r16;
+        java.io.OutputStream $r9, $r11, $r15;
+        java.io.InputStream $r13;
+        java.io.IOException $r17, r19;
+
+        r0 := @this;
+
+        $r3 = new org.gjt.sp.jedit.msg.ViewUpdate;
+
+        $r4 = org.gjt.sp.jedit.msg.ViewUpdate.CLOSED;
+
+        specialinvoke $r3.<init>(r0, $r4);
+
+        org.gjt.sp.jedit.EditBus.send($r3);
+
+        Packer.Unpack(r0);
+
+        r0.closed = 1;
+
+        $r5 = r0.dockableWindowManager;
+
+        $r5.close();
+
+        Packer.Pack(r0);
+
+        org.gjt.sp.jedit.EditBus.removeFromBus(r0);
+
+        r0.dispose();
+
+        r1 = r0.getEditPanes();
+
+        r18 = r1;
+
+        i0 = lengthof r18;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label2;
+
+        r2 = r18[i1];
+
+        r2.close();
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        Packer.Unpack(r0);
+
+        r0.toolBarManager = null;
+
+        r0.toolBar = null;
+
+        r0.searchBar = null;
+
+        r0.splitPane = null;
+
+        r0.inputHandler = null;
+
+        r0.recorder = null;
+
+        Packer.Pack(r0);
+
+        $r6 = r0.getContentPane();
+
+        $r6.removeAll();
+
+        $r7 = r0.waitSocket;
+
+        if $r7 == null goto label6;
+
+     label3:
+        $r8 = r0.waitSocket;
+
+        Packer.Unpack(r0);
+
+        $r9 = $r8.getOutputStream();
+
+        $r9.write(0);
+
+        $r10 = r0.waitSocket;
+
+        $r11 = $r10.getOutputStream();
+
+        $r11.flush();
+
+        $r12 = r0.waitSocket;
+
+        $r13 = $r12.getInputStream();
+
+        $r13.close();
+
+        $r14 = r0.waitSocket;
+
+        $r15 = $r14.getOutputStream();
+
+        $r15.close();
+
+        $r16 = r0.waitSocket;
+
+        $r16.close();
+
+     label4:
+        Packer.Pack(r0);
+
+        goto label6;
+
+     label5:
+        $r17 := @caughtexception;
+
+        r19 = $r17;
+
+     label6:
+        return;
+
+        catch java.io.IOException from label3 to label4 with label5;
+    }
+
+    private void setMainContent(java.awt.Component)
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.Component r1, $r2, $r3, $r9;
+        javax.swing.JPanel $r4, $r6, $r7, $r10;
+        boolean $z0;
+        org.gjt.sp.jedit.EditPane $r5;
+        javax.swing.JSplitPane $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.mainContent;
+
+        if $r2 == null goto label1;
+
+        $r10 = r0.mainPanel;
+
+        $r9 = r0.mainContent;
+
+        Packer.Unpack(r0);
+
+        $r10.remove($r9);
+
+     label1:
+        Packer.Unpack(r0);
+
+        r0.mainContent = r1;
+
+        $r4 = r0.mainPanel;
+
+        $r3 = r0.mainContent;
+
+        $r4.add($r3, "Center");
+
+        $z0 = r1 instanceof javax.swing.JSplitPane;
+
+        if $z0 == 0 goto label2;
+
+        $r8 = (javax.swing.JSplitPane) r1;
+
+        r0.splitPane = $r8;
+
+        goto label3;
+
+     label2:
+        r0.splitPane = null;
+
+        $r5 = (org.gjt.sp.jedit.EditPane) r1;
+
+        r0.editPane = $r5;
+
+     label3:
+        $r6 = r0.mainPanel;
+
+        $r6.revalidate();
+
+        $r7 = r0.mainPanel;
+
+        $r7.repaint();
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    private static void getEditPanes(java.util.List, java.awt.Component)
+    {
+        java.util.List r0;
+        java.awt.Component r1, $r3, $r4;
+        javax.swing.JSplitPane r2;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.EditPane $r5;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.EditPane;
+
+        if $z0 == 0 goto label1;
+
+        $r5 = (org.gjt.sp.jedit.EditPane) r1;
+
+        r0.add($r5);
+
+        goto label2;
+
+     label1:
+        $z1 = r1 instanceof javax.swing.JSplitPane;
+
+        if $z1 == 0 goto label2;
+
+        r2 = (javax.swing.JSplitPane) r1;
+
+        $r3 = r2.getLeftComponent();
+
+        org.gjt.sp.jedit.View.getEditPanes(r0, $r3);
+
+        $r4 = r2.getRightComponent();
+
+        org.gjt.sp.jedit.View.getEditPanes(r0, $r4);
+
+     label2:
+        return;
+    }
+
+    private org.gjt.sp.jedit.EditPane showBuffer(org.gjt.sp.jedit.Buffer, boolean)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.Buffer r1, $r6, $r9;
+        boolean z0;
+        org.gjt.sp.jedit.EditPane[] r2, r3;
+        int i0, $i1, $i2, i3;
+        org.gjt.sp.jedit.EditPane r4, $r5, $r7, $r8, $r11, $r13, $r14;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r10, $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        $r5 = r0.editPane;
+
+        Packer.Unpack(r0);
+
+        $r6 = $r5.getBuffer();
+
+        Packer.Pack(r0);
+
+        if $r6 != r1 goto label2;
+
+        Packer.Unpack(r0);
+
+        $r11 = r0.editPane;
+
+        $r12 = $r11.getTextArea();
+
+        Packer.Pack(r0);
+
+        $i2 = $r12.getVisibleLines();
+
+        if $i2 <= 1 goto label2;
+
+        if z0 == 0 goto label1;
+
+        Packer.Unpack(r0);
+
+        $r14 = r0.editPane;
+
+        $r14.focusOnTextArea();
+
+     label1:
+        Packer.Pack(r0);
+
+        $r13 = r0.editPane;
+
+        return $r13;
+
+     label2:
+        r2 = r0.getEditPanes();
+
+        r3 = r2;
+
+        i0 = lengthof r3;
+
+(0)     i3 = 0;
+
+     label3:
+        i3 = Phi(i3 #0, i3 #1);
+
+        if i3 >= i0 goto label6;
+
+        r4 = r3[i3];
+
+        $r9 = r4.getBuffer();
+
+        if $r9 != r1 goto label5;
+
+        $r10 = r4.getTextArea();
+
+        $i1 = $r10.getVisibleLines();
+
+        if $i1 <= 1 goto label5;
+
+        specialinvoke r0.setEditPane(r4);
+
+        if z0 == 0 goto label4;
+
+        r4.focusOnTextArea();
+
+     label4:
+        return r4;
+
+     label5:
+        i3 = i3 + 1;
+
+(1)     goto label3;
+
+     label6:
+        $r7 = r0.editPane;
+
+        Packer.Unpack(r0);
+
+        $r7.setBuffer(r1, z0);
+
+        Packer.Pack(r0);
+
+        $r8 = r0.editPane;
+
+        return $r8;
+    }
+
+    private static void getSplitConfig(javax.swing.JSplitPane, java.lang.StringBuilder)
+    {
+        javax.swing.JSplitPane r0;
+        java.lang.StringBuilder r1;
+        java.awt.Component r2, r3;
+        int $i0, $i1;
+        java.lang.String $r9, $r9_1, $r9_2;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 = r0.getRightComponent();
+
+        org.gjt.sp.jedit.View.appendToSplitConfig(r1, r2);
+
+        r1.append(32);
+
+        r3 = r0.getLeftComponent();
+
+        org.gjt.sp.jedit.View.appendToSplitConfig(r1, r3);
+
+        r1.append(32);
+
+        $i0 = r0.getDividerLocation();
+
+        r1.append($i0);
+
+        r1.append(32);
+
+        $i1 = r0.getOrientation();
+
+        if $i1 != 0 goto label1;
+
+        $r9 = "vertical";
+
+(0)     goto label2;
+
+     label1:
+(1)     $r9_1 = "horizontal";
+
+     label2:
+        $r9_2 = Phi($r9 #0, $r9_1 #1);
+
+        r1.append($r9_2);
+
+        return;
+    }
+
+    private static void appendToSplitConfig(java.lang.StringBuilder, java.awt.Component)
+    {
+        java.lang.StringBuilder r0;
+        java.awt.Component r1;
+        org.gjt.sp.jedit.EditPane r2;
+        org.gjt.sp.jedit.bufferset.BufferSet r3;
+        org.gjt.sp.jedit.Buffer[] r4, r5;
+        int i0, i1;
+        org.gjt.sp.jedit.Buffer r6, $r8;
+        boolean $z0, $z1;
+        java.lang.String $r9, $r10, $r19, $r20;
+        org.gjt.sp.jedit.bufferset.BufferSetManager $r14;
+        org.gjt.sp.jedit.bufferset.BufferSet$Scope $r15;
+        javax.swing.JSplitPane $r23;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $z0 = r1 instanceof javax.swing.JSplitPane;
+
+        if $z0 == 0 goto label1;
+
+        $r23 = (javax.swing.JSplitPane) r1;
+
+        org.gjt.sp.jedit.View.getSplitConfig($r23, r0);
+
+(0)     goto label5;
+
+     label1:
+        r2 = (org.gjt.sp.jedit.EditPane) r1;
+
+        r0.append(34);
+
+        $r8 = r2.getBuffer();
+
+        $r9 = $r8.getPath();
+
+        $r10 = org.gjt.sp.util.StandardUtilities.charsToEscapes($r9);
+
+        r0.append($r10);
+
+        r0.append("\" buffer");
+
+        r3 = r2.getBufferSet();
+
+        r4 = r3.getAllBuffers();
+
+        r5 = r4;
+
+        i0 = lengthof r5;
+
+(1)     i1 = 0;
+
+     label2:
+        i1 = Phi(i1 #1, i1 #2);
+
+        if i1 >= i0 goto label4;
+
+        r6 = r5[i1];
+
+        $z1 = r6.isNewFile();
+
+        if $z1 != 0 goto label3;
+
+        r0.append(" \"");
+
+        $r19 = r6.getPath();
+
+        $r20 = org.gjt.sp.util.StandardUtilities.charsToEscapes($r19);
+
+        r0.append($r20);
+
+        r0.append("\" buff");
+
+     label3:
+        i1 = i1 + 1;
+
+(2)     goto label2;
+
+     label4:
+        r0.append(" \"");
+
+        $r14 = org.gjt.sp.jedit.jEdit.getBufferSetManager();
+
+        $r15 = $r14.getScope();
+
+        r0.append($r15);
+
+(3)     r0.append("\" bufferset");
+
+     label5:
+        i1 = Phi(i1 #0, i1 #3);
+
+        return;
+    }
+
+    private java.awt.Component restoreSplitConfig(org.gjt.sp.jedit.Buffer, java.lang.String) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.View r0, $r57;
+        java.lang.String r1, $r6, $r11, $r18, $r19, $r20, $r21, $r35, $r36, $r37, $r38, $r39, $r40, $r41, $r42, $r55, r68, r69;
+        java.util.Stack r2, $r7;
+        java.io.StreamTokenizer r3, $r8;
+        java.util.ArrayList r4, $r10;
+        org.gjt.sp.jedit.EditPane $r5, $r15, $r34, $r45, $r46, $r48, $r59;
+        int $i0, $i1, $i2, $i3, i6, i7, i8;
+        java.io.StringReader $r9;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z11, $z12;
+        java.awt.Component $r13, $r25, $r26;
+        org.gjt.sp.jedit.Buffer $r14, $r33, r60, r61, r65, r66, r72, r61_1, r61_2;
+        double $d0;
+        java.lang.Integer $r16, $r23, $r58;
+        java.lang.Object $r22, $r44, $r49, $r50, r63, r64, r67, r73;
+        javax.swing.JSplitPane $r24, $r28, $r29, $r31, $r32;
+        java.awt.Dimension $r30;
+        java.lang.StringBuilder $r51, $r52, $r53, $r54;
+        org.gjt.sp.jedit.Buffer[] r62;
+        byte $b4, b5;
+        org.gjt.sp.jedit.bufferset.BufferSet r70;
+        java.util.Iterator r71;
+
+        r0 := @this;
+
+        r60 := @parameter0;
+
+        r1 := @parameter1;
+
+        if r60 == null goto label01;
+
+        $r59 = specialinvoke r0.createEditPane(r60);
+
+        Packer.Unpack(r0);
+
+        r0.editPane = $r59;
+
+        Packer.Pack(r0);
+
+        return $r59;
+
+     label01:
+        if r1 == null goto label02;
+
+        $r6 = r1.trim();
+
+        $i0 = $r6.length();
+
+        if $i0 != 0 goto label04;
+
+     label02:
+        r61 = org.gjt.sp.jedit.jEdit.getFirstBuffer();
+
+(0)     if r61 != null goto label03;
+
+(1)     r61_1 = org.gjt.sp.jedit.bufferset.BufferSetManager.createUntitledBuffer();
+
+     label03:
+        r61_2 = Phi(r61 #0, r61_1 #1);
+
+        $r5 = specialinvoke r0.createEditPane(r61_2);
+
+        Packer.Unpack(r0);
+
+        r0.editPane = $r5;
+
+        Packer.Pack(r0);
+
+        return $r5;
+
+     label04:
+        r62 = org.gjt.sp.jedit.jEdit.getBuffers();
+
+        $r7 = new java.util.Stack;
+
+        specialinvoke $r7.<init>();
+
+        r2 = $r7;
+
+        $r8 = new java.io.StreamTokenizer;
+
+        $r9 = new java.io.StringReader;
+
+        specialinvoke $r9.<init>(r1);
+
+        specialinvoke $r8.<init>($r9);
+
+        r3 = $r8;
+
+        r3.whitespaceChars(0, 32);
+
+        r3.wordChars(35, 126);
+
+        r3.commentChar(33);
+
+        r3.quoteChar(34);
+
+        r3.eolIsSignificant(0);
+
+        $r10 = new java.util.ArrayList;
+
+        specialinvoke $r10.<init>();
+
+(2)     r4 = $r10;
+
+     label05:
+        r64 = Phi(r64 #2, r64 #28);
+
+        r63 = Phi(r63 #2, r63 #28);
+
+        i8 = Phi(i8 #2, i8 #28);
+
+        $b4 = Phi($b4 #2, $b4 #28);
+
+        r60 = Phi(r60 #2, r60 #28);
+
+        $i1 = r3.nextToken();
+
+(3)     lookupswitch($i1)
+        {
+            case -3: goto label07;
+            case -2: goto label24;
+            case -1: goto label06;
+            case 34: goto label25;
+            default: goto label26;
+        };
+
+     label06:
+        goto label27;
+
+     label07:
+        $r19 = "vertical";
+
+        $r18 = r3.sval;
+
+        $z1 = $r19.equals($r18);
+
+        if $z1 != 0 goto label08;
+
+        $r36 = "horizontal";
+
+        $r35 = r3.sval;
+
+        $z5 = $r36.equals($r35);
+
+        if $z5 == 0 goto label13;
+
+     label08:
+        $r21 = "vertical";
+
+        $r20 = r3.sval;
+
+        $z2 = $r21.equals($r20);
+
+        if $z2 == 0 goto label09;
+
+        $b4 = 0;
+
+(4)     goto label10;
+
+     label09:
+(5)     $b4 = 1;
+
+     label10:
+        $b4 = Phi($b4 #4, $b4 #5);
+
+        b5 = $b4;
+
+        $r22 = r2.pop();
+
+        $r23 = (java.lang.Integer) $r22;
+
+        i6 = $r23.intValue();
+
+        r63 = r2.pop();
+
+        r64 = r2.pop();
+
+        $z3 = r63 instanceof org.gjt.sp.jedit.Buffer;
+
+(6)     if $z3 == 0 goto label11;
+
+        $r33 = (org.gjt.sp.jedit.Buffer) r63;
+
+        r60 = $r33;
+
+        r65 = $r33;
+
+        $r34 = specialinvoke r0.createEditPane(r65);
+
+        Packer.Unpack(r0);
+
+        r0.editPane = $r34;
+
+        Packer.Pack(r0);
+
+(7)     r63 = $r34;
+
+     label11:
+        r63 = Phi(r63 #6, r63 #7);
+
+        r60 = Phi(r60 #6, r60 #7);
+
+        $z4 = r64 instanceof org.gjt.sp.jedit.Buffer;
+
+(8)     if $z4 == 0 goto label12;
+
+        r66 = (org.gjt.sp.jedit.Buffer) r64;
+
+(9)     r64 = specialinvoke r0.createEditPane(r66);
+
+     label12:
+        Packer.Unpack(r0);
+
+        Packer.Unpack(r0);
+
+        r64 = Phi(r64 #8, r64 #9);
+
+        $r24 = new javax.swing.JSplitPane;
+
+        $r26 = (java.awt.Component) r63;
+
+        $r25 = (java.awt.Component) r64;
+
+        specialinvoke $r24.<init>(b5, $r26, $r25);
+
+        r0.splitPane = $r24;
+
+        r2.push($r24);
+
+        $r28 = r0.splitPane;
+
+        $r28.setOneTouchExpandable(1);
+
+        $r29 = r0.splitPane;
+
+        $r29.setBorder(null);
+
+        $r31 = r0.splitPane;
+
+        $r30 = new java.awt.Dimension;
+
+        specialinvoke $r30.<init>(0, 0);
+
+        $r31.setMinimumSize($r30);
+
+        $r32 = r0.splitPane;
+
+        $r32.setDividerLocation(i6);
+
+        Packer.Pack(r0);
+
+(10)    goto label26;
+
+     label13:
+        $r38 = "buffer";
+
+        $r37 = r3.sval;
+
+        $z6 = $r38.equals($r37);
+
+        if $z6 == 0 goto label18;
+
+        r67 = r2.pop();
+
+        $z11 = r67 instanceof java.lang.Integer;
+
+        if $z11 == 0 goto label15;
+
+        $r58 = (java.lang.Integer) r67;
+
+        i7 = $r58.intValue();
+
+(11)    if i7 < 0 goto label14;
+
+        $i3 = lengthof r62;
+
+(12)    if i7 >= $i3 goto label14;
+
+(13)    r60 = r62[i7];
+
+     label14:
+        r60 = Phi(r60 #11, r60 #12, r60 #13);
+
+(14)    goto label16;
+
+     label15:
+        $z12 = r67 instanceof java.lang.String;
+
+(15)    if $z12 == 0 goto label16;
+
+        r68 = (java.lang.String) r67;
+
+        r60 = org.gjt.sp.jedit.jEdit.getBuffer(r68);
+
+(16)    if r60 != null goto label16;
+
+        $r57 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        r60 = org.gjt.sp.jedit.jEdit.openTemporary($r57, null, r68, 1, null);
+
+(17)    org.gjt.sp.jedit.jEdit.commitTemporary(r60);
+
+     label16:
+        r60 = Phi(r60 #14, r60 #15, r60 #16, r60 #17);
+
+(18)    if r60 != null goto label17;
+
+(19)    r60 = org.gjt.sp.jedit.jEdit.getFirstBuffer();
+
+     label17:
+        r60 = Phi(r60 #18, r60 #19);
+
+        r2.push(r60);
+
+        r4.add(r60);
+
+(20)    goto label26;
+
+     label18:
+        $r40 = "buff";
+
+        $r39 = r3.sval;
+
+        $z7 = $r40.equals($r39);
+
+        if $z7 == 0 goto label21;
+
+        $r50 = r2.pop();
+
+        r69 = (java.lang.String) $r50;
+
+        r60 = org.gjt.sp.jedit.jEdit.getBuffer(r69);
+
+        if r60 != null goto label19;
+
+        $r51 = new java.lang.StringBuilder;
+
+        specialinvoke $r51.<init>();
+
+        $r52 = $r51.append("Buffer ");
+
+        $r53 = $r52.append(r69);
+
+        $r54 = $r53.append(" doesn\'t exist");
+
+        $r55 = $r54.toString();
+
+        org.gjt.sp.util.Log.log(7, r0, $r55);
+
+        goto label20;
+
+     label19:
+        r4.add(r60);
+
+     label20:
+(21)    goto label26;
+
+     label21:
+        $r42 = "bufferset";
+
+        $r41 = r3.sval;
+
+        $z8 = $r42.equals($r41);
+
+(22)    if $z8 == 0 goto label26;
+
+        r2.pop();
+
+        $r44 = r2.pop();
+
+        r60 = (org.gjt.sp.jedit.Buffer) $r44;
+
+        $r45 = specialinvoke r0.createEditPane(r60);
+
+        Packer.Unpack(r0);
+
+        r0.editPane = $r45;
+
+        $r46 = r0.editPane;
+
+        r2.push($r46);
+
+        $r48 = r0.editPane;
+
+        r70 = $r48.getBufferSet();
+
+        Packer.Pack(r0);
+
+        i8 = 0;
+
+(23)    r71 = r4.iterator();
+
+     label22:
+        r64 = Phi(r64 #23, r64 #24);
+
+        r63 = Phi(r63 #23, r63 #24);
+
+        i8 = Phi(i8 #23, i8 #24);
+
+        $b4 = Phi($b4 #23, $b4 #24);
+
+        r60 = Phi(r60 #23, r60 #24);
+
+        $z9 = r71.hasNext();
+
+        if $z9 == 0 goto label23;
+
+        $r49 = r71.next();
+
+        r72 = (org.gjt.sp.jedit.Buffer) $r49;
+
+        r70.addBufferAt(r72, i8);
+
+        i8 = i8 + 1;
+
+(24)    goto label22;
+
+     label23:
+        r4.clear();
+
+(25)    goto label26;
+
+     label24:
+        $d0 = r3.nval;
+
+        $i2 = (int) $d0;
+
+        $r16 = java.lang.Integer.valueOf($i2);
+
+        r2.push($r16);
+
+(26)    goto label26;
+
+     label25:
+        $r11 = r3.sval;
+
+(27)    r2.push($r11);
+
+     label26:
+        r64 = Phi(r64 #3, r64 #10, r64 #20, r64 #21, r64 #22, r64 #25, r64 #26, r64 #27);
+
+        r63 = Phi(r63 #3, r63 #10, r63 #20, r63 #21, r63 #22, r63 #25, r63 #26, r63 #27);
+
+        i8 = Phi(i8 #3, i8 #10, i8 #20, i8 #21, i8 #22, i8 #25, i8 #26, i8 #27);
+
+        $b4 = Phi($b4 #3, $b4 #10, $b4 #20, $b4 #21, $b4 #22, $b4 #25, $b4 #26, $b4 #27);
+
+        r60 = Phi(r60 #3, r60 #10, r60 #20, r60 #21, r60 #22, r60 #25, r60 #26, r60 #27);
+
+(28)    goto label05;
+
+     label27:
+        r73 = r2.peek();
+
+        $z0 = r73 instanceof org.gjt.sp.jedit.Buffer;
+
+(29)    if $z0 == 0 goto label28;
+
+        $r14 = (org.gjt.sp.jedit.Buffer) r73;
+
+        $r15 = specialinvoke r0.createEditPane($r14);
+
+        Packer.Unpack(r0);
+
+        r0.editPane = $r15;
+
+        Packer.Pack(r0);
+
+(30)    r73 = $r15;
+
+     label28:
+        r73 = Phi(r73 #29, r73 #30);
+
+        specialinvoke r0.updateGutterBorders();
+
+        $r13 = (java.awt.Component) r73;
+
+        return $r13;
+    }
+
+    private void propertiesChanged()
+    {
+        org.gjt.sp.jedit.View r0;
+        javax.swing.JMenuBar r1;
+        javax.swing.JMenu r2;
+        int i0, $i1, i4;
+        java.lang.Object r3;
+        boolean $z0, $z1, $z2, $z3, $z4, z5;
+        org.gjt.sp.jedit.gui.StatusBar $r4, $r5, $r7, $r14, $r22;
+        java.awt.Container $r6, $r13, $r16, $r19;
+        javax.swing.JPanel $r8, $r9, $r10, $r11, $r17, $r20;
+        javax.swing.JRootPane $r12;
+        java.lang.StringBuilder $r23, $r25, $r26;
+        org.gjt.sp.jedit.gui.InputHandler $r24;
+        char $c2, $c3;
+        java.lang.String $r27;
+
+        r0 := @this;
+
+        r1 = org.gjt.sp.jedit.GUIUtilities.loadMenuBar("view.mbar");
+
+(0)     i4 = 0;
+
+     label1:
+        i4 = Phi(i4 #0, i4 #1);
+
+        $i1 = r1.getMenuCount();
+
+        if i4 >= $i1 goto label3;
+
+        r2 = r1.getMenu(i4);
+
+        if r2 == null goto label2;
+
+        i0 = r2.getMnemonic();
+
+        if i0 == 0 goto label2;
+
+        Packer.Unpack(r0);
+
+        $r24 = r0.inputHandler;
+
+        $r23 = new java.lang.StringBuilder;
+
+        specialinvoke $r23.<init>();
+
+        $r25 = $r23.append("A+");
+
+        $c2 = (char) i0;
+
+        $c3 = java.lang.Character.toLowerCase($c2);
+
+        $r26 = $r25.append($c3);
+
+        $r27 = $r26.toString();
+
+        r3 = $r24.getKeyBinding($r27);
+
+        Packer.Pack(r0);
+
+        if r3 == null goto label2;
+
+        r2.setMnemonic(0);
+
+     label2:
+        i4 = i4 + 1;
+
+(1)     goto label1;
+
+     label3:
+        r0.setJMenuBar(r1);
+
+        specialinvoke r0.loadToolBars();
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.showFullPath");
+
+        Packer.Unpack(r0);
+
+        r0.showFullPath = $z0;
+
+        Packer.Pack(r0);
+
+        r0.updateTitle();
+
+        $r4 = r0.status;
+
+        Packer.Unpack(r0);
+
+        $r4.propertiesChanged();
+
+        $r5 = r0.status;
+
+        r0.removeToolBar($r5);
+
+        Packer.Pack(r0);
+
+        $r6 = r0.getContentPane();
+
+        $r7 = r0.status;
+
+        Packer.Unpack(r0);
+
+        $r6.remove($r7);
+
+        Packer.Pack(r0);
+
+        $z1 = r0.plainView;
+
+        if $z1 == 0 goto label4;
+
+        $z4 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.plainview.visible");
+
+(2)     goto label5;
+
+     label4:
+(3)     $z4 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.visible");
+
+     label5:
+        $z4 = Phi($z4 #2, $z4 #3);
+
+        z5 = $z4;
+
+        $z2 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.toolbar.alternateLayout");
+
+        if $z2 == 0 goto label6;
+
+        $r16 = r0.getContentPane();
+
+        $r17 = r0.topToolBars;
+
+        Packer.Unpack(r0);
+
+        $r16.add("North", $r17);
+
+        Packer.Pack(r0);
+
+        $r19 = r0.getContentPane();
+
+        $r20 = r0.bottomToolBars;
+
+        Packer.Unpack(r0);
+
+        $r19.add("South", $r20);
+
+        Packer.Pack(r0);
+
+        if z5 == 0 goto label7;
+
+        Packer.Unpack(r0);
+
+        $r22 = r0.status;
+
+        r0.addToolBar(1, -100, $r22);
+
+        Packer.Pack(r0);
+
+        goto label7;
+
+     label6:
+        Packer.Unpack(r0);
+
+        $r9 = r0.mainPanel;
+
+        $r8 = r0.topToolBars;
+
+        $r9.add($r8, "North");
+
+        $r11 = r0.mainPanel;
+
+        $r10 = r0.bottomToolBars;
+
+        $r11.add($r10, "South");
+
+        Packer.Pack(r0);
+
+        if z5 == 0 goto label7;
+
+        $r13 = r0.getContentPane();
+
+        $r14 = r0.status;
+
+        Packer.Unpack(r0);
+
+        $r13.add("South", $r14);
+
+     label7:
+        Packer.Pack(r0);
+
+        r0.updateBufferSwitcherStates();
+
+        $r12 = r0.getRootPane();
+
+        $r12.revalidate();
+
+        $z3 = r0.fullScreenMode;
+
+        if $z3 == 0 goto label8;
+
+        r0.updateFullScreenProps();
+
+     label8:
+        return;
+    }
+
+    public void updateBufferSwitcherStates()
+    {
+        org.gjt.sp.jedit.View r0, r2;
+        boolean z0, $z1, $z2, $z3;
+        javax.swing.JMenuBar r1;
+        org.gjt.sp.jedit.EditPane[] r3;
+        int i0, $i1, $i2, i3, i4, i5, i6, i7;
+        org.gjt.sp.jedit.EditPane r4;
+        javax.swing.JMenuItem $r5;
+        java.lang.String $r6, $r7, r8, r9, r10, r11;
+        javax.swing.JMenu r12, r13;
+        java.awt.Component r14;
+        org.gjt.sp.jedit.View[] r15;
+
+        r0 := @this;
+
+        z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.showBufferSwitcher");
+
+        r1 = r0.getJMenuBar();
+
+        if r1 != null goto label01;
+
+        return;
+
+     label01:
+        r8 = org.gjt.sp.jedit.jEdit.getProperty("view.label");
+
+        r9 = r8.replace("$", "");
+
+        r10 = org.gjt.sp.jedit.jEdit.getProperty("focus-buffer-switcher.label");
+
+        r11 = r10.replace("$", "");
+
+        r12 = null;
+
+(0)     i3 = 0;
+
+     label02:
+        i3 = Phi(i3 #0, i3 #3);
+
+        r12 = Phi(r12 #0, r12 #3);
+
+        $i1 = r1.getMenuCount();
+
+(1)     if i3 >= $i1 goto label04;
+
+        r13 = r1.getMenu(i3);
+
+        $r7 = r13.getText();
+
+        $z3 = $r7.equals(r9);
+
+        if $z3 == 0 goto label03;
+
+        r12 = r13;
+
+(2)     goto label04;
+
+     label03:
+        i3 = i3 + 1;
+
+(3)     goto label02;
+
+     label04:
+        r12 = Phi(r12 #1, r12 #2);
+
+(4)     if r12 == null goto label07;
+
+(5)     i4 = 0;
+
+     label05:
+        i3 = Phi(i3 #5, i3 #7);
+
+        i4 = Phi(i4 #5, i4 #7);
+
+        r12 = Phi(r12 #5, r12 #7);
+
+        $i2 = r12.getMenuComponentCount();
+
+(6)     if i4 >= $i2 goto label07;
+
+        r14 = r12.getMenuComponent(i4);
+
+        $z1 = r14 instanceof javax.swing.JMenuItem;
+
+        if $z1 == 0 goto label06;
+
+        $r5 = (javax.swing.JMenuItem) r14;
+
+        $r6 = $r5.getText();
+
+        $z2 = $r6.equals(r11);
+
+        if $z2 == 0 goto label06;
+
+        r14.setEnabled(z0);
+
+     label06:
+        i4 = i4 + 1;
+
+(7)     goto label05;
+
+     label07:
+        i3 = Phi(i3 #4, i3 #6);
+
+        i4 = Phi(i4 #4, i4 #6);
+
+        r12 = Phi(r12 #4, r12 #6);
+
+        r15 = org.gjt.sp.jedit.jEdit.getViews();
+
+        i5 = lengthof r15;
+
+(8)     i6 = 0;
+
+     label08:
+        i3 = Phi(i3 #8, i3 #11);
+
+        i6 = Phi(i6 #8, i6 #11);
+
+        i7 = Phi(i7 #8, i7 #11);
+
+        i4 = Phi(i4 #8, i4 #11);
+
+        r12 = Phi(r12 #8, r12 #11);
+
+        if i6 >= i5 goto label11;
+
+        r2 = r15[i6];
+
+        r3 = r2.getEditPanes();
+
+        i0 = lengthof r3;
+
+(9)     i7 = 0;
+
+     label09:
+        i3 = Phi(i3 #9, i3 #10);
+
+        i6 = Phi(i6 #9, i6 #10);
+
+        i7 = Phi(i7 #9, i7 #10);
+
+        i4 = Phi(i4 #9, i4 #10);
+
+        r12 = Phi(r12 #9, r12 #10);
+
+        if i7 >= i0 goto label10;
+
+        r4 = r3[i7];
+
+        r4.loadBufferSwitcher();
+
+        i7 = i7 + 1;
+
+(10)    goto label09;
+
+     label10:
+        i6 = i6 + 1;
+
+(11)    goto label08;
+
+     label11:
+        return;
+    }
+
+    private void loadToolBars()
+    {
+        org.gjt.sp.jedit.View r0;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        java.awt.Container $r1, $r8, $r9, $r10, $r11, $r12;
+        org.gjt.sp.jedit.search.SearchBar $r2, $r3, $r4, $r5, $r6, $r7;
+        org.gjt.sp.jedit.gui.ToolBarManager $r13;
+
+        r0 := @this;
+
+        $z0 = r0.plainView;
+
+        if $z0 != 0 goto label4;
+
+        $z3 = r0.fullScreenMode;
+
+        if $z3 == 0 goto label1;
+
+        $z5 = org.gjt.sp.jedit.jEdit.getBooleanProperty("fullScreenIncludesToolbar");
+
+        if $z5 == 0 goto label4;
+
+        goto label2;
+
+     label1:
+        $z4 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.showToolbar");
+
+        if $z4 == 0 goto label4;
+
+     label2:
+        $r9 = r0.toolBar;
+
+        if $r9 == null goto label3;
+
+        $r13 = r0.toolBarManager;
+
+        $r12 = r0.toolBar;
+
+        Packer.Unpack(r0);
+
+        $r13.removeToolBar($r12);
+
+     label3:
+        Packer.Unpack(r0);
+
+        $r10 = org.gjt.sp.jedit.GUIUtilities.loadToolBar("view.toolbar");
+
+        r0.toolBar = $r10;
+
+        $r11 = r0.toolBar;
+
+        r0.addToolBar(0, 100, $r11);
+
+        Packer.Pack(r0);
+
+        goto label5;
+
+     label4:
+        $r1 = r0.toolBar;
+
+        if $r1 == null goto label5;
+
+        $r8 = r0.toolBar;
+
+        Packer.Unpack(r0);
+
+        r0.removeToolBar($r8);
+
+        r0.toolBar = null;
+
+     label5:
+        Packer.Pack(r0);
+
+        $r2 = r0.searchBar;
+
+        if $r2 == null goto label6;
+
+        Packer.Unpack(r0);
+
+        $r6 = r0.searchBar;
+
+        $r6.propertiesChanged();
+
+        $r7 = r0.searchBar;
+
+        r0.removeToolBar($r7);
+
+     label6:
+        Packer.Pack(r0);
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.showSearchbar");
+
+        if $z1 == 0 goto label8;
+
+        $z2 = r0.plainView;
+
+        if $z2 != 0 goto label8;
+
+        $r3 = r0.searchBar;
+
+        if $r3 != null goto label7;
+
+        $r5 = new org.gjt.sp.jedit.search.SearchBar;
+
+        specialinvoke $r5.<init>(r0, 0);
+
+        Packer.Unpack(r0);
+
+        r0.searchBar = $r5;
+
+     label7:
+        Packer.Unpack(r0);
+
+        $r4 = r0.searchBar;
+
+        r0.addToolBar(0, 75, $r4);
+
+     label8:
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    private org.gjt.sp.jedit.EditPane createEditPane(org.gjt.sp.jedit.Buffer)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.Buffer r1;
+        org.gjt.sp.jedit.EditPane $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = specialinvoke r0.createEditPane(null, r1);
+
+        return $r2;
+    }
+
+    private org.gjt.sp.jedit.EditPane createEditPane(org.gjt.sp.jedit.bufferset.BufferSet, org.gjt.sp.jedit.Buffer)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.bufferset.BufferSet r1;
+        org.gjt.sp.jedit.Buffer r2;
+        org.gjt.sp.jedit.EditPane r3, $r5;
+        org.gjt.sp.jedit.textarea.JEditTextArea r4;
+        org.gjt.sp.jedit.View$FocusHandler $r6;
+        org.gjt.sp.jedit.View$CaretHandler $r7;
+        org.gjt.sp.jedit.View$ScrollHandler $r8;
+        org.gjt.sp.jedit.msg.EditPaneUpdate $r9;
+        java.lang.Object $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r5 = new org.gjt.sp.jedit.EditPane;
+
+        specialinvoke $r5.<init>(r0, r1, r2);
+
+        r3 = $r5;
+
+        r4 = r3.getTextArea();
+
+        $r6 = new org.gjt.sp.jedit.View$FocusHandler;
+
+        specialinvoke $r6.<init>(r0, null);
+
+        r4.addFocusListener($r6);
+
+        $r7 = new org.gjt.sp.jedit.View$CaretHandler;
+
+        specialinvoke $r7.<init>(r0, null);
+
+        r4.addCaretListener($r7);
+
+        $r8 = new org.gjt.sp.jedit.View$ScrollHandler;
+
+        specialinvoke $r8.<init>(r0, null);
+
+        r4.addScrollListener($r8);
+
+        $r9 = new org.gjt.sp.jedit.msg.EditPaneUpdate;
+
+        $r10 = org.gjt.sp.jedit.msg.EditPaneUpdate.CREATED;
+
+        specialinvoke $r9.<init>(r3, $r10);
+
+        org.gjt.sp.jedit.EditBus.send($r9);
+
+        return r3;
+    }
+
+    private void setEditPane(org.gjt.sp.jedit.EditPane)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.EditPane r1;
+        org.gjt.sp.jedit.gui.StatusBar $r2, $r3, $r4;
+        org.gjt.sp.jedit.msg.ViewUpdate $r5;
+        java.lang.Object $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        Packer.Unpack(r0);
+
+        r0.editPane = r1;
+
+        $r2 = r0.status;
+
+        $r2.updateCaretStatus();
+
+        $r3 = r0.status;
+
+        $r3.updateBufferStatus();
+
+        $r4 = r0.status;
+
+        $r4.updateMiscStatus();
+
+        Packer.Pack(r0);
+
+        specialinvoke r0.updateGutterBorders();
+
+        $r5 = new org.gjt.sp.jedit.msg.ViewUpdate;
+
+        $r6 = org.gjt.sp.jedit.msg.ViewUpdate.EDIT_PANE_CHANGED;
+
+        specialinvoke $r5.<init>(r0, $r6);
+
+        org.gjt.sp.jedit.EditBus.send($r5);
+
+        return;
+    }
+
+    public void handleBufferUpdate(org.gjt.sp.jedit.msg.BufferUpdate)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.msg.BufferUpdate r1;
+        org.gjt.sp.jedit.Buffer r2, $r8;
+        org.gjt.sp.jedit.EditPane[] r3, r4;
+        int i0, i1;
+        org.gjt.sp.jedit.EditPane r5;
+        java.lang.Object $r6, $r7, $r9, $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getBuffer();
+
+        $r6 = r1.getWhat();
+
+        $r7 = org.gjt.sp.jedit.msg.BufferUpdate.DIRTY_CHANGED;
+
+        if $r6 == $r7 goto label1;
+
+        $r9 = r1.getWhat();
+
+        $r10 = org.gjt.sp.jedit.msg.BufferUpdate.LOADED;
+
+(0)     if $r9 != $r10 goto label4;
+
+     label1:
+        r3 = r0.getEditPanes();
+
+        r4 = r3;
+
+        i0 = lengthof r4;
+
+(1)     i1 = 0;
+
+     label2:
+        i1 = Phi(i1 #1, i1 #4);
+
+(2)     if i1 >= i0 goto label4;
+
+        r5 = r4[i1];
+
+        $r8 = r5.getBuffer();
+
+        if $r8 != r2 goto label3;
+
+        r0.updateTitle();
+
+(3)     goto label4;
+
+     label3:
+        i1 = i1 + 1;
+
+(4)     goto label2;
+
+     label4:
+        i1 = Phi(i1 #0, i1 #2, i1 #3);
+
+        return;
+    }
+
+    public void handleEditPaneUpdate(org.gjt.sp.jedit.msg.EditPaneUpdate)
+    {
+        org.gjt.sp.jedit.View r0, $r3;
+        org.gjt.sp.jedit.msg.EditPaneUpdate r1;
+        org.gjt.sp.jedit.EditPane r2;
+        java.lang.Object $r4, $r5;
+        org.gjt.sp.jedit.Buffer $r6;
+        boolean $z0;
+        org.gjt.sp.jedit.gui.StatusBar $r7, $r8, $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getEditPane();
+
+        if r2 == null goto label1;
+
+        $r3 = r2.getView();
+
+        if $r3 != r0 goto label1;
+
+        $r4 = r1.getWhat();
+
+        $r5 = org.gjt.sp.jedit.msg.EditPaneUpdate.BUFFER_CHANGED;
+
+        if $r4 != $r5 goto label1;
+
+        $r6 = r2.getBuffer();
+
+        $z0 = $r6.isLoaded();
+
+        if $z0 == 0 goto label1;
+
+        specialinvoke r0.closeDuplicateBuffers(r1);
+
+        $r7 = r0.status;
+
+        Packer.Unpack(r0);
+
+        $r7.updateCaretStatus();
+
+        $r8 = r0.status;
+
+        $r8.updateBufferStatus();
+
+        $r9 = r0.status;
+
+        $r9.updateMiscStatus();
+
+     label1:
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void handleViewUpdate(org.gjt.sp.jedit.msg.ViewUpdate)
+    {
+        org.gjt.sp.jedit.View r0, $r2, $r3;
+        org.gjt.sp.jedit.msg.ViewUpdate r1;
+        int i0, $i1, $i2;
+        boolean $z0, $z1, $z1_1, $z1_2, $z1_3;
+        java.lang.Object $r4, $r5, $r6, $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getView();
+
+        if $r2 == null goto label1;
+
+        $r3 = r1.getView();
+
+        if $r3 == r0 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("checkFileStatus");
+
+        if i0 == 0 goto label3;
+
+        $z0 = org.gjt.sp.jedit.jEdit.isStartupDone();
+
+        if $z0 != 0 goto label4;
+
+     label3:
+        return;
+
+     label4:
+        $r4 = r1.getWhat();
+
+        $r5 = org.gjt.sp.jedit.msg.ViewUpdate.EDIT_PANE_CHANGED;
+
+        if $r4 != $r5 goto label5;
+
+        $i2 = i0 & 2;
+
+        if $i2 <= 0 goto label5;
+
+        org.gjt.sp.jedit.jEdit.checkBufferStatus(r0, 1);
+
+(0)     goto label8;
+
+     label5:
+        $r6 = r1.getWhat();
+
+        $r7 = org.gjt.sp.jedit.msg.ViewUpdate.ACTIVATED;
+
+(1)     if $r6 != $r7 goto label8;
+
+        $i1 = i0 & 1;
+
+(2)     if $i1 <= 0 goto label8;
+
+        if i0 == 1 goto label6;
+
+        $z1 = 1;
+
+(3)     goto label7;
+
+     label6:
+(4)     $z1_1 = 0;
+
+     label7:
+        $z1_2 = Phi($z1 #3, $z1_1 #4);
+
+(5)     org.gjt.sp.jedit.jEdit.checkBufferStatus(r0, $z1_2);
+
+     label8:
+        $z1_3 = Phi($z1 #0, $z1 #1, $z1 #2, $z1_2 #5);
+
+        return;
+    }
+
+    private void closeDuplicateBuffers(org.gjt.sp.jedit.msg.EditPaneUpdate)
+    {
+        org.gjt.sp.jedit.View r0, r4;
+        org.gjt.sp.jedit.msg.EditPaneUpdate r1;
+        org.gjt.sp.jedit.bufferset.BufferSet$Scope r2, $r7;
+        org.gjt.sp.jedit.EditPane r3;
+        org.gjt.sp.jedit.Buffer r5;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.bufferset.BufferSetManager $r6;
+        org.gjt.sp.jedit.View$2 $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("buffersets.exclusive");
+
+        if $z0 != 0 goto label1;
+
+        return;
+
+     label1:
+        $r6 = org.gjt.sp.jedit.jEdit.getBufferSetManager();
+
+        r2 = $r6.getScope();
+
+        $r7 = org.gjt.sp.jedit.bufferset.BufferSet$Scope.global;
+
+        if r2 != $r7 goto label2;
+
+        return;
+
+     label2:
+        r3 = r1.getEditPane();
+
+        r4 = r3.getView();
+
+        if r4 == r0 goto label3;
+
+        return;
+
+     label3:
+        r5 = r3.getBuffer();
+
+        $z1 = r5.isDirty();
+
+        if $z1 == 0 goto label4;
+
+        return;
+
+     label4:
+        $r8 = new org.gjt.sp.jedit.View$2;
+
+        specialinvoke $r8.<init>(r0, r3, r2, r4, r5);
+
+        org.gjt.sp.jedit.jEdit.visit($r8);
+
+        return;
+    }
+
+    private void updateGutterBorders()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.EditPane[] r1, r2;
+        int i0, i1;
+        org.gjt.sp.jedit.EditPane r3;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r4;
+        org.gjt.sp.jedit.textarea.Gutter $r5;
+
+        r0 := @this;
+
+        r1 = r0.getEditPanes();
+
+        r2 = r1;
+
+        i0 = lengthof r2;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label2;
+
+        r3 = r2[i1];
+
+        $r4 = r3.getTextArea();
+
+        $r5 = $r4.getGutter();
+
+        $r5.updateBorder();
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return;
+    }
+
+    private java.util.Set getOpenBuffers()
+    {
+        org.gjt.sp.jedit.View r0;
+        java.util.LinkedHashSet r1, $r4;
+        org.gjt.sp.jedit.EditPane[] r2;
+        int i0, i1;
+        org.gjt.sp.jedit.EditPane r3;
+        org.gjt.sp.jedit.bufferset.BufferSet $r5;
+        org.gjt.sp.jedit.Buffer[] $r6;
+        java.util.List $r7;
+
+        r0 := @this;
+
+        $r4 = new java.util.LinkedHashSet;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4;
+
+        r2 = r0.getEditPanes();
+
+        i0 = lengthof r2;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label2;
+
+        r3 = r2[i1];
+
+        $r5 = r3.getBufferSet();
+
+        $r6 = $r5.getAllBuffers();
+
+        $r7 = java.util.Arrays.asList($r6);
+
+        r1.addAll($r7);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return r1;
+    }
+
+    private static void mergeBufferSets(org.gjt.sp.jedit.EditPane, org.gjt.sp.jedit.EditPane)
+    {
+        org.gjt.sp.jedit.EditPane r0, r1;
+        org.gjt.sp.jedit.bufferset.BufferSetManager r2;
+        org.gjt.sp.jedit.Buffer[] r3;
+        int i0, i1;
+        org.gjt.sp.jedit.Buffer r4;
+        org.gjt.sp.jedit.bufferset.BufferSet $r5;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 = org.gjt.sp.jedit.jEdit.getBufferSetManager();
+
+        $r5 = r1.getBufferSet();
+
+        r3 = $r5.getAllBuffers();
+
+        i0 = lengthof r3;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label2;
+
+        r4 = r3[i1];
+
+        r2.addBuffer(r0, r4);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return;
+    }
+
+    private static boolean isInsideScreen(org.gjt.sp.jedit.View, java.awt.Rectangle)
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.Rectangle r1, r3, r3_1, r3_2;
+        int i0, i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i20, $i21;
+        java.awt.GraphicsConfiguration $r2;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        if r0 != null goto label1;
+
+        r3 = org.gjt.sp.jedit.GUIUtilities.getScreenBounds();
+
+(0)     goto label2;
+
+     label1:
+        $r2 = r0.getGraphicsConfiguration();
+
+(1)     r3_1 = $r2.getBounds();
+
+     label2:
+        r3_2 = Phi(r3 #0, r3_1 #1);
+
+        i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("view.minStartupWidth");
+
+        i1 = org.gjt.sp.jedit.jEdit.getIntegerProperty("view.minStartupHeight");
+
+        $i3 = r1.x;
+
+        $i2 = r1.width;
+
+        $i6 = $i3 + $i2;
+
+        $i4 = r3_2.x;
+
+        $i5 = $i4 + i0;
+
+        if $i6 <= $i5 goto label3;
+
+        $i11 = r1.x;
+
+        $i8 = r3_2.x;
+
+        $i7 = r3_2.width;
+
+        $i9 = $i8 + $i7;
+
+        $i10 = $i9 - i0;
+
+        if $i11 >= $i10 goto label3;
+
+        $i13 = r1.y;
+
+        $i12 = r1.height;
+
+        $i16 = $i13 + $i12;
+
+        $i14 = r3_2.y;
+
+        $i15 = $i14 + i1;
+
+        if $i16 <= $i15 goto label3;
+
+        $i21 = r1.y;
+
+        $i18 = r3_2.y;
+
+        $i17 = r3_2.height;
+
+        $i19 = $i18 + $i17;
+
+        $i20 = $i19 - i1;
+
+        if $i21 >= $i20 goto label3;
+
+        $z0 = 1;
+
+(2)     goto label4;
+
+     label3:
+(3)     $z0_1 = 0;
+
+     label4:
+        $z0_2 = Phi($z0 #2, $z0_1 #3);
+
+        return $z0_2;
+    }
+
+    public void adjust(org.gjt.sp.jedit.View, org.gjt.sp.jedit.View$ViewConfig)
+    {
+        org.gjt.sp.jedit.View r0, r1;
+        org.gjt.sp.jedit.View$ViewConfig r2;
+        java.awt.Rectangle r3, $r4;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7;
+        boolean $z0, $z1, $z2;
+        org.gjt.sp.jedit.GUIUtilities$UnixWorkaround $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $i0 = r2.width;
+
+        if $i0 == 0 goto label4;
+
+        $i1 = r2.height;
+
+        if $i1 == 0 goto label4;
+
+        $r4 = new java.awt.Rectangle;
+
+        $i5 = r2.x;
+
+        $i4 = r2.y;
+
+        $i3 = r2.width;
+
+        $i2 = r2.height;
+
+        Packer.Unpack(r2);
+
+        specialinvoke $r4.<init>($i5, $i4, $i3, $i2);
+
+        Packer.Pack(r2);
+
+        r3 = $r4;
+
+        $z0 = org.gjt.sp.jedit.View.isInsideScreen(r1, r3);
+
+        if $z0 != 0 goto label1;
+
+        r0.setLocationRelativeTo(r1);
+
+        goto label3;
+
+     label1:
+        Packer.Unpack(r2);
+
+        $z1 = org.gjt.sp.jedit.OperatingSystem.isX11();
+
+        if $z1 == 0 goto label2;
+
+        $z2 = org.gjt.sp.jedit.Debug.GEOMETRY_WORKAROUND;
+
+        if $z2 == 0 goto label2;
+
+        $r5 = new org.gjt.sp.jedit.GUIUtilities$UnixWorkaround;
+
+        $i7 = r2.extState;
+
+        specialinvoke $r5.<init>(r0, "view", r3, $i7);
+
+        Packer.Pack(r2);
+
+        goto label3;
+
+     label2:
+        r0.setBounds(r3);
+
+        $i6 = r2.extState;
+
+        r0.setExtendedState($i6);
+
+     label3:
+        Packer.Pack(r2);
+
+        goto label5;
+
+     label4:
+        r0.setLocationRelativeTo(r1);
+
+     label5:
+        return;
+    }
+
+    public volatile org.gjt.sp.jedit.input.AbstractInputHandler getInputHandler()
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.gui.InputHandler $r1;
+
+        r0 := @this;
+
+        $r1 = r0.getInputHandler();
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.StatusBar access$500(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.gui.StatusBar $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.status;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.EditPane access$600(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.EditPane $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.editPane;
+
+        return $r1;
+    }
+
+    static void access$700(org.gjt.sp.jedit.View, org.gjt.sp.jedit.EditPane)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.EditPane r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        specialinvoke r0.setEditPane(r1);
+
+        return;
+    }
+
+    static void access$800(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.View r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updateGutterBorders();
+
+        return;
+    }
+}

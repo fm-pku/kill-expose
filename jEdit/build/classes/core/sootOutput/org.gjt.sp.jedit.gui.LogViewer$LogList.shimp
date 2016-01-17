@@ -1,0 +1,135 @@
+class org.gjt.sp.jedit.gui.LogViewer$LogList extends javax.swing.JList
+{
+    private int startIndex;
+    final org.gjt.sp.jedit.gui.LogViewer this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.LogViewer, javax.swing.ListModel)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogList r0;
+        org.gjt.sp.jedit.gui.LogViewer r1;
+        javax.swing.ListModel r2;
+        javax.swing.ListSelectionModel $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>(r2);
+
+        r0.setVisibleRowCount(24);
+
+        $r3 = r0.getSelectionModel();
+
+        $r3.setSelectionMode(1);
+
+        r0.setAutoscrolls(1);
+
+        return;
+    }
+
+    public void processMouseEvent(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogList r0;
+        java.awt.event.MouseEvent r1;
+        int $i0, $i1;
+        org.gjt.sp.jedit.gui.LogViewer $r2;
+        javax.swing.JList $r3;
+        java.awt.Point $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r1.getID();
+
+        if $i0 != 501 goto label1;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.LogViewer.access$800($r2);
+
+        $r4 = r1.getPoint();
+
+        $i1 = $r3.locationToIndex($r4);
+
+        r0.startIndex = $i1;
+
+     label1:
+        specialinvoke r0.processMouseEvent(r1);
+
+        return;
+    }
+
+    public void processMouseMotionEvent(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogList r0;
+        java.awt.event.MouseEvent r1;
+        int i0, $i1, $i2, $i3;
+        org.gjt.sp.jedit.gui.LogViewer $r2, $r5, $r7, $r9;
+        javax.swing.JList $r3, $r6, $r8, $r10;
+        java.awt.Point $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i1 = r1.getID();
+
+        if $i1 != 506 goto label4;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.LogViewer.access$800($r2);
+
+        $r4 = r1.getPoint();
+
+        i0 = $r3.locationToIndex($r4);
+
+        if i0 == -1 goto label3;
+
+        $i2 = r0.startIndex;
+
+        if $i2 != -1 goto label1;
+
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.gui.LogViewer.access$800($r9);
+
+        $r10.setSelectionInterval(i0, i0);
+
+        r0.startIndex = i0;
+
+        goto label2;
+
+     label1:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.LogViewer.access$800($r5);
+
+        $i3 = r0.startIndex;
+
+        $r6.setSelectionInterval($i3, i0);
+
+     label2:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.LogViewer.access$800($r7);
+
+        $r8.ensureIndexIsVisible(i0);
+
+        r1.consume();
+
+     label3:
+        goto label5;
+
+     label4:
+        specialinvoke r0.processMouseMotionEvent(r1);
+
+     label5:
+        return;
+    }
+}

@@ -1,0 +1,287 @@
+public class org.gjt.sp.jedit.gui.PasteSpecialDialog extends org.gjt.sp.jedit.gui.EnhancedDialog
+{
+    private static final java.awt.datatransfer.DataFlavor[] flavors;
+    private final org.gjt.sp.jedit.textarea.TextArea textArea;
+    private final javax.swing.JButton ok;
+    private final javax.swing.JButton cancel;
+    private javax.swing.JList flavorList;
+
+    public void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.textarea.TextArea)
+    {
+        org.gjt.sp.jedit.gui.PasteSpecialDialog r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.textarea.TextArea r2;
+        javax.swing.JPanel r3, $r11, $r23, r48;
+        org.gjt.sp.jedit.Registers$Register r4;
+        java.awt.datatransfer.Transferable r5;
+        java.awt.datatransfer.DataFlavor[] r6, $r15, r47;
+        java.util.List r7;
+        java.util.Vector r8, $r14;
+        int i0, $i1, i2;
+        java.awt.datatransfer.DataFlavor r9;
+        java.lang.String $r10, $r29, $r39;
+        java.awt.BorderLayout $r12;
+        javax.swing.border.EmptyBorder $r13, $r25;
+        javax.swing.JList $r16, $r18, $r21;
+        org.gjt.sp.jedit.gui.PasteSpecialDialog$1 $r17;
+        java.awt.Container $r19;
+        javax.swing.JScrollPane $r20;
+        javax.swing.BoxLayout $r24;
+        java.awt.Component $r26, $r36, $r44;
+        javax.swing.JButton $r28, $r31, $r33, $r34, $r38, $r41, $r42;
+        org.gjt.sp.jedit.gui.PasteSpecialDialog$2 $r30;
+        javax.swing.JRootPane $r32;
+        org.gjt.sp.jedit.gui.PasteSpecialDialog$3 $r40;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty("paste-special.title");
+
+        specialinvoke r0.<init>(r1, $r10, 1);
+
+        r0.textArea = r2;
+
+        $r11 = new javax.swing.JPanel;
+
+        $r12 = new java.awt.BorderLayout;
+
+        specialinvoke $r12.<init>();
+
+        specialinvoke $r11.<init>($r12);
+
+        r3 = $r11;
+
+        $r13 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r13.<init>(12, 12, 12, 12);
+
+        r3.setBorder($r13);
+
+        r0.setContentPane(r3);
+
+        r4 = org.gjt.sp.jedit.Registers.getRegister(36);
+
+        r5 = r4.getTransferable();
+
+        r6 = r5.getTransferDataFlavors();
+
+        r7 = java.util.Arrays.asList(r6);
+
+        $r14 = new java.util.Vector;
+
+        $r15 = org.gjt.sp.jedit.gui.PasteSpecialDialog.flavors;
+
+        $i1 = lengthof $r15;
+
+        specialinvoke $r14.<init>($i1);
+
+        r8 = $r14;
+
+        r47 = org.gjt.sp.jedit.gui.PasteSpecialDialog.flavors;
+
+        i0 = lengthof r47;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 >= i0 goto label3;
+
+        r9 = r47[i2];
+
+        $z0 = r7.contains(r9);
+
+        if $z0 == 0 goto label2;
+
+        r8.add(r9);
+
+     label2:
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label3:
+        $r16 = new javax.swing.JList;
+
+        specialinvoke $r16.<init>(r8);
+
+        r0.flavorList = $r16;
+
+        $r18 = r0.flavorList;
+
+        $r17 = new org.gjt.sp.jedit.gui.PasteSpecialDialog$1;
+
+        specialinvoke $r17.<init>(r0);
+
+        $r18.setCellRenderer($r17);
+
+        $r19 = r0.getContentPane();
+
+        $r20 = new javax.swing.JScrollPane;
+
+        $r21 = r0.flavorList;
+
+        specialinvoke $r20.<init>($r21);
+
+        $r19.add($r20);
+
+        $r23 = new javax.swing.JPanel;
+
+        specialinvoke $r23.<init>();
+
+        r48 = $r23;
+
+        $r24 = new javax.swing.BoxLayout;
+
+        specialinvoke $r24.<init>(r48, 0);
+
+        r48.setLayout($r24);
+
+        $r25 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r25.<init>(12, 0, 0, 0);
+
+        r48.setBorder($r25);
+
+        $r26 = javax.swing.Box.createGlue();
+
+        r48.add($r26);
+
+        $r28 = new javax.swing.JButton;
+
+        $r29 = org.gjt.sp.jedit.jEdit.getProperty("common.ok");
+
+        specialinvoke $r28.<init>($r29);
+
+        r0.ok = $r28;
+
+        $r31 = r0.ok;
+
+        $r30 = new org.gjt.sp.jedit.gui.PasteSpecialDialog$2;
+
+        specialinvoke $r30.<init>(r0);
+
+        $r31.addActionListener($r30);
+
+        $r32 = r0.getRootPane();
+
+        $r33 = r0.ok;
+
+        $r32.setDefaultButton($r33);
+
+        $r34 = r0.ok;
+
+        r48.add($r34);
+
+        $r36 = javax.swing.Box.createHorizontalStrut(6);
+
+        r48.add($r36);
+
+        $r38 = new javax.swing.JButton;
+
+        $r39 = org.gjt.sp.jedit.jEdit.getProperty("common.cancel");
+
+        specialinvoke $r38.<init>($r39);
+
+        r0.cancel = $r38;
+
+        $r41 = r0.cancel;
+
+        $r40 = new org.gjt.sp.jedit.gui.PasteSpecialDialog$3;
+
+        specialinvoke $r40.<init>(r0);
+
+        $r41.addActionListener($r40);
+
+        $r42 = r0.cancel;
+
+        r48.add($r42);
+
+        $r44 = javax.swing.Box.createGlue();
+
+        r48.add($r44);
+
+        r3.add("South", r48);
+
+        r0.pack();
+
+        r0.setLocationRelativeTo(r1);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.gui.PasteSpecialDialog r0;
+        javax.swing.JList $r1;
+        java.lang.Object $r2;
+        org.gjt.sp.jedit.textarea.TextArea $r3;
+        java.awt.datatransfer.DataFlavor r4, r4_1, r4_2;
+
+        r0 := @this;
+
+        $r1 = r0.flavorList;
+
+        $r2 = $r1.getSelectedValue();
+
+        r4 = (java.awt.datatransfer.DataFlavor) $r2;
+
+(0)     if r4 != null goto label1;
+
+(1)     r4_1 = java.awt.datatransfer.DataFlavor.stringFlavor;
+
+     label1:
+        r4_2 = Phi(r4 #0, r4_1 #1);
+
+        $r3 = r0.textArea;
+
+        org.gjt.sp.jedit.Registers.paste($r3, 36, r4_2);
+
+        r0.dispose();
+
+        return;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.gui.PasteSpecialDialog r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.awt.datatransfer.DataFlavor[] $r0;
+        java.awt.datatransfer.DataFlavor $r1, $r2, $r3;
+
+        $r0 = newarray (java.awt.datatransfer.DataFlavor)[3];
+
+        $r1 = java.awt.datatransfer.DataFlavor.stringFlavor;
+
+        $r0[0] = $r1;
+
+        $r2 = org.gjt.sp.jedit.datatransfer.JEditDataFlavor.jEditRichTextDataFlavor;
+
+        $r0[1] = $r2;
+
+        $r3 = org.gjt.sp.jedit.datatransfer.JEditDataFlavor.html;
+
+        $r0[2] = $r3;
+
+        org.gjt.sp.jedit.gui.PasteSpecialDialog.flavors = $r0;
+
+        return;
+    }
+}

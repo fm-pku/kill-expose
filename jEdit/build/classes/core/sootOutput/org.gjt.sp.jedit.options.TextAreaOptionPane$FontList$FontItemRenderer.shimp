@@ -1,0 +1,61 @@
+class org.gjt.sp.jedit.options.TextAreaOptionPane$FontList$FontItemRenderer extends javax.swing.DefaultListCellRenderer
+{
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.options.TextAreaOptionPane$FontList$FontItemRenderer r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.awt.Component getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+    {
+        org.gjt.sp.jedit.options.TextAreaOptionPane$FontList$FontItemRenderer r0;
+        javax.swing.JList r1;
+        java.lang.Object r2;
+        int i0;
+        boolean z0, z1;
+        java.awt.Font r3;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        r3 = (java.awt.Font) r2;
+
+        specialinvoke r0.getListCellRendererComponent(r1, r2, i0, z0, z1);
+
+        $r5 = r3.getFamily();
+
+        r0.setText($r5);
+
+        return r0;
+    }
+
+    void <init>(org.gjt.sp.jedit.options.TextAreaOptionPane$1)
+    {
+        org.gjt.sp.jedit.options.TextAreaOptionPane$FontList$FontItemRenderer r0;
+        org.gjt.sp.jedit.options.TextAreaOptionPane$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

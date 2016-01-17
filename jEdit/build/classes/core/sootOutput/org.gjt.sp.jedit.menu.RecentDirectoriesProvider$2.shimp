@@ -1,0 +1,75 @@
+class org.gjt.sp.jedit.menu.RecentDirectoriesProvider$2 extends java.awt.event.MouseAdapter
+{
+    final org.gjt.sp.jedit.View val$view;
+    final org.gjt.sp.jedit.menu.RecentDirectoriesProvider this$0;
+
+    void <init>(org.gjt.sp.jedit.menu.RecentDirectoriesProvider, org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.menu.RecentDirectoriesProvider$2 r0;
+        org.gjt.sp.jedit.menu.RecentDirectoriesProvider r1;
+        org.gjt.sp.jedit.View r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$view = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mouseEntered(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.menu.RecentDirectoriesProvider$2 r0;
+        java.awt.event.MouseEvent r1;
+        org.gjt.sp.jedit.View $r2;
+        org.gjt.sp.jedit.gui.StatusBar $r3;
+        java.lang.Object $r4;
+        javax.swing.JMenuItem $r5;
+        java.lang.String $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.val$view;
+
+        $r3 = $r2.getStatus();
+
+        $r4 = r1.getSource();
+
+        $r5 = (javax.swing.JMenuItem) $r4;
+
+        $r6 = $r5.getActionCommand();
+
+        $r3.setMessage($r6);
+
+        return;
+    }
+
+    public void mouseExited(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.menu.RecentDirectoriesProvider$2 r0;
+        java.awt.event.MouseEvent r1;
+        org.gjt.sp.jedit.View $r2;
+        org.gjt.sp.jedit.gui.StatusBar $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.val$view;
+
+        $r3 = $r2.getStatus();
+
+        $r3.setMessage(null);
+
+        return;
+    }
+}

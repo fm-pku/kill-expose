@@ -1,0 +1,1125 @@
+public class org.gjt.sp.jedit.bsh.BshClassManager extends java.lang.Object
+{
+    private static java.lang.Object NOVALUE;
+    private org.gjt.sp.jedit.bsh.Interpreter declaringInterpreter;
+    protected java.lang.ClassLoader externalClassLoader;
+    protected transient java.util.Hashtable absoluteClassCache;
+    protected transient java.util.Hashtable absoluteNonClasses;
+    protected transient java.util.Hashtable resolvedObjectMethods;
+    protected transient java.util.Hashtable resolvedStaticMethods;
+    protected transient java.util.Hashtable definingClasses;
+    protected transient java.util.Hashtable definingClassesBaseNames;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.util.Hashtable $r1, $r2, $r3, $r4, $r5, $r6;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.Hashtable;
+
+        specialinvoke $r1.<init>();
+
+        r0.absoluteClassCache = $r1;
+
+        $r2 = new java.util.Hashtable;
+
+        specialinvoke $r2.<init>();
+
+        r0.absoluteNonClasses = $r2;
+
+        $r3 = new java.util.Hashtable;
+
+        specialinvoke $r3.<init>();
+
+        r0.resolvedObjectMethods = $r3;
+
+        $r4 = new java.util.Hashtable;
+
+        specialinvoke $r4.<init>();
+
+        r0.resolvedStaticMethods = $r4;
+
+        $r5 = new java.util.Hashtable;
+
+        specialinvoke $r5.<init>();
+
+        r0.definingClasses = $r5;
+
+        $r6 = new java.util.Hashtable;
+
+        specialinvoke $r6.<init>();
+
+        r0.definingClassesBaseNames = $r6;
+
+        return;
+    }
+
+    public static org.gjt.sp.jedit.bsh.BshClassManager createClassManager(org.gjt.sp.jedit.bsh.Interpreter)
+    {
+        boolean $z0, $z1, $z2;
+        org.gjt.sp.jedit.bsh.BshClassManager $r0, r11, r11_1, r11_2, r11_3;
+        org.gjt.sp.jedit.bsh.Interpreter $r1, r9, r9_1, r9_2;
+        java.lang.Object $r2;
+        java.lang.Exception $r3, r12;
+        org.gjt.sp.jedit.bsh.InterpreterError $r4;
+        java.lang.StringBuilder $r5, $r6, $r7;
+        java.lang.String $r8;
+        java.lang.Class r10;
+
+        r9 := @parameter0;
+
+        $z0 = org.gjt.sp.jedit.bsh.Capabilities.classExists("java.lang.ref.WeakReference");
+
+        if $z0 == 0 goto label4;
+
+        $z1 = org.gjt.sp.jedit.bsh.Capabilities.classExists("java.util.HashMap");
+
+        if $z1 == 0 goto label4;
+
+        $z2 = org.gjt.sp.jedit.bsh.Capabilities.classExists("org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl");
+
+(0)     if $z2 == 0 goto label4;
+
+     label1:
+        r10 = java.lang.Class.forName("org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl");
+
+        $r2 = r10.newInstance();
+
+        r11 = (org.gjt.sp.jedit.bsh.BshClassManager) $r2;
+
+     label2:
+(1)     goto label5;
+
+     label3:
+        $r3 := @caughtexception;
+
+        r11_1 = Phi(r11 #0);
+
+        r12 = $r3;
+
+        $r4 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append("Error loading classmanager: ");
+
+        $r7 = $r6.append(r12);
+
+        $r8 = $r7.toString();
+
+        specialinvoke $r4.<init>($r8);
+
+        throw $r4;
+
+     label4:
+        $r0 = new org.gjt.sp.jedit.bsh.BshClassManager;
+
+        specialinvoke $r0.<init>();
+
+(2)     r11_2 = $r0;
+
+     label5:
+        r11_3 = Phi(r11 #1, r11_2 #2);
+
+(3)     if r9 != null goto label6;
+
+        $r1 = new org.gjt.sp.jedit.bsh.Interpreter;
+
+        specialinvoke $r1.<init>();
+
+(4)     r9_1 = $r1;
+
+     label6:
+        r9_2 = Phi(r9 #3, r9_1 #4);
+
+        r11_3.declaringInterpreter = r9_2;
+
+        return r11_3;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    public boolean classExists(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String r1;
+        java.lang.Class $r2;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.classForName(r1);
+
+        if $r2 == null goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    public java.lang.Class classForName(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String r1, $r7;
+        java.lang.ClassNotFoundException r2, $r8;
+        boolean $z0;
+        org.gjt.sp.jedit.bsh.InterpreterError $r3;
+        java.lang.StringBuilder $r4, $r5, $r6;
+        java.lang.Class r9, r9_1, r9_2, r9_3, r9_4, r9_5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r0.isClassBeingDefined(r1);
+
+        if $z0 == 0 goto label1;
+
+        $r3 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("Attempting to load class in the process of being defined: ");
+
+        $r6 = $r5.append(r1);
+
+        $r7 = $r6.toString();
+
+        specialinvoke $r3.<init>($r7);
+
+        throw $r3;
+
+     label1:
+(0)     r9 = null;
+
+     label2:
+(1)     r9_1 = r0.plainClassForName(r1);
+
+     label3:
+(2)     goto label5;
+
+     label4:
+        $r8 := @caughtexception;
+
+        r9_2 = Phi(r9 #0, r9_1 #1);
+
+(3)     r2 = $r8;
+
+     label5:
+        r9_3 = Phi(r9_1 #2, r9_2 #3);
+
+(4)     if r9_3 != null goto label6;
+
+(5)     r9_4 = r0.loadSourceClass(r1);
+
+     label6:
+        r9_5 = Phi(r9_3 #4, r9_4 #5);
+
+        return r9_5;
+
+        catch java.lang.ClassNotFoundException from label2 to label3 with label4;
+    }
+
+    protected java.lang.Class loadSourceClass(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String r1, r2, $r6, $r13, $r23;
+        java.io.InputStream r3;
+        java.lang.StringBuilder $r4, $r5, $r7, $r8, $r9, $r11, $r12, $r19, $r21, $r22;
+        java.io.PrintStream $r10, $r20, $r25;
+        java.io.InputStreamReader $r14;
+        org.gjt.sp.jedit.bsh.Interpreter $r15;
+        java.lang.Class $r17;
+        java.lang.ClassNotFoundException $r18, r27;
+        org.gjt.sp.jedit.bsh.EvalError $r24, r26;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("/");
+
+        $r6 = r1.replace(46, 47);
+
+        $r7 = $r5.append($r6);
+
+        $r8 = $r7.append(".java");
+
+        r2 = $r8.toString();
+
+        r3 = r0.getResourceAsStream(r2);
+
+        if r3 != null goto label1;
+
+        return null;
+
+     label1:
+        $r10 = java.lang.System.out;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r11 = $r9.append("Loading class from source file: ");
+
+        $r12 = $r11.append(r2);
+
+        $r13 = $r12.toString();
+
+        $r10.println($r13);
+
+        $r15 = r0.declaringInterpreter;
+
+        $r14 = new java.io.InputStreamReader;
+
+        specialinvoke $r14.<init>(r3);
+
+        $r15.eval($r14);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r24 := @caughtexception;
+
+        r26 = $r24;
+
+        $r25 = java.lang.System.err;
+
+        $r25.println(r26);
+
+     label4:
+        $r17 = r0.plainClassForName(r1);
+
+     label5:
+        return $r17;
+
+     label6:
+        $r18 := @caughtexception;
+
+        r27 = $r18;
+
+        $r20 = java.lang.System.err;
+
+        $r19 = new java.lang.StringBuilder;
+
+        specialinvoke $r19.<init>();
+
+        $r21 = $r19.append("Class not found in source file: ");
+
+        $r22 = $r21.append(r1);
+
+        $r23 = $r22.toString();
+
+        $r20.println($r23);
+
+        return null;
+
+        catch org.gjt.sp.jedit.bsh.EvalError from label1 to label2 with label3;
+        catch java.lang.ClassNotFoundException from label4 to label5 with label6;
+    }
+
+    public java.lang.Class plainClassForName(java.lang.String) throws java.lang.ClassNotFoundException
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String r1;
+        java.lang.NoClassDefFoundError r2, $r5;
+        java.lang.ClassLoader $r3, $r4;
+        java.lang.Error $r6;
+        java.lang.Class r7, r7_1, r7_2, r7_3;
+
+        r0 := @this;
+
+(0)     r1 := @parameter0;
+
+     label1:
+        $r3 = r0.externalClassLoader;
+
+        if $r3 == null goto label2;
+
+        $r4 = r0.externalClassLoader;
+
+        r7 = $r4.loadClass(r1);
+
+(1)     goto label3;
+
+     label2:
+(2)     r7_1 = java.lang.Class.forName(r1);
+
+     label3:
+        r7_2 = Phi(r7 #1, r7_1 #2);
+
+(3)     r0.cacheClassInfo(r1, r7_2);
+
+     label4:
+        goto label6;
+
+     label5:
+        $r5 := @caughtexception;
+
+        r7_3 = Phi(r7 #0, r7_1 #2, r7_2 #3);
+
+        r2 = $r5;
+
+        $r6 = org.gjt.sp.jedit.bsh.BshClassManager.noClassDefFound(r1, r2);
+
+        throw $r6;
+
+     label6:
+        return r7_2;
+
+        catch java.lang.NoClassDefFoundError from label1 to label4 with label5;
+    }
+
+    public java.net.URL getResource(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String r1, $r5;
+        java.lang.ClassLoader $r2, $r4;
+        java.lang.Class $r3;
+        java.net.URL r6, r6_1, r6_2, r6_3, r6_4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r6 = null;
+
+        $r2 = r0.externalClassLoader;
+
+(0)     if $r2 == null goto label1;
+
+        $r4 = r0.externalClassLoader;
+
+        $r5 = r1.substring(1);
+
+(1)     r6_1 = $r4.getResource($r5);
+
+     label1:
+        r6_2 = Phi(r6 #0, r6_1 #1);
+
+(2)     if r6_2 != null goto label2;
+
+        $r3 = class "org/gjt/sp/jedit/bsh/Interpreter";
+
+(3)     r6_3 = $r3.getResource(r1);
+
+     label2:
+        r6_4 = Phi(r6_2 #2, r6_3 #3);
+
+        return r6_4;
+    }
+
+    public java.io.InputStream getResourceAsStream(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String r1, $r5;
+        java.lang.ClassLoader $r2, $r4;
+        java.lang.Class $r3;
+        java.io.InputStream r6, r6_1, r6_2, r6_3, r6_4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r6 = null;
+
+        $r2 = r0.externalClassLoader;
+
+(0)     if $r2 == null goto label1;
+
+        $r4 = r0.externalClassLoader;
+
+        $r5 = r1.substring(1);
+
+(1)     r6_1 = $r4.getResourceAsStream($r5);
+
+     label1:
+        r6_2 = Phi(r6 #0, r6_1 #1);
+
+(2)     if r6_2 != null goto label2;
+
+        $r3 = class "org/gjt/sp/jedit/bsh/Interpreter";
+
+(3)     r6_3 = $r3.getResourceAsStream(r1);
+
+     label2:
+        r6_4 = Phi(r6_2 #2, r6_3 #3);
+
+        return r6_4;
+    }
+
+    public void cacheClassInfo(java.lang.String, java.lang.Class)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String r1;
+        java.lang.Class r2;
+        java.lang.Object $r3;
+        java.util.Hashtable $r4, $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        if r2 == null goto label1;
+
+        $r6 = r0.absoluteClassCache;
+
+        $r6.put(r1, r2);
+
+        goto label2;
+
+     label1:
+        $r4 = r0.absoluteNonClasses;
+
+        $r3 = org.gjt.sp.jedit.bsh.BshClassManager.NOVALUE;
+
+        $r4.put(r1, $r3);
+
+     label2:
+        return;
+    }
+
+    public void cacheResolvedMethod(java.lang.Class, java.lang.Class[], java.lang.reflect.Method)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.Class r1;
+        java.lang.Class[] r2;
+        java.lang.reflect.Method r3;
+        org.gjt.sp.jedit.bsh.BshClassManager$SignatureKey r4, $r5;
+        boolean $z0, $z1;
+        java.lang.String $r6, $r16;
+        int $i0;
+        java.util.Hashtable $r7, $r9;
+        java.lang.StringBuilder $r11, $r12, $r13, $r14, $r15;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $z0 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z0 == 0 goto label1;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = $r11.append("cacheResolvedMethod putting: ");
+
+        $r13 = $r12.append(r1);
+
+        $r14 = $r13.append(" ");
+
+        $r15 = $r14.append(r3);
+
+        $r16 = $r15.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r16);
+
+     label1:
+        $r5 = new org.gjt.sp.jedit.bsh.BshClassManager$SignatureKey;
+
+        $r6 = r3.getName();
+
+        specialinvoke $r5.<init>(r1, $r6, r2);
+
+        r4 = $r5;
+
+        $i0 = r3.getModifiers();
+
+        $z1 = java.lang.reflect.Modifier.isStatic($i0);
+
+        if $z1 == 0 goto label2;
+
+        $r9 = r0.resolvedStaticMethods;
+
+        $r9.put(r4, r3);
+
+        goto label3;
+
+     label2:
+        $r7 = r0.resolvedObjectMethods;
+
+        $r7.put(r4, r3);
+
+     label3:
+        return;
+    }
+
+    protected java.lang.reflect.Method getResolvedMethod(java.lang.Class, java.lang.String, java.lang.Class[], boolean)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.Class r1;
+        java.lang.String r2, $r13, $r19;
+        java.lang.Class[] r3;
+        boolean z0, $z1;
+        org.gjt.sp.jedit.bsh.BshClassManager$SignatureKey r4, $r5;
+        java.util.Hashtable $r6, $r20;
+        java.lang.Object $r7, $r21;
+        java.lang.StringBuilder $r8, $r9, $r10, $r11, $r12, $r14, $r15, $r16, $r17, $r18;
+        java.lang.reflect.Method r22, r22_1, r22_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        z0 := @parameter3;
+
+        $r5 = new org.gjt.sp.jedit.bsh.BshClassManager$SignatureKey;
+
+        specialinvoke $r5.<init>(r1, r2, r3);
+
+        r4 = $r5;
+
+        $r6 = r0.resolvedStaticMethods;
+
+        $r7 = $r6.get(r4);
+
+        r22 = (java.lang.reflect.Method) $r7;
+
+(0)     if r22 != null goto label1;
+
+(1)     if z0 != 0 goto label1;
+
+        $r20 = r0.resolvedObjectMethods;
+
+        $r21 = $r20.get(r4);
+
+(2)     r22_1 = (java.lang.reflect.Method) $r21;
+
+     label1:
+        r22_2 = Phi(r22 #0, r22 #1, r22_1 #2);
+
+        $z1 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z1 == 0 goto label3;
+
+        if r22_2 != null goto label2;
+
+        $r14 = new java.lang.StringBuilder;
+
+        specialinvoke $r14.<init>();
+
+        $r15 = $r14.append("getResolvedMethod cache MISS: ");
+
+        $r16 = $r15.append(r1);
+
+        $r17 = $r16.append(" - ");
+
+        $r18 = $r17.append(r2);
+
+        $r19 = $r18.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r19);
+
+        goto label3;
+
+     label2:
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("getResolvedMethod cache HIT: ");
+
+        $r10 = $r9.append(r1);
+
+        $r11 = $r10.append(" - ");
+
+        $r12 = $r11.append(r22_2);
+
+        $r13 = $r12.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r13);
+
+     label3:
+        return r22_2;
+    }
+
+    protected void clearCaches()
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.util.Hashtable $r1, $r2, $r3, $r4;
+
+        r0 := @this;
+
+        $r1 = new java.util.Hashtable;
+
+        specialinvoke $r1.<init>();
+
+        r0.absoluteNonClasses = $r1;
+
+        $r2 = new java.util.Hashtable;
+
+        specialinvoke $r2.<init>();
+
+        r0.absoluteClassCache = $r2;
+
+        $r3 = new java.util.Hashtable;
+
+        specialinvoke $r3.<init>();
+
+        r0.resolvedObjectMethods = $r3;
+
+        $r4 = new java.util.Hashtable;
+
+        specialinvoke $r4.<init>();
+
+        r0.resolvedStaticMethods = $r4;
+
+        return;
+    }
+
+    public void setClassLoader(java.lang.ClassLoader)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.ClassLoader r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.externalClassLoader = r1;
+
+        r0.classLoaderChanged();
+
+        return;
+    }
+
+    public void addClassPath(java.net.URL) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.net.URL r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void reset()
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+
+        r0 := @this;
+
+        r0.clearCaches();
+
+        return;
+    }
+
+    public void setClassPath(java.net.URL[]) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.net.URL[] r1;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.bsh.BshClassManager.cmUnavailable();
+
+        throw $r2;
+    }
+
+    public void reloadAllClasses() throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r1;
+
+        r0 := @this;
+
+        $r1 = org.gjt.sp.jedit.bsh.BshClassManager.cmUnavailable();
+
+        throw $r1;
+    }
+
+    public void reloadClasses(java.lang.String[]) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String[] r1;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.bsh.BshClassManager.cmUnavailable();
+
+        throw $r2;
+    }
+
+    public void reloadPackage(java.lang.String) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.bsh.BshClassManager.cmUnavailable();
+
+        throw $r2;
+    }
+
+    protected void doSuperImport() throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r1;
+
+        r0 := @this;
+
+        $r1 = org.gjt.sp.jedit.bsh.BshClassManager.cmUnavailable();
+
+        throw $r1;
+    }
+
+    protected boolean hasSuperImport()
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+
+    protected java.lang.String getClassNameByUnqName(java.lang.String) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.bsh.BshClassManager.cmUnavailable();
+
+        throw $r2;
+    }
+
+    public void addListener(org.gjt.sp.jedit.bsh.BshClassManager$Listener)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        org.gjt.sp.jedit.bsh.BshClassManager$Listener r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void removeListener(org.gjt.sp.jedit.bsh.BshClassManager$Listener)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        org.gjt.sp.jedit.bsh.BshClassManager$Listener r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void dump(java.io.PrintWriter)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.io.PrintWriter r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r1.println("BshClassManager: no class manager.");
+
+        return;
+    }
+
+    protected void definingClass(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String r1, r2, $r19, r20, r20_1, r20_2;
+        int i0, $i1;
+        java.util.Hashtable $r3, $r6, $r8;
+        java.lang.Object $r4, $r5;
+        org.gjt.sp.jedit.bsh.InterpreterError $r10;
+        java.lang.StringBuilder $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r20 = org.gjt.sp.jedit.bsh.Name.suffix(r1, 1);
+
+        i0 = r20.indexOf("$");
+
+(0)     if i0 == -1 goto label1;
+
+        $i1 = i0 + 1;
+
+(1)     r20_1 = r20.substring($i1);
+
+     label1:
+        r20_2 = Phi(r20 #0, r20_1 #1);
+
+        $r3 = r0.definingClassesBaseNames;
+
+        $r4 = $r3.get(r20_2);
+
+        r2 = (java.lang.String) $r4;
+
+        if r2 == null goto label2;
+
+        $r10 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = $r11.append("Defining class problem: ");
+
+        $r13 = $r12.append(r1);
+
+        $r14 = $r13.append(": BeanShell cannot yet simultaneously define two or more ");
+
+        $r15 = $r14.append("dependant classes of the same name.  Attempt to define: ");
+
+        $r16 = $r15.append(r1);
+
+        $r17 = $r16.append(" while defining: ");
+
+        $r18 = $r17.append(r2);
+
+        $r19 = $r18.toString();
+
+        specialinvoke $r10.<init>($r19);
+
+        throw $r10;
+
+     label2:
+        $r6 = r0.definingClasses;
+
+        $r5 = org.gjt.sp.jedit.bsh.BshClassManager.NOVALUE;
+
+        $r6.put(r1, $r5);
+
+        $r8 = r0.definingClassesBaseNames;
+
+        $r8.put(r20_2, r1);
+
+        return;
+    }
+
+    protected boolean isClassBeingDefined(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String r1;
+        java.util.Hashtable $r2;
+        java.lang.Object $r3;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.definingClasses;
+
+        $r3 = $r2.get(r1);
+
+        if $r3 == null goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    protected java.lang.String getClassBeingDefined(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String r1, r2, $r5;
+        java.util.Hashtable $r3;
+        java.lang.Object $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = org.gjt.sp.jedit.bsh.Name.suffix(r1, 1);
+
+        $r3 = r0.definingClassesBaseNames;
+
+        $r4 = $r3.get(r2);
+
+        $r5 = (java.lang.String) $r4;
+
+        return $r5;
+    }
+
+    protected void doneDefiningClass(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String r1, r2;
+        java.util.Hashtable $r3, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = org.gjt.sp.jedit.bsh.Name.suffix(r1, 1);
+
+        $r3 = r0.definingClasses;
+
+        $r3.remove(r1);
+
+        $r5 = r0.definingClassesBaseNames;
+
+        $r5.remove(r2);
+
+        return;
+    }
+
+    public java.lang.Class defineClass(java.lang.String, byte[])
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.String r1, $r8;
+        byte[] r2;
+        org.gjt.sp.jedit.bsh.InterpreterError $r3;
+        java.lang.StringBuilder $r4, $r5, $r6, $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("Can\'t create class (");
+
+        $r6 = $r5.append(r1);
+
+        $r7 = $r6.append(") without class manager package.");
+
+        $r8 = $r7.toString();
+
+        specialinvoke $r3.<init>($r8);
+
+        throw $r3;
+    }
+
+    protected void classLoaderChanged()
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+
+        r0 := @this;
+
+        return;
+    }
+
+    protected static java.lang.Error noClassDefFound(java.lang.String, java.lang.Error)
+    {
+        java.lang.String r0, $r7, $r9;
+        java.lang.Error r1;
+        java.lang.NoClassDefFoundError $r2;
+        java.lang.StringBuilder $r3, $r4, $r5, $r6, $r8;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r2 = new java.lang.NoClassDefFoundError;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("A class required by class: ");
+
+        $r5 = $r4.append(r0);
+
+        $r6 = $r5.append(" could not be loaded:\n");
+
+        $r7 = r1.toString();
+
+        $r8 = $r6.append($r7);
+
+        $r9 = $r8.toString();
+
+        specialinvoke $r2.<init>($r9);
+
+        return $r2;
+    }
+
+    protected static org.gjt.sp.jedit.bsh.UtilEvalError cmUnavailable()
+    {
+        org.gjt.sp.jedit.bsh.Capabilities$Unavailable $r0;
+
+        $r0 = new org.gjt.sp.jedit.bsh.Capabilities$Unavailable;
+
+        specialinvoke $r0.<init>("ClassLoading features unavailable.");
+
+        return $r0;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Object $r0;
+
+        $r0 = new java.lang.Object;
+
+        specialinvoke $r0.<init>();
+
+        org.gjt.sp.jedit.bsh.BshClassManager.NOVALUE = $r0;
+
+        return;
+    }
+}

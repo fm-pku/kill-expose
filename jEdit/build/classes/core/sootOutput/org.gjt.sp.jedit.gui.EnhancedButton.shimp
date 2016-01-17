@@ -1,0 +1,99 @@
+public class org.gjt.sp.jedit.gui.EnhancedButton extends org.gjt.sp.jedit.gui.RolloverButton
+{
+    private java.lang.String action;
+
+    public void <init>(javax.swing.Icon, java.lang.String, java.lang.String, org.gjt.sp.jedit.ActionContext)
+    {
+        org.gjt.sp.jedit.gui.EnhancedButton r0;
+        javax.swing.Icon r1;
+        java.lang.String r2, r3, $r7;
+        org.gjt.sp.jedit.ActionContext r4;
+        int i0, $i1, $i2, $i3;
+        org.gjt.sp.jedit.EditAction$Wrapper $r5;
+        org.gjt.sp.jedit.gui.EnhancedButton$MouseHandler $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        specialinvoke r0.<init>(r1);
+
+        r0.action = r3;
+
+        if r3 == null goto label4;
+
+        i0 = r3.lastIndexOf(46);
+
+        if i0 < 0 goto label1;
+
+        $i1 = r3.length();
+
+        $i2 = $i1 - 1;
+
+        if i0 != $i2 goto label2;
+
+     label1:
+        r0.setName(r3);
+
+        goto label3;
+
+     label2:
+        $i3 = i0 + 1;
+
+        $r7 = r3.substring($i3);
+
+        r0.setName($r7);
+
+     label3:
+        r0.setEnabled(1);
+
+        $r5 = new org.gjt.sp.jedit.EditAction$Wrapper;
+
+        specialinvoke $r5.<init>(r4, r3);
+
+        r0.addActionListener($r5);
+
+        $r6 = new org.gjt.sp.jedit.gui.EnhancedButton$MouseHandler;
+
+        specialinvoke $r6.<init>(r0);
+
+        r0.addMouseListener($r6);
+
+        goto label5;
+
+     label4:
+        r0.setEnabled(0);
+
+     label5:
+        r0.setToolTipText(r2);
+
+        return;
+    }
+
+    public boolean isFocusTraversable()
+    {
+        org.gjt.sp.jedit.gui.EnhancedButton r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+
+    static java.lang.String access$000(org.gjt.sp.jedit.gui.EnhancedButton)
+    {
+        org.gjt.sp.jedit.gui.EnhancedButton r0;
+        java.lang.String $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.action;
+
+        return $r1;
+    }
+}

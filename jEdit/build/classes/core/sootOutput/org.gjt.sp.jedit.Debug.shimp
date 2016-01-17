@@ -1,0 +1,180 @@
+public class org.gjt.sp.jedit.Debug extends java.lang.Object
+{
+    public static boolean OFFSET_DEBUG;
+    public static boolean SCROLL_DEBUG;
+    public static boolean SCROLL_TO_DEBUG;
+    public static boolean SCROLL_VERIFY;
+    public static boolean SCREEN_LINES_DEBUG;
+    public static boolean TOKEN_MARKER_DEBUG;
+    public static boolean FOLD_DEBUG;
+    public static boolean FOLD_VIS_DEBUG;
+    public static boolean CHUNK_CACHE_DEBUG;
+    public static boolean CHUNK_PAINT_DEBUG;
+    public static boolean PAINT_TIMER;
+    public static boolean EB_TIMER;
+    public static boolean DISABLE_GLYPH_VECTOR;
+    public static boolean BEANSHELL_DEBUG;
+    public static boolean ALTERNATIVE_DISPATCHER;
+    public static boolean ALT_KEY_PRESSED_DISABLED;
+    public static boolean GEOMETRY_WORKAROUND;
+    public static boolean DUMP_KEY_EVENTS;
+    public static boolean INDENT_DEBUG;
+    public static boolean PRINT_DEBUG;
+    public static boolean DISABLE_SEARCH_DIALOG_POOL;
+    public static boolean DISABLE_MULTIHEAD;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.Debug r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static int compDelay(long)
+    {
+        long l0, l1, $l6, l13;
+        byte $b2, $b5;
+        int $i3, $i4, $i7, $i8, $i9, $i10, $i11, $i12, i14, i15, i16, i17;
+
+        l0 := @parameter0;
+
+        l1 = java.lang.System.currentTimeMillis();
+
+        l13 = 0L;
+
+        i14 = 0;
+
+        i15 = 0;
+
+(0)     i16 = 0;
+
+     label1:
+        l13 = Phi(l13 #0, l13 #3);
+
+        i15 = Phi(i15 #0, i15 #3);
+
+        i14 = Phi(i14 #0, i14 #3);
+
+        i17 = Phi(i17 #0, i17 #3);
+
+        i16 = Phi(i16 #0, i16 #3);
+
+        $b2 = l13 cmp 0L;
+
+        if $b2 < 0 goto label4;
+
+        $b5 = l13 cmp l0;
+
+        if $b5 >= 0 goto label4;
+
+(1)     i17 = 0;
+
+     label2:
+        l13 = Phi(l13 #1, l13 #2);
+
+        i15 = Phi(i15 #1, i15 #2);
+
+        i14 = Phi(i14 #1, i14 #2);
+
+        i17 = Phi(i17 #1, i17 #2);
+
+        i16 = Phi(i16 #1, i16 #2);
+
+        if i17 >= 500000 goto label3;
+
+        $i8 = i15 + 1;
+
+        $i7 = i16 + 1;
+
+        i14 = $i8 * $i7;
+
+        $i10 = i14 + 1;
+
+        $i9 = i16 + 1;
+
+        i15 = $i10 * $i9;
+
+        $i12 = i14 + 1;
+
+        $i11 = i15 + 1;
+
+        i16 = $i12 * $i11;
+
+        i17 = i17 + 1;
+
+(2)     goto label2;
+
+     label3:
+        $l6 = java.lang.System.currentTimeMillis();
+
+        l13 = $l6 - l1;
+
+(3)     goto label1;
+
+     label4:
+        $i3 = i14 + i15;
+
+        $i4 = $i3 + i16;
+
+        return $i4;
+    }
+
+    static void <clinit>()
+    {
+        boolean $z0, $z1;
+
+        org.gjt.sp.jedit.Debug.OFFSET_DEBUG = 0;
+
+        org.gjt.sp.jedit.Debug.SCROLL_DEBUG = 0;
+
+        org.gjt.sp.jedit.Debug.SCROLL_TO_DEBUG = 0;
+
+        org.gjt.sp.jedit.Debug.SCROLL_VERIFY = 0;
+
+        org.gjt.sp.jedit.Debug.SCREEN_LINES_DEBUG = 0;
+
+        org.gjt.sp.jedit.Debug.TOKEN_MARKER_DEBUG = 0;
+
+        org.gjt.sp.jedit.Debug.FOLD_DEBUG = 0;
+
+        org.gjt.sp.jedit.Debug.FOLD_VIS_DEBUG = 0;
+
+        org.gjt.sp.jedit.Debug.CHUNK_CACHE_DEBUG = 0;
+
+        org.gjt.sp.jedit.Debug.CHUNK_PAINT_DEBUG = 0;
+
+        org.gjt.sp.jedit.Debug.PAINT_TIMER = 0;
+
+        org.gjt.sp.jedit.Debug.EB_TIMER = 0;
+
+        org.gjt.sp.jedit.Debug.DISABLE_GLYPH_VECTOR = 0;
+
+        org.gjt.sp.jedit.Debug.BEANSHELL_DEBUG = 0;
+
+        org.gjt.sp.jedit.Debug.ALTERNATIVE_DISPATCHER = 0;
+
+        $z0 = org.gjt.sp.jedit.OperatingSystem.isMacOS();
+
+        org.gjt.sp.jedit.Debug.ALT_KEY_PRESSED_DISABLED = $z0;
+
+        org.gjt.sp.jedit.Debug.GEOMETRY_WORKAROUND = 0;
+
+        org.gjt.sp.jedit.Debug.DUMP_KEY_EVENTS = 0;
+
+        org.gjt.sp.jedit.Debug.INDENT_DEBUG = 0;
+
+        org.gjt.sp.jedit.Debug.PRINT_DEBUG = 0;
+
+        $z1 = org.gjt.sp.jedit.OperatingSystem.isMacOS();
+
+        org.gjt.sp.jedit.Debug.DISABLE_SEARCH_DIALOG_POOL = $z1;
+
+        org.gjt.sp.jedit.Debug.DISABLE_MULTIHEAD = 0;
+
+        return;
+    }
+}

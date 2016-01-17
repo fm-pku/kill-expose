@@ -1,0 +1,104 @@
+class org.gjt.sp.jedit.browser.VFSBrowser$VFSFileFilterRenderer extends javax.swing.DefaultListCellRenderer
+{
+    static final boolean $assertionsDisabled;
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$VFSFileFilterRenderer r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.awt.Component getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$VFSFileFilterRenderer r0;
+        javax.swing.JList r1;
+        java.lang.Object r2;
+        int i0;
+        boolean z0, z1, $z2, $z3;
+        org.gjt.sp.jedit.io.VFSFileFilter $r4;
+        java.lang.String $r5;
+        java.lang.AssertionError $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        $z2 = org.gjt.sp.jedit.browser.VFSBrowser$VFSFileFilterRenderer.$assertionsDisabled;
+
+        if $z2 != 0 goto label1;
+
+        $z3 = r2 instanceof org.gjt.sp.jedit.io.VFSFileFilter;
+
+        if $z3 != 0 goto label1;
+
+        $r6 = new java.lang.AssertionError;
+
+        specialinvoke $r6.<init>("Filter is not a VFSFileFilter");
+
+        throw $r6;
+
+     label1:
+        specialinvoke r0.getListCellRendererComponent(r1, r2, i0, z0, z1);
+
+        $r4 = (org.gjt.sp.jedit.io.VFSFileFilter) r2;
+
+        $r5 = $r4.getDescription();
+
+        r0.setText($r5);
+
+        return r0;
+    }
+
+    void <init>(org.gjt.sp.jedit.browser.VFSBrowser$1)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$VFSFileFilterRenderer r0;
+        org.gjt.sp.jedit.browser.VFSBrowser$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Class $r0;
+        boolean $z0, $z1, $z1_1, $z1_2;
+
+        $r0 = class "org/gjt/sp/jedit/browser/VFSBrowser";
+
+        $z0 = $r0.desiredAssertionStatus();
+
+        if $z0 != 0 goto label1;
+
+        $z1 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z1_1 = 0;
+
+     label2:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        org.gjt.sp.jedit.browser.VFSBrowser$VFSFileFilterRenderer.$assertionsDisabled = $z1_2;
+
+        return;
+    }
+}

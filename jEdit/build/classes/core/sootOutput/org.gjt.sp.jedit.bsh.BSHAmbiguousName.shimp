@@ -1,0 +1,241 @@
+class org.gjt.sp.jedit.bsh.BSHAmbiguousName extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+    public java.lang.String text;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.Name getName(org.gjt.sp.jedit.bsh.NameSpace)
+    {
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+        java.lang.String $r2;
+        org.gjt.sp.jedit.bsh.Name $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.text;
+
+        Packer.Unpack(r0);
+
+        $r3 = r1.getNameResolver($r2);
+
+        Packer.Pack(r0);
+
+        return $r3;
+    }
+
+    public java.lang.Object toObject(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        java.lang.Object $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r0.toObject(r1, r2, 0);
+
+        return $r3;
+    }
+
+    java.lang.Object toObject(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter, boolean) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        boolean z0;
+        org.gjt.sp.jedit.bsh.UtilEvalError r3, $r7;
+        org.gjt.sp.jedit.bsh.NameSpace $r4;
+        org.gjt.sp.jedit.bsh.Name $r5;
+        java.lang.Object $r6;
+        org.gjt.sp.jedit.bsh.EvalError $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+     label1:
+        $r4 = r1.top();
+
+        $r5 = r0.getName($r4);
+
+        $r6 = $r5.toObject(r1, r2, z0);
+
+     label2:
+        return $r6;
+
+     label3:
+        $r7 := @caughtexception;
+
+        r3 = $r7;
+
+        $r8 = r3.toEvalError(r0, r1);
+
+        throw $r8;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label2 with label3;
+    }
+
+    public java.lang.Class toClass(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.NameSpace $r3;
+        org.gjt.sp.jedit.bsh.Name $r4;
+        java.lang.Class $r5;
+        java.lang.ClassNotFoundException $r6, r11;
+        org.gjt.sp.jedit.bsh.EvalError $r7, $r10;
+        java.lang.String $r8;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r9, r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+     label1:
+        $r3 = r1.top();
+
+        $r4 = r0.getName($r3);
+
+        $r5 = $r4.toClass();
+
+     label2:
+        return $r5;
+
+     label3:
+        $r6 := @caughtexception;
+
+        r11 = $r6;
+
+        $r7 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r8 = r11.getMessage();
+
+        specialinvoke $r7.<init>($r8, r0, r1);
+
+        throw $r7;
+
+     label4:
+        $r9 := @caughtexception;
+
+        r12 = $r9;
+
+        $r10 = r12.toEvalError(r0, r1);
+
+        throw $r10;
+
+        catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label2 with label4;
+    }
+
+    public org.gjt.sp.jedit.bsh.LHS toLHS(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.UtilEvalError r3, $r7;
+        org.gjt.sp.jedit.bsh.NameSpace $r4;
+        org.gjt.sp.jedit.bsh.Name $r5;
+        org.gjt.sp.jedit.bsh.LHS $r6;
+        org.gjt.sp.jedit.bsh.EvalError $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+     label1:
+        $r4 = r1.top();
+
+        $r5 = r0.getName($r4);
+
+        $r6 = $r5.toLHS(r1, r2);
+
+     label2:
+        return $r6;
+
+     label3:
+        $r7 := @caughtexception;
+
+        r3 = $r7;
+
+        $r8 = r3.toEvalError(r0, r1);
+
+        throw $r8;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label2 with label3;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.InterpreterError $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        specialinvoke $r3.<init>("Don\'t know how to eval an ambiguous name!  Use toObject() if you want an object.");
+
+        throw $r3;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName r0;
+        java.lang.StringBuilder $r1, $r2, $r4;
+        java.lang.String $r3, $r5;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("AmbigousName: ");
+
+        $r3 = r0.text;
+
+        Packer.Unpack(r0);
+
+        $r4 = $r2.append($r3);
+
+        Packer.Pack(r0);
+
+        $r5 = $r4.toString();
+
+        return $r5;
+    }
+}

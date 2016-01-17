@@ -1,0 +1,41 @@
+class org.gjt.sp.jedit.options.WindowTableModel$WindowCompare extends java.lang.Object implements java.util.Comparator
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.options.WindowTableModel$WindowCompare r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public int compare(java.lang.Object, java.lang.Object)
+    {
+        org.gjt.sp.jedit.options.WindowTableModel$WindowCompare r0;
+        java.lang.Object r1, r2;
+        org.gjt.sp.jedit.options.WindowTableModel$Entry r3, r4;
+        java.lang.String $r5, $r6;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 = (org.gjt.sp.jedit.options.WindowTableModel$Entry) r1;
+
+        r4 = (org.gjt.sp.jedit.options.WindowTableModel$Entry) r2;
+
+        $r6 = r3.title;
+
+        $r5 = r4.title;
+
+        $i0 = org.gjt.sp.util.StandardUtilities.compareStrings($r6, $r5, 1);
+
+        return $i0;
+    }
+}

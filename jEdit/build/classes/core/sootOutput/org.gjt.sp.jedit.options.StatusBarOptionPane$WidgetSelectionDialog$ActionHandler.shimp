@@ -1,0 +1,131 @@
+class org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog this$1;
+
+    private void <init>(org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog$ActionHandler r0;
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$1 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2;
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog $r3, $r5, $r7, $r9, $r11, $r13, $r15, $r16, $r18, $r20, $r21, $r22;
+        javax.swing.JButton $r4, $r6;
+        javax.swing.JRadioButton $r8, $r10;
+        javax.swing.JTextField $r12, $r17;
+        javax.swing.JComboBox $r14, $r19;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $r3 = r0.this$1;
+
+        $r4 = org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog.access$1300($r3);
+
+        if r2 != $r4 goto label1;
+
+        $r22 = r0.this$1;
+
+        $r22.ok();
+
+        goto label4;
+
+     label1:
+        $r5 = r0.this$1;
+
+        $r6 = org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog.access$1400($r5);
+
+        if r2 != $r6 goto label2;
+
+        $r21 = r0.this$1;
+
+        $r21.cancel();
+
+        goto label4;
+
+     label2:
+        $r7 = r0.this$1;
+
+        $r8 = org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog.access$1500($r7);
+
+        if r2 != $r8 goto label3;
+
+        $r16 = r0.this$1;
+
+        $r17 = org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog.access$1600($r16);
+
+        $r17.setEnabled(1);
+
+        $r18 = r0.this$1;
+
+        $r19 = org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog.access$1700($r18);
+
+        $r19.setEnabled(0);
+
+        $r20 = r0.this$1;
+
+        $r20.validate();
+
+        goto label4;
+
+     label3:
+        $r9 = r0.this$1;
+
+        $r10 = org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog.access$1800($r9);
+
+        if r2 != $r10 goto label4;
+
+        $r11 = r0.this$1;
+
+        $r12 = org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog.access$1600($r11);
+
+        $r12.setEnabled(0);
+
+        $r13 = r0.this$1;
+
+        $r14 = org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog.access$1700($r13);
+
+        $r14.setEnabled(1);
+
+        $r15 = r0.this$1;
+
+        $r15.validate();
+
+     label4:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog, org.gjt.sp.jedit.options.StatusBarOptionPane$1)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog$ActionHandler r0;
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog r1;
+        org.gjt.sp.jedit.options.StatusBarOptionPane$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

@@ -1,0 +1,695 @@
+public class org.gjt.sp.jedit.browser.VFSFileNameField extends org.gjt.sp.jedit.gui.HistoryTextField
+{
+    private org.gjt.sp.jedit.browser.VFSBrowser browser;
+
+    public void <init>(org.gjt.sp.jedit.browser.VFSBrowser, java.lang.String)
+    {
+        org.gjt.sp.jedit.browser.VFSFileNameField r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+        java.lang.String r2;
+        java.awt.Dimension r3;
+        boolean z0;
+        java.util.HashSet r4, $r5;
+        java.util.Set $r6;
+        java.awt.AWTKeyStroke $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r2);
+
+        r0.setEnterAddsToHistory(0);
+
+        Packer.Unpack(r0);
+
+        r0.browser = r1;
+
+        Packer.Pack(r0);
+
+        r3 = r0.getPreferredSize();
+
+        r3.width = 2147483647;
+
+        r0.setMaximumSize(r3);
+
+        z0 = 0;
+
+        $r5 = new java.util.HashSet;
+
+        $r6 = r0.getFocusTraversalKeys(0);
+
+        specialinvoke $r5.<init>($r6);
+
+        r4 = $r5;
+
+        $r7 = java.awt.AWTKeyStroke.getAWTKeyStroke("pressed TAB");
+
+        r4.remove($r7);
+
+        r0.setFocusTraversalKeys(0, r4);
+
+        return;
+    }
+
+    public void processKeyEvent(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSFileNameField r0;
+        java.awt.event.KeyEvent r1;
+        org.gjt.sp.jedit.browser.BrowserView r2, $r8, $r15;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10;
+        org.gjt.sp.jedit.browser.VFSBrowser $r3, $r4, $r6, $r7, $r10, $r11, $r13, $r14, $r17;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r5, $r9, $r16;
+        java.lang.String $r12, r18, r19, r20;
+        boolean $z0, $z1, $z1_1, $z1_2, $z1_3, $z1_4;
+        byte $b11, $b11_1, $b11_2, $b11_3, $b11_4;
+        char c12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i1 = r1.getID();
+
+        if $i1 != 401 goto label14;
+
+        r18 = r0.getText();
+
+        $i4 = r1.getKeyCode();
+
+        lookupswitch($i4)
+        {
+            case 9: goto label01;
+            case 10: goto label09;
+            case 33: goto label08;
+            case 34: goto label08;
+            case 37: goto label02;
+            case 38: goto label04;
+            case 39: goto label06;
+            case 40: goto label08;
+            default: goto label12;
+        };
+
+     label01:
+        specialinvoke r0.doComplete(r18);
+
+(0)     goto label13;
+
+     label02:
+        $i9 = r1.getModifiers();
+
+        $i10 = $i9 & 8;
+
+        if $i10 <= 0 goto label03;
+
+        $r13 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        $r13.previousDirectory();
+
+        Packer.Pack(r0);
+
+        r1.consume();
+
+(1)     goto label13;
+
+     label03:
+        specialinvoke r0.processKeyEvent(r1);
+
+(2)     goto label13;
+
+     label04:
+        $i7 = r1.getModifiers();
+
+        $i8 = $i7 & 8;
+
+        if $i8 <= 0 goto label05;
+
+        $r10 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        r19 = $r10.getDirectory();
+
+        $r11 = r0.browser;
+
+        $r12 = org.gjt.sp.jedit.MiscUtilities.getParentOfPath(r19);
+
+        $r11.setDirectory($r12);
+
+        Packer.Pack(r0);
+
+        r1.consume();
+
+(3)     goto label13;
+
+     label05:
+        $r7 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        $r8 = $r7.getBrowserView();
+
+        Packer.Pack(r0);
+
+        $r9 = $r8.getTable();
+
+        $r9.processKeyEvent(r1);
+
+(4)     goto label13;
+
+     label06:
+        $i5 = r1.getModifiers();
+
+        $i6 = $i5 & 8;
+
+        if $i6 <= 0 goto label07;
+
+        r1.consume();
+
+        $r6 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        $r6.nextDirectory();
+
+        Packer.Pack(r0);
+
+(5)     goto label13;
+
+     label07:
+        specialinvoke r0.processKeyEvent(r1);
+
+(6)     goto label13;
+
+     label08:
+        $r14 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        $r15 = $r14.getBrowserView();
+
+        Packer.Pack(r0);
+
+        $r16 = $r15.getTable();
+
+        $r16.processKeyEvent(r1);
+
+(7)     goto label13;
+
+     label09:
+        $r17 = r0.browser;
+
+        $z0 = r1.isShiftDown();
+
+        if $z0 == 0 goto label10;
+
+        $b11 = 1;
+
+(8)     goto label11;
+
+     label10:
+(9)     $b11_1 = 0;
+
+     label11:
+        $b11_2 = Phi($b11 #8, $b11_1 #9);
+
+        Packer.Unpack(r0);
+
+        $r17.filesActivated($b11_2, 0);
+
+        Packer.Pack(r0);
+
+        r0.setText(null);
+
+        r1.consume();
+
+(10)    goto label13;
+
+     label12:
+(11)    specialinvoke r0.processKeyEvent(r1);
+
+     label13:
+        $b11_3 = Phi($b11 #0, $b11 #1, $b11 #2, $b11 #3, $b11 #4, $b11 #5, $b11 #6, $b11 #7, $b11_2 #10, $b11 #11);
+
+(12)    goto label20;
+
+     label14:
+        $i2 = r1.getID();
+
+(13)    if $i2 != 400 goto label20;
+
+        c12 = r1.getKeyChar();
+
+        if c12 <= 32 goto label19;
+
+        if c12 == 127 goto label19;
+
+        if c12 == 255 goto label19;
+
+        specialinvoke r0.processKeyEvent(r1);
+
+        r20 = r0.getText();
+
+        $r3 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        r2 = $r3.getBrowserView();
+
+        Packer.Pack(r0);
+
+        r2.selectNone();
+
+        $i3 = org.gjt.sp.jedit.MiscUtilities.getLastSeparatorIndex(r20);
+
+(14)    if $i3 != -1 goto label18;
+
+        Packer.Unpack(r0);
+
+        $r4 = r0.browser;
+
+        i0 = $r4.getMode();
+
+        Packer.Pack(r0);
+
+        $r5 = r2.getTable();
+
+        if i0 == 3 goto label15;
+
+        if i0 != 1 goto label16;
+
+     label15:
+        $z1_1 = 1;
+
+(15)    goto label17;
+
+     label16:
+(16)    $z1 = 0;
+
+     label17:
+        $z1_2 = Phi($z1_1 #15, $z1 #16);
+
+(17)    $r5.doTypeSelect(r20, $z1_2);
+
+     label18:
+        $z1_3 = Phi($z1 #14, $z1_2 #17);
+
+(18)    goto label20;
+
+     label19:
+(19)    specialinvoke r0.processKeyEvent(r1);
+
+     label20:
+        $z1_4 = Phi($z1 #12, $z1 #13, $z1_3 #18, $z1 #19);
+
+        $b11_4 = Phi($b11_3 #12, $b11 #13, $b11 #18, $b11 #19);
+
+        return;
+    }
+
+    public java.lang.String doComplete(java.lang.String, java.lang.String, boolean)
+    {
+        org.gjt.sp.jedit.browser.VFSFileNameField r0;
+        boolean z0;
+        int i0, $i1, $i2;
+        java.lang.String r1, $r9, $r10, r12, r13;
+        java.lang.StringBuilder $r2, $r3, $r4, $r5, $r6, $r7, $r8;
+        org.gjt.sp.jedit.browser.VFSBrowser $r11;
+
+        r0 := @this;
+
+        r12 := @parameter0;
+
+        r13 := @parameter1;
+
+        z0 := @parameter2;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append("doComplete(");
+
+        $r4 = $r3.append(r12);
+
+        $r5 = $r4.append(",");
+
+        $r6 = $r5.append(r13);
+
+        $r7 = $r6.append(",");
+
+        $r8 = $r7.append(z0);
+
+        $r9 = $r8.toString();
+
+(0)     org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/browser/VFSFileNameField", $r9);
+
+     label1:
+        r12 = Phi(r12 #0, r12 #1);
+
+        r13 = Phi(r13 #0, r13 #1);
+
+        $i1 = r13.length();
+
+        if $i1 != 0 goto label2;
+
+        return r12;
+
+     label2:
+        i0 = org.gjt.sp.jedit.MiscUtilities.getFirstSeparatorIndex(r13);
+
+        if i0 != -1 goto label3;
+
+        return r12;
+
+     label3:
+        Packer.Unpack(r0);
+
+        $r10 = r13.substring(0, i0);
+
+        $r11 = r0.browser;
+
+        r1 = org.gjt.sp.jedit.io.VFSFile.findCompletion(r12, $r10, $r11, 1);
+
+        Packer.Pack(r0);
+
+        if r1 != null goto label4;
+
+        return null;
+
+     label4:
+        r12 = r1;
+
+        $i2 = i0 + 1;
+
+        r13 = r13.substring($i2);
+
+(1)     goto label1;
+    }
+
+    private void doComplete(java.lang.String)
+    {
+        org.gjt.sp.jedit.browser.VFSFileNameField r0;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6;
+        org.gjt.sp.jedit.browser.BrowserView r1;
+        org.gjt.sp.jedit.io.VFSFile[] r2;
+        java.lang.String r3, r4, r5, $r12, $r14, $r16, $r19, r22, r23, r24, r25, r26, r23_1, r23_2, r23_3, r23_4, r22_1, r22_2, r22_3, r23_5, r22_4, r26_1, r26_2, r26_3, r26_4;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z6_1, $z6_2;
+        org.gjt.sp.jedit.browser.VFSBrowser $r6, $r8, $r11, $r13, $r15, $r17, $r20;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r7;
+        org.gjt.sp.jedit.io.VFSFile $r9, $r10;
+        org.gjt.sp.util.TaskManager $r18, $r21;
+
+        r0 := @this;
+
+        r22 := @parameter0;
+
+        i0 = org.gjt.sp.jedit.MiscUtilities.getLastSeparatorIndex(r22);
+
+        if i0 == -1 goto label01;
+
+        $i6 = i0 + 1;
+
+        r23 = r22.substring(0, $i6);
+
+(0)     goto label02;
+
+     label01:
+(1)     r23_1 = "";
+
+     label02:
+        r23_2 = Phi(r23 #0, r23_1 #1);
+
+        $z0 = org.gjt.sp.jedit.MiscUtilities.isAbsolutePath(r22);
+
+        if $z0 == 0 goto label06;
+
+        $z4 = r23_2.startsWith("/");
+
+(2)     if $z4 == 0 goto label03;
+
+(3)     r23_3 = r23_2.substring(1);
+
+     label03:
+        r23_4 = Phi(r23_2 #2, r23_3 #3);
+
+        $r19 = org.gjt.sp.jedit.browser.VFSBrowser.getRootDirectory();
+
+        r24 = r0.doComplete($r19, r23_4, 0);
+
+        if r24 != null goto label04;
+
+        return;
+
+     label04:
+        $r20 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        $r20.setDirectory(r24);
+
+        $r21 = org.gjt.sp.util.TaskManager.instance;
+
+        $r21.waitForIoTasks();
+
+        if i0 != -1 goto label05;
+
+        $z5 = r22.startsWith("/");
+
+(4)     if $z5 == 0 goto label08;
+
+        r22_1 = r22.substring(1);
+
+(5)     goto label08;
+
+     label05:
+        $i5 = i0 + 1;
+
+        r22_2 = r22.substring($i5);
+
+(6)     goto label08;
+
+     label06:
+        $i1 = r23_2.length();
+
+(7)     if $i1 == 0 goto label08;
+
+        $r15 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        $r16 = $r15.getDirectory();
+
+        Packer.Pack(r0);
+
+        r25 = r0.doComplete($r16, r23_2, 0);
+
+        if r25 != null goto label07;
+
+        return;
+
+     label07:
+        $r17 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        $r17.setDirectory(r25);
+
+        $r18 = org.gjt.sp.util.TaskManager.instance;
+
+        $r18.waitForIoTasks();
+
+        $i4 = i0 + 1;
+
+(8)     r22_3 = r22.substring($i4);
+
+     label08:
+        Packer.Unpack(r0);
+
+        r23_5 = Phi(r23_4 #4, r23_4 #5, r23_4 #6, r23_2 #7, r23_2 #8);
+
+        r22_4 = Phi(r22 #4, r22_1 #5, r22_2 #6, r22 #7, r22_3 #8);
+
+        $r6 = r0.browser;
+
+        r1 = $r6.getBrowserView();
+
+        r1.selectNone();
+
+        $r7 = r1.getTable();
+
+        $r8 = r0.browser;
+
+        $i2 = $r8.getMode();
+
+        Packer.Pack(r0);
+
+        if $i2 != 3 goto label09;
+
+        $z6 = 1;
+
+(9)     goto label10;
+
+     label09:
+(10)    $z6_1 = 0;
+
+     label10:
+        $z6_2 = Phi($z6 #9, $z6_1 #10);
+
+        $r7.doTypeSelect(r22_4, $z6_2);
+
+        r2 = r1.getSelectedFiles();
+
+        $i3 = lengthof r2;
+
+        if $i3 != 0 goto label11;
+
+        r26 = r22_4;
+
+(11)    goto label14;
+
+     label11:
+        Packer.Unpack(r0);
+
+        $r9 = r2[0];
+
+        r3 = $r9.getPath();
+
+        $r10 = r2[0];
+
+        r4 = $r10.getName();
+
+        r5 = org.gjt.sp.jedit.MiscUtilities.getParentOfPath(r3);
+
+        $z1 = org.gjt.sp.jedit.MiscUtilities.isAbsolutePath(r22_4);
+
+        if $z1 == 0 goto label12;
+
+        $r13 = r0.browser;
+
+        $r14 = $r13.getDirectory();
+
+        Packer.Pack(r0);
+
+        $z3 = r22_4.startsWith($r14);
+
+        if $z3 != 0 goto label12;
+
+        r26_1 = r3;
+
+(12)    goto label14;
+
+     label12:
+        Packer.Unpack(r0);
+
+        $r11 = r0.browser;
+
+        $r12 = $r11.getDirectory();
+
+        Packer.Pack(r0);
+
+        $z2 = org.gjt.sp.jedit.MiscUtilities.pathsEqual(r5, $r12);
+
+        if $z2 == 0 goto label13;
+
+        r26_2 = r4;
+
+(13)    goto label14;
+
+     label13:
+(14)    r26_3 = r3;
+
+     label14:
+        r26_4 = Phi(r26 #11, r26_1 #12, r26_2 #13, r26_3 #14);
+
+        r0.setText(r26_4);
+
+        return;
+    }
+
+    private void goToParent()
+    {
+        org.gjt.sp.jedit.browser.VFSFileNameField r0;
+        java.lang.String r1, r2, $r5, $r7;
+        org.gjt.sp.jedit.io.VFS r3;
+        org.gjt.sp.jedit.browser.VFSBrowser $r4, $r6, $r8, $r10, $r13;
+        int $i0, $i1, $i2;
+        org.gjt.sp.util.TaskManager $r9;
+        org.gjt.sp.jedit.browser.BrowserView $r11;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r12;
+        boolean $z0, $z0_1, $z0_2, $z0_3;
+
+        r0 := @this;
+
+        $r4 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        $r5 = $r4.getDirectory();
+
+        r1 = org.gjt.sp.jedit.MiscUtilities.getFileName($r5);
+
+        $r6 = r0.browser;
+
+        $r7 = $r6.getDirectory();
+
+        r2 = org.gjt.sp.jedit.MiscUtilities.getParentOfPath($r7);
+
+        $r8 = r0.browser;
+
+        $r8.setDirectory(r2);
+
+        Packer.Pack(r0);
+
+        r3 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r2);
+
+        $i0 = r3.getCapabilities();
+
+        $i1 = $i0 & 64;
+
+(0)     if $i1 == 0 goto label3;
+
+        $r9 = org.gjt.sp.util.TaskManager.instance;
+
+        $r9.waitForIoTasks();
+
+        r0.setText(r1);
+
+        $r10 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        $r11 = $r10.getBrowserView();
+
+        $r12 = $r11.getTable();
+
+        $r13 = r0.browser;
+
+        $i2 = $r13.getMode();
+
+        Packer.Pack(r0);
+
+        if $i2 != 3 goto label1;
+
+        $z0 = 1;
+
+(1)     goto label2;
+
+     label1:
+(2)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #1, $z0_1 #2);
+
+(3)     $r12.doTypeSelect(r1, $z0_2);
+
+     label3:
+        $z0_3 = Phi($z0 #0, $z0_2 #3);
+
+        return;
+    }
+}

@@ -1,0 +1,208 @@
+final class org.gjt.sp.jedit.jEdit$9 extends java.lang.Object implements java.lang.Runnable
+{
+    final java.lang.String val$marker;
+    final org.gjt.sp.jedit.Buffer val$buffer;
+    final org.gjt.sp.jedit.View val$view;
+
+    void <init>(java.lang.String, org.gjt.sp.jedit.Buffer, org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.jEdit$9 r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.Buffer r2;
+        org.gjt.sp.jedit.View r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.val$marker = r1;
+
+        r0.val$buffer = r2;
+
+        r0.val$view = r3;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.jEdit$9 r0;
+        java.lang.String[] r1;
+        java.lang.String $r2, $r3, $r5, $r6, $r19, $r20, $r21, $r23, $r24, r26;
+        boolean $z0, $z1;
+        java.lang.InternalError $r4;
+        int $i0, $i2, $i3, $i4, $i5, i6, i7, i8, i6_1, i7_1, i7_2, i6_2, i7_3, i6_3, i8_1, i7_4, i8_2, i6_4;
+        org.gjt.sp.jedit.Buffer $r7, $r9, $r10, $r11, $r13, $r14, $r17, $r18, $r22;
+        char $c1;
+        org.gjt.sp.jedit.View $r8, $r12, $r15;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r16;
+        java.lang.Exception $r25, r27;
+        org.gjt.sp.jedit.Marker r28;
+
+        r0 := @this;
+
+        $r2 = r0.val$marker;
+
+        $z0 = $r2.startsWith("+line:");
+
+(0)     if $z0 == 0 goto label06;
+
+     label01:
+        $r19 = r0.val$marker;
+
+        r26 = $r19.substring(6);
+
+        r1 = r26.split(",");
+
+        $i2 = lengthof r1;
+
+        if $i2 <= 1 goto label02;
+
+        $r23 = r1[0];
+
+        i6 = java.lang.Integer.parseInt($r23);
+
+        $r24 = r1[1];
+
+        i7 = java.lang.Integer.parseInt($r24);
+
+(1)     goto label03;
+
+     label02:
+        $r20 = r0.val$marker;
+
+        $r21 = $r20.substring(6);
+
+(2)     i6_1 = java.lang.Integer.parseInt($r21);
+
+(3)     i7_1 = 1;
+
+     label03:
+        i7_2 = Phi(i7 #1, i7_1 #3);
+
+        i6_2 = Phi(i6 #1, i6_1 #3);
+
+(4)     $r22 = r0.val$buffer;
+
+        $i3 = i6_2 - 1;
+
+        $i4 = $r22.getLineStartOffset($i3);
+
+        $i5 = i7_2 - 1;
+
+        i8 = $i4 + $i5;
+
+     label04:
+(5)     goto label10;
+
+     label05:
+        $r25 := @caughtexception;
+
+        i7_3 = Phi(i7 #0, i7_1 #3, i7_2 #4);
+
+        i6_3 = Phi(i6 #0, i6_1 #2, i6_2 #4);
+
+        r27 = $r25;
+
+        return;
+
+     label06:
+        $r3 = r0.val$marker;
+
+        $z1 = $r3.startsWith("+marker:");
+
+        if $z1 == 0 goto label09;
+
+        $r5 = r0.val$marker;
+
+        $i0 = $r5.length();
+
+        if $i0 == 9 goto label07;
+
+        return;
+
+     label07:
+        $r7 = r0.val$buffer;
+
+        $r6 = r0.val$marker;
+
+        $c1 = $r6.charAt(8);
+
+        r28 = $r7.getMarker($c1);
+
+        if r28 != null goto label08;
+
+        return;
+
+     label08:
+        i8_1 = r28.getPosition();
+
+(6)     goto label10;
+
+     label09:
+        $r4 = new java.lang.InternalError;
+
+        specialinvoke $r4.<init>();
+
+        throw $r4;
+
+     label10:
+        i7_4 = Phi(i7_2 #5, i7 #6);
+
+        i8_2 = Phi(i8 #5, i8_1 #6);
+
+        i6_4 = Phi(i6_2 #5, i6 #6);
+
+        $r8 = r0.val$view;
+
+        if $r8 == null goto label11;
+
+        $r12 = r0.val$view;
+
+        $r13 = $r12.getBuffer();
+
+        $r14 = r0.val$buffer;
+
+        if $r13 != $r14 goto label11;
+
+        $r15 = r0.val$view;
+
+        $r16 = $r15.getTextArea();
+
+        $r16.setCaretPosition(i8_2);
+
+        $r17 = r0.val$buffer;
+
+        $r17.setIntegerProperty("Buffer__caret", i8_2);
+
+        $r18 = r0.val$buffer;
+
+        $r18.setBooleanProperty("Buffer__caretPositioned", 1);
+
+        goto label12;
+
+     label11:
+        $r9 = r0.val$buffer;
+
+        $r9.setIntegerProperty("Buffer__caret", i8_2);
+
+        $r10 = r0.val$buffer;
+
+        $r10.setBooleanProperty("Buffer__caretPositioned", 1);
+
+        $r11 = r0.val$buffer;
+
+        $r11.unsetProperty("Buffer__scrollVert");
+
+     label12:
+        return;
+
+        catch java.lang.Exception from label01 to label04 with label05;
+    }
+}

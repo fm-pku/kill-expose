@@ -1,0 +1,101 @@
+class org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$ColumnHandler extends java.lang.Object implements javax.swing.event.TableColumnModelListener
+{
+    final org.gjt.sp.jedit.browser.VFSDirectoryEntryTable this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSDirectoryEntryTable)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$ColumnHandler r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void columnAdded(javax.swing.event.TableColumnModelEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$ColumnHandler r0;
+        javax.swing.event.TableColumnModelEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void columnRemoved(javax.swing.event.TableColumnModelEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$ColumnHandler r0;
+        javax.swing.event.TableColumnModelEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void columnMoved(javax.swing.event.TableColumnModelEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$ColumnHandler r0;
+        javax.swing.event.TableColumnModelEvent r1;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r2;
+        javax.swing.table.TableModel $r3;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel $r4;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = $r2.getModel();
+
+        $r4 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel) $r3;
+
+        $i0 = r1.getFromIndex();
+
+        $i1 = r1.getToIndex();
+
+        $r4.columnMoved($i0, $i1);
+
+        return;
+    }
+
+    public void columnSelectionChanged(javax.swing.event.ListSelectionEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$ColumnHandler r0;
+        javax.swing.event.ListSelectionEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void columnMarginChanged(javax.swing.event.ChangeEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$ColumnHandler r0;
+        javax.swing.event.ChangeEvent r1;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable.access$100($r2);
+
+        return;
+    }
+}

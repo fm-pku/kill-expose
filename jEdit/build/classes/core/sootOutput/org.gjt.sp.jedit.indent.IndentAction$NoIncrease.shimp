@@ -1,0 +1,61 @@
+public class org.gjt.sp.jedit.indent.IndentAction$NoIncrease extends java.lang.Object implements org.gjt.sp.jedit.indent.IndentAction
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.indent.IndentAction$NoIncrease r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public int calculateIndent(org.gjt.sp.jedit.buffer.JEditBuffer, int, int, int)
+    {
+        org.gjt.sp.jedit.indent.IndentAction$NoIncrease r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+        int i0, i1, i2, i3, $i4, $i5, $i5_1, $i5_2;
+        java.lang.CharSequence $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        $r2 = r1.getLineSegment(i0);
+
+        $i4 = r1.getTabSize();
+
+        i3 = org.gjt.sp.util.StandardUtilities.getLeadingWhiteSpaceWidth($r2, $i4);
+
+        if i3 >= i2 goto label1;
+
+        $i5 = i3;
+
+(0)     goto label2;
+
+     label1:
+(1)     $i5_1 = i2;
+
+     label2:
+        $i5_2 = Phi($i5 #0, $i5_1 #1);
+
+        return $i5_2;
+    }
+
+    public boolean keepChecking()
+    {
+        org.gjt.sp.jedit.indent.IndentAction$NoIncrease r0;
+
+        r0 := @this;
+
+        return 1;
+    }
+}

@@ -1,0 +1,70 @@
+class org.gjt.sp.jedit.help.HelpSearchPanel$ResultRenderer extends javax.swing.DefaultListCellRenderer
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel$ResultRenderer r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.awt.Component getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel$ResultRenderer r0;
+        javax.swing.JList r1;
+        java.lang.Object r2;
+        int i0, $i1;
+        boolean z0, z1, $z2;
+        org.gjt.sp.jedit.help.HelpSearchPanel$Result r3;
+        org.gjt.sp.jedit.help.HelpSearchPanel$ResultIcon $r5;
+        java.lang.String $r6, $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        specialinvoke r0.getListCellRendererComponent(r1, null, i0, z0, z1);
+
+        $z2 = r2 instanceof java.lang.String;
+
+        if $z2 == 0 goto label1;
+
+        r0.setIcon(null);
+
+        $r7 = (java.lang.String) r2;
+
+        r0.setText($r7);
+
+        goto label2;
+
+     label1:
+        r3 = (org.gjt.sp.jedit.help.HelpSearchPanel$Result) r2;
+
+        $r5 = new org.gjt.sp.jedit.help.HelpSearchPanel$ResultIcon;
+
+        $i1 = r3.rank;
+
+        specialinvoke $r5.<init>($i1);
+
+        r0.setIcon($r5);
+
+        $r6 = r3.title;
+
+        r0.setText($r6);
+
+     label2:
+        return r0;
+    }
+}

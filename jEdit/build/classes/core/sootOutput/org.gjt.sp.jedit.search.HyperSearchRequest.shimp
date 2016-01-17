@@ -1,0 +1,916 @@
+class org.gjt.sp.jedit.search.HyperSearchRequest extends org.gjt.sp.util.Task
+{
+    private final org.gjt.sp.jedit.View view;
+    private final org.gjt.sp.jedit.search.SearchMatcher matcher;
+    private final org.gjt.sp.jedit.search.HyperSearchResults results;
+    private final javax.swing.tree.DefaultMutableTreeNode rootSearchNode;
+    private final org.gjt.sp.jedit.textarea.Selection[] selection;
+    private final java.lang.String searchString;
+    private javax.swing.tree.DefaultMutableTreeNode selectNode;
+
+    void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.search.SearchMatcher, org.gjt.sp.jedit.search.HyperSearchResults, org.gjt.sp.jedit.textarea.Selection[])
+    {
+        org.gjt.sp.jedit.search.HyperSearchRequest r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.search.SearchMatcher r2;
+        org.gjt.sp.jedit.search.HyperSearchResults r3;
+        org.gjt.sp.jedit.textarea.Selection[] r4;
+        java.lang.String $r5, $r8;
+        javax.swing.tree.DefaultMutableTreeNode $r6;
+        org.gjt.sp.jedit.search.HyperSearchOperationNode $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        specialinvoke r0.<init>();
+
+        r0.view = r1;
+
+        r0.matcher = r2;
+
+        r0.results = r3;
+
+        $r5 = org.gjt.sp.jedit.search.SearchAndReplace.getSearchString();
+
+        r0.searchString = $r5;
+
+        $r6 = new javax.swing.tree.DefaultMutableTreeNode;
+
+        $r7 = new org.gjt.sp.jedit.search.HyperSearchOperationNode;
+
+        $r8 = r0.searchString;
+
+        specialinvoke $r7.<init>($r8, r2);
+
+        specialinvoke $r6.<init>($r7);
+
+        r0.rootSearchNode = $r6;
+
+        r0.selection = r4;
+
+        return;
+    }
+
+    public void _run()
+    {
+        org.gjt.sp.jedit.search.HyperSearchRequest r0;
+        org.gjt.sp.jedit.search.SearchFileSet r1;
+        java.lang.String[] r2, $r11;
+        java.lang.String r3, $r6, $r12, $r13, $r20, $r28, $r33, r44;
+        int i0, $i2, $i3, $i5, $i8, $i9, i12, i14, i15, i16;
+        long l1, $l4, $l6, $l10, l13;
+        org.gjt.sp.jedit.Buffer r4, r43;
+        java.lang.Throwable r5, $r41;
+        org.gjt.sp.jedit.View $r7, $r9, $r35, $r37;
+        org.gjt.sp.jedit.search.HyperSearchRequest$1 $r8;
+        java.lang.StringBuilder $r10, $r14, $r15, $r17, $r18, $r19, $r24, $r26, $r27, $r29, $r30, $r31, $r32;
+        org.gjt.sp.jedit.textarea.Selection[] $r16;
+        org.gjt.sp.jedit.search.HyperSearchRequest$3 $r21, $r40, $r42;
+        java.lang.Thread $r22;
+        boolean $z0, $z1, z2;
+        byte $b7;
+        org.gjt.sp.util.TaskManager $r23;
+        org.gjt.sp.jedit.search.HyperSearchResults $r25;
+        java.lang.Object[] $r34;
+        java.lang.Integer $r36;
+        java.lang.Exception $r38, r45;
+        org.gjt.sp.jedit.search.HyperSearchRequest$2 $r39;
+
+        r0 := @this;
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("hypersearch-status");
+
+        r0.setStatus($r6);
+
+        r1 = org.gjt.sp.jedit.search.SearchAndReplace.getSearchFileSet();
+
+        $r7 = r0.view;
+
+        r2 = r1.getFiles($r7);
+
+        if r2 == null goto label01;
+
+        $i2 = lengthof r2;
+
+        if $i2 != 0 goto label02;
+
+     label01:
+        $r8 = new org.gjt.sp.jedit.search.HyperSearchRequest$1;
+
+        specialinvoke $r8.<init>(r0);
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread($r8);
+
+        return;
+
+     label02:
+        $r9 = r0.view;
+
+        $i3 = r1.getFileCount($r9);
+
+        $l4 = (long) $i3;
+
+        r0.setMaximum($l4);
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = newarray (java.lang.String)[1];
+
+        $r12 = org.gjt.sp.jedit.search.SearchAndReplace.getSearchString();
+
+        $r11[0] = $r12;
+
+        $r13 = org.gjt.sp.jedit.jEdit.getProperty("hypersearch-results.searching", $r11);
+
+        $r14 = $r10.append($r13);
+
+        $r15 = $r14.append(32);
+
+(0)     r3 = $r15.toString();
+
+     label03:
+        $r16 = r0.selection;
+
+        if $r16 == null goto label04;
+
+        $r37 = r0.view;
+
+        r43 = $r37.getBuffer();
+
+        specialinvoke r0.searchInSelection(r43);
+
+(1)     goto label12;
+
+     label04:
+        i12 = 0;
+
+        l13 = 0L;
+
+        i14 = 0;
+
+        z2 = 0;
+
+        i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("hypersearch.maxWarningResults");
+
+(2)     i15 = 0;
+
+     label05:
+        l13 = Phi(l13 #2, l13 #15);
+
+        i15 = Phi(i15 #2, i15 #15);
+
+        i12 = Phi(i12 #2, i12 #15);
+
+        i14 = Phi(i14 #2, i14 #15);
+
+        z2 = Phi(z2 #2, z2 #15);
+
+(3)     $i5 = lengthof r2;
+
+(4)     if i15 >= $i5 goto label11;
+
+        $r22 = java.lang.Thread.currentThread();
+
+        $z0 = $r22.isInterrupted();
+
+        if $z0 == 0 goto label06;
+
+        org.gjt.sp.util.Log.log(3, r0, "Search stopped by user action (stop button)");
+
+(5)     goto label11;
+
+     label06:
+(6)     if z2 != 0 goto label07;
+
+(7)     if i14 <= i0 goto label07;
+
+(8)     if i0 == 0 goto label07;
+
+        $r29 = new java.lang.StringBuilder;
+
+        specialinvoke $r29.<init>();
+
+        $r30 = $r29.append("Search in progress, ");
+
+        $r31 = $r30.append(i14);
+
+        $r32 = $r31.append(" occurrences found, asking the user to stop");
+
+        $r33 = $r32.toString();
+
+        org.gjt.sp.util.Log.log(1, r0, $r33);
+
+        z2 = 1;
+
+        $r35 = r0.view;
+
+        $r34 = newarray (java.lang.Object)[1];
+
+        $r36 = java.lang.Integer.valueOf(i14);
+
+        $r34[0] = $r36;
+
+        i16 = org.gjt.sp.jedit.GUIUtilities.confirm($r35, "hypersearch.tooManyResults", $r34, 0, 3);
+
+(9)     if i16 != 0 goto label07;
+
+        org.gjt.sp.util.Log.log(3, r0, "Search stopped by user action");
+
+(10)    goto label11;
+
+     label07:
+        z2 = Phi(z2 #6, z2 #7, z2 #8, z2 #9);
+
+        r44 = r2[i15];
+
+        i12 = i12 + 1;
+
+        l1 = java.lang.System.currentTimeMillis();
+
+        $l6 = l1 - l13;
+
+        $b7 = $l6 cmp 250L;
+
+(11)    if $b7 <= 0 goto label08;
+
+        $l10 = (long) i12;
+
+        r0.setValue($l10);
+
+        l13 = l1;
+
+        $r25 = r0.results;
+
+        $r24 = new java.lang.StringBuilder;
+
+        specialinvoke $r24.<init>();
+
+        $r26 = $r24.append(r3);
+
+        $r27 = $r26.append(r44);
+
+        $r28 = $r27.toString();
+
+(12)    $r25.setSearchStatus($r28);
+
+     label08:
+        l13 = Phi(l13 #11, l13 #12);
+
+        r4 = org.gjt.sp.jedit.jEdit.openTemporary(null, null, r44, 0);
+
+(13)    if r4 == null goto label10;
+
+        $z1 = r4.isLoaded();
+
+        if $z1 != 0 goto label09;
+
+        $r23 = org.gjt.sp.util.TaskManager.instance;
+
+        $r23.waitForIoTasks();
+
+     label09:
+        $i8 = r4.getLength();
+
+        $i9 = specialinvoke r0.doHyperSearch(r4, 0, $i8);
+
+(14)    i14 = i14 + $i9;
+
+     label10:
+        i14 = Phi(i14 #13, i14 #14);
+
+        i15 = i15 + 1;
+
+(15)    goto label05;
+
+     label11:
+        z2 = Phi(z2 #4, z2 #5, z2 #10);
+
+        $r17 = new java.lang.StringBuilder;
+
+        specialinvoke $r17.<init>();
+
+        $r18 = $r17.append(i14);
+
+        $r19 = $r18.append(" OCCURENCES");
+
+        $r20 = $r19.toString();
+
+(16)    org.gjt.sp.util.Log.log(3, r0, $r20);
+
+     label12:
+        l13 = Phi(l13 #1, l13 #16);
+
+        i15 = Phi(i15 #1, i15 #16);
+
+        i12 = Phi(i12 #1, i12 #16);
+
+        i14 = Phi(i14 #1, i14 #16);
+
+        z2 = Phi(z2 #1, z2 #16);
+
+        $r21 = new org.gjt.sp.jedit.search.HyperSearchRequest$3;
+
+        specialinvoke $r21.<init>(r0);
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread($r21);
+
+(17)    goto label17;
+
+     label13:
+        $r38 := @caughtexception;
+
+        l13 = Phi(l13 #0, l13 #3);
+
+        i15 = Phi(i15 #0, i15 #3);
+
+        i12 = Phi(i12 #0, i12 #3);
+
+        i14 = Phi(i14 #0, i14 #3);
+
+(18)    z2 = Phi(z2 #0, z2 #3);
+
+        r45 = $r38;
+
+        org.gjt.sp.util.Log.log(9, r0, r45);
+
+        $r39 = new org.gjt.sp.jedit.search.HyperSearchRequest$2;
+
+        specialinvoke $r39.<init>(r0, r45);
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread($r39);
+
+     label14:
+        $r40 = new org.gjt.sp.jedit.search.HyperSearchRequest$3;
+
+        specialinvoke $r40.<init>(r0);
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread($r40);
+
+(19)    goto label17;
+
+     label15:
+        $r41 := @caughtexception;
+
+        l13 = Phi(l13 #0, l13 #3, l13 #18, l13 #20);
+
+        i15 = Phi(i15 #0, i15 #3, i15 #18, i15 #20);
+
+        i12 = Phi(i12 #0, i12 #3, i12 #18, i12 #20);
+
+        i14 = Phi(i14 #0, i14 #3, i14 #18, i14 #20);
+
+(20)    z2 = Phi(z2 #0, z2 #3, z2 #18, z2 #20);
+
+        r5 = $r41;
+
+     label16:
+        $r42 = new org.gjt.sp.jedit.search.HyperSearchRequest$3;
+
+        specialinvoke $r42.<init>(r0);
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread($r42);
+
+        throw r5;
+
+     label17:
+        l13 = Phi(l13 #17, l13 #19);
+
+        i15 = Phi(i15 #17, i15 #19);
+
+        i12 = Phi(i12 #17, i12 #19);
+
+        i14 = Phi(i14 #17, i14 #19);
+
+        z2 = Phi(z2 #17, z2 #19);
+
+        return;
+
+        catch java.lang.Exception from label03 to label12 with label13;
+        catch java.lang.Throwable from label03 to label12 with label15;
+        catch java.lang.Throwable from label13 to label14 with label15;
+        catch java.lang.Throwable from label15 to label16 with label15;
+    }
+
+    private int searchInSelection(org.gjt.sp.jedit.Buffer) throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.search.HyperSearchRequest r0;
+        org.gjt.sp.jedit.Buffer r1;
+        org.gjt.sp.jedit.textarea.Selection[] r2;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, i8, i9, i10;
+        org.gjt.sp.jedit.textarea.Selection r3;
+        java.lang.Throwable r4, $r5;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.setCancellable(0);
+
+(0)     i8 = 0;
+
+     label01:
+        r1.readLock();
+
+        r2 = r0.selection;
+
+        i0 = lengthof r2;
+
+(1)     i9 = 0;
+
+     label02:
+        i9 = Phi(i9 #1, i9 #9);
+
+        i10 = Phi(i10 #1, i10 #9);
+
+        i8 = Phi(i8 #1, i8 #9);
+
+(2)     if i9 >= i0 goto label07;
+
+        r3 = r2[i9];
+
+        $z0 = r3 instanceof org.gjt.sp.jedit.textarea.Selection$Rect;
+
+        if $z0 == 0 goto label05;
+
+(3)     i10 = r3.getStartLine();
+
+     label03:
+        i9 = Phi(i9 #3, i9 #5);
+
+        i10 = Phi(i10 #3, i10 #5);
+
+        i8 = Phi(i8 #3, i8 #5);
+
+(4)     $i4 = r3.getEndLine();
+
+        if i10 > $i4 goto label04;
+
+        $i5 = r3.getStart(r1, i10);
+
+        $i6 = r3.getEnd(r1, i10);
+
+        $i7 = specialinvoke r0.doHyperSearch(r1, $i5, $i6);
+
+        i8 = i8 + $i7;
+
+        i10 = i10 + 1;
+
+(5)     goto label03;
+
+     label04:
+(6)     goto label06;
+
+     label05:
+        $i1 = r3.getStart();
+
+        $i2 = r3.getEnd();
+
+        $i3 = specialinvoke r0.doHyperSearch(r1, $i1, $i2);
+
+(7)     i8 = i8 + $i3;
+
+     label06:
+        i9 = Phi(i9 #6, i9 #7);
+
+        i10 = Phi(i10 #6, i10 #7);
+
+        i8 = Phi(i8 #6, i8 #7);
+
+(8)     i9 = i9 + 1;
+
+(9)     goto label02;
+
+     label07:
+        r1.readUnlock();
+
+        goto label10;
+
+     label08:
+        $r5 := @caughtexception;
+
+        i9 = Phi(i9 #0, i9 #2, i9 #4, i9 #8, i9 #10);
+
+        i10 = Phi(i10 #0, i10 #2, i10 #4, i10 #8, i10 #10);
+
+(10)    i8 = Phi(i8 #0, i8 #2, i8 #4, i8 #8, i8 #10);
+
+        r4 = $r5;
+
+     label09:
+        r1.readUnlock();
+
+        throw r4;
+
+     label10:
+        r0.setCancellable(1);
+
+        return i8;
+
+        catch java.lang.Throwable from label01 to label07 with label08;
+        catch java.lang.Throwable from label08 to label09 with label08;
+    }
+
+    private int doHyperSearch(org.gjt.sp.jedit.Buffer, int, int) throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.search.HyperSearchRequest r0;
+        org.gjt.sp.jedit.Buffer r1;
+        int i0, i1, i2, $i3;
+        org.gjt.sp.jedit.search.HyperSearchFileNode r2, $r5;
+        javax.swing.tree.DefaultMutableTreeNode r3, $r7, $r8, $r9;
+        org.gjt.sp.jedit.search.SearchMatcher $r4;
+        boolean $z0;
+        java.lang.String $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        $r4 = r0.matcher;
+
+        $z0 = $r4 instanceof org.gjt.sp.jedit.search.BoyerMooreSearchMatcher;
+
+        if $z0 == 0 goto label1;
+
+        r0.setCancellable(1);
+
+        goto label2;
+
+     label1:
+        r0.setCancellable(0);
+
+     label2:
+        $r5 = new org.gjt.sp.jedit.search.HyperSearchFileNode;
+
+        $r6 = r1.getPath();
+
+        specialinvoke $r5.<init>($r6);
+
+        r2 = $r5;
+
+        $r7 = new javax.swing.tree.DefaultMutableTreeNode;
+
+        specialinvoke $r7.<init>(r2);
+
+        r3 = $r7;
+
+        i2 = specialinvoke r0.doHyperSearch(r1, i0, i1, r3);
+
+        r2.setCount(i2);
+
+        if i2 == 0 goto label3;
+
+        $r9 = r0.rootSearchNode;
+
+        $r8 = r0.rootSearchNode;
+
+        $i3 = $r8.getChildCount();
+
+        $r9.insert(r3, $i3);
+
+     label3:
+        r0.setCancellable(1);
+
+        return i2;
+    }
+
+    private int doHyperSearch(org.gjt.sp.jedit.Buffer, int, int, javax.swing.tree.DefaultMutableTreeNode)
+    {
+        org.gjt.sp.jedit.search.HyperSearchRequest r0;
+        org.gjt.sp.jedit.Buffer r1;
+        int i0, i1, i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, i18, $i19, i20, i21, i22, $i19_1, $i19_2;
+        javax.swing.tree.DefaultMutableTreeNode r2, r4, $r12;
+        org.gjt.sp.jedit.textarea.JEditTextArea r3;
+        boolean z0, z1, $z2, $z3, $z4, $z5, $z3_1, $z3_2;
+        java.lang.Throwable r5, $r14;
+        org.gjt.sp.jedit.search.SearchMatcher $r6, $r9, $r13;
+        org.gjt.sp.jedit.View $r7;
+        org.gjt.sp.jedit.buffer.JEditBuffer $r8;
+        java.lang.CharSequence $r10;
+        org.gjt.sp.jedit.search.HyperSearchResult $r11, r18;
+        java.lang.InterruptedException $r15, r20;
+        java.lang.Thread $r16;
+        java.lang.String r17;
+        org.gjt.sp.jedit.search.SearchMatcher$Match r19;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        r2 := @parameter3;
+
+        $r6 = r0.matcher;
+
+        $z2 = $r6.wholeWord;
+
+        if $z2 == 0 goto label01;
+
+        r1.setMode();
+
+        r17 = r1.getStringProperty("noWordSep");
+
+        $r13 = r0.matcher;
+
+        $r13.setNoWordSep(r17);
+
+     label01:
+        i18 = 0;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        r3 = $r7.getTextArea();
+
+        $r8 = r3.getBuffer();
+
+        if $r8 != r1 goto label02;
+
+        $i19 = r3.getCaretLine();
+
+(0)     goto label03;
+
+     label02:
+(1)     $i19_1 = -1;
+
+     label03:
+        $i19_2 = Phi($i19 #0, $i19_1 #1);
+
+(2)     i2 = $i19_2;
+
+     label04:
+        r1.readLock();
+
+        $i3 = r1.getLineOfOffset(i1);
+
+        $i4 = r1.getLineEndOffset($i3);
+
+        $i5 = $i4 - 1;
+
+        if $i5 != i1 goto label05;
+
+        $z3 = 1;
+
+(3)     goto label06;
+
+     label05:
+(4)     $z3_1 = 0;
+
+     label06:
+        $z3_2 = Phi($z3 #3, $z3_1 #4);
+
+(5)     z0 = $z3_2;
+
+        i20 = i0;
+
+        r18 = null;
+
+(6)     i21 = 0;
+
+     label07:
+        r19 = Phi(r19 #6, r19 #17);
+
+        i21 = Phi(i21 #6, i21 #17);
+
+        $z4 = Phi($z4 #6, $z4 #17);
+
+        $z5 = Phi($z5 #6, $z5 #17);
+
+        r18 = Phi(r18 #6, r18 #17);
+
+        i20 = Phi(i20 #6, i20 #17);
+
+        i18 = Phi(i18 #6, i18 #17);
+
+        $z3 = Phi($z3_2 #6, $z3 #17);
+
+        $i19 = Phi($i19_2 #6, $i19 #17);
+
+(7)     $i6 = r1.getLineOfOffset(i20);
+
+        $i7 = r1.getLineStartOffset($i6);
+
+        if $i7 != i20 goto label08;
+
+        $z4 = 1;
+
+(8)     goto label09;
+
+     label08:
+(9)     $z4 = 0;
+
+     label09:
+        $z4 = Phi($z4 #8, $z4 #9);
+
+        z1 = $z4;
+
+        r19 = null;
+
+     label10:
+        $r9 = r0.matcher;
+
+(10)    $i8 = i1 - i20;
+
+        $r10 = r1.getSegment(i20, $i8);
+
+        if i21 != 0 goto label11;
+
+        $z5 = 1;
+
+(11)    goto label12;
+
+     label11:
+(12)    $z5 = 0;
+
+     label12:
+        $z5 = Phi($z5 #11, $z5 #12);
+
+        r19 = $r9.nextMatch($r10, z1, z0, $z5, 0);
+
+     label13:
+(13)    goto label15;
+
+     label14:
+        $r15 := @caughtexception;
+
+        r19 = Phi(r19 #10);
+
+        $z5 = Phi($z5 #10);
+
+        r20 = $r15;
+
+        $r16 = java.lang.Thread.currentThread();
+
+(14)    $r16.interrupt();
+
+     label15:
+        r19 = Phi(r19 #13, r19 #14);
+
+        $z5 = Phi($z5 #13, $z5 #14);
+
+        if r19 != null goto label16;
+
+        goto label20;
+
+     label16:
+        $i9 = r19.start;
+
+        $i10 = i20 + $i9;
+
+        i22 = r1.getLineOfOffset($i10);
+
+        if r18 == null goto label17;
+
+        $i17 = r18.line;
+
+(15)    if $i17 == i22 goto label19;
+
+     label17:
+        $r11 = new org.gjt.sp.jedit.search.HyperSearchResult;
+
+        specialinvoke $r11.<init>(r1, i22);
+
+        r18 = $r11;
+
+        $r12 = new javax.swing.tree.DefaultMutableTreeNode;
+
+        specialinvoke $r12.<init>(r18, 0);
+
+        r4 = $r12;
+
+        $i11 = r18.line;
+
+        if $i11 != i2 goto label18;
+
+        r0.selectNode = r4;
+
+     label18:
+(16)    r2.add(r4);
+
+     label19:
+        r18 = Phi(r18 #15, r18 #16);
+
+        $i12 = r19.start;
+
+        $i15 = i20 + $i12;
+
+        $i13 = r19.end;
+
+        $i14 = i20 + $i13;
+
+        r18.addOccur($i15, $i14);
+
+        $i16 = r19.end;
+
+        i20 = i20 + $i16;
+
+        i18 = i18 + 1;
+
+        i21 = i21 + 1;
+
+(17)    goto label07;
+
+     label20:
+        r1.readUnlock();
+
+        goto label23;
+
+     label21:
+        $r14 := @caughtexception;
+
+        r19 = Phi(r19 #2, r19 #7, r19 #18);
+
+        i21 = Phi(i21 #2, i21 #7, i21 #18);
+
+        $z4 = Phi($z4 #2, $z4 #7, $z4 #18);
+
+        $z5 = Phi($z5 #2, $z5 #7, $z5 #18);
+
+        r18 = Phi(r18 #2, r18 #7, r18 #18);
+
+        i20 = Phi(i20 #2, i20 #7, i20 #18);
+
+        i18 = Phi(i18 #2, i18 #7, i18 #18);
+
+        $z3 = Phi($z3 #2, $z3_1 #4, $z3_2 #5, $z3 #7, $z3 #18);
+
+(18)    $i19 = Phi($i19_2 #2, $i19 #7, $i19 #18);
+
+        r5 = $r14;
+
+     label22:
+        r1.readUnlock();
+
+        throw r5;
+
+     label23:
+        return i18;
+
+        catch java.lang.InterruptedException from label10 to label13 with label14;
+        catch java.lang.Throwable from label04 to label20 with label21;
+        catch java.lang.Throwable from label21 to label22 with label21;
+    }
+
+    static org.gjt.sp.jedit.View access$000(org.gjt.sp.jedit.search.HyperSearchRequest)
+    {
+        org.gjt.sp.jedit.search.HyperSearchRequest r0;
+        org.gjt.sp.jedit.View $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.view;
+
+        return $r1;
+    }
+
+    static javax.swing.tree.DefaultMutableTreeNode access$100(org.gjt.sp.jedit.search.HyperSearchRequest)
+    {
+        org.gjt.sp.jedit.search.HyperSearchRequest r0;
+        javax.swing.tree.DefaultMutableTreeNode $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.rootSearchNode;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.search.HyperSearchResults access$200(org.gjt.sp.jedit.search.HyperSearchRequest)
+    {
+        org.gjt.sp.jedit.search.HyperSearchRequest r0;
+        org.gjt.sp.jedit.search.HyperSearchResults $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.results;
+
+        return $r1;
+    }
+
+    static javax.swing.tree.DefaultMutableTreeNode access$300(org.gjt.sp.jedit.search.HyperSearchRequest)
+    {
+        org.gjt.sp.jedit.search.HyperSearchRequest r0;
+        javax.swing.tree.DefaultMutableTreeNode $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.selectNode;
+
+        return $r1;
+    }
+}

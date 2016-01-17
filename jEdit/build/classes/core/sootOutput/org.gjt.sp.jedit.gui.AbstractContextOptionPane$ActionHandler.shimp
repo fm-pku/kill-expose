@@ -1,0 +1,345 @@
+class org.gjt.sp.jedit.gui.AbstractContextOptionPane$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.AbstractContextOptionPane this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.AbstractContextOptionPane)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane$ActionHandler r0;
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2, r79, r80;
+        org.gjt.sp.jedit.EditAction r3;
+        java.lang.String r4, r77, r81, r82, r83;
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane $r5, $r7, $r9, $r11, $r13, $r15, $r17, $r18, $r20, $r22, $r23, $r25, $r27, $r29, $r31, $r33, $r35, $r37, $r39, $r41, $r43, $r45, $r47, $r49, $r51, $r53, $r54, $r56, $r59, $r60, $r62, $r64, $r67, $r69, $r71, $r74;
+        javax.swing.JButton $r6, $r8, $r10, $r12, $r14;
+        javax.swing.JList $r16, $r19, $r21, $r24, $r26, $r32, $r34, $r36, $r38, $r44, $r46, $r48, $r55, $r63, $r70, $r72;
+        javax.swing.DefaultListModel $r28, $r30, $r40, $r42, $r50, $r52, $r57, $r68, $r75;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, i10, i11, i12, i13, i14, i15, i11_1, i11_2, i11_3;
+        org.gjt.sp.jedit.gui.ContextAddDialog $r58, r76;
+        org.gjt.sp.jedit.ActionContext $r61, $r65;
+        boolean $z0;
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem $r66, $r73, r78, r78_1, r78_2, r78_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$000($r5);
+
+        if r2 != $r6 goto label06;
+
+        $r58 = new org.gjt.sp.jedit.gui.ContextAddDialog;
+
+        $r60 = r0.this$0;
+
+        $r59 = r0.this$0;
+
+        $r61 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$100($r59);
+
+        specialinvoke $r58.<init>($r60, $r61);
+
+        r76 = $r58;
+
+        r77 = r76.getSelection();
+
+        if r77 != null goto label01;
+
+        return;
+
+     label01:
+        $r62 = r0.this$0;
+
+        $r63 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r62);
+
+        i10 = $r63.getSelectedIndex();
+
+        if i10 != -1 goto label02;
+
+        $r74 = r0.this$0;
+
+        $r75 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$300($r74);
+
+        i11 = $r75.getSize();
+
+(0)     goto label03;
+
+     label02:
+(1)     i11_1 = i10 + 1;
+
+     label03:
+        i11_2 = Phi(i11 #0, i11_1 #1);
+
+        $z0 = r77.equals("-");
+
+        if $z0 == 0 goto label04;
+
+        $r73 = new org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem;
+
+        specialinvoke $r73.<init>("-", "-");
+
+        r78 = $r73;
+
+(2)     goto label05;
+
+     label04:
+        $r64 = r0.this$0;
+
+        $r65 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$100($r64);
+
+        r3 = $r65.getAction(r77);
+
+        r4 = r3.getLabel();
+
+        $r66 = new org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem;
+
+        specialinvoke $r66.<init>(r77, r4);
+
+(3)     r78_1 = $r66;
+
+     label05:
+        r78_2 = Phi(r78 #2, r78_1 #3);
+
+        $r67 = r0.this$0;
+
+        $r68 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$300($r67);
+
+        $r68.insertElementAt(r78_2, i11_2);
+
+        $r69 = r0.this$0;
+
+        $r70 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r69);
+
+        $r70.setSelectedIndex(i11_2);
+
+        $r71 = r0.this$0;
+
+        $r72 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r71);
+
+        $r72.ensureIndexIsVisible(i11_2);
+
+(4)     goto label11;
+
+     label06:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$400($r7);
+
+        if r2 != $r8 goto label08;
+
+        $r47 = r0.this$0;
+
+        $r48 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r47);
+
+        i12 = $r48.getSelectedIndex();
+
+        $r49 = r0.this$0;
+
+        $r50 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$300($r49);
+
+        $r50.removeElementAt(i12);
+
+        $r51 = r0.this$0;
+
+        $r52 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$300($r51);
+
+        $i6 = $r52.getSize();
+
+        if $i6 == 0 goto label07;
+
+        $r54 = r0.this$0;
+
+        $r55 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r54);
+
+        $r56 = r0.this$0;
+
+        $r57 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$300($r56);
+
+        $i7 = $r57.getSize();
+
+        $i8 = $i7 - 1;
+
+        $i9 = java.lang.Math.min($i8, i12);
+
+        $r55.setSelectedIndex($i9);
+
+     label07:
+        $r53 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$500($r53);
+
+(5)     goto label11;
+
+     label08:
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$600($r9);
+
+        if r2 != $r10 goto label09;
+
+        $r35 = r0.this$0;
+
+        $r36 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r35);
+
+        i13 = $r36.getSelectedIndex();
+
+        $r37 = r0.this$0;
+
+        $r38 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r37);
+
+        r79 = $r38.getSelectedValue();
+
+        $r39 = r0.this$0;
+
+        $r40 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$300($r39);
+
+        $r40.removeElementAt(i13);
+
+        $r41 = r0.this$0;
+
+        $r42 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$300($r41);
+
+        $i3 = i13 - 1;
+
+        $r42.insertElementAt(r79, $i3);
+
+        $r43 = r0.this$0;
+
+        $r44 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r43);
+
+        $i4 = i13 - 1;
+
+        $r44.setSelectedIndex($i4);
+
+        $r45 = r0.this$0;
+
+        $r46 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r45);
+
+        $i5 = i13 - 1;
+
+        $r46.ensureIndexIsVisible($i5);
+
+(6)     goto label11;
+
+     label09:
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$700($r11);
+
+        if r2 != $r12 goto label10;
+
+        $r23 = r0.this$0;
+
+        $r24 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r23);
+
+        i14 = $r24.getSelectedIndex();
+
+        $r25 = r0.this$0;
+
+        $r26 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r25);
+
+        r80 = $r26.getSelectedValue();
+
+        $r27 = r0.this$0;
+
+        $r28 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$300($r27);
+
+        $r28.removeElementAt(i14);
+
+        $r29 = r0.this$0;
+
+        $r30 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$300($r29);
+
+        $i0 = i14 + 1;
+
+        $r30.insertElementAt(r80, $i0);
+
+        $r31 = r0.this$0;
+
+        $r32 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r31);
+
+        $i1 = i14 + 1;
+
+        $r32.setSelectedIndex($i1);
+
+        $r33 = r0.this$0;
+
+        $r34 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r33);
+
+        $i2 = i14 + 1;
+
+        $r34.ensureIndexIsVisible($i2);
+
+(7)     goto label11;
+
+     label10:
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$800($r13);
+
+(8)     if r2 != $r14 goto label11;
+
+        r81 = "options.context.reset.dialog";
+
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r15);
+
+        i15 = org.gjt.sp.jedit.GUIUtilities.confirm($r16, r81, null, 0, 2);
+
+(9)     if i15 != 0 goto label11;
+
+        r82 = org.gjt.sp.jedit.jEdit.getProperty("view.context");
+
+        org.gjt.sp.jedit.jEdit.resetProperty("view.context");
+
+        r83 = org.gjt.sp.jedit.jEdit.getProperty("view.context");
+
+        org.gjt.sp.jedit.jEdit.setProperty("view.context", r82);
+
+        $r17 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$900($r17, r83);
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r18);
+
+        $r19.setSelectedIndex(0);
+
+        $r20 = r0.this$0;
+
+        $r21 = org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$200($r20);
+
+        $r21.ensureIndexIsVisible(0);
+
+        $r22 = r0.this$0;
+
+(10)    org.gjt.sp.jedit.gui.AbstractContextOptionPane.access$500($r22);
+
+     label11:
+        i11_3 = Phi(i11_2 #4, i11 #5, i11 #6, i11 #7, i11 #8, i11 #9, i11 #10);
+
+        r78_3 = Phi(r78_2 #4, r78 #5, r78 #6, r78 #7, r78 #8, r78 #9, r78 #10);
+
+        return;
+    }
+}

@@ -1,0 +1,113 @@
+public class org.gjt.sp.jedit.msg.DockableWindowUpdate extends org.gjt.sp.jedit.EBMessage
+{
+    public static final java.lang.Object PROPERTIES_CHANGED;
+    public static final java.lang.Object ACTIVATED;
+    public static final java.lang.Object DEACTIVATED;
+    private java.lang.Object what;
+    private java.lang.String dockable;
+
+    public void <init>(org.gjt.sp.jedit.gui.DockableWindowManager, java.lang.Object, java.lang.String)
+    {
+        org.gjt.sp.jedit.msg.DockableWindowUpdate r0;
+        org.gjt.sp.jedit.gui.DockableWindowManager r1;
+        java.lang.Object r2;
+        java.lang.String r3;
+        java.lang.NullPointerException $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        specialinvoke r0.<init>(r1);
+
+        if r2 != null goto label1;
+
+        $r4 = new java.lang.NullPointerException;
+
+        specialinvoke $r4.<init>("What must be non-null");
+
+        throw $r4;
+
+     label1:
+        r0.what = r2;
+
+        r0.dockable = r3;
+
+        return;
+    }
+
+    public java.lang.Object getWhat()
+    {
+        org.gjt.sp.jedit.msg.DockableWindowUpdate r0;
+        java.lang.Object $r1;
+
+        r0 := @this;
+
+        $r1 = r0.what;
+
+        return $r1;
+    }
+
+    public java.lang.String getDockable()
+    {
+        org.gjt.sp.jedit.msg.DockableWindowUpdate r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.dockable;
+
+        return $r1;
+    }
+
+    public java.lang.String paramString()
+    {
+        org.gjt.sp.jedit.msg.DockableWindowUpdate r0;
+        java.lang.StringBuilder $r1, $r2, $r4, $r5, $r7, $r8, $r10;
+        java.lang.Object $r3;
+        java.lang.String $r6, $r9, $r11;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("what=");
+
+        $r3 = r0.what;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.append(",dockable=");
+
+        $r6 = r0.dockable;
+
+        $r7 = $r5.append($r6);
+
+        $r8 = $r7.append(",");
+
+        $r9 = specialinvoke r0.paramString();
+
+        $r10 = $r8.append($r9);
+
+        $r11 = $r10.toString();
+
+        return $r11;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.msg.DockableWindowUpdate.PROPERTIES_CHANGED = "PROPERTIES_CHANGED";
+
+        org.gjt.sp.jedit.msg.DockableWindowUpdate.ACTIVATED = "ACTIVATED";
+
+        org.gjt.sp.jedit.msg.DockableWindowUpdate.DEACTIVATED = "DEACTIVATED";
+
+        return;
+    }
+}

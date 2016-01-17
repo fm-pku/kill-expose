@@ -1,0 +1,655 @@
+class org.gjt.sp.jedit.PropertyManager extends java.lang.Object
+{
+    private final java.util.Properties system;
+    private final java.util.List plugins;
+    private final java.util.Properties site;
+    private final java.util.Properties localization;
+    private final java.util.List pluginLocalizations;
+    private final java.util.Properties user;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.util.Properties $r1, $r3, $r4, $r6;
+        java.util.LinkedList $r2, $r5;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.Properties;
+
+        specialinvoke $r1.<init>();
+
+        r0.system = $r1;
+
+        $r2 = new java.util.LinkedList;
+
+        specialinvoke $r2.<init>();
+
+        r0.plugins = $r2;
+
+        $r3 = new java.util.Properties;
+
+        specialinvoke $r3.<init>();
+
+        r0.site = $r3;
+
+        $r4 = new java.util.Properties;
+
+        specialinvoke $r4.<init>();
+
+        r0.localization = $r4;
+
+        $r5 = new java.util.LinkedList;
+
+        specialinvoke $r5.<init>();
+
+        r0.pluginLocalizations = $r5;
+
+        $r6 = new java.util.Properties;
+
+        specialinvoke $r6.<init>();
+
+        r0.user = $r6;
+
+        return;
+    }
+
+    java.util.Properties getProperties()
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.util.Properties r1, $r2, $r3, $r5, $r6, $r8, r12, r14;
+        java.util.List $r4, $r7;
+        boolean $z0, $z1;
+        java.lang.Object $r9, $r10;
+        java.util.Iterator r11, r13;
+
+        r0 := @this;
+
+        $r2 = new java.util.Properties;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+        $r3 = r0.system;
+
+        r1.putAll($r3);
+
+        $r4 = r0.plugins;
+
+        r11 = $r4.iterator();
+
+     label1:
+        $z0 = r11.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r10 = r11.next();
+
+        r12 = (java.util.Properties) $r10;
+
+        r1.putAll(r12);
+
+        goto label1;
+
+     label2:
+        $r5 = r0.site;
+
+        r1.putAll($r5);
+
+        $r6 = r0.localization;
+
+        r1.putAll($r6);
+
+        $r7 = r0.pluginLocalizations;
+
+        r13 = $r7.iterator();
+
+     label3:
+        $z1 = r13.hasNext();
+
+        if $z1 == 0 goto label4;
+
+        $r9 = r13.next();
+
+        r14 = (java.util.Properties) $r9;
+
+        r1.putAll(r14);
+
+        goto label3;
+
+     label4:
+        $r8 = r0.user;
+
+        r1.putAll($r8);
+
+        return r1;
+    }
+
+    void loadSystemProps(java.io.Reader) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.io.Reader r1;
+        java.util.Properties $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.system;
+
+        org.gjt.sp.jedit.PropertyManager.loadProps($r2, r1);
+
+        return;
+    }
+
+    void loadSiteProps(java.io.InputStream) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.io.InputStream r1;
+        java.util.Properties $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.site;
+
+        org.gjt.sp.jedit.PropertyManager.loadProps($r2, r1);
+
+        return;
+    }
+
+    void loadLocalizationProps(java.io.Reader) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.io.Reader r1;
+        java.util.Properties $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 != null goto label1;
+
+        $r3 = r0.localization;
+
+        $r3.clear();
+
+        goto label2;
+
+     label1:
+        $r2 = r0.localization;
+
+        org.gjt.sp.jedit.PropertyManager.loadProps($r2, r1);
+
+     label2:
+        return;
+    }
+
+    void loadUserProps(java.io.InputStream) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.io.InputStream r1;
+        java.util.Properties $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.user;
+
+        org.gjt.sp.jedit.PropertyManager.loadProps($r2, r1);
+
+        return;
+    }
+
+    void saveUserProps(java.io.OutputStream) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.io.OutputStream r1;
+        java.util.Properties $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.user;
+
+        org.gjt.sp.jedit.MiscUtilities.storeProperties($r2, r1, "jEdit properties");
+
+        return;
+    }
+
+    java.util.Properties loadPluginProps(java.io.InputStream) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.io.InputStream r1;
+        java.util.Properties r2, $r3;
+        java.util.List $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new java.util.Properties;
+
+        specialinvoke $r3.<init>();
+
+        r2 = $r3;
+
+        org.gjt.sp.jedit.PropertyManager.loadProps(r2, r1);
+
+        $r4 = r0.plugins;
+
+        $r4.add(r2);
+
+        return r2;
+    }
+
+    void addPluginProps(java.util.Properties)
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.util.Properties r1;
+        java.util.List $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.plugins;
+
+        $r2.add(r1);
+
+        return;
+    }
+
+    void removePluginProps(java.util.Properties)
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.util.Properties r1;
+        java.util.List $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.plugins;
+
+        $r2.remove(r1);
+
+        return;
+    }
+
+    java.util.Properties loadPluginLocalizationProps(java.io.Reader) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.io.Reader r1;
+        java.util.Properties r2, $r3;
+        java.util.List $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new java.util.Properties;
+
+        specialinvoke $r3.<init>();
+
+        r2 = $r3;
+
+        org.gjt.sp.jedit.PropertyManager.loadProps(r2, r1);
+
+        $r4 = r0.pluginLocalizations;
+
+        $r4.add(r2);
+
+        return r2;
+    }
+
+    void addPluginLocalizationProps(java.util.Properties)
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.util.Properties r1;
+        java.util.List $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.pluginLocalizations;
+
+        $r2.add(r1);
+
+        return;
+    }
+
+    void removePluginLocalizationProps(java.util.Properties)
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.util.Properties r1;
+        java.util.List $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.pluginLocalizations;
+
+        $r2.remove(r1);
+
+        return;
+    }
+
+    java.lang.String getProperty(java.lang.String)
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.lang.String r1, $r7, r9, r10, r11;
+        java.util.Iterator r2;
+        java.util.Properties r3, $r4, $r6;
+        java.util.List $r5;
+        boolean $z0;
+        java.lang.Object $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.user;
+
+        r9 = $r4.getProperty(r1);
+
+        if r9 == null goto label1;
+
+        return r9;
+
+     label1:
+        $r5 = r0.pluginLocalizations;
+
+        r2 = $r5.iterator();
+
+     label2:
+        $z0 = r2.hasNext();
+
+        if $z0 == 0 goto label4;
+
+        $r8 = r2.next();
+
+        r3 = (java.util.Properties) $r8;
+
+        r10 = r3.getProperty(r1);
+
+        if r10 == null goto label3;
+
+        return r10;
+
+     label3:
+        goto label2;
+
+     label4:
+        $r6 = r0.localization;
+
+        r11 = $r6.getProperty(r1);
+
+        if r11 == null goto label5;
+
+        return r11;
+
+     label5:
+        $r7 = specialinvoke r0.getDefaultProperty(r1);
+
+        return $r7;
+    }
+
+    void setProperty(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.lang.String r1, r2, r3;
+        boolean $z0;
+        java.util.Properties $r4, $r6, $r8, $r10;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 = specialinvoke r0.getDefaultProperty(r1);
+
+        if r2 != null goto label3;
+
+        if r3 == null goto label1;
+
+        $i0 = r3.length();
+
+        if $i0 != 0 goto label2;
+
+     label1:
+        $r8 = r0.user;
+
+        $r8.remove(r1);
+
+        goto label5;
+
+     label2:
+        $r10 = r0.user;
+
+        $r10.setProperty(r1, "");
+
+        goto label5;
+
+     label3:
+        $z0 = r2.equals(r3);
+
+        if $z0 == 0 goto label4;
+
+        $r6 = r0.user;
+
+        $r6.remove(r1);
+
+        goto label5;
+
+     label4:
+        $r4 = r0.user;
+
+        $r4.setProperty(r1, r2);
+
+     label5:
+        return;
+    }
+
+    public void setTemporaryProperty(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.lang.String r1, r2;
+        java.util.Properties $r3, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r0.user;
+
+        $r3.remove(r1);
+
+        $r5 = r0.system;
+
+        $r5.setProperty(r1, r2);
+
+        return;
+    }
+
+    void unsetProperty(java.lang.String)
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.lang.String r1, $r2;
+        java.util.Properties $r3, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = specialinvoke r0.getDefaultProperty(r1);
+
+        if $r2 == null goto label1;
+
+        $r5 = r0.user;
+
+        $r5.setProperty(r1, "");
+
+        goto label2;
+
+     label1:
+        $r3 = r0.user;
+
+        $r3.remove(r1);
+
+     label2:
+        return;
+    }
+
+    public void resetProperty(java.lang.String)
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.lang.String r1;
+        java.util.Properties $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.user;
+
+        $r2.remove(r1);
+
+        return;
+    }
+
+    private java.lang.String getDefaultProperty(java.lang.String)
+    {
+        org.gjt.sp.jedit.PropertyManager r0;
+        java.lang.String r1, $r7, r9, r10;
+        java.util.Iterator r2;
+        java.util.Properties r3, $r4, $r6;
+        java.util.List $r5;
+        boolean $z0;
+        java.lang.Object $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.site;
+
+        r9 = $r4.getProperty(r1);
+
+        if r9 == null goto label1;
+
+        return r9;
+
+     label1:
+        $r5 = r0.plugins;
+
+        r2 = $r5.iterator();
+
+     label2:
+        $z0 = r2.hasNext();
+
+        if $z0 == 0 goto label4;
+
+        $r8 = r2.next();
+
+        r3 = (java.util.Properties) $r8;
+
+        r10 = r3.getProperty(r1);
+
+        if r10 == null goto label3;
+
+        return r10;
+
+     label3:
+        goto label2;
+
+     label4:
+        $r6 = r0.system;
+
+        $r7 = $r6.getProperty(r1);
+
+        return $r7;
+    }
+
+    private static void loadProps(java.util.Properties, java.io.InputStream) throws java.io.IOException
+    {
+        java.util.Properties r0;
+        java.io.InputStream r1;
+        java.lang.Throwable r2, $r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+     label1:
+        r0.load(r1);
+
+     label2:
+        r1.close();
+
+        goto label5;
+
+     label3:
+        $r3 := @caughtexception;
+
+        r2 = $r3;
+
+     label4:
+        r1.close();
+
+        throw r2;
+
+     label5:
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+
+    private static void loadProps(java.util.Properties, java.io.Reader) throws java.io.IOException
+    {
+        java.util.Properties r0;
+        java.io.Reader r1;
+        java.lang.Throwable r2, $r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+     label1:
+        r0.load(r1);
+
+     label2:
+        r1.close();
+
+        goto label5;
+
+     label3:
+        $r3 := @caughtexception;
+
+        r2 = $r3;
+
+     label4:
+        r1.close();
+
+        throw r2;
+
+     label5:
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+}

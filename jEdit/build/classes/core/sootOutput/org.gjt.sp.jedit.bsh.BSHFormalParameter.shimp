@@ -1,0 +1,102 @@
+class org.gjt.sp.jedit.bsh.BSHFormalParameter extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+    public static final java.lang.Class UNTYPED;
+    public java.lang.String name;
+    public java.lang.Class type;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHFormalParameter r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.String getTypeDescriptor(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter, java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BSHFormalParameter r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        java.lang.String r3, $r6;
+        int $i0;
+        org.gjt.sp.jedit.bsh.Node $r4;
+        org.gjt.sp.jedit.bsh.BSHType $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $i0 = r0.jjtGetNumChildren();
+
+        if $i0 <= 0 goto label1;
+
+        $r4 = r0.jjtGetChild(0);
+
+        $r5 = (org.gjt.sp.jedit.bsh.BSHType) $r4;
+
+        $r6 = $r5.getTypeDescriptor(r1, r2, r3);
+
+        return $r6;
+
+     label1:
+        return "Ljava/lang/Object;";
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHFormalParameter r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        int $i0;
+        java.lang.Class $r3, $r4, $r7;
+        org.gjt.sp.jedit.bsh.Node $r5;
+        org.gjt.sp.jedit.bsh.BSHType $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $i0 = r0.jjtGetNumChildren();
+
+        if $i0 <= 0 goto label1;
+
+        $r5 = r0.jjtGetChild(0);
+
+        $r6 = (org.gjt.sp.jedit.bsh.BSHType) $r5;
+
+        $r7 = $r6.getType(r1, r2);
+
+        r0.type = $r7;
+
+        goto label2;
+
+     label1:
+        $r3 = org.gjt.sp.jedit.bsh.BSHFormalParameter.UNTYPED;
+
+        r0.type = $r3;
+
+     label2:
+        $r4 = r0.type;
+
+        return $r4;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.bsh.BSHFormalParameter.UNTYPED = null;
+
+        return;
+    }
+}

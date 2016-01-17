@@ -1,0 +1,226 @@
+public class org.gjt.sp.jedit.gui.ToolBarManager extends java.lang.Object
+{
+    private final java.awt.Container top;
+    private final java.awt.Container bottom;
+    private final java.util.List topToolBars;
+    private final java.util.List bottomToolBars;
+
+    public void <init>(java.awt.Container, java.awt.Container)
+    {
+        org.gjt.sp.jedit.gui.ToolBarManager r0;
+        java.awt.Container r1, r2;
+        java.util.ArrayList $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        $r3 = new java.util.ArrayList;
+
+        specialinvoke $r3.<init>();
+
+        r0.topToolBars = $r3;
+
+        $r4 = new java.util.ArrayList;
+
+        specialinvoke $r4.<init>();
+
+        r0.bottomToolBars = $r4;
+
+        r0.top = r1;
+
+        r0.bottom = r2;
+
+        return;
+    }
+
+    public void addToolBar(int, int, java.awt.Component)
+    {
+        org.gjt.sp.jedit.gui.ToolBarManager r0;
+        int i0, i1;
+        java.awt.Component r1;
+        org.gjt.sp.jedit.gui.ToolBarManager$Entry r2, $r3;
+        java.lang.InternalError $r4;
+        java.util.List $r5, $r7;
+        java.awt.Container $r6, $r8;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        r1 := @parameter2;
+
+        $r3 = new org.gjt.sp.jedit.gui.ToolBarManager$Entry;
+
+        specialinvoke $r3.<init>(i1, r1);
+
+        r2 = $r3;
+
+        if i0 != 0 goto label1;
+
+        $r8 = r0.top;
+
+        $r7 = r0.topToolBars;
+
+        org.gjt.sp.jedit.gui.ToolBarManager.addToolBar($r8, $r7, r2);
+
+        goto label3;
+
+     label1:
+        if i0 != 1 goto label2;
+
+        $r6 = r0.bottom;
+
+        $r5 = r0.bottomToolBars;
+
+        org.gjt.sp.jedit.gui.ToolBarManager.addToolBar($r6, $r5, r2);
+
+        goto label3;
+
+     label2:
+        $r4 = new java.lang.InternalError;
+
+        specialinvoke $r4.<init>("Invalid tool bar group");
+
+        throw $r4;
+
+     label3:
+        return;
+    }
+
+    public void removeToolBar(java.awt.Component)
+    {
+        org.gjt.sp.jedit.gui.ToolBarManager r0;
+        java.awt.Component r1;
+        java.util.List $r2, $r4;
+        java.awt.Container $r3, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.top;
+
+        $r2 = r0.topToolBars;
+
+        org.gjt.sp.jedit.gui.ToolBarManager.removeToolBar($r3, $r2, r1);
+
+        $r5 = r0.bottom;
+
+        $r4 = r0.bottomToolBars;
+
+        org.gjt.sp.jedit.gui.ToolBarManager.removeToolBar($r5, $r4, r1);
+
+        return;
+    }
+
+    private static void addToolBar(java.awt.Container, java.util.List, org.gjt.sp.jedit.gui.ToolBarManager$Entry)
+    {
+        java.awt.Container r0;
+        java.util.List r1;
+        org.gjt.sp.jedit.gui.ToolBarManager$Entry r2, $r6;
+        int $i0, $i1, $i2, i3;
+        java.awt.Component $r3, $r7;
+        java.lang.Object $r5;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+(0)     i3 = 0;
+
+     label1:
+        i3 = Phi(i3 #0, i3 #1);
+
+        $i0 = r1.size();
+
+        if i3 >= $i0 goto label3;
+
+        $i1 = r2.layer;
+
+        $r5 = r1.get(i3);
+
+        $r6 = (org.gjt.sp.jedit.gui.ToolBarManager$Entry) $r5;
+
+        $i2 = $r6.layer;
+
+        if $i1 <= $i2 goto label2;
+
+        r1.add(i3, r2);
+
+        $r7 = r2.toolbar;
+
+        r0.add($r7, i3);
+
+        return;
+
+     label2:
+        i3 = i3 + 1;
+
+(1)     goto label1;
+
+     label3:
+        r1.add(r2);
+
+        $r3 = r2.toolbar;
+
+        r0.add($r3);
+
+        return;
+    }
+
+    private static void removeToolBar(java.awt.Container, java.util.List, java.awt.Component)
+    {
+        java.awt.Container r0;
+        java.util.List r1;
+        java.awt.Component r2, $r5;
+        int $i0, i1;
+        java.lang.Object $r3;
+        org.gjt.sp.jedit.gui.ToolBarManager$Entry $r4;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $i0 = r1.size();
+
+        if i1 >= $i0 goto label3;
+
+        $r3 = r1.get(i1);
+
+        $r4 = (org.gjt.sp.jedit.gui.ToolBarManager$Entry) $r3;
+
+        $r5 = $r4.toolbar;
+
+        if r2 != $r5 goto label2;
+
+        r0.remove(r2);
+
+        r1.remove(i1);
+
+        return;
+
+     label2:
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        return;
+    }
+}

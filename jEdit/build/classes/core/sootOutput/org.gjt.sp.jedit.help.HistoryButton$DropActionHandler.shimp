@@ -1,0 +1,177 @@
+class org.gjt.sp.jedit.help.HistoryButton$DropActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.help.HistoryButton this$0;
+
+    void <init>(org.gjt.sp.jedit.help.HistoryButton)
+    {
+        org.gjt.sp.jedit.help.HistoryButton$DropActionHandler r0;
+        org.gjt.sp.jedit.help.HistoryButton r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.help.HistoryButton$DropActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        int i0, $i1, $i2, $i3, i4, i5;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry r2, $r19, $r23;
+        javax.swing.JPopupMenu $r3, $r11, $r15, $r21;
+        org.gjt.sp.jedit.help.HistoryButton $r4, $r6, $r7, $r9, $r10, $r14, $r17, $r20, $r24, $r26;
+        org.gjt.sp.jedit.help.HelpHistoryModel $r8, $r27;
+        java.lang.Object $r12;
+        javax.swing.JComponent $r13;
+        org.gjt.sp.jedit.help.HistoryButton$HistoryListActionHandler $r16, $r22;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry[] r28, r29, r28_1, r28_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.this$0;
+
+        $r3 = new javax.swing.JPopupMenu;
+
+        specialinvoke $r3.<init>();
+
+        org.gjt.sp.jedit.help.HistoryButton.access$002($r4, $r3);
+
+        $r6 = r0.this$0;
+
+        $i1 = org.gjt.sp.jedit.help.HistoryButton.access$100($r6);
+
+        if $i1 != 0 goto label01;
+
+        $r26 = r0.this$0;
+
+        $r27 = org.gjt.sp.jedit.help.HistoryButton.access$200($r26);
+
+        r28 = $r27.getPreviousURLs();
+
+(0)     goto label02;
+
+     label01:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.help.HistoryButton.access$200($r7);
+
+(1)     r28_1 = $r8.getNextURLs();
+
+     label02:
+        r28_2 = Phi(r28 #0, r28_1 #1);
+
+(2)     if r28_2 == null goto label10;
+
+        $r9 = r0.this$0;
+
+        $i2 = org.gjt.sp.jedit.help.HistoryButton.access$100($r9);
+
+        if $i2 != 0 goto label06;
+
+        $i3 = lengthof r28_2;
+
+(3)     i4 = $i3 - 1;
+
+     label03:
+        i4 = Phi(i4 #3, i4 #4);
+
+        r28 = Phi(r28_2 #3, r28 #4);
+
+        if i4 < 0 goto label05;
+
+        $r19 = r28[i4];
+
+        if $r19 == null goto label04;
+
+        $r20 = r0.this$0;
+
+        $r21 = org.gjt.sp.jedit.help.HistoryButton.access$000($r20);
+
+        $r22 = new org.gjt.sp.jedit.help.HistoryButton$HistoryListActionHandler;
+
+        $r24 = r0.this$0;
+
+        $r23 = r28[i4];
+
+        specialinvoke $r22.<init>($r24, $r23);
+
+        $r21.add($r22);
+
+     label04:
+        i4 = i4 + -1;
+
+(4)     goto label03;
+
+     label05:
+(5)     goto label09;
+
+     label06:
+        r29 = r28_2;
+
+        i0 = lengthof r29;
+
+(6)     i5 = 0;
+
+     label07:
+        r28 = Phi(r28_2 #6, r28 #8);
+
+        i5 = Phi(i5 #6, i5 #8);
+
+(7)     if i5 >= i0 goto label09;
+
+        r2 = r29[i5];
+
+        if r2 == null goto label08;
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.help.HistoryButton.access$000($r14);
+
+        $r16 = new org.gjt.sp.jedit.help.HistoryButton$HistoryListActionHandler;
+
+        $r17 = r0.this$0;
+
+        specialinvoke $r16.<init>($r17, r2);
+
+        $r15.add($r16);
+
+     label08:
+        i5 = i5 + 1;
+
+(8)     goto label07;
+
+     label09:
+        i4 = Phi(i4 #5, i4 #7);
+
+        r28 = Phi(r28 #5, r28 #7);
+
+        i5 = Phi(i5 #5, i5 #7);
+
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.help.HistoryButton.access$000($r10);
+
+        $r12 = r1.getSource();
+
+        $r13 = (javax.swing.JComponent) $r12;
+
+(9)     $r11.show($r13, 0, 0);
+
+     label10:
+        i4 = Phi(i4 #2, i4 #9);
+
+        r28 = Phi(r28_2 #2, r28 #9);
+
+        i5 = Phi(i5 #2, i5 #9);
+
+        return;
+    }
+}

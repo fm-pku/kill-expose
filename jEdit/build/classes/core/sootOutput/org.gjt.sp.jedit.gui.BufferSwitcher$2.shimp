@@ -1,0 +1,111 @@
+class org.gjt.sp.jedit.gui.BufferSwitcher$2 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.bufferset.BufferSet val$bufferSet;
+    final org.gjt.sp.jedit.gui.BufferSwitcher this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.BufferSwitcher, org.gjt.sp.jedit.bufferset.BufferSet)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$2 r0;
+        org.gjt.sp.jedit.gui.BufferSwitcher r1;
+        org.gjt.sp.jedit.bufferset.BufferSet r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$bufferSet = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$2 r0;
+        org.gjt.sp.jedit.Buffer[] r1;
+        org.gjt.sp.jedit.gui.BufferSwitcher $r2, $r3, $r6, $r7, $r8, $r11, $r12, $r17, $r18;
+        int $i0;
+        org.gjt.sp.jedit.bufferset.BufferSet $r4;
+        boolean $z1;
+        javax.swing.DefaultComboBoxModel $r5;
+        org.gjt.sp.jedit.EditPane $r9, $r13;
+        org.gjt.sp.jedit.Buffer $r10, $r14;
+        java.lang.Boolean $r15;
+        java.lang.String $r16;
+        org.gjt.sp.jedit.gui.BufferSwitcher$2$1 $r19;
+
+        r0 := @this;
+
+        $r2 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.BufferSwitcher.access$102($r2, 1);
+
+        $r3 = r0.this$0;
+
+        $i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("bufferSwitcher.maxRowCount", 10);
+
+        $r3.setMaximumRowCount($i0);
+
+        $r4 = r0.val$bufferSet;
+
+        r1 = $r4.getAllBuffers();
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("bufferswitcher.sortBuffers", 1);
+
+        if $z1 == 0 goto label1;
+
+        $r19 = new org.gjt.sp.jedit.gui.BufferSwitcher$2$1;
+
+        specialinvoke $r19.<init>(r0);
+
+        java.util.Arrays.sort(r1, $r19);
+
+     label1:
+        $r6 = r0.this$0;
+
+        $r5 = new javax.swing.DefaultComboBoxModel;
+
+        specialinvoke $r5.<init>(r1);
+
+        $r6.setModel($r5);
+
+        $r8 = r0.this$0;
+
+        $r7 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.gui.BufferSwitcher.access$200($r7);
+
+        $r10 = $r9.getBuffer();
+
+        $r8.setSelectedItem($r10);
+
+        $r12 = r0.this$0;
+
+        $r11 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.gui.BufferSwitcher.access$200($r11);
+
+        $r14 = $r13.getBuffer();
+
+        $r15 = java.lang.Boolean.valueOf(1);
+
+        $r16 = $r14.getPath($r15);
+
+        $r12.setToolTipText($r16);
+
+        $r17 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.BufferSwitcher.access$300($r17);
+
+        $r18 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.BufferSwitcher.access$102($r18, 0);
+
+        return;
+    }
+}

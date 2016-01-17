@@ -1,0 +1,214 @@
+class org.gjt.sp.jedit.buffer.PositionManager extends java.lang.Object
+{
+    boolean iteration;
+    private org.gjt.sp.jedit.buffer.JEditBuffer buffer;
+    private java.util.SortedMap positions;
+
+    public void <init>(org.gjt.sp.jedit.buffer.JEditBuffer)
+    {
+        org.gjt.sp.jedit.buffer.PositionManager r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+        java.util.TreeMap $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        $r2 = new java.util.TreeMap;
+
+        specialinvoke $r2.<init>();
+
+        r0.positions = $r2;
+
+        r0.buffer = r1;
+
+        return;
+    }
+
+    public synchronized javax.swing.text.Position createPosition(int)
+    {
+        org.gjt.sp.jedit.buffer.PositionManager r0;
+        int i0;
+        org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf r1, $r2, r8, r8_1, r8_2;
+        java.util.SortedMap $r3, $r6;
+        java.lang.Object $r4;
+        org.gjt.sp.jedit.buffer.PositionManager$PosTopHalf $r5;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r2 = new org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf;
+
+        specialinvoke $r2.<init>(r0, i0);
+
+        r1 = $r2;
+
+        $r3 = r0.positions;
+
+        $r4 = $r3.get(r1);
+
+        r8 = (org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf) $r4;
+
+(0)     if r8 != null goto label1;
+
+        $r6 = r0.positions;
+
+        $r6.put(r1, r1);
+
+(1)     r8_1 = r1;
+
+     label1:
+        r8_2 = Phi(r8 #0, r8_1 #1);
+
+        $r5 = new org.gjt.sp.jedit.buffer.PositionManager$PosTopHalf;
+
+        specialinvoke $r5.<init>(r0, r8_2);
+
+        return $r5;
+    }
+
+    public synchronized void contentInserted(int, int)
+    {
+        org.gjt.sp.jedit.buffer.PositionManager r0;
+        int i0, i1;
+        java.util.Iterator r1;
+        java.util.SortedMap $r2, $r4, $r5;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf $r3, $r8;
+        java.util.Set $r6;
+        java.lang.Object $r7;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $r2 = r0.positions;
+
+        $z0 = $r2.isEmpty();
+
+        if $z0 == 0 goto label1;
+
+        return;
+
+     label1:
+        $r4 = r0.positions;
+
+        $r3 = new org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf;
+
+        specialinvoke $r3.<init>(r0, i0);
+
+        $r5 = $r4.tailMap($r3);
+
+        $r6 = $r5.keySet();
+
+        r1 = $r6.iterator();
+
+        r0.iteration = 1;
+
+     label2:
+        $z1 = r1.hasNext();
+
+        if $z1 == 0 goto label3;
+
+        $r7 = r1.next();
+
+        $r8 = (org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf) $r7;
+
+        $r8.contentInserted(i0, i1);
+
+        goto label2;
+
+     label3:
+        r0.iteration = 0;
+
+        return;
+    }
+
+    public synchronized void contentRemoved(int, int)
+    {
+        org.gjt.sp.jedit.buffer.PositionManager r0;
+        int i0, i1;
+        java.util.Iterator r1;
+        java.util.SortedMap $r2, $r4, $r5;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf $r3, $r8;
+        java.util.Set $r6;
+        java.lang.Object $r7;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $r2 = r0.positions;
+
+        $z0 = $r2.isEmpty();
+
+        if $z0 == 0 goto label1;
+
+        return;
+
+     label1:
+        $r4 = r0.positions;
+
+        $r3 = new org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf;
+
+        specialinvoke $r3.<init>(r0, i0);
+
+        $r5 = $r4.tailMap($r3);
+
+        $r6 = $r5.keySet();
+
+        r1 = $r6.iterator();
+
+        r0.iteration = 1;
+
+     label2:
+        $z1 = r1.hasNext();
+
+        if $z1 == 0 goto label3;
+
+        $r7 = r1.next();
+
+        $r8 = (org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf) $r7;
+
+        $r8.contentRemoved(i0, i1);
+
+        goto label2;
+
+     label3:
+        r0.iteration = 0;
+
+        return;
+    }
+
+    static java.util.SortedMap access$000(org.gjt.sp.jedit.buffer.PositionManager)
+    {
+        org.gjt.sp.jedit.buffer.PositionManager r0;
+        java.util.SortedMap $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.positions;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.buffer.JEditBuffer access$100(org.gjt.sp.jedit.buffer.PositionManager)
+    {
+        org.gjt.sp.jedit.buffer.PositionManager r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.buffer;
+
+        return $r1;
+    }
+}

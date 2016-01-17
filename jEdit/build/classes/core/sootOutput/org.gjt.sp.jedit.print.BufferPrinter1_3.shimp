@@ -1,0 +1,218 @@
+public class org.gjt.sp.jedit.print.BufferPrinter1_3 extends java.lang.Object
+{
+    private static java.awt.print.PageFormat format;
+    private static java.awt.print.PrinterJob job;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.print.BufferPrinter1_3 r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    private static java.awt.print.PrinterJob getPrintJob()
+    {
+        int i0;
+        double d0, d1, d2, d3, d4, d5;
+        java.awt.print.Paper r0;
+        java.awt.print.PrinterJob $r1, $r2, $r5;
+        java.awt.print.PageFormat $r3, $r4, $r6, $r7;
+        byte $b1, $b2;
+
+        $r1 = java.awt.print.PrinterJob.getPrinterJob();
+
+        org.gjt.sp.jedit.print.BufferPrinter1_3.job = $r1;
+
+        i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("print.orientation", 1);
+
+        d0 = org.gjt.sp.jedit.jEdit.getDoubleProperty("print.width", 0.0);
+
+        d1 = org.gjt.sp.jedit.jEdit.getDoubleProperty("print.height", 0.0);
+
+        d2 = org.gjt.sp.jedit.jEdit.getDoubleProperty("print.x", 0.0);
+
+        d3 = org.gjt.sp.jedit.jEdit.getDoubleProperty("print.y", 0.0);
+
+        d4 = org.gjt.sp.jedit.jEdit.getDoubleProperty("print.pagewidth", 0.0);
+
+        d5 = org.gjt.sp.jedit.jEdit.getDoubleProperty("print.pageheight", 0.0);
+
+        $r2 = org.gjt.sp.jedit.print.BufferPrinter1_3.job;
+
+        $r3 = $r2.defaultPage();
+
+        org.gjt.sp.jedit.print.BufferPrinter1_3.format = $r3;
+
+        $b1 = d0 cmpl 0.0;
+
+        if $b1 == 0 goto label1;
+
+        $b2 = d1 cmpl 0.0;
+
+        if $b2 == 0 goto label1;
+
+        $r6 = org.gjt.sp.jedit.print.BufferPrinter1_3.format;
+
+        r0 = $r6.getPaper();
+
+        r0.setImageableArea(d2, d3, d0, d1);
+
+        r0.setSize(d4, d5);
+
+        $r7 = org.gjt.sp.jedit.print.BufferPrinter1_3.format;
+
+        $r7.setPaper(r0);
+
+     label1:
+        $r4 = org.gjt.sp.jedit.print.BufferPrinter1_3.format;
+
+        $r4.setOrientation(i0);
+
+        $r5 = org.gjt.sp.jedit.print.BufferPrinter1_3.job;
+
+        return $r5;
+    }
+
+    public static void pageSetup(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.print.PageFormat r1, $r4, $r6, $r7;
+        java.awt.print.Paper r2;
+        java.awt.print.PrinterJob $r3, $r5;
+        int $i0;
+        double $d0, $d1, $d2, $d3, $d4, $d5;
+
+        r0 := @parameter0;
+
+        $r3 = org.gjt.sp.jedit.print.BufferPrinter1_3.getPrintJob();
+
+        org.gjt.sp.jedit.print.BufferPrinter1_3.job = $r3;
+
+        $r5 = org.gjt.sp.jedit.print.BufferPrinter1_3.job;
+
+        $r4 = org.gjt.sp.jedit.print.BufferPrinter1_3.format;
+
+        r1 = $r5.pageDialog($r4);
+
+        if r1 == null goto label1;
+
+        org.gjt.sp.jedit.print.BufferPrinter1_3.format = r1;
+
+        $r6 = org.gjt.sp.jedit.print.BufferPrinter1_3.format;
+
+        $i0 = $r6.getOrientation();
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty("print.orientation", $i0);
+
+        $r7 = org.gjt.sp.jedit.print.BufferPrinter1_3.format;
+
+        r2 = $r7.getPaper();
+
+        $d0 = r2.getImageableWidth();
+
+        org.gjt.sp.jedit.jEdit.setDoubleProperty("print.width", $d0);
+
+        $d1 = r2.getImageableHeight();
+
+        org.gjt.sp.jedit.jEdit.setDoubleProperty("print.height", $d1);
+
+        $d2 = r2.getImageableX();
+
+        org.gjt.sp.jedit.jEdit.setDoubleProperty("print.x", $d2);
+
+        $d3 = r2.getImageableY();
+
+        org.gjt.sp.jedit.jEdit.setDoubleProperty("print.y", $d3);
+
+        $d4 = r2.getWidth();
+
+        org.gjt.sp.jedit.jEdit.setDoubleProperty("print.pagewidth", $d4);
+
+        $d5 = r2.getHeight();
+
+        org.gjt.sp.jedit.jEdit.setDoubleProperty("print.pageheight", $d5);
+
+     label1:
+        return;
+    }
+
+    public static void print(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Buffer, boolean)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.Buffer r1;
+        boolean z0, z1, z2, z3, z4, $z5;
+        java.awt.Font r2;
+        org.gjt.sp.jedit.print.BufferPrintable r3, $r8;
+        java.awt.print.PrinterJob $r4, $r5, $r9, $r11, $r12;
+        java.lang.String $r6, $r7;
+        java.awt.print.PageFormat $r10;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        z0 := @parameter2;
+
+        $r4 = org.gjt.sp.jedit.print.BufferPrinter1_3.getPrintJob();
+
+        org.gjt.sp.jedit.print.BufferPrinter1_3.job = $r4;
+
+        $r5 = org.gjt.sp.jedit.print.BufferPrinter1_3.job;
+
+        $r6 = r1.getPath();
+
+        $r7 = org.gjt.sp.jedit.MiscUtilities.abbreviateView($r6);
+
+        $r5.setJobName($r7);
+
+        z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.header");
+
+        z2 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.footer");
+
+        z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.lineNumbers");
+
+        z4 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.color");
+
+        r2 = org.gjt.sp.jedit.jEdit.getFontProperty("print.font");
+
+        $r8 = new org.gjt.sp.jedit.print.BufferPrintable;
+
+        $r9 = org.gjt.sp.jedit.print.BufferPrinter1_3.job;
+
+        specialinvoke $r8.<init>($r9, null, r0, r1, r2, z1, z2, z3, z4);
+
+        r3 = $r8;
+
+        $r11 = org.gjt.sp.jedit.print.BufferPrinter1_3.job;
+
+        $r10 = org.gjt.sp.jedit.print.BufferPrinter1_3.format;
+
+        $r11.setPrintable(r3, $r10);
+
+        $r12 = org.gjt.sp.jedit.print.BufferPrinter1_3.job;
+
+        $z5 = $r12.printDialog();
+
+        if $z5 != 0 goto label1;
+
+        return;
+
+     label1:
+        r3.print();
+
+        return;
+    }
+
+    public static java.awt.print.PageFormat getPageFormat()
+    {
+        java.awt.print.PageFormat $r0;
+
+        $r0 = org.gjt.sp.jedit.print.BufferPrinter1_3.format;
+
+        return $r0;
+    }
+}

@@ -1,0 +1,171 @@
+class org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry extends java.lang.Object
+{
+    org.gjt.sp.jedit.gui.DockableWindowFactory$Window factory;
+    java.lang.String position;
+    org.gjt.sp.jedit.gui.DockableWindowContainer container;
+    javax.swing.JComponent win;
+    javax.swing.AbstractButton btn;
+
+    void <init>(org.gjt.sp.jedit.gui.DockableWindowFactory$Window)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry r0;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window r1;
+        java.lang.StringBuilder $r2, $r4, $r5;
+        java.lang.String $r3, $r6, $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = r1.name;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.append(".dock-position");
+
+        $r6 = $r5.toString();
+
+        $r7 = org.gjt.sp.jedit.jEdit.getProperty($r6, "floating");
+
+        specialinvoke r0.<init>(r1, $r7);
+
+        return;
+    }
+
+    public java.lang.String longTitle()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry r0;
+        java.lang.String r1, $r4, $r7, $r8;
+        java.lang.StringBuilder $r2, $r5, $r6;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window $r3;
+
+        r0 := @this;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = r0.factory;
+
+        $r4 = $r3.name;
+
+        $r5 = $r2.append($r4);
+
+        $r6 = $r5.append(".longtitle");
+
+        $r7 = $r6.toString();
+
+        r1 = org.gjt.sp.jedit.jEdit.getProperty($r7);
+
+        if r1 != null goto label1;
+
+        $r8 = r0.shortTitle();
+
+        return $r8;
+
+     label1:
+        return r1;
+    }
+
+    public java.lang.String shortTitle()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry r0;
+        java.lang.String r1, $r4, $r7, $r11, $r13;
+        java.lang.StringBuilder $r2, $r5, $r6, $r8, $r9, $r12;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window $r3, $r10;
+
+        r0 := @this;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = r0.factory;
+
+        $r4 = $r3.name;
+
+        $r5 = $r2.append($r4);
+
+        $r6 = $r5.append(".title");
+
+        $r7 = $r6.toString();
+
+        r1 = org.gjt.sp.jedit.jEdit.getProperty($r7);
+
+        if r1 != null goto label1;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("NO TITLE PROPERTY: ");
+
+        $r10 = r0.factory;
+
+        $r11 = $r10.name;
+
+        $r12 = $r9.append($r11);
+
+        $r13 = $r12.toString();
+
+        return $r13;
+
+     label1:
+        return r1;
+    }
+
+    public java.lang.String label()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry r0;
+        java.lang.StringBuilder $r1, $r4, $r5;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window $r2;
+        java.lang.String $r3, $r6, r7, r8;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = r0.factory;
+
+        $r3 = $r2.name;
+
+        $r4 = $r1.append($r3);
+
+        $r5 = $r4.append(".label");
+
+        $r6 = $r5.toString();
+
+        r7 = org.gjt.sp.jedit.jEdit.getProperty($r6);
+
+        r8 = r7.replaceAll("\\$", "");
+
+        return r8;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.DockableWindowFactory$Window, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry r0;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window r1;
+        java.lang.String r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.factory = r1;
+
+        r0.position = r2;
+
+        return;
+    }
+}

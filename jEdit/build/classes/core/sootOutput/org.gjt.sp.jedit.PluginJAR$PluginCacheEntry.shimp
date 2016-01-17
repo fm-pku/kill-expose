@@ -1,0 +1,785 @@
+public class org.gjt.sp.jedit.PluginJAR$PluginCacheEntry extends java.lang.Object
+{
+    public static final int MAGIC;
+    public org.gjt.sp.jedit.PluginJAR plugin;
+    public long modTime;
+    public java.lang.String[] classes;
+    public java.lang.String[] resources;
+    public java.net.URL actionsURI;
+    public java.lang.String[] cachedActionNames;
+    public boolean[] cachedActionToggleFlags;
+    public java.net.URL browserActionsURI;
+    public java.lang.String[] cachedBrowserActionNames;
+    public boolean[] cachedBrowserActionToggleFlags;
+    public java.net.URL dockablesURI;
+    public java.lang.String[] cachedDockableNames;
+    public boolean[] cachedDockableActionFlags;
+    public boolean[] cachedDockableMovableFlags;
+    public java.net.URL servicesURI;
+    org.gjt.sp.jedit.ServiceManager$Descriptor[] cachedServices;
+    public java.util.Properties cachedProperties;
+    public java.util.Map localizationProperties;
+    public java.lang.String pluginClass;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public boolean read(java.io.DataInputStream) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry r0;
+        java.io.DataInputStream r1;
+        int i0, i2, i5;
+        java.lang.String r2, $r4, $r21, $r23, $r24;
+        long l1, $l3;
+        org.gjt.sp.jedit.ServiceManager$Descriptor r3, $r22;
+        boolean $z0;
+        byte $b4;
+        java.net.URL $r5, $r8, $r11, $r15;
+        java.lang.String[] $r6, $r9, $r12, $r17, $r18;
+        boolean[] $r7, $r10, $r13, $r14;
+        org.gjt.sp.jedit.ServiceManager$Descriptor[] $r16, $r26;
+        java.util.Properties $r19;
+        java.util.Map $r20;
+        org.gjt.sp.jedit.PluginJAR $r25;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 = r1.readInt();
+
+        if i0 == -1214061532 goto label1;
+
+        return 0;
+
+     label1:
+        r2 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readString(r1);
+
+        $r4 = org.gjt.sp.jedit.jEdit.getBuild();
+
+        $z0 = r2.equals($r4);
+
+        if $z0 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        l1 = r1.readLong();
+
+        $l3 = r0.modTime;
+
+        $b4 = l1 cmp $l3;
+
+        if $b4 == 0 goto label3;
+
+        return 0;
+
+     label3:
+        $r5 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readURI(r1);
+
+        r0.actionsURI = $r5;
+
+        $r6 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readStringArray(r1);
+
+        r0.cachedActionNames = $r6;
+
+        $r7 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readBooleanArray(r1);
+
+        r0.cachedActionToggleFlags = $r7;
+
+        $r8 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readURI(r1);
+
+        r0.browserActionsURI = $r8;
+
+        $r9 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readStringArray(r1);
+
+        r0.cachedBrowserActionNames = $r9;
+
+        $r10 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readBooleanArray(r1);
+
+        r0.cachedBrowserActionToggleFlags = $r10;
+
+        $r11 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readURI(r1);
+
+        r0.dockablesURI = $r11;
+
+        $r12 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readStringArray(r1);
+
+        r0.cachedDockableNames = $r12;
+
+        $r13 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readBooleanArray(r1);
+
+        r0.cachedDockableActionFlags = $r13;
+
+        $r14 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readBooleanArray(r1);
+
+        r0.cachedDockableMovableFlags = $r14;
+
+        $r15 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readURI(r1);
+
+        r0.servicesURI = $r15;
+
+        i2 = r1.readInt();
+
+        if i2 != 0 goto label4;
+
+        r0.cachedServices = null;
+
+(0)     goto label6;
+
+     label4:
+        $r16 = newarray (org.gjt.sp.jedit.ServiceManager$Descriptor)[i2];
+
+        r0.cachedServices = $r16;
+
+(1)     i5 = 0;
+
+     label5:
+        i5 = Phi(i5 #1, i5 #3);
+
+(2)     if i5 >= i2 goto label6;
+
+        $r22 = new org.gjt.sp.jedit.ServiceManager$Descriptor;
+
+        $r23 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readString(r1);
+
+        $r24 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readString(r1);
+
+        $r25 = r0.plugin;
+
+        specialinvoke $r22.<init>($r23, $r24, null, $r25);
+
+        r3 = $r22;
+
+        $r26 = r0.cachedServices;
+
+        $r26[i5] = r3;
+
+        i5 = i5 + 1;
+
+(3)     goto label5;
+
+     label6:
+        i5 = Phi(i5 #0, i5 #2);
+
+        $r17 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readStringArray(r1);
+
+        r0.classes = $r17;
+
+        $r18 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readStringArray(r1);
+
+        r0.resources = $r18;
+
+        $r19 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readMap(r1);
+
+        r0.cachedProperties = $r19;
+
+        $r20 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readLanguagesMap(r1);
+
+        r0.localizationProperties = $r20;
+
+        $r21 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readString(r1);
+
+        r0.pluginClass = $r21;
+
+        return 1;
+    }
+
+    public void write(java.io.DataOutputStream) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry r0;
+        java.io.DataOutputStream r1;
+        org.gjt.sp.jedit.ServiceManager$Descriptor[] r2, $r16, $r17;
+        int i0, $i2, i3;
+        org.gjt.sp.jedit.ServiceManager$Descriptor r3;
+        java.lang.String $r4, $r22, $r23, $r24;
+        long $l1;
+        java.net.URL $r5, $r8, $r11, $r15;
+        java.lang.String[] $r6, $r9, $r12, $r18, $r19;
+        boolean[] $r7, $r10, $r13, $r14;
+        java.util.Properties $r20;
+        java.util.Map $r21;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r1.writeInt(-1214061532);
+
+        $r4 = org.gjt.sp.jedit.jEdit.getBuild();
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeString(r1, $r4);
+
+        $l1 = r0.modTime;
+
+        r1.writeLong($l1);
+
+        $r5 = r0.actionsURI;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeString(r1, $r5);
+
+        $r6 = r0.cachedActionNames;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeStringArray(r1, $r6);
+
+        $r7 = r0.cachedActionToggleFlags;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeBooleanArray(r1, $r7);
+
+        $r8 = r0.browserActionsURI;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeString(r1, $r8);
+
+        $r9 = r0.cachedBrowserActionNames;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeStringArray(r1, $r9);
+
+        $r10 = r0.cachedBrowserActionToggleFlags;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeBooleanArray(r1, $r10);
+
+        $r11 = r0.dockablesURI;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeString(r1, $r11);
+
+        $r12 = r0.cachedDockableNames;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeStringArray(r1, $r12);
+
+        $r13 = r0.cachedDockableActionFlags;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeBooleanArray(r1, $r13);
+
+        $r14 = r0.cachedDockableMovableFlags;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeBooleanArray(r1, $r14);
+
+        $r15 = r0.servicesURI;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeString(r1, $r15);
+
+        $r16 = r0.cachedServices;
+
+        if $r16 != null goto label1;
+
+        r1.writeInt(0);
+
+(0)     goto label3;
+
+     label1:
+        $r17 = r0.cachedServices;
+
+        $i2 = lengthof $r17;
+
+        r1.writeInt($i2);
+
+        r2 = r0.cachedServices;
+
+        i0 = lengthof r2;
+
+(1)     i3 = 0;
+
+     label2:
+        i3 = Phi(i3 #1, i3 #3);
+
+(2)     if i3 >= i0 goto label3;
+
+        r3 = r2[i3];
+
+        $r23 = r3.clazz;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeString(r1, $r23);
+
+        $r24 = r3.name;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeString(r1, $r24);
+
+        i3 = i3 + 1;
+
+(3)     goto label2;
+
+     label3:
+        i3 = Phi(i3 #0, i3 #2);
+
+        $r18 = r0.classes;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeStringArray(r1, $r18);
+
+        $r19 = r0.resources;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeStringArray(r1, $r19);
+
+        $r20 = r0.cachedProperties;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeMap(r1, $r20);
+
+        $r21 = r0.localizationProperties;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeLanguages(r1, $r21);
+
+        $r22 = r0.pluginClass;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeString(r1, $r22);
+
+        return;
+    }
+
+    private static java.lang.String readString(java.io.DataInputStream) throws java.io.IOException
+    {
+        java.io.DataInputStream r0;
+        int i0, i2;
+        char[] r1;
+        java.lang.String $r2;
+        char $c1;
+
+        r0 := @parameter0;
+
+        i0 = r0.readInt();
+
+        if i0 != 0 goto label1;
+
+        return null;
+
+     label1:
+        r1 = newarray (char)[i0];
+
+(0)     i2 = 0;
+
+     label2:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 >= i0 goto label3;
+
+        $c1 = r0.readChar();
+
+        r1[i2] = $c1;
+
+        i2 = i2 + 1;
+
+(1)     goto label2;
+
+     label3:
+        $r2 = new java.lang.String;
+
+        specialinvoke $r2.<init>(r1);
+
+        return $r2;
+    }
+
+    private static java.net.URL readURI(java.io.DataInputStream) throws java.io.IOException
+    {
+        java.io.DataInputStream r0;
+        java.lang.String r1;
+        java.net.URL $r2;
+
+        r0 := @parameter0;
+
+        r1 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readString(r0);
+
+        if r1 != null goto label1;
+
+        return null;
+
+     label1:
+        $r2 = new java.net.URL;
+
+        specialinvoke $r2.<init>(r1);
+
+        return $r2;
+    }
+
+    private static java.lang.String[] readStringArray(java.io.DataInputStream) throws java.io.IOException
+    {
+        java.io.DataInputStream r0;
+        int i0, i1;
+        java.lang.String[] r1;
+        java.lang.String $r2;
+
+        r0 := @parameter0;
+
+        i0 = r0.readInt();
+
+        if i0 != 0 goto label1;
+
+        return null;
+
+     label1:
+        r1 = newarray (java.lang.String)[i0];
+
+(0)     i1 = 0;
+
+     label2:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label3;
+
+        $r2 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readString(r0);
+
+        r1[i1] = $r2;
+
+        i1 = i1 + 1;
+
+(1)     goto label2;
+
+     label3:
+        return r1;
+    }
+
+    private static boolean[] readBooleanArray(java.io.DataInputStream) throws java.io.IOException
+    {
+        java.io.DataInputStream r0;
+        int i0, i1;
+        boolean[] r1;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        i0 = r0.readInt();
+
+        if i0 != 0 goto label1;
+
+        return null;
+
+     label1:
+        r1 = newarray (boolean)[i0];
+
+(0)     i1 = 0;
+
+     label2:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label3;
+
+        $z0 = r0.readBoolean();
+
+        r1[i1] = $z0;
+
+        i1 = i1 + 1;
+
+(1)     goto label2;
+
+     label3:
+        return r1;
+    }
+
+    private static java.util.Properties readMap(java.io.DataInputStream) throws java.io.IOException
+    {
+        java.io.DataInputStream r0;
+        java.util.Properties r1, $r3;
+        int i0, i1;
+        java.lang.String r2, r5;
+
+        r0 := @parameter0;
+
+        $r3 = new java.util.Properties;
+
+        specialinvoke $r3.<init>();
+
+        r1 = $r3;
+
+        i0 = r0.readInt();
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #3);
+
+        r5 = Phi(r5 #0, r5 #3);
+
+        if i1 >= i0 goto label3;
+
+        r2 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readString(r0);
+
+        r5 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readString(r0);
+
+(1)     if r5 != null goto label2;
+
+(2)     r5 = "";
+
+     label2:
+        r5 = Phi(r5 #1, r5 #2);
+
+        r1.setProperty(r2, r5);
+
+        i1 = i1 + 1;
+
+(3)     goto label1;
+
+     label3:
+        return r1;
+    }
+
+    private static java.util.Map readLanguagesMap(java.io.DataInputStream) throws java.io.IOException
+    {
+        java.io.DataInputStream r0;
+        int i0, i1;
+        java.util.HashMap r1, $r4;
+        java.lang.String r2;
+        java.util.Properties r3;
+        java.util.Map $r6;
+
+        r0 := @parameter0;
+
+        i0 = r0.readInt();
+
+        if i0 != 0 goto label1;
+
+        $r6 = java.util.Collections.emptyMap();
+
+        return $r6;
+
+     label1:
+        $r4 = new java.util.HashMap;
+
+        specialinvoke $r4.<init>(i0);
+
+        r1 = $r4;
+
+(0)     i1 = 0;
+
+     label2:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label3;
+
+        r2 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readString(r0);
+
+        r3 = org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.readMap(r0);
+
+        r1.put(r2, r3);
+
+        i1 = i1 + 1;
+
+(1)     goto label2;
+
+     label3:
+        return r1;
+    }
+
+    private static void writeString(java.io.DataOutputStream, java.lang.Object) throws java.io.IOException
+    {
+        java.io.DataOutputStream r0;
+        java.lang.Object r1;
+        java.lang.String r2;
+        int $i0;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        if r1 != null goto label1;
+
+        r0.writeInt(0);
+
+        goto label2;
+
+     label1:
+        r2 = r1.toString();
+
+        $i0 = r2.length();
+
+        r0.writeInt($i0);
+
+        r0.writeChars(r2);
+
+     label2:
+        return;
+    }
+
+    private static void writeStringArray(java.io.DataOutputStream, java.lang.String[]) throws java.io.IOException
+    {
+        java.io.DataOutputStream r0;
+        java.lang.String[] r1, r2;
+        int i0, $i1, i2;
+        java.lang.String r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        if r1 != null goto label1;
+
+        r0.writeInt(0);
+
+(0)     goto label3;
+
+     label1:
+        $i1 = lengthof r1;
+
+        r0.writeInt($i1);
+
+        r2 = r1;
+
+        i0 = lengthof r2;
+
+(1)     i2 = 0;
+
+     label2:
+        i2 = Phi(i2 #1, i2 #3);
+
+(2)     if i2 >= i0 goto label3;
+
+        r3 = r2[i2];
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeString(r0, r3);
+
+        i2 = i2 + 1;
+
+(3)     goto label2;
+
+     label3:
+        i2 = Phi(i2 #0, i2 #2);
+
+        return;
+    }
+
+    private static void writeBooleanArray(java.io.DataOutputStream, boolean[]) throws java.io.IOException
+    {
+        java.io.DataOutputStream r0;
+        boolean[] r1, r2;
+        int i0, $i1, i2;
+        boolean z0;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        if r1 != null goto label1;
+
+        r0.writeInt(0);
+
+(0)     goto label3;
+
+     label1:
+        $i1 = lengthof r1;
+
+        r0.writeInt($i1);
+
+        r2 = r1;
+
+        i0 = lengthof r2;
+
+(1)     i2 = 0;
+
+     label2:
+        i2 = Phi(i2 #1, i2 #3);
+
+(2)     if i2 >= i0 goto label3;
+
+        z0 = r2[i2];
+
+        r0.writeBoolean(z0);
+
+        i2 = i2 + 1;
+
+(3)     goto label2;
+
+     label3:
+        i2 = Phi(i2 #0, i2 #2);
+
+        return;
+    }
+
+    private static void writeMap(java.io.DataOutputStream, java.util.Properties) throws java.io.IOException
+    {
+        java.io.DataOutputStream r0;
+        java.util.Properties r1;
+        java.util.Set r2;
+        java.util.Iterator r3;
+        java.util.Map$Entry r4;
+        int $i0;
+        boolean $z0;
+        java.lang.Object $r5, $r6, $r7;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $i0 = r1.size();
+
+        r0.writeInt($i0);
+
+        r2 = r1.entrySet();
+
+        r3 = r2.iterator();
+
+     label1:
+        $z0 = r3.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r5 = r3.next();
+
+        r4 = (java.util.Map$Entry) $r5;
+
+        $r6 = r4.getKey();
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeString(r0, $r6);
+
+        $r7 = r4.getValue();
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeString(r0, $r7);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    private static void writeLanguages(java.io.DataOutputStream, java.util.Map) throws java.io.IOException
+    {
+        java.io.DataOutputStream r0;
+        java.util.Map r1;
+        java.util.Iterator r2;
+        java.util.Map$Entry r3;
+        int $i0;
+        java.util.Set $r4;
+        boolean $z0;
+        java.lang.Object $r5, $r6, $r7;
+        java.util.Properties $r8;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $i0 = r1.size();
+
+        r0.writeInt($i0);
+
+        $r4 = r1.entrySet();
+
+        r2 = $r4.iterator();
+
+     label1:
+        $z0 = r2.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r5 = r2.next();
+
+        r3 = (java.util.Map$Entry) $r5;
+
+        $r6 = r3.getKey();
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeString(r0, $r6);
+
+        $r7 = r3.getValue();
+
+        $r8 = (java.util.Properties) $r7;
+
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry.writeMap(r0, $r8);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+}

@@ -1,0 +1,94 @@
+class org.gjt.sp.jedit.gui.JCheckBoxList$LabelRenderer extends javax.swing.table.DefaultTableCellRenderer
+{
+    java.awt.Font plainFont;
+    java.awt.Font boldFont;
+    final org.gjt.sp.jedit.gui.JCheckBoxList this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.JCheckBoxList)
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList$LabelRenderer r0;
+        org.gjt.sp.jedit.gui.JCheckBoxList r1;
+        java.awt.Font $r2, $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r2 = javax.swing.UIManager.getFont("Tree.font");
+
+        r0.plainFont = $r2;
+
+        $r3 = r0.plainFont;
+
+        $r4 = $r3.deriveFont(1);
+
+        r0.boldFont = $r4;
+
+        return;
+    }
+
+    public java.awt.Component getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList$LabelRenderer r0;
+        javax.swing.JTable r1;
+        java.lang.Object r2, $r9;
+        boolean z0, z1, $z2;
+        int i0, i1;
+        org.gjt.sp.jedit.gui.JCheckBoxList$Entry r3;
+        org.gjt.sp.jedit.gui.JCheckBoxList $r5;
+        javax.swing.table.TableModel $r6;
+        org.gjt.sp.jedit.gui.CheckBoxListModel $r7;
+        java.util.Vector $r8;
+        java.awt.Font $r10, $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        z1 := @parameter3;
+
+        i0 := @parameter4;
+
+        i1 := @parameter5;
+
+        specialinvoke r0.getTableCellRendererComponent(r1, r2, z0, z1, i0, i1);
+
+        $r5 = r0.this$0;
+
+        $r6 = $r5.getModel();
+
+        $r7 = (org.gjt.sp.jedit.gui.CheckBoxListModel) $r6;
+
+        $r8 = $r7.items;
+
+        $r9 = $r8.get(i0);
+
+        r3 = (org.gjt.sp.jedit.gui.JCheckBoxList$Entry) $r9;
+
+        $z2 = r3.caption;
+
+        if $z2 == 0 goto label1;
+
+        $r11 = r0.boldFont;
+
+        r0.setFont($r11);
+
+        goto label2;
+
+     label1:
+        $r10 = r0.plainFont;
+
+        r0.setFont($r10);
+
+     label2:
+        return r0;
+    }
+}

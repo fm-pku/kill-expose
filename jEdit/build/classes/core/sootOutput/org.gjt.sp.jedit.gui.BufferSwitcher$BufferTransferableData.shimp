@@ -1,0 +1,56 @@
+class org.gjt.sp.jedit.gui.BufferSwitcher$BufferTransferableData extends java.lang.Object
+{
+    private final org.gjt.sp.jedit.Buffer buffer;
+    private final javax.swing.JComponent source;
+    final org.gjt.sp.jedit.gui.BufferSwitcher this$0;
+
+    public void <init>(org.gjt.sp.jedit.gui.BufferSwitcher, org.gjt.sp.jedit.Buffer, javax.swing.JComponent)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferTransferableData r0;
+        org.gjt.sp.jedit.gui.BufferSwitcher r1;
+        org.gjt.sp.jedit.Buffer r2;
+        javax.swing.JComponent r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.buffer = r2;
+
+        r0.source = r3;
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.Buffer getBuffer()
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferTransferableData r0;
+        org.gjt.sp.jedit.Buffer $r1;
+
+        r0 := @this;
+
+        $r1 = r0.buffer;
+
+        return $r1;
+    }
+
+    public javax.swing.JComponent getSource()
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferTransferableData r0;
+        javax.swing.JComponent $r1;
+
+        r0 := @this;
+
+        $r1 = r0.source;
+
+        return $r1;
+    }
+}

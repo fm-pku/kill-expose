@@ -1,0 +1,152 @@
+class org.gjt.sp.jedit.gui.statusbar.OverwriteWidgetFactory$OverwriteWidget extends java.lang.Object implements org.gjt.sp.jedit.gui.statusbar.Widget
+{
+    private final javax.swing.JLabel overwrite;
+    private final org.gjt.sp.jedit.View view;
+
+    void <init>(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.statusbar.OverwriteWidgetFactory$OverwriteWidget r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.gui.statusbar.ToolTipLabel $r2;
+        javax.swing.JLabel $r3, $r4, $r7;
+        java.lang.String $r5;
+        org.gjt.sp.jedit.gui.statusbar.OverwriteWidgetFactory$OverwriteWidget$1 $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        $r2 = new org.gjt.sp.jedit.gui.statusbar.ToolTipLabel;
+
+        specialinvoke $r2.<init>();
+
+        r0.overwrite = $r2;
+
+        $r3 = r0.overwrite;
+
+        $r3.setHorizontalAlignment(0);
+
+        $r4 = r0.overwrite;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("view.status.overwrite-tooltip");
+
+        $r4.setToolTipText($r5);
+
+        r0.view = r1;
+
+        $r7 = r0.overwrite;
+
+        $r6 = new org.gjt.sp.jedit.gui.statusbar.OverwriteWidgetFactory$OverwriteWidget$1;
+
+        specialinvoke $r6.<init>(r0, r1);
+
+        $r7.addMouseListener($r6);
+
+        return;
+    }
+
+    public javax.swing.JComponent getComponent()
+    {
+        org.gjt.sp.jedit.gui.statusbar.OverwriteWidgetFactory$OverwriteWidget r0;
+        javax.swing.JLabel $r1;
+
+        r0 := @this;
+
+        $r1 = r0.overwrite;
+
+        return $r1;
+    }
+
+    public void update()
+    {
+        org.gjt.sp.jedit.gui.statusbar.OverwriteWidgetFactory$OverwriteWidget r0;
+        org.gjt.sp.jedit.textarea.JEditTextArea r1;
+        org.gjt.sp.jedit.View $r2;
+        boolean $z0;
+        javax.swing.JLabel $r3, $r4, $r5, $r6;
+
+        r0 := @this;
+
+        $r2 = r0.view;
+
+        r1 = $r2.getTextArea();
+
+        if r1 == null goto label2;
+
+        $z0 = r1.isOverwriteEnabled();
+
+        if $z0 == 0 goto label1;
+
+        $r5 = r0.overwrite;
+
+        $r5.setText("O");
+
+        $r6 = r0.overwrite;
+
+        $r6.setEnabled(1);
+
+        goto label2;
+
+     label1:
+        $r3 = r0.overwrite;
+
+        $r3.setText("o");
+
+        $r4 = r0.overwrite;
+
+        $r4.setEnabled(0);
+
+     label2:
+        return;
+    }
+
+    public void propertiesChanged()
+    {
+        org.gjt.sp.jedit.gui.statusbar.OverwriteWidgetFactory$OverwriteWidget r0;
+        java.awt.Font r1;
+        java.awt.FontMetrics r2;
+        java.awt.Dimension r3, $r6;
+        javax.swing.JLabel $r4, $r5, $r7, $r8;
+        int $i0, $i1, $i2, $i3, $i4;
+
+        r0 := @this;
+
+        $r4 = new javax.swing.JLabel;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4.getFont();
+
+        $r5 = r0.overwrite;
+
+        r2 = $r5.getFontMetrics(r1);
+
+        $r6 = new java.awt.Dimension;
+
+        $i0 = r2.charWidth(111);
+
+        $i1 = r2.charWidth(79);
+
+        $i2 = java.lang.Math.max($i0, $i1);
+
+        $i3 = $i2 + 1;
+
+        $i4 = r2.getHeight();
+
+        specialinvoke $r6.<init>($i3, $i4);
+
+        r3 = $r6;
+
+        $r7 = r0.overwrite;
+
+        $r7.setPreferredSize(r3);
+
+        $r8 = r0.overwrite;
+
+        $r8.setMaximumSize(r3);
+
+        return;
+    }
+}

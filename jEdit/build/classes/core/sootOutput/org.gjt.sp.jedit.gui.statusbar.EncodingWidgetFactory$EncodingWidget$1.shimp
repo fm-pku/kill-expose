@@ -1,0 +1,57 @@
+class org.gjt.sp.jedit.gui.statusbar.EncodingWidgetFactory$EncodingWidget$1 extends java.awt.event.MouseAdapter
+{
+    final org.gjt.sp.jedit.View val$view;
+    final org.gjt.sp.jedit.gui.statusbar.EncodingWidgetFactory$EncodingWidget this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.statusbar.EncodingWidgetFactory$EncodingWidget, org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.statusbar.EncodingWidgetFactory$EncodingWidget$1 r0;
+        org.gjt.sp.jedit.gui.statusbar.EncodingWidgetFactory$EncodingWidget r1;
+        org.gjt.sp.jedit.View r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$view = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mouseClicked(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.statusbar.EncodingWidgetFactory$EncodingWidget$1 r0;
+        java.awt.event.MouseEvent r1;
+        int $i0;
+        org.gjt.sp.jedit.gui.BufferOptions $r2;
+        org.gjt.sp.jedit.View $r3, $r4;
+        org.gjt.sp.jedit.Buffer $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r1.getClickCount();
+
+        if $i0 != 2 goto label1;
+
+        $r2 = new org.gjt.sp.jedit.gui.BufferOptions;
+
+        $r4 = r0.val$view;
+
+        $r3 = r0.val$view;
+
+        $r5 = $r3.getBuffer();
+
+        specialinvoke $r2.<init>($r4, $r5);
+
+     label1:
+        return;
+    }
+}

@@ -1,0 +1,391 @@
+class org.gjt.sp.jedit.gui.BufferSwitcher$BufferSwitcherTransferHandler extends javax.swing.TransferHandler
+{
+    final org.gjt.sp.jedit.gui.BufferSwitcher this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.BufferSwitcher)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferSwitcherTransferHandler r0;
+        org.gjt.sp.jedit.gui.BufferSwitcher r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public boolean canImport(javax.swing.TransferHandler$TransferSupport)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferSwitcherTransferHandler r0;
+        javax.swing.TransferHandler$TransferSupport r1;
+        javax.swing.JList$DropLocation r2;
+        java.awt.datatransfer.Transferable r3;
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferTransferableData r4;
+        org.gjt.sp.jedit.EditPane r5, r6;
+        org.gjt.sp.jedit.bufferset.BufferSet$Scope r7;
+        org.gjt.sp.jedit.View r8, r9;
+        java.awt.datatransfer.DataFlavor $r10, $r12;
+        boolean $z0, $z1, $z2, $z1_1, $z1_2, $z2_1, $z2_2;
+        javax.swing.TransferHandler$DropLocation $r11;
+        int $i0, $i1, $i2;
+        java.lang.Object $r13;
+        java.awt.Component $r14, $r16, $r17;
+        javax.swing.JComponent $r15, r24;
+        org.gjt.sp.jedit.bufferset.BufferSetManager $r18;
+        int[] $r19;
+        java.awt.datatransfer.UnsupportedFlavorException $r20, r22;
+        java.io.IOException $r21, r23;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r10 = org.gjt.sp.jedit.gui.BufferSwitcher.BufferDataFlavor;
+
+        $z0 = r1.isDataFlavorSupported($r10);
+
+        if $z0 != 0 goto label01;
+
+        return 0;
+
+     label01:
+        $r11 = r1.getDropLocation();
+
+        r2 = (javax.swing.JList$DropLocation) $r11;
+
+        $i0 = r2.getIndex();
+
+        if $i0 != -1 goto label02;
+
+        return 0;
+
+     label02:
+        r3 = r1.getTransferable();
+
+     label03:
+        $r12 = org.gjt.sp.jedit.gui.BufferSwitcher.BufferDataFlavor;
+
+        $r13 = r3.getTransferData($r12);
+
+        r4 = (org.gjt.sp.jedit.gui.BufferSwitcher$BufferTransferableData) $r13;
+
+     label04:
+        goto label07;
+
+     label05:
+        $r20 := @caughtexception;
+
+        r22 = $r20;
+
+        return 0;
+
+     label06:
+        $r21 := @caughtexception;
+
+        r23 = $r21;
+
+        return 0;
+
+     label07:
+        $r14 = r1.getComponent();
+
+        r24 = (javax.swing.JComponent) $r14;
+
+        $r15 = r4.getSource();
+
+        $r16 = org.gjt.sp.jedit.GUIUtilities.getComponentParent($r15, class "org/gjt/sp/jedit/EditPane");
+
+        r5 = (org.gjt.sp.jedit.EditPane) $r16;
+
+        $r17 = org.gjt.sp.jedit.GUIUtilities.getComponentParent(r24, class "org/gjt/sp/jedit/EditPane");
+
+        r6 = (org.gjt.sp.jedit.EditPane) $r17;
+
+        $r18 = org.gjt.sp.jedit.jEdit.getBufferSetManager();
+
+        r7 = $r18.getScope();
+
+        r8 = r5.getView();
+
+        r9 = r6.getView();
+
+        $r19 = org.gjt.sp.jedit.gui.BufferSwitcher$3.$SwitchMap$org$gjt$sp$jedit$bufferset$BufferSet$Scope;
+
+        $i1 = r7.ordinal();
+
+        $i2 = $r19[$i1];
+
+        tableswitch($i2)
+        {
+            case 1: goto label08;
+            case 2: goto label11;
+            case 3: goto label14;
+            default: goto label15;
+        };
+
+     label08:
+        if r5 == r6 goto label09;
+
+        $z1 = 1;
+
+(0)     goto label10;
+
+     label09:
+(1)     $z1_1 = 0;
+
+     label10:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        return $z1_2;
+
+     label11:
+        if r8 == r9 goto label12;
+
+        $z2 = 1;
+
+(2)     goto label13;
+
+     label12:
+(3)     $z2_1 = 0;
+
+     label13:
+        $z2_2 = Phi($z2 #2, $z2_1 #3);
+
+        return $z2_2;
+
+     label14:
+        return 0;
+
+     label15:
+        return 0;
+
+        catch java.awt.datatransfer.UnsupportedFlavorException from label03 to label04 with label05;
+        catch java.io.IOException from label03 to label04 with label06;
+    }
+
+    public boolean importData(javax.swing.TransferHandler$TransferSupport)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferSwitcherTransferHandler r0;
+        javax.swing.TransferHandler$TransferSupport r1;
+        java.awt.datatransfer.Transferable r2;
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferTransferableData r3;
+        org.gjt.sp.jedit.EditPane r4;
+        org.gjt.sp.jedit.Buffer r5;
+        org.gjt.sp.jedit.View r6;
+        org.gjt.sp.jedit.bufferset.BufferSetManager r7;
+        boolean $z0;
+        java.awt.datatransfer.DataFlavor $r8;
+        java.lang.Object $r9;
+        java.awt.Component $r10, $r11;
+        java.awt.datatransfer.UnsupportedFlavorException $r12, r14;
+        java.io.IOException $r13, r15;
+        javax.swing.JComponent r16;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1.isDrop();
+
+        if $z0 != 0 goto label1;
+
+        return 0;
+
+     label1:
+        r2 = r1.getTransferable();
+
+     label2:
+        $r8 = org.gjt.sp.jedit.gui.BufferSwitcher.BufferDataFlavor;
+
+        $r9 = r2.getTransferData($r8);
+
+        r3 = (org.gjt.sp.jedit.gui.BufferSwitcher$BufferTransferableData) $r9;
+
+     label3:
+        goto label6;
+
+     label4:
+        $r12 := @caughtexception;
+
+        r14 = $r12;
+
+        return 0;
+
+     label5:
+        $r13 := @caughtexception;
+
+        r15 = $r13;
+
+        return 0;
+
+     label6:
+        $r10 = r1.getComponent();
+
+        r16 = (javax.swing.JComponent) $r10;
+
+        $r11 = org.gjt.sp.jedit.GUIUtilities.getComponentParent(r16, class "org/gjt/sp/jedit/EditPane");
+
+        r4 = (org.gjt.sp.jedit.EditPane) $r11;
+
+        r5 = r3.getBuffer();
+
+        r6 = r4.getView();
+
+        r7 = org.gjt.sp.jedit.jEdit.getBufferSetManager();
+
+        if r5 == null goto label7;
+
+        r7.addBuffer(r4, r5);
+
+        r4.setBuffer(r5);
+
+     label7:
+        r6.toFront();
+
+        r6.requestFocus();
+
+        r4.requestFocus();
+
+        return 1;
+
+        catch java.awt.datatransfer.UnsupportedFlavorException from label2 to label3 with label4;
+        catch java.io.IOException from label2 to label3 with label5;
+    }
+
+    public int getSourceActions(javax.swing.JComponent)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferSwitcherTransferHandler r0;
+        javax.swing.JComponent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return 3;
+    }
+
+    public void exportDone(javax.swing.JComponent, java.awt.datatransfer.Transferable, int)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferSwitcherTransferHandler r0;
+        javax.swing.JComponent r1;
+        java.awt.datatransfer.Transferable r2;
+        int i0;
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferTransferableData r3;
+        org.gjt.sp.jedit.EditPane r4;
+        org.gjt.sp.jedit.bufferset.BufferSetManager r5;
+        java.awt.datatransfer.DataFlavor $r6;
+        java.lang.Object $r7;
+        java.awt.Component $r8;
+        java.awt.datatransfer.UnsupportedFlavorException $r9, r11;
+        java.io.IOException $r10, r12;
+        org.gjt.sp.jedit.Buffer r13;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        if i0 != 2 goto label6;
+
+     label1:
+        $r6 = org.gjt.sp.jedit.gui.BufferSwitcher.BufferDataFlavor;
+
+        $r7 = r2.getTransferData($r6);
+
+        r3 = (org.gjt.sp.jedit.gui.BufferSwitcher$BufferTransferableData) $r7;
+
+     label2:
+        goto label5;
+
+     label3:
+        $r9 := @caughtexception;
+
+        r11 = $r9;
+
+        return;
+
+     label4:
+        $r10 := @caughtexception;
+
+        r12 = $r10;
+
+        return;
+
+     label5:
+        r13 = r3.getBuffer();
+
+        $r8 = org.gjt.sp.jedit.GUIUtilities.getComponentParent(r1, class "org/gjt/sp/jedit/EditPane");
+
+        r4 = (org.gjt.sp.jedit.EditPane) $r8;
+
+        r5 = org.gjt.sp.jedit.jEdit.getBufferSetManager();
+
+        if r13 == null goto label6;
+
+        r5.removeBuffer(r4, r13);
+
+     label6:
+        return;
+
+        catch java.awt.datatransfer.UnsupportedFlavorException from label1 to label2 with label3;
+        catch java.io.IOException from label1 to label2 with label4;
+    }
+
+    public java.awt.datatransfer.Transferable createTransferable(javax.swing.JComponent)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferSwitcherTransferHandler r0;
+        javax.swing.JComponent r1;
+        javax.swing.JList r2;
+        org.gjt.sp.jedit.Buffer r3;
+        java.lang.Object $r4;
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferSwitcherTransferable $r5;
+        org.gjt.sp.jedit.gui.BufferSwitcher $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = (javax.swing.JList) r1;
+
+        $r4 = r2.getSelectedValue();
+
+        r3 = (org.gjt.sp.jedit.Buffer) $r4;
+
+        if r3 != null goto label1;
+
+        return null;
+
+     label1:
+        $r5 = new org.gjt.sp.jedit.gui.BufferSwitcher$BufferSwitcherTransferable;
+
+        $r6 = r0.this$0;
+
+        specialinvoke $r5.<init>($r6, r3, r1);
+
+        return $r5;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.BufferSwitcher, org.gjt.sp.jedit.gui.BufferSwitcher$1)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferSwitcherTransferHandler r0;
+        org.gjt.sp.jedit.gui.BufferSwitcher r1;
+        org.gjt.sp.jedit.gui.BufferSwitcher$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

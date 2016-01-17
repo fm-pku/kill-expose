@@ -1,0 +1,413 @@
+public class org.gjt.sp.jedit.gui.AddModeDialog extends org.gjt.sp.jedit.gui.EnhancedDialog
+{
+    private javax.swing.JTextField modeName;
+    private javax.swing.JTextField modeFile;
+    private javax.swing.JButton browse;
+    private javax.swing.JTextField filenameGlob;
+    private javax.swing.JTextField firstLineGlob;
+    private final javax.swing.JButton ok;
+    private final javax.swing.JButton cancel;
+    private boolean canceled;
+
+    public void <init>(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog r0;
+        org.gjt.sp.jedit.View r1;
+        javax.swing.JPanel r2, r5, $r7, $r31;
+        org.gjt.sp.jedit.AbstractOptionPane r3, $r10;
+        javax.swing.JLabel r4, $r14;
+        java.lang.String $r6, $r12, $r15, $r18, $r24, $r27, $r37, $r47;
+        java.awt.BorderLayout $r8;
+        javax.swing.border.EmptyBorder $r9, $r33;
+        javax.swing.JTextField $r11, $r13, $r16, $r22, $r23, $r25, $r26, $r28;
+        javax.swing.JButton $r17, $r20, $r21, $r36, $r39, $r41, $r42, $r46, $r49, $r50;
+        org.gjt.sp.jedit.gui.AddModeDialog$ActionHandler $r19, $r38, $r48;
+        java.awt.Container $r29;
+        javax.swing.BoxLayout $r32;
+        java.awt.Component $r34, $r44, $r52;
+        javax.swing.JRootPane $r40;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.addMode.dialog.title");
+
+        specialinvoke r0.<init>(r1, $r6, 1);
+
+        r0.canceled = 0;
+
+        $r7 = new javax.swing.JPanel;
+
+        $r8 = new java.awt.BorderLayout;
+
+        specialinvoke $r8.<init>();
+
+        specialinvoke $r7.<init>($r8);
+
+        r2 = $r7;
+
+        $r9 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r9.<init>(12, 12, 12, 12);
+
+        r2.setBorder($r9);
+
+        r0.setContentPane(r2);
+
+        $r10 = new org.gjt.sp.jedit.AbstractOptionPane;
+
+        specialinvoke $r10.<init>("addmode");
+
+        r3 = $r10;
+
+        $r11 = new javax.swing.JTextField;
+
+        specialinvoke $r11.<init>();
+
+        r0.modeName = $r11;
+
+        $r12 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.addMode.dialog.modeName");
+
+        $r13 = r0.modeName;
+
+        r3.addComponent($r12, $r13);
+
+        $r14 = new javax.swing.JLabel;
+
+        $r15 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.addMode.dialog.modeFile");
+
+        specialinvoke $r14.<init>($r15);
+
+        r4 = $r14;
+
+        r3.addComponent(r4);
+
+        $r16 = new javax.swing.JTextField;
+
+        specialinvoke $r16.<init>();
+
+        r0.modeFile = $r16;
+
+        $r17 = new javax.swing.JButton;
+
+        $r18 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.addMode.dialog.browse");
+
+        specialinvoke $r17.<init>($r18);
+
+        r0.browse = $r17;
+
+        $r20 = r0.browse;
+
+        $r19 = new org.gjt.sp.jedit.gui.AddModeDialog$ActionHandler;
+
+        specialinvoke $r19.<init>(r0, null);
+
+        $r20.addActionListener($r19);
+
+        $r22 = r0.modeFile;
+
+        $r21 = r0.browse;
+
+        r3.addComponent($r22, $r21);
+
+        $r23 = new javax.swing.JTextField;
+
+        specialinvoke $r23.<init>();
+
+        r0.filenameGlob = $r23;
+
+        $r24 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.addMode.dialog.filenameGlob");
+
+        $r25 = r0.filenameGlob;
+
+        r3.addComponent($r24, $r25);
+
+        $r26 = new javax.swing.JTextField;
+
+        specialinvoke $r26.<init>();
+
+        r0.firstLineGlob = $r26;
+
+        $r27 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.addMode.dialog.firstLineGlob");
+
+        $r28 = r0.firstLineGlob;
+
+        r3.addComponent($r27, $r28);
+
+        $r29 = r0.getContentPane();
+
+        $r29.add(r3);
+
+        $r31 = new javax.swing.JPanel;
+
+        specialinvoke $r31.<init>();
+
+        r5 = $r31;
+
+        $r32 = new javax.swing.BoxLayout;
+
+        specialinvoke $r32.<init>(r5, 0);
+
+        r5.setLayout($r32);
+
+        $r33 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r33.<init>(12, 0, 0, 0);
+
+        r5.setBorder($r33);
+
+        $r34 = javax.swing.Box.createGlue();
+
+        r5.add($r34);
+
+        $r36 = new javax.swing.JButton;
+
+        $r37 = org.gjt.sp.jedit.jEdit.getProperty("common.ok");
+
+        specialinvoke $r36.<init>($r37);
+
+        r0.ok = $r36;
+
+        $r39 = r0.ok;
+
+        $r38 = new org.gjt.sp.jedit.gui.AddModeDialog$ActionHandler;
+
+        specialinvoke $r38.<init>(r0, null);
+
+        $r39.addActionListener($r38);
+
+        $r40 = r0.getRootPane();
+
+        $r41 = r0.ok;
+
+        $r40.setDefaultButton($r41);
+
+        $r42 = r0.ok;
+
+        r5.add($r42);
+
+        $r44 = javax.swing.Box.createHorizontalStrut(6);
+
+        r5.add($r44);
+
+        $r46 = new javax.swing.JButton;
+
+        $r47 = org.gjt.sp.jedit.jEdit.getProperty("common.cancel");
+
+        specialinvoke $r46.<init>($r47);
+
+        r0.cancel = $r46;
+
+        $r49 = r0.cancel;
+
+        $r48 = new org.gjt.sp.jedit.gui.AddModeDialog$ActionHandler;
+
+        specialinvoke $r48.<init>(r0, null);
+
+        $r49.addActionListener($r48);
+
+        $r50 = r0.cancel;
+
+        r5.add($r50);
+
+        $r52 = javax.swing.Box.createGlue();
+
+        r5.add($r52);
+
+        r2.add("South", r5);
+
+        r0.pack();
+
+        r0.setLocationRelativeTo(r1);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    public java.lang.String getModeName()
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog r0;
+        javax.swing.JTextField $r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        $r1 = r0.modeName;
+
+        $r2 = $r1.getText();
+
+        return $r2;
+    }
+
+    public java.lang.String getModeFile()
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog r0;
+        javax.swing.JTextField $r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        $r1 = r0.modeFile;
+
+        $r2 = $r1.getText();
+
+        return $r2;
+    }
+
+    public java.lang.String getFilenameGlob()
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog r0;
+        javax.swing.JTextField $r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        $r1 = r0.filenameGlob;
+
+        $r2 = $r1.getText();
+
+        return $r2;
+    }
+
+    public java.lang.String getFirstLineGlob()
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog r0;
+        javax.swing.JTextField $r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        $r1 = r0.firstLineGlob;
+
+        $r2 = $r1.getText();
+
+        return $r2;
+    }
+
+    public boolean isCanceled()
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.canceled;
+
+        return $z0;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog r0;
+        java.lang.String $r1, $r2, $r3, $r4;
+        org.gjt.sp.jedit.View $r5, $r6, $r7;
+
+        r0 := @this;
+
+        $r1 = r0.getModeName();
+
+        if $r1 != null goto label1;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        javax.swing.JOptionPane.showMessageDialog($r7, "Mode name may not be empty.");
+
+        return;
+
+     label1:
+        $r2 = r0.getModeFile();
+
+        if $r2 != null goto label2;
+
+        $r6 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        javax.swing.JOptionPane.showMessageDialog($r6, "Mode name may not be empty.");
+
+        return;
+
+     label2:
+        $r3 = r0.getFilenameGlob();
+
+        if $r3 != null goto label3;
+
+        $r4 = r0.getFirstLineGlob();
+
+        if $r4 != null goto label3;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        javax.swing.JOptionPane.showMessageDialog($r5, "Either file name glob or first line glob or both must be filled in.");
+
+        return;
+
+     label3:
+        r0.canceled = 0;
+
+        r0.dispose();
+
+        return;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog r0;
+
+        r0 := @this;
+
+        r0.canceled = 1;
+
+        r0.dispose();
+
+        return;
+    }
+
+    static javax.swing.JButton access$100(org.gjt.sp.jedit.gui.AddModeDialog)
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.browse;
+
+        return $r1;
+    }
+
+    static javax.swing.JTextField access$200(org.gjt.sp.jedit.gui.AddModeDialog)
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.modeFile;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$300(org.gjt.sp.jedit.gui.AddModeDialog)
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.ok;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$400(org.gjt.sp.jedit.gui.AddModeDialog)
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.cancel;
+
+        return $r1;
+    }
+}

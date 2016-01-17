@@ -1,0 +1,353 @@
+class org.gjt.sp.jedit.browser.BrowserView$ParentDirectoryList extends javax.swing.JList
+{
+    final org.gjt.sp.jedit.browser.BrowserView this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.BrowserView)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$ParentDirectoryList r0;
+        org.gjt.sp.jedit.browser.BrowserView r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    protected void processKeyEvent(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$ParentDirectoryList r0;
+        java.awt.event.KeyEvent r1;
+        org.gjt.sp.jedit.ActionContext r2;
+        org.gjt.sp.jedit.EditAction r3, r4;
+        java.lang.Object r5;
+        org.gjt.sp.jedit.io.VFSFile r6;
+        int $i0, $i1, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, i16, i17, i18;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        char $c2;
+        org.gjt.sp.jedit.browser.BrowserView $r7, $r9, $r12, $r14, $r16, $r18, $r20, $r25, $r27, $r30, $r32, $r34, $r36, $r38, $r41, $r44, $r46, $r47, $r49;
+        org.gjt.sp.jedit.browser.VFSBrowser $r8, $r10, $r13, $r15, $r17, $r19, $r21, $r33, $r37, $r42, $r45, $r50;
+        java.lang.String $r11, $r24, $r43;
+        org.gjt.sp.jedit.View $r22;
+        org.gjt.sp.jedit.Buffer $r23;
+        javax.swing.JList $r26, $r28, $r31, $r35, $r39;
+        java.awt.Dimension $r29;
+        javax.swing.ListModel $r40;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r48;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r1.getID();
+
+        if $i0 != 401 goto label13;
+
+        r2 = org.gjt.sp.jedit.browser.VFSBrowser.getActionContext();
+
+        $r25 = r0.this$0;
+
+        $r26 = org.gjt.sp.jedit.browser.BrowserView.access$400($r25);
+
+        i16 = $r26.getSelectedIndex();
+
+        $i6 = r1.getKeyCode();
+
+        lookupswitch($i6)
+        {
+            case 8: goto label09;
+            case 9: goto label06;
+            case 10: goto label11;
+            case 37: goto label02;
+            case 38: goto label08;
+            case 39: goto label04;
+            case 40: goto label01;
+            case 116: goto label10;
+            default: goto label12;
+        };
+
+     label01:
+        r1.consume();
+
+        $r27 = r0.this$0;
+
+        $r28 = org.gjt.sp.jedit.browser.BrowserView.access$400($r27);
+
+        $r29 = $r28.getSize();
+
+        $i7 = $r29.height;
+
+        $i8 = $i7 - 1;
+
+        if i16 >= $i8 goto label12;
+
+        $r30 = r0.this$0;
+
+        $r31 = org.gjt.sp.jedit.browser.BrowserView.access$400($r30);
+
+        i17 = i16 + 1;
+
+        $r31.setSelectedIndex(i17);
+
+        goto label12;
+
+     label02:
+        $i11 = r1.getModifiers();
+
+        $i12 = $i11 & 8;
+
+        if $i12 <= 0 goto label03;
+
+        r1.consume();
+
+        $r36 = r0.this$0;
+
+        $r37 = org.gjt.sp.jedit.browser.BrowserView.access$600($r36);
+
+        $r37.previousDirectory();
+
+        goto label12;
+
+     label03:
+        specialinvoke r0.processEvent(r1);
+
+        goto label12;
+
+     label04:
+        $i9 = r1.getModifiers();
+
+        $i10 = $i9 & 8;
+
+        if $i10 <= 0 goto label05;
+
+        r1.consume();
+
+        $r32 = r0.this$0;
+
+        $r33 = org.gjt.sp.jedit.browser.BrowserView.access$600($r32);
+
+        $r33.nextDirectory();
+
+        goto label12;
+
+     label05:
+        specialinvoke r0.processEvent(r1);
+
+        goto label12;
+
+     label06:
+        r1.consume();
+
+        $i14 = r1.getModifiers();
+
+        $i15 = $i14 & 1;
+
+        if $i15 <= 0 goto label07;
+
+        $r49 = r0.this$0;
+
+        $r50 = org.gjt.sp.jedit.browser.BrowserView.access$600($r49);
+
+        $r50.focusOnDefaultComponent();
+
+        goto label12;
+
+     label07:
+        $r47 = r0.this$0;
+
+        $r48 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r47);
+
+        $r48.requestFocus();
+
+        goto label12;
+
+     label08:
+        r1.consume();
+
+        if i16 <= 0 goto label12;
+
+        $r34 = r0.this$0;
+
+        $r35 = org.gjt.sp.jedit.browser.BrowserView.access$400($r34);
+
+        i18 = i16 + -1;
+
+        $r35.setSelectedIndex(i18);
+
+        goto label12;
+
+     label09:
+        r1.consume();
+
+        r3 = r2.getAction("vfs.browser.up");
+
+        r2.invokeAction(r1, r3);
+
+        goto label12;
+
+     label10:
+        r1.consume();
+
+        r4 = r2.getAction("vfs.browser.reload");
+
+        r2.invokeAction(r1, r4);
+
+        goto label12;
+
+     label11:
+        r1.consume();
+
+        if i16 == -1 goto label12;
+
+        $r38 = r0.this$0;
+
+        $r39 = org.gjt.sp.jedit.browser.BrowserView.access$400($r38);
+
+        $r40 = $r39.getModel();
+
+        r5 = $r40.getElementAt(i16);
+
+        $z4 = r5 instanceof org.gjt.sp.jedit.io.VFSFile;
+
+        if $z4 == 0 goto label12;
+
+        r6 = (org.gjt.sp.jedit.io.VFSFile) r5;
+
+        $r41 = r0.this$0;
+
+        $r42 = org.gjt.sp.jedit.browser.BrowserView.access$600($r41);
+
+        $r43 = r6.getPath();
+
+        $r42.setDirectory($r43);
+
+        $r44 = r0.this$0;
+
+        $r45 = org.gjt.sp.jedit.browser.BrowserView.access$600($r44);
+
+        $i13 = $r45.getMode();
+
+        if $i13 != 2 goto label12;
+
+        $r46 = r0.this$0;
+
+        $r46.focusOnFileView();
+
+     label12:
+        goto label19;
+
+     label13:
+        $i1 = r1.getID();
+
+        if $i1 != 400 goto label19;
+
+        $z1 = r1.isControlDown();
+
+        if $z1 != 0 goto label14;
+
+        $z2 = r1.isAltDown();
+
+        if $z2 != 0 goto label14;
+
+        $z3 = r1.isMetaDown();
+
+        if $z3 == 0 goto label15;
+
+     label14:
+        r1.consume();
+
+        return;
+
+     label15:
+        $c2 = r1.getKeyChar();
+
+        lookupswitch($c2)
+        {
+            case 45: goto label18;
+            case 47: goto label17;
+            case 126: goto label16;
+            default: goto label19;
+        };
+
+     label16:
+        r1.consume();
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.browser.BrowserView.access$600($r7);
+
+        $i3 = $r8.getMode();
+
+        if $i3 != 2 goto label19;
+
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.browser.BrowserView.access$600($r9);
+
+        $r11 = java.lang.System.getProperty("user.home");
+
+        $r10.setDirectory($r11);
+
+        goto label19;
+
+     label17:
+        r1.consume();
+
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.browser.BrowserView.access$600($r12);
+
+        $i4 = $r13.getMode();
+
+        if $i4 != 2 goto label19;
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.browser.BrowserView.access$600($r14);
+
+        $r15.rootDirectory();
+
+        goto label19;
+
+     label18:
+        r1.consume();
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.browser.BrowserView.access$600($r16);
+
+        $i5 = $r17.getMode();
+
+        if $i5 != 2 goto label19;
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.browser.BrowserView.access$600($r18);
+
+        $r20 = r0.this$0;
+
+        $r21 = org.gjt.sp.jedit.browser.BrowserView.access$600($r20);
+
+        $r22 = $r21.getView();
+
+        $r23 = $r22.getBuffer();
+
+        $r24 = $r23.getDirectory();
+
+        $r19.setDirectory($r24);
+
+     label19:
+        $z0 = r1.isConsumed();
+
+        if $z0 != 0 goto label20;
+
+        specialinvoke r0.processKeyEvent(r1);
+
+     label20:
+        return;
+    }
+}

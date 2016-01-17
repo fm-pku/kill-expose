@@ -1,0 +1,153 @@
+public class org.gjt.sp.jedit.gui.tray.JTrayIcon extends java.awt.TrayIcon
+{
+    private javax.swing.JDialog parent;
+    private javax.swing.JPopupMenu menu;
+    private java.awt.event.MouseListener mouseListener;
+    private javax.swing.event.PopupMenuListener popupMenuListener;
+
+    public void <init>(java.awt.Image, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.tray.JTrayIcon r0;
+        java.awt.Image r1;
+        java.lang.String r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1, r2, null);
+
+        return;
+    }
+
+    public javax.swing.JPopupMenu getMenu()
+    {
+        org.gjt.sp.jedit.gui.tray.JTrayIcon r0;
+        javax.swing.JPopupMenu $r1;
+
+        r0 := @this;
+
+        $r1 = r0.menu;
+
+        return $r1;
+    }
+
+    public void setMenu(javax.swing.JPopupMenu)
+    {
+        org.gjt.sp.jedit.gui.tray.JTrayIcon r0;
+        javax.swing.JPopupMenu r1, $r14;
+        javax.swing.JDialog $r2, $r4, $r5;
+        java.awt.Frame $r3;
+        java.awt.event.MouseListener $r6, $r10, $r11, $r15;
+        org.gjt.sp.jedit.gui.tray.JTrayIcon$MyPopupMenuListener $r7;
+        javax.swing.event.PopupMenuListener $r8, $r12, $r13;
+        org.gjt.sp.jedit.gui.tray.JTrayIcon$MyMouseListener $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 != null goto label3;
+
+        $r11 = r0.mouseListener;
+
+        if $r11 == null goto label1;
+
+        $r15 = r0.mouseListener;
+
+        r0.removeMouseListener($r15);
+
+        r0.mouseListener = null;
+
+     label1:
+        $r12 = r0.popupMenuListener;
+
+        if $r12 == null goto label2;
+
+        $r14 = r0.menu;
+
+        $r13 = r0.popupMenuListener;
+
+        $r14.removePopupMenuListener($r13);
+
+        r0.popupMenuListener = null;
+
+     label2:
+        r0.parent = null;
+
+        goto label5;
+
+     label3:
+        $r2 = new javax.swing.JDialog;
+
+        $r3 = (java.awt.Frame) null;
+
+        specialinvoke $r2.<init>($r3);
+
+        r0.parent = $r2;
+
+        $r4 = r0.parent;
+
+        $r4.setUndecorated(1);
+
+        $r5 = r0.parent;
+
+        $r5.setAlwaysOnTop(1);
+
+        $r6 = r0.mouseListener;
+
+        if $r6 != null goto label4;
+
+        $r9 = new org.gjt.sp.jedit.gui.tray.JTrayIcon$MyMouseListener;
+
+        specialinvoke $r9.<init>(r0, null);
+
+        r0.mouseListener = $r9;
+
+        $r10 = r0.mouseListener;
+
+        r0.addMouseListener($r10);
+
+     label4:
+        $r7 = new org.gjt.sp.jedit.gui.tray.JTrayIcon$MyPopupMenuListener;
+
+        specialinvoke $r7.<init>(r0, null);
+
+        r0.popupMenuListener = $r7;
+
+        $r8 = r0.popupMenuListener;
+
+        r1.addPopupMenuListener($r8);
+
+     label5:
+        r0.menu = r1;
+
+        return;
+    }
+
+    static javax.swing.JPopupMenu access$200(org.gjt.sp.jedit.gui.tray.JTrayIcon)
+    {
+        org.gjt.sp.jedit.gui.tray.JTrayIcon r0;
+        javax.swing.JPopupMenu $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.menu;
+
+        return $r1;
+    }
+
+    static javax.swing.JDialog access$300(org.gjt.sp.jedit.gui.tray.JTrayIcon)
+    {
+        org.gjt.sp.jedit.gui.tray.JTrayIcon r0;
+        javax.swing.JDialog $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.parent;
+
+        return $r1;
+    }
+}

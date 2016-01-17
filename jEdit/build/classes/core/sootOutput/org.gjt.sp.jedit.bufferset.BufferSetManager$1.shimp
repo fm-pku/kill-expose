@@ -1,0 +1,37 @@
+class org.gjt.sp.jedit.bufferset.BufferSetManager$1 extends org.gjt.sp.jedit.visitors.JEditVisitorAdapter
+{
+    final org.gjt.sp.jedit.bufferset.BufferSetManager this$0;
+
+    void <init>(org.gjt.sp.jedit.bufferset.BufferSetManager)
+    {
+        org.gjt.sp.jedit.bufferset.BufferSetManager$1 r0;
+        org.gjt.sp.jedit.bufferset.BufferSetManager r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void visit(org.gjt.sp.jedit.EditPane)
+    {
+        org.gjt.sp.jedit.bufferset.BufferSetManager$1 r0;
+        org.gjt.sp.jedit.EditPane r1;
+        org.gjt.sp.jedit.bufferset.BufferSet $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getBufferSet();
+
+        $r2.propertiesChanged();
+
+        return;
+    }
+}

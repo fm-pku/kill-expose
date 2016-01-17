@@ -1,0 +1,879 @@
+public class org.gjt.sp.jedit.gui.KeyEventTranslator extends java.lang.Object
+{
+    protected static java.awt.event.KeyEvent lastKeyPressEvent;
+    protected static boolean lastKeyPressAccepted;
+    private static final int[] MODS;
+    static int c;
+    static int a;
+    static int m;
+    static int s;
+    private static final java.util.Map transMap;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.gui.KeyEventTranslator r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static void addTranslation(org.gjt.sp.jedit.gui.KeyEventTranslator$Key, org.gjt.sp.jedit.gui.KeyEventTranslator$Key)
+    {
+        org.gjt.sp.jedit.gui.KeyEventTranslator$Key r0, r1;
+        java.util.Map $r2;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r2 = org.gjt.sp.jedit.gui.KeyEventTranslator.transMap;
+
+        $r2.put(r0, r1);
+
+        return;
+    }
+
+    public static org.gjt.sp.jedit.gui.KeyEventTranslator$Key translateKeyEvent(java.awt.event.KeyEvent)
+    {
+        java.awt.event.KeyEvent r0;
+        int i0, $i2, $i3, $i6, $i7, $i9, i10;
+        char c1, $c4, $c5;
+        org.gjt.sp.jedit.gui.KeyEventTranslator$Key $r1, $r5, $r7, $r9, $r11, $r12, r14, r15, r14_1, r14_2, r14_3, r14_4, r14_5, r14_6, r14_7;
+        java.lang.String $r2, $r6, $r8, $r10, $r13;
+        java.util.Map $r3;
+        java.lang.Object $r4;
+        boolean $z0;
+        byte $b8, b11, b11_1, b11_2, b11_3;
+
+        r0 := @parameter0;
+
+        i0 = r0.getModifiers();
+
+        $i2 = r0.getID();
+
+        lookupswitch($i2)
+        {
+            case 400: goto label08;
+            case 401: goto label01;
+            default: goto label16;
+        };
+
+     label01:
+        i10 = r0.getKeyCode();
+
+        if i10 < 48 goto label02;
+
+        if i10 <= 57 goto label03;
+
+     label02:
+        if i10 < 65 goto label04;
+
+        if i10 > 90 goto label04;
+
+     label03:
+        $r9 = new org.gjt.sp.jedit.gui.KeyEventTranslator$Key;
+
+        $r10 = org.gjt.sp.jedit.gui.KeyEventTranslator.modifiersToString(i0);
+
+        $c4 = (char) i10;
+
+        $c5 = java.lang.Character.toLowerCase($c4);
+
+        specialinvoke $r9.<init>($r10, 0, $c5);
+
+        r14_4 = $r9;
+
+(0)     goto label17;
+
+     label04:
+        if i10 != 9 goto label05;
+
+        r0.consume();
+
+        $r7 = new org.gjt.sp.jedit.gui.KeyEventTranslator$Key;
+
+        $r8 = org.gjt.sp.jedit.gui.KeyEventTranslator.modifiersToString(i0);
+
+        specialinvoke $r7.<init>($r8, i10, 0);
+
+        r14 = $r7;
+
+(1)     goto label17;
+
+     label05:
+        if i10 != 32 goto label07;
+
+        $i3 = i0 & -2;
+
+        if $i3 != 0 goto label06;
+
+        r14_1 = null;
+
+(2)     goto label17;
+
+     label06:
+        $r5 = new org.gjt.sp.jedit.gui.KeyEventTranslator$Key;
+
+        $r6 = org.gjt.sp.jedit.gui.KeyEventTranslator.modifiersToString(i0);
+
+        specialinvoke $r5.<init>($r6, 0, 32);
+
+        r14_2 = $r5;
+
+(3)     goto label17;
+
+     label07:
+        $r1 = new org.gjt.sp.jedit.gui.KeyEventTranslator$Key;
+
+        $r2 = org.gjt.sp.jedit.gui.KeyEventTranslator.modifiersToString(i0);
+
+        specialinvoke $r1.<init>($r2, i10, 0);
+
+        r14_3 = $r1;
+
+(4)     goto label17;
+
+     label08:
+        c1 = r0.getKeyChar();
+
+        lookupswitch(c1)
+        {
+            case 8: goto label09;
+            case 9: goto label09;
+            case 10: goto label09;
+            case 32: goto label10;
+            default: goto label11;
+        };
+
+     label09:
+        return null;
+
+     label10:
+        $i6 = i0 & -2;
+
+        if $i6 == 0 goto label11;
+
+        return null;
+
+     label11:
+        $z0 = org.gjt.sp.jedit.Debug.ALT_KEY_PRESSED_DISABLED;
+
+        if $z0 == 0 goto label12;
+
+        b11 = 41;
+
+(5)     goto label13;
+
+     label12:
+(6)     b11_1 = 33;
+
+     label13:
+        b11_2 = Phi(b11 #5, b11_1 #6);
+
+        $i7 = i0 & 32;
+
+        if $i7 != 0 goto label14;
+
+        $b8 = b11_2 ^ -1;
+
+        $i9 = i0 & $b8;
+
+        if $i9 == 0 goto label14;
+
+        return null;
+
+     label14:
+        if c1 != 32 goto label15;
+
+        $r12 = new org.gjt.sp.jedit.gui.KeyEventTranslator$Key;
+
+        $r13 = org.gjt.sp.jedit.gui.KeyEventTranslator.modifiersToString(i0);
+
+        specialinvoke $r12.<init>($r13, 0, c1);
+
+        r14_5 = $r12;
+
+(7)     goto label17;
+
+     label15:
+        $r11 = new org.gjt.sp.jedit.gui.KeyEventTranslator$Key;
+
+        specialinvoke $r11.<init>(null, 0, c1);
+
+        r14_6 = $r11;
+
+(8)     goto label17;
+
+     label16:
+        return null;
+
+     label17:
+        r14_7 = Phi(r14_4 #0, r14 #1, r14_1 #2, r14_2 #3, r14_3 #4, r14_5 #7, r14_6 #8);
+
+        b11_3 = Phi(b11 #0, b11 #1, b11 #2, b11 #3, b11 #4, b11_2 #7, b11_2 #8);
+
+        $r3 = org.gjt.sp.jedit.gui.KeyEventTranslator.transMap;
+
+        $r4 = $r3.get(r14_7);
+
+        r15 = (org.gjt.sp.jedit.gui.KeyEventTranslator$Key) $r4;
+
+        if r15 != null goto label18;
+
+        return r14_7;
+
+     label18:
+        return r15;
+    }
+
+    public static org.gjt.sp.jedit.gui.KeyEventTranslator$Key parseKey(java.lang.String)
+    {
+        java.lang.String r0, $r2, $r4, $r6, $r10, $r12, r13, r13_1, r13_2;
+        java.lang.String[] r1;
+        int i0, $i1, $i2, $i3, i5, i5_1, i5_2;
+        boolean $z0;
+        org.gjt.sp.jedit.gui.KeyEventTranslator$Key $r3, $r5, $r11;
+        java.lang.StringBuilder $r7, $r8, $r9;
+        char $c4;
+
+        r0 := @parameter0;
+
+        if r0 != null goto label1;
+
+        return null;
+
+     label1:
+        i5 = 0;
+
+        r1 = r0.split("\\+", 2);
+
+        $i1 = lengthof r1;
+
+        if $i1 != 1 goto label2;
+
+        r13 = r1[0];
+
+(0)     goto label3;
+
+     label2:
+        $r2 = r1[0];
+
+        i5_1 = org.gjt.sp.jedit.gui.KeyEventTranslator.parseModifiers($r2);
+
+(1)     r13_1 = r1[1];
+
+     label3:
+        i5_2 = Phi(i5 #0, i5_1 #1);
+
+        r13_2 = Phi(r13 #0, r13_1 #1);
+
+        $i2 = r13_2.length();
+
+        if $i2 != 1 goto label4;
+
+        $r11 = new org.gjt.sp.jedit.gui.KeyEventTranslator$Key;
+
+        $r12 = org.gjt.sp.jedit.gui.KeyEventTranslator.modifiersToString(i5_2);
+
+        $c4 = r13_2.charAt(0);
+
+        specialinvoke $r11.<init>($r12, 0, $c4);
+
+        return $r11;
+
+     label4:
+        $i3 = r13_2.length();
+
+        if $i3 != 0 goto label5;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("Invalid key stroke: ");
+
+        $r9 = $r8.append(r0);
+
+        $r10 = $r9.toString();
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/gui/KeyEventTranslator", $r10);
+
+        return null;
+
+     label5:
+        $z0 = r13_2.equals("SPACE");
+
+        if $z0 == 0 goto label6;
+
+        $r5 = new org.gjt.sp.jedit.gui.KeyEventTranslator$Key;
+
+        $r6 = org.gjt.sp.jedit.gui.KeyEventTranslator.modifiersToString(i5_2);
+
+        specialinvoke $r5.<init>($r6, 0, 32);
+
+        return $r5;
+
+     label6:
+        i0 = org.gjt.sp.jedit.gui.KeyEventTranslator.parseKeyCode(r13_2);
+
+        if i0 != 0 goto label7;
+
+        return null;
+
+     label7:
+        $r3 = new org.gjt.sp.jedit.gui.KeyEventTranslator$Key;
+
+        $r4 = org.gjt.sp.jedit.gui.KeyEventTranslator.modifiersToString(i5_2);
+
+        specialinvoke $r3.<init>($r4, i0, 0);
+
+        return $r3;
+    }
+
+    public static javax.swing.KeyStroke parseKeyStroke(java.lang.String)
+    {
+        java.lang.String r0, $r2, $r7, r10, r10_1, r10_2;
+        java.lang.String[] r1;
+        int i0, $i1, $i2, $i3, $i4, i6, i6_1, i6_2;
+        javax.swing.KeyStroke $r3, $r9;
+        java.lang.StringBuilder $r4, $r5, $r6;
+        java.lang.Character $r8;
+        char $c5;
+
+        r0 := @parameter0;
+
+        if r0 == null goto label1;
+
+        $i1 = r0.indexOf(32);
+
+        if $i1 == -1 goto label2;
+
+     label1:
+        return null;
+
+     label2:
+        i6 = 0;
+
+        r1 = r0.split("\\+", 2);
+
+        $i2 = lengthof r1;
+
+        if $i2 != 1 goto label3;
+
+        r10 = r1[0];
+
+(0)     goto label4;
+
+     label3:
+        $r2 = r1[0];
+
+        i6_1 = org.gjt.sp.jedit.gui.KeyEventTranslator.parseModifiers($r2);
+
+(1)     r10_1 = r1[1];
+
+     label4:
+        r10_2 = Phi(r10 #0, r10_1 #1);
+
+        i6_2 = Phi(i6 #0, i6_1 #1);
+
+        $i3 = r10_2.length();
+
+        if $i3 != 1 goto label5;
+
+        $r8 = new java.lang.Character;
+
+        $c5 = r10_2.charAt(0);
+
+        specialinvoke $r8.<init>($c5);
+
+        $r9 = javax.swing.KeyStroke.getKeyStroke($r8, i6_2);
+
+        return $r9;
+
+     label5:
+        $i4 = r10_2.length();
+
+        if $i4 != 0 goto label6;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("Invalid key stroke: ");
+
+        $r6 = $r5.append(r0);
+
+        $r7 = $r6.toString();
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/gui/KeyEventTranslator", $r7);
+
+        return null;
+
+     label6:
+        i0 = org.gjt.sp.jedit.gui.KeyEventTranslator.parseKeyCode(r10_2);
+
+        if i0 != 0 goto label7;
+
+        return null;
+
+     label7:
+        $r3 = javax.swing.KeyStroke.getKeyStroke(i0, i6_2);
+
+        return $r3;
+    }
+
+    public static void setModifierMapping(int, int, int, int)
+    {
+        int i0, i1, i2, i3, i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18;
+        java.lang.IllegalArgumentException $r0, $r1, $r2, $r3;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        i2 := @parameter2;
+
+        i3 := @parameter3;
+
+        $i6 = i0 & i1;
+
+        $i5 = i0 & i2;
+
+        $i8 = $i6 | $i5;
+
+        $i7 = i0 & i3;
+
+        $i10 = $i8 | $i7;
+
+        $i9 = i1 & i2;
+
+        $i12 = $i10 | $i9;
+
+        $i11 = i1 & i3;
+
+        $i14 = $i12 | $i11;
+
+        $i13 = i2 & i3;
+
+        i4 = $i14 | $i13;
+
+        $i15 = i4 & 2;
+
+        if $i15 == 0 goto label1;
+
+        $r3 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $r3.<init>("CTRL is mapped to more than one modifier");
+
+        throw $r3;
+
+     label1:
+        $i16 = i4 & 8;
+
+        if $i16 == 0 goto label2;
+
+        $r2 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $r2.<init>("ALT is mapped to more than one modifier");
+
+        throw $r2;
+
+     label2:
+        $i17 = i4 & 4;
+
+        if $i17 == 0 goto label3;
+
+        $r1 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $r1.<init>("META is mapped to more than one modifier");
+
+        throw $r1;
+
+     label3:
+        $i18 = i4 & 1;
+
+        if $i18 == 0 goto label4;
+
+        $r0 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $r0.<init>("SHIFT is mapped to more than one modifier");
+
+        throw $r0;
+
+     label4:
+        org.gjt.sp.jedit.gui.KeyEventTranslator.c = i0;
+
+        org.gjt.sp.jedit.gui.KeyEventTranslator.a = i1;
+
+        org.gjt.sp.jedit.gui.KeyEventTranslator.m = i2;
+
+        org.gjt.sp.jedit.gui.KeyEventTranslator.s = i3;
+
+        return;
+    }
+
+    public static char getSymbolicModifierName(int)
+    {
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8;
+
+        i0 := @parameter0;
+
+        $i1 = org.gjt.sp.jedit.gui.KeyEventTranslator.c;
+
+        $i2 = i0 & $i1;
+
+        if $i2 == 0 goto label1;
+
+        return 67;
+
+     label1:
+        $i3 = org.gjt.sp.jedit.gui.KeyEventTranslator.a;
+
+        $i4 = i0 & $i3;
+
+        if $i4 == 0 goto label2;
+
+        return 65;
+
+     label2:
+        $i5 = org.gjt.sp.jedit.gui.KeyEventTranslator.m;
+
+        $i6 = i0 & $i5;
+
+        if $i6 == 0 goto label3;
+
+        return 77;
+
+     label3:
+        $i7 = org.gjt.sp.jedit.gui.KeyEventTranslator.s;
+
+        $i8 = i0 & $i7;
+
+        if $i8 == 0 goto label4;
+
+        return 83;
+
+     label4:
+        return 0;
+    }
+
+    public static java.lang.String modifiersToString(int)
+    {
+        int i0, i1, i2, $i3, i5;
+        int[] r0;
+        java.lang.String $r1;
+        char $c4;
+        java.lang.StringBuilder r2;
+
+        i0 := @parameter0;
+
+        r2 = null;
+
+        r0 = org.gjt.sp.jedit.gui.KeyEventTranslator.MODS;
+
+        i1 = lengthof r0;
+
+(0)     i5 = 0;
+
+     label1:
+        r2 = Phi(r2 #0, r2 #3);
+
+        i5 = Phi(i5 #0, i5 #3);
+
+        if i5 >= i1 goto label3;
+
+        i2 = r0[i5];
+
+        $i3 = i0 & i2;
+
+(1)     if $i3 == 0 goto label2;
+
+        $c4 = org.gjt.sp.jedit.gui.KeyEventTranslator.getSymbolicModifierName(i2);
+
+(2)     r2 = org.gjt.sp.jedit.gui.KeyEventTranslator.lazyAppend(r2, $c4);
+
+     label2:
+        r2 = Phi(r2 #1, r2 #2);
+
+        i5 = i5 + 1;
+
+(3)     goto label1;
+
+     label3:
+        if r2 != null goto label4;
+
+        return null;
+
+     label4:
+        $r1 = r2.toString();
+
+        return $r1;
+    }
+
+    public static java.lang.String getModifierString(java.awt.event.InputEvent)
+    {
+        java.awt.event.InputEvent r0;
+        java.lang.StringBuilder r1, $r2;
+        boolean $z0, $z1, $z2, $z3;
+        int $i0;
+        char $c1, $c2, $c3, $c4;
+        java.lang.String $r7, $r7_1, $r7_2;
+
+        r0 := @parameter0;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+        $z0 = r0.isControlDown();
+
+        if $z0 == 0 goto label1;
+
+        $c4 = org.gjt.sp.jedit.gui.KeyEventTranslator.getSymbolicModifierName(2);
+
+        r1.append($c4);
+
+     label1:
+        $z1 = r0.isAltDown();
+
+        if $z1 == 0 goto label2;
+
+        $c3 = org.gjt.sp.jedit.gui.KeyEventTranslator.getSymbolicModifierName(8);
+
+        r1.append($c3);
+
+     label2:
+        $z2 = r0.isMetaDown();
+
+        if $z2 == 0 goto label3;
+
+        $c2 = org.gjt.sp.jedit.gui.KeyEventTranslator.getSymbolicModifierName(4);
+
+        r1.append($c2);
+
+     label3:
+        $z3 = r0.isShiftDown();
+
+        if $z3 == 0 goto label4;
+
+        $c1 = org.gjt.sp.jedit.gui.KeyEventTranslator.getSymbolicModifierName(1);
+
+        r1.append($c1);
+
+     label4:
+        $i0 = r1.length();
+
+        if $i0 != 0 goto label5;
+
+        $r7 = null;
+
+(0)     goto label6;
+
+     label5:
+(1)     $r7_1 = r1.toString();
+
+     label6:
+        $r7_2 = Phi($r7 #0, $r7_1 #1);
+
+        return $r7_2;
+    }
+
+    private static java.lang.StringBuilder lazyAppend(java.lang.StringBuilder, char)
+    {
+        char c0;
+        java.lang.String $r0;
+        int $i1;
+        java.lang.StringBuilder $r2, r3, r3_1, r3_2;
+
+        r3 := @parameter0;
+
+        c0 := @parameter1;
+
+(0)     if r3 != null goto label1;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+(1)     r3_1 = $r2;
+
+     label1:
+        r3_2 = Phi(r3 #0, r3_1 #1);
+
+        $r0 = java.lang.String.valueOf(c0);
+
+        $i1 = r3_2.indexOf($r0);
+
+        if $i1 != -1 goto label2;
+
+        r3_2.append(c0);
+
+     label2:
+        return r3_2;
+    }
+
+    private static int parseModifiers(java.lang.String)
+    {
+        java.lang.String r0;
+        char[] r1;
+        int i0, $i3, $i4, $i5, $i6, i7, i8;
+        char c1, $c2;
+
+        r0 := @parameter0;
+
+        i7 = 0;
+
+        r1 = r0.toCharArray();
+
+        i0 = lengthof r1;
+
+(0)     i8 = 0;
+
+     label1:
+        i8 = Phi(i8 #0, i8 #6);
+
+        i7 = Phi(i7 #0, i7 #6);
+
+        if i8 >= i0 goto label7;
+
+        c1 = r1[i8];
+
+        $c2 = java.lang.Character.toUpperCase(c1);
+
+(1)     lookupswitch($c2)
+        {
+            case 65: goto label2;
+            case 67: goto label3;
+            case 77: goto label4;
+            case 83: goto label5;
+            default: goto label6;
+        };
+
+     label2:
+        $i6 = org.gjt.sp.jedit.gui.KeyEventTranslator.a;
+
+        i7 = i7 | $i6;
+
+(2)     goto label6;
+
+     label3:
+        $i5 = org.gjt.sp.jedit.gui.KeyEventTranslator.c;
+
+        i7 = i7 | $i5;
+
+(3)     goto label6;
+
+     label4:
+        $i4 = org.gjt.sp.jedit.gui.KeyEventTranslator.m;
+
+        i7 = i7 | $i4;
+
+(4)     goto label6;
+
+     label5:
+        $i3 = org.gjt.sp.jedit.gui.KeyEventTranslator.s;
+
+(5)     i7 = i7 | $i3;
+
+     label6:
+        i7 = Phi(i7 #1, i7 #2, i7 #3, i7 #4, i7 #5);
+
+        i8 = i8 + 1;
+
+(6)     goto label1;
+
+     label7:
+        return i7;
+    }
+
+    private static int parseKeyCode(java.lang.String)
+    {
+        java.lang.String r0, $r2, $r4, $r10;
+        java.lang.Exception r1, $r6;
+        java.lang.Class $r3;
+        java.lang.reflect.Field $r5;
+        int $i0;
+        java.lang.StringBuilder $r7, $r8, $r9;
+
+        r0 := @parameter0;
+
+     label1:
+        $r3 = class "java/awt/event/KeyEvent";
+
+        $r2 = "VK_";
+
+        $r4 = $r2.concat(r0);
+
+        $r5 = $r3.getField($r4);
+
+        $i0 = $r5.getInt(null);
+
+     label2:
+        return $i0;
+
+     label3:
+        $r6 := @caughtexception;
+
+        r1 = $r6;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("Invalid key code: ");
+
+        $r9 = $r8.append(r0);
+
+        $r10 = $r9.toString();
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/gui/KeyEventTranslator", $r10);
+
+        return 0;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    static void <clinit>()
+    {
+        int[] $r0;
+        java.util.HashMap $r1;
+        boolean $z0;
+
+        $r0 = newarray (int)[4];
+
+        $r0[0] = 2;
+
+        $r0[1] = 8;
+
+        $r0[2] = 4;
+
+        $r0[3] = 1;
+
+        org.gjt.sp.jedit.gui.KeyEventTranslator.MODS = $r0;
+
+        $r1 = new java.util.HashMap;
+
+        specialinvoke $r1.<init>();
+
+        org.gjt.sp.jedit.gui.KeyEventTranslator.transMap = $r1;
+
+        $z0 = org.gjt.sp.jedit.OperatingSystem.isMacOS();
+
+        if $z0 == 0 goto label1;
+
+        org.gjt.sp.jedit.gui.KeyEventTranslator.setModifierMapping(4, 2, 8, 1);
+
+        goto label2;
+
+     label1:
+        org.gjt.sp.jedit.gui.KeyEventTranslator.setModifierMapping(2, 8, 4, 1);
+
+     label2:
+        return;
+    }
+}

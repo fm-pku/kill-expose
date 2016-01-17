@@ -1,0 +1,111 @@
+class org.gjt.sp.jedit.bsh.BSHVariableDeclarator extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+    public java.lang.String name;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHVariableDeclarator r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.BSHType, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHVariableDeclarator r0;
+        org.gjt.sp.jedit.bsh.BSHType r1;
+        org.gjt.sp.jedit.bsh.CallStack r2;
+        org.gjt.sp.jedit.bsh.Interpreter r3;
+        org.gjt.sp.jedit.bsh.SimpleNode r4;
+        int $i0, $i1;
+        org.gjt.sp.jedit.bsh.Primitive $r5;
+        org.gjt.sp.jedit.bsh.EvalError $r6;
+        org.gjt.sp.jedit.bsh.Node $r7;
+        boolean $z0;
+        org.gjt.sp.jedit.bsh.BSHArrayInitializer $r8;
+        java.lang.Class $r9;
+        java.lang.Object r10, r10_1, r10_2, r10_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r10 = null;
+
+        $i0 = r0.jjtGetNumChildren();
+
+(0)     if $i0 <= 0 goto label2;
+
+        $r7 = r0.jjtGetChild(0);
+
+        r4 = (org.gjt.sp.jedit.bsh.SimpleNode) $r7;
+
+        if r1 == null goto label1;
+
+        $z0 = r4 instanceof org.gjt.sp.jedit.bsh.BSHArrayInitializer;
+
+        if $z0 == 0 goto label1;
+
+        $r8 = (org.gjt.sp.jedit.bsh.BSHArrayInitializer) r4;
+
+        $r9 = r1.getBaseType();
+
+        $i1 = r1.getArrayDims();
+
+        r10_1 = $r8.eval($r9, $i1, r2, r3);
+
+(1)     goto label2;
+
+     label1:
+(2)     r10_2 = r4.eval(r2, r3);
+
+     label2:
+        r10_3 = Phi(r10 #0, r10_1 #1, r10_2 #2);
+
+        $r5 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        if r10_3 != $r5 goto label3;
+
+        $r6 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        specialinvoke $r6.<init>("Void initializer.", r0, r2);
+
+        throw $r6;
+
+     label3:
+        return r10_3;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.bsh.BSHVariableDeclarator r0;
+        java.lang.StringBuilder $r1, $r2, $r4;
+        java.lang.String $r3, $r5;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("BSHVariableDeclarator ");
+
+        $r3 = r0.name;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.toString();
+
+        return $r5;
+    }
+}

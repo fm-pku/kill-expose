@@ -1,0 +1,508 @@
+class org.gjt.sp.jedit.gui.PanelWindowContainer$DockBorder extends java.lang.Object implements javax.swing.border.Border
+{
+    java.lang.String position;
+    java.awt.Insets insets;
+    java.awt.Color color1;
+    java.awt.Color color2;
+    java.awt.Color color3;
+
+    void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$DockBorder r0;
+        java.lang.String r1;
+        java.awt.Insets $r2;
+        boolean $z0, $z1, $z2, $z3;
+        byte $b0, $b1, $b2, $b3, $b0_1, $b0_2, $b1_1, $b1_2, $b2_1, $b2_2, $b3_1, $b3_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.position = r1;
+
+        $r2 = new java.awt.Insets;
+
+        $z0 = r1.equals("bottom");
+
+        if $z0 == 0 goto label1;
+
+        $b0 = 10;
+
+(0)     goto label2;
+
+     label1:
+(1)     $b0_1 = 0;
+
+     label2:
+        $b0_2 = Phi($b0 #0, $b0_1 #1);
+
+        $z1 = r1.equals("right");
+
+        if $z1 == 0 goto label3;
+
+        $b1 = 10;
+
+(2)     goto label4;
+
+     label3:
+(3)     $b1_1 = 0;
+
+     label4:
+        $b1_2 = Phi($b1 #2, $b1_1 #3);
+
+        $z2 = r1.equals("top");
+
+        if $z2 == 0 goto label5;
+
+        $b2 = 10;
+
+(4)     goto label6;
+
+     label5:
+(5)     $b2_1 = 0;
+
+     label6:
+        $b2_2 = Phi($b2 #4, $b2_1 #5);
+
+        $z3 = r1.equals("left");
+
+        if $z3 == 0 goto label7;
+
+        $b3 = 10;
+
+(6)     goto label8;
+
+     label7:
+(7)     $b3_1 = 0;
+
+     label8:
+        $b3_2 = Phi($b3 #6, $b3_1 #7);
+
+        specialinvoke $r2.<init>($b0_2, $b1_2, $b2_2, $b3_2);
+
+        r0.insets = $r2;
+
+        return;
+    }
+
+    public void paintBorder(java.awt.Component, java.awt.Graphics, int, int, int, int)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$DockBorder r0;
+        java.awt.Component r1;
+        java.awt.Graphics r2;
+        int i0, i1, i2, i3, $i4, $i5, $i6, $i7;
+        java.awt.Color $r3, $r4, $r5;
+        java.lang.String $r6, $r7, $r8, $r9;
+        boolean $z0, $z1, $z2, $z3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        i1 := @parameter3;
+
+        i2 := @parameter4;
+
+        i3 := @parameter5;
+
+        specialinvoke r0.updateColors();
+
+        $r3 = r0.color1;
+
+        if $r3 == null goto label1;
+
+        $r4 = r0.color2;
+
+        if $r4 == null goto label1;
+
+        $r5 = r0.color3;
+
+        if $r5 != null goto label2;
+
+     label1:
+        return;
+
+     label2:
+        $r6 = r0.position;
+
+        $z0 = $r6.equals("bottom");
+
+        if $z0 == 0 goto label3;
+
+        specialinvoke r0.paintHorizBorder(r2, i0, i1, i2);
+
+        goto label6;
+
+     label3:
+        $r7 = r0.position;
+
+        $z1 = $r7.equals("right");
+
+        if $z1 == 0 goto label4;
+
+        specialinvoke r0.paintVertBorder(r2, i0, i1, i3);
+
+        goto label6;
+
+     label4:
+        $r8 = r0.position;
+
+        $z2 = $r8.equals("top");
+
+        if $z2 == 0 goto label5;
+
+        $i6 = i1 + i3;
+
+        $i7 = $i6 - 10;
+
+        specialinvoke r0.paintHorizBorder(r2, i0, $i7, i2);
+
+        goto label6;
+
+     label5:
+        $r9 = r0.position;
+
+        $z3 = $r9.equals("left");
+
+        if $z3 == 0 goto label6;
+
+        $i4 = i0 + i2;
+
+        $i5 = $i4 - 10;
+
+        specialinvoke r0.paintVertBorder(r2, $i5, i1, i3);
+
+     label6:
+        return;
+    }
+
+    public java.awt.Insets getBorderInsets(java.awt.Component)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$DockBorder r0;
+        java.awt.Component r1;
+        java.awt.Insets $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.insets;
+
+        return $r2;
+    }
+
+    public boolean isBorderOpaque()
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$DockBorder r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+
+    private void paintHorizBorder(java.awt.Graphics, int, int, int)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$DockBorder r0;
+        java.awt.Graphics r1;
+        int i0, i1, i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i20, $i21, $i22, $i23, $i24, $i25, $i26, $i27, $i28, $i29, $i30, $i31, $i32, $i33, $i34, $i35, $i36, i37;
+        java.awt.Color $r2, $r3, $r4, $r5, $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        $r2 = r0.color3;
+
+        r1.setColor($r2);
+
+        r1.fillRect(i0, i1, i2, 10);
+
+(0)     i37 = 0;
+
+     label1:
+        i37 = Phi(i37 #0, i37 #1);
+
+        $i3 = i2 / 4;
+
+        $i4 = $i3 - 1;
+
+        if i37 >= $i4 goto label2;
+
+        $r3 = r0.color1;
+
+        r1.setColor($r3);
+
+        $i5 = i37 << 2;
+
+        $i6 = i0 + $i5;
+
+        $i12 = $i6 + 2;
+
+        $i11 = i1 + 3;
+
+        $i7 = i37 << 2;
+
+        $i8 = i0 + $i7;
+
+        $i10 = $i8 + 2;
+
+        $i9 = i1 + 3;
+
+        r1.drawLine($i12, $i11, $i10, $i9);
+
+        $r4 = r0.color2;
+
+        r1.setColor($r4);
+
+        $i13 = i37 << 2;
+
+        $i14 = i0 + $i13;
+
+        $i20 = $i14 + 3;
+
+        $i19 = i1 + 4;
+
+        $i15 = i37 << 2;
+
+        $i16 = i0 + $i15;
+
+        $i18 = $i16 + 3;
+
+        $i17 = i1 + 4;
+
+        r1.drawLine($i20, $i19, $i18, $i17);
+
+        $r5 = r0.color1;
+
+        r1.setColor($r5);
+
+        $i21 = i37 << 2;
+
+        $i22 = i0 + $i21;
+
+        $i28 = $i22 + 4;
+
+        $i27 = i1 + 5;
+
+        $i23 = i37 << 2;
+
+        $i24 = i0 + $i23;
+
+        $i26 = $i24 + 4;
+
+        $i25 = i1 + 5;
+
+        r1.drawLine($i28, $i27, $i26, $i25);
+
+        $r6 = r0.color2;
+
+        r1.setColor($r6);
+
+        $i29 = i37 << 2;
+
+        $i30 = i0 + $i29;
+
+        $i36 = $i30 + 5;
+
+        $i35 = i1 + 6;
+
+        $i31 = i37 << 2;
+
+        $i32 = i0 + $i31;
+
+        $i34 = $i32 + 5;
+
+        $i33 = i1 + 6;
+
+        r1.drawLine($i36, $i35, $i34, $i33);
+
+        i37 = i37 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return;
+    }
+
+    private void paintVertBorder(java.awt.Graphics, int, int, int)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$DockBorder r0;
+        java.awt.Graphics r1;
+        int i0, i1, i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i20, $i21, $i22, $i23, $i24, $i25, $i26, $i27, $i28, $i29, $i30, $i31, $i32, $i33, $i34, $i35, $i36, i37;
+        java.awt.Color $r2, $r3, $r4, $r5, $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        $r2 = r0.color3;
+
+        r1.setColor($r2);
+
+        r1.fillRect(i0, i1, 10, i2);
+
+(0)     i37 = 0;
+
+     label1:
+        i37 = Phi(i37 #0, i37 #1);
+
+        $i3 = i2 / 4;
+
+        $i4 = $i3 - 1;
+
+        if i37 >= $i4 goto label2;
+
+        $r3 = r0.color1;
+
+        r1.setColor($r3);
+
+        $i12 = i0 + 3;
+
+        $i5 = i37 << 2;
+
+        $i6 = i1 + $i5;
+
+        $i11 = $i6 + 2;
+
+        $i10 = i0 + 3;
+
+        $i7 = i37 << 2;
+
+        $i8 = i1 + $i7;
+
+        $i9 = $i8 + 2;
+
+        r1.drawLine($i12, $i11, $i10, $i9);
+
+        $r4 = r0.color2;
+
+        r1.setColor($r4);
+
+        $i20 = i0 + 4;
+
+        $i13 = i37 << 2;
+
+        $i14 = i1 + $i13;
+
+        $i19 = $i14 + 3;
+
+        $i18 = i0 + 4;
+
+        $i15 = i37 << 2;
+
+        $i16 = i1 + $i15;
+
+        $i17 = $i16 + 3;
+
+        r1.drawLine($i20, $i19, $i18, $i17);
+
+        $r5 = r0.color1;
+
+        r1.setColor($r5);
+
+        $i28 = i0 + 5;
+
+        $i21 = i37 << 2;
+
+        $i22 = i1 + $i21;
+
+        $i27 = $i22 + 4;
+
+        $i26 = i0 + 5;
+
+        $i23 = i37 << 2;
+
+        $i24 = i1 + $i23;
+
+        $i25 = $i24 + 4;
+
+        r1.drawLine($i28, $i27, $i26, $i25);
+
+        $r6 = r0.color2;
+
+        r1.setColor($r6);
+
+        $i36 = i0 + 6;
+
+        $i29 = i37 << 2;
+
+        $i30 = i1 + $i29;
+
+        $i35 = $i30 + 5;
+
+        $i34 = i0 + 6;
+
+        $i31 = i37 << 2;
+
+        $i32 = i1 + $i31;
+
+        $i33 = $i32 + 5;
+
+        r1.drawLine($i36, $i35, $i34, $i33);
+
+        i37 = i37 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return;
+    }
+
+    private void updateColors()
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$DockBorder r0;
+        javax.swing.LookAndFeel $r1;
+        boolean $z0;
+        javax.swing.plaf.ColorUIResource $r2, $r3, $r4;
+
+        r0 := @this;
+
+        $r1 = javax.swing.UIManager.getLookAndFeel();
+
+        $z0 = $r1 instanceof javax.swing.plaf.metal.MetalLookAndFeel;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = javax.swing.plaf.metal.MetalLookAndFeel.getControlHighlight();
+
+        r0.color1 = $r2;
+
+        $r3 = javax.swing.plaf.metal.MetalLookAndFeel.getControlDarkShadow();
+
+        r0.color2 = $r3;
+
+        $r4 = javax.swing.plaf.metal.MetalLookAndFeel.getControl();
+
+        r0.color3 = $r4;
+
+        goto label2;
+
+     label1:
+        r0.color3 = null;
+
+        r0.color2 = null;
+
+        r0.color1 = null;
+
+     label2:
+        return;
+    }
+}

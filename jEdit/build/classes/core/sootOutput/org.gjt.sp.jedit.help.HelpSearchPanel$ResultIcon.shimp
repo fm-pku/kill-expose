@@ -1,0 +1,138 @@
+class org.gjt.sp.jedit.help.HelpSearchPanel$ResultIcon extends java.lang.Object implements javax.swing.Icon
+{
+    private static java.awt.RenderingHints renderingHints;
+    private int rank;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel$ResultIcon r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.rank = i0;
+
+        return;
+    }
+
+    public int getIconWidth()
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel$ResultIcon r0;
+
+        r0 := @this;
+
+        return 40;
+    }
+
+    public int getIconHeight()
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel$ResultIcon r0;
+
+        r0 := @this;
+
+        return 9;
+    }
+
+    public void paintIcon(java.awt.Component, java.awt.Graphics, int, int)
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel$ResultIcon r0;
+        java.awt.Component r1;
+        java.awt.Graphics r2, $r4;
+        int i0, i1, $i2, $i3, $i4, i5;
+        java.awt.Graphics2D r3;
+        java.awt.RenderingHints $r5;
+        java.awt.Color $r6, $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        i1 := @parameter3;
+
+        $r4 = r2.create();
+
+        r3 = (java.awt.Graphics2D) $r4;
+
+        $r5 = org.gjt.sp.jedit.help.HelpSearchPanel$ResultIcon.renderingHints;
+
+        r3.setRenderingHints($r5);
+
+(0)     i5 = 0;
+
+     label1:
+        i5 = Phi(i5 #0, i5 #1);
+
+        if i5 >= 4 goto label4;
+
+        $i2 = r0.rank;
+
+        if $i2 <= i5 goto label2;
+
+        $r7 = javax.swing.UIManager.getColor("Label.foreground");
+
+        r3.setColor($r7);
+
+        goto label3;
+
+     label2:
+        $r6 = javax.swing.UIManager.getColor("Label.disabledForeground");
+
+        r3.setColor($r6);
+
+     label3:
+        $i3 = i5 * 10;
+
+        $i4 = i0 + $i3;
+
+        r3.fillOval($i4, i1, 9, 9);
+
+        i5 = i5 + 1;
+
+(1)     goto label1;
+
+     label4:
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.util.HashMap r0, $r1;
+        java.lang.Object $r2, $r5;
+        java.awt.RenderingHints$Key $r3, $r6;
+        java.awt.RenderingHints $r8;
+
+        $r1 = new java.util.HashMap;
+
+        specialinvoke $r1.<init>();
+
+        r0 = $r1;
+
+        $r3 = java.awt.RenderingHints.KEY_RENDERING;
+
+        $r2 = java.awt.RenderingHints.VALUE_RENDER_QUALITY;
+
+        r0.put($r3, $r2);
+
+        $r6 = java.awt.RenderingHints.KEY_ANTIALIASING;
+
+        $r5 = java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
+
+        r0.put($r6, $r5);
+
+        $r8 = new java.awt.RenderingHints;
+
+        specialinvoke $r8.<init>(r0);
+
+        org.gjt.sp.jedit.help.HelpSearchPanel$ResultIcon.renderingHints = $r8;
+
+        return;
+    }
+}

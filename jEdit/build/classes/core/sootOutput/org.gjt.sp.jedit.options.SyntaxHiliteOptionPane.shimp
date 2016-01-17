@@ -1,0 +1,195 @@
+public class org.gjt.sp.jedit.options.SyntaxHiliteOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    public static final javax.swing.border.EmptyBorder noFocusBorder;
+    private org.gjt.sp.jedit.options.SyntaxHiliteOptionPane$StyleTableModel styleModel;
+    private javax.swing.JTable styleTable;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.SyntaxHiliteOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("syntax");
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.SyntaxHiliteOptionPane r0;
+        java.awt.BorderLayout $r1;
+        javax.swing.JScrollPane $r2;
+
+        r0 := @this;
+
+        $r1 = new java.awt.BorderLayout;
+
+        specialinvoke $r1.<init>(6, 6);
+
+        r0.setLayout($r1);
+
+        $r2 = specialinvoke r0.createStyleTableScroller();
+
+        r0.add("Center", $r2);
+
+        return;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.options.SyntaxHiliteOptionPane r0;
+        org.gjt.sp.jedit.options.SyntaxHiliteOptionPane$StyleTableModel $r1;
+
+        r0 := @this;
+
+        $r1 = r0.styleModel;
+
+        $r1.save();
+
+        return;
+    }
+
+    private javax.swing.JScrollPane createStyleTableScroller()
+    {
+        org.gjt.sp.jedit.options.SyntaxHiliteOptionPane r0;
+        javax.swing.table.TableColumnModel r1;
+        javax.swing.table.TableColumn r2;
+        java.awt.Dimension r3;
+        javax.swing.JScrollPane r4, $r19;
+        org.gjt.sp.jedit.options.SyntaxHiliteOptionPane$StyleTableModel $r5, $r7;
+        javax.swing.JTable $r6, $r8, $r9, $r10, $r11, $r12, $r15, $r16, $r18, $r20;
+        int $i0, $i1, $i2;
+        javax.swing.table.JTableHeader $r13;
+        org.gjt.sp.jedit.options.SyntaxHiliteOptionPane$MouseHandler $r14;
+        org.gjt.sp.jedit.options.SyntaxHiliteOptionPane$StyleTableModel$StyleRenderer $r17;
+
+        r0 := @this;
+
+        $r5 = org.gjt.sp.jedit.options.SyntaxHiliteOptionPane.createStyleTableModel();
+
+        r0.styleModel = $r5;
+
+        $r6 = new javax.swing.JTable;
+
+        $r7 = r0.styleModel;
+
+        specialinvoke $r6.<init>($r7);
+
+        r0.styleTable = $r6;
+
+        $r8 = r0.styleTable;
+
+        $i0 = org.gjt.sp.jedit.GUIUtilities.defaultRowHeight();
+
+        $r8.setRowHeight($i0);
+
+        $r9 = r0.styleTable;
+
+        $r9.setRowSelectionAllowed(0);
+
+        $r10 = r0.styleTable;
+
+        $r10.setColumnSelectionAllowed(0);
+
+        $r11 = r0.styleTable;
+
+        $r11.setCellSelectionEnabled(0);
+
+        $r12 = r0.styleTable;
+
+        $r13 = $r12.getTableHeader();
+
+        $r13.setReorderingAllowed(0);
+
+        $r15 = r0.styleTable;
+
+        $r14 = new org.gjt.sp.jedit.options.SyntaxHiliteOptionPane$MouseHandler;
+
+        specialinvoke $r14.<init>(r0, null);
+
+        $r15.addMouseListener($r14);
+
+        $r16 = r0.styleTable;
+
+        r1 = $r16.getColumnModel();
+
+        r2 = r1.getColumn(1);
+
+        $r17 = new org.gjt.sp.jedit.options.SyntaxHiliteOptionPane$StyleTableModel$StyleRenderer;
+
+        specialinvoke $r17.<init>();
+
+        r2.setCellRenderer($r17);
+
+        $r18 = r0.styleTable;
+
+        r3 = $r18.getPreferredSize();
+
+        $i1 = r3.height;
+
+        $i2 = java.lang.Math.min($i1, 100);
+
+        r3.height = $i2;
+
+        $r19 = new javax.swing.JScrollPane;
+
+        $r20 = r0.styleTable;
+
+        specialinvoke $r19.<init>($r20);
+
+        r4 = $r19;
+
+        r4.setPreferredSize(r3);
+
+        return r4;
+    }
+
+    private static org.gjt.sp.jedit.options.SyntaxHiliteOptionPane$StyleTableModel createStyleTableModel()
+    {
+        org.gjt.sp.jedit.options.SyntaxHiliteOptionPane$StyleTableModel $r0;
+
+        $r0 = new org.gjt.sp.jedit.options.SyntaxHiliteOptionPane$StyleTableModel;
+
+        specialinvoke $r0.<init>();
+
+        return $r0;
+    }
+
+    static javax.swing.JTable access$100(org.gjt.sp.jedit.options.SyntaxHiliteOptionPane)
+    {
+        org.gjt.sp.jedit.options.SyntaxHiliteOptionPane r0;
+        javax.swing.JTable $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.styleTable;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.options.SyntaxHiliteOptionPane$StyleTableModel access$200(org.gjt.sp.jedit.options.SyntaxHiliteOptionPane)
+    {
+        org.gjt.sp.jedit.options.SyntaxHiliteOptionPane r0;
+        org.gjt.sp.jedit.options.SyntaxHiliteOptionPane$StyleTableModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.styleModel;
+
+        return $r1;
+    }
+
+    static void <clinit>()
+    {
+        javax.swing.border.EmptyBorder $r0;
+
+        $r0 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r0.<init>(1, 1, 1, 1);
+
+        org.gjt.sp.jedit.options.SyntaxHiliteOptionPane.noFocusBorder = $r0;
+
+        return;
+    }
+}

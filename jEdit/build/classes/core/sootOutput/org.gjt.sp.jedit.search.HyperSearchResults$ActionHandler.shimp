@@ -1,0 +1,207 @@
+public class org.gjt.sp.jedit.search.HyperSearchResults$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.search.HyperSearchResults this$0;
+
+    public void <init>(org.gjt.sp.jedit.search.HyperSearchResults)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$ActionHandler r0;
+        org.gjt.sp.jedit.search.HyperSearchResults r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2;
+        java.awt.Font r3, $r37, $r37_1, $r37_2;
+        org.gjt.sp.jedit.syntax.SyntaxStyle r4, $r31;
+        org.gjt.sp.jedit.search.HyperSearchResults $r5, $r7, $r9, $r11, $r14, $r15, $r16, $r17, $r18, $r20, $r22, $r26, $r27, $r32, $r34;
+        org.gjt.sp.jedit.gui.RolloverButton $r6, $r8, $r10, $r12;
+        org.gjt.sp.util.TaskManager $r13;
+        boolean $z0, $z2, $z3, $z3_1, $z3_2;
+        javax.swing.tree.DefaultMutableTreeNode $r19, $r23;
+        int $i0, i1;
+        javax.swing.tree.DefaultTreeModel $r21;
+        javax.swing.tree.TreeNode $r24;
+        javax.swing.tree.MutableTreeNode $r25;
+        javax.swing.JTree $r28, $r35;
+        org.gjt.sp.jedit.gui.StyleEditor $r29;
+        org.gjt.sp.jedit.View $r30;
+        java.lang.String $r33, r36;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.search.HyperSearchResults.access$400($r5);
+
+        if r2 != $r6 goto label04;
+
+        r36 = org.gjt.sp.jedit.jEdit.getProperty("hypersearch.results.highlight");
+
+        $r27 = r0.this$0;
+
+        $r28 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r27);
+
+        if $r28 == null goto label01;
+
+        $r34 = r0.this$0;
+
+        $r35 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r34);
+
+        $r37 = $r35.getFont();
+
+(0)     goto label02;
+
+     label01:
+(1)     $r37_1 = javax.swing.UIManager.getFont("Tree.font");
+
+     label02:
+        $r37_2 = Phi($r37 #0, $r37_1 #1);
+
+        r3 = $r37_2;
+
+        $r29 = new org.gjt.sp.jedit.gui.StyleEditor;
+
+        $r30 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        $r31 = org.gjt.sp.util.HtmlUtilities.parseHighlightStyle(r36, r3);
+
+        specialinvoke $r29.<init>($r30, $r31, "hypersearch");
+
+        r4 = $r29.getStyle();
+
+        if r4 == null goto label03;
+
+        $r33 = org.gjt.sp.jedit.GUIUtilities.getStyleString(r4);
+
+        org.gjt.sp.jedit.jEdit.setProperty("hypersearch.results.highlight", $r33);
+
+     label03:
+        $r32 = r0.this$0;
+
+        org.gjt.sp.jedit.search.HyperSearchResults.access$500($r32);
+
+(2)     goto label11;
+
+     label04:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.search.HyperSearchResults.access$600($r7);
+
+        if r2 != $r8 goto label05;
+
+        $r26 = r0.this$0;
+
+        org.gjt.sp.jedit.search.HyperSearchResults.access$700($r26);
+
+(3)     goto label11;
+
+     label05:
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.search.HyperSearchResults.access$800($r9);
+
+        if r2 != $r10 goto label10;
+
+        $r15 = r0.this$0;
+
+        $r14 = r0.this$0;
+
+        $z0 = org.gjt.sp.jedit.search.HyperSearchResults.access$000($r14);
+
+        if $z0 != 0 goto label06;
+
+        $z3 = 1;
+
+(4)     goto label07;
+
+     label06:
+(5)     $z3_1 = 0;
+
+     label07:
+        $z3_2 = Phi($z3 #4, $z3_1 #5);
+
+        org.gjt.sp.jedit.search.HyperSearchResults.access$002($r15, $z3_2);
+
+        $r16 = r0.this$0;
+
+        org.gjt.sp.jedit.search.HyperSearchResults.access$900($r16);
+
+        $r17 = r0.this$0;
+
+        $z2 = org.gjt.sp.jedit.search.HyperSearchResults.access$000($r17);
+
+(6)     if $z2 != 0 goto label11;
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.search.HyperSearchResults.access$100($r18);
+
+        $i0 = $r19.getChildCount();
+
+(7)     i1 = $i0 - 2;
+
+     label08:
+        $z3 = Phi($z3_2 #7, $z3 #8);
+
+        i1 = Phi(i1 #7, i1 #8);
+
+        if i1 < 0 goto label09;
+
+        $r20 = r0.this$0;
+
+        $r21 = org.gjt.sp.jedit.search.HyperSearchResults.access$200($r20);
+
+        $r22 = r0.this$0;
+
+        $r23 = org.gjt.sp.jedit.search.HyperSearchResults.access$100($r22);
+
+        $r24 = $r23.getChildAt(i1);
+
+        $r25 = (javax.swing.tree.MutableTreeNode) $r24;
+
+        $r21.removeNodeFromParent($r25);
+
+        i1 = i1 + -1;
+
+(8)     goto label08;
+
+     label09:
+(9)     goto label11;
+
+     label10:
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.search.HyperSearchResults.access$1000($r11);
+
+(10)    if r2 != $r12 goto label11;
+
+        $r13 = org.gjt.sp.util.TaskManager.instance;
+
+(11)    $r13.cancelTasksByClass(class "org/gjt/sp/jedit/search/HyperSearchRequest");
+
+     label11:
+        $z3 = Phi($z3 #2, $z3 #3, $z3_2 #6, $z3 #9, $z3 #10, $z3 #11);
+
+        $r37 = Phi($r37_2 #2, $r37 #3, $r37 #6, $r37 #9, $r37 #10, $r37 #11);
+
+        i1 = Phi(i1 #2, i1 #3, i1 #6, i1 #9, i1 #10, i1 #11);
+
+        return;
+    }
+}

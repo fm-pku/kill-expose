@@ -1,0 +1,89 @@
+class org.gjt.sp.jedit.gui.tray.JTrayIcon$MyPopupMenuListener extends java.lang.Object implements javax.swing.event.PopupMenuListener
+{
+    final org.gjt.sp.jedit.gui.tray.JTrayIcon this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.tray.JTrayIcon)
+    {
+        org.gjt.sp.jedit.gui.tray.JTrayIcon$MyPopupMenuListener r0;
+        org.gjt.sp.jedit.gui.tray.JTrayIcon r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent)
+    {
+        org.gjt.sp.jedit.gui.tray.JTrayIcon$MyPopupMenuListener r0;
+        javax.swing.event.PopupMenuEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent)
+    {
+        org.gjt.sp.jedit.gui.tray.JTrayIcon$MyPopupMenuListener r0;
+        javax.swing.event.PopupMenuEvent r1;
+        org.gjt.sp.jedit.gui.tray.JTrayIcon $r2;
+        javax.swing.JDialog $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.tray.JTrayIcon.access$300($r2);
+
+        $r3.setVisible(0);
+
+        return;
+    }
+
+    public void popupMenuCanceled(javax.swing.event.PopupMenuEvent)
+    {
+        org.gjt.sp.jedit.gui.tray.JTrayIcon$MyPopupMenuListener r0;
+        javax.swing.event.PopupMenuEvent r1;
+        org.gjt.sp.jedit.gui.tray.JTrayIcon $r2;
+        javax.swing.JDialog $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.tray.JTrayIcon.access$300($r2);
+
+        $r3.setVisible(0);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.tray.JTrayIcon, org.gjt.sp.jedit.gui.tray.JTrayIcon$1)
+    {
+        org.gjt.sp.jedit.gui.tray.JTrayIcon$MyPopupMenuListener r0;
+        org.gjt.sp.jedit.gui.tray.JTrayIcon r1;
+        org.gjt.sp.jedit.gui.tray.JTrayIcon$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

@@ -1,0 +1,40 @@
+final class org.gjt.sp.jedit.gui.CompleteWord$1 extends org.gjt.sp.jedit.visitors.JEditVisitorAdapter
+{
+    final java.util.Set val$buffers;
+
+    void <init>(java.util.Set)
+    {
+        org.gjt.sp.jedit.gui.CompleteWord$1 r0;
+        java.util.Set r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.val$buffers = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void visit(org.gjt.sp.jedit.EditPane)
+    {
+        org.gjt.sp.jedit.gui.CompleteWord$1 r0;
+        org.gjt.sp.jedit.EditPane r1;
+        java.util.Set $r2;
+        org.gjt.sp.jedit.Buffer $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.val$buffers;
+
+        $r3 = r1.getBuffer();
+
+        $r2.add($r3);
+
+        return;
+    }
+}

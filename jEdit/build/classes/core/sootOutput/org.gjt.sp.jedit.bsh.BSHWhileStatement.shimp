@@ -1,0 +1,143 @@
+class org.gjt.sp.jedit.bsh.BSHWhileStatement extends org.gjt.sp.jedit.bsh.SimpleNode implements org.gjt.sp.jedit.bsh.ParserConstants
+{
+    public boolean isDoStatement;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHWhileStatement r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHWhileStatement r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        int i0, $i1;
+        java.lang.Object r3;
+        boolean $z0, $z1, $z2, z3, z4;
+        org.gjt.sp.jedit.bsh.Node $r4, $r7, $r8, $r9;
+        org.gjt.sp.jedit.bsh.Primitive $r5;
+        org.gjt.sp.jedit.bsh.ReturnControl $r6;
+        org.gjt.sp.jedit.bsh.SimpleNode r10, r11, r10_1, r11_1, r10_2, r10_3, r11_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 = r0.jjtGetNumChildren();
+
+        r10 = null;
+
+        $z0 = r0.isDoStatement;
+
+        if $z0 == 0 goto label01;
+
+        $r8 = r0.jjtGetChild(1);
+
+        r11 = (org.gjt.sp.jedit.bsh.SimpleNode) $r8;
+
+        $r9 = r0.jjtGetChild(0);
+
+        r10_1 = (org.gjt.sp.jedit.bsh.SimpleNode) $r9;
+
+(0)     goto label02;
+
+     label01:
+        $r4 = r0.jjtGetChild(0);
+
+        r11_1 = (org.gjt.sp.jedit.bsh.SimpleNode) $r4;
+
+(1)     if i0 <= 1 goto label02;
+
+        $r7 = r0.jjtGetChild(1);
+
+(2)     r10_2 = (org.gjt.sp.jedit.bsh.SimpleNode) $r7;
+
+     label02:
+        r10_3 = Phi(r10_1 #0, r10 #1, r10_2 #2);
+
+        r11_2 = Phi(r11 #0, r11_1 #1, r11_1 #2);
+
+(3)     z3 = r0.isDoStatement;
+
+     label03:
+        z4 = Phi(z4 #3, z4 #5, z4 #8, z4 #11);
+
+        z3 = Phi(z3 #3, z3 #5, z3 #8, z3 #11);
+
+        r10 = Phi(r10_3 #3, r10 #5, r10 #8, r10 #11);
+
+        r11 = Phi(r11_2 #3, r11 #5, r11 #8, r11 #11);
+
+        if z3 != 0 goto label04;
+
+        $z2 = org.gjt.sp.jedit.bsh.BSHIfStatement.evaluateCondition(r11, r1, r2);
+
+(4)     if $z2 == 0 goto label11;
+
+     label04:
+        if r10 != null goto label05;
+
+(5)     goto label03;
+
+     label05:
+        r3 = r10.eval(r1, r2);
+
+        z4 = 0;
+
+        $z1 = r3 instanceof org.gjt.sp.jedit.bsh.ReturnControl;
+
+(6)     if $z1 == 0 goto label09;
+
+        $r6 = (org.gjt.sp.jedit.bsh.ReturnControl) r3;
+
+        $i1 = $r6.kind;
+
+(7)     lookupswitch($i1)
+        {
+            case 12: goto label08;
+            case 19: goto label07;
+            case 46: goto label06;
+            default: goto label09;
+        };
+
+     label06:
+        return r3;
+
+     label07:
+(8)     goto label03;
+
+     label08:
+(9)     z4 = 1;
+
+     label09:
+        z4 = Phi(z4 #6, z4 #7, z4 #9);
+
+        if z4 == 0 goto label10;
+
+(10)    goto label11;
+
+     label10:
+        z3 = 0;
+
+(11)    goto label03;
+
+     label11:
+        z4 = Phi(z4 #4, z4 #10);
+
+        $r5 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        return $r5;
+    }
+}

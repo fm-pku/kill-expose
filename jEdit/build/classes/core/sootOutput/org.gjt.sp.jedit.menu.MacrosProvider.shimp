@@ -1,0 +1,237 @@
+public class org.gjt.sp.jedit.menu.MacrosProvider extends java.lang.Object implements org.gjt.sp.jedit.menu.DynamicMenuProvider
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.menu.MacrosProvider r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public boolean updateEveryTime()
+    {
+        org.gjt.sp.jedit.menu.MacrosProvider r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+
+    public void update(javax.swing.JMenu)
+    {
+        org.gjt.sp.jedit.menu.MacrosProvider r0;
+        javax.swing.JMenu r1;
+        java.util.Vector r2;
+        int i0, $i1;
+        javax.swing.JMenuItem r3, $r4;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = org.gjt.sp.jedit.Macros.getMacroHierarchy();
+
+        i0 = r1.getMenuComponentCount();
+
+        specialinvoke r0.createMacrosMenu(r1, r2, 0);
+
+        $i1 = r1.getMenuComponentCount();
+
+        if i0 != $i1 goto label1;
+
+        $r4 = new javax.swing.JMenuItem;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("no-macros.label");
+
+        specialinvoke $r4.<init>($r5);
+
+        r3 = $r4;
+
+        r3.setEnabled(0);
+
+        r1.add(r3);
+
+     label1:
+        return;
+    }
+
+    private void createMacrosMenu(javax.swing.JMenu, java.util.Vector, int)
+    {
+        org.gjt.sp.jedit.menu.MacrosProvider r0;
+        javax.swing.JMenu r1, r6, $r12, $r27, r29;
+        java.util.Vector r2, r3, r4, $r7;
+        int i0, i1, $i2, $i3, $i4, i5;
+        java.lang.String r5, $r17, $r18, $r23, $r24, $r25, $r28;
+        org.gjt.sp.jedit.menu.MenuItemTextComparator $r8;
+        boolean $z0, $z2, $z3;
+        java.lang.Object $r9, $r11, r30;
+        java.lang.StringBuilder $r13, $r14, $r15, $r16, $r20, $r21, $r22;
+        org.gjt.sp.jedit.menu.EnhancedMenuItem $r19;
+        org.gjt.sp.jedit.ActionContext $r26;
+        java.util.Iterator r31;
+        javax.swing.JMenuItem r32;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        $r7 = new java.util.Vector;
+
+        specialinvoke $r7.<init>();
+
+        r3 = $r7;
+
+        i1 = org.gjt.sp.jedit.jEdit.getIntegerProperty("menu.spillover", 20);
+
+        r29 = null;
+
+(0)     i5 = i0;
+
+     label1:
+        r29 = Phi(r29 #0, r29 #3);
+
+        i5 = Phi(i5 #0, i5 #3);
+
+        $i2 = r2.size();
+
+(1)     if i5 >= $i2 goto label5;
+
+        if i5 == i0 goto label2;
+
+        $i4 = i5 % i1;
+
+        if $i4 != 0 goto label2;
+
+        $r27 = new javax.swing.JMenu;
+
+        $r28 = org.gjt.sp.jedit.jEdit.getProperty("common.more");
+
+        specialinvoke $r27.<init>($r28);
+
+        r29 = $r27;
+
+        specialinvoke r0.createMacrosMenu(r29, r2, i5);
+
+(2)     goto label5;
+
+     label2:
+        r30 = r2.elementAt(i5);
+
+        $z2 = r30 instanceof java.lang.String;
+
+        if $z2 == 0 goto label3;
+
+        $r19 = new org.gjt.sp.jedit.menu.EnhancedMenuItem;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<init>();
+
+        $r21 = $r20.append(r30);
+
+        $r22 = $r21.append(".label");
+
+        $r23 = $r22.toString();
+
+        $r24 = org.gjt.sp.jedit.jEdit.getProperty($r23);
+
+        $r25 = (java.lang.String) r30;
+
+        $r26 = org.gjt.sp.jedit.jEdit.getActionContext();
+
+        specialinvoke $r19.<init>($r24, $r25, $r26);
+
+        r3.add($r19);
+
+        goto label4;
+
+     label3:
+        $z3 = r30 instanceof java.util.Vector;
+
+        if $z3 == 0 goto label4;
+
+        r4 = (java.util.Vector) r30;
+
+        $r11 = r4.elementAt(0);
+
+        r5 = (java.lang.String) $r11;
+
+        $r12 = new javax.swing.JMenu;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r14 = $r13.append("macros.folder.");
+
+        $r15 = $r14.append(r5);
+
+        $r16 = $r15.append(".label");
+
+        $r17 = $r16.toString();
+
+        $r18 = org.gjt.sp.jedit.jEdit.getProperty($r17, r5);
+
+        specialinvoke $r12.<init>($r18);
+
+        r6 = $r12;
+
+        specialinvoke r0.createMacrosMenu(r6, r4, 1);
+
+        $i3 = r6.getMenuComponentCount();
+
+        if $i3 == 0 goto label4;
+
+        r3.add(r6);
+
+     label4:
+        i5 = i5 + 1;
+
+(3)     goto label1;
+
+     label5:
+        r29 = Phi(r29 #1, r29 #2);
+
+        $r8 = new org.gjt.sp.jedit.menu.MenuItemTextComparator;
+
+        specialinvoke $r8.<init>();
+
+        java.util.Collections.sort(r3, $r8);
+
+        if r29 == null goto label6;
+
+        r3.add(r29);
+
+     label6:
+(4)     r31 = r3.iterator();
+
+     label7:
+        r29 = Phi(r29 #4, r29 #5);
+
+        i5 = Phi(i5 #4, i5 #5);
+
+        $z0 = r31.hasNext();
+
+        if $z0 == 0 goto label8;
+
+        $r9 = r31.next();
+
+        r32 = (javax.swing.JMenuItem) $r9;
+
+        r1.add(r32);
+
+(5)     goto label7;
+
+     label8:
+        return;
+    }
+}

@@ -1,0 +1,97 @@
+class org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget$SelectionLength extends javax.swing.JLabel implements javax.swing.event.CaretListener
+{
+    boolean visible;
+    final org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget)
+    {
+        org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget$SelectionLength r0;
+        org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void addNotify()
+    {
+        org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget$SelectionLength r0;
+        org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget $r1;
+        org.gjt.sp.jedit.textarea.TextArea $r2;
+
+        r0 := @this;
+
+        specialinvoke r0.addNotify();
+
+        r0.visible = 1;
+
+        $r1 = r0.this$0;
+
+        $r2 = org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget.access$100($r1);
+
+        $r2.addCaretListener(r0);
+
+        return;
+    }
+
+    public void removeNotify()
+    {
+        org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget$SelectionLength r0;
+        org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget $r1;
+        org.gjt.sp.jedit.textarea.TextArea $r2;
+
+        r0 := @this;
+
+        r0.visible = 0;
+
+        $r1 = r0.this$0;
+
+        $r2 = org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget.access$100($r1);
+
+        $r2.removeCaretListener(r0);
+
+        specialinvoke r0.removeNotify();
+
+        return;
+    }
+
+    public void caretUpdate(javax.swing.event.CaretEvent)
+    {
+        org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget$SelectionLength r0;
+        javax.swing.event.CaretEvent r1;
+        org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r2.update();
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget, org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$1)
+    {
+        org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget$SelectionLength r0;
+        org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$SelectionLengthWidget r1;
+        org.gjt.sp.jedit.gui.statusbar.SelectionLengthWidgetFactory$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

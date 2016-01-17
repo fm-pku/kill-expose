@@ -1,0 +1,62 @@
+class org.gjt.sp.jedit.bsh.BSHReturnStatement extends org.gjt.sp.jedit.bsh.SimpleNode implements org.gjt.sp.jedit.bsh.ParserConstants
+{
+    public int kind;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHReturnStatement r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHReturnStatement r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        int $i0, $i1;
+        org.gjt.sp.jedit.bsh.ReturnControl $r3;
+        org.gjt.sp.jedit.bsh.Node $r4;
+        org.gjt.sp.jedit.bsh.SimpleNode $r5;
+        java.lang.Object r6, r6_1, r6_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $i0 = r0.jjtGetNumChildren();
+
+        if $i0 <= 0 goto label1;
+
+        $r4 = r0.jjtGetChild(0);
+
+        $r5 = (org.gjt.sp.jedit.bsh.SimpleNode) $r4;
+
+        r6 = $r5.eval(r1, r2);
+
+(0)     goto label2;
+
+     label1:
+(1)     r6_1 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+     label2:
+        r6_2 = Phi(r6 #0, r6_1 #1);
+
+        $r3 = new org.gjt.sp.jedit.bsh.ReturnControl;
+
+        $i1 = r0.kind;
+
+        specialinvoke $r3.<init>($i1, r6_2, r0);
+
+        return $r3;
+    }
+}

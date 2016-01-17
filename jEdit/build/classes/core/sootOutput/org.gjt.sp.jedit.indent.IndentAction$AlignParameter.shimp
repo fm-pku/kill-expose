@@ -1,0 +1,52 @@
+public class org.gjt.sp.jedit.indent.IndentAction$AlignParameter extends java.lang.Object implements org.gjt.sp.jedit.indent.IndentAction
+{
+    private int openParensColumn;
+
+    public void <init>(int)
+    {
+        org.gjt.sp.jedit.indent.IndentAction$AlignParameter r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.openParensColumn = i0;
+
+        return;
+    }
+
+    public int calculateIndent(org.gjt.sp.jedit.buffer.JEditBuffer, int, int, int)
+    {
+        org.gjt.sp.jedit.indent.IndentAction$AlignParameter r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+        int i0, i1, i2, $i3, $i4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        $i3 = r0.openParensColumn;
+
+        $i4 = $i3 + 1;
+
+        return $i4;
+    }
+
+    public boolean keepChecking()
+    {
+        org.gjt.sp.jedit.indent.IndentAction$AlignParameter r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+}

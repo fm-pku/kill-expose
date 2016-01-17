@@ -1,0 +1,468 @@
+public class org.gjt.sp.jedit.pluginmgr.PluginList$Plugin extends java.lang.Object
+{
+    java.lang.String jar;
+    java.lang.String name;
+    java.lang.String description;
+    java.lang.String author;
+    final java.util.List branches;
+    java.lang.String installedVersion;
+    java.lang.String installedPath;
+    boolean loaded;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin r0;
+        java.util.ArrayList $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.ArrayList;
+
+        specialinvoke $r1.<init>();
+
+        r0.branches = $r1;
+
+        r0.installedVersion = null;
+
+        r0.installedPath = null;
+
+        r0.loaded = 0;
+
+        return;
+    }
+
+    java.lang.String getInstalledVersion()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin r0;
+        org.gjt.sp.jedit.PluginJAR[] r1;
+        java.lang.String r2, r3, $r4, $r5, $r8, $r12, $r15, $r18, $r20, $r21, $r23, $r24, $r28, $r31, $r32, $r33, $r37, $r39, r40;
+        int $i0, i1, i2, i3;
+        boolean $z0, $z1;
+        java.lang.StringBuilder $r6, $r7, $r9, $r10, $r13, $r14, $r16, $r17, $r19, $r26, $r27, $r29, $r30, $r35, $r36, $r38;
+        java.util.Properties $r11;
+        org.gjt.sp.jedit.PluginJAR $r22, $r25;
+        java.io.IOException $r34, r45;
+        org.gjt.sp.jedit.EditPlugin r41;
+        java.lang.String[] r42, r43;
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry r44;
+
+        r0 := @this;
+
+        r0.loaded = 0;
+
+        r1 = org.gjt.sp.jedit.jEdit.getPluginJARs();
+
+(0)     i1 = 0;
+
+     label01:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $i0 = lengthof r1;
+
+        if i1 >= $i0 goto label04;
+
+        $r22 = r1[i1];
+
+        r40 = $r22.getPath();
+
+        $r23 = org.gjt.sp.jedit.MiscUtilities.getFileName(r40);
+
+        $r24 = r0.jar;
+
+        $z1 = $r23.equals($r24);
+
+        if $z1 == 0 goto label03;
+
+        $r25 = r1[i1];
+
+        r41 = $r25.getPlugin();
+
+        if r41 == null goto label02;
+
+        $r26 = new java.lang.StringBuilder;
+
+        specialinvoke $r26.<init>();
+
+        $r27 = $r26.append("plugin.");
+
+        $r28 = r41.getClassName();
+
+        $r29 = $r27.append($r28);
+
+        $r30 = $r29.append(".version");
+
+        $r31 = $r30.toString();
+
+        $r32 = org.gjt.sp.jedit.jEdit.getProperty($r31);
+
+        r0.installedVersion = $r32;
+
+        r0.loaded = 1;
+
+        $r33 = r0.installedVersion;
+
+        return $r33;
+
+     label02:
+        return null;
+
+     label03:
+        i1 = i1 + 1;
+
+(1)     goto label01;
+
+     label04:
+        r42 = org.gjt.sp.jedit.jEdit.getNotLoadedPluginJARs();
+
+        r43 = r42;
+
+        i2 = lengthof r43;
+
+(2)     i3 = 0;
+
+     label05:
+        i1 = Phi(i1 #2, i1 #3);
+
+        i3 = Phi(i3 #2, i3 #3);
+
+        if i3 >= i2 goto label11;
+
+        r2 = r43[i3];
+
+        $r4 = org.gjt.sp.jedit.MiscUtilities.getFileName(r2);
+
+        $r5 = r0.jar;
+
+        $z0 = $r4.equals($r5);
+
+        if $z0 == 0 goto label10;
+
+     label06:
+        r44 = org.gjt.sp.jedit.PluginJAR.getPluginCacheEntry(r2);
+
+        if r44 == null goto label08;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("plugin.");
+
+        $r8 = r44.pluginClass;
+
+        $r9 = $r7.append($r8);
+
+        $r10 = $r9.append(".version");
+
+        r3 = $r10.toString();
+
+        $r11 = r44.cachedProperties;
+
+        $r12 = $r11.getProperty(r3);
+
+        r0.installedVersion = $r12;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r14 = $r13.append("found installed but not loaded ");
+
+        $r15 = r0.jar;
+
+        $r16 = $r14.append($r15);
+
+        $r17 = $r16.append(" version=");
+
+        $r18 = r0.installedVersion;
+
+        $r19 = $r17.append($r18);
+
+        $r20 = $r19.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/pluginmgr/PluginList", $r20);
+
+        r0.installedPath = r2;
+
+        $r21 = r0.installedVersion;
+
+     label07:
+        return $r21;
+
+     label08:
+        goto label10;
+
+     label09:
+        $r34 := @caughtexception;
+
+        r45 = $r34;
+
+        $r35 = new java.lang.StringBuilder;
+
+        specialinvoke $r35.<init>();
+
+        $r36 = $r35.append("Unable to access cache for ");
+
+        $r37 = r0.jar;
+
+        $r38 = $r36.append($r37);
+
+        $r39 = $r38.toString();
+
+        org.gjt.sp.util.Log.log(7, $r39, r45);
+
+     label10:
+        i3 = i3 + 1;
+
+(3)     goto label05;
+
+     label11:
+        return null;
+
+        catch java.io.IOException from label06 to label07 with label09;
+    }
+
+    java.lang.String getInstalledPath()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin r0;
+        org.gjt.sp.jedit.PluginJAR[] r1;
+        java.lang.String r2, $r3, $r5, $r6, $r8, $r9;
+        int $i0, i1;
+        org.gjt.sp.jedit.PluginJAR $r4;
+        boolean $z0, $z1;
+        java.io.File $r7;
+
+        r0 := @this;
+
+        $r3 = r0.installedPath;
+
+        if $r3 == null goto label2;
+
+        $r7 = new java.io.File;
+
+        $r8 = r0.installedPath;
+
+        specialinvoke $r7.<init>($r8);
+
+        $z1 = $r7.exists();
+
+        if $z1 == 0 goto label1;
+
+        $r9 = r0.installedPath;
+
+        return $r9;
+
+     label1:
+        r0.installedPath = null;
+
+     label2:
+        r1 = org.gjt.sp.jedit.jEdit.getPluginJARs();
+
+(0)     i1 = 0;
+
+     label3:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $i0 = lengthof r1;
+
+        if i1 >= $i0 goto label5;
+
+        $r4 = r1[i1];
+
+        r2 = $r4.getPath();
+
+        $r5 = org.gjt.sp.jedit.MiscUtilities.getFileName(r2);
+
+        $r6 = r0.jar;
+
+        $z0 = $r5.equals($r6);
+
+        if $z0 == 0 goto label4;
+
+        return r2;
+
+     label4:
+        i1 = i1 + 1;
+
+(1)     goto label3;
+
+     label5:
+        return null;
+    }
+
+    org.gjt.sp.jedit.pluginmgr.PluginList$Branch getCompatibleBranch()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin r0;
+        java.util.Iterator r1;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Branch r2;
+        java.util.List $r3;
+        boolean $z0, $z1;
+        java.lang.Object $r4;
+
+        r0 := @this;
+
+        $r3 = r0.branches;
+
+        r1 = $r3.iterator();
+
+     label1:
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label3;
+
+        $r4 = r1.next();
+
+        r2 = (org.gjt.sp.jedit.pluginmgr.PluginList$Branch) $r4;
+
+        $z1 = r2.canSatisfyDependencies();
+
+        if $z1 == 0 goto label2;
+
+        return r2;
+
+     label2:
+        goto label1;
+
+     label3:
+        return null;
+    }
+
+    boolean canBeInstalled()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin r0;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Branch r1;
+        boolean $z0, $z1, $z2, $z2_1, $z2_2;
+
+        r0 := @this;
+
+        r1 = r0.getCompatibleBranch();
+
+        if r1 == null goto label1;
+
+        $z0 = r1.obsolete;
+
+        if $z0 != 0 goto label1;
+
+        $z1 = r1.canSatisfyDependencies();
+
+        if $z1 == 0 goto label1;
+
+        $z2 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z2_1 = 0;
+
+     label2:
+        $z2_2 = Phi($z2 #0, $z2_1 #1);
+
+        return $z2_2;
+    }
+
+    void install(org.gjt.sp.jedit.pluginmgr.Roster, java.lang.String, boolean, boolean)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin r0;
+        org.gjt.sp.jedit.pluginmgr.Roster r1;
+        boolean z0, z1, $z2, $z3;
+        java.lang.String r2, $r4, $r5, $r6, r7, $r8, r7_1, r7_2, $r8_1, $r8_2;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Branch r3;
+        int $i0, $i0_1, $i0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r7 := @parameter1;
+
+        z0 := @parameter2;
+
+        z1 := @parameter3;
+
+        r2 = r0.getInstalledPath();
+
+        r3 = r0.getCompatibleBranch();
+
+        $z2 = r3.obsolete;
+
+        if $z2 == 0 goto label2;
+
+        if r2 == null goto label1;
+
+        r1.addRemove(r2);
+
+     label1:
+        return;
+
+     label2:
+        $r4 = r0.installedVersion;
+
+        if $r4 == null goto label3;
+
+        $r5 = r0.installedPath;
+
+        if $r5 == null goto label3;
+
+        $z3 = r0.loaded;
+
+        if $z3 != 0 goto label3;
+
+        if z1 == 0 goto label3;
+
+        $r6 = r0.installedPath;
+
+        r1.addLoad($r6);
+
+        return;
+
+     label3:
+(0)     if r2 == null goto label4;
+
+(1)     r7_1 = org.gjt.sp.jedit.MiscUtilities.getParentOfPath(r2);
+
+     label4:
+        r7_2 = Phi(r7 #0, r7_1 #1);
+
+        if z0 == 0 goto label5;
+
+        $r8 = r3.downloadSource;
+
+(2)     goto label6;
+
+     label5:
+(3)     $r8_1 = r3.download;
+
+     label6:
+        $r8_2 = Phi($r8 #2, $r8_1 #3);
+
+        if z0 == 0 goto label7;
+
+        $i0 = r3.downloadSourceSize;
+
+(4)     goto label8;
+
+     label7:
+(5)     $i0_1 = r3.downloadSize;
+
+     label8:
+        $i0_2 = Phi($i0 #4, $i0_1 #5);
+
+        r1.addInstall(r2, $r8_2, r7_2, $i0_2);
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.name;
+
+        return $r1;
+    }
+}

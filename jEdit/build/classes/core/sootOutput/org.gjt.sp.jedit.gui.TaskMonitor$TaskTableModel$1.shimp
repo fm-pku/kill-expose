@@ -1,0 +1,67 @@
+class org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.util.Task val$task;
+    final org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel, org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel$1 r0;
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel r1;
+        org.gjt.sp.util.Task r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$task = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel$1 r0;
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel $r1, $r4, $r5, $r7;
+        java.util.List $r2, $r6, $r8;
+        org.gjt.sp.util.Task $r3;
+        int $i0, $i1, $i2, $i3;
+
+        r0 := @this;
+
+        $r1 = r0.this$0;
+
+        $r2 = org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel.access$600($r1);
+
+        $r3 = r0.val$task;
+
+        $r2.add($r3);
+
+        $r5 = r0.this$0;
+
+        $r4 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel.access$600($r4);
+
+        $i0 = $r6.size();
+
+        $i1 = $i0 - 1;
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel.access$600($r7);
+
+        $i2 = $r8.size();
+
+        $i3 = $i2 - 1;
+
+        $r5.fireTableRowsInserted($i1, $i3);
+
+        return;
+    }
+}

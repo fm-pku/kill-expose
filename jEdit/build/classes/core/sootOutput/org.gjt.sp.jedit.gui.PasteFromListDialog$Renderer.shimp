@@ -1,0 +1,148 @@
+class org.gjt.sp.jedit.gui.PasteFromListDialog$Renderer extends javax.swing.DefaultListCellRenderer
+{
+    private int maxItemLength;
+
+    public void <init>(int)
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog$Renderer r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.maxItemLength = i0;
+
+        return;
+    }
+
+    java.lang.String shorten(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog$Renderer r0;
+        java.lang.String r1, $r4, $r5, $r6;
+        java.lang.StringBuilder r2, $r3;
+        char c0;
+        boolean $z0, $z1, z2;
+        int $i1, $i2, $i3, $i4, i5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        r2 = $r3;
+
+        $r4 = r1.toLowerCase();
+
+        $z0 = $r4.startsWith("<html>");
+
+        if $z0 == 0 goto label1;
+
+        r2.append(32);
+
+     label1:
+        z2 = 1;
+
+(0)     i5 = 0;
+
+     label2:
+        z2 = Phi(z2 #0, z2 #4);
+
+        i5 = Phi(i5 #0, i5 #4);
+
+        $i1 = r1.length();
+
+        if i5 >= $i1 goto label7;
+
+        $i3 = r2.length();
+
+        $i4 = r0.maxItemLength;
+
+        if $i3 != $i4 goto label3;
+
+        r2.append("...");
+
+        goto label7;
+
+     label3:
+        c0 = r1.charAt(i5);
+
+        $z1 = java.lang.Character.isWhitespace(c0);
+
+        if $z1 == 0 goto label5;
+
+        if z2 == 0 goto label4;
+
+(1)     goto label6;
+
+     label4:
+        r2.append(32);
+
+        z2 = 1;
+
+(2)     goto label6;
+
+     label5:
+        z2 = 0;
+
+(3)     r2.append(c0);
+
+     label6:
+        z2 = Phi(z2 #1, z2 #2, z2 #3);
+
+        i5 = i5 + 1;
+
+(4)     goto label2;
+
+     label7:
+        $i2 = r2.length();
+
+        if $i2 != 0 goto label8;
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("paste-from-list.whitespace");
+
+        return $r6;
+
+     label8:
+        $r5 = r2.toString();
+
+        return $r5;
+    }
+
+    public java.awt.Component getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog$Renderer r0;
+        javax.swing.JList r1;
+        java.lang.Object r2;
+        int i0;
+        boolean z0, z1;
+        java.lang.String $r4, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        specialinvoke r0.getListCellRendererComponent(r1, r2, i0, z0, z1);
+
+        $r4 = r2.toString();
+
+        $r5 = r0.shorten($r4);
+
+        r0.setText($r5);
+
+        return r0;
+    }
+}

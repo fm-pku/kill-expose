@@ -1,0 +1,7 @@
+public interface  org.gjt.sp.jedit.menu.DynamicMenuProvider extends java.lang.Object
+{
+
+    public abstract boolean updateEveryTime();
+
+    public abstract void update(javax.swing.JMenu);
+}

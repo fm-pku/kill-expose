@@ -1,0 +1,95 @@
+class org.gjt.sp.jedit.View$FocusHandler extends java.awt.event.FocusAdapter
+{
+    final org.gjt.sp.jedit.View this$0;
+
+    private void <init>(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.View$FocusHandler r0;
+        org.gjt.sp.jedit.View r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void focusGained(java.awt.event.FocusEvent)
+    {
+        org.gjt.sp.jedit.View$FocusHandler r0;
+        java.awt.event.FocusEvent r1;
+        java.lang.Object $r2;
+        boolean $z0;
+        org.gjt.sp.jedit.View $r3, $r5, $r7;
+        org.gjt.sp.jedit.EditPane $r4, $r6;
+        java.awt.Component r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getSource();
+
+(0)     r8 = (java.awt.Component) $r2;
+
+     label1:
+        r8 = Phi(r8 #0, r8 #1);
+
+        $z0 = r8 instanceof org.gjt.sp.jedit.EditPane;
+
+        if $z0 != 0 goto label3;
+
+        if r8 != null goto label2;
+
+        return;
+
+     label2:
+        r8 = r8.getParent();
+
+(1)     goto label1;
+
+     label3:
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.View.access$600($r3);
+
+        if r8 == $r4 goto label4;
+
+        $r7 = r0.this$0;
+
+        $r6 = (org.gjt.sp.jedit.EditPane) r8;
+
+        org.gjt.sp.jedit.View.access$700($r7, $r6);
+
+        goto label5;
+
+     label4:
+        $r5 = r0.this$0;
+
+        org.gjt.sp.jedit.View.access$800($r5);
+
+     label5:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.View$1)
+    {
+        org.gjt.sp.jedit.View$FocusHandler r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.View$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

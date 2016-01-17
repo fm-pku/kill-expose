@@ -1,0 +1,62 @@
+class org.gjt.sp.jedit.bsh.BSHThrowStatement extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHThrowStatement r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHThrowStatement r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        java.lang.Object r3;
+        org.gjt.sp.jedit.bsh.Node $r4;
+        org.gjt.sp.jedit.bsh.SimpleNode $r5;
+        boolean $z0;
+        org.gjt.sp.jedit.bsh.TargetError $r6;
+        java.lang.Exception $r7;
+        org.gjt.sp.jedit.bsh.EvalError $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = r0.jjtGetChild(0);
+
+        $r5 = (org.gjt.sp.jedit.bsh.SimpleNode) $r4;
+
+        r3 = $r5.eval(r1, r2);
+
+        $z0 = r3 instanceof java.lang.Exception;
+
+        if $z0 != 0 goto label1;
+
+        $r8 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        specialinvoke $r8.<init>("Expression in \'throw\' must be Exception type", r0, r1);
+
+        throw $r8;
+
+     label1:
+        $r6 = new org.gjt.sp.jedit.bsh.TargetError;
+
+        $r7 = (java.lang.Exception) r3;
+
+        specialinvoke $r6.<init>($r7, r0, r1);
+
+        throw $r6;
+    }
+}

@@ -1,0 +1,173 @@
+class org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel extends javax.swing.table.AbstractTableModel
+{
+    private final java.util.List tasks;
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel r0;
+        java.util.ArrayList $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.ArrayList;
+
+        specialinvoke $r1.<init>();
+
+        r0.tasks = $r1;
+
+        return;
+    }
+
+    public int getRowCount()
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel r0;
+        java.util.List $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.tasks;
+
+        $i0 = $r1.size();
+
+        return $i0;
+    }
+
+    public int getColumnCount()
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel r0;
+
+        r0 := @this;
+
+        return 2;
+    }
+
+    public boolean isCellEditable(int, int)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel r0;
+        int i0, i1;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        if i1 != 1 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    public java.lang.Object getValueAt(int, int)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel r0;
+        int i0, i1;
+        java.util.List $r1;
+        java.lang.Object $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $r1 = r0.tasks;
+
+        $r2 = $r1.get(i0);
+
+        return $r2;
+    }
+
+    void addTask(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel r0;
+        org.gjt.sp.util.Task r1;
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel$1 $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel$1;
+
+        specialinvoke $r2.<init>(r0, r1);
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread($r2);
+
+        return;
+    }
+
+    void removeTask(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel r0;
+        org.gjt.sp.util.Task r1;
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel$2 $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel$2;
+
+        specialinvoke $r2.<init>(r0, r1);
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread($r2);
+
+        return;
+    }
+
+    public void removeAll()
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel r0;
+        java.util.List $r1;
+
+        r0 := @this;
+
+        $r1 = r0.tasks;
+
+        $r1.clear();
+
+        r0.fireTableDataChanged();
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.TaskMonitor$1)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel r0;
+        org.gjt.sp.jedit.gui.TaskMonitor$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    static java.util.List access$600(org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel r0;
+        java.util.List $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.tasks;
+
+        return $r1;
+    }
+}

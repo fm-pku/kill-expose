@@ -1,0 +1,154 @@
+class org.gjt.sp.jedit.options.BrowserColorsOptionPane$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.options.BrowserColorsOptionPane this$0;
+
+    void <init>(org.gjt.sp.jedit.options.BrowserColorsOptionPane)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane$ActionHandler r0;
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2;
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane $r3, $r5, $r7, $r9, $r11, $r13, $r15, $r16, $r18, $r19, $r21, $r22, $r24, $r25, $r27, $r29, $r30;
+        javax.swing.JButton $r4, $r6, $r8, $r10;
+        javax.swing.JTable $r12, $r14, $r20, $r26;
+        int $i0, $i1, $i2, $i3, i4, i5, i6;
+        org.gjt.sp.jedit.options.BrowserColorsModel $r17, $r23, $r28, $r31;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$100($r3);
+
+        if r2 != $r4 goto label1;
+
+        $r30 = r0.this$0;
+
+        $r31 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$200($r30);
+
+        $r31.add();
+
+        goto label6;
+
+     label1:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$300($r5);
+
+        if r2 != $r6 goto label2;
+
+        $r25 = r0.this$0;
+
+        $r26 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$400($r25);
+
+        i4 = $r26.getSelectedRow();
+
+        $r27 = r0.this$0;
+
+        $r28 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$200($r27);
+
+        $r28.remove(i4);
+
+        $r29 = r0.this$0;
+
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$000($r29);
+
+        goto label6;
+
+     label2:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$500($r7);
+
+        if r2 != $r8 goto label4;
+
+        $r19 = r0.this$0;
+
+        $r20 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$400($r19);
+
+        i5 = $r20.getSelectedRow();
+
+        if i5 == 0 goto label3;
+
+        $r22 = r0.this$0;
+
+        $r23 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$200($r22);
+
+        $r23.moveUp(i5);
+
+        $r24 = r0.this$0;
+
+        $i3 = i5 - 1;
+
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$600($r24, $i3);
+
+     label3:
+        $r21 = r0.this$0;
+
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$000($r21);
+
+        goto label6;
+
+     label4:
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$700($r9);
+
+        if r2 != $r10 goto label6;
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$400($r11);
+
+        i6 = $r12.getSelectedRow();
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$400($r13);
+
+        $i0 = $r14.getRowCount();
+
+        $i1 = $i0 - 1;
+
+        if i6 == $i1 goto label5;
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$200($r16);
+
+        $r17.moveDown(i6);
+
+        $r18 = r0.this$0;
+
+        $i2 = i6 + 1;
+
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$600($r18, $i2);
+
+     label5:
+        $r15 = r0.this$0;
+
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$000($r15);
+
+     label6:
+        return;
+    }
+}

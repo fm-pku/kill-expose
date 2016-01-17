@@ -1,0 +1,96 @@
+class org.gjt.sp.jedit.gui.tray.JTrayIcon$MyMouseListener extends java.awt.event.MouseAdapter
+{
+    final org.gjt.sp.jedit.gui.tray.JTrayIcon this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.tray.JTrayIcon)
+    {
+        org.gjt.sp.jedit.gui.tray.JTrayIcon$MyMouseListener r0;
+        org.gjt.sp.jedit.gui.tray.JTrayIcon r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mouseClicked(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.tray.JTrayIcon$MyMouseListener r0;
+        java.awt.event.MouseEvent r1;
+        boolean $z0;
+        org.gjt.sp.jedit.gui.tray.JTrayIcon $r2, $r4, $r7, $r9, $r11;
+        javax.swing.JDialog $r3, $r8, $r12;
+        int $i0, $i1, $i2, $i3;
+        javax.swing.JPopupMenu $r5, $r10;
+        java.awt.Dimension $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = org.gjt.sp.jedit.GUIUtilities.isPopupTrigger(r1);
+
+        if $z0 == 0 goto label1;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.tray.JTrayIcon.access$300($r2);
+
+        $i0 = r1.getX();
+
+        $i1 = r1.getY();
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.gui.tray.JTrayIcon.access$200($r4);
+
+        $r6 = $r5.getPreferredSize();
+
+        $i2 = $r6.height;
+
+        $i3 = $i1 - $i2;
+
+        $r3.setLocation($i0, $i3);
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.tray.JTrayIcon.access$300($r7);
+
+        $r8.setVisible(1);
+
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.gui.tray.JTrayIcon.access$200($r9);
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.gui.tray.JTrayIcon.access$300($r11);
+
+        $r10.show($r12, 0, 0);
+
+     label1:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.tray.JTrayIcon, org.gjt.sp.jedit.gui.tray.JTrayIcon$1)
+    {
+        org.gjt.sp.jedit.gui.tray.JTrayIcon$MyMouseListener r0;
+        org.gjt.sp.jedit.gui.tray.JTrayIcon r1;
+        org.gjt.sp.jedit.gui.tray.JTrayIcon$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

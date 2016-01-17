@@ -1,0 +1,39 @@
+class org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem extends java.lang.Object
+{
+    java.lang.String actionName;
+    java.lang.String label;
+
+    void <init>(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem r0;
+        java.lang.String r1, r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.actionName = r1;
+
+        $r3 = org.gjt.sp.jedit.GUIUtilities.prettifyMenuLabel(r2);
+
+        r0.label = $r3;
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.label;
+
+        return $r1;
+    }
+}

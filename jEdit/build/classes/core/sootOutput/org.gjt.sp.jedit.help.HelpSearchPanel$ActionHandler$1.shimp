@@ -1,0 +1,288 @@
+class org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final java.lang.String val$text;
+    final org.gjt.sp.jedit.help.HelpIndex val$index;
+    final java.util.Vector val$resultModel;
+    final org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler this$1;
+
+    void <init>(org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler, java.lang.String, org.gjt.sp.jedit.help.HelpIndex, java.util.Vector)
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler$1 r0;
+        org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler r1;
+        java.lang.String r2;
+        org.gjt.sp.jedit.help.HelpIndex r3;
+        java.util.Vector r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r0.this$1 = r1;
+
+        r0.val$text = r2;
+
+        r0.val$index = r3;
+
+        r0.val$resultModel = r4;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler$1 r0;
+        java.util.StringTokenizer r1, $r5;
+        org.gjt.sp.jedit.help.HelpIndex$Word$Occurrence r2;
+        org.gjt.sp.jedit.help.HelpIndex$HelpFile r3;
+        org.gjt.sp.jedit.help.HelpSearchPanel$Result r4, $r18, r26;
+        java.lang.String $r6, $r13, $r22, $r23, r24;
+        boolean $z0, $z1, z2;
+        org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler$1$1 $r7;
+        java.util.Vector $r8, $r10, $r11, $r17, $r19, $r20;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, i14, i15, i16, i17;
+        org.gjt.sp.jedit.help.HelpSearchPanel$ResultCompare $r9;
+        java.lang.Object $r12, $r21;
+        double $d0, $d1, $d2, $d3, $d4;
+        org.gjt.sp.jedit.help.HelpIndex $r14, $r16;
+        org.gjt.sp.jedit.help.HelpIndex$Word$Occurrence[] $r15;
+        org.gjt.sp.jedit.help.HelpIndex$Word r25;
+
+        r0 := @this;
+
+        $r5 = new java.util.StringTokenizer;
+
+        $r6 = r0.val$text;
+
+        specialinvoke $r5.<init>($r6, ",.;:-? ");
+
+        r1 = $r5;
+
+(0)     i14 = 0;
+
+     label01:
+        i16 = Phi(i16 #0, i16 #1, i16 #10);
+
+        i15 = Phi(i15 #0, i15 #1, i15 #10);
+
+        i14 = Phi(i14 #0, i14 #1, i14 #10);
+
+        z2 = Phi(z2 #0, z2 #1, z2 #10);
+
+        $z0 = r1.hasMoreTokens();
+
+        if $z0 == 0 goto label09;
+
+        $r13 = r1.nextToken();
+
+        r24 = $r13.toLowerCase();
+
+        $r14 = r0.val$index;
+
+        r25 = $r14.lookupWord(r24);
+
+        if r25 != null goto label02;
+
+(1)     goto label01;
+
+     label02:
+(2)     i15 = 0;
+
+     label03:
+        i16 = Phi(i16 #2, i16 #9);
+
+        i15 = Phi(i15 #2, i15 #9);
+
+        i14 = Phi(i14 #2, i14 #9);
+
+        z2 = Phi(z2 #2, z2 #9);
+
+        $i3 = r25.occurCount;
+
+        if i15 >= $i3 goto label08;
+
+        $r15 = r25.occurrences;
+
+        r2 = $r15[i15];
+
+        z2 = 0;
+
+        $r16 = r0.val$index;
+
+        $i4 = r2.file;
+
+        r3 = $r16.getFile($i4);
+
+(3)     i16 = 0;
+
+     label04:
+        i16 = Phi(i16 #3, i16 #6);
+
+        i15 = Phi(i15 #3, i15 #6);
+
+        i14 = Phi(i14 #3, i14 #6);
+
+        z2 = Phi(z2 #3, z2 #6);
+
+        $r17 = r0.val$resultModel;
+
+        $i5 = $r17.size();
+
+(4)     if i16 >= $i5 goto label06;
+
+        $r20 = r0.val$resultModel;
+
+        $r21 = $r20.elementAt(i16);
+
+        r4 = (org.gjt.sp.jedit.help.HelpSearchPanel$Result) $r21;
+
+        $r23 = r4.file;
+
+        $r22 = r3.file;
+
+        $z1 = $r23.equals($r22);
+
+        if $z1 == 0 goto label05;
+
+        $i9 = r4.rank;
+
+        $i8 = r2.count;
+
+        $i10 = $i9 + $i8;
+
+        r4.rank = $i10;
+
+        $i11 = r4.rank;
+
+        $i12 = $i11 + 20;
+
+        r4.rank = $i12;
+
+        $i13 = r4.rank;
+
+        i14 = java.lang.Math.max($i13, i14);
+
+        z2 = 1;
+
+(5)     goto label06;
+
+     label05:
+        i16 = i16 + 1;
+
+(6)     goto label04;
+
+     label06:
+        i14 = Phi(i14 #4, i14 #5);
+
+        z2 = Phi(z2 #4, z2 #5);
+
+(7)     if z2 != 0 goto label07;
+
+        $i6 = r2.count;
+
+        i14 = java.lang.Math.max($i6, i14);
+
+        $r19 = r0.val$resultModel;
+
+        $r18 = new org.gjt.sp.jedit.help.HelpSearchPanel$Result;
+
+        $i7 = r2.count;
+
+        specialinvoke $r18.<init>(r3, $i7);
+
+(8)     $r19.addElement($r18);
+
+     label07:
+        i14 = Phi(i14 #7, i14 #8);
+
+        i15 = i15 + 1;
+
+(9)     goto label03;
+
+     label08:
+(10)    goto label01;
+
+     label09:
+(11)    if i14 == 0 goto label12;
+
+(12)    i17 = 0;
+
+     label10:
+        i16 = Phi(i16 #12, i16 #13);
+
+        i15 = Phi(i15 #12, i15 #13);
+
+        i17 = Phi(i17 #12, i17 #13);
+
+        i14 = Phi(i14 #12, i14 #13);
+
+        z2 = Phi(z2 #12, z2 #13);
+
+        $r8 = r0.val$resultModel;
+
+        $i0 = $r8.size();
+
+        if i17 >= $i0 goto label11;
+
+        $r11 = r0.val$resultModel;
+
+        $r12 = $r11.elementAt(i17);
+
+        r26 = (org.gjt.sp.jedit.help.HelpSearchPanel$Result) $r12;
+
+        $i1 = r26.rank;
+
+        $d0 = (double) $i1;
+
+        $d2 = $d0 * 4.0;
+
+        $d1 = (double) i14;
+
+        $d3 = $d2 / $d1;
+
+        $d4 = java.lang.Math.ceil($d3);
+
+        $i2 = (int) $d4;
+
+        r26.rank = $i2;
+
+        i17 = i17 + 1;
+
+(13)    goto label10;
+
+     label11:
+        $r10 = r0.val$resultModel;
+
+        $r9 = new org.gjt.sp.jedit.help.HelpSearchPanel$ResultCompare;
+
+        specialinvoke $r9.<init>();
+
+(14)    java.util.Collections.sort($r10, $r9);
+
+     label12:
+        i16 = Phi(i16 #11, i16 #14);
+
+        i15 = Phi(i15 #11, i15 #14);
+
+        i17 = Phi(i17 #11, i17 #14);
+
+        i14 = Phi(i14 #11, i14 #14);
+
+        z2 = Phi(z2 #11, z2 #14);
+
+        $r7 = new org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler$1$1;
+
+        specialinvoke $r7.<init>(r0);
+
+        java.awt.EventQueue.invokeLater($r7);
+
+        return;
+    }
+}

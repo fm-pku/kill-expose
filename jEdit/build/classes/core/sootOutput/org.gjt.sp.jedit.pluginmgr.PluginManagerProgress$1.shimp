@@ -1,0 +1,55 @@
+class org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final long val$value;
+    final org.gjt.sp.jedit.pluginmgr.PluginManagerProgress this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress, long)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$1 r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r1;
+        long l0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        l0 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$value = l0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$1 r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress $r1, $r3;
+        javax.swing.JProgressBar $r2;
+        int $i0, $i2, $i3;
+        long $l1;
+
+        r0 := @this;
+
+        $r1 = r0.this$0;
+
+        $r2 = org.gjt.sp.jedit.pluginmgr.PluginManagerProgress.access$100($r1);
+
+        $r3 = r0.this$0;
+
+        $i0 = org.gjt.sp.jedit.pluginmgr.PluginManagerProgress.access$000($r3);
+
+        $l1 = r0.val$value;
+
+        $i2 = (int) $l1;
+
+        $i3 = $i0 + $i2;
+
+        $r2.setValue($i3);
+
+        return;
+    }
+}

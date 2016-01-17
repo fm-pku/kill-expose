@@ -1,0 +1,289 @@
+class org.gjt.sp.jedit.GUIUtilities$UnixWorkaround$ComponentHandler extends java.awt.event.ComponentAdapter
+{
+    final org.gjt.sp.jedit.GUIUtilities$UnixWorkaround this$0;
+
+    private void <init>(org.gjt.sp.jedit.GUIUtilities$UnixWorkaround)
+    {
+        org.gjt.sp.jedit.GUIUtilities$UnixWorkaround$ComponentHandler r0;
+        org.gjt.sp.jedit.GUIUtilities$UnixWorkaround r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void componentMoved(java.awt.event.ComponentEvent)
+    {
+        org.gjt.sp.jedit.GUIUtilities$UnixWorkaround$ComponentHandler r0;
+        java.awt.event.ComponentEvent r1;
+        java.awt.Rectangle r2, $r10, $r15, $r20, $r23;
+        long $l0, $l1, $l2;
+        org.gjt.sp.jedit.GUIUtilities$UnixWorkaround $r3, $r4, $r6, $r8, $r9, $r13, $r18, $r19, $r22;
+        byte $b3;
+        java.awt.Window $r5, $r7, $r14, $r21;
+        boolean $z0, $z1, $z2;
+        java.lang.StringBuilder $r11, $r12, $r16;
+        java.lang.String $r17;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $l0 = java.lang.System.currentTimeMillis();
+
+        $r3 = r0.this$0;
+
+        $l1 = $r3.start;
+
+        $l2 = $l0 - $l1;
+
+        $b3 = $l2 cmp 1000L;
+
+        if $b3 >= 0 goto label2;
+
+        $r6 = r0.this$0;
+
+        $r7 = $r6.win;
+
+        Packer.Unpack($r6);
+
+        r2 = $r7.getBounds();
+
+        Packer.Pack($r6);
+
+        $r8 = r0.this$0;
+
+        $z0 = $r8.windowOpened;
+
+        if $z0 != 0 goto label1;
+
+        $r22 = r0.this$0;
+
+        $r23 = $r22.required;
+
+        Packer.Unpack($r22);
+
+        $z2 = r2.equals($r23);
+
+        Packer.Pack($r22);
+
+        if $z2 == 0 goto label1;
+
+        return;
+
+     label1:
+        $r9 = r0.this$0;
+
+        $r10 = $r9.desired;
+
+        Packer.Unpack($r9);
+
+        $z1 = r2.equals($r10);
+
+        Packer.Pack($r9);
+
+        if $z1 != 0 goto label2;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = $r11.append("Window resize blocked: ");
+
+        $r13 = r0.this$0;
+
+        $r14 = $r13.win;
+
+        Packer.Unpack($r13);
+
+        $r15 = $r14.getBounds();
+
+        Packer.Pack($r13);
+
+        $r16 = $r12.append($r15);
+
+        $r17 = $r16.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/GUIUtilities", $r17);
+
+        $r18 = r0.this$0;
+
+        $r21 = $r18.win;
+
+        $r19 = r0.this$0;
+
+        $r20 = $r19.desired;
+
+        Packer.Unpack($r18);
+
+        Packer.Unpack($r19);
+
+        $r21.setBounds($r20);
+
+     label2:
+        Packer.Pack($r18);
+
+        Packer.Pack($r19);
+
+        $r4 = r0.this$0;
+
+        $r5 = $r4.win;
+
+        Packer.Unpack($r4);
+
+        $r5.removeComponentListener(r0);
+
+        Packer.Pack($r4);
+
+        return;
+    }
+
+    public void componentResized(java.awt.event.ComponentEvent)
+    {
+        org.gjt.sp.jedit.GUIUtilities$UnixWorkaround$ComponentHandler r0;
+        java.awt.event.ComponentEvent r1;
+        java.awt.Rectangle r2, $r10, $r15, $r20, $r23;
+        long $l0, $l1, $l2;
+        org.gjt.sp.jedit.GUIUtilities$UnixWorkaround $r3, $r4, $r6, $r8, $r9, $r13, $r18, $r19, $r22;
+        byte $b3;
+        java.awt.Window $r5, $r7, $r14, $r21;
+        boolean $z0, $z1, $z2;
+        java.lang.StringBuilder $r11, $r12, $r16;
+        java.lang.String $r17;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $l0 = java.lang.System.currentTimeMillis();
+
+        $r3 = r0.this$0;
+
+        $l1 = $r3.start;
+
+        $l2 = $l0 - $l1;
+
+        $b3 = $l2 cmp 1000L;
+
+        if $b3 >= 0 goto label2;
+
+        $r6 = r0.this$0;
+
+        $r7 = $r6.win;
+
+        Packer.Unpack($r6);
+
+        r2 = $r7.getBounds();
+
+        Packer.Pack($r6);
+
+        $r8 = r0.this$0;
+
+        $z0 = $r8.windowOpened;
+
+        if $z0 != 0 goto label1;
+
+        $r22 = r0.this$0;
+
+        $r23 = $r22.required;
+
+        Packer.Unpack($r22);
+
+        $z2 = r2.equals($r23);
+
+        Packer.Pack($r22);
+
+        if $z2 == 0 goto label1;
+
+        return;
+
+     label1:
+        $r9 = r0.this$0;
+
+        $r10 = $r9.desired;
+
+        Packer.Unpack($r9);
+
+        $z1 = r2.equals($r10);
+
+        Packer.Pack($r9);
+
+        if $z1 != 0 goto label2;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = $r11.append("Window resize blocked: ");
+
+        $r13 = r0.this$0;
+
+        $r14 = $r13.win;
+
+        Packer.Unpack($r13);
+
+        $r15 = $r14.getBounds();
+
+        Packer.Pack($r13);
+
+        $r16 = $r12.append($r15);
+
+        $r17 = $r16.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/GUIUtilities", $r17);
+
+        $r18 = r0.this$0;
+
+        $r21 = $r18.win;
+
+        $r19 = r0.this$0;
+
+        $r20 = $r19.desired;
+
+        Packer.Unpack($r18);
+
+        Packer.Unpack($r19);
+
+        $r21.setBounds($r20);
+
+     label2:
+        Packer.Pack($r18);
+
+        Packer.Pack($r19);
+
+        $r4 = r0.this$0;
+
+        $r5 = $r4.win;
+
+        Packer.Unpack($r4);
+
+        $r5.removeComponentListener(r0);
+
+        Packer.Pack($r4);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.GUIUtilities$UnixWorkaround, org.gjt.sp.jedit.GUIUtilities$1)
+    {
+        org.gjt.sp.jedit.GUIUtilities$UnixWorkaround$ComponentHandler r0;
+        org.gjt.sp.jedit.GUIUtilities$UnixWorkaround r1;
+        org.gjt.sp.jedit.GUIUtilities$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

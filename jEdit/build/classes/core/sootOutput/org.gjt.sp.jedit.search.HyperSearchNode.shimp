@@ -1,0 +1,7 @@
+public interface  org.gjt.sp.jedit.search.HyperSearchNode extends java.lang.Object
+{
+
+    public abstract org.gjt.sp.jedit.Buffer getBuffer(org.gjt.sp.jedit.View);
+
+    public abstract void goTo(org.gjt.sp.jedit.EditPane);
+}

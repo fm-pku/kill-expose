@@ -1,0 +1,682 @@
+public class org.gjt.sp.jedit.AbstractOptionPane extends javax.swing.JPanel implements org.gjt.sp.jedit.OptionPane
+{
+    protected boolean initialized;
+    protected java.awt.GridBagLayout gridBag;
+    protected int y;
+    private final java.lang.String name;
+
+    public void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+        java.lang.String r1;
+        java.awt.GridBagLayout $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.name = r1;
+
+        $r2 = new java.awt.GridBagLayout;
+
+        Packer.Unpack(r0);
+
+        specialinvoke $r2.<init>();
+
+        r0.gridBag = $r2;
+
+        r0.setLayout($r2);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public java.lang.String getName()
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.name;
+
+        return $r1;
+    }
+
+    public java.awt.Component getComponent()
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+
+        r0 := @this;
+
+        return r0;
+    }
+
+    public final void init()
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.initialized;
+
+        if $z0 != 0 goto label1;
+
+        r0.initialized = 1;
+
+        r0._init();
+
+     label1:
+        return;
+    }
+
+    public final void save()
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.initialized;
+
+        if $z0 == 0 goto label1;
+
+        r0._save();
+
+     label1:
+        return;
+    }
+
+    public javax.swing.JLabel newLabel(java.lang.String, java.awt.Component)
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+        java.lang.String r1, r4;
+        java.awt.Component r2;
+        javax.swing.JLabel r3, $r5;
+        java.lang.Exception $r6, r8;
+        javax.swing.JComponent r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r5 = new javax.swing.JLabel;
+
+        specialinvoke $r5.<init>(r1);
+
+        r3 = $r5;
+
+     label1:
+        r7 = (javax.swing.JComponent) r2;
+
+        r4 = r7.getToolTipText();
+
+        r3.setToolTipText(r4);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r6 := @caughtexception;
+
+        r8 = $r6;
+
+     label4:
+        return r3;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    public void addComponent(java.lang.String, java.awt.Component)
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+        java.lang.String r1;
+        java.awt.Component r2;
+        javax.swing.JLabel r3;
+        javax.swing.border.EmptyBorder $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 = r0.newLabel(r1, r2);
+
+        $r4 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r4.<init>(0, 0, 0, 12);
+
+        r3.setBorder($r4);
+
+        r0.addComponent(r3, r2, 1);
+
+        return;
+    }
+
+    public void addComponent(java.lang.String, java.awt.Component, int)
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+        java.lang.String r1;
+        java.awt.Component r2;
+        int i0;
+        javax.swing.JLabel r3;
+        javax.swing.border.EmptyBorder $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        r3 = r0.newLabel(r1, r2);
+
+        $r4 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r4.<init>(0, 0, 0, 12);
+
+        r3.setBorder($r4);
+
+        r0.addComponent(r3, r2, i0);
+
+        return;
+    }
+
+    public void addComponent(java.awt.Component, java.awt.Component)
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+        java.awt.Component r1, r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.addComponent(r1, r2, 1);
+
+        return;
+    }
+
+    public void addComponent(java.awt.Component, java.awt.Component, int)
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+        java.awt.Component r1, r2;
+        int i0, $i1, $i2;
+        java.awt.GridBagConstraints r3, $r4;
+        java.awt.Insets $r5;
+        java.awt.GridBagLayout $r6, $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        org.gjt.sp.jedit.AbstractOptionPane.copyToolTips(r1, r2);
+
+        $r4 = new java.awt.GridBagConstraints;
+
+        specialinvoke $r4.<init>();
+
+        r3 = $r4;
+
+        $i1 = r0.y;
+
+        $i2 = $i1 + 1;
+
+        r0.y = $i2;
+
+        r3.gridy = $i1;
+
+        r3.gridheight = 1;
+
+        r3.gridwidth = 1;
+
+        r3.weightx = 0.0;
+
+        $r5 = new java.awt.Insets;
+
+        specialinvoke $r5.<init>(1, 0, 1, 0);
+
+        r3.insets = $r5;
+
+        r3.fill = 1;
+
+        $r6 = r0.gridBag;
+
+        Packer.Unpack(r0);
+
+        $r6.setConstraints(r1, r3);
+
+        Packer.Pack(r0);
+
+        r0.add(r1);
+
+        r3.fill = i0;
+
+        r3.gridx = 1;
+
+        r3.weightx = 1.0;
+
+        $r8 = r0.gridBag;
+
+        Packer.Unpack(r0);
+
+        $r8.setConstraints(r2, r3);
+
+        Packer.Pack(r0);
+
+        r0.add(r2);
+
+        return;
+    }
+
+    public void addComponent(java.awt.Component)
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+        java.awt.Component r1;
+        java.awt.GridBagConstraints r2, $r3;
+        int $i0, $i1;
+        java.awt.Insets $r4;
+        java.awt.GridBagLayout $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new java.awt.GridBagConstraints;
+
+        specialinvoke $r3.<init>();
+
+        r2 = $r3;
+
+        $i0 = r0.y;
+
+        $i1 = $i0 + 1;
+
+        r0.y = $i1;
+
+        r2.gridy = $i0;
+
+        r2.gridheight = 1;
+
+        r2.gridwidth = 0;
+
+        r2.fill = 0;
+
+        r2.anchor = 17;
+
+        r2.weightx = 1.0;
+
+        $r4 = new java.awt.Insets;
+
+        specialinvoke $r4.<init>(1, 0, 1, 0);
+
+        r2.insets = $r4;
+
+        $r5 = r0.gridBag;
+
+        Packer.Unpack(r0);
+
+        $r5.setConstraints(r1, r2);
+
+        Packer.Pack(r0);
+
+        r0.add(r1);
+
+        return;
+    }
+
+    public void addComponent(java.awt.Component, int)
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+        java.awt.Component r1;
+        int i0, $i1, $i2;
+        java.awt.GridBagConstraints r2, $r3;
+        java.awt.Insets $r4;
+        java.awt.GridBagLayout $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        $r3 = new java.awt.GridBagConstraints;
+
+        specialinvoke $r3.<init>();
+
+        r2 = $r3;
+
+        $i1 = r0.y;
+
+        $i2 = $i1 + 1;
+
+        r0.y = $i2;
+
+        r2.gridy = $i1;
+
+        r2.gridheight = 1;
+
+        r2.gridwidth = 0;
+
+        r2.fill = i0;
+
+        r2.anchor = 17;
+
+        r2.weightx = 1.0;
+
+        $r4 = new java.awt.Insets;
+
+        specialinvoke $r4.<init>(1, 0, 1, 0);
+
+        r2.insets = $r4;
+
+        $r5 = r0.gridBag;
+
+        Packer.Unpack(r0);
+
+        $r5.setConstraints(r1, r2);
+
+        Packer.Pack(r0);
+
+        r0.add(r1);
+
+        return;
+    }
+
+    private static void copyToolTips(java.awt.Component, java.awt.Component)
+    {
+        java.awt.Component r0, r1;
+        javax.swing.JComponent r2, r3;
+        java.lang.String r4, r5, r5_1, r5_2;
+        boolean $z0, $z1, $z2, $z3;
+        int i0, i0_1, i0_2, i0_3, i0_4;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $z0 = r0 instanceof javax.swing.JComponent;
+
+        if $z0 == 0 goto label1;
+
+        $z1 = r1 instanceof javax.swing.JComponent;
+
+        if $z1 != 0 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        r2 = (javax.swing.JComponent) r0;
+
+        r5 = r2.getToolTipText();
+
+        i0 = 0;
+
+(0)     if r5 == null goto label3;
+
+        $z3 = r5.isEmpty();
+
+(1)     if $z3 != 0 goto label3;
+
+(2)     i0_1 = i0 + 1;
+
+     label3:
+        i0_2 = Phi(i0 #0, i0 #1, i0_1 #2);
+
+        r3 = (javax.swing.JComponent) r1;
+
+        r4 = r3.getToolTipText();
+
+(3)     if r4 == null goto label4;
+
+        $z2 = r4.isEmpty();
+
+(4)     if $z2 != 0 goto label4;
+
+        r5_1 = r4;
+
+(5)     i0_3 = i0_2 + 1;
+
+     label4:
+        r5_2 = Phi(r5 #3, r5 #4, r5_1 #5);
+
+        i0_4 = Phi(i0_2 #3, i0_2 #4, i0_3 #5);
+
+        if i0_4 != 1 goto label5;
+
+        r2.setToolTipText(r5_2);
+
+        r3.setToolTipText(r5_2);
+
+     label5:
+        return;
+    }
+
+    public void addSeparator()
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+        javax.swing.JSeparator r1, $r4;
+        java.awt.GridBagConstraints r2, $r5;
+        java.awt.Component $r3, $r8;
+        int $i0, $i1;
+        java.awt.GridBagLayout $r6;
+
+        r0 := @this;
+
+        $r3 = javax.swing.Box.createVerticalStrut(6);
+
+        r0.addComponent($r3);
+
+        $r4 = new javax.swing.JSeparator;
+
+        specialinvoke $r4.<init>(0);
+
+        r1 = $r4;
+
+        $r5 = new java.awt.GridBagConstraints;
+
+        specialinvoke $r5.<init>();
+
+        r2 = $r5;
+
+        $i0 = r0.y;
+
+        $i1 = $i0 + 1;
+
+        r0.y = $i1;
+
+        r2.gridy = $i0;
+
+        r2.gridheight = 1;
+
+        r2.gridwidth = 0;
+
+        r2.fill = 1;
+
+        r2.anchor = 17;
+
+        r2.weightx = 1.0;
+
+        $r6 = r0.gridBag;
+
+        Packer.Unpack(r0);
+
+        $r6.setConstraints(r1, r2);
+
+        Packer.Pack(r0);
+
+        r0.add(r1);
+
+        $r8 = javax.swing.Box.createVerticalStrut(6);
+
+        r0.addComponent($r8);
+
+        return;
+    }
+
+    public void addSeparator(java.lang.String)
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+        java.lang.String r1, $r17;
+        javax.swing.Box r2, r3, r5, $r7, $r8, $r20;
+        javax.swing.JLabel r4, $r16;
+        java.awt.GridBagConstraints r6, $r28;
+        int $i0, $i1, $i2;
+        java.awt.Component $r9, $r13, $r21, $r25, $r32;
+        javax.swing.JSeparator $r11, $r23;
+        java.awt.Dimension $r18;
+        java.awt.Insets $r29;
+        java.awt.GridBagLayout $r30;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r0.y;
+
+        if $i0 == 0 goto label1;
+
+        $r32 = javax.swing.Box.createVerticalStrut(6);
+
+        r0.addComponent($r32);
+
+     label1:
+        $r7 = new javax.swing.Box;
+
+        specialinvoke $r7.<init>(0);
+
+        r2 = $r7;
+
+        $r8 = new javax.swing.Box;
+
+        specialinvoke $r8.<init>(1);
+
+        r3 = $r8;
+
+        $r9 = javax.swing.Box.createGlue();
+
+        r3.add($r9);
+
+        $r11 = new javax.swing.JSeparator;
+
+        specialinvoke $r11.<init>(0);
+
+        r3.add($r11);
+
+        $r13 = javax.swing.Box.createGlue();
+
+        r3.add($r13);
+
+        r2.add(r3);
+
+        $r16 = new javax.swing.JLabel;
+
+        $r17 = org.gjt.sp.jedit.jEdit.getProperty(r1);
+
+        specialinvoke $r16.<init>($r17);
+
+        r4 = $r16;
+
+        $r18 = r4.getPreferredSize();
+
+        r4.setMaximumSize($r18);
+
+        r2.add(r4);
+
+        $r20 = new javax.swing.Box;
+
+        specialinvoke $r20.<init>(1);
+
+        r5 = $r20;
+
+        $r21 = javax.swing.Box.createGlue();
+
+        r5.add($r21);
+
+        $r23 = new javax.swing.JSeparator;
+
+        specialinvoke $r23.<init>(0);
+
+        r5.add($r23);
+
+        $r25 = javax.swing.Box.createGlue();
+
+        r5.add($r25);
+
+        r2.add(r5);
+
+        $r28 = new java.awt.GridBagConstraints;
+
+        specialinvoke $r28.<init>();
+
+        r6 = $r28;
+
+        $i1 = r0.y;
+
+        $i2 = $i1 + 1;
+
+        r0.y = $i2;
+
+        r6.gridy = $i1;
+
+        r6.gridheight = 1;
+
+        r6.gridwidth = 0;
+
+        r6.fill = 1;
+
+        r6.anchor = 17;
+
+        r6.weightx = 1.0;
+
+        $r29 = new java.awt.Insets;
+
+        specialinvoke $r29.<init>(1, 0, 1, 0);
+
+        r6.insets = $r29;
+
+        $r30 = r0.gridBag;
+
+        Packer.Unpack(r0);
+
+        $r30.setConstraints(r2, r6);
+
+        Packer.Pack(r0);
+
+        r0.add(r2);
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+
+        r0 := @this;
+
+        return;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.AbstractOptionPane r0;
+
+        r0 := @this;
+
+        return;
+    }
+}

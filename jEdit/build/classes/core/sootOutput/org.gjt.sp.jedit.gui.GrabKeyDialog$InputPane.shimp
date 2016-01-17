@@ -1,0 +1,319 @@
+class org.gjt.sp.jedit.gui.GrabKeyDialog$InputPane extends javax.swing.JTextField
+{
+    protected java.lang.String rawShortcut;
+    final org.gjt.sp.jedit.gui.GrabKeyDialog this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.GrabKeyDialog)
+    {
+        org.gjt.sp.jedit.gui.GrabKeyDialog$InputPane r0;
+        org.gjt.sp.jedit.gui.GrabKeyDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.rawShortcut = "";
+
+        return;
+    }
+
+    public boolean getFocusTraversalKeysEnabled()
+    {
+        org.gjt.sp.jedit.gui.GrabKeyDialog$InputPane r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+
+    public void setText(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.GrabKeyDialog$InputPane r0;
+        java.lang.String r1, $r2, $r3, $r3_1, $r3_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 != null goto label1;
+
+        $r3 = "";
+
+(0)     goto label2;
+
+     label1:
+(1)     $r3_1 = r1;
+
+     label2:
+        $r3_2 = Phi($r3 #0, $r3_1 #1);
+
+        r0.rawShortcut = $r3_2;
+
+        $r2 = org.gjt.sp.jedit.GUIUtilities.getPlatformShortcutLabel(r1);
+
+        specialinvoke r0.setText($r2);
+
+        return;
+    }
+
+    public java.lang.String getShortcut()
+    {
+        org.gjt.sp.jedit.gui.GrabKeyDialog$InputPane r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.rawShortcut;
+
+        return $r1;
+    }
+
+    protected void processKeyEvent(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.gui.GrabKeyDialog$InputPane r0;
+        java.awt.event.KeyEvent r1, r51, r51_1, r51_2;
+        org.gjt.sp.jedit.gui.KeyEventTranslator$Key r2;
+        java.lang.StringBuilder r3, $r9, $r22, $r29, $r30, $r31, $r32, $r34, $r35, $r36, $r37, $r38, $r39, $r45, $r46, $r48, $r49;
+        java.lang.String r4, $r10, $r12, $r14, $r18, $r21, $r33, $r40, $r47, $r50, $r52, $r52_1, $r52_2, $r52_3;
+        int $i0, $i1, $i2, $i6, $i7;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.gui.GrabKeyDialog $r5, $r7, $r15, $r17, $r25, $r27, $r41, $r43;
+        org.gjt.sp.jedit.Buffer $r6, $r8, $r16, $r26, $r28, $r42, $r44;
+        javax.swing.text.Document $r11;
+        char $c3, $c4, $c5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r51 = org.gjt.sp.jedit.gui.KeyEventWorkaround.processKeyEvent(r1);
+
+        $i0 = r1.getKeyCode();
+
+        $z0 = org.gjt.sp.jedit.gui.KeyEventWorkaround.isBindable($i0);
+
+(0)     if $z0 != 0 goto label01;
+
+(1)     r51_1 = null;
+
+     label01:
+        r51_2 = Phi(r51 #0, r51_1 #1);
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$200($r5);
+
+(2)     if $r6 == null goto label04;
+
+        $r41 = r0.this$0;
+
+        $r42 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$200($r41);
+
+        $r43 = r0.this$0;
+
+        $r44 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$200($r43);
+
+        $i7 = $r44.getLength();
+
+        $r45 = new java.lang.StringBuilder;
+
+        specialinvoke $r45.<init>();
+
+        $r46 = $r45.append("Event ");
+
+        $r47 = org.gjt.sp.jedit.input.AbstractInputHandler.toString(r1);
+
+        $r48 = $r46.append($r47);
+
+        if r51_2 != null goto label02;
+
+        $r52 = " filtered\n";
+
+(3)     goto label03;
+
+     label02:
+(4)     $r52_1 = " passed\n";
+
+     label03:
+        $r52_2 = Phi($r52 #3, $r52_1 #4);
+
+        $r49 = $r48.append($r52_2);
+
+        $r50 = $r49.toString();
+
+(5)     $r42.insert($i7, $r50);
+
+     label04:
+        $r52_3 = Phi($r52 #2, $r52_2 #5);
+
+        if r51_2 != null goto label05;
+
+        return;
+
+     label05:
+        r51_2.consume();
+
+        r2 = org.gjt.sp.jedit.gui.KeyEventTranslator.translateKeyEvent(r51_2);
+
+        $z1 = org.gjt.sp.jedit.Debug.DUMP_KEY_EVENTS;
+
+        if $z1 == 0 goto label06;
+
+        $r34 = new java.lang.StringBuilder;
+
+        specialinvoke $r34.<init>();
+
+        $r35 = $r34.append("processKeyEvent() key=");
+
+        $r36 = $r35.append(r2);
+
+        $r37 = $r36.append(", _evt=");
+
+        $r38 = $r37.append(r1);
+
+        $r39 = $r38.append(46);
+
+        $r40 = $r39.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/gui/GrabKeyDialog", $r40);
+
+     label06:
+        if r2 != null goto label07;
+
+        return;
+
+     label07:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$200($r7);
+
+        if $r8 == null goto label08;
+
+        $r25 = r0.this$0;
+
+        $r26 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$200($r25);
+
+        $r27 = r0.this$0;
+
+        $r28 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$200($r27);
+
+        $i6 = $r28.getLength();
+
+        $r29 = new java.lang.StringBuilder;
+
+        specialinvoke $r29.<init>();
+
+        $r30 = $r29.append("==> Translated to ");
+
+        $r31 = $r30.append(r2);
+
+        $r32 = $r31.append(10);
+
+        $r33 = $r32.toString();
+
+        $r26.insert($i6, $r33);
+
+     label08:
+        $r9 = new java.lang.StringBuilder;
+
+        $r10 = r0.getShortcut();
+
+        specialinvoke $r9.<init>($r10);
+
+        r3 = $r9;
+
+        $r11 = r0.getDocument();
+
+        $i1 = $r11.getLength();
+
+        if $i1 == 0 goto label09;
+
+        r3.append(32);
+
+     label09:
+        $r12 = r2.modifiers;
+
+        if $r12 == null goto label10;
+
+        $r21 = r2.modifiers;
+
+        $r22 = r3.append($r21);
+
+        $r22.append(43);
+
+     label10:
+        $i2 = r2.key;
+
+        r4 = org.gjt.sp.jedit.gui.GrabKeyDialog.getSymbolicName($i2);
+
+        if r4 == null goto label11;
+
+        r3.append(r4);
+
+        goto label14;
+
+     label11:
+        $c3 = r2.input;
+
+        if $c3 == 0 goto label13;
+
+        $c4 = r2.input;
+
+        if $c4 != 32 goto label12;
+
+        r3.append("SPACE");
+
+        goto label14;
+
+     label12:
+        $c5 = r2.input;
+
+        r3.append($c5);
+
+        goto label14;
+
+     label13:
+        return;
+
+     label14:
+        $r14 = r3.toString();
+
+        r0.setText($r14);
+
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$200($r15);
+
+        if $r16 != null goto label15;
+
+        $r17 = r0.this$0;
+
+        $r18 = r3.toString();
+
+        org.gjt.sp.jedit.gui.GrabKeyDialog.access$300($r17, $r18);
+
+     label15:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.GrabKeyDialog, org.gjt.sp.jedit.gui.GrabKeyDialog$1)
+    {
+        org.gjt.sp.jedit.gui.GrabKeyDialog$InputPane r0;
+        org.gjt.sp.jedit.gui.GrabKeyDialog r1;
+        org.gjt.sp.jedit.gui.GrabKeyDialog$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

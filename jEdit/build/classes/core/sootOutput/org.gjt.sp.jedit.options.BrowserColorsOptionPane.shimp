@@ -1,0 +1,485 @@
+public class org.gjt.sp.jedit.options.BrowserColorsOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private org.gjt.sp.jedit.options.BrowserColorsModel colorsModel;
+    private javax.swing.JTable colorsTable;
+    private javax.swing.JButton add;
+    private javax.swing.JButton remove;
+    private javax.swing.JButton moveUp;
+    private javax.swing.JButton moveDown;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("browser.colors");
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r0;
+        javax.swing.table.TableColumnModel r1;
+        java.awt.Dimension r2;
+        javax.swing.JScrollPane r3, $r23;
+        javax.swing.JPanel r4, $r26;
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane$ActionHandler r5, $r29;
+        java.awt.BorderLayout $r6;
+        org.gjt.sp.jedit.options.BrowserColorsModel $r7, $r9;
+        javax.swing.JTable $r8, $r10, $r11, $r12, $r15, $r16, $r19, $r22, $r24;
+        int $i0, $i1, $i2;
+        javax.swing.table.JTableHeader $r13;
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane$MouseHandler $r14;
+        javax.swing.ListSelectionModel $r17;
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane$SelectionHandler $r18;
+        javax.swing.table.TableColumn $r20;
+        org.gjt.sp.jedit.options.BrowserColorsModel$ColorRenderer $r21;
+        javax.swing.border.EmptyBorder $r27;
+        javax.swing.BoxLayout $r28;
+        org.gjt.sp.jedit.gui.RolloverButton $r30, $r39, $r48, $r57;
+        javax.swing.Icon $r31, $r40, $r49, $r58;
+        javax.swing.JButton $r32, $r34, $r35, $r41, $r43, $r44, $r50, $r52, $r53, $r59, $r61, $r62;
+        java.lang.String $r33, $r42, $r51, $r60;
+        java.awt.Component $r37, $r46, $r55, $r64;
+
+        r0 := @this;
+
+        $r6 = new java.awt.BorderLayout;
+
+        specialinvoke $r6.<init>();
+
+        r0.setLayout($r6);
+
+        $r7 = new org.gjt.sp.jedit.options.BrowserColorsModel;
+
+        specialinvoke $r7.<init>();
+
+        r0.colorsModel = $r7;
+
+        $r8 = new javax.swing.JTable;
+
+        $r9 = r0.colorsModel;
+
+        specialinvoke $r8.<init>($r9);
+
+        r0.colorsTable = $r8;
+
+        $r10 = r0.colorsTable;
+
+        $i0 = org.gjt.sp.jedit.GUIUtilities.defaultRowHeight();
+
+        $r10.setRowHeight($i0);
+
+        $r11 = r0.colorsTable;
+
+        $r11.setAutoResizeMode(4);
+
+        $r12 = r0.colorsTable;
+
+        $r13 = $r12.getTableHeader();
+
+        $r13.setReorderingAllowed(0);
+
+        $r15 = r0.colorsTable;
+
+        $r14 = new org.gjt.sp.jedit.options.BrowserColorsOptionPane$MouseHandler;
+
+        specialinvoke $r14.<init>(r0);
+
+        $r15.addMouseListener($r14);
+
+        $r16 = r0.colorsTable;
+
+        $r17 = $r16.getSelectionModel();
+
+        $r18 = new org.gjt.sp.jedit.options.BrowserColorsOptionPane$SelectionHandler;
+
+        specialinvoke $r18.<init>(r0);
+
+        $r17.addListSelectionListener($r18);
+
+        $r19 = r0.colorsTable;
+
+        r1 = $r19.getColumnModel();
+
+        $r20 = r1.getColumn(1);
+
+        $r21 = new org.gjt.sp.jedit.options.BrowserColorsModel$ColorRenderer;
+
+        specialinvoke $r21.<init>();
+
+        $r20.setCellRenderer($r21);
+
+        $r22 = r0.colorsTable;
+
+        r2 = $r22.getPreferredSize();
+
+        $i1 = r2.height;
+
+        $i2 = java.lang.Math.min($i1, 200);
+
+        r2.height = $i2;
+
+        $r23 = new javax.swing.JScrollPane;
+
+        $r24 = r0.colorsTable;
+
+        specialinvoke $r23.<init>($r24);
+
+        r3 = $r23;
+
+        r3.setPreferredSize(r2);
+
+        r0.add("Center", r3);
+
+        $r26 = new javax.swing.JPanel;
+
+        specialinvoke $r26.<init>();
+
+        r4 = $r26;
+
+        $r27 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r27.<init>(3, 0, 0, 0);
+
+        r4.setBorder($r27);
+
+        $r28 = new javax.swing.BoxLayout;
+
+        specialinvoke $r28.<init>(r4, 0);
+
+        r4.setLayout($r28);
+
+        $r29 = new org.gjt.sp.jedit.options.BrowserColorsOptionPane$ActionHandler;
+
+        specialinvoke $r29.<init>(r0);
+
+        r5 = $r29;
+
+        $r30 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r31 = org.gjt.sp.jedit.GUIUtilities.loadIcon("Plus.png");
+
+        specialinvoke $r30.<init>($r31);
+
+        r0.add = $r30;
+
+        $r32 = r0.add;
+
+        $r33 = org.gjt.sp.jedit.jEdit.getProperty("common.add");
+
+        $r32.setToolTipText($r33);
+
+        $r34 = r0.add;
+
+        $r34.addActionListener(r5);
+
+        $r35 = r0.add;
+
+        r4.add($r35);
+
+        $r37 = javax.swing.Box.createHorizontalStrut(6);
+
+        r4.add($r37);
+
+        $r39 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r40 = org.gjt.sp.jedit.GUIUtilities.loadIcon("Minus.png");
+
+        specialinvoke $r39.<init>($r40);
+
+        r0.remove = $r39;
+
+        $r41 = r0.remove;
+
+        $r42 = org.gjt.sp.jedit.jEdit.getProperty("common.remove");
+
+        $r41.setToolTipText($r42);
+
+        $r43 = r0.remove;
+
+        $r43.addActionListener(r5);
+
+        $r44 = r0.remove;
+
+        r4.add($r44);
+
+        $r46 = javax.swing.Box.createHorizontalStrut(6);
+
+        r4.add($r46);
+
+        $r48 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r49 = org.gjt.sp.jedit.GUIUtilities.loadIcon("ArrowU.png");
+
+        specialinvoke $r48.<init>($r49);
+
+        r0.moveUp = $r48;
+
+        $r50 = r0.moveUp;
+
+        $r51 = org.gjt.sp.jedit.jEdit.getProperty("common.moveUp");
+
+        $r50.setToolTipText($r51);
+
+        $r52 = r0.moveUp;
+
+        $r52.addActionListener(r5);
+
+        $r53 = r0.moveUp;
+
+        r4.add($r53);
+
+        $r55 = javax.swing.Box.createHorizontalStrut(6);
+
+        r4.add($r55);
+
+        $r57 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r58 = org.gjt.sp.jedit.GUIUtilities.loadIcon("ArrowD.png");
+
+        specialinvoke $r57.<init>($r58);
+
+        r0.moveDown = $r57;
+
+        $r59 = r0.moveDown;
+
+        $r60 = org.gjt.sp.jedit.jEdit.getProperty("common.moveDown");
+
+        $r59.setToolTipText($r60);
+
+        $r61 = r0.moveDown;
+
+        $r61.addActionListener(r5);
+
+        $r62 = r0.moveDown;
+
+        r4.add($r62);
+
+        $r64 = javax.swing.Box.createGlue();
+
+        r4.add($r64);
+
+        r0.add("South", r4);
+
+        specialinvoke r0.updateEnabled();
+
+        return;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r0;
+        org.gjt.sp.jedit.options.BrowserColorsModel $r1;
+
+        r0 := @this;
+
+        $r1 = r0.colorsModel;
+
+        $r1.save();
+
+        return;
+    }
+
+    private void updateEnabled()
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r0;
+        int i0, $i1, $i2;
+        javax.swing.JTable $r1;
+        javax.swing.JButton $r2, $r3, $r4;
+        org.gjt.sp.jedit.options.BrowserColorsModel $r5;
+        boolean $z0, $z1, $z2, $z0_1, $z0_2, $z1_1, $z1_2, $z2_1, $z2_2;
+
+        r0 := @this;
+
+        $r1 = r0.colorsTable;
+
+        i0 = $r1.getSelectedRow();
+
+        $r2 = r0.remove;
+
+        if i0 == -1 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        $r2.setEnabled($z0_2);
+
+        $r3 = r0.moveUp;
+
+        if i0 <= 0 goto label3;
+
+        $z1 = 1;
+
+(2)     goto label4;
+
+     label3:
+(3)     $z1_1 = 0;
+
+     label4:
+        $z1_2 = Phi($z1 #2, $z1_1 #3);
+
+        $r3.setEnabled($z1_2);
+
+        $r4 = r0.moveDown;
+
+        if i0 == -1 goto label5;
+
+        $r5 = r0.colorsModel;
+
+        $i1 = $r5.getRowCount();
+
+        $i2 = $i1 - 1;
+
+        if i0 == $i2 goto label5;
+
+        $z2 = 1;
+
+(4)     goto label6;
+
+     label5:
+(5)     $z2_1 = 0;
+
+     label6:
+        $z2_2 = Phi($z2 #4, $z2_1 #5);
+
+        $r4.setEnabled($z2_2);
+
+        return;
+    }
+
+    private void setSelectedRow(int)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r0;
+        int i0;
+        javax.swing.JTable $r1, $r3, $r4;
+        javax.swing.ListSelectionModel $r2;
+        java.awt.Rectangle $r5;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.colorsTable;
+
+        $r2 = $r1.getSelectionModel();
+
+        $r2.setSelectionInterval(i0, i0);
+
+        $r4 = r0.colorsTable;
+
+        $r3 = r0.colorsTable;
+
+        $r5 = $r3.getCellRect(i0, 0, 1);
+
+        $r4.scrollRectToVisible($r5);
+
+        return;
+    }
+
+    static void access$000(org.gjt.sp.jedit.options.BrowserColorsOptionPane)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updateEnabled();
+
+        return;
+    }
+
+    static javax.swing.JButton access$100(org.gjt.sp.jedit.options.BrowserColorsOptionPane)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.add;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.options.BrowserColorsModel access$200(org.gjt.sp.jedit.options.BrowserColorsOptionPane)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r0;
+        org.gjt.sp.jedit.options.BrowserColorsModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.colorsModel;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$300(org.gjt.sp.jedit.options.BrowserColorsOptionPane)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.remove;
+
+        return $r1;
+    }
+
+    static javax.swing.JTable access$400(org.gjt.sp.jedit.options.BrowserColorsOptionPane)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r0;
+        javax.swing.JTable $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.colorsTable;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$500(org.gjt.sp.jedit.options.BrowserColorsOptionPane)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.moveUp;
+
+        return $r1;
+    }
+
+    static void access$600(org.gjt.sp.jedit.options.BrowserColorsOptionPane, int)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r0;
+        int i0;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        specialinvoke r0.setSelectedRow(i0);
+
+        return;
+    }
+
+    static javax.swing.JButton access$700(org.gjt.sp.jedit.options.BrowserColorsOptionPane)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.moveDown;
+
+        return $r1;
+    }
+}

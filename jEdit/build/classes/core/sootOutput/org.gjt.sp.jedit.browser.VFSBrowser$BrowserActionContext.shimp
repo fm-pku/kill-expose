@@ -1,0 +1,164 @@
+class org.gjt.sp.jedit.browser.VFSBrowser$BrowserActionContext extends org.gjt.sp.jedit.ActionContext
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$BrowserActionContext r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void invokeAction(java.util.EventObject, org.gjt.sp.jedit.EditAction)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$BrowserActionContext r0;
+        java.util.EventObject r1;
+        org.gjt.sp.jedit.EditAction r2;
+        java.awt.Component r3, $r10;
+        org.gjt.sp.jedit.browser.VFSBrowser r4;
+        org.gjt.sp.jedit.io.VFSFile[] r5;
+        org.gjt.sp.jedit.bsh.NameSpace r6;
+        java.lang.Throwable r7, $r12;
+        org.gjt.sp.jedit.bsh.UtilEvalError r8, $r11, $r13, $r14, $r15, r17, r18, r19;
+        java.lang.Object $r9;
+        org.gjt.sp.jedit.View r16, r16_1, r16_2, r16_3, r16_4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r9 = r1.getSource();
+
+        r3 = (java.awt.Component) $r9;
+
+        $r10 = org.gjt.sp.jedit.GUIUtilities.getComponentParent(r3, class "org/gjt/sp/jedit/browser/VFSBrowser");
+
+        r4 = (org.gjt.sp.jedit.browser.VFSBrowser) $r10;
+
+        r5 = r4.getSelectedFiles(r3);
+
+(0)     r6 = org.gjt.sp.jedit.BeanShell.getNameSpace();
+
+     label01:
+        r6.setVariable("browser", r4);
+
+        r6.setVariable("files", r5);
+
+        r16 = r4.getView();
+
+(1)     if r16 != null goto label02;
+
+(2)     r16_1 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+     label02:
+        r16_2 = Phi(r16 #1, r16_1 #2);
+
+(3)     r2.invoke(r16_2);
+
+     label03:
+        r6.setVariable("browser", null);
+
+        r6.setVariable("files", null);
+
+     label04:
+(4)     goto label15;
+
+     label05:
+        $r15 := @caughtexception;
+
+        r17 = $r15;
+
+        org.gjt.sp.util.Log.log(9, r0, r17);
+
+(5)     goto label15;
+
+     label06:
+        $r14 := @caughtexception;
+
+(6)     r16_3 = Phi(r16 #0, r16_1 #2, r16_2 #3);
+
+        r18 = $r14;
+
+        org.gjt.sp.util.Log.log(9, r0, r18);
+
+     label07:
+        r6.setVariable("browser", null);
+
+        r6.setVariable("files", null);
+
+     label08:
+(7)     goto label15;
+
+     label09:
+        $r13 := @caughtexception;
+
+        r19 = $r13;
+
+        org.gjt.sp.util.Log.log(9, r0, r19);
+
+(8)     goto label15;
+
+     label10:
+        $r12 := @caughtexception;
+
+(9)     r16 = Phi(r16 #0, r16_1 #2, r16_2 #3, r16_3 #6, r16 #9);
+
+        r7 = $r12;
+
+     label11:
+        r6.setVariable("browser", null);
+
+        r6.setVariable("files", null);
+
+     label12:
+        goto label14;
+
+     label13:
+        $r11 := @caughtexception;
+
+        r8 = $r11;
+
+        org.gjt.sp.util.Log.log(9, r0, r8);
+
+     label14:
+        throw r7;
+
+     label15:
+        r16_4 = Phi(r16_2 #4, r16_2 #5, r16_3 #7, r16_3 #8);
+
+        return;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label03 to label04 with label05;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label01 to label03 with label06;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label07 to label08 with label09;
+        catch java.lang.Throwable from label01 to label03 with label10;
+        catch java.lang.Throwable from label06 to label07 with label10;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label11 to label12 with label13;
+        catch java.lang.Throwable from label10 to label11 with label10;
+    }
+
+    public volatile void invokeAction(java.util.EventObject, org.gjt.sp.jedit.JEditAbstractEditAction)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$BrowserActionContext r0;
+        java.util.EventObject r1;
+        org.gjt.sp.jedit.JEditAbstractEditAction r2;
+        org.gjt.sp.jedit.EditAction $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = (org.gjt.sp.jedit.EditAction) r2;
+
+        r0.invokeAction(r1, $r3);
+
+        return;
+    }
+}

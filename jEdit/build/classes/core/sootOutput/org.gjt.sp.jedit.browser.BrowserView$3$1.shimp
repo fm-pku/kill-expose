@@ -1,0 +1,54 @@
+class org.gjt.sp.jedit.browser.BrowserView$3$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.browser.BrowserView$3 this$1;
+
+    void <init>(org.gjt.sp.jedit.browser.BrowserView$3)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$3$1 r0;
+        org.gjt.sp.jedit.browser.BrowserView$3 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$1 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.browser.BrowserView$3$1 r0;
+        int i0, $i1;
+        org.gjt.sp.jedit.browser.BrowserView$3 $r1, $r5;
+        org.gjt.sp.jedit.browser.BrowserView $r2, $r6;
+        javax.swing.JList $r3, $r7;
+        javax.swing.ListModel $r4;
+
+        r0 := @this;
+
+        $r1 = r0.this$1;
+
+        $r2 = $r1.this$0;
+
+        $r3 = org.gjt.sp.jedit.browser.BrowserView.access$400($r2);
+
+        $r4 = $r3.getModel();
+
+        $i1 = $r4.getSize();
+
+        i0 = $i1 - 1;
+
+        $r5 = r0.this$1;
+
+        $r6 = $r5.this$0;
+
+        $r7 = org.gjt.sp.jedit.browser.BrowserView.access$400($r6);
+
+        $r7.setSelectedIndex(i0);
+
+        return;
+    }
+}

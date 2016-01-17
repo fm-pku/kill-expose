@@ -1,0 +1,316 @@
+class org.gjt.sp.jedit.search.HyperSearchResults$HighlightingTree extends javax.swing.JTree
+{
+    private java.lang.String prop;
+    private java.lang.String styleTag;
+    final org.gjt.sp.jedit.search.HyperSearchResults this$0;
+
+    void <init>(org.gjt.sp.jedit.search.HyperSearchResults, javax.swing.tree.DefaultTreeModel)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$HighlightingTree r0;
+        org.gjt.sp.jedit.search.HyperSearchResults r1;
+        javax.swing.tree.DefaultTreeModel r2;
+        java.awt.Font r3, $r11, $r11_1, $r11_2, $r11_3;
+        java.lang.String $r4, $r5, $r6, $r8, $r9;
+        boolean $z0;
+        javax.swing.JTree $r7, $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>(r2);
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("hypersearch.results.highlight");
+
+        r0.prop = $r4;
+
+        $r5 = r0.prop;
+
+(0)     if $r5 == null goto label3;
+
+        $r6 = r0.prop;
+
+        $z0 = $r6.isEmpty();
+
+(1)     if $z0 != 0 goto label3;
+
+        $r7 = org.gjt.sp.jedit.search.HyperSearchResults.access$300(r1);
+
+        if $r7 == null goto label1;
+
+        $r10 = org.gjt.sp.jedit.search.HyperSearchResults.access$300(r1);
+
+        $r11 = $r10.getFont();
+
+(2)     goto label2;
+
+     label1:
+(3)     $r11_1 = javax.swing.UIManager.getFont("Tree.font");
+
+     label2:
+        $r11_2 = Phi($r11 #2, $r11_1 #3);
+
+        r3 = $r11_2;
+
+        $r8 = r0.prop;
+
+        $r9 = org.gjt.sp.util.HtmlUtilities.style2html($r8, r3);
+
+(4)     r0.styleTag = $r9;
+
+     label3:
+        $r11_3 = Phi($r11 #0, $r11 #1, $r11_2 #4);
+
+        return;
+    }
+
+    public java.lang.String convertValueToText(java.lang.Object, boolean, boolean, boolean, int, boolean)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$HighlightingTree r0;
+        java.lang.Object r1, $r7, $r22;
+        boolean z0, z1, z2, z3, $z4, $z5, $z6;
+        int i0, $i1, $i2, $i3, $i4, $i5, i6, i7;
+        java.lang.String r2, r3, $r6, $r10, $r11, $r12, $r15, $r18, $r19;
+        java.util.ArrayList r4, $r9;
+        java.lang.Throwable r5, $r28;
+        org.gjt.sp.jedit.search.HyperSearchOperationNode $r8;
+        java.lang.Integer $r13, $r14;
+        org.gjt.sp.jedit.search.HyperSearchResults $r16, $r20;
+        javax.swing.JTree $r17, $r21;
+        javax.swing.tree.TreeNode $r23;
+        java.lang.InterruptedException $r24, $r26;
+        java.lang.Thread $r25, $r27;
+        javax.swing.tree.DefaultMutableTreeNode r29;
+        java.awt.Font $r30, r31;
+        org.gjt.sp.jedit.search.SearchMatcher r32;
+        org.gjt.sp.jedit.search.SearchMatcher$Match r33;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        z1 := @parameter2;
+
+        z2 := @parameter3;
+
+        i0 := @parameter4;
+
+        z3 := @parameter5;
+
+        r2 = specialinvoke r0.convertValueToText(r1, z0, z1, z2, i0, z3);
+
+        r3 = org.gjt.sp.jedit.jEdit.getProperty("hypersearch.results.highlight");
+
+        if r3 == null goto label01;
+
+        $z4 = r3.isEmpty();
+
+        if $z4 == 0 goto label02;
+
+     label01:
+        return r2;
+
+     label02:
+(0)     r29 = (javax.swing.tree.DefaultMutableTreeNode) r1;
+
+     label03:
+        r29 = Phi(r29 #0, r29 #1);
+
+        if r29 == null goto label04;
+
+        $r22 = r29.getUserObject();
+
+        $z6 = $r22 instanceof org.gjt.sp.jedit.search.HyperSearchOperationNode;
+
+        if $z6 != 0 goto label04;
+
+        $r23 = r29.getParent();
+
+        r29 = (javax.swing.tree.DefaultMutableTreeNode) $r23;
+
+(1)     goto label03;
+
+     label04:
+        if r29 != null goto label05;
+
+        return r2;
+
+     label05:
+        $r6 = r0.prop;
+
+        $z5 = r3.equals($r6);
+
+(2)     if $z5 != 0 goto label08;
+
+        r0.prop = r3;
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r16);
+
+        if $r17 == null goto label06;
+
+        $r20 = r0.this$0;
+
+        $r21 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r20);
+
+        $r30 = $r21.getFont();
+
+(3)     goto label07;
+
+     label06:
+(4)     $r30 = javax.swing.UIManager.getFont("Tree.font");
+
+     label07:
+        $r30 = Phi($r30 #3, $r30 #4);
+
+        r31 = $r30;
+
+        $r18 = r0.prop;
+
+        $r19 = org.gjt.sp.util.HtmlUtilities.style2html($r18, r31);
+
+(5)     r0.styleTag = $r19;
+
+     label08:
+        $r30 = Phi($r30 #2, $r30 #5);
+
+        $r7 = r29.getUserObject();
+
+        $r8 = (org.gjt.sp.jedit.search.HyperSearchOperationNode) $r7;
+
+        r32 = $r8.getSearchMatcher();
+
+        i6 = r2.indexOf(": ");
+
+        if i6 <= 0 goto label09;
+
+        i7 = i6 + 2;
+
+(6)     goto label10;
+
+     label09:
+(7)     i7 = 0;
+
+     label10:
+        i7 = Phi(i7 #6, i7 #7);
+
+        r33 = null;
+
+        $r9 = new java.util.ArrayList;
+
+        specialinvoke $r9.<init>();
+
+(8)     r4 = $r9;
+
+     label11:
+        $r10 = r2.substring(i7);
+
+        r33 = r32.nextMatch($r10, 1, 1, 1, 0);
+
+     label12:
+(9)     goto label14;
+
+     label13:
+        $r26 := @caughtexception;
+
+        r33 = Phi(r33 #8);
+
+        $r27 = java.lang.Thread.currentThread();
+
+(10)    $r27.interrupt();
+
+     label14:
+        r29 = Phi(r29 #9, r29 #10, r29 #15);
+
+        i7 = Phi(i7 #9, i7 #10, i7 #15);
+
+        $r30 = Phi($r30 #9, $r30 #10, $r30 #15);
+
+        r33 = Phi(r33 #9, r33 #10, r33 #15);
+
+        if r33 == null goto label22;
+
+        $i1 = r33.start;
+
+        $i2 = i7 + $i1;
+
+        $r13 = java.lang.Integer.valueOf($i2);
+
+        r4.add($r13);
+
+        $i3 = r33.end;
+
+        $i4 = i7 + $i3;
+
+        $r14 = java.lang.Integer.valueOf($i4);
+
+        r4.add($r14);
+
+        $i5 = r33.end;
+
+(11)    i7 = i7 + $i5;
+
+     label15:
+        $r15 = r2.substring(i7);
+
+        r32.nextMatch($r15, 1, 1, 1, 0);
+
+     label16:
+        r33 = null;
+
+(12)    goto label21;
+
+     label17:
+        $r24 := @caughtexception;
+
+        $r25 = java.lang.Thread.currentThread();
+
+        $r25.interrupt();
+
+     label18:
+        r33 = null;
+
+(13)    goto label21;
+
+     label19:
+        $r28 := @caughtexception;
+
+        r29 = Phi(r29 #11, r29 #14);
+
+        i7 = Phi(i7 #11, i7 #14);
+
+        $r30 = Phi($r30 #11, $r30 #14);
+
+(14)    r33 = Phi(r33 #11, r33 #14);
+
+        r5 = $r28;
+
+     label20:
+        throw r5;
+
+     label21:
+        r33 = Phi(r33 #12, r33 #13);
+
+(15)    goto label14;
+
+     label22:
+        $r11 = r0.styleTag;
+
+        $r12 = org.gjt.sp.util.HtmlUtilities.highlightString(r2, $r11, r4);
+
+        return $r12;
+
+        catch java.lang.InterruptedException from label11 to label12 with label13;
+        catch java.lang.InterruptedException from label15 to label16 with label17;
+        catch java.lang.Throwable from label15 to label16 with label19;
+        catch java.lang.Throwable from label17 to label18 with label19;
+        catch java.lang.Throwable from label19 to label20 with label19;
+    }
+}

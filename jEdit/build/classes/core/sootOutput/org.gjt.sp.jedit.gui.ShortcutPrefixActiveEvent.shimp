@@ -1,0 +1,195 @@
+public class org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent extends javax.swing.event.ChangeEvent
+{
+    protected java.util.Hashtable bindings;
+    protected boolean active;
+    protected static javax.swing.event.EventListenerList listenerList;
+
+    public void <init>(java.util.Hashtable, boolean)
+    {
+        org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent r0;
+        java.util.Hashtable r1;
+        boolean z0;
+        java.lang.Object $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        $r2 = new java.lang.Object;
+
+        specialinvoke $r2.<init>();
+
+        specialinvoke r0.<init>($r2);
+
+        r0.bindings = r1;
+
+        r0.active = z0;
+
+        return;
+    }
+
+    public static void addChangeEventListener(javax.swing.event.ChangeListener)
+    {
+        javax.swing.event.ChangeListener r0;
+        javax.swing.event.EventListenerList $r1, $r4;
+        java.lang.StringBuilder $r2, $r3, $r6, $r7;
+        java.lang.Object[] $r5;
+        int $i0;
+        java.lang.String $r8;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent.listenerList;
+
+        $r1.add(class "javax/swing/event/ChangeListener", r0);
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append("Listener added.  ");
+
+        $r4 = org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent.listenerList;
+
+        $r5 = $r4.getListenerList();
+
+        $i0 = lengthof $r5;
+
+        $r6 = $r3.append($i0);
+
+        $r7 = $r6.append(" left.");
+
+        $r8 = $r7.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/gui/ShortcutPrefixActiveEvent", $r8);
+
+        return;
+    }
+
+    public static void removeChangeEventListener(javax.swing.event.ChangeListener)
+    {
+        javax.swing.event.ChangeListener r0;
+        javax.swing.event.EventListenerList $r1, $r4;
+        java.lang.StringBuilder $r2, $r3, $r6, $r7;
+        java.lang.Object[] $r5;
+        int $i0;
+        java.lang.String $r8;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent.listenerList;
+
+        $r1.remove(class "javax/swing/event/ChangeListener", r0);
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append("Listener removed.  ");
+
+        $r4 = org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent.listenerList;
+
+        $r5 = $r4.getListenerList();
+
+        $i0 = lengthof $r5;
+
+        $r6 = $r3.append($i0);
+
+        $r7 = $r6.append(" left.");
+
+        $r8 = $r7.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/gui/ShortcutPrefixActiveEvent", $r8);
+
+        return;
+    }
+
+    public static void firePrefixStateChange(java.util.Hashtable, boolean)
+    {
+        java.util.Hashtable r0;
+        boolean z0;
+        java.lang.Object[] r1;
+        org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent r2, $r4;
+        javax.swing.event.EventListenerList $r3;
+        int $i0, $i1, i2;
+        java.lang.Object $r5;
+        javax.swing.event.ChangeListener $r6;
+
+        r0 := @parameter0;
+
+        z0 := @parameter1;
+
+        $r3 = org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent.listenerList;
+
+        r1 = $r3.getListenerList();
+
+        $i0 = lengthof r1;
+
+(0)     i2 = $i0 - 2;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 < 0 goto label2;
+
+        $r4 = new org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent;
+
+        specialinvoke $r4.<init>(r0, z0);
+
+        r2 = $r4;
+
+        $i1 = i2 + 1;
+
+        $r5 = r1[$i1];
+
+        $r6 = (javax.swing.event.ChangeListener) $r5;
+
+        $r6.stateChanged(r2);
+
+        i2 = i2 + -2;
+
+(1)     goto label1;
+
+     label2:
+        return;
+    }
+
+    public java.util.Hashtable getBindings()
+    {
+        org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent r0;
+        java.util.Hashtable $r1;
+
+        r0 := @this;
+
+        $r1 = r0.bindings;
+
+        return $r1;
+    }
+
+    public boolean getActive()
+    {
+        org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.active;
+
+        return $z0;
+    }
+
+    static void <clinit>()
+    {
+        javax.swing.event.EventListenerList $r0;
+
+        $r0 = new javax.swing.event.EventListenerList;
+
+        specialinvoke $r0.<init>();
+
+        org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent.listenerList = $r0;
+
+        return;
+    }
+}

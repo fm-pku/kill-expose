@@ -1,0 +1,99 @@
+public class org.gjt.sp.jedit.search.HyperSearchFolderNode extends java.lang.Object
+{
+    private java.io.File nodeFile;
+    private boolean showFullPath;
+    private static java.lang.String fileSep;
+
+    public java.io.File getNodeFile()
+    {
+        org.gjt.sp.jedit.search.HyperSearchFolderNode r0;
+        java.io.File $r1;
+
+        r0 := @this;
+
+        $r1 = r0.nodeFile;
+
+        return $r1;
+    }
+
+    public void <init>(java.io.File, boolean)
+    {
+        org.gjt.sp.jedit.search.HyperSearchFolderNode r0;
+        java.io.File r1;
+        boolean z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.nodeFile = r1;
+
+        r0.showFullPath = z0;
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.search.HyperSearchFolderNode r0;
+        java.lang.String[] r1;
+        boolean $z0;
+        java.io.File $r2, $r6;
+        java.lang.String $r3, $r4, $r5, $r7;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        $z0 = r0.showFullPath;
+
+        if $z0 == 0 goto label1;
+
+        $r6 = r0.nodeFile;
+
+        $r7 = $r6.getAbsolutePath();
+
+        return $r7;
+
+     label1:
+        $r2 = r0.nodeFile;
+
+        $r3 = $r2.getAbsolutePath();
+
+        $r4 = org.gjt.sp.jedit.search.HyperSearchFolderNode.fileSep;
+
+        r1 = $r3.split($r4);
+
+        $i0 = lengthof r1;
+
+        $i1 = $i0 - 1;
+
+        $r5 = r1[$i1];
+
+        return $r5;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String $r0, $r1;
+        boolean $z0;
+
+        $r0 = java.lang.System.getProperty("file.separator");
+
+        org.gjt.sp.jedit.search.HyperSearchFolderNode.fileSep = $r0;
+
+        $r1 = org.gjt.sp.jedit.search.HyperSearchFolderNode.fileSep;
+
+        $z0 = $r1.equals("\\");
+
+        if $z0 == 0 goto label1;
+
+        org.gjt.sp.jedit.search.HyperSearchFolderNode.fileSep = "\\\\";
+
+     label1:
+        return;
+    }
+}

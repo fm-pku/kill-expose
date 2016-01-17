@@ -1,0 +1,815 @@
+public class org.gjt.sp.jedit.options.AbbrevsOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private javax.swing.JComboBox setsComboBox;
+    private javax.swing.JCheckBox expandOnInput;
+    private javax.swing.JTable abbrevsTable;
+    private org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel globalAbbrevs;
+    private java.util.Map modeAbbrevs;
+    private javax.swing.JButton add;
+    private javax.swing.JButton edit;
+    private javax.swing.JButton remove;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("abbrevs");
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+        javax.swing.JPanel r1, r2, r8, $r10, $r15, $r60;
+        javax.swing.JLabel r3, $r20;
+        java.util.Hashtable r4, $r35;
+        org.gjt.sp.jedit.Mode[] r5;
+        java.lang.String[] r6;
+        javax.swing.JScrollPane r7, $r57;
+        java.awt.BorderLayout $r9, $r11;
+        javax.swing.JCheckBox $r12, $r14;
+        java.lang.String $r13, $r21, $r64, $r67, $r72, $r75, $r80, $r83, r97;
+        boolean $z0;
+        javax.swing.BoxLayout $r16, $r61;
+        javax.swing.border.EmptyBorder $r17, $r22, $r62;
+        java.awt.Component $r18, $r31, $r87;
+        java.util.HashMap $r24;
+        org.gjt.sp.util.StandardUtilities$StringCompare $r25;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, i8;
+        javax.swing.JComboBox $r26, $r28, $r29, $r90;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$ActionHandler $r27, r98;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel $r34, $r37, $r92;
+        javax.swing.JTable $r36, $r38, $r39, $r43, $r44, $r46, $r49, $r52, $r55, $r56, $r58;
+        javax.swing.table.TableColumnModel $r40;
+        javax.swing.table.TableColumn $r41;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$Renderer $r42;
+        javax.swing.table.JTableHeader $r45, $r47;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$HeaderMouseHandler $r48;
+        javax.swing.ListSelectionModel $r50, $r53;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$SelectionHandler $r51;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$TableMouseHandler $r54;
+        org.gjt.sp.jedit.gui.RolloverButton $r63, $r71, $r79;
+        javax.swing.Icon $r65, $r73, $r81;
+        javax.swing.JButton $r66, $r68, $r69, $r74, $r76, $r77, $r82, $r84, $r85;
+        org.gjt.sp.jedit.Mode $r91;
+        java.util.Map $r93, $r95;
+        java.lang.Object $r94;
+        java.awt.Dimension r99;
+
+        r0 := @this;
+
+        $r9 = new java.awt.BorderLayout;
+
+        specialinvoke $r9.<init>();
+
+        r0.setLayout($r9);
+
+        $r10 = new javax.swing.JPanel;
+
+        $r11 = new java.awt.BorderLayout;
+
+        specialinvoke $r11.<init>(6, 6);
+
+        specialinvoke $r10.<init>($r11);
+
+        r1 = $r10;
+
+        $r12 = new javax.swing.JCheckBox;
+
+        $r13 = org.gjt.sp.jedit.jEdit.getProperty("options.abbrevs.expandOnInput");
+
+        $z0 = org.gjt.sp.jedit.Abbrevs.getExpandOnInput();
+
+        specialinvoke $r12.<init>($r13, $z0);
+
+        r0.expandOnInput = $r12;
+
+        $r14 = r0.expandOnInput;
+
+        r1.add($r14, "North");
+
+        $r15 = new javax.swing.JPanel;
+
+        specialinvoke $r15.<init>();
+
+        r2 = $r15;
+
+        $r16 = new javax.swing.BoxLayout;
+
+        specialinvoke $r16.<init>(r2, 0);
+
+        r2.setLayout($r16);
+
+        $r17 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r17.<init>(0, 0, 6, 0);
+
+        r2.setBorder($r17);
+
+        $r18 = javax.swing.Box.createGlue();
+
+        r2.add($r18);
+
+        $r20 = new javax.swing.JLabel;
+
+        $r21 = org.gjt.sp.jedit.jEdit.getProperty("options.abbrevs.set");
+
+        specialinvoke $r20.<init>($r21);
+
+        r3 = $r20;
+
+        $r22 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r22.<init>(0, 0, 0, 12);
+
+        r3.setBorder($r22);
+
+        r2.add(r3);
+
+        r4 = org.gjt.sp.jedit.Abbrevs.getModeAbbrevs();
+
+        $r24 = new java.util.HashMap;
+
+        specialinvoke $r24.<init>();
+
+        r0.modeAbbrevs = $r24;
+
+        r5 = org.gjt.sp.jedit.jEdit.getModes();
+
+        $r25 = new org.gjt.sp.util.StandardUtilities$StringCompare;
+
+        specialinvoke $r25.<init>(1);
+
+        java.util.Arrays.sort(r5, $r25);
+
+        $i0 = lengthof r5;
+
+        $i1 = $i0 + 1;
+
+        r6 = newarray (java.lang.String)[$i1];
+
+        r6[0] = "global";
+
+(0)     i8 = 0;
+
+     label1:
+        i8 = Phi(i8 #0, i8 #1);
+
+        $i2 = lengthof r5;
+
+        if i8 >= $i2 goto label2;
+
+        $r91 = r5[i8];
+
+        r97 = $r91.getName();
+
+        $i7 = i8 + 1;
+
+        r6[$i7] = r97;
+
+        $r93 = r0.modeAbbrevs;
+
+        $r92 = new org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel;
+
+        $r94 = r4.get(r97);
+
+        $r95 = (java.util.Map) $r94;
+
+        specialinvoke $r92.<init>($r95);
+
+        $r93.put(r97, $r92);
+
+        i8 = i8 + 1;
+
+(1)     goto label1;
+
+     label2:
+        $r26 = new javax.swing.JComboBox;
+
+        specialinvoke $r26.<init>(r6);
+
+        r0.setsComboBox = $r26;
+
+        $r27 = new org.gjt.sp.jedit.options.AbbrevsOptionPane$ActionHandler;
+
+        specialinvoke $r27.<init>(r0, null);
+
+        r98 = $r27;
+
+        $r28 = r0.setsComboBox;
+
+        $r28.addActionListener(r98);
+
+        $r29 = r0.setsComboBox;
+
+        r2.add($r29);
+
+        $r31 = javax.swing.Box.createGlue();
+
+        r2.add($r31);
+
+        r1.add(r2, "South");
+
+        r0.add("North", r1);
+
+        $r34 = new org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel;
+
+        $r35 = org.gjt.sp.jedit.Abbrevs.getGlobalAbbrevs();
+
+        specialinvoke $r34.<init>($r35);
+
+        r0.globalAbbrevs = $r34;
+
+        $r36 = new javax.swing.JTable;
+
+        $r37 = r0.globalAbbrevs;
+
+        specialinvoke $r36.<init>($r37);
+
+        r0.abbrevsTable = $r36;
+
+        $r38 = r0.abbrevsTable;
+
+        $i3 = org.gjt.sp.jedit.GUIUtilities.defaultRowHeight();
+
+        $r38.setRowHeight($i3);
+
+        $r39 = r0.abbrevsTable;
+
+        $r40 = $r39.getColumnModel();
+
+        $r41 = $r40.getColumn(1);
+
+        $r42 = new org.gjt.sp.jedit.options.AbbrevsOptionPane$Renderer;
+
+        specialinvoke $r42.<init>(null);
+
+        $r41.setCellRenderer($r42);
+
+        $r43 = r0.abbrevsTable;
+
+        $r43.setAutoResizeMode(4);
+
+        $r44 = r0.abbrevsTable;
+
+        $r45 = $r44.getTableHeader();
+
+        $r45.setReorderingAllowed(0);
+
+        $r46 = r0.abbrevsTable;
+
+        $r47 = $r46.getTableHeader();
+
+        $r48 = new org.gjt.sp.jedit.options.AbbrevsOptionPane$HeaderMouseHandler;
+
+        specialinvoke $r48.<init>(r0, null);
+
+        $r47.addMouseListener($r48);
+
+        $r49 = r0.abbrevsTable;
+
+        $r50 = $r49.getSelectionModel();
+
+        $r51 = new org.gjt.sp.jedit.options.AbbrevsOptionPane$SelectionHandler;
+
+        specialinvoke $r51.<init>(r0, null);
+
+        $r50.addListSelectionListener($r51);
+
+        $r52 = r0.abbrevsTable;
+
+        $r53 = $r52.getSelectionModel();
+
+        $r53.setSelectionMode(0);
+
+        $r55 = r0.abbrevsTable;
+
+        $r54 = new org.gjt.sp.jedit.options.AbbrevsOptionPane$TableMouseHandler;
+
+        specialinvoke $r54.<init>(r0, null);
+
+        $r55.addMouseListener($r54);
+
+        $r56 = r0.abbrevsTable;
+
+        r99 = $r56.getPreferredSize();
+
+        $i4 = r99.height;
+
+        $i5 = java.lang.Math.min($i4, 200);
+
+        r99.height = $i5;
+
+        $r57 = new javax.swing.JScrollPane;
+
+        $r58 = r0.abbrevsTable;
+
+        specialinvoke $r57.<init>($r58);
+
+        r7 = $r57;
+
+        r7.setPreferredSize(r99);
+
+        r0.add("Center", r7);
+
+        $r60 = new javax.swing.JPanel;
+
+        specialinvoke $r60.<init>();
+
+        r8 = $r60;
+
+        $r61 = new javax.swing.BoxLayout;
+
+        specialinvoke $r61.<init>(r8, 0);
+
+        r8.setLayout($r61);
+
+        $r62 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r62.<init>(6, 0, 0, 0);
+
+        r8.setBorder($r62);
+
+        $r63 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r64 = org.gjt.sp.jedit.jEdit.getProperty("options.abbrevs.add.icon");
+
+        $r65 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r64);
+
+        specialinvoke $r63.<init>($r65);
+
+        r0.add = $r63;
+
+        $r66 = r0.add;
+
+        $r67 = org.gjt.sp.jedit.jEdit.getProperty("options.abbrevs.add");
+
+        $r66.setToolTipText($r67);
+
+        $r68 = r0.add;
+
+        $r68.addActionListener(r98);
+
+        $r69 = r0.add;
+
+        r8.add($r69);
+
+        $r71 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r72 = org.gjt.sp.jedit.jEdit.getProperty("options.abbrevs.remove.icon");
+
+        $r73 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r72);
+
+        specialinvoke $r71.<init>($r73);
+
+        r0.remove = $r71;
+
+        $r74 = r0.remove;
+
+        $r75 = org.gjt.sp.jedit.jEdit.getProperty("options.abbrevs.remove");
+
+        $r74.setToolTipText($r75);
+
+        $r76 = r0.remove;
+
+        $r76.addActionListener(r98);
+
+        $r77 = r0.remove;
+
+        r8.add($r77);
+
+        $r79 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r80 = org.gjt.sp.jedit.jEdit.getProperty("options.abbrevs.edit.icon");
+
+        $r81 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r80);
+
+        specialinvoke $r79.<init>($r81);
+
+        r0.edit = $r79;
+
+        $r82 = r0.edit;
+
+        $r83 = org.gjt.sp.jedit.jEdit.getProperty("options.abbrevs.edit");
+
+        $r82.setToolTipText($r83);
+
+        $r84 = r0.edit;
+
+        $r84.addActionListener(r98);
+
+        $r85 = r0.edit;
+
+        r8.add($r85);
+
+        $r87 = javax.swing.Box.createGlue();
+
+        r8.add($r87);
+
+        r0.add("South", r8);
+
+        $r90 = r0.setsComboBox;
+
+        $i6 = org.gjt.sp.jedit.jEdit.getIntegerProperty("options.abbrevs.combobox.index", 0);
+
+        $r90.setSelectedIndex($i6);
+
+        specialinvoke r0.updateEnabled();
+
+        return;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+        java.util.Hashtable r1, $r9, $r10, $r16;
+        java.util.Set r2;
+        java.util.Iterator r3;
+        java.util.Map$Entry r4;
+        javax.swing.JTable $r5, $r18;
+        javax.swing.table.TableCellEditor $r6, $r19;
+        javax.swing.JCheckBox $r7;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel $r8, $r15;
+        java.util.Map $r11;
+        java.lang.Object $r12, $r13, $r14;
+
+        r0 := @this;
+
+        $r5 = r0.abbrevsTable;
+
+        $r6 = $r5.getCellEditor();
+
+        if $r6 == null goto label1;
+
+        $r18 = r0.abbrevsTable;
+
+        $r19 = $r18.getCellEditor();
+
+        $r19.stopCellEditing();
+
+     label1:
+        $r7 = r0.expandOnInput;
+
+        $z0 = $r7.isSelected();
+
+        org.gjt.sp.jedit.Abbrevs.setExpandOnInput($z0);
+
+        $r8 = r0.globalAbbrevs;
+
+        $r9 = $r8.toHashtable();
+
+        org.gjt.sp.jedit.Abbrevs.setGlobalAbbrevs($r9);
+
+        $r10 = new java.util.Hashtable;
+
+        specialinvoke $r10.<init>();
+
+        r1 = $r10;
+
+        $r11 = r0.modeAbbrevs;
+
+        r2 = $r11.entrySet();
+
+        r3 = r2.iterator();
+
+     label2:
+        $z1 = r3.hasNext();
+
+        if $z1 == 0 goto label3;
+
+        $r12 = r3.next();
+
+        r4 = (java.util.Map$Entry) $r12;
+
+        $r13 = r4.getKey();
+
+        $r14 = r4.getValue();
+
+        $r15 = (org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel) $r14;
+
+        $r16 = $r15.toHashtable();
+
+        r1.put($r13, $r16);
+
+        goto label2;
+
+     label3:
+        org.gjt.sp.jedit.Abbrevs.setModeAbbrevs(r1);
+
+        return;
+    }
+
+    private void updateEnabled()
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+        int i0;
+        javax.swing.JTable $r1;
+        javax.swing.JButton $r2, $r3;
+        boolean $z0, $z1, $z0_1, $z0_2, $z1_1, $z1_2;
+
+        r0 := @this;
+
+        $r1 = r0.abbrevsTable;
+
+        i0 = $r1.getSelectedRow();
+
+        $r2 = r0.edit;
+
+        if i0 == -1 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        $r2.setEnabled($z0_2);
+
+        $r3 = r0.remove;
+
+        if i0 == -1 goto label3;
+
+        $z1 = 1;
+
+(2)     goto label4;
+
+     label3:
+(3)     $z1_1 = 0;
+
+     label4:
+        $z1_2 = Phi($z1 #2, $z1_1 #3);
+
+        $r3.setEnabled($z1_2);
+
+        return;
+    }
+
+    private void edit()
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel r1;
+        int i0, $i1, i2;
+        java.lang.String r2, r13, r14, r15, r16;
+        org.gjt.sp.jedit.gui.EditAbbrevDialog r3, $r9;
+        javax.swing.JTable $r4, $r6;
+        javax.swing.table.TableModel $r5;
+        java.lang.Object $r7, $r8, $r12;
+        javax.swing.JDialog $r10;
+        java.util.Hashtable $r11;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r4 = r0.abbrevsTable;
+
+        $r5 = $r4.getModel();
+
+        r1 = (org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel) $r5;
+
+        $r6 = r0.abbrevsTable;
+
+        i0 = $r6.getSelectedRow();
+
+        $r7 = r1.getValueAt(i0, 0);
+
+        r13 = (java.lang.String) $r7;
+
+        $r8 = r1.getValueAt(i0, 1);
+
+        r14 = (java.lang.String) $r8;
+
+        r2 = r13;
+
+        $r9 = new org.gjt.sp.jedit.gui.EditAbbrevDialog;
+
+        $r10 = org.gjt.sp.jedit.GUIUtilities.getParentDialog(r0);
+
+        $r11 = r1.toHashtable();
+
+        specialinvoke $r9.<init>($r10, r13, r14, $r11);
+
+        r3 = $r9;
+
+        r15 = r3.getAbbrev();
+
+        r16 = r3.getExpansion();
+
+(0)     if r15 == null goto label4;
+
+(1)     if r16 == null goto label4;
+
+(2)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #2, i2 #3);
+
+        $i1 = r1.getRowCount();
+
+        if i2 >= $i1 goto label3;
+
+        $r12 = r1.getValueAt(i2, 0);
+
+        $z0 = $r12.equals(r2);
+
+        if $z0 == 0 goto label2;
+
+        r1.remove(i2);
+
+        goto label3;
+
+     label2:
+        i2 = i2 + 1;
+
+(3)     goto label1;
+
+     label3:
+(4)     specialinvoke r0.add(r1, r15, r16);
+
+     label4:
+        i2 = Phi(i2 #0, i2 #1, i2 #4);
+
+        return;
+    }
+
+    private void add(org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel r1;
+        java.lang.String r2, r3;
+        int $i0, i1;
+        java.lang.Object $r4;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $i0 = r1.getRowCount();
+
+        if i1 >= $i0 goto label3;
+
+        $r4 = r1.getValueAt(i1, 0);
+
+        $z0 = $r4.equals(r2);
+
+        if $z0 == 0 goto label2;
+
+        r1.remove(i1);
+
+        goto label3;
+
+     label2:
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        r1.add(r2, r3);
+
+        specialinvoke r0.updateEnabled();
+
+        return;
+    }
+
+    static javax.swing.JTable access$500(org.gjt.sp.jedit.options.AbbrevsOptionPane)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+        javax.swing.JTable $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.abbrevsTable;
+
+        return $r1;
+    }
+
+    static void access$600(org.gjt.sp.jedit.options.AbbrevsOptionPane)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.edit();
+
+        return;
+    }
+
+    static void access$700(org.gjt.sp.jedit.options.AbbrevsOptionPane)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updateEnabled();
+
+        return;
+    }
+
+    static javax.swing.JComboBox access$800(org.gjt.sp.jedit.options.AbbrevsOptionPane)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+        javax.swing.JComboBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.setsComboBox;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel access$900(org.gjt.sp.jedit.options.AbbrevsOptionPane)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.globalAbbrevs;
+
+        return $r1;
+    }
+
+    static java.util.Map access$1000(org.gjt.sp.jedit.options.AbbrevsOptionPane)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+        java.util.Map $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.modeAbbrevs;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$1100(org.gjt.sp.jedit.options.AbbrevsOptionPane)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.add;
+
+        return $r1;
+    }
+
+    static void access$1200(org.gjt.sp.jedit.options.AbbrevsOptionPane, org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel r1;
+        java.lang.String r2, r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        specialinvoke r0.add(r1, r2, r3);
+
+        return;
+    }
+
+    static javax.swing.JButton access$1300(org.gjt.sp.jedit.options.AbbrevsOptionPane)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.edit;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$1400(org.gjt.sp.jedit.options.AbbrevsOptionPane)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.remove;
+
+        return $r1;
+    }
+}

@@ -1,0 +1,179 @@
+class org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$Clock extends javax.swing.JLabel implements java.awt.event.ActionListener
+{
+    private javax.swing.Timer timer;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$Clock r0;
+        java.awt.Color $r1, $r2;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = org.gjt.sp.jedit.jEdit.getColorProperty("view.status.foreground");
+
+        r0.setForeground($r1);
+
+        $r2 = org.gjt.sp.jedit.jEdit.getColorProperty("view.status.background");
+
+        r0.setBackground($r2);
+
+        return;
+    }
+
+    public void addNotify()
+    {
+        org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$Clock r0;
+        char c0;
+        javax.swing.Timer $r1, $r2, $r3;
+        long $l1, $l2, $l3, $l4, $l5;
+        int $i6, $i7;
+        javax.swing.ToolTipManager $r4;
+
+        r0 := @this;
+
+        specialinvoke r0.addNotify();
+
+        specialinvoke r0.update();
+
+        c0 = 60000;
+
+        $r1 = new javax.swing.Timer;
+
+        specialinvoke $r1.<init>(c0, r0);
+
+        r0.timer = $r1;
+
+        $r2 = r0.timer;
+
+        $l1 = (long) c0;
+
+        $l2 = java.lang.System.currentTimeMillis();
+
+        $l3 = (long) c0;
+
+        $l4 = $l2 % $l3;
+
+        $l5 = $l1 - $l4;
+
+        $i6 = (int) $l5;
+
+        $i7 = $i6 + 500;
+
+        $r2.setInitialDelay($i7);
+
+        $r3 = r0.timer;
+
+        $r3.start();
+
+        $r4 = javax.swing.ToolTipManager.sharedInstance();
+
+        $r4.registerComponent(r0);
+
+        return;
+    }
+
+    public void removeNotify()
+    {
+        org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$Clock r0;
+        javax.swing.Timer $r1;
+        javax.swing.ToolTipManager $r2;
+
+        r0 := @this;
+
+        $r1 = r0.timer;
+
+        $r1.stop();
+
+        $r2 = javax.swing.ToolTipManager.sharedInstance();
+
+        $r2.unregisterComponent(r0);
+
+        specialinvoke r0.removeNotify();
+
+        return;
+    }
+
+    public java.lang.String getToolTipText()
+    {
+        org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$Clock r0;
+        java.util.Date $r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        $r1 = new java.util.Date;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.toString();
+
+        return $r2;
+    }
+
+    public java.awt.Point getToolTipLocation(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$Clock r0;
+        java.awt.event.MouseEvent r1;
+        java.awt.Point $r2;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.awt.Point;
+
+        $i0 = r1.getX();
+
+        specialinvoke $r2.<init>($i0, -20);
+
+        return $r2;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$Clock r0;
+        java.awt.event.ActionEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.update();
+
+        return;
+    }
+
+    private static java.lang.String getTime()
+    {
+        java.text.DateFormat $r0;
+        java.util.Date $r1;
+        java.lang.String $r2;
+
+        $r0 = java.text.DateFormat.getTimeInstance(3);
+
+        $r1 = new java.util.Date;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r0.format($r1);
+
+        return $r2;
+    }
+
+    private void update()
+    {
+        org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$Clock r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$Clock.getTime();
+
+        r0.setText($r1);
+
+        return;
+    }
+}

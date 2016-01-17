@@ -1,0 +1,97 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$TextRenderer extends javax.swing.table.DefaultTableCellRenderer
+{
+    private final javax.swing.table.DefaultTableCellRenderer tcr;
+    final org.gjt.sp.jedit.pluginmgr.ManagePanel this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel, javax.swing.table.DefaultTableCellRenderer)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$TextRenderer r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+        javax.swing.table.DefaultTableCellRenderer r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.tcr = r2;
+
+        return;
+    }
+
+    public java.awt.Component getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$TextRenderer r0;
+        javax.swing.JTable r1;
+        java.lang.Object r2;
+        boolean z0, z1, $z2, $z3;
+        int i0, i1;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r3;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r4;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel $r5;
+        java.lang.String $r6, $r11;
+        java.awt.Color $r7, $r13;
+        javax.swing.table.DefaultTableCellRenderer $r8, $r9, $r12;
+        java.awt.Component $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        z1 := @parameter3;
+
+        i0 := @parameter4;
+
+        i1 := @parameter5;
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$600($r4);
+
+        r3 = $r5.getEntry(i0);
+
+        $r6 = r3.status;
+
+        $z2 = $r6.equals("error");
+
+        if $z2 != 0 goto label1;
+
+        $r11 = r3.status;
+
+        $z3 = $r11.equals("disabled");
+
+        if $z3 == 0 goto label2;
+
+     label1:
+        $r8 = r0.tcr;
+
+        $r7 = java.awt.Color.red;
+
+        $r8.setForeground($r7);
+
+        goto label3;
+
+     label2:
+        $r12 = r0.tcr;
+
+        $r13 = javax.swing.UIManager.getColor("Table.foreground");
+
+        $r12.setForeground($r13);
+
+     label3:
+        $r9 = r0.tcr;
+
+        $r10 = $r9.getTableCellRendererComponent(r1, r2, z0, 0, i0, i1);
+
+        return $r10;
+    }
+}

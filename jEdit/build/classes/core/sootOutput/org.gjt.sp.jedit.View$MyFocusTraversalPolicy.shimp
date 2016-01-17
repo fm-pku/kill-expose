@@ -1,0 +1,46 @@
+class org.gjt.sp.jedit.View$MyFocusTraversalPolicy extends javax.swing.LayoutFocusTraversalPolicy
+{
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.View$MyFocusTraversalPolicy r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.awt.Component getDefaultComponent(java.awt.Container)
+    {
+        org.gjt.sp.jedit.View$MyFocusTraversalPolicy r0;
+        java.awt.Container r1;
+        org.gjt.sp.jedit.View $r2;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.GUIUtilities.getView(r1);
+
+        $r3 = $r2.getTextArea();
+
+        return $r3;
+    }
+
+    void <init>(org.gjt.sp.jedit.View$1)
+    {
+        org.gjt.sp.jedit.View$MyFocusTraversalPolicy r0;
+        org.gjt.sp.jedit.View$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

@@ -1,0 +1,60 @@
+class org.gjt.sp.jedit.browser.VFSBrowser$CommandsMenuButton extends org.gjt.sp.jedit.browser.VFSBrowser$MenuButton
+{
+    final org.gjt.sp.jedit.browser.VFSBrowser this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSBrowser)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$CommandsMenuButton r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+        java.lang.String $r2;
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.commands.label");
+
+        r0.setText($r2);
+
+        org.gjt.sp.jedit.GUIUtilities.setAutoMnemonic(r0);
+
+        r0.setName("commands");
+
+        $r3 = new org.gjt.sp.jedit.browser.BrowserCommandsMenu;
+
+        specialinvoke $r3.<init>(r1, null);
+
+        r0.popup = $r3;
+
+        return;
+    }
+
+    void doPopup()
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$CommandsMenuButton r0;
+        javax.swing.JPopupMenu $r1, $r3;
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu $r2;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.popup;
+
+        $r2 = (org.gjt.sp.jedit.browser.BrowserCommandsMenu) $r1;
+
+        $r2.update();
+
+        $r3 = r0.popup;
+
+        $i0 = r0.getHeight();
+
+        org.gjt.sp.jedit.GUIUtilities.showPopupMenu($r3, r0, 0, $i0, 0);
+
+        return;
+    }
+}

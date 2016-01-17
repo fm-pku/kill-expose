@@ -1,0 +1,11 @@
+public interface  org.gjt.sp.jedit.bufferset.BufferSetListener extends java.lang.Object implements java.util.EventListener
+{
+
+    public abstract void bufferAdded(org.gjt.sp.jedit.Buffer, int);
+
+    public abstract void bufferRemoved(org.gjt.sp.jedit.Buffer, int);
+
+    public abstract void bufferMoved(org.gjt.sp.jedit.Buffer, int, int);
+
+    public abstract void bufferSetSorted();
+}

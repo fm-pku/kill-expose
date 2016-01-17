@@ -1,0 +1,389 @@
+public class org.gjt.sp.jedit.bsh.ExternalNameSpace extends org.gjt.sp.jedit.bsh.NameSpace
+{
+    private java.util.Map externalMap;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>(null, "External Map Namespace", null);
+
+        return;
+    }
+
+    public void <init>(org.gjt.sp.jedit.bsh.NameSpace, java.lang.String, java.util.Map)
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+        java.lang.String r2;
+        java.util.HashMap $r3;
+        java.util.Map r4, r4_1, r4_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r4 := @parameter2;
+
+        specialinvoke r0.<init>(r1, r2);
+
+(0)     if r4 != null goto label1;
+
+        $r3 = new java.util.HashMap;
+
+        specialinvoke $r3.<init>();
+
+(1)     r4_1 = $r3;
+
+     label1:
+        r4_2 = Phi(r4 #0, r4_1 #1);
+
+        r0.externalMap = r4_2;
+
+        return;
+    }
+
+    public java.util.Map getMap()
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+        java.util.Map $r1;
+
+        r0 := @this;
+
+        $r1 = r0.externalMap;
+
+        return $r1;
+    }
+
+    public void setMap(java.util.Map)
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+        java.util.Map r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.externalMap = null;
+
+        r0.clear();
+
+        r0.externalMap = r1;
+
+        return;
+    }
+
+    void setVariable(java.lang.String, java.lang.Object, boolean, boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+        java.lang.String r1;
+        java.lang.Object r2;
+        boolean z0, z1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        z1 := @parameter3;
+
+        specialinvoke r0.setVariable(r1, r2, z0, z1);
+
+        r0.putExternalMap(r1, r2);
+
+        return;
+    }
+
+    public void unsetVariable(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+        java.lang.String r1;
+        java.util.Map $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.unsetVariable(r1);
+
+        $r2 = r0.externalMap;
+
+        $r2.remove(r1);
+
+        return;
+    }
+
+    public java.lang.String[] getVariableNames()
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+        java.util.HashSet r1, $r3;
+        java.lang.String[] r2, $r7, $r9, $r10;
+        java.util.List $r4;
+        java.util.Map $r5;
+        java.util.Set $r6;
+        java.lang.Object[] $r8;
+
+        r0 := @this;
+
+        $r3 = new java.util.HashSet;
+
+        specialinvoke $r3.<init>();
+
+        r1 = $r3;
+
+        r2 = specialinvoke r0.getVariableNames();
+
+        $r4 = java.util.Arrays.asList(r2);
+
+        r1.addAll($r4);
+
+        $r5 = r0.externalMap;
+
+        $r6 = $r5.keySet();
+
+        r1.addAll($r6);
+
+        $r7 = newarray (java.lang.String)[0];
+
+        $r8 = r1.toArray($r7);
+
+        $r9 = (java.lang.String[]) $r8;
+
+        $r10 = (java.lang.String[]) $r9;
+
+        return $r10;
+    }
+
+    protected org.gjt.sp.jedit.bsh.Variable getVariableImpl(java.lang.String, boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+        java.lang.String r1;
+        boolean z0;
+        java.lang.Object r2;
+        org.gjt.sp.jedit.bsh.Variable r3, $r5, r8, r8_1, r8_2, r8_3;
+        java.util.Map $r4;
+        org.gjt.sp.jedit.bsh.Modifiers $r6;
+        java.lang.Class $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        $r4 = r0.externalMap;
+
+        r2 = $r4.get(r1);
+
+        if r2 != null goto label1;
+
+        specialinvoke r0.unsetVariable(r1);
+
+        r8 = specialinvoke r0.getVariableImpl(r1, z0);
+
+(0)     goto label3;
+
+     label1:
+        r3 = specialinvoke r0.getVariableImpl(r1, 0);
+
+        if r3 != null goto label2;
+
+        $r5 = new org.gjt.sp.jedit.bsh.Variable;
+
+        $r7 = (java.lang.Class) null;
+
+        $r6 = (org.gjt.sp.jedit.bsh.Modifiers) null;
+
+        specialinvoke $r5.<init>(r1, $r7, r2, $r6);
+
+        r8_1 = $r5;
+
+(1)     goto label3;
+
+     label2:
+(2)     r8_2 = r3;
+
+     label3:
+        r8_3 = Phi(r8 #0, r8_1 #1, r8_2 #2);
+
+        return r8_3;
+    }
+
+    public org.gjt.sp.jedit.bsh.Variable[] getDeclaredVariables()
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+        org.gjt.sp.jedit.bsh.Variable[] $r1;
+
+        r0 := @this;
+
+        $r1 = specialinvoke r0.getDeclaredVariables();
+
+        return $r1;
+    }
+
+    public void setTypedVariable(java.lang.String, java.lang.Class, java.lang.Object, org.gjt.sp.jedit.bsh.Modifiers) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+        java.lang.String r1;
+        java.lang.Class r2;
+        java.lang.Object r3;
+        org.gjt.sp.jedit.bsh.Modifiers r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        specialinvoke r0.setTypedVariable(r1, r2, r3, r4);
+
+        r0.putExternalMap(r1, r3);
+
+        return;
+    }
+
+    public void setMethod(java.lang.String, org.gjt.sp.jedit.bsh.BshMethod) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.bsh.BshMethod r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.setMethod(r1, r2);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.BshMethod getMethod(java.lang.String, java.lang.Class[], boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+        java.lang.String r1;
+        java.lang.Class[] r2;
+        boolean z0;
+        org.gjt.sp.jedit.bsh.BshMethod $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        $r3 = specialinvoke r0.getMethod(r1, r2, z0);
+
+        return $r3;
+    }
+
+    protected void getAllNamesAux(java.util.Vector)
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+        java.util.Vector r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.getAllNamesAux(r1);
+
+        return;
+    }
+
+    public void clear()
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+        java.util.Map $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.clear();
+
+        $r1 = r0.externalMap;
+
+        $r1.clear();
+
+        return;
+    }
+
+    protected void putExternalMap(java.lang.String, java.lang.Object)
+    {
+        org.gjt.sp.jedit.bsh.ExternalNameSpace r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.bsh.UtilEvalError r2, $r7;
+        boolean $z0, $z1;
+        java.util.Map $r3;
+        org.gjt.sp.jedit.bsh.Primitive $r5;
+        org.gjt.sp.jedit.bsh.Variable $r6;
+        org.gjt.sp.jedit.bsh.InterpreterError $r8;
+        java.lang.Object r9, r9_1, r9_2, r9_3, r9_4, r9_5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r9 := @parameter1;
+
+        $z0 = r9 instanceof org.gjt.sp.jedit.bsh.Variable;
+
+(0)     if $z0 == 0 goto label4;
+
+     label1:
+(1)     $r6 = (org.gjt.sp.jedit.bsh.Variable) r9;
+
+(2)     r9_1 = r0.unwrapVariable($r6);
+
+     label2:
+(3)     goto label4;
+
+     label3:
+        $r7 := @caughtexception;
+
+        r9_2 = Phi(r9 #1, r9_1 #2);
+
+        r2 = $r7;
+
+        $r8 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        specialinvoke $r8.<init>("unexpected UtilEvalError");
+
+        throw $r8;
+
+     label4:
+        r9_3 = Phi(r9 #0, r9_1 #3);
+
+        $z1 = r9_3 instanceof org.gjt.sp.jedit.bsh.Primitive;
+
+(4)     if $z1 == 0 goto label5;
+
+        $r5 = (org.gjt.sp.jedit.bsh.Primitive) r9_3;
+
+(5)     r9_4 = org.gjt.sp.jedit.bsh.Primitive.unwrap($r5);
+
+     label5:
+        r9_5 = Phi(r9_3 #4, r9_4 #5);
+
+        $r3 = r0.externalMap;
+
+        $r3.put(r1, r9_5);
+
+        return;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label2 with label3;
+    }
+}

@@ -1,0 +1,1129 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel extends javax.swing.table.AbstractTableModel
+{
+    private final java.util.List entries;
+    private int sortType;
+    private java.util.concurrent.ConcurrentHashMap unloaded;
+    private int sortDirection;
+    final org.gjt.sp.jedit.pluginmgr.ManagePanel this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+        java.util.ArrayList $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.sortType = 1;
+
+        r0.sortDirection = 1;
+
+        $r2 = new java.util.ArrayList;
+
+        specialinvoke $r2.<init>();
+
+        r0.entries = $r2;
+
+        return;
+    }
+
+    public int getColumnCount()
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+
+        r0 := @this;
+
+        return 5;
+    }
+
+    public java.lang.Class getColumnClass(int)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        lookupswitch(i0)
+        {
+            case 0: goto label1;
+            default: goto label2;
+        };
+
+     label1:
+        return class "java/lang/Boolean";
+
+     label2:
+        return class "java/lang/Object";
+    }
+
+    public java.lang.String getColumnName(int)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        int i0;
+        java.lang.String $r1, $r2, $r3, $r4;
+        java.lang.Error $r5;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        tableswitch(i0)
+        {
+            case 0: goto label1;
+            case 1: goto label2;
+            case 2: goto label3;
+            case 3: goto label4;
+            case 4: goto label5;
+            default: goto label6;
+        };
+
+     label1:
+        return " ";
+
+     label2:
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("manage-plugins.info.name");
+
+        return $r4;
+
+     label3:
+        $r3 = org.gjt.sp.jedit.jEdit.getProperty("manage-plugins.info.version");
+
+        return $r3;
+
+     label4:
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("manage-plugins.info.status");
+
+        return $r2;
+
+     label5:
+        $r1 = org.gjt.sp.jedit.jEdit.getProperty("manage-plugins.info.data");
+
+        return $r1;
+
+     label6:
+        $r5 = new java.lang.Error;
+
+        specialinvoke $r5.<init>("Column out of range");
+
+        throw $r5;
+    }
+
+    public org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry getEntry(int)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        int i0;
+        java.util.List $r1;
+        java.lang.Object $r2;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry $r3;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.entries;
+
+        $r2 = $r1.get(i0);
+
+        $r3 = (org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry) $r2;
+
+        return $r3;
+    }
+
+    public org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry getEntry(java.lang.String)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        java.lang.String r1, $r6;
+        java.util.Iterator r2;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r3;
+        boolean $z0, $z1, $z2;
+        java.util.List $r4;
+        java.lang.Object $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 == null goto label1;
+
+        $z0 = r1.isEmpty();
+
+        if $z0 == 0 goto label2;
+
+     label1:
+        return null;
+
+     label2:
+        $r4 = r0.entries;
+
+        r2 = $r4.iterator();
+
+     label3:
+        $z1 = r2.hasNext();
+
+        if $z1 == 0 goto label5;
+
+        $r5 = r2.next();
+
+        r3 = (org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry) $r5;
+
+        $r6 = r3.clazz;
+
+        $z2 = r1.equals($r6);
+
+        if $z2 == 0 goto label4;
+
+        return r3;
+
+     label4:
+        goto label3;
+
+     label5:
+        return null;
+    }
+
+    public int getRowCount()
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        java.util.List $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.entries;
+
+        $i0 = $r1.size();
+
+        return $i0;
+    }
+
+    public java.lang.Object getValueAt(int, int)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        int i0, i1;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r1;
+        java.io.File r2;
+        java.util.List $r3;
+        java.lang.Object $r4;
+        java.lang.String $r5, $r7, $r8, $r9, $r14, $r17, $r18, $r19, $r20, $r23, $r25, $r26, $r27, $r28, $r29, $r30, $r31;
+        boolean $z0, $z1, $z2, $z3, $z4, $z4_1, $z4_2;
+        java.lang.Boolean $r6;
+        org.gjt.sp.jedit.EditPlugin $r10, $r11;
+        java.lang.StringBuilder $r12, $r13, $r15, $r16, $r21, $r22, $r24;
+        long $l2;
+        java.lang.Error $r32;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $r3 = r0.entries;
+
+        $r4 = $r3.get(i0);
+
+        r1 = (org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry) $r4;
+
+        tableswitch(i1)
+        {
+            case 0: goto label01;
+            case 1: goto label04;
+            case 2: goto label06;
+            case 3: goto label07;
+            case 4: goto label08;
+            default: goto label13;
+        };
+
+     label01:
+        $r5 = r1.status;
+
+        $z0 = $r5.equals("not-loaded");
+
+        if $z0 != 0 goto label02;
+
+        $r7 = r1.status;
+
+        $z1 = $r7.equals("disabled");
+
+        if $z1 != 0 goto label02;
+
+        $z4 = 1;
+
+(0)     goto label03;
+
+     label02:
+(1)     $z4_1 = 0;
+
+     label03:
+        $z4_2 = Phi($z4 #0, $z4_1 #1);
+
+        $r6 = java.lang.Boolean.valueOf($z4_2);
+
+        return $r6;
+
+     label04:
+        $r28 = r1.name;
+
+        if $r28 != null goto label05;
+
+        $r30 = r1.jar;
+
+        $r31 = org.gjt.sp.jedit.MiscUtilities.getFileName($r30);
+
+        return $r31;
+
+     label05:
+        $r29 = r1.name;
+
+        return $r29;
+
+     label06:
+        $r27 = r1.version;
+
+        return $r27;
+
+     label07:
+        $r21 = new java.lang.StringBuilder;
+
+        specialinvoke $r21.<init>();
+
+        $r22 = $r21.append("plugin-manager.status.");
+
+        $r23 = r1.status;
+
+        $r24 = $r22.append($r23);
+
+        $r25 = $r24.toString();
+
+        $r26 = org.gjt.sp.jedit.jEdit.getProperty($r25);
+
+        return $r26;
+
+     label08:
+        $r8 = r1.dataSize;
+
+        if $r8 != null goto label12;
+
+        $r10 = r1.plugin;
+
+        if $r10 == null goto label12;
+
+        $r11 = r1.plugin;
+
+        r2 = $r11.getPluginHome();
+
+        if null != r2 goto label09;
+
+        return null;
+
+     label09:
+        $z2 = r2.exists();
+
+        if $z2 == 0 goto label10;
+
+        $l2 = org.gjt.sp.util.IOUtilities.fileLength(r2);
+
+        $r20 = org.gjt.sp.util.StandardUtilities.formatFileSize($l2);
+
+        r1.dataSize = $r20;
+
+        goto label12;
+
+     label10:
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = $r12.append("plugin.");
+
+        $r14 = r1.clazz;
+
+        $r15 = $r13.append($r14);
+
+        $r16 = $r15.append(".usePluginHome");
+
+        $r17 = $r16.toString();
+
+        $z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty($r17);
+
+        if $z3 == 0 goto label11;
+
+        $r19 = org.gjt.sp.util.StandardUtilities.formatFileSize(0L);
+
+        r1.dataSize = $r19;
+
+        goto label12;
+
+     label11:
+        $r18 = org.gjt.sp.jedit.jEdit.getProperty("manage-plugins.data-size.unknown");
+
+        r1.dataSize = $r18;
+
+     label12:
+        $r9 = r1.dataSize;
+
+        return $r9;
+
+     label13:
+        $r32 = new java.lang.Error;
+
+        specialinvoke $r32.<init>("Column out of range");
+
+        throw $r32;
+    }
+
+    public boolean isCellEditable(int, int)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        int i0, i1;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        if i1 != 0 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    public void setValueAt(java.lang.Object, int, int)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        java.lang.Object r1, $r4;
+        int i0, i1;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r2;
+        java.util.List $r3;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel$1 $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        $r3 = r0.entries;
+
+        $r4 = $r3.get(i0);
+
+        r2 = (org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry) $r4;
+
+        $r5 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel$1;
+
+        specialinvoke $r5.<init>(r0, i1, r2, r1);
+
+        javax.swing.SwingUtilities.invokeLater($r5);
+
+        return;
+    }
+
+    public void sort(int)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        int i0, $i1, $i2;
+        java.util.ArrayList r1, $r2;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$EntryCompare $r3;
+        java.util.List $r4;
+        javax.swing.event.TableModelEvent $r5;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r6;
+        javax.swing.JTable $r7;
+        javax.swing.table.JTableHeader $r8;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r2 = new java.util.ArrayList;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+        r0.saveSelection(r1);
+
+        $i1 = r0.sortType;
+
+        if $i1 == i0 goto label1;
+
+        r0.sortDirection = 1;
+
+     label1:
+        r0.sortType = i0;
+
+        $r4 = r0.entries;
+
+        $r3 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$EntryCompare;
+
+        $i2 = r0.sortDirection;
+
+        specialinvoke $r3.<init>(i0, $i2);
+
+        java.util.Collections.sort($r4, $r3);
+
+        $r5 = new javax.swing.event.TableModelEvent;
+
+        specialinvoke $r5.<init>(r0);
+
+        r0.fireTableChanged($r5);
+
+        r0.restoreSelection(r1);
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r6);
+
+        $r8 = $r7.getTableHeader();
+
+        $r8.repaint();
+
+        return;
+    }
+
+    public void update()
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        java.util.ArrayList r1, $r5;
+        java.lang.String r2, r3, $r7, $r9, $r19, r20, r21, r20_1, r20_2;
+        org.gjt.sp.jedit.PluginJAR[] r4;
+        java.util.List $r6, $r11, $r18;
+        int $i0, $i1, $i2, i3, i4;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry $r8, $r13, r22, r24;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r10, $r15, $r16;
+        org.gjt.sp.jedit.PluginJAR $r12, $r14;
+        boolean $z1, $z2, $z4;
+        javax.swing.JCheckBox $r17;
+        java.lang.String[] r23;
+
+        r0 := @this;
+
+        $r5 = new java.util.ArrayList;
+
+        specialinvoke $r5.<init>();
+
+        r1 = $r5;
+
+        r0.saveSelection(r1);
+
+        $r6 = r0.entries;
+
+        $r6.clear();
+
+        $r7 = org.gjt.sp.jedit.jEdit.getJEditHome();
+
+        r2 = org.gjt.sp.jedit.MiscUtilities.constructPath($r7, "jars");
+
+        r3 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        if r3 != null goto label1;
+
+        r20 = null;
+
+(0)     goto label2;
+
+     label1:
+(1)     r20_1 = org.gjt.sp.jedit.MiscUtilities.constructPath(r3, "jars");
+
+     label2:
+        r20_2 = Phi(r20 #0, r20_1 #1);
+
+        r4 = org.gjt.sp.jedit.jEdit.getPluginJARs();
+
+(2)     i3 = 0;
+
+     label3:
+        i3 = Phi(i3 #2, i3 #3);
+
+        r20 = Phi(r20_2 #2, r20 #3);
+
+        $i0 = lengthof r4;
+
+        if i3 >= $i0 goto label7;
+
+        $r12 = r4[i3];
+
+        r21 = $r12.getPath();
+
+        $z1 = r21.startsWith(r2);
+
+        if $z1 != 0 goto label4;
+
+        if r20 == null goto label6;
+
+        $z4 = r21.startsWith(r20);
+
+        if $z4 == 0 goto label6;
+
+     label4:
+        $r13 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry;
+
+        $r15 = r0.this$0;
+
+        $r14 = r4[i3];
+
+        specialinvoke $r13.<init>($r15, $r14);
+
+        r22 = $r13;
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$900($r16);
+
+        $z2 = $r17.isSelected();
+
+        if $z2 == 0 goto label5;
+
+        $r19 = r22.clazz;
+
+        if $r19 == null goto label6;
+
+     label5:
+        $r18 = r0.entries;
+
+        $r18.add(r22);
+
+     label6:
+        i3 = i3 + 1;
+
+(3)     goto label3;
+
+     label7:
+        r23 = org.gjt.sp.jedit.jEdit.getNotLoadedPluginJARs();
+
+(4)     i4 = 0;
+
+     label8:
+        i3 = Phi(i3 #4, i3 #5);
+
+        r20 = Phi(r20 #4, r20 #5);
+
+        i4 = Phi(i4 #4, i4 #5);
+
+        $i1 = lengthof r23;
+
+        if i4 >= $i1 goto label9;
+
+        $r8 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry;
+
+        $r10 = r0.this$0;
+
+        $r9 = r23[i4];
+
+        specialinvoke $r8.<init>($r10, $r9);
+
+        r24 = $r8;
+
+        $r11 = r0.entries;
+
+        $r11.add(r24);
+
+        i4 = i4 + 1;
+
+(5)     goto label8;
+
+     label9:
+        $i2 = r0.sortType;
+
+        r0.sort($i2);
+
+        r0.restoreSelection(r1);
+
+        return;
+    }
+
+    private void unloadPluginJARWithDialog(org.gjt.sp.jedit.PluginJAR)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        org.gjt.sp.jedit.PluginJAR r1;
+        java.util.LinkedList r2, $r7;
+        java.util.ArrayList r3, $r8;
+        java.lang.String[] r4, $r14, r18, r19, r20;
+        int i0, $i1, i2, i3;
+        java.lang.String r5, $r16;
+        java.util.concurrent.ConcurrentHashMap $r6;
+        java.util.HashSet $r9;
+        boolean $z0, z1, $z2, $z2_1, $z2_2, z1_1, $z2_3, z1_2;
+        org.gjt.sp.util.StandardUtilities$StringCompare $r11;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r12;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r13;
+        java.io.File $r15;
+        java.lang.Object[] $r17;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r6 = new java.util.concurrent.ConcurrentHashMap;
+
+        specialinvoke $r6.<init>();
+
+        r0.unloaded = $r6;
+
+        r18 = r1.getAllDependentPlugins();
+
+        $i1 = lengthof r18;
+
+        if $i1 != 0 goto label1;
+
+        specialinvoke r0.unloadPluginJAR(r1);
+
+(0)     goto label6;
+
+     label1:
+        $r7 = new java.util.LinkedList;
+
+        specialinvoke $r7.<init>();
+
+        r2 = $r7;
+
+        r19 = r1.getDependentPlugins();
+
+        org.gjt.sp.jedit.PluginJAR.transitiveClosure(r19, r2);
+
+        $r8 = new java.util.ArrayList;
+
+        $r9 = new java.util.HashSet;
+
+        specialinvoke $r9.<init>(r2);
+
+        specialinvoke $r8.<init>($r9);
+
+        r3 = $r8;
+
+        z1 = 1;
+
+        $z0 = r3.isEmpty();
+
+(1)     if $z0 != 0 goto label4;
+
+        $r11 = new org.gjt.sp.util.StandardUtilities$StringCompare;
+
+        specialinvoke $r11.<init>(1);
+
+        java.util.Collections.sort(r3, $r11);
+
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1000($r12);
+
+        $r14 = newarray (java.lang.String)[1];
+
+        $r15 = r1.getFile();
+
+        $r16 = $r15.getName();
+
+        $r14[0] = $r16;
+
+        $r17 = r3.toArray();
+
+        i2 = org.gjt.sp.jedit.GUIUtilities.listConfirm($r13, "plugin-manager.dependency", $r14, $r17);
+
+        if i2 != 0 goto label2;
+
+        $z2 = 1;
+
+(2)     goto label3;
+
+     label2:
+(3)     $z2_1 = 0;
+
+     label3:
+        $z2_2 = Phi($z2 #2, $z2_1 #3);
+
+(4)     z1_1 = $z2_2;
+
+     label4:
+        $z2_3 = Phi($z2 #1, $z2_2 #4);
+
+        z1_2 = Phi(z1 #1, z1_1 #4);
+
+(5)     if z1_2 == 0 goto label6;
+
+        r20 = r1.getOptionallyDependentPlugins();
+
+        specialinvoke r0.unloadPluginJAR(r1);
+
+        r4 = r20;
+
+        i0 = lengthof r4;
+
+(6)     i3 = 0;
+
+     label5:
+        $z2 = Phi($z2_3 #6, $z2 #8);
+
+        i3 = Phi(i3 #6, i3 #8);
+
+        z1 = Phi(z1_2 #6, z1 #8);
+
+(7)     if i3 >= i0 goto label6;
+
+        r5 = r4[i3];
+
+        org.gjt.sp.jedit.PluginJAR.load(r5, 1);
+
+        i3 = i3 + 1;
+
+(8)     goto label5;
+
+     label6:
+        $z2 = Phi($z2 #0, $z2_3 #5, $z2 #7);
+
+        i3 = Phi(i3 #0, i3 #5, i3 #7);
+
+        z1 = Phi(z1 #0, z1_2 #5, z1 #7);
+
+        return;
+    }
+
+    private void unloadPluginJAR(org.gjt.sp.jedit.PluginJAR)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        org.gjt.sp.jedit.PluginJAR r1, r5;
+        java.lang.String[] r2, r3;
+        int i0, i1;
+        java.lang.String r4, $r8, $r9, $r11;
+        java.lang.StringBuilder $r6, $r7, $r10;
+        java.util.concurrent.ConcurrentHashMap $r12, $r14;
+        boolean $z0;
+        java.lang.Boolean $r13;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getAllDependentPlugins();
+
+        r3 = r2;
+
+        i0 = lengthof r3;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label3;
+
+        r4 = r3[i1];
+
+        $r12 = r0.unloaded;
+
+        $z0 = $r12.containsKey(r4);
+
+        if $z0 != 0 goto label2;
+
+        $r14 = r0.unloaded;
+
+        $r13 = java.lang.Boolean.TRUE;
+
+        $r14.put(r4, $r13);
+
+        r5 = org.gjt.sp.jedit.jEdit.getPluginJAR(r4);
+
+        if r5 == null goto label2;
+
+        specialinvoke r0.unloadPluginJAR(r5);
+
+     label2:
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        org.gjt.sp.jedit.jEdit.removePluginJAR(r1, 0);
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("plugin-blacklist.");
+
+        $r8 = r1.getPath();
+
+        $r9 = org.gjt.sp.jedit.MiscUtilities.getFileName($r8);
+
+        $r10 = $r7.append($r9);
+
+        $r11 = $r10.toString();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty($r11, 1);
+
+        org.gjt.sp.jedit.jEdit.propertiesChanged();
+
+        return;
+    }
+
+    public void saveSelection(java.util.List)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        java.util.List r1, $r8;
+        int[] r2, r3;
+        int i0, i1, i2;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r4, $r6;
+        javax.swing.JTable $r5, $r7;
+        java.lang.Object $r9;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry $r10;
+        java.lang.String $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r4);
+
+(0)     if $r5 == null goto label2;
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r6);
+
+        r2 = $r7.getSelectedRows();
+
+        r3 = r2;
+
+        i0 = lengthof r3;
+
+(1)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #1, i2 #3);
+
+(2)     if i2 >= i0 goto label2;
+
+        i1 = r3[i2];
+
+        $r8 = r0.entries;
+
+        $r9 = $r8.get(i1);
+
+        $r10 = (org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry) $r9;
+
+        $r11 = $r10.jar;
+
+        r1.add($r11);
+
+        i2 = i2 + 1;
+
+(3)     goto label1;
+
+     label2:
+        i2 = Phi(i2 #0, i2 #2);
+
+        return;
+    }
+
+    public void restoreSelection(java.util.List)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        java.util.List r1, $r15, $r19;
+        int i0, $i1, $i2, i3;
+        javax.swing.ListSelectionModel r2;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r3, $r5, $r7, $r9, $r11, $r13, $r23;
+        javax.swing.JTable $r4, $r6, $r8, $r12, $r14, $r24;
+        boolean $z0, $z1, $z2;
+        javax.swing.JScrollPane $r10;
+        java.lang.Object $r16, $r20;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry $r17, $r21;
+        java.lang.String $r18, $r22;
+        javax.swing.JScrollBar r25;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r3);
+
+(0)     if null == $r4 goto label9;
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r5);
+
+        $r6.setColumnSelectionInterval(0, 0);
+
+        $z0 = r1.isEmpty();
+
+        if $z0 != 0 goto label7;
+
+        i3 = 0;
+
+(1)     i0 = r0.getRowCount();
+
+     label1:
+        i3 = Phi(i3 #1, i3 #2);
+
+        if i3 >= i0 goto label3;
+
+        $r19 = r0.entries;
+
+        $r20 = $r19.get(i3);
+
+        $r21 = (org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry) $r20;
+
+        $r22 = $r21.jar;
+
+        $z2 = r1.contains($r22);
+
+        if $z2 == 0 goto label2;
+
+        $r23 = r0.this$0;
+
+        $r24 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r23);
+
+        $r24.setRowSelectionInterval(i3, i3);
+
+        goto label3;
+
+     label2:
+        i3 = i3 + 1;
+
+(2)     goto label1;
+
+     label3:
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r13);
+
+(3)     r2 = $r14.getSelectionModel();
+
+     label4:
+        i3 = Phi(i3 #3, i3 #4);
+
+        if i3 >= i0 goto label6;
+
+        $r15 = r0.entries;
+
+        $r16 = $r15.get(i3);
+
+        $r17 = (org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry) $r16;
+
+        $r18 = $r17.jar;
+
+        $z1 = r1.contains($r18);
+
+        if $z1 == 0 goto label5;
+
+        r2.addSelectionInterval(i3, i3);
+
+     label5:
+        i3 = i3 + 1;
+
+(4)     goto label4;
+
+     label6:
+(5)     goto label9;
+
+     label7:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r7);
+
+        $i1 = $r8.getRowCount();
+
+        if $i1 == 0 goto label8;
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r11);
+
+        $r12.setRowSelectionInterval(0, 0);
+
+     label8:
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1100($r9);
+
+        r25 = $r10.getVerticalScrollBar();
+
+        $i2 = r25.getMinimum();
+
+(6)     r25.setValue($i2);
+
+     label9:
+        i3 = Phi(i3 #0, i3 #5, i3 #6);
+
+        return;
+    }
+
+    static void access$700(org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel, org.gjt.sp.jedit.PluginJAR)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        org.gjt.sp.jedit.PluginJAR r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        specialinvoke r0.unloadPluginJARWithDialog(r1);
+
+        return;
+    }
+
+    static int access$1328(org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel, int)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        int i0, $i1, $i2;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        $i1 = r0.sortDirection;
+
+        $i2 = $i1 * i0;
+
+        r0.sortDirection = $i2;
+
+        return $i2;
+    }
+
+    static int access$1600(org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        int $i0;
+
+        r0 := @parameter0;
+
+        $i0 = r0.sortType;
+
+        return $i0;
+    }
+
+    static int access$1300(org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r0;
+        int $i0;
+
+        r0 := @parameter0;
+
+        $i0 = r0.sortDirection;
+
+        return $i0;
+    }
+}

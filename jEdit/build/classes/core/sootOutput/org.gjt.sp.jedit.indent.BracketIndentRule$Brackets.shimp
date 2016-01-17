@@ -1,0 +1,16 @@
+public class org.gjt.sp.jedit.indent.BracketIndentRule$Brackets extends java.lang.Object
+{
+    int openCount;
+    int closeCount;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.indent.BracketIndentRule$Brackets r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

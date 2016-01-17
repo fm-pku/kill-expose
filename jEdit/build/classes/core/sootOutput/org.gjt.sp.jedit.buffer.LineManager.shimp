@@ -1,0 +1,1042 @@
+public class org.gjt.sp.jedit.buffer.LineManager extends java.lang.Object
+{
+    private int[] endOffsets;
+    private short[] foldLevels;
+    private org.gjt.sp.jedit.syntax.TokenMarker$LineContext[] lineContext;
+    private int lineCount;
+    private int gapLine;
+    private int gapWidth;
+    private int firstInvalidLineContext;
+    private int firstInvalidFoldLevel;
+    private int getLineOfOffsetLine;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int[] $r1, $r2;
+        short[] $r3;
+        org.gjt.sp.jedit.syntax.TokenMarker$LineContext[] $r4;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        r0.getLineOfOffsetLine = -1;
+
+        $r1 = newarray (int)[1];
+
+        r0.endOffsets = $r1;
+
+        $r2 = r0.endOffsets;
+
+        $r2[0] = 1;
+
+        $r3 = newarray (short)[1];
+
+        r0.foldLevels = $r3;
+
+        $r4 = newarray (org.gjt.sp.jedit.syntax.TokenMarker$LineContext)[1];
+
+        r0.lineContext = $r4;
+
+        r0.lineCount = 1;
+
+        return;
+    }
+
+    public final int getLineCount()
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.lineCount;
+
+        return $i0;
+    }
+
+    public int getLineOfOffset(int)
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int i0, i1, i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i20, $i21, i22, i23, i24, i25;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $i3 = r0.getLineOfOffsetLine;
+
+        if $i3 <= 0 goto label01;
+
+        $i17 = r0.getLineOfOffsetLine;
+
+        $i16 = r0.lineCount;
+
+        if $i17 >= $i16 goto label01;
+
+        $i18 = r0.getLineOfOffsetLine;
+
+        $i19 = $i18 - 1;
+
+        i22 = r0.getLineEndOffset($i19);
+
+        $i20 = r0.getLineOfOffsetLine;
+
+        i23 = r0.getLineEndOffset($i20);
+
+        if i0 < i22 goto label01;
+
+        if i0 >= i23 goto label01;
+
+        $i21 = r0.getLineOfOffsetLine;
+
+        return $i21;
+
+     label01:
+        i24 = 0;
+
+        $i4 = r0.lineCount;
+
+(0)     i25 = $i4 - 1;
+
+     label02:
+        i24 = Phi(i24 #0, i24 #3);
+
+        i25 = Phi(i25 #0, i25 #3);
+
+        $i5 = i25 - i24;
+
+        lookupswitch($i5)
+        {
+            case 0: goto label03;
+            case 1: goto label06;
+            default: goto label10;
+        };
+
+     label03:
+        $i10 = r0.getLineEndOffset(i24);
+
+        if $i10 > i0 goto label04;
+
+        $i12 = i24 + 1;
+
+        r0.getLineOfOffsetLine = $i12;
+
+        goto label05;
+
+     label04:
+        r0.getLineOfOffsetLine = i24;
+
+     label05:
+        $i11 = r0.getLineOfOffsetLine;
+
+        return $i11;
+
+     label06:
+        $i6 = r0.getLineEndOffset(i24);
+
+        if $i6 > i0 goto label08;
+
+        $i8 = r0.getLineEndOffset(i25);
+
+        if $i8 > i0 goto label07;
+
+        $i9 = i25 + 1;
+
+        r0.getLineOfOffsetLine = $i9;
+
+        goto label09;
+
+     label07:
+        r0.getLineOfOffsetLine = i25;
+
+        goto label09;
+
+     label08:
+        r0.getLineOfOffsetLine = i24;
+
+     label09:
+        $i7 = r0.getLineOfOffsetLine;
+
+        return $i7;
+
+     label10:
+        $i13 = i25 + i24;
+
+        i1 = $i13 / 2;
+
+        i2 = r0.getLineEndOffset(i1);
+
+        if i2 != i0 goto label11;
+
+        $i14 = i1 + 1;
+
+        r0.getLineOfOffsetLine = $i14;
+
+        $i15 = r0.getLineOfOffsetLine;
+
+        return $i15;
+
+     label11:
+        if i2 >= i0 goto label12;
+
+        i24 = i1 + 1;
+
+(1)     goto label13;
+
+     label12:
+(2)     i25 = i1 - 1;
+
+     label13:
+        i24 = Phi(i24 #1, i24 #2);
+
+        i25 = Phi(i25 #1, i25 #2);
+
+(3)     goto label02;
+    }
+
+    public final int getLineEndOffset(int)
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6;
+        int[] $r1, $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $i1 = r0.gapLine;
+
+        if $i1 == -1 goto label1;
+
+        $i3 = r0.gapLine;
+
+        if i0 < $i3 goto label1;
+
+        $r2 = r0.endOffsets;
+
+        $i5 = $r2[i0];
+
+        $i4 = r0.gapWidth;
+
+        $i6 = $i5 + $i4;
+
+        return $i6;
+
+     label1:
+        $r1 = r0.endOffsets;
+
+        $i2 = $r1[i0];
+
+        return $i2;
+    }
+
+    public final int getFoldLevel(int)
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int i0;
+        short[] $r1;
+        short $s1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.foldLevels;
+
+        $s1 = $r1[i0];
+
+        return $s1;
+    }
+
+    public final void setFoldLevel(int, int)
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int i0, i2, i2_1, i2_2;
+        short $s1;
+        short[] $r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i2 := @parameter1;
+
+(0)     if i2 <= 65535 goto label1;
+
+(1)     i2_1 = 65535;
+
+     label1:
+        i2_2 = Phi(i2 #0, i2_1 #1);
+
+        $r1 = r0.foldLevels;
+
+        $s1 = (short) i2_2;
+
+        $r1[i0] = $s1;
+
+        return;
+    }
+
+    public void setFirstInvalidFoldLevel(int)
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r0.firstInvalidFoldLevel = i0;
+
+        return;
+    }
+
+    public int getFirstInvalidFoldLevel()
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.firstInvalidFoldLevel;
+
+        return $i0;
+    }
+
+    public final org.gjt.sp.jedit.syntax.TokenMarker$LineContext getLineContext(int)
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int i0;
+        org.gjt.sp.jedit.syntax.TokenMarker$LineContext[] $r1;
+        org.gjt.sp.jedit.syntax.TokenMarker$LineContext $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.lineContext;
+
+        $r2 = $r1[i0];
+
+        return $r2;
+    }
+
+    public final void setLineContext(int, org.gjt.sp.jedit.syntax.TokenMarker$LineContext)
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int i0;
+        org.gjt.sp.jedit.syntax.TokenMarker$LineContext r1;
+        org.gjt.sp.jedit.syntax.TokenMarker$LineContext[] $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r2 = r0.lineContext;
+
+        $r2[i0] = r1;
+
+        return;
+    }
+
+    public void setFirstInvalidLineContext(int)
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r0.firstInvalidLineContext = i0;
+
+        return;
+    }
+
+    public int getFirstInvalidLineContext()
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.firstInvalidLineContext;
+
+        return $i0;
+    }
+
+    public void _contentInserted(org.gjt.sp.util.IntegerArray)
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        org.gjt.sp.util.IntegerArray r1;
+        int $i1, $i2, $i3;
+        int[] $r2;
+        short[] $r3;
+        org.gjt.sp.jedit.syntax.TokenMarker$LineContext[] $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.gapLine = -1;
+
+        r0.gapWidth = 0;
+
+        r0.firstInvalidFoldLevel = 0;
+
+        r0.firstInvalidLineContext = 0;
+
+        $i1 = r1.getSize();
+
+        r0.lineCount = $i1;
+
+        $r2 = r1.getArray();
+
+        r0.endOffsets = $r2;
+
+        $i2 = r0.lineCount;
+
+        $r3 = newarray (short)[$i2];
+
+        r0.foldLevels = $r3;
+
+        $i3 = r0.lineCount;
+
+        $r4 = newarray (org.gjt.sp.jedit.syntax.TokenMarker$LineContext)[$i3];
+
+        r0.lineContext = $r4;
+
+        return;
+    }
+
+    public void contentInserted(int, int, int, int, org.gjt.sp.util.IntegerArray)
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int i0, i1, i2, i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i20, $i21, $i22, $i23, $i24, $i25, $i26, $i27, $i28, $i29, $i30, $i31, $i32, $i33, $i34, $i35, $i36, $i37, $i38, $i39, $i40, $i41, $i42, $i43, i44, i45, i44_1, i44_2;
+        org.gjt.sp.util.IntegerArray r1;
+        int[] $r2, $r5, $r6, $r11, $r17, $r18, r19;
+        short[] $r3, $r7, $r8, $r12, $r15, $r16, r20;
+        org.gjt.sp.jedit.syntax.TokenMarker$LineContext[] $r4, $r9, $r10, $r13, $r14, r21;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i44 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        r1 := @parameter4;
+
+        i3 = i0 + i1;
+
+(0)     if i1 <= 0 goto label08;
+
+        $i6 = r0.lineCount;
+
+        $i7 = $i6 + i1;
+
+        r0.lineCount = $i7;
+
+        $r2 = r0.endOffsets;
+
+        $i9 = lengthof $r2;
+
+        $i8 = r0.lineCount;
+
+        if $i9 > $i8 goto label01;
+
+        $i40 = r0.lineCount;
+
+        $i41 = $i40 + 1;
+
+        $i42 = $i41 * 2;
+
+        r19 = newarray (int)[$i42];
+
+        $r18 = r0.endOffsets;
+
+        $r17 = r0.endOffsets;
+
+        $i43 = lengthof $r17;
+
+        java.lang.System.arraycopy($r18, 0, r19, 0, $i43);
+
+        r0.endOffsets = r19;
+
+     label01:
+        $r3 = r0.foldLevels;
+
+        $i11 = lengthof $r3;
+
+        $i10 = r0.lineCount;
+
+        if $i11 > $i10 goto label02;
+
+        $i36 = r0.lineCount;
+
+        $i37 = $i36 + 1;
+
+        $i38 = $i37 * 2;
+
+        r20 = newarray (short)[$i38];
+
+        $r16 = r0.foldLevels;
+
+        $r15 = r0.foldLevels;
+
+        $i39 = lengthof $r15;
+
+        java.lang.System.arraycopy($r16, 0, r20, 0, $i39);
+
+        r0.foldLevels = r20;
+
+     label02:
+        $r4 = r0.lineContext;
+
+        $i13 = lengthof $r4;
+
+        $i12 = r0.lineCount;
+
+        if $i13 > $i12 goto label03;
+
+        $i32 = r0.lineCount;
+
+        $i33 = $i32 + 1;
+
+        $i34 = $i33 * 2;
+
+        r21 = newarray (org.gjt.sp.jedit.syntax.TokenMarker$LineContext)[$i34];
+
+        $r14 = r0.lineContext;
+
+        $r13 = r0.lineContext;
+
+        $i35 = lengthof $r13;
+
+        java.lang.System.arraycopy($r14, 0, r21, 0, $i35);
+
+        r0.lineContext = r21;
+
+     label03:
+        $r6 = r0.endOffsets;
+
+        $r5 = r0.endOffsets;
+
+        $i14 = r0.lineCount;
+
+        $i15 = $i14 - i3;
+
+        java.lang.System.arraycopy($r6, i0, $r5, i3, $i15);
+
+        $r8 = r0.foldLevels;
+
+        $r7 = r0.foldLevels;
+
+        $i16 = r0.lineCount;
+
+        $i17 = $i16 - i3;
+
+        java.lang.System.arraycopy($r8, i0, $r7, i3, $i17);
+
+        $r10 = r0.lineContext;
+
+        $r9 = r0.lineContext;
+
+        $i18 = r0.lineCount;
+
+        $i19 = $i18 - i3;
+
+        java.lang.System.arraycopy($r10, i0, $r9, i3, $i19);
+
+        $i20 = r0.gapLine;
+
+        if i0 > $i20 goto label04;
+
+        $i30 = r0.gapLine;
+
+        $i31 = $i30 + i1;
+
+        r0.gapLine = $i31;
+
+(1)     goto label05;
+
+     label04:
+        $i21 = r0.gapLine;
+
+(2)     if $i21 == -1 goto label05;
+
+        $i29 = r0.gapWidth;
+
+(3)     i44_1 = i44 - $i29;
+
+     label05:
+        i44_2 = Phi(i44 #1, i44 #2, i44_1 #3);
+
+        $i22 = r0.firstInvalidLineContext;
+
+        if i0 >= $i22 goto label06;
+
+        $i27 = r0.firstInvalidLineContext;
+
+        $i28 = $i27 + i1;
+
+        r0.firstInvalidLineContext = $i28;
+
+     label06:
+(4)     i45 = 0;
+
+     label07:
+        i45 = Phi(i45 #4, i45 #6);
+
+        i44 = Phi(i44_2 #4, i44 #6);
+
+(5)     if i45 >= i1 goto label08;
+
+        $r11 = r0.endOffsets;
+
+        $i23 = i0 + i45;
+
+        $i24 = r1.get(i45);
+
+        $i25 = i44 + $i24;
+
+        $r11[$i23] = $i25;
+
+        $r12 = r0.foldLevels;
+
+        $i26 = i0 + i45;
+
+        $r12[$i26] = 0;
+
+        i45 = i45 + 1;
+
+(6)     goto label07;
+
+     label08:
+        i45 = Phi(i45 #0, i45 #5);
+
+        i44 = Phi(i44 #0, i44 #5);
+
+        $i4 = r0.firstInvalidFoldLevel;
+
+        if $i4 == -1 goto label09;
+
+        $i5 = r0.firstInvalidFoldLevel;
+
+        if $i5 <= i0 goto label10;
+
+     label09:
+        r0.firstInvalidFoldLevel = i0;
+
+     label10:
+        specialinvoke r0.moveGap(i3, i2, "contentInserted");
+
+        return;
+    }
+
+    public void contentRemoved(int, int, int, int)
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int i0, i1, i2, i3, i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i20, $i21, $i22, $i23, $i24, $i25, $i26;
+        int[] $r1, $r2;
+        short[] $r3, $r4;
+        org.gjt.sp.jedit.syntax.TokenMarker$LineContext[] $r5, $r6;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        i2 := @parameter2;
+
+        i3 := @parameter3;
+
+        i4 = i0 + i2;
+
+        if i2 <= 0 goto label5;
+
+        $i9 = i0 + i2;
+
+        $i8 = r0.gapLine;
+
+        if $i9 >= $i8 goto label1;
+
+        $i25 = r0.gapLine;
+
+        $i26 = $i25 - i2;
+
+        r0.gapLine = $i26;
+
+        goto label2;
+
+     label1:
+        $i10 = r0.gapLine;
+
+        if i0 >= $i10 goto label2;
+
+        r0.gapLine = i0;
+
+     label2:
+        $i12 = i0 + i2;
+
+        $i11 = r0.firstInvalidLineContext;
+
+        if $i12 >= $i11 goto label3;
+
+        $i23 = r0.firstInvalidLineContext;
+
+        $i24 = $i23 - i2;
+
+        r0.firstInvalidLineContext = $i24;
+
+        goto label4;
+
+     label3:
+        $i13 = r0.firstInvalidLineContext;
+
+        if i0 >= $i13 goto label4;
+
+        $i22 = i0 - 1;
+
+        r0.firstInvalidLineContext = $i22;
+
+     label4:
+        $i14 = r0.lineCount;
+
+        $i15 = $i14 - i2;
+
+        r0.lineCount = $i15;
+
+        $r2 = r0.endOffsets;
+
+        $r1 = r0.endOffsets;
+
+        $i16 = r0.lineCount;
+
+        $i17 = $i16 - i0;
+
+        java.lang.System.arraycopy($r2, i4, $r1, i0, $i17);
+
+        $r4 = r0.foldLevels;
+
+        $r3 = r0.foldLevels;
+
+        $i18 = r0.lineCount;
+
+        $i19 = $i18 - i0;
+
+        java.lang.System.arraycopy($r4, i4, $r3, i0, $i19);
+
+        $r6 = r0.lineContext;
+
+        $r5 = r0.lineContext;
+
+        $i20 = r0.lineCount;
+
+        $i21 = $i20 - i0;
+
+        java.lang.System.arraycopy($r6, i4, $r5, i0, $i21);
+
+     label5:
+        $i5 = r0.firstInvalidFoldLevel;
+
+        if $i5 == -1 goto label6;
+
+        $i7 = r0.firstInvalidFoldLevel;
+
+        if $i7 <= i0 goto label7;
+
+     label6:
+        r0.firstInvalidFoldLevel = i0;
+
+     label7:
+        $i6 = neg i3;
+
+        specialinvoke r0.moveGap(i0, $i6, "contentRemoved");
+
+        return;
+    }
+
+    private void setLineEndOffset(int, int)
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int i0, i1;
+        int[] $r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $r1 = r0.endOffsets;
+
+        $r1[i0] = i1;
+
+        return;
+    }
+
+    private void moveGap(int, int, java.lang.String)
+    {
+        org.gjt.sp.jedit.buffer.LineManager r0;
+        int i0, i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i20, $i21, $i22, $i23, $i24, $i25, $i26, $i27, $i28, $i29, i30, i31, i32;
+        java.lang.String r1, $r10, $r19, $r28;
+        boolean $z0, $z1, $z2;
+        java.lang.StringBuilder $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18, $r20, $r21, $r22, $r23, $r24, $r25, $r26, $r27;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        r1 := @parameter2;
+
+        $i2 = r0.gapLine;
+
+        if $i2 != -1 goto label01;
+
+        r0.gapWidth = i1;
+
+(0)     goto label13;
+
+     label01:
+        if i0 != -1 goto label05;
+
+        $i22 = r0.gapWidth;
+
+(1)     if $i22 == 0 goto label04;
+
+        $z2 = org.gjt.sp.jedit.Debug.OFFSET_DEBUG;
+
+        if $z2 == 0 goto label02;
+
+        $i26 = r0.gapLine;
+
+        $i25 = r0.lineCount;
+
+        if $i26 == $i25 goto label02;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<init>();
+
+        $r21 = $r20.append(r1);
+
+        $r22 = $r21.append(": update from ");
+
+        $i27 = r0.gapLine;
+
+        $r23 = $r22.append($i27);
+
+        $r24 = $r23.append(" to ");
+
+        $i28 = r0.lineCount;
+
+        $r25 = $r24.append($i28);
+
+        $r26 = $r25.append(" width ");
+
+        $i29 = r0.gapWidth;
+
+        $r27 = $r26.append($i29);
+
+        $r28 = $r27.toString();
+
+        org.gjt.sp.util.Log.log(1, r0, $r28);
+
+     label02:
+(2)     i30 = r0.gapLine;
+
+     label03:
+        i30 = Phi(i30 #2, i30 #4);
+
+        $i23 = r0.lineCount;
+
+(3)     if i30 >= $i23 goto label04;
+
+        $i24 = r0.getLineEndOffset(i30);
+
+        specialinvoke r0.setLineEndOffset(i30, $i24);
+
+        i30 = i30 + 1;
+
+(4)     goto label03;
+
+     label04:
+        i30 = Phi(i30 #1, i30 #3);
+
+        r0.gapWidth = i1;
+
+(5)     goto label13;
+
+     label05:
+        $i3 = r0.gapLine;
+
+        if i0 >= $i3 goto label09;
+
+        $i12 = r0.gapWidth;
+
+(6)     if $i12 == 0 goto label08;
+
+        $z1 = org.gjt.sp.jedit.Debug.OFFSET_DEBUG;
+
+        if $z1 == 0 goto label06;
+
+        $i19 = r0.gapLine;
+
+        if i0 == $i19 goto label06;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = $r11.append(r1);
+
+        $r13 = $r12.append(": update from ");
+
+        $r14 = $r13.append(i0);
+
+        $r15 = $r14.append(" to ");
+
+        $i20 = r0.gapLine;
+
+        $r16 = $r15.append($i20);
+
+        $r17 = $r16.append(" width ");
+
+        $i21 = r0.gapWidth;
+
+        $r18 = $r17.append($i21);
+
+        $r19 = $r18.toString();
+
+        org.gjt.sp.util.Log.log(1, r0, $r19);
+
+     label06:
+(7)     i31 = i0;
+
+     label07:
+        i31 = Phi(i31 #7, i31 #9);
+
+        $i15 = r0.gapLine;
+
+(8)     if i31 >= $i15 goto label08;
+
+        $i16 = r0.getLineEndOffset(i31);
+
+        $i17 = r0.gapWidth;
+
+        $i18 = $i16 - $i17;
+
+        specialinvoke r0.setLineEndOffset(i31, $i18);
+
+        i31 = i31 + 1;
+
+(9)     goto label07;
+
+     label08:
+        i31 = Phi(i31 #6, i31 #8);
+
+        $i13 = r0.gapWidth;
+
+        $i14 = $i13 + i1;
+
+        r0.gapWidth = $i14;
+
+(10)    goto label13;
+
+     label09:
+        $i4 = r0.gapWidth;
+
+(11)    if $i4 == 0 goto label12;
+
+        $z0 = org.gjt.sp.jedit.Debug.OFFSET_DEBUG;
+
+        if $z0 == 0 goto label10;
+
+        $i9 = r0.gapLine;
+
+        if $i9 == i0 goto label10;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append(r1);
+
+        $r4 = $r3.append(": update from ");
+
+        $i10 = r0.gapLine;
+
+        $r5 = $r4.append($i10);
+
+        $r6 = $r5.append(" to ");
+
+        $r7 = $r6.append(i0);
+
+        $r8 = $r7.append(" width ");
+
+        $i11 = r0.gapWidth;
+
+        $r9 = $r8.append($i11);
+
+        $r10 = $r9.toString();
+
+        org.gjt.sp.util.Log.log(1, r0, $r10);
+
+     label10:
+(12)    i32 = r0.gapLine;
+
+     label11:
+        i32 = Phi(i32 #12, i32 #14);
+
+(13)    if i32 >= i0 goto label12;
+
+        $i8 = r0.getLineEndOffset(i32);
+
+        specialinvoke r0.setLineEndOffset(i32, $i8);
+
+        i32 = i32 + 1;
+
+(14)    goto label11;
+
+     label12:
+        i32 = Phi(i32 #11, i32 #13);
+
+        $i5 = r0.gapWidth;
+
+        $i6 = $i5 + i1;
+
+(15)    r0.gapWidth = $i6;
+
+     label13:
+        i30 = Phi(i30 #0, i30 #5, i30 #10, i30 #15);
+
+        i31 = Phi(i31 #0, i31 #5, i31 #10, i31 #15);
+
+        i32 = Phi(i32 #0, i32 #5, i32 #10, i32 #15);
+
+        $i7 = r0.lineCount;
+
+        if i0 != $i7 goto label14;
+
+        r0.gapLine = -1;
+
+        goto label15;
+
+     label14:
+        r0.gapLine = i0;
+
+     label15:
+        return;
+    }
+}

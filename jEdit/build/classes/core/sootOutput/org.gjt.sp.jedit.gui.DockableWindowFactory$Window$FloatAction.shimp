@@ -1,0 +1,99 @@
+class org.gjt.sp.jedit.gui.DockableWindowFactory$Window$FloatAction extends org.gjt.sp.jedit.EditAction
+{
+    private java.lang.String dockable;
+    final org.gjt.sp.jedit.gui.DockableWindowFactory$Window this$1;
+
+    void <init>(org.gjt.sp.jedit.gui.DockableWindowFactory$Window, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window$FloatAction r0;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window r1;
+        java.lang.String r2, $r6;
+        java.lang.StringBuilder $r3, $r4, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$1 = r1;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append(r2);
+
+        $r5 = $r4.append("-float");
+
+        $r6 = $r5.toString();
+
+        specialinvoke r0.<init>($r6);
+
+        r0.dockable = r2;
+
+        return;
+    }
+
+    public void invoke(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window$FloatAction r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.gui.DockableWindowManager $r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getDockableWindowManager();
+
+        $r3 = r0.dockable;
+
+        $r2.floatDockableWindow($r3);
+
+        return;
+    }
+
+    public java.lang.String getCode()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window$FloatAction r0;
+        java.lang.StringBuilder $r1, $r2, $r4, $r5;
+        java.lang.String $r3, $r6;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("view.getDockableWindowManager().floatDockableWindow(\"");
+
+        $r3 = r0.dockable;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.append("\");");
+
+        $r6 = $r5.toString();
+
+        return $r6;
+    }
+
+    public volatile void invoke(java.lang.Object)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window$FloatAction r0;
+        java.lang.Object r1;
+        org.gjt.sp.jedit.View $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = (org.gjt.sp.jedit.View) r1;
+
+        r0.invoke($r2);
+
+        return;
+    }
+}

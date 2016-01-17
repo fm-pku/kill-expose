@@ -1,0 +1,132 @@
+class org.gjt.sp.jedit.JEditBeanShellAction$MyBeanShellFacade extends org.gjt.sp.jedit.BeanShellFacade
+{
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.JEditBeanShellAction$MyBeanShellFacade r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    protected void setupDefaultVariables(org.gjt.sp.jedit.bsh.NameSpace, org.gjt.sp.jedit.textarea.TextArea) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.JEditBeanShellAction$MyBeanShellFacade r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+        org.gjt.sp.jedit.textarea.TextArea r2;
+        org.gjt.sp.jedit.buffer.JEditBuffer $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        if r2 == null goto label1;
+
+        $r3 = r2.getBuffer();
+
+        r0.setVariable(r1, "buffer", $r3);
+
+        r0.setVariable(r1, "textArea", r2);
+
+     label1:
+        return;
+    }
+
+    protected void resetDefaultVariables(org.gjt.sp.jedit.bsh.NameSpace) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.JEditBeanShellAction$MyBeanShellFacade r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r1.setVariable("buffer", null, 0);
+
+        r1.setVariable("textArea", null, 0);
+
+        return;
+    }
+
+    protected void handleException(org.gjt.sp.jedit.textarea.TextArea, java.lang.String, java.lang.Throwable)
+    {
+        org.gjt.sp.jedit.JEditBeanShellAction$MyBeanShellFacade r0;
+        org.gjt.sp.jedit.textarea.TextArea r1;
+        java.lang.String r2;
+        java.lang.Throwable r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        org.gjt.sp.util.Log.log(9, r0, r3, r3);
+
+        return;
+    }
+
+    protected volatile void handleException(java.lang.Object, java.lang.String, java.lang.Throwable)
+    {
+        org.gjt.sp.jedit.JEditBeanShellAction$MyBeanShellFacade r0;
+        java.lang.Object r1;
+        java.lang.String r2;
+        java.lang.Throwable r3;
+        org.gjt.sp.jedit.textarea.TextArea $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = (org.gjt.sp.jedit.textarea.TextArea) r1;
+
+        r0.handleException($r4, r2, r3);
+
+        return;
+    }
+
+    protected volatile void setupDefaultVariables(org.gjt.sp.jedit.bsh.NameSpace, java.lang.Object) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.JEditBeanShellAction$MyBeanShellFacade r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+        java.lang.Object r2;
+        org.gjt.sp.jedit.textarea.TextArea $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = (org.gjt.sp.jedit.textarea.TextArea) r2;
+
+        r0.setupDefaultVariables(r1, $r3);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.JEditBeanShellAction$1)
+    {
+        org.gjt.sp.jedit.JEditBeanShellAction$MyBeanShellFacade r0;
+        org.gjt.sp.jedit.JEditBeanShellAction$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

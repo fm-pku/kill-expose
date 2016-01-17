@@ -1,0 +1,697 @@
+public class org.gjt.sp.jedit.options.AppearanceOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    public static final java.lang.String[] builtInIconThemes;
+    private java.lang.String oldTheme;
+    private javax.swing.UIManager$LookAndFeelInfo[] lfs;
+    private javax.swing.JComboBox lookAndFeel;
+    private org.gjt.sp.jedit.gui.FontSelector primaryFont;
+    private org.gjt.sp.jedit.gui.FontSelector secondaryFont;
+    private org.gjt.sp.jedit.gui.FontSelector helpViewerFont;
+    private javax.swing.JTextField history;
+    private javax.swing.JTextField menuSpillover;
+    private javax.swing.JCheckBox showTips;
+    private javax.swing.JCheckBox showSplash;
+    private javax.swing.JCheckBox textColors;
+    private javax.swing.JCheckBox decorateFrames;
+    private javax.swing.JCheckBox decorateDialogs;
+    private javax.swing.JComboBox antiAliasExtras;
+    private javax.swing.JComboBox iconThemes;
+    private javax.swing.JCheckBox systemTrayIcon;
+    private javax.swing.JCheckBox useQuartz;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.AppearanceOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("appearance");
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.AppearanceOptionPane r0;
+        java.lang.String[] r1, r74;
+        java.lang.String r2, r3, $r12, $r15, $r17, $r19, $r23, $r27, $r30, $r31, $r34, $r35, $r38, $r42, $r47, $r50, $r53, $r57, $r61, $r65, $r66, $r70, $r73;
+        javax.swing.UIManager$LookAndFeelInfo[] $r4, $r5, $r68, $r71;
+        int $i0, $i1, $i2, i3, i4, i5;
+        javax.swing.LookAndFeel $r6;
+        java.lang.Class $r7;
+        javax.swing.JComboBox $r8, $r9, $r11, $r13, $r14, $r16, $r67;
+        org.gjt.sp.jedit.options.AppearanceOptionPane$1 $r10;
+        org.gjt.sp.jedit.gui.FontSelector $r18, $r20, $r21, $r24, $r25, $r28;
+        java.awt.Font $r22, $r26, r75;
+        org.gjt.sp.jedit.gui.NumericTextField $r29, $r33;
+        javax.swing.JTextField $r32, $r36;
+        javax.swing.JCheckBox $r37, $r39, $r40, $r41, $r44, $r45, $r46, $r48, $r49, $r52, $r54, $r55, $r56, $r58, $r59, $r60, $r62, $r63, $r64;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8;
+        java.io.File $r43;
+        javax.swing.JComponent $r51;
+        javax.swing.UIManager$LookAndFeelInfo $r69, $r72;
+
+        r0 := @this;
+
+        $r4 = javax.swing.UIManager.getInstalledLookAndFeels();
+
+        r0.lfs = $r4;
+
+        $r5 = r0.lfs;
+
+        $i0 = lengthof $r5;
+
+        r1 = newarray (java.lang.String)[$i0];
+
+        $r6 = javax.swing.UIManager.getLookAndFeel();
+
+        $r7 = $r6.getClass();
+
+        r2 = $r7.getName();
+
+        i3 = 0;
+
+(0)     i4 = 0;
+
+     label01:
+        i4 = Phi(i4 #0, i4 #3);
+
+        i3 = Phi(i3 #0, i3 #3);
+
+        $i1 = lengthof r1;
+
+        if i4 >= $i1 goto label03;
+
+        $r68 = r0.lfs;
+
+        $r69 = $r68[i4];
+
+        $r70 = $r69.getName();
+
+        r1[i4] = $r70;
+
+        $r71 = r0.lfs;
+
+        $r72 = $r71[i4];
+
+        $r73 = $r72.getClassName();
+
+        $z7 = r2.equals($r73);
+
+(1)     if $z7 == 0 goto label02;
+
+(2)     i3 = i4;
+
+     label02:
+        i3 = Phi(i3 #1, i3 #2);
+
+        i4 = i4 + 1;
+
+(3)     goto label01;
+
+     label03:
+        $r8 = new javax.swing.JComboBox;
+
+        specialinvoke $r8.<init>(r1);
+
+        r0.lookAndFeel = $r8;
+
+        $r9 = r0.lookAndFeel;
+
+        $r9.setSelectedIndex(i3);
+
+        $r11 = r0.lookAndFeel;
+
+        $r10 = new org.gjt.sp.jedit.options.AppearanceOptionPane$1;
+
+        specialinvoke $r10.<init>(r0);
+
+        $r11.addActionListener($r10);
+
+        $r12 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.lf");
+
+        $r13 = r0.lookAndFeel;
+
+        r0.addComponent($r12, $r13);
+
+        r74 = org.gjt.sp.jedit.options.IconTheme.builtInNames();
+
+        $r14 = new javax.swing.JComboBox;
+
+        specialinvoke $r14.<init>(r74);
+
+        r0.iconThemes = $r14;
+
+        $r15 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.iconTheme");
+
+        $r16 = r0.iconThemes;
+
+        r0.addComponent($r15, $r16);
+
+        $r17 = org.gjt.sp.jedit.options.IconTheme.get();
+
+        r0.oldTheme = $r17;
+
+(4)     i5 = 0;
+
+     label04:
+        i5 = Phi(i5 #4, i5 #5);
+
+        i4 = Phi(i4 #4, i4 #5);
+
+        i3 = Phi(i3 #4, i3 #5);
+
+        $i2 = lengthof r74;
+
+        if i5 >= $i2 goto label06;
+
+        $r66 = r74[i5];
+
+        $r65 = r0.oldTheme;
+
+        $z6 = $r66.equals($r65);
+
+        if $z6 == 0 goto label05;
+
+        $r67 = r0.iconThemes;
+
+        $r67.setSelectedIndex(i5);
+
+        goto label06;
+
+     label05:
+        i5 = i5 + 1;
+
+(5)     goto label04;
+
+     label06:
+        r75 = org.gjt.sp.jedit.jEdit.getFontProperty("metal.primary.font");
+
+        $r18 = new org.gjt.sp.jedit.gui.FontSelector;
+
+        specialinvoke $r18.<init>(r75);
+
+        r0.primaryFont = $r18;
+
+        $r19 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.primaryFont");
+
+        $r20 = r0.primaryFont;
+
+        r0.addComponent($r19, $r20);
+
+        $r21 = new org.gjt.sp.jedit.gui.FontSelector;
+
+        $r22 = org.gjt.sp.jedit.jEdit.getFontProperty("metal.secondary.font");
+
+        specialinvoke $r21.<init>($r22);
+
+        r0.secondaryFont = $r21;
+
+        $r23 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.secondaryFont");
+
+        $r24 = r0.secondaryFont;
+
+        r0.addComponent($r23, $r24);
+
+        $r25 = new org.gjt.sp.jedit.gui.FontSelector;
+
+        $r26 = org.gjt.sp.jedit.jEdit.getFontProperty("helpviewer.font", r75);
+
+        specialinvoke $r25.<init>($r26);
+
+        r0.helpViewerFont = $r25;
+
+        $r27 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.helpViewerFont");
+
+        $r28 = r0.helpViewerFont;
+
+        r0.addComponent($r27, $r28);
+
+        specialinvoke r0.updateEnabled();
+
+        $r29 = new org.gjt.sp.jedit.gui.NumericTextField;
+
+        $r30 = org.gjt.sp.jedit.jEdit.getProperty("history");
+
+        specialinvoke $r29.<init>($r30, 1);
+
+        r0.history = $r29;
+
+        $r31 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.history");
+
+        $r32 = r0.history;
+
+        r0.addComponent($r31, $r32);
+
+        $r33 = new org.gjt.sp.jedit.gui.NumericTextField;
+
+        $r34 = org.gjt.sp.jedit.jEdit.getProperty("menu.spillover");
+
+        specialinvoke $r33.<init>($r34, 1);
+
+        r0.menuSpillover = $r33;
+
+        $r35 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.menuSpillover");
+
+        $r36 = r0.menuSpillover;
+
+        r0.addComponent($r35, $r36);
+
+        $r37 = new javax.swing.JCheckBox;
+
+        $r38 = org.gjt.sp.jedit.jEdit.getProperty("options.general.systrayicon", "Show the systray icon");
+
+        specialinvoke $r37.<init>($r38);
+
+        r0.systemTrayIcon = $r37;
+
+        $r39 = r0.systemTrayIcon;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("systrayicon", 1);
+
+        $r39.setSelected($z0);
+
+        $r40 = r0.systemTrayIcon;
+
+        r0.addComponent($r40);
+
+        r0.addSeparator("options.appearance.startup.label");
+
+        $r41 = new javax.swing.JCheckBox;
+
+        $r42 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.showSplash");
+
+        specialinvoke $r41.<init>($r42);
+
+        r0.showSplash = $r41;
+
+        r3 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        if r3 != null goto label07;
+
+        $r64 = r0.showSplash;
+
+        $r64.setSelected(1);
+
+(6)     goto label10;
+
+     label07:
+        $r44 = r0.showSplash;
+
+        $r43 = new java.io.File;
+
+        specialinvoke $r43.<init>(r3, "nosplash");
+
+        $z1 = $r43.exists();
+
+        if $z1 != 0 goto label08;
+
+        $z8 = 1;
+
+(7)     goto label09;
+
+     label08:
+(8)     $z8 = 0;
+
+     label09:
+        $z8 = Phi($z8 #7, $z8 #8);
+
+(9)     $r44.setSelected($z8);
+
+     label10:
+        $z8 = Phi($z8 #6, $z8 #9);
+
+        $r45 = r0.showSplash;
+
+        r0.addComponent($r45);
+
+        $r46 = new javax.swing.JCheckBox;
+
+        $r47 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.showTips");
+
+        specialinvoke $r46.<init>($r47);
+
+        r0.showTips = $r46;
+
+        $r48 = r0.showTips;
+
+        $z2 = org.gjt.sp.jedit.jEdit.getBooleanProperty("tip.show");
+
+        $r48.setSelected($z2);
+
+        $r49 = r0.showTips;
+
+        r0.addComponent($r49);
+
+        r0.addSeparator("options.appearance.experimental.label");
+
+        $r50 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.experimental.caption");
+
+        $r51 = org.gjt.sp.jedit.GUIUtilities.createMultilineLabel($r50);
+
+        r0.addComponent($r51);
+
+        $r52 = new javax.swing.JCheckBox;
+
+        $r53 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.textColors");
+
+        specialinvoke $r52.<init>($r53);
+
+        r0.textColors = $r52;
+
+        $r54 = r0.textColors;
+
+        $z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty("textColors");
+
+        $r54.setSelected($z3);
+
+        $r55 = r0.textColors;
+
+        r0.addComponent($r55);
+
+        $r56 = new javax.swing.JCheckBox;
+
+        $r57 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.decorateFrames");
+
+        specialinvoke $r56.<init>($r57);
+
+        r0.decorateFrames = $r56;
+
+        $r58 = r0.decorateFrames;
+
+        $z4 = org.gjt.sp.jedit.jEdit.getBooleanProperty("decorate.frames");
+
+        $r58.setSelected($z4);
+
+        $r59 = r0.decorateFrames;
+
+        r0.addComponent($r59);
+
+        $r60 = new javax.swing.JCheckBox;
+
+        $r61 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.decorateDialogs");
+
+        specialinvoke $r60.<init>($r61);
+
+        r0.decorateDialogs = $r60;
+
+        $r62 = r0.decorateDialogs;
+
+        $z5 = org.gjt.sp.jedit.jEdit.getBooleanProperty("decorate.dialogs");
+
+        $r62.setSelected($z5);
+
+        $r63 = r0.decorateDialogs;
+
+        r0.addComponent($r63);
+
+        return;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.options.AppearanceOptionPane r0;
+        java.lang.String r1, $r12, $r14, $r19;
+        javax.swing.JComboBox $r2, $r17;
+        javax.swing.UIManager$LookAndFeelInfo[] $r3;
+        int $i0;
+        javax.swing.UIManager$LookAndFeelInfo $r4;
+        org.gjt.sp.jedit.gui.FontSelector $r5, $r7, $r9;
+        java.awt.Font $r6, $r8, $r10;
+        javax.swing.JTextField $r11, $r13;
+        javax.swing.JCheckBox $r15, $r16, $r20, $r22, $r23, $r24;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z6_1, $z6_2;
+        java.lang.Object $r18;
+
+        r0 := @this;
+
+        $r3 = r0.lfs;
+
+        $r2 = r0.lookAndFeel;
+
+        $i0 = $r2.getSelectedIndex();
+
+        $r4 = $r3[$i0];
+
+        r1 = $r4.getClassName();
+
+        org.gjt.sp.jedit.jEdit.setProperty("lookAndFeel", r1);
+
+        $r5 = r0.primaryFont;
+
+        $r6 = $r5.getFont();
+
+        org.gjt.sp.jedit.jEdit.setFontProperty("metal.primary.font", $r6);
+
+        $r7 = r0.secondaryFont;
+
+        $r8 = $r7.getFont();
+
+        org.gjt.sp.jedit.jEdit.setFontProperty("metal.secondary.font", $r8);
+
+        $r9 = r0.helpViewerFont;
+
+        $r10 = $r9.getFont();
+
+        org.gjt.sp.jedit.jEdit.setFontProperty("helpviewer.font", $r10);
+
+        $r11 = r0.history;
+
+        $r12 = $r11.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("history", $r12);
+
+        $r13 = r0.menuSpillover;
+
+        $r14 = $r13.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("menu.spillover", $r14);
+
+        $r15 = r0.showTips;
+
+        $z0 = $r15.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("tip.show", $z0);
+
+        $r16 = r0.systemTrayIcon;
+
+        $z1 = $r16.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("systrayicon", $z1);
+
+        $r17 = r0.iconThemes;
+
+        $r18 = $r17.getSelectedItem();
+
+        $r19 = $r18.toString();
+
+        org.gjt.sp.jedit.options.IconTheme.set($r19);
+
+        $r20 = r0.showSplash;
+
+        $z2 = $r20.isSelected();
+
+        if $z2 != 0 goto label1;
+
+        $z6 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z6_1 = 0;
+
+     label2:
+        $z6_2 = Phi($z6 #0, $z6_1 #1);
+
+        specialinvoke r0.setFileFlag("nosplash", $z6_2);
+
+        $r22 = r0.textColors;
+
+        $z3 = $r22.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("textColors", $z3);
+
+        $r23 = r0.decorateFrames;
+
+        $z4 = $r23.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("decorate.frames", $z4);
+
+        $r24 = r0.decorateDialogs;
+
+        $z5 = $r24.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("decorate.dialogs", $z5);
+
+        return;
+    }
+
+    private void updateEnabled()
+    {
+        org.gjt.sp.jedit.options.AppearanceOptionPane r0;
+        java.lang.String r1;
+        javax.swing.JComboBox $r2;
+        javax.swing.UIManager$LookAndFeelInfo[] $r3;
+        int $i0;
+        javax.swing.UIManager$LookAndFeelInfo $r4;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.gui.FontSelector $r5, $r6, $r7, $r8;
+
+        r0 := @this;
+
+        $r3 = r0.lfs;
+
+        $r2 = r0.lookAndFeel;
+
+        $i0 = $r2.getSelectedIndex();
+
+        $r4 = $r3[$i0];
+
+        r1 = $r4.getClassName();
+
+        $z0 = r1.equals("javax.swing.plaf.metal.MetalLookAndFeel");
+
+        if $z0 != 0 goto label1;
+
+        $z1 = r1.equals("com.incors.plaf.kunststoff.KunststoffLookAndFeel");
+
+        if $z1 == 0 goto label2;
+
+     label1:
+        $r5 = r0.primaryFont;
+
+        $r5.setEnabled(1);
+
+        $r6 = r0.secondaryFont;
+
+        $r6.setEnabled(1);
+
+        goto label3;
+
+     label2:
+        $r7 = r0.primaryFont;
+
+        $r7.setEnabled(0);
+
+        $r8 = r0.secondaryFont;
+
+        $r8.setEnabled(0);
+
+     label3:
+        return;
+    }
+
+    private void setFileFlag(java.lang.String, boolean)
+    {
+        org.gjt.sp.jedit.options.AppearanceOptionPane r0;
+        java.lang.String r1, r2;
+        boolean z0;
+        java.io.File r3, $r6;
+        java.io.IOException r4, $r9;
+        java.lang.Throwable r5, $r8;
+        java.io.FileOutputStream $r7, r10, r10_1, r10_2, r10_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        r2 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+(0)     if r2 == null goto label8;
+
+        $r6 = new java.io.File;
+
+        specialinvoke $r6.<init>(r2, r1);
+
+        r3 = $r6;
+
+        if z0 != 0 goto label1;
+
+        r3.delete();
+
+(1)     goto label8;
+
+     label1:
+(2)     r10 = null;
+
+     label2:
+(3)     $r7 = new java.io.FileOutputStream;
+
+        specialinvoke $r7.<init>(r3);
+
+(4)     r10_1 = $r7;
+
+        r10_1.write(10);
+
+        r10_1.close();
+
+     label3:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r10_1);
+
+(5)     goto label8;
+
+     label4:
+        $r9 := @caughtexception;
+
+(6)     r10_2 = Phi(r10 #3, r10_1 #4);
+
+        r4 = $r9;
+
+        org.gjt.sp.util.Log.log(9, r0, r4);
+
+     label5:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r10_2);
+
+(7)     goto label8;
+
+     label6:
+        $r8 := @caughtexception;
+
+(8)     r10 = Phi(r10_1 #4, r10 #2, r10_2 #6, r10 #8);
+
+        r5 = $r8;
+
+     label7:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r10);
+
+        throw r5;
+
+     label8:
+        r10_3 = Phi(r10 #0, r10 #1, r10_1 #5, r10_2 #7);
+
+        return;
+
+        catch java.io.IOException from label2 to label3 with label4;
+        catch java.lang.Throwable from label2 to label3 with label6;
+        catch java.lang.Throwable from label4 to label5 with label6;
+        catch java.lang.Throwable from label6 to label7 with label6;
+    }
+
+    static void access$000(org.gjt.sp.jedit.options.AppearanceOptionPane)
+    {
+        org.gjt.sp.jedit.options.AppearanceOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updateEnabled();
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String[] $r0;
+
+        $r0 = newarray (java.lang.String)[2];
+
+        $r0[0] = "tango";
+
+        $r0[1] = "old";
+
+        org.gjt.sp.jedit.options.AppearanceOptionPane.builtInIconThemes = $r0;
+
+        return;
+    }
+}

@@ -1,0 +1,47 @@
+abstract class org.gjt.sp.jedit.pluginmgr.Roster$Operation extends java.lang.Object
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.pluginmgr.Roster$Operation r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void runInWorkThread(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress)
+    {
+        org.gjt.sp.jedit.pluginmgr.Roster$Operation r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void runInAWTThread(java.awt.Component)
+    {
+        org.gjt.sp.jedit.pluginmgr.Roster$Operation r0;
+        java.awt.Component r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public int getMaximum()
+    {
+        org.gjt.sp.jedit.pluginmgr.Roster$Operation r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+}

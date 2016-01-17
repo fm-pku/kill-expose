@@ -1,0 +1,158 @@
+class org.gjt.sp.jedit.browser.BrowserView$TableKeyListener extends java.awt.event.KeyAdapter
+{
+    final org.gjt.sp.jedit.browser.BrowserView this$0;
+
+    private void <init>(org.gjt.sp.jedit.browser.BrowserView)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$TableKeyListener r0;
+        org.gjt.sp.jedit.browser.BrowserView r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void keyPressed(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$TableKeyListener r0;
+        java.awt.event.KeyEvent r1;
+        int i0, $i1, $i2, $i3;
+        java.awt.Point r2, $r7;
+        org.gjt.sp.jedit.browser.BrowserView $r3, $r5, $r8, $r10, $r13, $r14, $r16, $r18, $r21, $r22, $r24, $r26, $r28;
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu $r4, $r25, $r27;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r6, $r9, $r11, $r17, $r19, $r23;
+        javax.swing.ListSelectionModel $r12, $r20;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.io.VFSFile[] $r15;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i1 = r1.getKeyCode();
+
+        lookupswitch($i1)
+        {
+            case 525: goto label1;
+            default: goto label5;
+        };
+
+     label1:
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.browser.BrowserView.access$800($r3);
+
+        if $r4 == null goto label2;
+
+        $r24 = r0.this$0;
+
+        $r25 = org.gjt.sp.jedit.browser.BrowserView.access$800($r24);
+
+        $z1 = $r25.isVisible();
+
+        if $z1 == 0 goto label2;
+
+        $r26 = r0.this$0;
+
+        $r27 = org.gjt.sp.jedit.browser.BrowserView.access$800($r26);
+
+        $r27.setVisible(0);
+
+        $r28 = r0.this$0;
+
+        org.gjt.sp.jedit.browser.BrowserView.access$802($r28, null);
+
+        return;
+
+     label2:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r5);
+
+        i0 = $r6.getSelectedRow();
+
+        $r7 = new java.awt.Point;
+
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r8);
+
+        $i2 = $r9.getRowHeight();
+
+        $i3 = i0 * $i2;
+
+        specialinvoke $r7.<init>(0, $i3);
+
+        r2 = $r7;
+
+        if i0 != -1 goto label3;
+
+        $r22 = r0.this$0;
+
+        $r21 = r0.this$0;
+
+        $r23 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r21);
+
+        org.gjt.sp.jedit.browser.BrowserView.access$900($r22, null, $r23, r2);
+
+        goto label5;
+
+     label3:
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r10);
+
+        $r12 = $r11.getSelectionModel();
+
+        $z0 = $r12.isSelectedIndex(i0);
+
+        if $z0 != 0 goto label4;
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r18);
+
+        $r20 = $r19.getSelectionModel();
+
+        $r20.setSelectionInterval(i0, i0);
+
+     label4:
+        $r14 = r0.this$0;
+
+        $r13 = r0.this$0;
+
+        $r15 = $r13.getSelectedFiles();
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r16);
+
+        org.gjt.sp.jedit.browser.BrowserView.access$900($r14, $r15, $r17, r2);
+
+     label5:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.browser.BrowserView, org.gjt.sp.jedit.browser.BrowserView$1)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$TableKeyListener r0;
+        org.gjt.sp.jedit.browser.BrowserView r1;
+        org.gjt.sp.jedit.browser.BrowserView$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

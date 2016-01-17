@@ -1,0 +1,129 @@
+public class org.gjt.sp.jedit.buffer.ExplicitFoldHandler extends org.gjt.sp.jedit.buffer.FoldHandler
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.buffer.ExplicitFoldHandler r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("explicit");
+
+        return;
+    }
+
+    public int getFoldLevel(org.gjt.sp.jedit.buffer.JEditBuffer, int, javax.swing.text.Segment)
+    {
+        org.gjt.sp.jedit.buffer.ExplicitFoldHandler r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+        int i0, i1, i2, $i3, $i4, $i5, i7, i8, i9, i10;
+        javax.swing.text.Segment r2;
+        char[] $r3;
+        char $c6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        r2 := @parameter2;
+
+        if i0 != 0 goto label1;
+
+        return 0;
+
+     label1:
+        $i3 = i0 - 1;
+
+        i7 = r1.getFoldLevel($i3);
+
+        $i4 = i0 - 1;
+
+        r1.getLineText($i4, r2);
+
+        i1 = r2.offset;
+
+        i2 = r2.count;
+
+        i8 = 0;
+
+        i9 = 0;
+
+(0)     i10 = 0;
+
+     label2:
+        i7 = Phi(i7 #0, i7 #8);
+
+        i8 = Phi(i8 #0, i8 #8);
+
+        i10 = Phi(i10 #0, i10 #8);
+
+        i9 = Phi(i9 #0, i9 #8);
+
+        if i10 >= i2 goto label8;
+
+        $r3 = r2.array;
+
+        $i5 = i1 + i10;
+
+        $c6 = $r3[$i5];
+
+        lookupswitch($c6)
+        {
+            case 123: goto label3;
+            case 125: goto label4;
+            default: goto label6;
+        };
+
+     label3:
+        i9 = 0;
+
+        i8 = i8 + 1;
+
+(1)     if i8 != 3 goto label7;
+
+        i7 = i7 + 1;
+
+        i8 = 0;
+
+(2)     goto label7;
+
+     label4:
+        i8 = 0;
+
+        i9 = i9 + 1;
+
+(3)     if i9 != 3 goto label7;
+
+(4)     if i7 <= 0 goto label5;
+
+(5)     i7 = i7 + -1;
+
+     label5:
+        i7 = Phi(i7 #4, i7 #5);
+
+        i9 = 0;
+
+(6)     goto label7;
+
+     label6:
+        i8 = 0;
+
+(7)     i9 = 0;
+
+     label7:
+        i7 = Phi(i7 #1, i7 #2, i7 #3, i7 #6, i7 #7);
+
+        i8 = Phi(i8 #1, i8 #2, i8 #3, i8 #6, i8 #7);
+
+        i9 = Phi(i9 #1, i9 #2, i9 #3, i9 #6, i9 #7);
+
+        i10 = i10 + 1;
+
+(8)     goto label2;
+
+     label8:
+        return i7;
+    }
+}

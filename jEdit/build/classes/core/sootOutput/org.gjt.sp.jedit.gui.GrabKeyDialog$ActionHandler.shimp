@@ -1,0 +1,282 @@
+class org.gjt.sp.jedit.gui.GrabKeyDialog$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.GrabKeyDialog this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.GrabKeyDialog)
+    {
+        org.gjt.sp.jedit.gui.GrabKeyDialog$ActionHandler r0;
+        org.gjt.sp.jedit.gui.GrabKeyDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.GrabKeyDialog$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object $r2, $r5, $r8, $r11;
+        org.gjt.sp.jedit.gui.GrabKeyDialog $r3, $r6, $r9, $r12, $r14, $r16, $r18, $r20, $r21, $r22, $r24, $r25, $r26;
+        javax.swing.JButton $r4, $r7, $r10, $r13;
+        org.gjt.sp.jedit.gui.GrabKeyDialog$InputPane $r15, $r19, $r23;
+        org.gjt.sp.jedit.Buffer $r17;
+        boolean $z1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getSource();
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$400($r3);
+
+        if $r2 != $r4 goto label1;
+
+        $z1 = specialinvoke r0.canClose();
+
+        if $z1 == 0 goto label5;
+
+        $r26 = r0.this$0;
+
+        $r26.dispose();
+
+        goto label5;
+
+     label1:
+        $r5 = r1.getSource();
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$500($r6);
+
+        if $r5 != $r7 goto label2;
+
+        $r22 = r0.this$0;
+
+        $r23 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$600($r22);
+
+        $r23.setText(null);
+
+        $r24 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.GrabKeyDialog.access$702($r24, 1);
+
+        $r25 = r0.this$0;
+
+        $r25.dispose();
+
+        goto label5;
+
+     label2:
+        $r8 = r1.getSource();
+
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$800($r9);
+
+        if $r8 != $r10 goto label3;
+
+        $r21 = r0.this$0;
+
+        $r21.dispose();
+
+        goto label5;
+
+     label3:
+        $r11 = r1.getSource();
+
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$900($r12);
+
+        if $r11 != $r13 goto label5;
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$600($r14);
+
+        $r15.setText(null);
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$200($r16);
+
+        if $r17 != null goto label4;
+
+        $r20 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.GrabKeyDialog.access$300($r20, null);
+
+     label4:
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$600($r18);
+
+        $r19.requestFocus();
+
+     label5:
+        return;
+    }
+
+    private boolean canClose()
+    {
+        org.gjt.sp.jedit.gui.GrabKeyDialog$ActionHandler r0;
+        java.lang.String r1, $r9, $r11, $r13, $r15, $r17;
+        int i0, $i1, i2;
+        org.gjt.sp.jedit.gui.GrabKeyDialog $r2, $r4, $r5, $r6, $r8, $r14, $r16, $r18, $r19, $r20, $r22, $r23, $r25;
+        org.gjt.sp.jedit.gui.GrabKeyDialog$InputPane $r3, $r24;
+        org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding $r7, $r10, $r21, r26;
+        boolean $z1, $z3, $z4;
+        java.lang.Object[] $r12;
+
+        r0 := @this;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$600($r2);
+
+        r1 = $r3.getShortcut();
+
+        $i1 = r1.length();
+
+        if $i1 != 0 goto label2;
+
+        $r20 = r0.this$0;
+
+        $r21 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$1000($r20);
+
+        $z4 = $r21.isAssigned();
+
+        if $z4 == 0 goto label2;
+
+        $r22 = r0.this$0;
+
+        i2 = org.gjt.sp.jedit.GUIUtilities.confirm($r22, "grab-key.remove-ask", null, 0, 3);
+
+        if i2 != 0 goto label1;
+
+        $r23 = r0.this$0;
+
+        $r24 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$600($r23);
+
+        $r24.setText(null);
+
+        $r25 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.GrabKeyDialog.access$702($r25, 1);
+
+        goto label2;
+
+     label1:
+        return 0;
+
+     label2:
+        $r4 = r0.this$0;
+
+        r26 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$1100($r4, r1);
+
+        if r26 == null goto label3;
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$1000($r6);
+
+        if r26 != $r7 goto label4;
+
+     label3:
+        $r5 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.GrabKeyDialog.access$702($r5, 1);
+
+        return 1;
+
+     label4:
+        $r9 = r26.name;
+
+        $r8 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.gui.GrabKeyDialog.access$1000($r8);
+
+        $r11 = $r10.name;
+
+        if $r9 != $r11 goto label5;
+
+        $r19 = r0.this$0;
+
+        org.gjt.sp.jedit.GUIUtilities.error($r19, "grab-key.duplicate-alt-shortcut", null);
+
+        return 0;
+
+     label5:
+        $z1 = r26.isPrefix;
+
+        if $z1 == 0 goto label6;
+
+        $r18 = r0.this$0;
+
+        org.gjt.sp.jedit.GUIUtilities.error($r18, "grab-key.prefix-shortcut", null);
+
+        return 0;
+
+     label6:
+        $r14 = r0.this$0;
+
+        $r12 = newarray (java.lang.Object)[1];
+
+        $r13 = r26.label;
+
+        $r12[0] = $r13;
+
+        i0 = org.gjt.sp.jedit.GUIUtilities.confirm($r14, "grab-key.duplicate-shortcut", $r12, 0, 3);
+
+        if i0 != 0 goto label8;
+
+        $r15 = r26.shortcut;
+
+        if $r15 == null goto label7;
+
+        $r17 = r26.shortcut;
+
+        $z3 = r1.startsWith($r17);
+
+        if $z3 == 0 goto label7;
+
+        r26.shortcut = null;
+
+     label7:
+        $r16 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.GrabKeyDialog.access$702($r16, 1);
+
+        return 1;
+
+     label8:
+        return 0;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.GrabKeyDialog, org.gjt.sp.jedit.gui.GrabKeyDialog$1)
+    {
+        org.gjt.sp.jedit.gui.GrabKeyDialog$ActionHandler r0;
+        org.gjt.sp.jedit.gui.GrabKeyDialog r1;
+        org.gjt.sp.jedit.gui.GrabKeyDialog$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

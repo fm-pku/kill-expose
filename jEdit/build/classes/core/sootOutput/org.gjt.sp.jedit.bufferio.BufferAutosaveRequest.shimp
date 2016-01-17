@@ -1,0 +1,280 @@
+public class org.gjt.sp.jedit.bufferio.BufferAutosaveRequest extends org.gjt.sp.jedit.bufferio.BufferIORequest
+{
+
+    public void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Buffer, java.lang.Object, org.gjt.sp.jedit.io.VFS, java.lang.String)
+    {
+        org.gjt.sp.jedit.bufferio.BufferAutosaveRequest r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Buffer r2;
+        java.lang.Object r3;
+        org.gjt.sp.jedit.io.VFS r4;
+        java.lang.String r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        specialinvoke r0.<init>(r1, r2, r3, r4, r5);
+
+        return;
+    }
+
+    public void _run()
+    {
+        org.gjt.sp.jedit.bufferio.BufferAutosaveRequest r0;
+        java.lang.String[] r1, r2, $r5, $r32;
+        java.lang.Throwable r3, r4, $r18, $r29;
+        java.lang.String $r6, $r8, $r9, $r15, $r22, $r24, $r33, $r34;
+        org.gjt.sp.jedit.io.VFS $r7, $r17;
+        org.gjt.sp.jedit.Buffer $r10, $r11, $r12, $r13, $r25, $r28, $r30, $r36;
+        boolean $z0;
+        org.gjt.sp.jedit.View $r14, $r35;
+        java.lang.Object $r16;
+        java.io.FileNotFoundException $r19, r38;
+        java.lang.StringBuilder $r20, $r21, $r23;
+        java.lang.InterruptedException $r26, r39;
+        java.lang.Thread $r27;
+        java.lang.Exception $r31, r40;
+        java.io.OutputStream r37, r37_1, r37_2, r37_3, r37_4, r37_5, r37_6;
+
+        r0 := @this;
+
+(0)     r37 = null;
+
+     label01:
+        $r5 = newarray (java.lang.String)[1];
+
+        $r7 = r0.vfs;
+
+        $r6 = r0.path;
+
+        $r8 = $r7.getFileName($r6);
+
+        $r5[0] = $r8;
+
+        r1 = $r5;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("vfs.status.autosave", r1);
+
+        r0.setStatus($r9);
+
+(1)     r0.setCancellable(1);
+
+     label02:
+(2)     $r10 = r0.buffer;
+
+        $r10.readLock();
+
+        $r11 = r0.buffer;
+
+        $z0 = $r11.isDirty();
+
+(3)     if $z0 == 0 goto label03;
+
+        $r17 = r0.vfs;
+
+        $r16 = r0.session;
+
+        $r15 = r0.path;
+
+        $r14 = r0.view;
+
+(4)     r37_1 = $r17._createOutputStream($r16, $r15, $r14);
+
+     label03:
+        r37_2 = Phi(r37 #3, r37_1 #4);
+
+(5)     if r37_2 == null goto label04;
+
+(6)     $r13 = r0.buffer;
+
+        r0.write($r13, r37_2);
+
+     label04:
+        $r12 = r0.buffer;
+
+        $r12.readUnlock();
+
+(7)     goto label13;
+
+     label05:
+        $r19 := @caughtexception;
+
+(8)     r37_3 = Phi(r37 #2, r37_1 #4, r37_2 #6);
+
+        r38 = $r19;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<init>();
+
+        $r21 = $r20.append("Unable to save ");
+
+        $r22 = r38.getMessage();
+
+        $r23 = $r21.append($r22);
+
+        $r24 = $r23.toString();
+
+(9)     org.gjt.sp.util.Log.log(7, r0, $r24);
+
+     label06:
+        $r25 = r0.buffer;
+
+        $r25.readUnlock();
+
+(10)    goto label13;
+
+     label07:
+        $r26 := @caughtexception;
+
+(11)    r37_4 = Phi(r37 #2, r37_1 #4, r37_2 #6);
+
+        r39 = $r26;
+
+        specialinvoke r0.cleanUpIncomplete(r37_4);
+
+        $r27 = java.lang.Thread.currentThread();
+
+(12)    $r27.interrupt();
+
+     label08:
+        $r28 = r0.buffer;
+
+        $r28.readUnlock();
+
+(13)    goto label13;
+
+     label09:
+        $r31 := @caughtexception;
+
+(14)    r37_5 = Phi(r37_1 #4, r37 #1, r37_2 #5);
+
+        r40 = $r31;
+
+        org.gjt.sp.util.Log.log(9, r0, r40);
+
+        $r32 = newarray (java.lang.String)[1];
+
+        $r33 = r40.toString();
+
+        $r32[0] = $r33;
+
+        r2 = $r32;
+
+        $r35 = r0.view;
+
+        $r34 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r35, $r34, "ioerror.write-error", r2);
+
+(15)    specialinvoke r0.cleanUpIncomplete(r37_5);
+
+     label10:
+        $r36 = r0.buffer;
+
+        $r36.readUnlock();
+
+(16)    goto label13;
+
+     label11:
+        $r29 := @caughtexception;
+
+(17)    r37 = Phi(r37_1 #4, r37 #1, r37_2 #5, r37_3 #8, r37_4 #11, r37_5 #14, r37 #17);
+
+(18)    r3 = $r29;
+
+     label12:
+        $r30 = r0.buffer;
+
+        $r30.readUnlock();
+
+        throw r3;
+
+     label13:
+        r37_6 = Phi(r37_2 #7, r37_3 #10, r37_4 #13, r37_5 #16);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r37_6);
+
+        goto label16;
+
+     label14:
+        $r18 := @caughtexception;
+
+(19)    r37 = Phi(r37 #0, r37_2 #5, r37_3 #9, r37_4 #12, r37_5 #15, r37 #18, r37 #19);
+
+        r4 = $r18;
+
+     label15:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r37);
+
+        throw r4;
+
+     label16:
+        return;
+
+        catch java.io.FileNotFoundException from label02 to label04 with label05;
+        catch java.lang.InterruptedException from label02 to label04 with label07;
+        catch java.lang.Exception from label02 to label04 with label09;
+        catch java.lang.Throwable from label02 to label04 with label11;
+        catch java.lang.Throwable from label05 to label06 with label11;
+        catch java.lang.Throwable from label07 to label08 with label11;
+        catch java.lang.Throwable from label09 to label10 with label11;
+        catch java.lang.Throwable from label11 to label12 with label11;
+        catch java.lang.Throwable from label01 to label13 with label14;
+        catch java.lang.Throwable from label14 to label15 with label14;
+    }
+
+    private void cleanUpIncomplete(java.io.OutputStream)
+    {
+        org.gjt.sp.jedit.bufferio.BufferAutosaveRequest r0;
+        java.io.IOException r1, $r6;
+        org.gjt.sp.jedit.View $r2;
+        java.lang.String $r3;
+        java.lang.Object $r4;
+        org.gjt.sp.jedit.io.VFS $r5;
+        java.io.OutputStream r7;
+
+        r0 := @this;
+
+        r7 := @parameter0;
+
+        if r7 == null goto label4;
+
+     label1:
+        r7.close();
+
+        $r5 = r0.vfs;
+
+        $r4 = r0.session;
+
+        $r3 = r0.path;
+
+        $r2 = r0.view;
+
+        $r5._delete($r4, $r3, $r2);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r6 := @caughtexception;
+
+        r1 = $r6;
+
+        org.gjt.sp.util.Log.log(9, r0, r1);
+
+     label4:
+        return;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+}

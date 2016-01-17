@@ -1,0 +1,38 @@
+class org.gjt.sp.jedit.options.ToolBarOptionPane$IconListEntry extends java.lang.Object
+{
+    javax.swing.Icon icon;
+    java.lang.String name;
+
+    void <init>(javax.swing.Icon, java.lang.String)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane$IconListEntry r0;
+        javax.swing.Icon r1;
+        java.lang.String r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.icon = r1;
+
+        r0.name = r2;
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane$IconListEntry r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.name;
+
+        return $r1;
+    }
+}

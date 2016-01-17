@@ -1,0 +1,76 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$TableSelectionListener extends java.lang.Object implements javax.swing.event.ListSelectionListener
+{
+    final org.gjt.sp.jedit.pluginmgr.ManagePanel this$0;
+
+    private void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$TableSelectionListener r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void valueChanged(javax.swing.event.ListSelectionEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$TableSelectionListener r0;
+        javax.swing.event.ListSelectionEvent r1;
+        int i0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r2;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r3, $r5, $r7;
+        javax.swing.JTable $r4;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel $r6;
+        org.gjt.sp.jedit.pluginmgr.PluginDetailPanel $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r3);
+
+        i0 = $r4.getSelectedRow();
+
+        if i0 == -1 goto label1;
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$600($r5);
+
+        r2 = $r6.getEntry(i0);
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1700($r7);
+
+        $r8.setPlugin(r2);
+
+     label1:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel, org.gjt.sp.jedit.pluginmgr.ManagePanel$1)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$TableSelectionListener r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

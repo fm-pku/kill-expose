@@ -1,0 +1,1487 @@
+class org.gjt.sp.jedit.bsh.JThis extends org.gjt.sp.jedit.bsh.This implements java.awt.event.ActionListener, java.awt.event.AdjustmentListener, java.awt.event.ComponentListener, java.awt.event.ContainerListener, java.awt.event.FocusListener, java.awt.event.ItemListener, java.awt.event.KeyListener, java.awt.event.MouseListener, java.awt.event.MouseMotionListener, java.awt.event.TextListener, java.awt.event.WindowListener, java.beans.PropertyChangeListener, javax.swing.event.AncestorListener, javax.swing.event.CaretListener, javax.swing.event.CellEditorListener, javax.swing.event.ChangeListener, javax.swing.event.DocumentListener, javax.swing.event.HyperlinkListener, javax.swing.event.InternalFrameListener, javax.swing.event.ListDataListener, javax.swing.event.ListSelectionListener, javax.swing.event.MenuDragMouseListener, javax.swing.event.MenuKeyListener, javax.swing.event.MenuListener, javax.swing.event.MouseInputListener, javax.swing.event.PopupMenuListener, javax.swing.event.TableColumnModelListener, javax.swing.event.TableModelListener, javax.swing.event.TreeExpansionListener, javax.swing.event.TreeModelListener, javax.swing.event.TreeSelectionListener, javax.swing.event.TreeWillExpandListener, javax.swing.event.UndoableEditListener
+{
+
+    void <init>(org.gjt.sp.jedit.bsh.NameSpace, org.gjt.sp.jedit.bsh.Interpreter)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1, r2);
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.lang.StringBuilder $r1, $r2, $r5;
+        org.gjt.sp.jedit.bsh.NameSpace $r3;
+        java.lang.String $r4, $r6;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("\'this\' reference (JThis) to Bsh object: ");
+
+        $r3 = r0.namespace;
+
+        $r4 = $r3.getName();
+
+        $r5 = $r2.append($r4);
+
+        $r6 = $r5.toString();
+
+        return $r6;
+    }
+
+    void event(java.lang.String, java.lang.Object)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.lang.String r1, $r22, $r28;
+        java.lang.Object r2;
+        org.gjt.sp.jedit.bsh.CallStack r3, $r4;
+        org.gjt.sp.jedit.bsh.NameSpace $r5, $r7, $r9;
+        java.lang.Class[] $r6, $r8;
+        java.lang.Object[] $r10, $r13;
+        org.gjt.sp.jedit.bsh.Interpreter $r11, $r14, $r19, $r25;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r16, $r29, r31, r33;
+        org.gjt.sp.jedit.bsh.EvalError $r17, $r23, r32, r34;
+        java.lang.StringBuilder $r18, $r20, $r21, $r24, $r26, $r27;
+        org.gjt.sp.jedit.bsh.BshMethod r30, r30_1, r30_2, r30_3, r30_4, r30_5, r30_6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        $r5 = r0.namespace;
+
+        specialinvoke $r4.<init>($r5);
+
+        r3 = $r4;
+
+        r30 = null;
+
+     label01:
+        $r7 = r0.namespace;
+
+        $r6 = newarray (java.lang.Class)[1];
+
+(0)     $r6[0] = null;
+
+(1)     r30_1 = $r7.getMethod("handleEvent", $r6);
+
+     label02:
+(2)     goto label04;
+
+     label03:
+        $r29 := @caughtexception;
+
+        r30_2 = Phi(r30 #0, r30_1 #1);
+
+(3)     r31 = $r29;
+
+     label04:
+        r30_3 = Phi(r30_1 #2, r30_2 #3);
+
+        if r30_3 == null goto label08;
+
+     label05:
+        $r13 = newarray (java.lang.Object)[1];
+
+        $r13[0] = r2;
+
+        $r14 = r0.declaringInterpreter;
+
+        r30_3.invoke($r13, $r14, r3, null);
+
+     label06:
+        goto label08;
+
+     label07:
+        $r23 := @caughtexception;
+
+        r32 = $r23;
+
+        $r25 = r0.declaringInterpreter;
+
+        $r24 = new java.lang.StringBuilder;
+
+        specialinvoke $r24.<init>();
+
+        $r26 = $r24.append("local event hander method invocation error:");
+
+        $r27 = $r26.append(r32);
+
+        $r28 = $r27.toString();
+
+        $r25.error($r28);
+
+     label08:
+        $r9 = r0.namespace;
+
+        $r8 = newarray (java.lang.Class)[1];
+
+(4)     $r8[0] = null;
+
+(5)     r30_4 = $r9.getMethod(r1, $r8);
+
+     label09:
+(6)     goto label11;
+
+     label10:
+        $r16 := @caughtexception;
+
+        r30_5 = Phi(r30_3 #4, r30_4 #5);
+
+(7)     r33 = $r16;
+
+     label11:
+        r30_6 = Phi(r30_4 #6, r30_5 #7);
+
+        if r30_6 == null goto label15;
+
+     label12:
+        $r10 = newarray (java.lang.Object)[1];
+
+        $r10[0] = r2;
+
+        $r11 = r0.declaringInterpreter;
+
+        r30_6.invoke($r10, $r11, r3, null);
+
+     label13:
+        goto label15;
+
+     label14:
+        $r17 := @caughtexception;
+
+        r34 = $r17;
+
+        $r19 = r0.declaringInterpreter;
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<init>();
+
+        $r20 = $r18.append("local event hander method invocation error:");
+
+        $r21 = $r20.append(r34);
+
+        $r22 = $r21.toString();
+
+        $r19.error($r22);
+
+     label15:
+        return;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label01 to label02 with label03;
+        catch org.gjt.sp.jedit.bsh.EvalError from label05 to label06 with label07;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label08 to label09 with label10;
+        catch org.gjt.sp.jedit.bsh.EvalError from label12 to label13 with label14;
+    }
+
+    public void ancestorAdded(javax.swing.event.AncestorEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.AncestorEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("ancestorAdded", r1);
+
+        return;
+    }
+
+    public void ancestorRemoved(javax.swing.event.AncestorEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.AncestorEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("ancestorRemoved", r1);
+
+        return;
+    }
+
+    public void ancestorMoved(javax.swing.event.AncestorEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.AncestorEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("ancestorMoved", r1);
+
+        return;
+    }
+
+    public void caretUpdate(javax.swing.event.CaretEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.CaretEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("caretUpdate", r1);
+
+        return;
+    }
+
+    public void editingStopped(javax.swing.event.ChangeEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.ChangeEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("editingStopped", r1);
+
+        return;
+    }
+
+    public void editingCanceled(javax.swing.event.ChangeEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.ChangeEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("editingCanceled", r1);
+
+        return;
+    }
+
+    public void stateChanged(javax.swing.event.ChangeEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.ChangeEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("stateChanged", r1);
+
+        return;
+    }
+
+    public void insertUpdate(javax.swing.event.DocumentEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.DocumentEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("insertUpdate", r1);
+
+        return;
+    }
+
+    public void removeUpdate(javax.swing.event.DocumentEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.DocumentEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("removeUpdate", r1);
+
+        return;
+    }
+
+    public void changedUpdate(javax.swing.event.DocumentEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.DocumentEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("changedUpdate", r1);
+
+        return;
+    }
+
+    public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.HyperlinkEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("internalFrameOpened", r1);
+
+        return;
+    }
+
+    public void internalFrameOpened(javax.swing.event.InternalFrameEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.InternalFrameEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("internalFrameOpened", r1);
+
+        return;
+    }
+
+    public void internalFrameClosing(javax.swing.event.InternalFrameEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.InternalFrameEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("internalFrameClosing", r1);
+
+        return;
+    }
+
+    public void internalFrameClosed(javax.swing.event.InternalFrameEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.InternalFrameEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("internalFrameClosed", r1);
+
+        return;
+    }
+
+    public void internalFrameIconified(javax.swing.event.InternalFrameEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.InternalFrameEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("internalFrameIconified", r1);
+
+        return;
+    }
+
+    public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.InternalFrameEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("internalFrameDeiconified", r1);
+
+        return;
+    }
+
+    public void internalFrameActivated(javax.swing.event.InternalFrameEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.InternalFrameEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("internalFrameActivated", r1);
+
+        return;
+    }
+
+    public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.InternalFrameEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("internalFrameDeactivated", r1);
+
+        return;
+    }
+
+    public void intervalAdded(javax.swing.event.ListDataEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.ListDataEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("intervalAdded", r1);
+
+        return;
+    }
+
+    public void intervalRemoved(javax.swing.event.ListDataEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.ListDataEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("intervalRemoved", r1);
+
+        return;
+    }
+
+    public void contentsChanged(javax.swing.event.ListDataEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.ListDataEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("contentsChanged", r1);
+
+        return;
+    }
+
+    public void valueChanged(javax.swing.event.ListSelectionEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.ListSelectionEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("valueChanged", r1);
+
+        return;
+    }
+
+    public void menuDragMouseEntered(javax.swing.event.MenuDragMouseEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.MenuDragMouseEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("menuDragMouseEntered", r1);
+
+        return;
+    }
+
+    public void menuDragMouseExited(javax.swing.event.MenuDragMouseEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.MenuDragMouseEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("menuDragMouseExited", r1);
+
+        return;
+    }
+
+    public void menuDragMouseDragged(javax.swing.event.MenuDragMouseEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.MenuDragMouseEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("menuDragMouseDragged", r1);
+
+        return;
+    }
+
+    public void menuDragMouseReleased(javax.swing.event.MenuDragMouseEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.MenuDragMouseEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("menuDragMouseReleased", r1);
+
+        return;
+    }
+
+    public void menuKeyTyped(javax.swing.event.MenuKeyEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.MenuKeyEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("menuKeyTyped", r1);
+
+        return;
+    }
+
+    public void menuKeyPressed(javax.swing.event.MenuKeyEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.MenuKeyEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("menuKeyPressed", r1);
+
+        return;
+    }
+
+    public void menuKeyReleased(javax.swing.event.MenuKeyEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.MenuKeyEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("menuKeyReleased", r1);
+
+        return;
+    }
+
+    public void menuSelected(javax.swing.event.MenuEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.MenuEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("menuSelected", r1);
+
+        return;
+    }
+
+    public void menuDeselected(javax.swing.event.MenuEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.MenuEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("menuDeselected", r1);
+
+        return;
+    }
+
+    public void menuCanceled(javax.swing.event.MenuEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.MenuEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("menuCanceled", r1);
+
+        return;
+    }
+
+    public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.PopupMenuEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("popupMenuWillBecomeVisible", r1);
+
+        return;
+    }
+
+    public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.PopupMenuEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("popupMenuWillBecomeInvisible", r1);
+
+        return;
+    }
+
+    public void popupMenuCanceled(javax.swing.event.PopupMenuEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.PopupMenuEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("popupMenuCanceled", r1);
+
+        return;
+    }
+
+    public void columnAdded(javax.swing.event.TableColumnModelEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.TableColumnModelEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("columnAdded", r1);
+
+        return;
+    }
+
+    public void columnRemoved(javax.swing.event.TableColumnModelEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.TableColumnModelEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("columnRemoved", r1);
+
+        return;
+    }
+
+    public void columnMoved(javax.swing.event.TableColumnModelEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.TableColumnModelEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("columnMoved", r1);
+
+        return;
+    }
+
+    public void columnMarginChanged(javax.swing.event.ChangeEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.ChangeEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("columnMarginChanged", r1);
+
+        return;
+    }
+
+    public void columnSelectionChanged(javax.swing.event.ListSelectionEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.ListSelectionEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("columnSelectionChanged", r1);
+
+        return;
+    }
+
+    public void tableChanged(javax.swing.event.TableModelEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.TableModelEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("tableChanged", r1);
+
+        return;
+    }
+
+    public void treeExpanded(javax.swing.event.TreeExpansionEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.TreeExpansionEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("treeExpanded", r1);
+
+        return;
+    }
+
+    public void treeCollapsed(javax.swing.event.TreeExpansionEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.TreeExpansionEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("treeCollapsed", r1);
+
+        return;
+    }
+
+    public void treeNodesChanged(javax.swing.event.TreeModelEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.TreeModelEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("treeNodesChanged", r1);
+
+        return;
+    }
+
+    public void treeNodesInserted(javax.swing.event.TreeModelEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.TreeModelEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("treeNodesInserted", r1);
+
+        return;
+    }
+
+    public void treeNodesRemoved(javax.swing.event.TreeModelEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.TreeModelEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("treeNodesRemoved", r1);
+
+        return;
+    }
+
+    public void treeStructureChanged(javax.swing.event.TreeModelEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.TreeModelEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("treeStructureChanged", r1);
+
+        return;
+    }
+
+    public void valueChanged(javax.swing.event.TreeSelectionEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.TreeSelectionEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("valueChanged", r1);
+
+        return;
+    }
+
+    public void treeWillExpand(javax.swing.event.TreeExpansionEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.TreeExpansionEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("treeWillExpand", r1);
+
+        return;
+    }
+
+    public void treeWillCollapse(javax.swing.event.TreeExpansionEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.TreeExpansionEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("treeWillCollapse", r1);
+
+        return;
+    }
+
+    public void undoableEditHappened(javax.swing.event.UndoableEditEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        javax.swing.event.UndoableEditEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("undoableEditHappened", r1);
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.ActionEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("actionPerformed", r1);
+
+        return;
+    }
+
+    public void adjustmentValueChanged(java.awt.event.AdjustmentEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.AdjustmentEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("adjustmentValueChanged", r1);
+
+        return;
+    }
+
+    public void componentResized(java.awt.event.ComponentEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.ComponentEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("componentResized", r1);
+
+        return;
+    }
+
+    public void componentMoved(java.awt.event.ComponentEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.ComponentEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("componentMoved", r1);
+
+        return;
+    }
+
+    public void componentShown(java.awt.event.ComponentEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.ComponentEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("componentShown", r1);
+
+        return;
+    }
+
+    public void componentHidden(java.awt.event.ComponentEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.ComponentEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("componentHidden", r1);
+
+        return;
+    }
+
+    public void componentAdded(java.awt.event.ContainerEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.ContainerEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("componentAdded", r1);
+
+        return;
+    }
+
+    public void componentRemoved(java.awt.event.ContainerEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.ContainerEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("componentRemoved", r1);
+
+        return;
+    }
+
+    public void focusGained(java.awt.event.FocusEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.FocusEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("focusGained", r1);
+
+        return;
+    }
+
+    public void focusLost(java.awt.event.FocusEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.FocusEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("focusLost", r1);
+
+        return;
+    }
+
+    public void itemStateChanged(java.awt.event.ItemEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.ItemEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("itemStateChanged", r1);
+
+        return;
+    }
+
+    public void keyTyped(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.KeyEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("keyTyped", r1);
+
+        return;
+    }
+
+    public void keyPressed(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.KeyEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("keyPressed", r1);
+
+        return;
+    }
+
+    public void keyReleased(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.KeyEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("keyReleased", r1);
+
+        return;
+    }
+
+    public void mouseClicked(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.MouseEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("mouseClicked", r1);
+
+        return;
+    }
+
+    public void mousePressed(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.MouseEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("mousePressed", r1);
+
+        return;
+    }
+
+    public void mouseReleased(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.MouseEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("mouseReleased", r1);
+
+        return;
+    }
+
+    public void mouseEntered(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.MouseEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("mouseEntered", r1);
+
+        return;
+    }
+
+    public void mouseExited(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.MouseEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("mouseExited", r1);
+
+        return;
+    }
+
+    public void mouseDragged(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.MouseEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("mouseDragged", r1);
+
+        return;
+    }
+
+    public void mouseMoved(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.MouseEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("mouseMoved", r1);
+
+        return;
+    }
+
+    public void textValueChanged(java.awt.event.TextEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.TextEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("textValueChanged", r1);
+
+        return;
+    }
+
+    public void windowOpened(java.awt.event.WindowEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.WindowEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("windowOpened", r1);
+
+        return;
+    }
+
+    public void windowClosing(java.awt.event.WindowEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.WindowEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("windowClosing", r1);
+
+        return;
+    }
+
+    public void windowClosed(java.awt.event.WindowEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.WindowEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("windowClosed", r1);
+
+        return;
+    }
+
+    public void windowIconified(java.awt.event.WindowEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.WindowEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("windowIconified", r1);
+
+        return;
+    }
+
+    public void windowDeiconified(java.awt.event.WindowEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.WindowEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("windowDeiconified", r1);
+
+        return;
+    }
+
+    public void windowActivated(java.awt.event.WindowEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.WindowEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("windowActivated", r1);
+
+        return;
+    }
+
+    public void windowDeactivated(java.awt.event.WindowEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.event.WindowEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("windowDeactivated", r1);
+
+        return;
+    }
+
+    public void propertyChange(java.beans.PropertyChangeEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.beans.PropertyChangeEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("propertyChange", r1);
+
+        return;
+    }
+
+    public void vetoableChange(java.beans.PropertyChangeEvent)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.beans.PropertyChangeEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.event("vetoableChange", r1);
+
+        return;
+    }
+
+    public boolean imageUpdate(java.awt.Image, int, int, int, int, int)
+    {
+        org.gjt.sp.jedit.bsh.JThis r0;
+        java.awt.Image r1;
+        int i0, i1, i2, i3, i4;
+        java.lang.Class[] $r2;
+        org.gjt.sp.jedit.bsh.NameSpace $r3, $r5;
+        org.gjt.sp.jedit.bsh.CallStack $r4, r23;
+        java.lang.Object[] $r6;
+        org.gjt.sp.jedit.bsh.Primitive $r7, $r8, $r9, $r10, $r11;
+        org.gjt.sp.jedit.bsh.Interpreter $r12, $r16;
+        org.gjt.sp.jedit.bsh.EvalError $r14, r24;
+        java.lang.StringBuilder $r15, $r17, $r18;
+        java.lang.String $r19;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r20, r22;
+        org.gjt.sp.jedit.bsh.BshMethod r21, r21_1, r21_2, r21_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        i3 := @parameter4;
+
+        i4 := @parameter5;
+
+        r21 = null;
+
+     label1:
+        $r3 = r0.namespace;
+
+        $r2 = newarray (java.lang.Class)[6];
+
+        $r2[0] = null;
+
+        $r2[1] = null;
+
+        $r2[2] = null;
+
+        $r2[3] = null;
+
+        $r2[4] = null;
+
+(0)     $r2[5] = null;
+
+(1)     r21_1 = $r3.getMethod("imageUpdate", $r2);
+
+     label2:
+(2)     goto label4;
+
+     label3:
+        $r20 := @caughtexception;
+
+        r21_2 = Phi(r21 #0, r21_1 #1);
+
+(3)     r22 = $r20;
+
+     label4:
+        r21_3 = Phi(r21_1 #2, r21_2 #3);
+
+        if r21_3 == null goto label8;
+
+     label5:
+        $r4 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        $r5 = r0.namespace;
+
+        specialinvoke $r4.<init>($r5);
+
+        r23 = $r4;
+
+        $r6 = newarray (java.lang.Object)[6];
+
+        $r6[0] = r1;
+
+        $r7 = new org.gjt.sp.jedit.bsh.Primitive;
+
+        specialinvoke $r7.<init>(i0);
+
+        $r6[1] = $r7;
+
+        $r8 = new org.gjt.sp.jedit.bsh.Primitive;
+
+        specialinvoke $r8.<init>(i1);
+
+        $r6[2] = $r8;
+
+        $r9 = new org.gjt.sp.jedit.bsh.Primitive;
+
+        specialinvoke $r9.<init>(i2);
+
+        $r6[3] = $r9;
+
+        $r10 = new org.gjt.sp.jedit.bsh.Primitive;
+
+        specialinvoke $r10.<init>(i3);
+
+        $r6[4] = $r10;
+
+        $r11 = new org.gjt.sp.jedit.bsh.Primitive;
+
+        specialinvoke $r11.<init>(i4);
+
+        $r6[5] = $r11;
+
+        $r12 = r0.declaringInterpreter;
+
+        r21_3.invoke($r6, $r12, r23, null);
+
+     label6:
+        goto label8;
+
+     label7:
+        $r14 := @caughtexception;
+
+        r24 = $r14;
+
+        $r16 = r0.declaringInterpreter;
+
+        $r15 = new java.lang.StringBuilder;
+
+        specialinvoke $r15.<init>();
+
+        $r17 = $r15.append("local event handler imageUpdate: method invocation error:");
+
+        $r18 = $r17.append(r24);
+
+        $r19 = $r18.toString();
+
+        $r16.error($r19);
+
+     label8:
+        return 1;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label2 with label3;
+        catch org.gjt.sp.jedit.bsh.EvalError from label5 to label6 with label7;
+    }
+}

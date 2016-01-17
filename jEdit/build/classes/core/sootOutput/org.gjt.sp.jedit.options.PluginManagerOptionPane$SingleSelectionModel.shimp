@@ -1,0 +1,30 @@
+class org.gjt.sp.jedit.options.PluginManagerOptionPane$SingleSelectionModel extends javax.swing.DefaultListSelectionModel
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$SingleSelectionModel r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        r0.setSelectionMode(0);
+
+        return;
+    }
+
+    public void removeSelectionInterval(int, int)
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$SingleSelectionModel r0;
+        int i0, i1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        return;
+    }
+}

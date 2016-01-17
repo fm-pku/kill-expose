@@ -1,0 +1,32 @@
+class org.gjt.sp.jedit.bsh.ReturnControl extends java.lang.Object implements org.gjt.sp.jedit.bsh.ParserConstants
+{
+    public int kind;
+    public java.lang.Object value;
+    public org.gjt.sp.jedit.bsh.SimpleNode returnPoint;
+
+    public void <init>(int, java.lang.Object, org.gjt.sp.jedit.bsh.SimpleNode)
+    {
+        org.gjt.sp.jedit.bsh.ReturnControl r0;
+        int i0;
+        java.lang.Object r1;
+        org.gjt.sp.jedit.bsh.SimpleNode r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.kind = i0;
+
+        r0.value = r1;
+
+        r0.returnPoint = r2;
+
+        return;
+    }
+}

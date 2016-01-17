@@ -1,0 +1,898 @@
+public class org.gjt.sp.jedit.options.ViewOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private javax.swing.JLabel layout;
+    private javax.swing.Icon layoutIcon1;
+    private javax.swing.Icon layoutIcon2;
+    private javax.swing.Icon layoutIcon3;
+    private javax.swing.Icon layoutIcon4;
+    private javax.swing.JButton alternateDockingLayout;
+    private javax.swing.JButton alternateToolBarLayout;
+    private javax.swing.JCheckBox abbreviatePaths;
+    private javax.swing.JCheckBox showFullPath;
+    private javax.swing.JCheckBox floatableToolbars;
+    private javax.swing.JCheckBox showSearchbar;
+    private javax.swing.JCheckBox beepOnSearchAutoWrap;
+    private javax.swing.JCheckBox showBufferSwitcher;
+    private javax.swing.JTextField bufferSwitcherMaxRowCount;
+    private javax.swing.JComboBox buffersetScope;
+    private javax.swing.JCheckBox sortBuffers;
+    private javax.swing.JCheckBox sortByName;
+    private javax.swing.JCheckBox fullScreenIncludesMenu;
+    private javax.swing.JCheckBox fullScreenIncludesToolbar;
+    private javax.swing.JCheckBox fullScreenIncludesStatus;
+    private javax.swing.JCheckBox sortBufferSwitcher;
+    private javax.swing.JCheckBox sortBufferSwitcherByName;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("view");
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.JPanel r1, r2, $r10, $r17;
+        org.gjt.sp.jedit.options.ViewOptionPane$ActionHandler r3, $r23;
+        javax.swing.border.TitledBorder r4, $r30;
+        java.lang.IllegalArgumentException r5, $r111;
+        javax.swing.Icon $r6, $r7, $r8, $r9, $r112, $r113, $r112_1, $r112_2, $r113_1, $r113_2, $r113_3, $r112_3;
+        java.awt.BorderLayout $r11;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z10, $z11, $z12, $z13, $z14, $z15, $z16, $z17, $z18;
+        javax.swing.JLabel $r12, $r14, $r15, $r110;
+        javax.swing.border.EmptyBorder $r13, $r19;
+        java.awt.GridLayout $r18;
+        javax.swing.JButton $r20, $r24, $r25, $r28;
+        java.lang.String $r21, $r26, $r31, $r33, $r37, $r41, $r45, $r49, $r53, $r58, $r64, $r70, $r71, $r82, $r84, $r87, $r93, $r99, $r103, $r107;
+        javax.swing.JCheckBox $r32, $r34, $r35, $r36, $r38, $r39, $r40, $r42, $r43, $r44, $r46, $r47, $r48, $r50, $r51, $r52, $r54, $r55, $r56, $r57, $r59, $r61, $r62, $r63, $r65, $r66, $r67, $r68, $r73, $r86, $r88, $r90, $r91, $r92, $r94, $r95, $r96, $r97, $r98, $r100, $r101, $r102, $r104, $r105, $r106, $r108, $r109;
+        org.gjt.sp.jedit.options.ViewOptionPane$1 $r60;
+        javax.swing.JTextField $r69, $r72, $r74;
+        javax.swing.JComboBox $r75, $r77, $r79, $r81, $r83, $r85;
+        org.gjt.sp.jedit.bufferset.BufferSet$Scope $r76, $r78, $r80, r114, r114_1, r114_2, r114_3;
+        org.gjt.sp.jedit.options.ViewOptionPane$2 $r89;
+
+        r0 := @this;
+
+        $r6 = org.gjt.sp.jedit.GUIUtilities.loadIcon("dock_layout1.png");
+
+        r0.layoutIcon1 = $r6;
+
+        $r7 = org.gjt.sp.jedit.GUIUtilities.loadIcon("dock_layout2.png");
+
+        r0.layoutIcon2 = $r7;
+
+        $r8 = org.gjt.sp.jedit.GUIUtilities.loadIcon("dock_layout3.png");
+
+        r0.layoutIcon3 = $r8;
+
+        $r9 = org.gjt.sp.jedit.GUIUtilities.loadIcon("dock_layout4.png");
+
+        r0.layoutIcon4 = $r9;
+
+        $r10 = new javax.swing.JPanel;
+
+        $r11 = new java.awt.BorderLayout;
+
+        specialinvoke $r11.<init>(12, 12);
+
+        specialinvoke $r10.<init>($r11);
+
+        r1 = $r10;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.docking.alternateLayout");
+
+        if $z0 == 0 goto label03;
+
+        $r110 = new javax.swing.JLabel;
+
+        $z18 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.toolbar.alternateLayout");
+
+        if $z18 == 0 goto label01;
+
+        $r112 = r0.layoutIcon4;
+
+(0)     goto label02;
+
+     label01:
+(1)     $r112_1 = r0.layoutIcon2;
+
+     label02:
+        $r112_2 = Phi($r112 #0, $r112_1 #1);
+
+        specialinvoke $r110.<init>($r112_2);
+
+        r0.layout = $r110;
+
+(2)     goto label06;
+
+     label03:
+        $r12 = new javax.swing.JLabel;
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.toolbar.alternateLayout");
+
+        if $z1 == 0 goto label04;
+
+        $r113 = r0.layoutIcon3;
+
+(3)     goto label05;
+
+     label04:
+(4)     $r113_1 = r0.layoutIcon1;
+
+     label05:
+        $r113_2 = Phi($r113 #3, $r113_1 #4);
+
+        specialinvoke $r12.<init>($r113_2);
+
+(5)     r0.layout = $r12;
+
+     label06:
+        $r113_3 = Phi($r113 #2, $r113_2 #5);
+
+        $r112_3 = Phi($r112_2 #2, $r112 #5);
+
+        $r14 = r0.layout;
+
+        $r13 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r13.<init>(12, 12, 12, 12);
+
+        $r14.setBorder($r13);
+
+        $r15 = r0.layout;
+
+        r1.add("Center", $r15);
+
+        $r17 = new javax.swing.JPanel;
+
+        $r18 = new java.awt.GridLayout;
+
+        specialinvoke $r18.<init>(2, 1, 12, 12);
+
+        specialinvoke $r17.<init>($r18);
+
+        r2 = $r17;
+
+        $r19 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r19.<init>(0, 12, 12, 12);
+
+        r2.setBorder($r19);
+
+        $r20 = new javax.swing.JButton;
+
+        $r21 = org.gjt.sp.jedit.jEdit.getProperty("options.view.alternateDockingLayout");
+
+        specialinvoke $r20.<init>($r21);
+
+        r0.alternateDockingLayout = $r20;
+
+        r2.add($r20);
+
+        $r23 = new org.gjt.sp.jedit.options.ViewOptionPane$ActionHandler;
+
+        specialinvoke $r23.<init>(r0, null);
+
+        r3 = $r23;
+
+        $r24 = r0.alternateDockingLayout;
+
+        $r24.addActionListener(r3);
+
+        $r25 = new javax.swing.JButton;
+
+        $r26 = org.gjt.sp.jedit.jEdit.getProperty("options.view.alternateToolBarLayout");
+
+        specialinvoke $r25.<init>($r26);
+
+        r0.alternateToolBarLayout = $r25;
+
+        r2.add($r25);
+
+        $r28 = r0.alternateToolBarLayout;
+
+        $r28.addActionListener(r3);
+
+        r1.add("South", r2);
+
+        $r30 = new javax.swing.border.TitledBorder;
+
+        $r31 = org.gjt.sp.jedit.jEdit.getProperty("options.view.viewLayout");
+
+        specialinvoke $r30.<init>($r31);
+
+        r4 = $r30;
+
+        r4.setTitleJustification(2);
+
+        r1.setBorder(r4);
+
+        r0.addComponent(r1);
+
+        $r32 = new javax.swing.JCheckBox;
+
+        $r33 = org.gjt.sp.jedit.jEdit.getProperty("options.view.floatableToolbars");
+
+        specialinvoke $r32.<init>($r33);
+
+        r0.floatableToolbars = $r32;
+
+        $r34 = r0.floatableToolbars;
+
+        $z2 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.toolbar.floatable");
+
+        $r34.setSelected($z2);
+
+        $r35 = r0.floatableToolbars;
+
+        r0.addComponent($r35);
+
+        $r36 = new javax.swing.JCheckBox;
+
+        $r37 = org.gjt.sp.jedit.jEdit.getProperty("options.view.abbreviatePaths");
+
+        specialinvoke $r36.<init>($r37);
+
+        r0.abbreviatePaths = $r36;
+
+        $r38 = r0.abbreviatePaths;
+
+        $z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.abbreviatePaths");
+
+        $r38.setSelected($z3);
+
+        $r39 = r0.abbreviatePaths;
+
+        r0.addComponent($r39);
+
+        $r40 = new javax.swing.JCheckBox;
+
+        $r41 = org.gjt.sp.jedit.jEdit.getProperty("options.view.showFullPath");
+
+        specialinvoke $r40.<init>($r41);
+
+        r0.showFullPath = $r40;
+
+        $r42 = r0.showFullPath;
+
+        $z4 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.showFullPath");
+
+        $r42.setSelected($z4);
+
+        $r43 = r0.showFullPath;
+
+        r0.addComponent($r43);
+
+        $r44 = new javax.swing.JCheckBox;
+
+        $r45 = org.gjt.sp.jedit.jEdit.getProperty("options.view.showSearchbar");
+
+        specialinvoke $r44.<init>($r45);
+
+        r0.showSearchbar = $r44;
+
+        $r46 = r0.showSearchbar;
+
+        $z5 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.showSearchbar");
+
+        $r46.setSelected($z5);
+
+        $r47 = r0.showSearchbar;
+
+        r0.addComponent($r47);
+
+        $r48 = new javax.swing.JCheckBox;
+
+        $r49 = org.gjt.sp.jedit.jEdit.getProperty("options.view.beepOnSearchAutoWrap");
+
+        specialinvoke $r48.<init>($r49);
+
+        r0.beepOnSearchAutoWrap = $r48;
+
+        $r50 = r0.beepOnSearchAutoWrap;
+
+        $z6 = org.gjt.sp.jedit.jEdit.getBooleanProperty("search.beepOnSearchAutoWrap");
+
+        $r50.setSelected($z6);
+
+        $r51 = r0.beepOnSearchAutoWrap;
+
+        r0.addComponent($r51);
+
+        r0.addSeparator();
+
+        $r52 = new javax.swing.JCheckBox;
+
+        $r53 = org.gjt.sp.jedit.jEdit.getProperty("options.view.showBufferSwitcher");
+
+        specialinvoke $r52.<init>($r53);
+
+        r0.showBufferSwitcher = $r52;
+
+        $r54 = r0.showBufferSwitcher;
+
+        $z7 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.showBufferSwitcher");
+
+        $r54.setSelected($z7);
+
+        $r55 = r0.showBufferSwitcher;
+
+        r0.addComponent($r55);
+
+        $r56 = r0.showBufferSwitcher;
+
+        $r56.addActionListener(r3);
+
+        $r57 = new javax.swing.JCheckBox;
+
+        $r58 = org.gjt.sp.jedit.jEdit.getProperty("options.view.bufferswitcher.sortBuffers");
+
+        specialinvoke $r57.<init>($r58);
+
+        r0.sortBufferSwitcher = $r57;
+
+        $r59 = r0.sortBufferSwitcher;
+
+        $z8 = org.gjt.sp.jedit.jEdit.getBooleanProperty("bufferswitcher.sortBuffers", 1);
+
+        $r59.setSelected($z8);
+
+        $r61 = r0.sortBufferSwitcher;
+
+        $r60 = new org.gjt.sp.jedit.options.ViewOptionPane$1;
+
+        specialinvoke $r60.<init>(r0);
+
+        $r61.addActionListener($r60);
+
+        $r62 = r0.sortBufferSwitcher;
+
+        r0.addComponent($r62);
+
+        $r63 = new javax.swing.JCheckBox;
+
+        $r64 = org.gjt.sp.jedit.jEdit.getProperty("options.view.bufferswitcher.sortByName");
+
+        specialinvoke $r63.<init>($r64);
+
+        r0.sortBufferSwitcherByName = $r63;
+
+        $r65 = r0.sortBufferSwitcherByName;
+
+        $z9 = org.gjt.sp.jedit.jEdit.getBooleanProperty("bufferswitcher.sortByName", 1);
+
+        $r65.setSelected($z9);
+
+        $r67 = r0.sortBufferSwitcherByName;
+
+        $r66 = r0.sortBufferSwitcher;
+
+        $z10 = $r66.isSelected();
+
+        $r67.setEnabled($z10);
+
+        $r68 = r0.sortBufferSwitcherByName;
+
+        r0.addComponent($r68);
+
+        $r69 = new javax.swing.JTextField;
+
+        $r70 = org.gjt.sp.jedit.jEdit.getProperty("bufferSwitcher.maxRowCount");
+
+        specialinvoke $r69.<init>($r70);
+
+        r0.bufferSwitcherMaxRowCount = $r69;
+
+        $r71 = org.gjt.sp.jedit.jEdit.getProperty("options.view.bufferSwitcherMaxRowsCount");
+
+        $r72 = r0.bufferSwitcherMaxRowCount;
+
+        r0.addComponent($r71, $r72);
+
+        $r74 = r0.bufferSwitcherMaxRowCount;
+
+        $r73 = r0.showBufferSwitcher;
+
+        $z11 = $r73.isSelected();
+
+        $r74.setEditable($z11);
+
+        r0.addSeparator();
+
+        $r75 = new javax.swing.JComboBox;
+
+        specialinvoke $r75.<init>();
+
+        r0.buffersetScope = $r75;
+
+        $r77 = r0.buffersetScope;
+
+        $r76 = org.gjt.sp.jedit.bufferset.BufferSet$Scope.global;
+
+        $r77.addItem($r76);
+
+        $r79 = r0.buffersetScope;
+
+        $r78 = org.gjt.sp.jedit.bufferset.BufferSet$Scope.view;
+
+        $r79.addItem($r78);
+
+        $r81 = r0.buffersetScope;
+
+        $r80 = org.gjt.sp.jedit.bufferset.BufferSet$Scope.editpane;
+
+(6)     $r81.addItem($r80);
+
+     label07:
+        $r82 = org.gjt.sp.jedit.jEdit.getProperty("bufferset.scope", "global");
+
+        r114 = org.gjt.sp.jedit.bufferset.BufferSet$Scope.valueOf($r82);
+
+     label08:
+(7)     goto label10;
+
+     label09:
+        $r111 := @caughtexception;
+
+        r114_1 = Phi(r114 #6);
+
+        r5 = $r111;
+
+        org.gjt.sp.util.Log.log(9, r0, r5);
+
+(8)     r114_2 = org.gjt.sp.jedit.bufferset.BufferSet$Scope.global;
+
+     label10:
+        r114_3 = Phi(r114 #7, r114_2 #8);
+
+        $r83 = r0.buffersetScope;
+
+        $r83.setSelectedItem(r114_3);
+
+        $r84 = org.gjt.sp.jedit.jEdit.getProperty("options.bufferset.scope");
+
+        $r85 = r0.buffersetScope;
+
+        r0.addComponent($r84, $r85);
+
+        $r86 = new javax.swing.JCheckBox;
+
+        $r87 = org.gjt.sp.jedit.jEdit.getProperty("options.view.sortBuffers");
+
+        specialinvoke $r86.<init>($r87);
+
+        r0.sortBuffers = $r86;
+
+        $r88 = r0.sortBuffers;
+
+        $z12 = org.gjt.sp.jedit.jEdit.getBooleanProperty("sortBuffers");
+
+        $r88.setSelected($z12);
+
+        $r90 = r0.sortBuffers;
+
+        $r89 = new org.gjt.sp.jedit.options.ViewOptionPane$2;
+
+        specialinvoke $r89.<init>(r0);
+
+        $r90.addActionListener($r89);
+
+        $r91 = r0.sortBuffers;
+
+        r0.addComponent($r91);
+
+        $r92 = new javax.swing.JCheckBox;
+
+        $r93 = org.gjt.sp.jedit.jEdit.getProperty("options.view.sortByName");
+
+        specialinvoke $r92.<init>($r93);
+
+        r0.sortByName = $r92;
+
+        $r94 = r0.sortByName;
+
+        $z13 = org.gjt.sp.jedit.jEdit.getBooleanProperty("sortByName");
+
+        $r94.setSelected($z13);
+
+        $r96 = r0.sortByName;
+
+        $r95 = r0.sortBuffers;
+
+        $z14 = $r95.isSelected();
+
+        $r96.setEnabled($z14);
+
+        $r97 = r0.sortByName;
+
+        r0.addComponent($r97);
+
+        r0.addSeparator();
+
+        $r98 = new javax.swing.JCheckBox;
+
+        $r99 = org.gjt.sp.jedit.jEdit.getProperty("options.view.fullScreenIncludesMenu");
+
+        specialinvoke $r98.<init>($r99);
+
+        r0.fullScreenIncludesMenu = $r98;
+
+        $r100 = r0.fullScreenIncludesMenu;
+
+        $z15 = org.gjt.sp.jedit.jEdit.getBooleanProperty("fullScreenIncludesMenu");
+
+        $r100.setSelected($z15);
+
+        $r101 = r0.fullScreenIncludesMenu;
+
+        r0.addComponent($r101);
+
+        $r102 = new javax.swing.JCheckBox;
+
+        $r103 = org.gjt.sp.jedit.jEdit.getProperty("options.view.fullScreenIncludesToolbar");
+
+        specialinvoke $r102.<init>($r103);
+
+        r0.fullScreenIncludesToolbar = $r102;
+
+        $r104 = r0.fullScreenIncludesToolbar;
+
+        $z16 = org.gjt.sp.jedit.jEdit.getBooleanProperty("fullScreenIncludesToolbar");
+
+        $r104.setSelected($z16);
+
+        $r105 = r0.fullScreenIncludesToolbar;
+
+        r0.addComponent($r105);
+
+        $r106 = new javax.swing.JCheckBox;
+
+        $r107 = org.gjt.sp.jedit.jEdit.getProperty("options.view.fullScreenIncludesStatus");
+
+        specialinvoke $r106.<init>($r107);
+
+        r0.fullScreenIncludesStatus = $r106;
+
+        $r108 = r0.fullScreenIncludesStatus;
+
+        $z17 = org.gjt.sp.jedit.jEdit.getBooleanProperty("fullScreenIncludesStatus");
+
+        $r108.setSelected($z17);
+
+        $r109 = r0.fullScreenIncludesStatus;
+
+        r0.addComponent($r109);
+
+        return;
+
+        catch java.lang.IllegalArgumentException from label07 to label08 with label09;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.JLabel $r1, $r5, $r27, $r30;
+        javax.swing.Icon $r3, $r4, $r7, $r8, $r28, $r29, $r31, $r32;
+        javax.swing.JCheckBox $r9, $r10, $r11, $r12, $r13, $r14, $r15, $r16, $r22, $r23, $r24, $r25, $r26;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z10, $z11, $z12, $z13, $z14, $z13_1, $z13_2, $z14_1, $z14_2;
+        javax.swing.JTextField $r17;
+        java.lang.String $r18, $r21;
+        javax.swing.JComboBox $r19;
+        java.lang.Object $r20;
+
+        r0 := @this;
+
+        $r1 = r0.layout;
+
+        $r3 = $r1.getIcon();
+
+        $r4 = r0.layoutIcon2;
+
+        if $r3 == $r4 goto label1;
+
+        $r30 = r0.layout;
+
+        $r31 = $r30.getIcon();
+
+        $r32 = r0.layoutIcon4;
+
+        if $r31 != $r32 goto label2;
+
+     label1:
+        $z13_1 = 1;
+
+(0)     goto label3;
+
+     label2:
+(1)     $z13 = 0;
+
+     label3:
+        $z13_2 = Phi($z13_1 #0, $z13 #1);
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.docking.alternateLayout", $z13_2);
+
+        $r5 = r0.layout;
+
+        $r7 = $r5.getIcon();
+
+        $r8 = r0.layoutIcon3;
+
+        if $r7 == $r8 goto label4;
+
+        $r27 = r0.layout;
+
+        $r28 = $r27.getIcon();
+
+        $r29 = r0.layoutIcon4;
+
+        if $r28 != $r29 goto label5;
+
+     label4:
+        $z14_1 = 1;
+
+(2)     goto label6;
+
+     label5:
+(3)     $z14 = 0;
+
+     label6:
+        $z14_2 = Phi($z14_1 #2, $z14 #3);
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.toolbar.alternateLayout", $z14_2);
+
+        $r9 = r0.abbreviatePaths;
+
+        $z0 = $r9.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.abbreviatePaths", $z0);
+
+        $r10 = r0.showFullPath;
+
+        $z1 = $r10.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.showFullPath", $z1);
+
+        $r11 = r0.floatableToolbars;
+
+        $z2 = $r11.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.toolbar.floatable", $z2);
+
+        $r12 = r0.showSearchbar;
+
+        $z3 = $r12.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.showSearchbar", $z3);
+
+        $r13 = r0.beepOnSearchAutoWrap;
+
+        $z4 = $r13.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("search.beepOnSearchAutoWrap", $z4);
+
+        $r14 = r0.showBufferSwitcher;
+
+        $z5 = $r14.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.showBufferSwitcher", $z5);
+
+        $r15 = r0.sortBufferSwitcher;
+
+        $z6 = $r15.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("bufferswitcher.sortBuffers", $z6);
+
+        $r16 = r0.sortBufferSwitcherByName;
+
+        $z7 = $r16.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("bufferswitcher.sortByName", $z7);
+
+        $r17 = r0.bufferSwitcherMaxRowCount;
+
+        $r18 = $r17.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("bufferSwitcher.maxRowCount", $r18);
+
+        $r19 = r0.buffersetScope;
+
+        $r20 = $r19.getSelectedItem();
+
+        $r21 = $r20.toString();
+
+        org.gjt.sp.jedit.jEdit.setProperty("bufferset.scope", $r21);
+
+        $r22 = r0.sortBuffers;
+
+        $z8 = $r22.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("sortBuffers", $z8);
+
+        $r23 = r0.sortByName;
+
+        $z9 = $r23.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("sortByName", $z9);
+
+        $r24 = r0.fullScreenIncludesMenu;
+
+        $z10 = $r24.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("fullScreenIncludesMenu", $z10);
+
+        $r25 = r0.fullScreenIncludesToolbar;
+
+        $z11 = $r25.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("fullScreenIncludesToolbar", $z11);
+
+        $r26 = r0.fullScreenIncludesStatus;
+
+        $z12 = $r26.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("fullScreenIncludesStatus", $z12);
+
+        return;
+    }
+
+    static javax.swing.JCheckBox access$100(org.gjt.sp.jedit.options.ViewOptionPane)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.sortBufferSwitcher;
+
+        return $r1;
+    }
+
+    static javax.swing.JCheckBox access$200(org.gjt.sp.jedit.options.ViewOptionPane)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.sortBufferSwitcherByName;
+
+        return $r1;
+    }
+
+    static javax.swing.JCheckBox access$300(org.gjt.sp.jedit.options.ViewOptionPane)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.sortBuffers;
+
+        return $r1;
+    }
+
+    static javax.swing.JCheckBox access$400(org.gjt.sp.jedit.options.ViewOptionPane)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.sortByName;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$500(org.gjt.sp.jedit.options.ViewOptionPane)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.alternateDockingLayout;
+
+        return $r1;
+    }
+
+    static javax.swing.JLabel access$600(org.gjt.sp.jedit.options.ViewOptionPane)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.JLabel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.layout;
+
+        return $r1;
+    }
+
+    static javax.swing.Icon access$700(org.gjt.sp.jedit.options.ViewOptionPane)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.Icon $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.layoutIcon1;
+
+        return $r1;
+    }
+
+    static javax.swing.Icon access$800(org.gjt.sp.jedit.options.ViewOptionPane)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.Icon $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.layoutIcon2;
+
+        return $r1;
+    }
+
+    static javax.swing.Icon access$900(org.gjt.sp.jedit.options.ViewOptionPane)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.Icon $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.layoutIcon3;
+
+        return $r1;
+    }
+
+    static javax.swing.Icon access$1000(org.gjt.sp.jedit.options.ViewOptionPane)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.Icon $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.layoutIcon4;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$1100(org.gjt.sp.jedit.options.ViewOptionPane)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.alternateToolBarLayout;
+
+        return $r1;
+    }
+
+    static javax.swing.JCheckBox access$1200(org.gjt.sp.jedit.options.ViewOptionPane)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.showBufferSwitcher;
+
+        return $r1;
+    }
+
+    static javax.swing.JTextField access$1300(org.gjt.sp.jedit.options.ViewOptionPane)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.bufferSwitcherMaxRowCount;
+
+        return $r1;
+    }
+}

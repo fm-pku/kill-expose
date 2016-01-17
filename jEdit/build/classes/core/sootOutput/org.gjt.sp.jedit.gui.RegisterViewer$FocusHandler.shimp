@@ -1,0 +1,76 @@
+class org.gjt.sp.jedit.gui.RegisterViewer$FocusHandler extends java.lang.Object implements java.awt.event.FocusListener
+{
+    final org.gjt.sp.jedit.gui.RegisterViewer this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.RegisterViewer)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer$FocusHandler r0;
+        org.gjt.sp.jedit.gui.RegisterViewer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void focusGained(java.awt.event.FocusEvent)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer$FocusHandler r0;
+        java.awt.event.FocusEvent r1;
+        org.gjt.sp.jedit.gui.RegisterViewer $r2, $r5;
+        javax.swing.JTextArea $r3;
+        javax.swing.text.Document $r4;
+        org.gjt.sp.jedit.gui.RegisterViewer$DocumentHandler $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.RegisterViewer.access$200($r2);
+
+        $r4 = $r3.getDocument();
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.RegisterViewer.access$500($r5);
+
+        $r4.addDocumentListener($r6);
+
+        return;
+    }
+
+    public void focusLost(java.awt.event.FocusEvent)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer$FocusHandler r0;
+        java.awt.event.FocusEvent r1;
+        org.gjt.sp.jedit.gui.RegisterViewer $r2, $r5;
+        javax.swing.JTextArea $r3;
+        javax.swing.text.Document $r4;
+        org.gjt.sp.jedit.gui.RegisterViewer$DocumentHandler $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.RegisterViewer.access$200($r2);
+
+        $r4 = $r3.getDocument();
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.RegisterViewer.access$500($r5);
+
+        $r4.removeDocumentListener($r6);
+
+        return;
+    }
+}

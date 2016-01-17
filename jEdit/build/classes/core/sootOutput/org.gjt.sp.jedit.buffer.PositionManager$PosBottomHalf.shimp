@@ -1,0 +1,270 @@
+class org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf extends java.lang.Object implements java.lang.Comparable
+{
+    int offset;
+    int ref;
+    final org.gjt.sp.jedit.buffer.PositionManager this$0;
+
+    void <init>(org.gjt.sp.jedit.buffer.PositionManager, int)
+    {
+        org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf r0;
+        org.gjt.sp.jedit.buffer.PositionManager r1;
+        int i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.offset = i0;
+
+        return;
+    }
+
+    void ref()
+    {
+        org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf r0;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        $i0 = r0.ref;
+
+        $i1 = $i0 + 1;
+
+        r0.ref = $i1;
+
+        return;
+    }
+
+    void unref()
+    {
+        org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf r0;
+        int $i0, $i1;
+        org.gjt.sp.jedit.buffer.PositionManager $r1;
+        java.util.SortedMap $r2;
+
+        r0 := @this;
+
+        $i0 = r0.ref;
+
+        $i1 = $i0 - 1;
+
+        r0.ref = $i1;
+
+        if $i1 != 0 goto label1;
+
+        $r1 = r0.this$0;
+
+        $r2 = org.gjt.sp.jedit.buffer.PositionManager.access$000($r1);
+
+        $r2.remove(r0);
+
+     label1:
+        return;
+    }
+
+    void contentInserted(int, int)
+    {
+        org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf r0;
+        int i0, i1, $i2, $i3, $i4;
+        java.lang.ArrayIndexOutOfBoundsException $r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $i2 = r0.offset;
+
+        if i0 <= $i2 goto label1;
+
+        $r1 = new java.lang.ArrayIndexOutOfBoundsException;
+
+        specialinvoke $r1.<init>();
+
+        throw $r1;
+
+     label1:
+        $i3 = r0.offset;
+
+        $i4 = $i3 + i1;
+
+        r0.offset = $i4;
+
+        specialinvoke r0.checkInvariants();
+
+        return;
+    }
+
+    void contentRemoved(int, int)
+    {
+        org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf r0;
+        int i0, i1, $i2, $i3, $i4, $i5, $i6;
+        java.lang.ArrayIndexOutOfBoundsException $r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $i2 = r0.offset;
+
+        if i0 <= $i2 goto label1;
+
+        $r1 = new java.lang.ArrayIndexOutOfBoundsException;
+
+        specialinvoke $r1.<init>();
+
+        throw $r1;
+
+     label1:
+        $i4 = r0.offset;
+
+        $i3 = i0 + i1;
+
+        if $i4 > $i3 goto label2;
+
+        r0.offset = i0;
+
+        goto label3;
+
+     label2:
+        $i5 = r0.offset;
+
+        $i6 = $i5 - i1;
+
+        r0.offset = $i6;
+
+     label3:
+        specialinvoke r0.checkInvariants();
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf r0, $r2;
+        java.lang.Object r1;
+        boolean $z0, $z1, $z1_1, $z1_2;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf;
+
+        if $z0 != 0 goto label1;
+
+        return 0;
+
+     label1:
+        $r2 = (org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf) r1;
+
+        $i1 = $r2.offset;
+
+        $i0 = r0.offset;
+
+        if $i1 != $i0 goto label2;
+
+        $z1 = 1;
+
+(0)     goto label3;
+
+     label2:
+(1)     $z1_1 = 0;
+
+     label3:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        return $z1_2;
+    }
+
+    public int compareTo(org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf)
+    {
+        org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf r0, r1;
+        org.gjt.sp.jedit.buffer.PositionManager $r2;
+        boolean $z0;
+        int $i0, $i1, $i2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $z0 = $r2.iteration;
+
+        if $z0 == 0 goto label1;
+
+        org.gjt.sp.util.Log.log(9, r0, "Consistency failure");
+
+     label1:
+        $i1 = r0.offset;
+
+        $i0 = r1.offset;
+
+        $i2 = $i1 - $i0;
+
+        return $i2;
+    }
+
+    private void checkInvariants()
+    {
+        org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf r0;
+        int $i0, $i1, $i2;
+        java.lang.ArrayIndexOutOfBoundsException $r1;
+        org.gjt.sp.jedit.buffer.PositionManager $r2;
+        org.gjt.sp.jedit.buffer.JEditBuffer $r3;
+
+        r0 := @this;
+
+        $i0 = r0.offset;
+
+        if $i0 < 0 goto label1;
+
+        $i1 = r0.offset;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.buffer.PositionManager.access$100($r2);
+
+        $i2 = $r3.getLength();
+
+        if $i1 <= $i2 goto label2;
+
+     label1:
+        $r1 = new java.lang.ArrayIndexOutOfBoundsException;
+
+        specialinvoke $r1.<init>();
+
+        throw $r1;
+
+     label2:
+        return;
+    }
+
+    public volatile int compareTo(java.lang.Object)
+    {
+        org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf r0, $r2;
+        java.lang.Object r1;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = (org.gjt.sp.jedit.buffer.PositionManager$PosBottomHalf) r1;
+
+        $i0 = r0.compareTo($r2);
+
+        return $i0;
+    }
+}

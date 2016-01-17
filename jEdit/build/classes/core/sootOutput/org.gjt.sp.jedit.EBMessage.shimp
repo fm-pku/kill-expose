@@ -1,0 +1,123 @@
+public abstract class org.gjt.sp.jedit.EBMessage extends java.lang.Object
+{
+    private java.lang.Object source;
+
+    protected void <init>(java.lang.Object)
+    {
+        org.gjt.sp.jedit.EBMessage r0;
+        java.lang.Object r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.source = r1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    protected void <init>(org.gjt.sp.jedit.EBComponent)
+    {
+        org.gjt.sp.jedit.EBMessage r0;
+        org.gjt.sp.jedit.EBComponent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.source = r1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public java.lang.Object getSource()
+    {
+        org.gjt.sp.jedit.EBMessage r0;
+        java.lang.Object $r1;
+
+        r0 := @this;
+
+        $r1 = r0.source;
+
+        return $r1;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.EBMessage r0;
+        java.lang.String r1, $r4, $r7, $r10;
+        int i0, $i1;
+        java.lang.Class $r2;
+        java.lang.StringBuilder $r3, $r5, $r6, $r8, $r9;
+
+        r0 := @this;
+
+        $r2 = r0.getClass();
+
+        r1 = $r2.getName();
+
+        i0 = r1.lastIndexOf(46);
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $i1 = i0 + 1;
+
+        $r4 = r1.substring($i1);
+
+        $r5 = $r3.append($r4);
+
+        $r6 = $r5.append(91);
+
+        $r7 = r0.paramString();
+
+        $r8 = $r6.append($r7);
+
+        $r9 = $r8.append(93);
+
+        $r10 = $r9.toString();
+
+        return $r10;
+    }
+
+    public java.lang.String paramString()
+    {
+        org.gjt.sp.jedit.EBMessage r0;
+        java.lang.StringBuilder $r1, $r2, $r4;
+        java.lang.Object $r3;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("source=");
+
+        $r3 = r0.source;
+
+        Packer.Unpack(r0);
+
+        $r4 = $r2.append($r3);
+
+        Packer.Pack(r0);
+
+        $r5 = $r4.toString();
+
+        return $r5;
+    }
+}

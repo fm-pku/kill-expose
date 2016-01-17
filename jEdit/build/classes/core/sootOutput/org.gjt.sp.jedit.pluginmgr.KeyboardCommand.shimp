@@ -1,0 +1,117 @@
+final enum class org.gjt.sp.jedit.pluginmgr.KeyboardCommand extends java.lang.Enum
+{
+    public static final enum org.gjt.sp.jedit.pluginmgr.KeyboardCommand NONE;
+    public static final enum org.gjt.sp.jedit.pluginmgr.KeyboardCommand TAB_OUT_FORWARD;
+    public static final enum org.gjt.sp.jedit.pluginmgr.KeyboardCommand TAB_OUT_BACK;
+    public static final enum org.gjt.sp.jedit.pluginmgr.KeyboardCommand EDIT_PLUGIN;
+    public static final enum org.gjt.sp.jedit.pluginmgr.KeyboardCommand CLOSE_PLUGIN_MANAGER;
+    private static final org.gjt.sp.jedit.pluginmgr.KeyboardCommand[] $VALUES;
+
+    public static org.gjt.sp.jedit.pluginmgr.KeyboardCommand[] values()
+    {
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand[] $r0, $r2;
+        java.lang.Object $r1;
+
+        $r0 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.$VALUES;
+
+        $r1 = $r0.clone();
+
+        $r2 = (org.gjt.sp.jedit.pluginmgr.KeyboardCommand[]) $r1;
+
+        return $r2;
+    }
+
+    public static org.gjt.sp.jedit.pluginmgr.KeyboardCommand valueOf(java.lang.String)
+    {
+        java.lang.String r0;
+        java.lang.Enum $r1;
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand $r2;
+
+        r0 := @parameter0;
+
+        $r1 = java.lang.Enum.valueOf(class "org/gjt/sp/jedit/pluginmgr/KeyboardCommand", r0);
+
+        $r2 = (org.gjt.sp.jedit.pluginmgr.KeyboardCommand) $r1;
+
+        return $r2;
+    }
+
+    private void <init>(java.lang.String, int)
+    {
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand r0;
+        java.lang.String r1;
+        int i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        specialinvoke r0.<init>(r1, i0);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand $r0, $r1, $r2, $r3, $r4, $r6, $r7, $r8, $r9, $r10;
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand[] $r5;
+
+        $r0 = new org.gjt.sp.jedit.pluginmgr.KeyboardCommand;
+
+        specialinvoke $r0.<init>("NONE", 0);
+
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand.NONE = $r0;
+
+        $r1 = new org.gjt.sp.jedit.pluginmgr.KeyboardCommand;
+
+        specialinvoke $r1.<init>("TAB_OUT_FORWARD", 1);
+
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand.TAB_OUT_FORWARD = $r1;
+
+        $r2 = new org.gjt.sp.jedit.pluginmgr.KeyboardCommand;
+
+        specialinvoke $r2.<init>("TAB_OUT_BACK", 2);
+
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand.TAB_OUT_BACK = $r2;
+
+        $r3 = new org.gjt.sp.jedit.pluginmgr.KeyboardCommand;
+
+        specialinvoke $r3.<init>("EDIT_PLUGIN", 3);
+
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand.EDIT_PLUGIN = $r3;
+
+        $r4 = new org.gjt.sp.jedit.pluginmgr.KeyboardCommand;
+
+        specialinvoke $r4.<init>("CLOSE_PLUGIN_MANAGER", 4);
+
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand.CLOSE_PLUGIN_MANAGER = $r4;
+
+        $r5 = newarray (org.gjt.sp.jedit.pluginmgr.KeyboardCommand)[5];
+
+        $r6 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.NONE;
+
+        $r5[0] = $r6;
+
+        $r7 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.TAB_OUT_FORWARD;
+
+        $r5[1] = $r7;
+
+        $r8 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.TAB_OUT_BACK;
+
+        $r5[2] = $r8;
+
+        $r9 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.EDIT_PLUGIN;
+
+        $r5[3] = $r9;
+
+        $r10 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.CLOSE_PLUGIN_MANAGER;
+
+        $r5[4] = $r10;
+
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand.$VALUES = $r5;
+
+        return;
+    }
+}

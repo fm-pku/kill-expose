@@ -1,0 +1,381 @@
+public class org.gjt.sp.jedit.gui.EditAbbrevDialog extends javax.swing.JDialog
+{
+    private org.gjt.sp.jedit.gui.AbbrevEditor editor;
+    private javax.swing.JButton ok;
+    private javax.swing.JButton cancel;
+    private boolean isOK;
+    private java.lang.String originalAbbrev;
+    private java.util.Map abbrevs;
+
+    public void <init>(java.awt.Frame, java.lang.String, java.lang.String, java.util.Map)
+    {
+        org.gjt.sp.jedit.gui.EditAbbrevDialog r0;
+        java.awt.Frame r1;
+        java.lang.String r2, r3, $r5;
+        java.util.Map r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("edit-abbrev.title");
+
+        specialinvoke r0.<init>(r1, $r5, 1);
+
+        specialinvoke r0.init(r2, r3, r4);
+
+        return;
+    }
+
+    public void <init>(java.awt.Dialog, java.lang.String, java.lang.String, java.util.Map)
+    {
+        org.gjt.sp.jedit.gui.EditAbbrevDialog r0;
+        java.awt.Dialog r1;
+        java.lang.String r2, r3, $r5;
+        java.util.Map r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("edit-abbrev.title");
+
+        specialinvoke r0.<init>(r1, $r5, 1);
+
+        specialinvoke r0.init(r2, r3, r4);
+
+        return;
+    }
+
+    public java.lang.String getAbbrev()
+    {
+        org.gjt.sp.jedit.gui.EditAbbrevDialog r0;
+        boolean $z0;
+        org.gjt.sp.jedit.gui.AbbrevEditor $r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        $z0 = r0.isOK;
+
+        if $z0 != 0 goto label1;
+
+        return null;
+
+     label1:
+        $r1 = r0.editor;
+
+        $r2 = $r1.getAbbrev();
+
+        return $r2;
+    }
+
+    public java.lang.String getExpansion()
+    {
+        org.gjt.sp.jedit.gui.EditAbbrevDialog r0;
+        boolean $z0;
+        org.gjt.sp.jedit.gui.AbbrevEditor $r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        $z0 = r0.isOK;
+
+        if $z0 != 0 goto label1;
+
+        return null;
+
+     label1:
+        $r1 = r0.editor;
+
+        $r2 = $r1.getExpansion();
+
+        return $r2;
+    }
+
+    private void init(java.lang.String, java.lang.String, java.util.Map)
+    {
+        org.gjt.sp.jedit.gui.EditAbbrevDialog r0;
+        java.lang.String r1, r2, $r21, $r31;
+        java.util.Map r3;
+        javax.swing.JPanel r4, $r7;
+        javax.swing.Box r5, $r17;
+        org.gjt.sp.jedit.gui.EditAbbrevDialog$KeyHandler r6, $r39;
+        java.awt.BorderLayout $r8;
+        javax.swing.border.EmptyBorder $r9, $r13;
+        org.gjt.sp.jedit.gui.AbbrevEditor $r10, $r11, $r12, $r14, $r15, $r40, $r42;
+        java.awt.Component $r18, $r28, $r36;
+        javax.swing.JButton $r20, $r23, $r25, $r26, $r30, $r33, $r34;
+        org.gjt.sp.jedit.gui.EditAbbrevDialog$ActionHandler $r22, $r32;
+        javax.swing.JRootPane $r24;
+        javax.swing.JTextArea $r41, $r43;
+        java.awt.Container $r44;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.abbrevs = r3;
+
+        r0.originalAbbrev = r1;
+
+        $r7 = new javax.swing.JPanel;
+
+        $r8 = new java.awt.BorderLayout;
+
+        specialinvoke $r8.<init>();
+
+        specialinvoke $r7.<init>($r8);
+
+        r4 = $r7;
+
+        $r9 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r9.<init>(12, 12, 12, 12);
+
+        r4.setBorder($r9);
+
+        r0.setContentPane(r4);
+
+        $r10 = new org.gjt.sp.jedit.gui.AbbrevEditor;
+
+        specialinvoke $r10.<init>();
+
+        r0.editor = $r10;
+
+        $r11 = r0.editor;
+
+        $r11.setAbbrev(r1);
+
+        $r12 = r0.editor;
+
+        $r12.setExpansion(r2);
+
+        $r14 = r0.editor;
+
+        $r13 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r13.<init>(0, 0, 12, 0);
+
+        $r14.setBorder($r13);
+
+        $r15 = r0.editor;
+
+        r4.add("Center", $r15);
+
+        $r17 = new javax.swing.Box;
+
+        specialinvoke $r17.<init>(0);
+
+        r5 = $r17;
+
+        $r18 = javax.swing.Box.createGlue();
+
+        r5.add($r18);
+
+        $r20 = new javax.swing.JButton;
+
+        $r21 = org.gjt.sp.jedit.jEdit.getProperty("common.ok");
+
+        specialinvoke $r20.<init>($r21);
+
+        r0.ok = $r20;
+
+        $r23 = r0.ok;
+
+        $r22 = new org.gjt.sp.jedit.gui.EditAbbrevDialog$ActionHandler;
+
+        specialinvoke $r22.<init>(r0);
+
+        $r23.addActionListener($r22);
+
+        $r24 = r0.getRootPane();
+
+        $r25 = r0.ok;
+
+        $r24.setDefaultButton($r25);
+
+        $r26 = r0.ok;
+
+        r5.add($r26);
+
+        $r28 = javax.swing.Box.createHorizontalStrut(6);
+
+        r5.add($r28);
+
+        $r30 = new javax.swing.JButton;
+
+        $r31 = org.gjt.sp.jedit.jEdit.getProperty("common.cancel");
+
+        specialinvoke $r30.<init>($r31);
+
+        r0.cancel = $r30;
+
+        $r33 = r0.cancel;
+
+        $r32 = new org.gjt.sp.jedit.gui.EditAbbrevDialog$ActionHandler;
+
+        specialinvoke $r32.<init>(r0);
+
+        $r33.addActionListener($r32);
+
+        $r34 = r0.cancel;
+
+        r5.add($r34);
+
+        $r36 = javax.swing.Box.createGlue();
+
+        r5.add($r36);
+
+        r4.add("South", r5);
+
+        $r39 = new org.gjt.sp.jedit.gui.EditAbbrevDialog$KeyHandler;
+
+        specialinvoke $r39.<init>(r0);
+
+        r6 = $r39;
+
+        r0.addKeyListener(r6);
+
+        $r40 = r0.editor;
+
+        $r41 = $r40.getBeforeCaretTextArea();
+
+        $r41.addKeyListener(r6);
+
+        $r42 = r0.editor;
+
+        $r43 = $r42.getAfterCaretTextArea();
+
+        $r43.addKeyListener(r6);
+
+        r0.setDefaultCloseOperation(2);
+
+        r0.pack();
+
+        $r44 = r0.getParent();
+
+        r0.setLocationRelativeTo($r44);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    private boolean checkForExistingAbbrev()
+    {
+        org.gjt.sp.jedit.gui.EditAbbrevDialog r0;
+        java.lang.String r1, $r5;
+        int i0;
+        org.gjt.sp.jedit.gui.AbbrevEditor $r2;
+        java.util.Map $r3;
+        java.lang.Object $r4;
+        boolean $z0, $z1, $z1_1, $z1_2;
+
+        r0 := @this;
+
+        $r2 = r0.editor;
+
+        r1 = $r2.getAbbrev();
+
+        $r3 = r0.abbrevs;
+
+        $r4 = $r3.get(r1);
+
+        if $r4 == null goto label4;
+
+        $r5 = r0.originalAbbrev;
+
+        $z0 = r1.equals($r5);
+
+        if $z0 == 0 goto label1;
+
+        return 1;
+
+     label1:
+        i0 = org.gjt.sp.jedit.GUIUtilities.confirm(r0, "edit-abbrev.duplicate", null, 0, 2);
+
+        if i0 != 0 goto label2;
+
+        $z1 = 1;
+
+(0)     goto label3;
+
+     label2:
+(1)     $z1_1 = 0;
+
+     label3:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        return $z1_2;
+
+     label4:
+        return 1;
+    }
+
+    static javax.swing.JButton access$000(org.gjt.sp.jedit.gui.EditAbbrevDialog)
+    {
+        org.gjt.sp.jedit.gui.EditAbbrevDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.ok;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.AbbrevEditor access$100(org.gjt.sp.jedit.gui.EditAbbrevDialog)
+    {
+        org.gjt.sp.jedit.gui.EditAbbrevDialog r0;
+        org.gjt.sp.jedit.gui.AbbrevEditor $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.editor;
+
+        return $r1;
+    }
+
+    static boolean access$200(org.gjt.sp.jedit.gui.EditAbbrevDialog)
+    {
+        org.gjt.sp.jedit.gui.EditAbbrevDialog r0;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $z0 = specialinvoke r0.checkForExistingAbbrev();
+
+        return $z0;
+    }
+
+    static boolean access$302(org.gjt.sp.jedit.gui.EditAbbrevDialog, boolean)
+    {
+        org.gjt.sp.jedit.gui.EditAbbrevDialog r0;
+        boolean z0;
+
+        r0 := @parameter0;
+
+        z0 := @parameter1;
+
+        r0.isOK = z0;
+
+        return z0;
+    }
+}

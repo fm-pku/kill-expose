@@ -1,0 +1,112 @@
+class org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread$2 extends java.lang.Object implements java.lang.Runnable
+{
+    final java.util.List val$mirrors;
+    final org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread this$1;
+
+    void <init>(org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread, java.util.List)
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread$2 r0;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread r1;
+        java.util.List r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$1 = r1;
+
+        r0.val$mirrors = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread$2 r0;
+        java.lang.String r1, $r18;
+        int i0, i1;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread $r2, $r6, $r9, $r12, $r15;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane $r3, $r7, $r10, $r13, $r16;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$MirrorModel $r4, $r8, $r17;
+        java.util.List $r5;
+        javax.swing.JList $r11, $r14;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r2 = r0.this$1;
+
+        $r3 = $r2.this$0;
+
+        $r4 = org.gjt.sp.jedit.options.PluginManagerOptionPane.access$200($r3);
+
+        $r5 = r0.val$mirrors;
+
+        $r4.setList($r5);
+
+        r1 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.mirror.id");
+
+        $r6 = r0.this$1;
+
+        $r7 = $r6.this$0;
+
+        $r8 = org.gjt.sp.jedit.options.PluginManagerOptionPane.access$200($r7);
+
+        i0 = $r8.getSize();
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label4;
+
+        if i0 == 1 goto label2;
+
+        $r15 = r0.this$1;
+
+        $r16 = $r15.this$0;
+
+        $r17 = org.gjt.sp.jedit.options.PluginManagerOptionPane.access$200($r16);
+
+        $r18 = $r17.getID(i1);
+
+        $z0 = $r18.equals(r1);
+
+        if $z0 == 0 goto label3;
+
+     label2:
+        $r12 = r0.this$1;
+
+        $r13 = $r12.this$0;
+
+        $r14 = org.gjt.sp.jedit.options.PluginManagerOptionPane.access$300($r13);
+
+        $r14.setSelectedIndex(i1);
+
+        goto label4;
+
+     label3:
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label4:
+        if i0 != 0 goto label5;
+
+        $r9 = r0.this$1;
+
+        $r10 = $r9.this$0;
+
+        $r11 = org.gjt.sp.jedit.options.PluginManagerOptionPane.access$300($r10);
+
+        $r11.clearSelection();
+
+     label5:
+        return;
+    }
+}

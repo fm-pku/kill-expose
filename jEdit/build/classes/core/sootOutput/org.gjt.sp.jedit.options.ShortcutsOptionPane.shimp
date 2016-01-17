@@ -1,0 +1,1139 @@
+public class org.gjt.sp.jedit.options.ShortcutsOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private org.jedit.keymap.Keymap selectedKeymap;
+    private javax.swing.JButton duplicateKeymap;
+    private javax.swing.JButton resetKeymap;
+    private javax.swing.JButton deleteKeymap;
+    private javax.swing.JComboBox keymaps;
+    private javax.swing.JTable keyTable;
+    private java.util.Vector models;
+    private org.gjt.sp.jedit.gui.FilteredTableModel filteredModel;
+    private javax.swing.JComboBox selectModel;
+    private java.util.List allBindings;
+    private javax.swing.JTextField filterTF;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("shortcuts");
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        org.jedit.keymap.KeymapManager r1;
+        java.lang.String r2, $r19, $r21, $r23, $r39, $r55, $r57, $r65, $r70, $r75;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$ActionHandler r3, $r24;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$KeymapsModel r4, $r25;
+        javax.swing.JPanel r5, r8, r11, $r36, $r72, $r95;
+        javax.swing.Box r6, r12;
+        javax.swing.JButton r7, $r18, $r20, $r22, $r30, $r31, $r32, $r45, $r47, $r49, $r69;
+        java.awt.Dimension r9;
+        javax.swing.JScrollPane r10, $r93;
+        java.lang.IllegalArgumentException r13, $r107;
+        java.util.Vector $r14, $r52;
+        java.awt.BorderLayout $r15, $r96;
+        org.jedit.keymap.Keymap $r16, $r17, $r34, $r106;
+        javax.swing.JComboBox $r26, $r28, $r29, $r33, $r35, $r41, $r51, $r53, $r54, $r61, $r105;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$KeymapCellRenderer $r27;
+        java.awt.FlowLayout $r37, $r73;
+        javax.swing.JLabel $r38, $r56, $r74;
+        java.awt.Component $r43, $r59, $r100;
+        javax.swing.JTextField $r63, $r64, $r66, $r77;
+        javax.swing.text.Document $r67;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$1 $r68;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$2 $r71;
+        javax.swing.JTable $r80, $r82, $r84, $r85, $r87, $r91, $r92, $r94;
+        org.gjt.sp.jedit.gui.FilteredTableModel $r81, $r83;
+        int $i0, $i1, $i2, $i3;
+        javax.swing.table.JTableHeader $r86, $r88;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$HeaderMouseHandler $r89;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$TableMouseHandler $r90;
+
+        r0 := @this;
+
+        $r14 = new java.util.Vector;
+
+        specialinvoke $r14.<init>();
+
+        r0.allBindings = $r14;
+
+        $r15 = new java.awt.BorderLayout;
+
+        specialinvoke $r15.<init>(12, 12);
+
+        r0.setLayout($r15);
+
+        r1 = org.gjt.sp.jedit.jEdit.getKeymapManager();
+
+        r2 = org.gjt.sp.jedit.jEdit.getProperty("keymap.current");
+
+        $r16 = r1.getKeymap(r2);
+
+        r0.selectedKeymap = $r16;
+
+        $r17 = r0.selectedKeymap;
+
+        if $r17 != null goto label1;
+
+        $r106 = r1.getKeymap("jEdit");
+
+        r0.selectedKeymap = $r106;
+
+     label1:
+        specialinvoke r0.initModels();
+
+        $r18 = new javax.swing.JButton;
+
+        $r19 = org.gjt.sp.jedit.jEdit.getProperty("options.shortcuts.duplicatekeymap.label");
+
+        specialinvoke $r18.<init>($r19);
+
+        r0.duplicateKeymap = $r18;
+
+        $r20 = new javax.swing.JButton;
+
+        $r21 = org.gjt.sp.jedit.jEdit.getProperty("options.shortcuts.resetkeymap.label");
+
+        specialinvoke $r20.<init>($r21);
+
+        r0.resetKeymap = $r20;
+
+        $r22 = new javax.swing.JButton;
+
+        $r23 = org.gjt.sp.jedit.jEdit.getProperty("options.shortcuts.deletekeymap.label");
+
+        specialinvoke $r22.<init>($r23);
+
+        r0.deleteKeymap = $r22;
+
+        specialinvoke r0.resetButtons();
+
+        $r24 = new org.gjt.sp.jedit.options.ShortcutsOptionPane$ActionHandler;
+
+        specialinvoke $r24.<init>(r0, null);
+
+        r3 = $r24;
+
+        $r25 = new org.gjt.sp.jedit.options.ShortcutsOptionPane$KeymapsModel;
+
+        specialinvoke $r25.<init>(null);
+
+        r4 = $r25;
+
+        $r26 = new javax.swing.JComboBox;
+
+        specialinvoke $r26.<init>(r4);
+
+        r0.keymaps = $r26;
+
+        $r28 = r0.keymaps;
+
+        $r27 = new org.gjt.sp.jedit.options.ShortcutsOptionPane$KeymapCellRenderer;
+
+        specialinvoke $r27.<init>(null);
+
+        $r28.setRenderer($r27);
+
+        $r29 = r0.keymaps;
+
+        $r29.setSelectedItem(r2);
+
+        $r30 = r0.duplicateKeymap;
+
+        $r30.addActionListener(r3);
+
+        $r31 = r0.resetKeymap;
+
+        $r31.addActionListener(r3);
+
+        $r32 = r0.deleteKeymap;
+
+        $r32.addActionListener(r3);
+
+        $r33 = r0.keymaps;
+
+        $r33.addActionListener(r3);
+
+        $r35 = r0.keymaps;
+
+        $r34 = r0.selectedKeymap;
+
+        $r35.setSelectedItem($r34);
+
+        $r36 = new javax.swing.JPanel;
+
+        $r37 = new java.awt.FlowLayout;
+
+        specialinvoke $r37.<init>(3);
+
+        specialinvoke $r36.<init>($r37);
+
+        r5 = $r36;
+
+        $r38 = new javax.swing.JLabel;
+
+        $r39 = org.gjt.sp.jedit.jEdit.getProperty("options.shortcuts.keymap.label");
+
+        specialinvoke $r38.<init>($r39);
+
+        r5.add($r38);
+
+        $r41 = r0.keymaps;
+
+        r5.add($r41);
+
+        $r43 = javax.swing.Box.createHorizontalStrut(6);
+
+        r5.add($r43);
+
+        $r45 = r0.duplicateKeymap;
+
+        r5.add($r45);
+
+        $r47 = r0.resetKeymap;
+
+        r5.add($r47);
+
+        $r49 = r0.deleteKeymap;
+
+        r5.add($r49);
+
+        $r51 = new javax.swing.JComboBox;
+
+        $r52 = r0.models;
+
+        specialinvoke $r51.<init>($r52);
+
+        r0.selectModel = $r51;
+
+        $r53 = r0.selectModel;
+
+        $r53.addActionListener(r3);
+
+        $r54 = r0.selectModel;
+
+        $r55 = org.gjt.sp.jedit.jEdit.getProperty("options.shortcuts.select.tooltip");
+
+        $r54.setToolTipText($r55);
+
+        r6 = javax.swing.Box.createHorizontalBox();
+
+        $r56 = new javax.swing.JLabel;
+
+        $r57 = org.gjt.sp.jedit.jEdit.getProperty("options.shortcuts.select.label");
+
+        specialinvoke $r56.<init>($r57);
+
+        r6.add($r56);
+
+        $r59 = javax.swing.Box.createHorizontalStrut(6);
+
+        r6.add($r59);
+
+        $r61 = r0.selectModel;
+
+        r6.add($r61);
+
+        $r63 = new javax.swing.JTextField;
+
+        specialinvoke $r63.<init>(40);
+
+        r0.filterTF = $r63;
+
+        $r64 = r0.filterTF;
+
+        $r65 = org.gjt.sp.jedit.jEdit.getProperty("options.shortcuts.filter.tooltip");
+
+        $r64.setToolTipText($r65);
+
+        $r66 = r0.filterTF;
+
+        $r67 = $r66.getDocument();
+
+        $r68 = new org.gjt.sp.jedit.options.ShortcutsOptionPane$1;
+
+        specialinvoke $r68.<init>(r0);
+
+        $r67.addDocumentListener($r68);
+
+        $r69 = new javax.swing.JButton;
+
+        $r70 = org.gjt.sp.jedit.jEdit.getProperty("options.shortcuts.clear.label");
+
+        specialinvoke $r69.<init>($r70);
+
+        r7 = $r69;
+
+        $r71 = new org.gjt.sp.jedit.options.ShortcutsOptionPane$2;
+
+        specialinvoke $r71.<init>(r0);
+
+        r7.addActionListener($r71);
+
+        $r72 = new javax.swing.JPanel;
+
+        $r73 = new java.awt.FlowLayout;
+
+        specialinvoke $r73.<init>(0);
+
+        specialinvoke $r72.<init>($r73);
+
+        r8 = $r72;
+
+        $r74 = new javax.swing.JLabel;
+
+        $r75 = org.gjt.sp.jedit.jEdit.getProperty("options.shortcuts.filter.label");
+
+        specialinvoke $r74.<init>($r75);
+
+        r8.add($r74);
+
+        $r77 = r0.filterTF;
+
+        r8.add($r77);
+
+        r8.add(r7);
+
+        $r80 = new javax.swing.JTable;
+
+        $r81 = r0.filteredModel;
+
+        specialinvoke $r80.<init>($r81);
+
+        r0.keyTable = $r80;
+
+        $r83 = r0.filteredModel;
+
+        $r82 = r0.keyTable;
+
+        $r83.setTable($r82);
+
+        $r84 = r0.keyTable;
+
+        $i0 = org.gjt.sp.jedit.GUIUtilities.defaultRowHeight();
+
+        $r84.setRowHeight($i0);
+
+        $r85 = r0.keyTable;
+
+        $r86 = $r85.getTableHeader();
+
+        $r86.setReorderingAllowed(0);
+
+        $r87 = r0.keyTable;
+
+        $r88 = $r87.getTableHeader();
+
+        $r89 = new org.gjt.sp.jedit.options.ShortcutsOptionPane$HeaderMouseHandler;
+
+        specialinvoke $r89.<init>(r0, null);
+
+        $r88.addMouseListener($r89);
+
+        $r91 = r0.keyTable;
+
+        $r90 = new org.gjt.sp.jedit.options.ShortcutsOptionPane$TableMouseHandler;
+
+        specialinvoke $r90.<init>(r0, null);
+
+        $r91.addMouseListener($r90);
+
+        $r92 = r0.keyTable;
+
+        r9 = $r92.getPreferredSize();
+
+        $i1 = r9.height;
+
+        $i2 = java.lang.Math.min($i1, 200);
+
+        r9.height = $i2;
+
+        $r93 = new javax.swing.JScrollPane;
+
+        $r94 = r0.keyTable;
+
+        specialinvoke $r93.<init>($r94);
+
+        r10 = $r93;
+
+        r10.setPreferredSize(r9);
+
+        $r95 = new javax.swing.JPanel;
+
+        $r96 = new java.awt.BorderLayout;
+
+        specialinvoke $r96.<init>();
+
+        specialinvoke $r95.<init>($r96);
+
+        r11 = $r95;
+
+        r11.add("North", r8);
+
+        r11.add("Center", r10);
+
+        r12 = javax.swing.Box.createVerticalBox();
+
+        r12.add(r5);
+
+        $r100 = javax.swing.Box.createVerticalGlue();
+
+        r12.add($r100);
+
+        r12.add(r6);
+
+        r0.add("North", r12);
+
+        r0.add("Center", r11);
+
+     label2:
+        $r105 = r0.selectModel;
+
+        $i3 = org.gjt.sp.jedit.jEdit.getIntegerProperty("options.shortcuts.select.index", 0);
+
+        $r105.setSelectedIndex($i3);
+
+     label3:
+        goto label5;
+
+     label4:
+        $r107 := @caughtexception;
+
+        r13 = $r107;
+
+     label5:
+        return;
+
+        catch java.lang.IllegalArgumentException from label2 to label3 with label4;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        java.util.Iterator r1;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel r2;
+        org.jedit.keymap.Keymap $r3, $r8;
+        java.lang.String $r4;
+        javax.swing.JTable $r5, $r10;
+        javax.swing.table.TableCellEditor $r6, $r11;
+        java.util.Vector $r7;
+        boolean $z0;
+        java.lang.Object $r9;
+
+        r0 := @this;
+
+        $r3 = r0.selectedKeymap;
+
+        $r4 = $r3.toString();
+
+        org.gjt.sp.jedit.jEdit.setProperty("keymap.current", $r4);
+
+        $r5 = r0.keyTable;
+
+        $r6 = $r5.getCellEditor();
+
+        if $r6 == null goto label1;
+
+        $r10 = r0.keyTable;
+
+        $r11 = $r10.getCellEditor();
+
+        $r11.stopCellEditing();
+
+     label1:
+        $r7 = r0.models;
+
+        r1 = $r7.iterator();
+
+     label2:
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label3;
+
+        $r9 = r1.next();
+
+        r2 = (org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel) $r9;
+
+        r2.save();
+
+        goto label2;
+
+     label3:
+        org.gjt.sp.jedit.Macros.loadMacros();
+
+        $r8 = r0.selectedKeymap;
+
+        $r8.save();
+
+        return;
+    }
+
+    private void setFilter()
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        javax.swing.JTextField $r1;
+        org.gjt.sp.jedit.gui.FilteredTableModel $r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        $r2 = r0.filteredModel;
+
+        $r1 = r0.filterTF;
+
+        $r3 = $r1.getText();
+
+        $r2.setFilter($r3);
+
+        return;
+    }
+
+    private void initModels()
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$3 $r1;
+        java.util.Vector $r2;
+
+        r0 := @this;
+
+        $r1 = new org.gjt.sp.jedit.options.ShortcutsOptionPane$3;
+
+        specialinvoke $r1.<init>(r0);
+
+        r0.filteredModel = $r1;
+
+        $r2 = new java.util.Vector;
+
+        specialinvoke $r2.<init>();
+
+        r0.models = $r2;
+
+        specialinvoke r0.reloadModels();
+
+        return;
+    }
+
+    private void reloadModels()
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        java.util.ArrayList r1, $r13;
+        java.util.HashSet r2, $r14;
+        org.gjt.sp.jedit.ActionSet[] r3, r40;
+        org.gjt.sp.jedit.ActionSet r4;
+        java.lang.String r5, r10, $r24, $r25, $r30, $r39;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel r6, $r28, r41, r43;
+        java.util.List r7, $r12;
+        java.util.Iterator r8, r42;
+        org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding[] r9;
+        java.util.Vector $r11, $r15, $r19, $r20, $r26, $r29, $r32;
+        int $i0, $i1, i2, i3;
+        org.gjt.sp.jedit.gui.FilteredTableModel $r16, $r21, $r22;
+        javax.swing.table.TableModel $r17;
+        org.gjt.sp.util.StandardUtilities$StringCompare $r18;
+        boolean $z0, $z1, $z4, $z5;
+        java.lang.Object $r23, $r27, $r33;
+        java.lang.String[] $r31;
+        org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding $r34;
+        java.lang.StringBuilder $r35, $r36, $r38;
+        org.gjt.sp.jedit.PluginJAR $r37;
+
+        r0 := @this;
+
+        $r11 = r0.models;
+
+        $r11.clear();
+
+        $r12 = r0.allBindings;
+
+        $r12.clear();
+
+        $r13 = new java.util.ArrayList;
+
+        specialinvoke $r13.<init>();
+
+        r1 = $r13;
+
+        $r14 = new java.util.HashSet;
+
+        specialinvoke $r14.<init>();
+
+        r2 = $r14;
+
+        r3 = org.gjt.sp.jedit.jEdit.getActionSets();
+
+        r40 = r3;
+
+        i2 = lengthof r40;
+
+(0)     i3 = 0;
+
+     label01:
+        i3 = Phi(i3 #0, i3 #5);
+
+        if i3 >= i2 goto label06;
+
+        r4 = r40[i3];
+
+        $i1 = r4.getActionCount();
+
+(1)     if $i1 == 0 goto label05;
+
+        r5 = r4.getLabel();
+
+        if r5 != null goto label02;
+
+        $r35 = new java.lang.StringBuilder;
+
+        specialinvoke $r35.<init>();
+
+        $r36 = $r35.append("Empty action set: ");
+
+        $r37 = r4.getPluginJAR();
+
+        $r38 = $r36.append($r37);
+
+        $r39 = $r38.toString();
+
+        org.gjt.sp.util.Log.log(9, r0, $r39);
+
+     label02:
+        $r30 = r4.getLabel();
+
+        $r31 = r4.getActionNames();
+
+        r6 = specialinvoke r0.createModel($r30, r5, $r31);
+
+        $r32 = r0.models;
+
+        $r32.add(r6);
+
+        r7 = r6.getBindings();
+
+(2)     r8 = r7.iterator();
+
+     label03:
+        i3 = Phi(i3 #2, i3 #4);
+
+        $z4 = r8.hasNext();
+
+(3)     if $z4 == 0 goto label05;
+
+        $r33 = r8.next();
+
+        r9 = (org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding[]) $r33;
+
+        $r34 = r9[0];
+
+        r10 = $r34.name;
+
+        $z5 = r2.contains(r10);
+
+        if $z5 != 0 goto label04;
+
+        r2.add(r10);
+
+        r1.add(r9);
+
+     label04:
+(4)     goto label03;
+
+     label05:
+        i3 = Phi(i3 #1, i3 #3);
+
+        i3 = i3 + 1;
+
+(5)     goto label01;
+
+     label06:
+        $r15 = r0.models;
+
+        $i0 = $r15.size();
+
+        if $i0 <= 1 goto label07;
+
+        $r29 = r0.models;
+
+        $r28 = new org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel;
+
+        specialinvoke $r28.<init>(r0, "All", r1);
+
+        $r29.add($r28);
+
+     label07:
+        $r16 = r0.filteredModel;
+
+        $r17 = $r16.getDelegated();
+
+        r41 = (org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel) $r17;
+
+        $r19 = r0.models;
+
+        $r18 = new org.gjt.sp.util.StandardUtilities$StringCompare;
+
+        specialinvoke $r18.<init>(1);
+
+        java.util.Collections.sort($r19, $r18);
+
+        if r41 != null goto label08;
+
+        $r26 = r0.models;
+
+        $r27 = $r26.get(0);
+
+        r41 = (org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel) $r27;
+
+(6)     goto label11;
+
+     label08:
+        $r20 = r0.models;
+
+(7)     r42 = $r20.iterator();
+
+     label09:
+        r41 = Phi(r41 #7, r41 #10);
+
+        i3 = Phi(i3 #7, i3 #10);
+
+        $z0 = r42.hasNext();
+
+(8)     if $z0 == 0 goto label11;
+
+        $r23 = r42.next();
+
+        r43 = (org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel) $r23;
+
+        $r24 = r43.toString();
+
+        $r25 = r41.toString();
+
+        $z1 = $r24.equals($r25);
+
+        if $z1 == 0 goto label10;
+
+        r41 = r43;
+
+(9)     goto label11;
+
+     label10:
+(10)    goto label09;
+
+     label11:
+        r41 = Phi(r41 #6, r41 #8, r41 #9);
+
+        i3 = Phi(i3 #6, i3 #8, i3 #9);
+
+        $r21 = r0.filteredModel;
+
+        $r21.setDelegated(r41);
+
+        $r22 = r0.filteredModel;
+
+        $r22.fireTableDataChanged();
+
+        return;
+    }
+
+    private org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel createModel(java.lang.String, java.lang.String, java.lang.String[])
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        java.lang.String r1, r2, r6, r10, r11;
+        java.lang.String[] r3, r5;
+        java.util.ArrayList r4, $r8;
+        int i0, $i1, i2;
+        org.gjt.sp.jedit.EditAction r7;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r8 = new java.util.ArrayList;
+
+        $i1 = lengthof r3;
+
+        specialinvoke $r8.<init>($i1);
+
+        r4 = $r8;
+
+        r5 = r3;
+
+        i0 = lengthof r5;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 >= i0 goto label4;
+
+        r6 = r5[i2];
+
+        r7 = org.gjt.sp.jedit.jEdit.getAction(r6);
+
+        r10 = r7.getLabel();
+
+        if r10 != null goto label2;
+
+        goto label3;
+
+     label2:
+        r11 = org.gjt.sp.jedit.GUIUtilities.prettifyMenuLabel(r10);
+
+        specialinvoke r0.addBindings(r1, r6, r11, r4);
+
+     label3:
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label4:
+        $r9 = new org.gjt.sp.jedit.options.ShortcutsOptionPane$ShortcutsModel;
+
+        specialinvoke $r9.<init>(r0, r2, r4);
+
+        return $r9;
+    }
+
+    private void addBindings(java.lang.String, java.lang.String, java.lang.String, java.util.Collection)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        java.lang.String r1, r2, r3, $r10, $r11, $r17, $r18;
+        java.util.Collection r4;
+        org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding[] r5;
+        java.lang.StringBuilder $r6, $r8, $r9, $r13, $r15, $r16;
+        org.jedit.keymap.Keymap $r7, $r14;
+        org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding $r12, $r19;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 = newarray (org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding)[2];
+
+        $r7 = r0.selectedKeymap;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r8 = $r6.append(r2);
+
+        $r9 = $r8.append(".shortcut");
+
+        $r10 = $r9.toString();
+
+        $r11 = $r7.getShortcut($r10);
+
+        $r12 = specialinvoke r0.createBinding(r1, r2, r3, $r11);
+
+        r5[0] = $r12;
+
+        $r14 = r0.selectedKeymap;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r15 = $r13.append(r2);
+
+        $r16 = $r15.append(".shortcut2");
+
+        $r17 = $r16.toString();
+
+        $r18 = $r14.getShortcut($r17);
+
+        $r19 = specialinvoke r0.createBinding(r1, r2, r3, $r18);
+
+        r5[1] = $r19;
+
+        r4.add(r5);
+
+        return;
+    }
+
+    private org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding createBinding(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        java.lang.String r1, r2, r3, r7, r7_1, r7_2;
+        org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding r4, $r5;
+        java.util.List $r6;
+        boolean $z1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r7 := @parameter3;
+
+(0)     if r7 == null goto label1;
+
+        $z1 = r7.isEmpty();
+
+(1)     if $z1 == 0 goto label1;
+
+(2)     r7_1 = null;
+
+     label1:
+        r7_2 = Phi(r7 #0, r7 #1, r7_1 #2);
+
+        $r5 = new org.gjt.sp.jedit.gui.GrabKeyDialog$KeyBinding;
+
+        specialinvoke $r5.<init>(r2, r3, r7_2, 0);
+
+        r4 = $r5;
+
+        r4.actionSet = r1;
+
+        $r6 = r0.allBindings;
+
+        $r6.add(r4);
+
+        return r4;
+    }
+
+    private void resetButtons()
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        org.jedit.keymap.KeymapManager r1;
+        org.jedit.keymap.KeymapManager$State r2, $r5, $r7;
+        org.jedit.keymap.Keymap $r3;
+        java.lang.String $r4;
+        javax.swing.JButton $r6, $r8;
+        boolean $z0, $z1, $z0_1, $z0_2, $z1_1, $z1_2;
+
+        r0 := @this;
+
+        r1 = org.gjt.sp.jedit.jEdit.getKeymapManager();
+
+        $r3 = r0.selectedKeymap;
+
+        $r4 = $r3.toString();
+
+        r2 = r1.getKeymapState($r4);
+
+        $r6 = r0.resetKeymap;
+
+        $r5 = org.jedit.keymap.KeymapManager$State.SystemModified;
+
+        if r2 != $r5 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        $r6.setEnabled($z0_2);
+
+        $r8 = r0.deleteKeymap;
+
+        $r7 = org.jedit.keymap.KeymapManager$State.User;
+
+        if r2 != $r7 goto label3;
+
+        $z1 = 1;
+
+(2)     goto label4;
+
+     label3:
+(3)     $z1_1 = 0;
+
+     label4:
+        $z1_2 = Phi($z1 #2, $z1_1 #3);
+
+        $r8.setEnabled($z1_2);
+
+        return;
+    }
+
+    static void access$300(org.gjt.sp.jedit.options.ShortcutsOptionPane)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.setFilter();
+
+        return;
+    }
+
+    static javax.swing.JTextField access$400(org.gjt.sp.jedit.options.ShortcutsOptionPane)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.filterTF;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.FilteredTableModel access$700(org.gjt.sp.jedit.options.ShortcutsOptionPane)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        org.gjt.sp.jedit.gui.FilteredTableModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.filteredModel;
+
+        return $r1;
+    }
+
+    static javax.swing.JTable access$800(org.gjt.sp.jedit.options.ShortcutsOptionPane)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        javax.swing.JTable $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.keyTable;
+
+        return $r1;
+    }
+
+    static java.util.List access$900(org.gjt.sp.jedit.options.ShortcutsOptionPane)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        java.util.List $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.allBindings;
+
+        return $r1;
+    }
+
+    static javax.swing.JComboBox access$1000(org.gjt.sp.jedit.options.ShortcutsOptionPane)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        javax.swing.JComboBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.selectModel;
+
+        return $r1;
+    }
+
+    static javax.swing.JComboBox access$1100(org.gjt.sp.jedit.options.ShortcutsOptionPane)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        javax.swing.JComboBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.keymaps;
+
+        return $r1;
+    }
+
+    static org.jedit.keymap.Keymap access$1202(org.gjt.sp.jedit.options.ShortcutsOptionPane, org.jedit.keymap.Keymap)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        org.jedit.keymap.Keymap r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.selectedKeymap = r1;
+
+        return r1;
+    }
+
+    static void access$1300(org.gjt.sp.jedit.options.ShortcutsOptionPane)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.resetButtons();
+
+        return;
+    }
+
+    static void access$1400(org.gjt.sp.jedit.options.ShortcutsOptionPane)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.reloadModels();
+
+        return;
+    }
+
+    static javax.swing.JButton access$1500(org.gjt.sp.jedit.options.ShortcutsOptionPane)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.duplicateKeymap;
+
+        return $r1;
+    }
+
+    static org.jedit.keymap.Keymap access$1200(org.gjt.sp.jedit.options.ShortcutsOptionPane)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        org.jedit.keymap.Keymap $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.selectedKeymap;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$1600(org.gjt.sp.jedit.options.ShortcutsOptionPane)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.resetKeymap;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$1700(org.gjt.sp.jedit.options.ShortcutsOptionPane)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.deleteKeymap;
+
+        return $r1;
+    }
+}

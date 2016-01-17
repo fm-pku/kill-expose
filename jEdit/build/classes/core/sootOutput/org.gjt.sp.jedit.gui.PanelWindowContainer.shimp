@@ -1,0 +1,1190 @@
+public class org.gjt.sp.jedit.gui.PanelWindowContainer extends java.lang.Object implements org.gjt.sp.jedit.gui.DockableWindowContainer, org.gjt.sp.jedit.gui.DockableWindowManager$DockingArea
+{
+    static final int SPLITTER_WIDTH;
+    org.gjt.sp.jedit.gui.DockablePanel dockablePanel;
+    javax.swing.JPanel buttonPanel;
+    private final org.gjt.sp.jedit.gui.DockableWindowManagerImpl wm;
+    private final java.lang.String position;
+    private final javax.swing.JButton closeBox;
+    private final javax.swing.JButton menuBtn;
+    private final javax.swing.ButtonGroup buttonGroup;
+    private final javax.swing.JToggleButton nullButton;
+    private int dimension;
+    private final java.util.List dockables;
+    private final java.util.List buttons;
+    private org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry current;
+    private javax.swing.JPopupMenu popup;
+    private java.lang.String mostRecent;
+
+    public void <init>(org.gjt.sp.jedit.gui.DockableWindowManagerImpl, java.lang.String, int)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl r1;
+        java.lang.String r2, $r11, $r20, $r24;
+        int i0;
+        javax.swing.JPanel $r3, $r6;
+        org.gjt.sp.jedit.gui.PanelWindowContainer$ButtonLayout $r4;
+        javax.swing.border.EmptyBorder $r5;
+        javax.swing.JButton $r7, $r9, $r10, $r13, $r14, $r15, $r18, $r19, $r22, $r23, $r26, $r27, $r28, $r31, $r38, $r39;
+        javax.swing.Icon $r8, $r21;
+        boolean $z0, $z1;
+        java.awt.Insets $r12, $r16, $r25, $r29;
+        org.gjt.sp.jedit.gui.PanelWindowContainer$ActionHandler $r17;
+        org.gjt.sp.jedit.gui.PanelWindowContainer$MenuMouseHandler $r30;
+        javax.swing.ButtonGroup $r32, $r34;
+        javax.swing.JToggleButton $r33;
+        java.util.ArrayList $r35, $r36;
+        org.gjt.sp.jedit.gui.DockablePanel $r37;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.wm = r1;
+
+        r0.position = r2;
+
+        $r3 = new javax.swing.JPanel;
+
+        $r4 = new org.gjt.sp.jedit.gui.PanelWindowContainer$ButtonLayout;
+
+        specialinvoke $r4.<init>(r0);
+
+        specialinvoke $r3.<init>($r4);
+
+        r0.buttonPanel = $r3;
+
+        $r6 = r0.buttonPanel;
+
+        $r5 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r5.<init>(1, 1, 1, 1);
+
+        $r6.setBorder($r5);
+
+        $r7 = new javax.swing.JButton;
+
+        $r8 = org.gjt.sp.jedit.GUIUtilities.loadIcon("closebox.gif");
+
+        specialinvoke $r7.<init>($r8);
+
+        r0.closeBox = $r7;
+
+        $r9 = r0.closeBox;
+
+        $r9.setRequestFocusEnabled(0);
+
+        $r10 = r0.closeBox;
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty("view.docking.close-tooltip");
+
+        $r10.setToolTipText($r11);
+
+        $z0 = org.gjt.sp.jedit.OperatingSystem.isMacOSLF();
+
+        if $z0 == 0 goto label1;
+
+        $r39 = r0.closeBox;
+
+        $r39.putClientProperty("JButton.buttonType", "toolbar");
+
+     label1:
+        $r13 = r0.closeBox;
+
+        $r12 = new java.awt.Insets;
+
+        specialinvoke $r12.<init>(0, 0, 0, 0);
+
+        $r13.setMargin($r12);
+
+        $r15 = r0.closeBox;
+
+        $r14 = r0.closeBox;
+
+        $r16 = $r14.getMargin();
+
+        org.gjt.sp.jedit.GUIUtilities.setButtonContentMargin($r15, $r16);
+
+        $r18 = r0.closeBox;
+
+        $r17 = new org.gjt.sp.jedit.gui.PanelWindowContainer$ActionHandler;
+
+        specialinvoke $r17.<init>(r0);
+
+        $r18.addActionListener($r17);
+
+        $r19 = new javax.swing.JButton;
+
+        $r20 = org.gjt.sp.jedit.jEdit.getProperty("dropdown-arrow.icon");
+
+        $r21 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r20);
+
+        specialinvoke $r19.<init>($r21);
+
+        r0.menuBtn = $r19;
+
+        $r22 = r0.menuBtn;
+
+        $r22.setRequestFocusEnabled(0);
+
+        $r23 = r0.menuBtn;
+
+        $r24 = org.gjt.sp.jedit.jEdit.getProperty("view.docking.menu-tooltip");
+
+        $r23.setToolTipText($r24);
+
+        $z1 = org.gjt.sp.jedit.OperatingSystem.isMacOSLF();
+
+        if $z1 == 0 goto label2;
+
+        $r38 = r0.menuBtn;
+
+        $r38.putClientProperty("JButton.buttonType", "toolbar");
+
+     label2:
+        $r26 = r0.menuBtn;
+
+        $r25 = new java.awt.Insets;
+
+        specialinvoke $r25.<init>(0, 0, 0, 0);
+
+        $r26.setMargin($r25);
+
+        $r28 = r0.menuBtn;
+
+        $r27 = r0.menuBtn;
+
+        $r29 = $r27.getMargin();
+
+        org.gjt.sp.jedit.GUIUtilities.setButtonContentMargin($r28, $r29);
+
+        $r31 = r0.menuBtn;
+
+        $r30 = new org.gjt.sp.jedit.gui.PanelWindowContainer$MenuMouseHandler;
+
+        specialinvoke $r30.<init>(r0);
+
+        $r31.addMouseListener($r30);
+
+        $r32 = new javax.swing.ButtonGroup;
+
+        specialinvoke $r32.<init>();
+
+        r0.buttonGroup = $r32;
+
+        $r34 = r0.buttonGroup;
+
+        $r33 = new javax.swing.JToggleButton;
+
+        specialinvoke $r33.<init>();
+
+        r0.nullButton = $r33;
+
+        $r34.add($r33);
+
+        $r35 = new java.util.ArrayList;
+
+        specialinvoke $r35.<init>();
+
+        r0.dockables = $r35;
+
+        $r36 = new java.util.ArrayList;
+
+        specialinvoke $r36.<init>();
+
+        r0.buttons = $r36;
+
+        $r37 = new org.gjt.sp.jedit.gui.DockablePanel;
+
+        specialinvoke $r37.<init>(r0);
+
+        r0.dockablePanel = $r37;
+
+        r0.dimension = i0;
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.gui.DockableWindowManagerImpl getDockableWindowManager()
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r1;
+
+        r0 := @this;
+
+        $r1 = r0.wm;
+
+        return $r1;
+    }
+
+    public void register(org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry r1;
+        javax.swing.JToggleButton r2, $r5;
+        java.util.List $r3, $r16;
+        java.lang.String $r4, $r10, $r12, $r18, $r19, $r20, $r24, $r26;
+        boolean $z1, $z2, $z4, $z5, $z6;
+        java.awt.Insets $r6, $r7;
+        org.gjt.sp.jedit.gui.PanelWindowContainer$RotatedTextIcon $r8;
+        java.awt.Font $r9;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window $r11;
+        org.gjt.sp.jedit.gui.PanelWindowContainer$ActionHandler $r13;
+        org.gjt.sp.jedit.gui.PanelWindowContainer$MenuMouseHandler $r14;
+        javax.swing.ButtonGroup $r15;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r17;
+        java.lang.InternalError $r21;
+        java.lang.StringBuilder $r22, $r23, $r25;
+        byte b0, b0_1, b0_2, b0_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.dockables;
+
+        $r3.add(r1);
+
+        $r4 = r0.position;
+
+        $z1 = $r4.equals("top");
+
+        if $z1 != 0 goto label1;
+
+        $r18 = r0.position;
+
+        $z4 = $r18.equals("bottom");
+
+        if $z4 == 0 goto label2;
+
+     label1:
+        b0_2 = 0;
+
+(0)     goto label5;
+
+     label2:
+        $r19 = r0.position;
+
+        $z5 = $r19.equals("left");
+
+        if $z5 == 0 goto label3;
+
+        b0 = 2;
+
+(1)     goto label5;
+
+     label3:
+        $r20 = r0.position;
+
+        $z6 = $r20.equals("right");
+
+        if $z6 == 0 goto label4;
+
+        b0_1 = 1;
+
+(2)     goto label5;
+
+     label4:
+        $r21 = new java.lang.InternalError;
+
+        $r22 = new java.lang.StringBuilder;
+
+        specialinvoke $r22.<init>();
+
+        $r23 = $r22.append("Invalid position: ");
+
+        $r24 = r0.position;
+
+        $r25 = $r23.append($r24);
+
+        $r26 = $r25.toString();
+
+        specialinvoke $r21.<init>($r26);
+
+        throw $r21;
+
+     label5:
+        b0_3 = Phi(b0_2 #0, b0 #1, b0_1 #2);
+
+        $r5 = new javax.swing.JToggleButton;
+
+        specialinvoke $r5.<init>();
+
+        r2 = $r5;
+
+        $r6 = new java.awt.Insets;
+
+        specialinvoke $r6.<init>(1, 1, 1, 1);
+
+        r2.setMargin($r6);
+
+        $r7 = new java.awt.Insets;
+
+        specialinvoke $r7.<init>(6, 6, 6, 6);
+
+        org.gjt.sp.jedit.GUIUtilities.setButtonContentMargin(r2, $r7);
+
+        r2.setRequestFocusEnabled(0);
+
+        $r8 = new org.gjt.sp.jedit.gui.PanelWindowContainer$RotatedTextIcon;
+
+        $r9 = r2.getFont();
+
+        $r10 = r1.shortTitle();
+
+        specialinvoke $r8.<init>(b0_3, $r9, $r10);
+
+        r2.setIcon($r8);
+
+        $r11 = r1.factory;
+
+        $r12 = $r11.name;
+
+        r2.setActionCommand($r12);
+
+        $r13 = new org.gjt.sp.jedit.gui.PanelWindowContainer$ActionHandler;
+
+        specialinvoke $r13.<init>(r0);
+
+        r2.addActionListener($r13);
+
+        $r14 = new org.gjt.sp.jedit.gui.PanelWindowContainer$MenuMouseHandler;
+
+        specialinvoke $r14.<init>(r0);
+
+        r2.addMouseListener($r14);
+
+        $z2 = org.gjt.sp.jedit.OperatingSystem.isMacOSLF();
+
+        if $z2 == 0 goto label6;
+
+        r2.putClientProperty("JButton.buttonType", "toolbar");
+
+     label6:
+        $r15 = r0.buttonGroup;
+
+        $r15.add(r2);
+
+        $r16 = r0.buttons;
+
+        $r16.add(r2);
+
+        r1.btn = r2;
+
+        $r17 = r0.wm;
+
+        $r17.revalidate();
+
+        return;
+    }
+
+    public void unregister(org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry r1, $r8, $r12;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window $r2;
+        java.lang.String $r3, $r4;
+        boolean $z0;
+        javax.swing.AbstractButton $r5, $r15, $r17;
+        java.util.List $r6, $r18;
+        javax.swing.JComponent $r7, $r13;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r9;
+        org.gjt.sp.jedit.gui.DockablePanel $r10, $r14;
+        javax.swing.JPanel $r11, $r16;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.factory;
+
+        $r4 = $r2.name;
+
+        $r3 = r0.mostRecent;
+
+        $z0 = $r4.equals($r3);
+
+        if $z0 == 0 goto label1;
+
+        r0.mostRecent = null;
+
+     label1:
+        $r5 = r1.btn;
+
+        if $r5 == null goto label2;
+
+        $r16 = r0.buttonPanel;
+
+        $r15 = r1.btn;
+
+        $r16.remove($r15);
+
+        $r18 = r0.buttons;
+
+        $r17 = r1.btn;
+
+        $r18.remove($r17);
+
+        r1.btn = null;
+
+     label2:
+        $r6 = r0.dockables;
+
+        $r6.remove(r1);
+
+        $r7 = r1.win;
+
+        if $r7 == null goto label3;
+
+        $r14 = r0.dockablePanel;
+
+        $r13 = r1.win;
+
+        $r14.remove($r13);
+
+     label3:
+        $r8 = r0.current;
+
+        if $r8 != r1 goto label4;
+
+        r0.current = null;
+
+        $r12 = r0.current;
+
+        r0.show($r12);
+
+        goto label5;
+
+     label4:
+        $r9 = r0.wm;
+
+        $r9.revalidate();
+
+        $r10 = r0.dockablePanel;
+
+        $r10.repaint();
+
+        $r11 = r0.buttonPanel;
+
+        $r11.repaint();
+
+     label5:
+        return;
+    }
+
+    public void remove(org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry r1, $r6, $r9;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window $r2;
+        java.lang.String $r3, $r4;
+        boolean $z0;
+        javax.swing.JComponent $r5, $r10;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r7;
+        org.gjt.sp.jedit.gui.DockablePanel $r8, $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.factory;
+
+        $r4 = $r2.name;
+
+        $r3 = r0.mostRecent;
+
+        $z0 = $r4.equals($r3);
+
+        if $z0 == 0 goto label1;
+
+        r0.mostRecent = null;
+
+     label1:
+        $r5 = r1.win;
+
+        if $r5 == null goto label2;
+
+        $r11 = r0.dockablePanel;
+
+        $r10 = r1.win;
+
+        $r11.remove($r10);
+
+        r1.win = null;
+
+     label2:
+        $r6 = r0.current;
+
+        if $r6 != r1 goto label3;
+
+        r0.current = null;
+
+        $r9 = r0.current;
+
+        r0.show($r9);
+
+        goto label4;
+
+     label3:
+        $r7 = r0.wm;
+
+        $r7.revalidate();
+
+        $r8 = r0.dockablePanel;
+
+        $r8.repaint();
+
+     label4:
+        return;
+    }
+
+    public void showMostRecent()
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        java.util.List $r1, $r5;
+        boolean $z0;
+        java.lang.String $r2, $r3, $r9;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r4;
+        java.lang.Object $r6;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry $r7;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window $r8;
+        java.awt.Toolkit $r10;
+
+        r0 := @this;
+
+        $r1 = r0.dockables;
+
+        $z0 = $r1.isEmpty();
+
+        if $z0 == 0 goto label1;
+
+        $r10 = java.awt.Toolkit.getDefaultToolkit();
+
+        $r10.beep();
+
+        return;
+
+     label1:
+        $r2 = r0.mostRecent;
+
+        if $r2 != null goto label2;
+
+        $r5 = r0.dockables;
+
+        $r6 = $r5.get(0);
+
+        $r7 = (org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry) $r6;
+
+        $r8 = $r7.factory;
+
+        $r9 = $r8.name;
+
+        r0.mostRecent = $r9;
+
+     label2:
+        $r4 = r0.wm;
+
+        $r3 = r0.mostRecent;
+
+        $r4.showDockableWindow($r3);
+
+        return;
+    }
+
+    public void show(org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry r1, $r3, $r4, $r13, $r17;
+        java.lang.Object r2;
+        javax.swing.JToggleButton $r5;
+        org.gjt.sp.jedit.gui.DockablePanel $r6, $r11, $r22, $r25, $r34, $r38;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r7, $r10, $r16;
+        org.gjt.sp.jedit.View $r8;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r9;
+        org.gjt.sp.jedit.msg.DockableWindowUpdate $r12;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window $r14, $r18, $r23, $r31;
+        java.lang.String $r15, $r19, $r24, $r33, $r37;
+        javax.swing.JComponent $r20, $r27, $r28, $r29, $r32, $r39, $r40, $r41;
+        java.awt.Container $r21;
+        javax.swing.AbstractButton $r26;
+        boolean $z0, $z2;
+        org.gjt.sp.jedit.gui.DefaultFocusComponent $r30, $r42;
+        org.gjt.sp.jedit.gui.PanelWindowContainer$DockBorder $r36;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.current;
+
+        if $r3 != r1 goto label3;
+
+        if r1 == null goto label2;
+
+        $r39 = r1.win;
+
+        $z2 = $r39 instanceof org.gjt.sp.jedit.gui.DefaultFocusComponent;
+
+        if $z2 == 0 goto label1;
+
+        $r41 = r1.win;
+
+        $r42 = (org.gjt.sp.jedit.gui.DefaultFocusComponent) $r41;
+
+        $r42.focusOnDefaultComponent();
+
+        goto label2;
+
+     label1:
+        $r40 = r1.win;
+
+        $r40.requestDefaultFocus();
+
+     label2:
+        return;
+
+     label3:
+        if r1 == null goto label7;
+
+        $r17 = r0.current;
+
+        if $r17 != null goto label4;
+
+        $r38 = r0.dockablePanel;
+
+        $r36 = new org.gjt.sp.jedit.gui.PanelWindowContainer$DockBorder;
+
+        $r37 = r0.position;
+
+        specialinvoke $r36.<init>($r37);
+
+        $r38.setBorder($r36);
+
+     label4:
+        $r18 = r1.factory;
+
+        $r19 = $r18.name;
+
+        r0.mostRecent = $r19;
+
+        r0.current = r1;
+
+        $r20 = r1.win;
+
+        $r21 = $r20.getParent();
+
+        $r22 = r0.dockablePanel;
+
+        if $r21 == $r22 goto label5;
+
+        $r34 = r0.dockablePanel;
+
+        $r31 = r1.factory;
+
+        $r33 = $r31.name;
+
+        $r32 = r1.win;
+
+        $r34.add($r33, $r32);
+
+     label5:
+        $r25 = r0.dockablePanel;
+
+        $r23 = r1.factory;
+
+        $r24 = $r23.name;
+
+        $r25.showDockable($r24);
+
+        $r26 = r1.btn;
+
+        $r26.setSelected(1);
+
+        $r27 = r1.win;
+
+        $z0 = $r27 instanceof org.gjt.sp.jedit.gui.DefaultFocusComponent;
+
+        if $z0 == 0 goto label6;
+
+        $r29 = r1.win;
+
+        $r30 = (org.gjt.sp.jedit.gui.DefaultFocusComponent) $r29;
+
+        $r30.focusOnDefaultComponent();
+
+        goto label9;
+
+     label6:
+        $r28 = r1.win;
+
+        $r28.requestDefaultFocus();
+
+        goto label9;
+
+     label7:
+        $r4 = r0.current;
+
+        if $r4 == null goto label8;
+
+        r2 = org.gjt.sp.jedit.msg.DockableWindowUpdate.DEACTIVATED;
+
+        $r12 = new org.gjt.sp.jedit.msg.DockableWindowUpdate;
+
+        $r16 = r0.wm;
+
+        $r13 = r0.current;
+
+        $r14 = $r13.factory;
+
+        $r15 = $r14.name;
+
+        specialinvoke $r12.<init>($r16, r2, $r15);
+
+        org.gjt.sp.jedit.EditBus.send($r12);
+
+     label8:
+        r0.current = null;
+
+        $r5 = r0.nullButton;
+
+        $r5.setSelected(1);
+
+        $r6 = r0.dockablePanel;
+
+        $r6.setBorder(null);
+
+        $r7 = r0.wm;
+
+        $r8 = $r7.getView();
+
+        $r9 = $r8.getTextArea();
+
+        $r9.requestFocus();
+
+     label9:
+        $r10 = r0.wm;
+
+        $r10.revalidate();
+
+        $r11 = r0.dockablePanel;
+
+        $r11.repaint();
+
+        return;
+    }
+
+    public boolean isVisible(org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry r1, $r2;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.current;
+
+        if $r2 != r1 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    public java.lang.String getCurrent()
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry $r1, $r2;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window $r3;
+        java.lang.String $r4;
+
+        r0 := @this;
+
+        $r1 = r0.current;
+
+        if $r1 != null goto label1;
+
+        return null;
+
+     label1:
+        $r2 = r0.current;
+
+        $r3 = $r2.factory;
+
+        $r4 = $r3.name;
+
+        return $r4;
+    }
+
+    public int getDimension()
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.dimension;
+
+        return $i0;
+    }
+
+    public java.lang.String getPosition()
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.position;
+
+        return $r1;
+    }
+
+    public java.lang.String[] getDockables()
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        java.lang.String[] r1;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry r2;
+        java.util.List $r3, $r4, $r5;
+        int $i0, $i1, i2;
+        java.lang.Object $r6;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window $r7;
+        java.lang.String $r8;
+
+        r0 := @this;
+
+        $r3 = r0.dockables;
+
+        $i0 = $r3.size();
+
+        r1 = newarray (java.lang.String)[$i0];
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $r4 = r0.dockables;
+
+        $i1 = $r4.size();
+
+        if i2 >= $i1 goto label2;
+
+        $r5 = r0.dockables;
+
+        $r6 = $r5.get(i2);
+
+        r2 = (org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry) $r6;
+
+        $r7 = r2.factory;
+
+        $r8 = $r7.name;
+
+        r1[i2] = $r8;
+
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return r1;
+    }
+
+    void save()
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        java.lang.StringBuilder $r1, $r2, $r4, $r5, $r8, $r9, $r11, $r12, $r17, $r18, $r20, $r21;
+        java.lang.String $r3, $r6, $r10, $r13, $r16, $r19, $r22;
+        int $i0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry $r7, $r14;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window $r15;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("view.dock.");
+
+        $r3 = r0.position;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.append(".dimension");
+
+        $r6 = $r5.toString();
+
+        $i0 = r0.dimension;
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty($r6, $i0);
+
+        $r7 = r0.current;
+
+        if $r7 != null goto label1;
+
+        $r17 = new java.lang.StringBuilder;
+
+        specialinvoke $r17.<init>();
+
+        $r18 = $r17.append("view.dock.");
+
+        $r19 = r0.position;
+
+        $r20 = $r18.append($r19);
+
+        $r21 = $r20.append(".last");
+
+        $r22 = $r21.toString();
+
+        org.gjt.sp.jedit.jEdit.unsetProperty($r22);
+
+        goto label2;
+
+     label1:
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("view.dock.");
+
+        $r10 = r0.position;
+
+        $r11 = $r9.append($r10);
+
+        $r12 = $r11.append(".last");
+
+        $r13 = $r12.toString();
+
+        $r14 = r0.current;
+
+        $r15 = $r14.factory;
+
+        $r16 = $r15.name;
+
+        org.gjt.sp.jedit.jEdit.setProperty($r13, $r16);
+
+     label2:
+        return;
+    }
+
+    void setDimension(int)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        int i0, $i1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        if i0 <= 10 goto label1;
+
+        $i1 = i0 - 10;
+
+        r0.dimension = $i1;
+
+     label1:
+        return;
+    }
+
+    void sortDockables()
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        java.util.Iterator r1;
+        javax.swing.AbstractButton r2;
+        javax.swing.JPanel $r3, $r5, $r8, $r14;
+        javax.swing.JButton $r4, $r7;
+        org.gjt.sp.jedit.gui.PanelWindowContainer$DockableWindowCompare $r10;
+        java.util.List $r11, $r12;
+        boolean $z0;
+        java.lang.Object $r13;
+
+        r0 := @this;
+
+        $r3 = r0.buttonPanel;
+
+        $r3.removeAll();
+
+        $r5 = r0.buttonPanel;
+
+        $r4 = r0.closeBox;
+
+        $r5.add($r4);
+
+        $r8 = r0.buttonPanel;
+
+        $r7 = r0.menuBtn;
+
+        $r8.add($r7);
+
+        $r11 = r0.buttons;
+
+        $r10 = new org.gjt.sp.jedit.gui.PanelWindowContainer$DockableWindowCompare;
+
+        specialinvoke $r10.<init>();
+
+        java.util.Collections.sort($r11, $r10);
+
+        $r12 = r0.buttons;
+
+        r1 = $r12.iterator();
+
+     label1:
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r13 = r1.next();
+
+        r2 = (javax.swing.AbstractButton) $r13;
+
+        $r14 = r0.buttonPanel;
+
+        $r14.add(r2);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    int getWrappedDimension(int)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        int i0, $i1;
+        javax.swing.JPanel $r1, $r3;
+        java.awt.LayoutManager $r2;
+        org.gjt.sp.jedit.gui.PanelWindowContainer$ButtonLayout $r4;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.buttonPanel;
+
+        $r2 = $r1.getLayout();
+
+        $r4 = (org.gjt.sp.jedit.gui.PanelWindowContainer$ButtonLayout) $r2;
+
+        $r3 = r0.buttonPanel;
+
+        $i1 = $r4.getWrappedDimension($r3, i0);
+
+        return $i1;
+    }
+
+    public void show(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 == null goto label1;
+
+        $r2 = r0.wm;
+
+        $r2.showDockableWindow(r1);
+
+        $r3 = r0.wm;
+
+        $r3.hideDockableWindow(r1);
+
+     label1:
+        r0.show(null);
+
+        return;
+    }
+
+    static javax.swing.JPopupMenu access$000(org.gjt.sp.jedit.gui.PanelWindowContainer)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        javax.swing.JPopupMenu $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.popup;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$100(org.gjt.sp.jedit.gui.PanelWindowContainer)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.closeBox;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.DockableWindowManagerImpl access$200(org.gjt.sp.jedit.gui.PanelWindowContainer)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.wm;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$300(org.gjt.sp.jedit.gui.PanelWindowContainer)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.menuBtn;
+
+        return $r1;
+    }
+
+    static javax.swing.JPopupMenu access$002(org.gjt.sp.jedit.gui.PanelWindowContainer, javax.swing.JPopupMenu)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        javax.swing.JPopupMenu r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.popup = r1;
+
+        return r1;
+    }
+
+    static java.lang.String access$400(org.gjt.sp.jedit.gui.PanelWindowContainer)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer r0;
+        java.lang.String $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.position;
+
+        return $r1;
+    }
+}

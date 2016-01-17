@@ -1,0 +1,215 @@
+public class org.gjt.sp.jedit.help.HelpSearchPanel extends javax.swing.JPanel
+{
+    private org.gjt.sp.jedit.help.HelpViewerInterface helpViewer;
+    private org.gjt.sp.jedit.gui.HistoryTextField searchField;
+    private javax.swing.JList results;
+    private org.gjt.sp.jedit.help.HelpIndex index;
+
+    public void <init>(org.gjt.sp.jedit.help.HelpViewerInterface)
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel r0;
+        org.gjt.sp.jedit.help.HelpViewerInterface r1;
+        javax.swing.Box r2, $r4;
+        java.awt.BorderLayout $r3;
+        javax.swing.JLabel $r5;
+        java.lang.String $r6;
+        java.awt.Component $r8;
+        org.gjt.sp.jedit.gui.HistoryTextField $r10, $r13;
+        org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler $r12;
+        javax.swing.JList $r15, $r17, $r18, $r20, $r22;
+        org.gjt.sp.jedit.help.HelpSearchPanel$MouseHandler $r16;
+        org.gjt.sp.jedit.help.HelpSearchPanel$ResultRenderer $r19;
+        javax.swing.JScrollPane $r21;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new java.awt.BorderLayout;
+
+        specialinvoke $r3.<init>(6, 6);
+
+        specialinvoke r0.<init>($r3);
+
+        r0.helpViewer = r1;
+
+        $r4 = new javax.swing.Box;
+
+        specialinvoke $r4.<init>(0);
+
+        r2 = $r4;
+
+        $r5 = new javax.swing.JLabel;
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.search.caption");
+
+        specialinvoke $r5.<init>($r6);
+
+        r2.add($r5);
+
+        $r8 = javax.swing.Box.createHorizontalStrut(6);
+
+        r2.add($r8);
+
+        $r10 = new org.gjt.sp.jedit.gui.HistoryTextField;
+
+        specialinvoke $r10.<init>("helpviewer.search");
+
+        r0.searchField = $r10;
+
+        r2.add($r10);
+
+        $r13 = r0.searchField;
+
+        $r12 = new org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler;
+
+        specialinvoke $r12.<init>(r0);
+
+        $r13.addActionListener($r12);
+
+        r0.add("North", r2);
+
+        $r15 = new javax.swing.JList;
+
+        specialinvoke $r15.<init>();
+
+        r0.results = $r15;
+
+        $r17 = r0.results;
+
+        $r16 = new org.gjt.sp.jedit.help.HelpSearchPanel$MouseHandler;
+
+        specialinvoke $r16.<init>(r0);
+
+        $r17.addMouseListener($r16);
+
+        $r18 = r0.results;
+
+        $r18.setSelectionMode(0);
+
+        $r20 = r0.results;
+
+        $r19 = new org.gjt.sp.jedit.help.HelpSearchPanel$ResultRenderer;
+
+        specialinvoke $r19.<init>();
+
+        $r20.setCellRenderer($r19);
+
+        $r21 = new javax.swing.JScrollPane;
+
+        $r22 = r0.results;
+
+        specialinvoke $r21.<init>($r22);
+
+        r0.add("Center", $r21);
+
+        return;
+    }
+
+    private org.gjt.sp.jedit.help.HelpIndex getHelpIndex()
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel r0;
+        java.lang.Exception r1, $r6;
+        org.gjt.sp.jedit.help.HelpIndex $r2, $r3, $r4, $r5;
+        org.gjt.sp.jedit.help.HelpViewerInterface $r7;
+        java.awt.Component $r8;
+        java.lang.String[] $r9;
+        java.lang.String $r10;
+
+        r0 := @this;
+
+        $r2 = r0.index;
+
+        if $r2 != null goto label4;
+
+        $r4 = new org.gjt.sp.jedit.help.HelpIndex;
+
+        specialinvoke $r4.<init>();
+
+        r0.index = $r4;
+
+     label1:
+        $r5 = r0.index;
+
+        $r5.indexEditorHelp();
+
+     label2:
+        goto label4;
+
+     label3:
+        $r6 := @caughtexception;
+
+        r1 = $r6;
+
+        r0.index = null;
+
+        org.gjt.sp.util.Log.log(9, r0, r1);
+
+        $r7 = r0.helpViewer;
+
+        $r8 = $r7.getComponent();
+
+        $r9 = newarray (java.lang.String)[1];
+
+        $r10 = r1.toString();
+
+        $r9[0] = $r10;
+
+        org.gjt.sp.jedit.GUIUtilities.error($r8, "helpviewer.search.error", $r9);
+
+     label4:
+        $r3 = r0.index;
+
+        return $r3;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    static org.gjt.sp.jedit.help.HelpIndex access$000(org.gjt.sp.jedit.help.HelpSearchPanel)
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel r0;
+        org.gjt.sp.jedit.help.HelpIndex $r1;
+
+        r0 := @parameter0;
+
+        $r1 = specialinvoke r0.getHelpIndex();
+
+        return $r1;
+    }
+
+    static javax.swing.JList access$100(org.gjt.sp.jedit.help.HelpSearchPanel)
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel r0;
+        javax.swing.JList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.results;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.HistoryTextField access$200(org.gjt.sp.jedit.help.HelpSearchPanel)
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel r0;
+        org.gjt.sp.jedit.gui.HistoryTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.searchField;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.help.HelpViewerInterface access$300(org.gjt.sp.jedit.help.HelpSearchPanel)
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel r0;
+        org.gjt.sp.jedit.help.HelpViewerInterface $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.helpViewer;
+
+        return $r1;
+    }
+}

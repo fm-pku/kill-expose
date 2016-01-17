@@ -1,0 +1,57 @@
+public class org.gjt.sp.jedit.msg.PositionChanging extends org.gjt.sp.jedit.msg.EditPaneUpdate
+{
+
+    protected void <init>(org.gjt.sp.jedit.EditPane, java.lang.Object)
+    {
+        org.gjt.sp.jedit.msg.PositionChanging r0;
+        org.gjt.sp.jedit.EditPane r1;
+        java.lang.Object r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1, r2);
+
+        return;
+    }
+
+    public void <init>(org.gjt.sp.jedit.textarea.TextArea)
+    {
+        org.gjt.sp.jedit.msg.PositionChanging r0;
+        org.gjt.sp.jedit.textarea.TextArea r1;
+        org.gjt.sp.jedit.EditPane $r2;
+        java.lang.Object $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.EditPane.get(r1);
+
+        $r3 = org.gjt.sp.jedit.msg.EditPaneUpdate.POSITION_CHANGING;
+
+        specialinvoke r0.<init>($r2, $r3);
+
+        return;
+    }
+
+    public void <init>(org.gjt.sp.jedit.EditPane)
+    {
+        org.gjt.sp.jedit.msg.PositionChanging r0;
+        org.gjt.sp.jedit.EditPane r1;
+        java.lang.Object $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.msg.EditPaneUpdate.POSITION_CHANGING;
+
+        specialinvoke r0.<init>(r1, $r2);
+
+        return;
+    }
+}

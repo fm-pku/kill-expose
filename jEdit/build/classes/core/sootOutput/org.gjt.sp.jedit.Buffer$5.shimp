@@ -1,0 +1,46 @@
+class org.gjt.sp.jedit.Buffer$5 extends org.gjt.sp.jedit.visitors.JEditVisitorAdapter
+{
+    final org.gjt.sp.jedit.Buffer this$0;
+
+    void <init>(org.gjt.sp.jedit.Buffer)
+    {
+        org.gjt.sp.jedit.Buffer$5 r0;
+        org.gjt.sp.jedit.Buffer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void visit(org.gjt.sp.jedit.EditPane)
+    {
+        org.gjt.sp.jedit.Buffer$5 r0;
+        org.gjt.sp.jedit.EditPane r1;
+        org.gjt.sp.jedit.bufferset.BufferSet r2;
+        org.gjt.sp.jedit.Buffer $r3;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getBufferSet();
+
+        $r3 = r0.this$0;
+
+        $i0 = r2.indexOf($r3);
+
+        if $i0 == -1 goto label1;
+
+        r2.sort();
+
+     label1:
+        return;
+    }
+}

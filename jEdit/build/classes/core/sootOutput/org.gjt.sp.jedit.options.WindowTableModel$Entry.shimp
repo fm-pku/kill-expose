@@ -1,0 +1,92 @@
+class org.gjt.sp.jedit.options.WindowTableModel$Entry extends java.lang.Object
+{
+    java.lang.String name;
+    java.lang.String title;
+    java.lang.String dockPosition;
+
+    void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.options.WindowTableModel$Entry r0;
+        java.lang.String r1, $r5, $r6, $r7, $r11, $r12, $r13;
+        java.lang.StringBuilder $r2, $r3, $r4, $r8, $r9, $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.name = r1;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append(r1);
+
+        $r4 = $r3.append(".title");
+
+        $r5 = $r4.toString();
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty($r5);
+
+        r0.title = $r6;
+
+        $r7 = r0.title;
+
+        if $r7 != null goto label1;
+
+        r0.title = r1;
+
+     label1:
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append(r1);
+
+        $r10 = $r9.append(".dock-position");
+
+        $r11 = $r10.toString();
+
+        $r12 = org.gjt.sp.jedit.jEdit.getProperty($r11);
+
+        r0.dockPosition = $r12;
+
+        $r13 = r0.dockPosition;
+
+        if $r13 != null goto label2;
+
+        r0.dockPosition = "floating";
+
+     label2:
+        return;
+    }
+
+    void save()
+    {
+        org.gjt.sp.jedit.options.WindowTableModel$Entry r0;
+        java.lang.StringBuilder $r1, $r3, $r4;
+        java.lang.String $r2, $r5, $r6;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = r0.name;
+
+        $r3 = $r1.append($r2);
+
+        $r4 = $r3.append(".dock-position");
+
+        $r5 = $r4.toString();
+
+        $r6 = r0.dockPosition;
+
+        org.gjt.sp.jedit.jEdit.setProperty($r5, $r6);
+
+        return;
+    }
+}

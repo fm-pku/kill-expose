@@ -1,0 +1,726 @@
+class org.gjt.sp.jedit.help.HelpIndex extends java.lang.Object
+{
+    private static java.lang.Object IGNORE;
+    private java.util.Map words;
+    private java.util.List files;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.help.HelpIndex r0;
+        java.util.HashMap $r1;
+        java.util.ArrayList $r2;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.HashMap;
+
+        specialinvoke $r1.<init>();
+
+        r0.words = $r1;
+
+        $r2 = new java.util.ArrayList;
+
+        specialinvoke $r2.<init>();
+
+        r0.files = $r2;
+
+        specialinvoke r0.ignoreWord("a");
+
+        specialinvoke r0.ignoreWord("an");
+
+        specialinvoke r0.ignoreWord("and");
+
+        specialinvoke r0.ignoreWord("are");
+
+        specialinvoke r0.ignoreWord("as");
+
+        specialinvoke r0.ignoreWord("be");
+
+        specialinvoke r0.ignoreWord("by");
+
+        specialinvoke r0.ignoreWord("can");
+
+        specialinvoke r0.ignoreWord("do");
+
+        specialinvoke r0.ignoreWord("for");
+
+        specialinvoke r0.ignoreWord("from");
+
+        specialinvoke r0.ignoreWord("how");
+
+        specialinvoke r0.ignoreWord("i");
+
+        specialinvoke r0.ignoreWord("if");
+
+        specialinvoke r0.ignoreWord("in");
+
+        specialinvoke r0.ignoreWord("is");
+
+        specialinvoke r0.ignoreWord("it");
+
+        specialinvoke r0.ignoreWord("not");
+
+        specialinvoke r0.ignoreWord("of");
+
+        specialinvoke r0.ignoreWord("on");
+
+        specialinvoke r0.ignoreWord("or");
+
+        specialinvoke r0.ignoreWord("s");
+
+        specialinvoke r0.ignoreWord("that");
+
+        specialinvoke r0.ignoreWord("the");
+
+        specialinvoke r0.ignoreWord("this");
+
+        specialinvoke r0.ignoreWord("to");
+
+        specialinvoke r0.ignoreWord("will");
+
+        specialinvoke r0.ignoreWord("with");
+
+        specialinvoke r0.ignoreWord("you");
+
+        return;
+    }
+
+    public void indexEditorHelp()
+    {
+        org.gjt.sp.jedit.help.HelpIndex r0;
+        org.gjt.sp.jedit.PluginJAR[] r1, r23;
+        int i0, $i1, i2;
+        org.gjt.sp.jedit.PluginJAR r2;
+        java.lang.Throwable r3, $r14, $r15, r22;
+        java.lang.StringBuilder $r4, $r5, $r7, $r8, $r16, $r17, $r19;
+        java.util.Map $r6;
+        java.lang.String $r9, $r11, $r12, $r13, $r18, $r20, r21;
+        java.util.zip.ZipFile $r10;
+
+        r0 := @this;
+
+     label01:
+        r21 = org.gjt.sp.jedit.jEdit.getJEditHome();
+
+        if r21 == null goto label02;
+
+        $r11 = org.gjt.sp.jedit.MiscUtilities.constructPath(r21, "doc", "users-guide");
+
+        r0.indexDirectory($r11);
+
+        $r12 = org.gjt.sp.jedit.MiscUtilities.constructPath(r21, "doc", "FAQ");
+
+        r0.indexDirectory($r12);
+
+        $r13 = org.gjt.sp.jedit.MiscUtilities.constructPath(r21, "doc", "whatsnew");
+
+        r0.indexDirectory($r13);
+
+     label02:
+        goto label04;
+
+     label03:
+        $r14 := @caughtexception;
+
+        r22 = $r14;
+
+        org.gjt.sp.util.Log.log(9, r0, "Error indexing editor help");
+
+        org.gjt.sp.util.Log.log(9, r0, r22);
+
+     label04:
+        r23 = org.gjt.sp.jedit.jEdit.getPluginJARs();
+
+        r1 = r23;
+
+        i0 = lengthof r1;
+
+(0)     i2 = 0;
+
+     label05:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 >= i0 goto label10;
+
+        r2 = r1[i2];
+
+     label06:
+        $r10 = r2.getZipFile();
+
+        r0.indexJAR($r10);
+
+     label07:
+        goto label09;
+
+     label08:
+        $r15 := @caughtexception;
+
+        r3 = $r15;
+
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<init>();
+
+        $r17 = $r16.append("Error indexing JAR: ");
+
+        $r18 = r2.getPath();
+
+        $r19 = $r17.append($r18);
+
+        $r20 = $r19.toString();
+
+        org.gjt.sp.util.Log.log(9, r0, $r20);
+
+        org.gjt.sp.util.Log.log(9, r0, r3);
+
+     label09:
+        i2 = i2 + 1;
+
+(1)     goto label05;
+
+     label10:
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("Indexed ");
+
+        $r6 = r0.words;
+
+        $i1 = $r6.size();
+
+        $r7 = $r5.append($i1);
+
+        $r8 = $r7.append(" words");
+
+        $r9 = $r8.toString();
+
+        org.gjt.sp.util.Log.log(1, r0, $r9);
+
+        return;
+
+        catch java.lang.Throwable from label01 to label02 with label03;
+        catch java.lang.Throwable from label06 to label07 with label08;
+    }
+
+    public void indexDirectory(java.lang.String) throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.help.HelpIndex r0;
+        java.lang.String r1, r4;
+        java.lang.String[] r2, r3;
+        int i0, i1;
+        org.gjt.sp.jedit.io.VFS $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r5 = org.gjt.sp.jedit.io.VFSManager.getFileVFS();
+
+        r2 = $r5._listDirectory(null, r1, "*.{html,txt}", 1, null);
+
+        r3 = r2;
+
+        i0 = lengthof r3;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label2;
+
+        r4 = r3[i1];
+
+        r0.indexURL(r4);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return;
+    }
+
+    public void indexJAR(java.util.zip.ZipFile) throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.help.HelpIndex r0;
+        java.util.zip.ZipFile r1;
+        java.util.Enumeration r2;
+        java.util.zip.ZipEntry r3;
+        java.lang.String r4, r5, r6, $r10, $r11;
+        boolean $z0, $z1, $z2;
+        java.lang.Object $r7;
+        java.lang.StringBuilder $r8, $r9, $r12, $r13, $r14;
+        java.io.InputStream $r15;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.entries();
+
+     label1:
+        $z0 = r2.hasMoreElements();
+
+        if $z0 == 0 goto label4;
+
+        $r7 = r2.nextElement();
+
+        r3 = (java.util.zip.ZipEntry) $r7;
+
+        r4 = r3.getName();
+
+        r5 = r4.toLowerCase();
+
+        $z1 = r5.endsWith(".html");
+
+        if $z1 != 0 goto label2;
+
+        $z2 = r5.endsWith(".txt");
+
+        if $z2 == 0 goto label3;
+
+     label2:
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("jeditresource:/");
+
+        $r10 = r1.getName();
+
+        $r11 = org.gjt.sp.jedit.MiscUtilities.getFileName($r10);
+
+        $r12 = $r9.append($r11);
+
+        $r13 = $r12.append("!/");
+
+        $r14 = $r13.append(r4);
+
+        r6 = $r14.toString();
+
+        org.gjt.sp.util.Log.log(1, r0, r6);
+
+        $r15 = r1.getInputStream(r3);
+
+        specialinvoke r0.indexStream($r15, r6);
+
+     label3:
+        goto label1;
+
+     label4:
+        return;
+    }
+
+    public void indexURL(java.lang.String) throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.help.HelpIndex r0;
+        java.lang.String r1, $r4;
+        boolean $z0;
+        java.io.File $r2, r7;
+        java.net.URI $r3;
+        java.net.URL $r5, r6, r6_1, r6_2;
+        java.io.InputStream r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = org.gjt.sp.jedit.MiscUtilities.isURL(r1);
+
+        if $z0 == 0 goto label1;
+
+        $r5 = new java.net.URL;
+
+        specialinvoke $r5.<init>(r1);
+
+        r6 = $r5;
+
+(0)     goto label2;
+
+     label1:
+        $r2 = new java.io.File;
+
+        specialinvoke $r2.<init>(r1);
+
+        r7 = $r2;
+
+        $r3 = r7.toURI();
+
+(1)     r6_1 = $r3.toURL();
+
+     label2:
+        r6_2 = Phi(r6 #0, r6_1 #1);
+
+        r8 = r6_2.openStream();
+
+        $r4 = r6_2.toString();
+
+        specialinvoke r0.indexStream(r8, $r4);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.help.HelpIndex$Word lookupWord(java.lang.String)
+    {
+        org.gjt.sp.jedit.help.HelpIndex r0;
+        java.lang.String r1;
+        java.lang.Object r2, $r4;
+        java.util.Map $r3;
+        org.gjt.sp.jedit.help.HelpIndex$Word $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.words;
+
+        r2 = $r3.get(r1);
+
+        $r4 = org.gjt.sp.jedit.help.HelpIndex.IGNORE;
+
+        if r2 != $r4 goto label1;
+
+        return null;
+
+     label1:
+        $r5 = (org.gjt.sp.jedit.help.HelpIndex$Word) r2;
+
+        return $r5;
+    }
+
+    public org.gjt.sp.jedit.help.HelpIndex$HelpFile getFile(int)
+    {
+        org.gjt.sp.jedit.help.HelpIndex r0;
+        int i0;
+        java.util.List $r1;
+        java.lang.Object $r2;
+        org.gjt.sp.jedit.help.HelpIndex$HelpFile $r3;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.files;
+
+        $r2 = $r1.get(i0);
+
+        $r3 = (org.gjt.sp.jedit.help.HelpIndex$HelpFile) $r2;
+
+        return $r3;
+    }
+
+    private void ignoreWord(java.lang.String)
+    {
+        org.gjt.sp.jedit.help.HelpIndex r0;
+        java.lang.String r1;
+        java.lang.Object $r2;
+        java.util.Map $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.words;
+
+        $r2 = org.gjt.sp.jedit.help.HelpIndex.IGNORE;
+
+        $r3.put(r1, $r2);
+
+        return;
+    }
+
+    private void indexStream(java.io.InputStream, java.lang.String) throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.help.HelpIndex r0;
+        java.io.InputStream r1;
+        java.lang.String r2, $r15, $r17, $r19, $r21;
+        org.gjt.sp.jedit.help.HelpIndex$HelpFile r3, $r8;
+        int i0, i1, $i3, $i4, $i5, $i6, $i7;
+        java.lang.StringBuilder r4, r6, $r11, $r14;
+        java.io.BufferedReader r5, $r12;
+        char c2;
+        java.lang.Throwable r7, $r22;
+        java.util.List $r9, $r10;
+        java.io.InputStreamReader $r13;
+        boolean $z1, $z2, z3, z4, z5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r8 = new org.gjt.sp.jedit.help.HelpIndex$HelpFile;
+
+        specialinvoke $r8.<init>(r2);
+
+        r3 = $r8;
+
+        $r9 = r0.files;
+
+        $r9.add(r3);
+
+        $r10 = r0.files;
+
+        $i3 = $r10.size();
+
+        i0 = $i3 - 1;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        r4 = $r11;
+
+        $r12 = new java.io.BufferedReader;
+
+        $r13 = new java.io.InputStreamReader;
+
+        specialinvoke $r13.<init>(r1);
+
+        specialinvoke $r12.<init>($r13);
+
+(0)     r5 = $r12;
+
+     label01:
+        $r14 = new java.lang.StringBuilder;
+
+        specialinvoke $r14.<init>();
+
+        r6 = $r14;
+
+        z3 = 0;
+
+        z4 = 0;
+
+(1)     z5 = 0;
+
+     label02:
+        z5 = Phi(z5 #1, z5 #17);
+
+        z3 = Phi(z3 #1, z3 #17);
+
+        z4 = Phi(z4 #1, z4 #17);
+
+(2)     $i4 = r5.read();
+
+        i1 = $i4;
+
+        if $i4 == -1 goto label14;
+
+        c2 = (char) i1;
+
+        if z3 == 0 goto label05;
+
+        if c2 != 62 goto label04;
+
+        $r21 = r6.toString();
+
+        $z2 = $r21.equals("title");
+
+(3)     if $z2 == 0 goto label03;
+
+(4)     z5 = 1;
+
+     label03:
+        z5 = Phi(z5 #3, z5 #4);
+
+        z3 = 0;
+
+        r6.setLength(0);
+
+(5)     goto label13;
+
+     label04:
+        r6.append(c2);
+
+(6)     goto label13;
+
+     label05:
+        if z4 == 0 goto label06;
+
+(7)     if c2 != 59 goto label13;
+
+        z4 = 0;
+
+(8)     goto label13;
+
+     label06:
+        if c2 != 60 goto label09;
+
+(9)     if z5 == 0 goto label07;
+
+(10)    z5 = 0;
+
+     label07:
+        z5 = Phi(z5 #9, z5 #10);
+
+        $i7 = r6.length();
+
+        if $i7 == 0 goto label08;
+
+        $r19 = r6.toString();
+
+        specialinvoke r0.addWord($r19, i0, z5);
+
+        r6.setLength(0);
+
+     label08:
+        z3 = 1;
+
+(11)    goto label13;
+
+     label09:
+        if c2 != 38 goto label10;
+
+        z4 = 1;
+
+(12)    goto label13;
+
+     label10:
+        if z5 == 0 goto label11;
+
+        r4.append(c2);
+
+(13)    goto label13;
+
+     label11:
+        $z1 = java.lang.Character.isLetterOrDigit(c2);
+
+        if $z1 != 0 goto label12;
+
+        $i6 = r6.length();
+
+(14)    if $i6 == 0 goto label13;
+
+        $r17 = r6.toString();
+
+        specialinvoke r0.addWord($r17, i0, z5);
+
+        r6.setLength(0);
+
+(15)    goto label13;
+
+     label12:
+(16)    r6.append(c2);
+
+     label13:
+        z5 = Phi(z5 #5, z5 #6, z5 #7, z5 #8, z5 #11, z5 #12, z5 #13, z5 #14, z5 #15, z5 #16);
+
+        z3 = Phi(z3 #5, z3 #6, z3 #7, z3 #8, z3 #11, z3 #12, z3 #13, z3 #14, z3 #15, z3 #16);
+
+        z4 = Phi(z4 #5, z4 #6, z4 #7, z4 #8, z4 #11, z4 #12, z4 #13, z4 #14, z4 #15, z4 #16);
+
+(17)    goto label02;
+
+     label14:
+        r5.close();
+
+        goto label17;
+
+     label15:
+        $r22 := @caughtexception;
+
+        z5 = Phi(z5 #0, z5 #2, z5 #18);
+
+        z3 = Phi(z3 #0, z3 #2, z3 #18);
+
+(18)    z4 = Phi(z4 #0, z4 #2, z4 #18);
+
+        r7 = $r22;
+
+     label16:
+        r5.close();
+
+        throw r7;
+
+     label17:
+        $i5 = r4.length();
+
+        if $i5 != 0 goto label18;
+
+        r3.title = r2;
+
+        goto label19;
+
+     label18:
+        $r15 = r4.toString();
+
+        r3.title = $r15;
+
+     label19:
+        return;
+
+        catch java.lang.Throwable from label01 to label14 with label15;
+        catch java.lang.Throwable from label15 to label16 with label15;
+    }
+
+    private void addWord(java.lang.String, int, boolean)
+    {
+        org.gjt.sp.jedit.help.HelpIndex r0;
+        int i0;
+        boolean z0;
+        java.lang.Object r1, $r3;
+        java.util.Map $r2, $r6;
+        org.gjt.sp.jedit.help.HelpIndex$Word $r4, $r5;
+        java.lang.String r8, r9;
+
+        r0 := @this;
+
+        r8 := @parameter0;
+
+        i0 := @parameter1;
+
+        z0 := @parameter2;
+
+        r9 = r8.toLowerCase();
+
+        $r2 = r0.words;
+
+        r1 = $r2.get(r9);
+
+        $r3 = org.gjt.sp.jedit.help.HelpIndex.IGNORE;
+
+        if r1 != $r3 goto label1;
+
+        return;
+
+     label1:
+        if r1 != null goto label2;
+
+        $r6 = r0.words;
+
+        $r5 = new org.gjt.sp.jedit.help.HelpIndex$Word;
+
+        specialinvoke $r5.<init>(r9, i0, z0);
+
+        $r6.put(r9, $r5);
+
+        goto label3;
+
+     label2:
+        $r4 = (org.gjt.sp.jedit.help.HelpIndex$Word) r1;
+
+        $r4.addOccurrence(i0, z0);
+
+     label3:
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Object $r0;
+
+        $r0 = new java.lang.Object;
+
+        specialinvoke $r0.<init>();
+
+        org.gjt.sp.jedit.help.HelpIndex.IGNORE = $r0;
+
+        return;
+    }
+}

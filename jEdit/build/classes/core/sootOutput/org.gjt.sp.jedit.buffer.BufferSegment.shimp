@@ -1,0 +1,300 @@
+class org.gjt.sp.jedit.buffer.BufferSegment extends java.lang.Object implements java.lang.CharSequence
+{
+    private final char[] data;
+    private final int offset;
+    private final int len;
+    private final org.gjt.sp.jedit.buffer.BufferSegment next;
+
+    public void <init>(char[], int, int)
+    {
+        org.gjt.sp.jedit.buffer.BufferSegment r0;
+        char[] r1;
+        int i0, i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        specialinvoke r0.<init>(r1, i0, i1, null);
+
+        return;
+    }
+
+    public void <init>(char[], int, int, org.gjt.sp.jedit.buffer.BufferSegment)
+    {
+        org.gjt.sp.jedit.buffer.BufferSegment r0, r2;
+        char[] r1;
+        int i0, i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        r2 := @parameter3;
+
+        specialinvoke r0.<init>();
+
+        r0.data = r1;
+
+        r0.offset = i0;
+
+        r0.len = i1;
+
+        r0.next = r2;
+
+        return;
+    }
+
+    public char charAt(int)
+    {
+        org.gjt.sp.jedit.buffer.BufferSegment r0, $r1, $r3;
+        int i0, $i1, $i2, $i3, $i5, $i6;
+        java.lang.ArrayIndexOutOfBoundsException $r2;
+        char $c4, $c7;
+        char[] $r4;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $i1 = r0.len;
+
+        if i0 >= $i1 goto label1;
+
+        $r4 = r0.data;
+
+        $i5 = r0.offset;
+
+        $i6 = $i5 + i0;
+
+        $c7 = $r4[$i6];
+
+        return $c7;
+
+     label1:
+        $r1 = r0.next;
+
+        if $r1 == null goto label2;
+
+        $r3 = r0.next;
+
+        $i2 = r0.len;
+
+        $i3 = i0 - $i2;
+
+        $c4 = $r3.charAt($i3);
+
+        return $c4;
+
+     label2:
+        $r2 = new java.lang.ArrayIndexOutOfBoundsException;
+
+        specialinvoke $r2.<init>(i0);
+
+        throw $r2;
+    }
+
+    public int length()
+    {
+        org.gjt.sp.jedit.buffer.BufferSegment r0, $r1, $r2;
+        int $i0, $i1, $i2, $i2_1, $i2_2;
+
+        r0 := @this;
+
+        $i0 = r0.len;
+
+        $r1 = r0.next;
+
+        if $r1 == null goto label1;
+
+        $r2 = r0.next;
+
+        $i2 = $r2.length();
+
+(0)     goto label2;
+
+     label1:
+(1)     $i2_1 = 0;
+
+     label2:
+        $i2_2 = Phi($i2 #0, $i2_1 #1);
+
+        $i1 = $i0 + $i2_2;
+
+        return $i1;
+    }
+
+    public java.lang.CharSequence subSequence(int, int)
+    {
+        org.gjt.sp.jedit.buffer.BufferSegment r0, $r1;
+        int i0, i1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $r1 = specialinvoke r0.subSegment(i0, i1);
+
+        return $r1;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.buffer.BufferSegment r0;
+        java.lang.StringBuilder r1, $r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+        specialinvoke r0.toString(r1);
+
+        $r3 = r1.toString();
+
+        return $r3;
+    }
+
+    private void toString(java.lang.StringBuilder)
+    {
+        org.gjt.sp.jedit.buffer.BufferSegment r0, $r4, $r5;
+        java.lang.StringBuilder r1;
+        int $i0, $i1;
+        char[] $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.data;
+
+        $i1 = r0.offset;
+
+        $i0 = r0.len;
+
+        r1.append($r2, $i1, $i0);
+
+        $r4 = r0.next;
+
+        if $r4 == null goto label1;
+
+        $r5 = r0.next;
+
+        specialinvoke $r5.toString(r1);
+
+     label1:
+        return;
+    }
+
+    private org.gjt.sp.jedit.buffer.BufferSegment subSegment(int, int)
+    {
+        org.gjt.sp.jedit.buffer.BufferSegment r0, $r2, $r4, $r5, $r6, $r7, $r9, $r10;
+        int i0, i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16;
+        java.lang.ArrayIndexOutOfBoundsException $r1, $r3;
+        char[] $r8, $r11;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        if 0 > i0 goto label4;
+
+        if i0 > i1 goto label4;
+
+        $i2 = r0.len;
+
+        if i1 > $i2 goto label1;
+
+        $r10 = new org.gjt.sp.jedit.buffer.BufferSegment;
+
+        $r11 = r0.data;
+
+        $i14 = r0.offset;
+
+        $i16 = $i14 + i0;
+
+        $i15 = i1 - i0;
+
+        specialinvoke $r10.<init>($r11, $i16, $i15);
+
+        return $r10;
+
+     label1:
+        $r2 = r0.next;
+
+        if $r2 == null goto label3;
+
+        $i3 = r0.len;
+
+        if i0 >= $i3 goto label2;
+
+        $r6 = new org.gjt.sp.jedit.buffer.BufferSegment;
+
+        $r8 = r0.data;
+
+        $i8 = r0.offset;
+
+        $i12 = $i8 + i0;
+
+        $i9 = r0.len;
+
+        $i13 = $i9 - i0;
+
+        $r7 = r0.next;
+
+        $i10 = r0.len;
+
+        $i11 = i1 - $i10;
+
+        $r9 = specialinvoke $r7.subSegment(0, $i11);
+
+        specialinvoke $r6.<init>($r8, $i12, $i13, $r9);
+
+        return $r6;
+
+     label2:
+        $r4 = r0.next;
+
+        $i4 = r0.len;
+
+        $i7 = i0 - $i4;
+
+        $i5 = r0.len;
+
+        $i6 = i1 - $i5;
+
+        $r5 = specialinvoke $r4.subSegment($i7, $i6);
+
+        return $r5;
+
+     label3:
+        $r3 = new java.lang.ArrayIndexOutOfBoundsException;
+
+        specialinvoke $r3.<init>();
+
+        throw $r3;
+
+     label4:
+        $r1 = new java.lang.ArrayIndexOutOfBoundsException;
+
+        specialinvoke $r1.<init>();
+
+        throw $r1;
+    }
+}

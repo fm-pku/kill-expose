@@ -1,0 +1,1113 @@
+public class org.gjt.sp.jedit.gui.FilePropertiesDialog extends org.gjt.sp.jedit.gui.EnhancedDialog
+{
+    private final org.gjt.sp.jedit.browser.VFSBrowser browser;
+    private final org.gjt.sp.jedit.io.VFSFile[] selectedFiles;
+    private final org.gjt.sp.jedit.io.VFSFile local;
+    private javax.swing.JButton okButton;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JTextField nameTextField;
+    private javax.swing.JLabel infoIcon;
+    private javax.swing.JCheckBox readable;
+    private javax.swing.JCheckBox write;
+
+    public void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.browser.VFSBrowser, org.gjt.sp.jedit.io.VFSFile[])
+    {
+        org.gjt.sp.jedit.gui.FilePropertiesDialog r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.browser.VFSBrowser r2;
+        org.gjt.sp.jedit.io.VFSFile[] r3, $r5, $r6;
+        java.lang.String $r4;
+        int $i0;
+        org.gjt.sp.jedit.io.VFSFile $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.properties.title");
+
+        specialinvoke r0.<init>(r1, $r4, 1);
+
+        org.gjt.sp.jedit.GUIUtilities.loadGeometry(r0, "propdialog");
+
+        r0.browser = r2;
+
+        $i0 = lengthof r3;
+
+        if $i0 <= 0 goto label1;
+
+        r0.selectedFiles = r3;
+
+        goto label2;
+
+     label1:
+        $r5 = r2.getSelectedFiles();
+
+        r0.selectedFiles = $r5;
+
+     label2:
+        $r6 = r0.selectedFiles;
+
+        $r7 = $r6[0];
+
+        r0.local = $r7;
+
+        specialinvoke r0.createAndShowGUI();
+
+        return;
+    }
+
+    public void addComponentsToPane()
+    {
+        org.gjt.sp.jedit.gui.FilePropertiesDialog r0;
+        javax.swing.JPanel r1, $r2, $r7, $r9, $r11, $r13, $r15, $r17;
+        java.awt.BorderLayout $r3;
+        javax.swing.border.EmptyBorder $r4;
+        org.gjt.sp.jedit.io.VFSFile[] $r5, $r6;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        $r2 = new javax.swing.JPanel;
+
+        $r3 = new java.awt.BorderLayout;
+
+        specialinvoke $r3.<init>();
+
+        specialinvoke $r2.<init>($r3);
+
+        r1 = $r2;
+
+        $r4 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r4.<init>(12, 5, 0, 5);
+
+        r1.setBorder($r4);
+
+        r0.setContentPane(r1);
+
+        $r5 = r0.selectedFiles;
+
+        $i0 = lengthof $r5;
+
+        if $i0 != 1 goto label1;
+
+        $r13 = r0.createNorthPanel();
+
+        r1.add("North", $r13);
+
+        $r15 = r0.createCenterPanel();
+
+        r1.add("Center", $r15);
+
+        $r17 = r0.createSouthPanel();
+
+        r1.add("South", $r17);
+
+        goto label2;
+
+     label1:
+        $r6 = r0.selectedFiles;
+
+        $i1 = lengthof $r6;
+
+        if $i1 <= 1 goto label2;
+
+        $r7 = r0.createNorthPanelAll();
+
+        r1.add("North", $r7);
+
+        $r9 = r0.createCenterPanelAll();
+
+        r1.add("Center", $r9);
+
+        $r11 = r0.createSouthPanelAll();
+
+        r1.add("South", $r11);
+
+     label2:
+        return;
+    }
+
+    public javax.swing.JPanel createNorthPanelAll()
+    {
+        org.gjt.sp.jedit.gui.FilePropertiesDialog r0;
+        javax.swing.JPanel r1, $r3, $r10, $r25, r28;
+        int i0, $i1, $i2, i3, i4, i5;
+        org.gjt.sp.jedit.io.VFSFile r2;
+        java.awt.BorderLayout $r4;
+        javax.swing.JLabel $r5, $r6, $r8, $r11;
+        javax.swing.Icon $r7;
+        java.lang.StringBuilder $r12, $r14, $r15, $r16, $r17, $r19, $r20, $r21;
+        java.lang.String $r13, $r18, $r22;
+        org.gjt.sp.jedit.io.VFSFile[] r27;
+
+        r0 := @this;
+
+        $r3 = new javax.swing.JPanel;
+
+        $r4 = new java.awt.BorderLayout;
+
+        specialinvoke $r4.<init>();
+
+        specialinvoke $r3.<init>($r4);
+
+        r1 = $r3;
+
+        $r5 = new javax.swing.JLabel;
+
+        specialinvoke $r5.<init>();
+
+        r0.infoIcon = $r5;
+
+        $r6 = r0.infoIcon;
+
+        $r7 = javax.swing.UIManager.getIcon("OptionPane.informationIcon");
+
+        $r6.setIcon($r7);
+
+        $r8 = r0.infoIcon;
+
+        r1.add("West", $r8);
+
+        i3 = 0;
+
+        i4 = 0;
+
+        r27 = r0.selectedFiles;
+
+        i0 = lengthof r27;
+
+(0)     i5 = 0;
+
+     label1:
+        i4 = Phi(i4 #0, i4 #4);
+
+        i5 = Phi(i5 #0, i5 #4);
+
+        i3 = Phi(i3 #0, i3 #4);
+
+        if i5 >= i0 goto label4;
+
+        r2 = r27[i5];
+
+        $i1 = r2.getType();
+
+        if $i1 != 1 goto label2;
+
+        i4 = i4 + 1;
+
+(1)     goto label3;
+
+     label2:
+        $i2 = r2.getType();
+
+(2)     if $i2 != 0 goto label3;
+
+(3)     i3 = i3 + 1;
+
+     label3:
+        i4 = Phi(i4 #1, i4 #2, i4 #3);
+
+        i3 = Phi(i3 #1, i3 #2, i3 #3);
+
+        i5 = i5 + 1;
+
+(4)     goto label1;
+
+     label4:
+        $r10 = new javax.swing.JPanel;
+
+        specialinvoke $r10.<init>();
+
+        r28 = $r10;
+
+        $r11 = new javax.swing.JLabel;
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.selectedFiles");
+
+        $r14 = $r12.append($r13);
+
+        $r15 = $r14.append(": ");
+
+        $r16 = $r15.append(i3);
+
+        $r17 = $r16.append(", ");
+
+        $r18 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.selectedDirectories");
+
+        $r19 = $r17.append($r18);
+
+        $r20 = $r19.append(": ");
+
+        $r21 = $r20.append(i4);
+
+        $r22 = $r21.toString();
+
+        specialinvoke $r11.<init>($r22);
+
+        r28.add($r11);
+
+        r1.add("Center", r28);
+
+        $r25 = new javax.swing.JPanel;
+
+        specialinvoke $r25.<init>();
+
+        r1.add("South", $r25);
+
+        return r1;
+    }
+
+    public javax.swing.JPanel createCenterPanelAll()
+    {
+        org.gjt.sp.jedit.gui.FilePropertiesDialog r0;
+        javax.swing.JPanel r1, $r4, $r6, r32;
+        org.gjt.sp.jedit.io.VFSFile r2, $r8;
+        java.io.File r3, $r29;
+        java.awt.BorderLayout $r5;
+        java.awt.GridLayout $r7;
+        boolean $z0, $z1, $z2;
+        int $i0, $i1, $i2, $i3, i7, i8;
+        javax.swing.JLabel $r9, $r17;
+        java.lang.StringBuilder $r10, $r12, $r13, $r14, $r18, $r20, $r21, $r23;
+        java.lang.String $r11, $r15, $r19, $r22, $r24, $r26, $r30, r33, r34;
+        javax.swing.border.TitledBorder $r27;
+        long $l4, $l5, l6;
+        org.gjt.sp.jedit.io.VFSFile[] r31;
+        javax.swing.border.Border r35;
+
+        r0 := @this;
+
+        l6 = 0L;
+
+        $r4 = new javax.swing.JPanel;
+
+        $r5 = new java.awt.BorderLayout;
+
+        specialinvoke $r5.<init>();
+
+        specialinvoke $r4.<init>($r5);
+
+        r1 = $r4;
+
+        r31 = r0.selectedFiles;
+
+        i7 = lengthof r31;
+
+(0)     i8 = 0;
+
+     label1:
+        l6 = Phi(l6 #0, l6 #4);
+
+        i8 = Phi(i8 #0, i8 #4);
+
+        if i8 >= i7 goto label4;
+
+        r2 = r31[i8];
+
+        $i2 = r2.getType();
+
+        if $i2 != 1 goto label2;
+
+        $r29 = new java.io.File;
+
+        $r30 = r2.getPath();
+
+        specialinvoke $r29.<init>($r30);
+
+        r3 = $r29;
+
+        $l5 = org.gjt.sp.util.IOUtilities.fileLength(r3);
+
+        l6 = l6 + $l5;
+
+(1)     goto label3;
+
+     label2:
+        $i3 = r2.getType();
+
+(2)     if $i3 != 0 goto label3;
+
+        $l4 = r2.getLength();
+
+(3)     l6 = l6 + $l4;
+
+     label3:
+        l6 = Phi(l6 #1, l6 #2, l6 #3);
+
+        i8 = i8 + 1;
+
+(4)     goto label1;
+
+     label4:
+        $r6 = new javax.swing.JPanel;
+
+        specialinvoke $r6.<init>();
+
+        r32 = $r6;
+
+        $r7 = new java.awt.GridLayout;
+
+        specialinvoke $r7.<init>(2, 1);
+
+        r32.setLayout($r7);
+
+        $r8 = r0.local;
+
+        r33 = $r8.getPath();
+
+        $z0 = org.gjt.sp.jedit.OperatingSystem.isWindows();
+
+        if $z0 != 0 goto label5;
+
+        $z1 = org.gjt.sp.jedit.OperatingSystem.isWindows9x();
+
+        if $z1 != 0 goto label5;
+
+        $z2 = org.gjt.sp.jedit.OperatingSystem.isWindowsNT();
+
+        if $z2 == 0 goto label6;
+
+     label5:
+        $i0 = r33.lastIndexOf(92);
+
+        r34 = r33.substring(0, $i0);
+
+(5)     goto label7;
+
+     label6:
+        $i1 = r33.lastIndexOf(47);
+
+(6)     r34 = r33.substring(0, $i1);
+
+     label7:
+        r34 = Phi(r34 #5, r34 #6);
+
+        $r9 = new javax.swing.JLabel;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.path");
+
+        $r12 = $r10.append($r11);
+
+        $r13 = $r12.append(": ");
+
+        $r14 = $r13.append(r34);
+
+        $r15 = $r14.toString();
+
+        specialinvoke $r9.<init>($r15);
+
+        r32.add($r9);
+
+        $r17 = new javax.swing.JLabel;
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<init>();
+
+        $r19 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.size");
+
+        $r20 = $r18.append($r19);
+
+        $r21 = $r20.append(": ");
+
+        $r22 = org.gjt.sp.util.StandardUtilities.formatFileSize(l6);
+
+        $r23 = $r21.append($r22);
+
+        $r24 = $r23.toString();
+
+        specialinvoke $r17.<init>($r24);
+
+        r32.add($r17);
+
+        r35 = javax.swing.BorderFactory.createEtchedBorder();
+
+        $r26 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.properties");
+
+        $r27 = javax.swing.BorderFactory.createTitledBorder(r35, $r26);
+
+        r32.setBorder($r27);
+
+        r1.add("Center", r32);
+
+        return r1;
+    }
+
+    public javax.swing.JPanel createSouthPanelAll()
+    {
+        org.gjt.sp.jedit.gui.FilePropertiesDialog r0;
+        org.gjt.sp.jedit.gui.FilePropertiesDialog$ButtonActionHandler r1, $r4;
+        javax.swing.JPanel r2, r3, $r5, $r7;
+        java.awt.BorderLayout $r6;
+        javax.swing.JButton $r8, $r10, $r12, $r13, $r15, $r17;
+        java.lang.String $r9, $r14;
+
+        r0 := @this;
+
+        $r4 = new org.gjt.sp.jedit.gui.FilePropertiesDialog$ButtonActionHandler;
+
+        specialinvoke $r4.<init>(r0, null);
+
+        r1 = $r4;
+
+        $r5 = new javax.swing.JPanel;
+
+        $r6 = new java.awt.BorderLayout;
+
+        specialinvoke $r6.<init>();
+
+        specialinvoke $r5.<init>($r6);
+
+        r2 = $r5;
+
+        $r7 = new javax.swing.JPanel;
+
+        specialinvoke $r7.<init>();
+
+        r3 = $r7;
+
+        $r8 = new javax.swing.JButton;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.okBtn");
+
+        specialinvoke $r8.<init>($r9);
+
+        r0.okButton = $r8;
+
+        $r10 = r0.okButton;
+
+        r3.add($r10);
+
+        $r12 = r0.okButton;
+
+        $r12.addActionListener(r1);
+
+        $r13 = new javax.swing.JButton;
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.cancelBtn");
+
+        specialinvoke $r13.<init>($r14);
+
+        r0.cancelButton = $r13;
+
+        $r15 = r0.cancelButton;
+
+        r3.add($r15);
+
+        $r17 = r0.cancelButton;
+
+        $r17.addActionListener(r1);
+
+        r2.add("East", r3);
+
+        return r2;
+    }
+
+    public javax.swing.JPanel createNorthPanel()
+    {
+        org.gjt.sp.jedit.gui.FilePropertiesDialog r0;
+        javax.swing.JPanel r1, r2, $r4, $r11, $r27;
+        org.gjt.sp.jedit.io.FavoritesVFS$Favorite r3;
+        java.awt.BorderLayout $r5;
+        javax.swing.JLabel $r6, $r7, $r9, $r12;
+        javax.swing.Icon $r8;
+        java.lang.StringBuilder $r13, $r15, $r16;
+        java.lang.String $r14, $r17, r31, r31_1, r31_2;
+        org.gjt.sp.jedit.io.VFSFile $r19, $r20, $r22, $r30;
+        boolean $z0;
+        javax.swing.JTextField $r21, $r24, $r29;
+        org.gjt.sp.jedit.io.VFS $r23;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        $r4 = new javax.swing.JPanel;
+
+        $r5 = new java.awt.BorderLayout;
+
+        specialinvoke $r5.<init>();
+
+        specialinvoke $r4.<init>($r5);
+
+        r1 = $r4;
+
+        $r6 = new javax.swing.JLabel;
+
+        specialinvoke $r6.<init>();
+
+        r0.infoIcon = $r6;
+
+        $r7 = r0.infoIcon;
+
+        $r8 = javax.swing.UIManager.getIcon("OptionPane.informationIcon");
+
+        $r7.setIcon($r8);
+
+        $r9 = r0.infoIcon;
+
+        r1.add("West", $r9);
+
+        $r11 = new javax.swing.JPanel;
+
+        specialinvoke $r11.<init>();
+
+        r2 = $r11;
+
+        $r12 = new javax.swing.JLabel;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.name");
+
+        $r15 = $r13.append($r14);
+
+        $r16 = $r15.append(": ");
+
+        $r17 = $r16.toString();
+
+        specialinvoke $r12.<init>($r17);
+
+        r2.add($r12);
+
+        $r19 = r0.local;
+
+        $z0 = $r19 instanceof org.gjt.sp.jedit.io.FavoritesVFS$Favorite;
+
+        if $z0 == 0 goto label1;
+
+        $r30 = r0.local;
+
+        r3 = (org.gjt.sp.jedit.io.FavoritesVFS$Favorite) $r30;
+
+        r31 = r3.getLabel();
+
+(0)     goto label2;
+
+     label1:
+        $r20 = r0.local;
+
+(1)     r31_1 = $r20.getName();
+
+     label2:
+        r31_2 = Phi(r31 #0, r31_1 #1);
+
+        $r21 = new javax.swing.JTextField;
+
+        specialinvoke $r21.<init>(r31_2, 20);
+
+        r0.nameTextField = $r21;
+
+        $r22 = r0.local;
+
+        $r23 = $r22.getVFS();
+
+        $i0 = $r23.getCapabilities();
+
+        $i1 = $i0 & 16;
+
+        if $i1 != 0 goto label3;
+
+        $r29 = r0.nameTextField;
+
+        $r29.setEditable(0);
+
+     label3:
+        $r24 = r0.nameTextField;
+
+        r2.add($r24);
+
+        r1.add("Center", r2);
+
+        $r27 = new javax.swing.JPanel;
+
+        specialinvoke $r27.<init>();
+
+        r1.add("South", $r27);
+
+        return r1;
+    }
+
+    public javax.swing.JPanel createCenterPanel()
+    {
+        org.gjt.sp.jedit.gui.FilePropertiesDialog r0;
+        java.text.SimpleDateFormat r1, $r5;
+        javax.swing.JPanel r2, r3, r4, $r6, $r8, $r45;
+        java.awt.BorderLayout $r7;
+        java.awt.GridLayout $r9, $r46;
+        javax.swing.JLabel $r10, $r20, $r32, $r67, $r76;
+        java.lang.StringBuilder $r11, $r13, $r14, $r17, $r21, $r23, $r24, $r27, $r33, $r35, $r36, $r39, $r68, $r70, $r71, $r73, $r77, $r79, $r80, $r85;
+        java.lang.String $r12, $r16, $r18, $r22, $r26, $r28, $r34, $r38, $r40, $r42, $r48, $r55, $r61, $r66, $r69, $r72, $r74, $r78, $r84, $r86;
+        org.gjt.sp.jedit.io.VFSFile $r15, $r25, $r30, $r31, $r37, $r49, $r56, $r65, $r82;
+        boolean $z0, $z1, $z2;
+        int $i0;
+        long $l1, $l2, $l3;
+        javax.swing.border.TitledBorder $r43, $r62;
+        javax.swing.JCheckBox $r47, $r50, $r51, $r52, $r54, $r57, $r58, $r59;
+        java.io.File $r64, r88;
+        java.util.Date $r81;
+        org.gjt.sp.jedit.io.FileVFS$LocalFile $r83;
+        javax.swing.border.Border r89;
+
+        r0 := @this;
+
+        $r5 = new java.text.SimpleDateFormat;
+
+        specialinvoke $r5.<init>("yyyy-MM-dd hh:mm");
+
+        r1 = $r5;
+
+        $r6 = new javax.swing.JPanel;
+
+        $r7 = new java.awt.BorderLayout;
+
+        specialinvoke $r7.<init>();
+
+        specialinvoke $r6.<init>($r7);
+
+        r2 = $r6;
+
+        $r8 = new javax.swing.JPanel;
+
+        specialinvoke $r8.<init>();
+
+        r3 = $r8;
+
+        $r9 = new java.awt.GridLayout;
+
+        specialinvoke $r9.<init>(4, 1);
+
+        r3.setLayout($r9);
+
+        $r10 = new javax.swing.JLabel;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.name");
+
+        $r13 = $r11.append($r12);
+
+        $r14 = $r13.append(": ");
+
+        $r15 = r0.local;
+
+        $r16 = $r15.getName();
+
+        $r17 = $r14.append($r16);
+
+        $r18 = $r17.toString();
+
+        specialinvoke $r10.<init>($r18);
+
+        r3.add($r10);
+
+        $r20 = new javax.swing.JLabel;
+
+        $r21 = new java.lang.StringBuilder;
+
+        specialinvoke $r21.<init>();
+
+        $r22 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.path");
+
+        $r23 = $r21.append($r22);
+
+        $r24 = $r23.append(": ");
+
+        $r25 = r0.local;
+
+        $r26 = $r25.getPath();
+
+        $r27 = $r24.append($r26);
+
+        $r28 = $r27.toString();
+
+        specialinvoke $r20.<init>($r28);
+
+        r3.add($r20);
+
+        $r30 = r0.local;
+
+        $z0 = $r30 instanceof org.gjt.sp.jedit.io.FileVFS$LocalFile;
+
+        if $z0 == 0 goto label1;
+
+        $r76 = new javax.swing.JLabel;
+
+        $r77 = new java.lang.StringBuilder;
+
+        specialinvoke $r77.<init>();
+
+        $r78 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.lastmod");
+
+        $r79 = $r77.append($r78);
+
+        $r80 = $r79.append(": ");
+
+        $r81 = new java.util.Date;
+
+        $r82 = r0.local;
+
+        $r83 = (org.gjt.sp.jedit.io.FileVFS$LocalFile) $r82;
+
+        $l3 = $r83.getModified();
+
+        specialinvoke $r81.<init>($l3);
+
+        $r84 = r1.format($r81);
+
+        $r85 = $r80.append($r84);
+
+        $r86 = $r85.toString();
+
+        specialinvoke $r76.<init>($r86);
+
+        r3.add($r76);
+
+     label1:
+        $r31 = r0.local;
+
+        $i0 = $r31.getType();
+
+        if $i0 != 1 goto label2;
+
+        $r64 = new java.io.File;
+
+        $r65 = r0.local;
+
+        $r66 = $r65.getPath();
+
+        specialinvoke $r64.<init>($r66);
+
+        r88 = $r64;
+
+        $r67 = new javax.swing.JLabel;
+
+        $r68 = new java.lang.StringBuilder;
+
+        specialinvoke $r68.<init>();
+
+        $r69 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.size");
+
+        $r70 = $r68.append($r69);
+
+        $r71 = $r70.append(": ");
+
+        $l2 = org.gjt.sp.util.IOUtilities.fileLength(r88);
+
+        $r72 = org.gjt.sp.util.StandardUtilities.formatFileSize($l2);
+
+        $r73 = $r71.append($r72);
+
+        $r74 = $r73.toString();
+
+        specialinvoke $r67.<init>($r74);
+
+        r3.add($r67);
+
+        goto label3;
+
+     label2:
+        $r32 = new javax.swing.JLabel;
+
+        $r33 = new java.lang.StringBuilder;
+
+        specialinvoke $r33.<init>();
+
+        $r34 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.size");
+
+        $r35 = $r33.append($r34);
+
+        $r36 = $r35.append(": ");
+
+        $r37 = r0.local;
+
+        $l1 = $r37.getLength();
+
+        $r38 = org.gjt.sp.util.StandardUtilities.formatFileSize($l1);
+
+        $r39 = $r36.append($r38);
+
+        $r40 = $r39.toString();
+
+        specialinvoke $r32.<init>($r40);
+
+        r3.add($r32);
+
+     label3:
+        r89 = javax.swing.BorderFactory.createEtchedBorder();
+
+        $r42 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.properties");
+
+        $r43 = javax.swing.BorderFactory.createTitledBorder(r89, $r42);
+
+        r3.setBorder($r43);
+
+        r2.add("Center", r3);
+
+        $r45 = new javax.swing.JPanel;
+
+        specialinvoke $r45.<init>();
+
+        r4 = $r45;
+
+        $r46 = new java.awt.GridLayout;
+
+        specialinvoke $r46.<init>(1, 2);
+
+        r4.setLayout($r46);
+
+        $r47 = new javax.swing.JCheckBox;
+
+        $r48 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.readable");
+
+        specialinvoke $r47.<init>($r48);
+
+        r0.readable = $r47;
+
+        $r50 = r0.readable;
+
+        $r49 = r0.local;
+
+        $z1 = $r49.isReadable();
+
+        $r50.setSelected($z1);
+
+        $r51 = r0.readable;
+
+        $r51.setEnabled(0);
+
+        $r52 = r0.readable;
+
+        r4.add($r52);
+
+        $r54 = new javax.swing.JCheckBox;
+
+        $r55 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.writeable");
+
+        specialinvoke $r54.<init>($r55);
+
+        r0.write = $r54;
+
+        $r57 = r0.write;
+
+        $r56 = r0.local;
+
+        $z2 = $r56.isWriteable();
+
+        $r57.setSelected($z2);
+
+        $r58 = r0.write;
+
+        $r58.setEnabled(0);
+
+        $r59 = r0.write;
+
+        r4.add($r59);
+
+        $r61 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.attribute");
+
+        $r62 = javax.swing.BorderFactory.createTitledBorder(r89, $r61);
+
+        r4.setBorder($r62);
+
+        r2.add("South", r4);
+
+        return r2;
+    }
+
+    public javax.swing.JPanel createSouthPanel()
+    {
+        org.gjt.sp.jedit.gui.FilePropertiesDialog r0;
+        org.gjt.sp.jedit.gui.FilePropertiesDialog$ButtonActionHandler r1, $r4;
+        javax.swing.JPanel r2, r3, $r5, $r7;
+        java.awt.BorderLayout $r6;
+        javax.swing.JButton $r8, $r10, $r12, $r13, $r15, $r17;
+        java.lang.String $r9, $r14;
+
+        r0 := @this;
+
+        $r4 = new org.gjt.sp.jedit.gui.FilePropertiesDialog$ButtonActionHandler;
+
+        specialinvoke $r4.<init>(r0, null);
+
+        r1 = $r4;
+
+        $r5 = new javax.swing.JPanel;
+
+        $r6 = new java.awt.BorderLayout;
+
+        specialinvoke $r6.<init>();
+
+        specialinvoke $r5.<init>($r6);
+
+        r2 = $r5;
+
+        $r7 = new javax.swing.JPanel;
+
+        specialinvoke $r7.<init>();
+
+        r3 = $r7;
+
+        $r8 = new javax.swing.JButton;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.okBtn");
+
+        specialinvoke $r8.<init>($r9);
+
+        r0.okButton = $r8;
+
+        $r10 = r0.okButton;
+
+        r3.add($r10);
+
+        $r12 = r0.okButton;
+
+        $r12.addActionListener(r1);
+
+        $r13 = new javax.swing.JButton;
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("fileprop.cancelBtn");
+
+        specialinvoke $r13.<init>($r14);
+
+        r0.cancelButton = $r13;
+
+        $r15 = r0.cancelButton;
+
+        r3.add($r15);
+
+        $r17 = r0.cancelButton;
+
+        $r17.addActionListener(r1);
+
+        r2.add("East", r3);
+
+        return r2;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.gui.FilePropertiesDialog r0;
+        org.gjt.sp.jedit.io.VFSFile r1;
+        javax.swing.JTextField $r2, $r6;
+        org.gjt.sp.jedit.browser.VFSBrowser $r3, $r7;
+        org.gjt.sp.jedit.io.VFSFile[] $r4;
+        org.gjt.sp.jedit.io.VFS $r5;
+        int $i0, $i1;
+        java.lang.String $r8;
+
+        r0 := @this;
+
+        $r2 = r0.nameTextField;
+
+        if $r2 == null goto label1;
+
+        $r3 = r0.browser;
+
+        $r4 = $r3.getSelectedFiles();
+
+        r1 = $r4[0];
+
+        $r5 = r1.getVFS();
+
+        $i0 = $r5.getCapabilities();
+
+        $i1 = $i0 & 16;
+
+        if $i1 == 0 goto label1;
+
+        $r7 = r0.browser;
+
+        $r6 = r0.nameTextField;
+
+        $r8 = $r6.getText();
+
+        $r7.rename(r1, $r8);
+
+     label1:
+        org.gjt.sp.jedit.GUIUtilities.saveGeometry(r0, "propdialog");
+
+        r0.setVisible(0);
+
+        return;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.gui.FilePropertiesDialog r0;
+
+        r0 := @this;
+
+        org.gjt.sp.jedit.GUIUtilities.saveGeometry(r0, "propdialog");
+
+        r0.setVisible(0);
+
+        return;
+    }
+
+    private void createAndShowGUI()
+    {
+        org.gjt.sp.jedit.gui.FilePropertiesDialog r0;
+
+        r0 := @this;
+
+        r0.addComponentsToPane();
+
+        r0.pack();
+
+        r0.setDefaultCloseOperation(2);
+
+        r0.setFocusable(1);
+
+        r0.toFront();
+
+        r0.requestFocus();
+
+        r0.setResizable(0);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    static javax.swing.JButton access$100(org.gjt.sp.jedit.gui.FilePropertiesDialog)
+    {
+        org.gjt.sp.jedit.gui.FilePropertiesDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.okButton;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$200(org.gjt.sp.jedit.gui.FilePropertiesDialog)
+    {
+        org.gjt.sp.jedit.gui.FilePropertiesDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.cancelButton;
+
+        return $r1;
+    }
+}

@@ -1,0 +1,40 @@
+class org.gjt.sp.jedit.pluginmgr.InstallPanel$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final javax.swing.JSplitPane val$split;
+    final org.gjt.sp.jedit.pluginmgr.InstallPanel this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.InstallPanel, javax.swing.JSplitPane)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$1 r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r1;
+        javax.swing.JSplitPane r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$split = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$1 r0;
+        javax.swing.JSplitPane $r1;
+
+        r0 := @this;
+
+        $r1 = r0.val$split;
+
+        $r1.setDividerLocation(0.75);
+
+        return;
+    }
+}

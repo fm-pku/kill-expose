@@ -1,0 +1,209 @@
+class org.gjt.sp.jedit.bsh.BSHMethodInvocation extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHMethodInvocation r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    org.gjt.sp.jedit.bsh.BSHAmbiguousName getNameNode()
+    {
+        org.gjt.sp.jedit.bsh.BSHMethodInvocation r0;
+        org.gjt.sp.jedit.bsh.Node $r1;
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName $r2;
+
+        r0 := @this;
+
+        $r1 = r0.jjtGetChild(0);
+
+        $r2 = (org.gjt.sp.jedit.bsh.BSHAmbiguousName) $r1;
+
+        return $r2;
+    }
+
+    org.gjt.sp.jedit.bsh.BSHArguments getArgsNode()
+    {
+        org.gjt.sp.jedit.bsh.BSHMethodInvocation r0;
+        org.gjt.sp.jedit.bsh.Node $r1;
+        org.gjt.sp.jedit.bsh.BSHArguments $r2;
+
+        r0 := @this;
+
+        $r1 = r0.jjtGetChild(1);
+
+        $r2 = (org.gjt.sp.jedit.bsh.BSHArguments) $r1;
+
+        return $r2;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHMethodInvocation r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.NameSpace r3, $r9, $r12;
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName r4;
+        org.gjt.sp.jedit.bsh.Name r5;
+        java.lang.Object[] r6;
+        java.lang.String r7, $r13, $r15, $r28, $r30;
+        java.lang.Throwable r8;
+        org.gjt.sp.jedit.bsh.BSHArguments $r10;
+        java.lang.Object $r11;
+        boolean $z0, $z1, $z2, $z3, $z4, z5, z5_1, z5_2, z5_3;
+        org.gjt.sp.jedit.bsh.Primitive $r14;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r16, r33;
+        org.gjt.sp.jedit.bsh.EvalError $r17, $r25;
+        java.lang.reflect.InvocationTargetException $r18, r32;
+        java.lang.StringBuilder $r19, $r20, $r21, $r26, $r27, $r29;
+        org.gjt.sp.jedit.bsh.TargetError $r22, $r23;
+        org.gjt.sp.jedit.bsh.ReflectError $r24, r31;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 = r1.top();
+
+        r4 = r0.getNameNode();
+
+        $r9 = r3.getParent();
+
+        if $r9 == null goto label2;
+
+        $r12 = r3.getParent();
+
+        $z0 = $r12.isClass;
+
+        if $z0 == 0 goto label2;
+
+        $r13 = r4.text;
+
+        Packer.Unpack(r4);
+
+        $z1 = $r13.equals("super");
+
+        Packer.Pack(r4);
+
+        if $z1 != 0 goto label1;
+
+        Packer.Unpack(r4);
+
+        $r15 = r4.text;
+
+        $z2 = $r15.equals("this");
+
+        Packer.Pack(r4);
+
+        if $z2 == 0 goto label2;
+
+     label1:
+        $r14 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        return $r14;
+
+     label2:
+        r5 = r4.getName(r3);
+
+        $r10 = r0.getArgsNode();
+
+        r6 = $r10.getArguments(r1, r2);
+
+     label3:
+        $r11 = r5.invokeMethod(r2, r6, r1, r0);
+
+     label4:
+        return $r11;
+
+     label5:
+        $r24 := @caughtexception;
+
+        r31 = $r24;
+
+        $r25 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r26 = new java.lang.StringBuilder;
+
+        specialinvoke $r26.<init>();
+
+        $r27 = $r26.append("Error in method invocation: ");
+
+        $r28 = r31.getMessage();
+
+        $r29 = $r27.append($r28);
+
+        $r30 = $r29.toString();
+
+        specialinvoke $r25.<init>($r30, r0, r1);
+
+        throw $r25;
+
+     label6:
+        $r18 := @caughtexception;
+
+        r32 = $r18;
+
+        $r19 = new java.lang.StringBuilder;
+
+        specialinvoke $r19.<init>();
+
+        $r20 = $r19.append("Method Invocation ");
+
+        $r21 = $r20.append(r5);
+
+        r7 = $r21.toString();
+
+        r8 = r32.getTargetException();
+
+        z5 = 1;
+
+        $z3 = r8 instanceof org.gjt.sp.jedit.bsh.EvalError;
+
+(0)     if $z3 == 0 goto label8;
+
+        $z4 = r8 instanceof org.gjt.sp.jedit.bsh.TargetError;
+
+        if $z4 == 0 goto label7;
+
+        $r23 = (org.gjt.sp.jedit.bsh.TargetError) r8;
+
+        z5_1 = $r23.inNativeCode();
+
+(1)     goto label8;
+
+     label7:
+(2)     z5_2 = 0;
+
+     label8:
+        z5_3 = Phi(z5 #0, z5_1 #1, z5_2 #2);
+
+        $r22 = new org.gjt.sp.jedit.bsh.TargetError;
+
+        specialinvoke $r22.<init>(r7, r8, r0, r1, z5_3);
+
+        throw $r22;
+
+     label9:
+        $r16 := @caughtexception;
+
+        r33 = $r16;
+
+        $r17 = r33.toEvalError(r0, r1);
+
+        throw $r17;
+
+        catch org.gjt.sp.jedit.bsh.ReflectError from label3 to label4 with label5;
+        catch java.lang.reflect.InvocationTargetException from label3 to label4 with label6;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label3 to label4 with label9;
+    }
+}

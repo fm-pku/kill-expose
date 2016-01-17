@@ -1,0 +1,681 @@
+public class org.gjt.sp.jedit.gui.SplashScreen extends javax.swing.JComponent
+{
+    private static final long serialVersionUID;
+    private final java.awt.FontMetrics fm;
+    private final javax.swing.JWindow win;
+    private final java.awt.Image image;
+    private int progress;
+    private static final int PROGRESS_HEIGHT;
+    private static final int PROGRESS_COUNT;
+    private java.lang.String label;
+    private java.lang.String lastLabel;
+    private long firstAdvanceTime;
+    private long lastAdvanceTime;
+    private java.awt.Font labelFont;
+    private java.awt.Color versionColor1;
+    private java.awt.Color versionColor2;
+    private java.awt.SplashScreen realSplash;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.gui.SplashScreen r0;
+        java.awt.MediaTracker r1, $r20;
+        java.awt.GraphicsEnvironment r2;
+        java.awt.GraphicsDevice[] r3;
+        java.awt.GraphicsDevice r4;
+        java.awt.Rectangle r5;
+        long $l0, $l1;
+        java.awt.Font $r6, $r7, $r11;
+        java.awt.Color $r8, $r9, $r15;
+        java.awt.SplashScreen $r10, $r13;
+        java.awt.FontMetrics $r12;
+        java.awt.Cursor $r14;
+        java.awt.Toolkit $r16, $r22;
+        java.lang.Class $r17;
+        java.net.URL $r18;
+        java.awt.Image $r19, $r21, $r25, $r26;
+        javax.swing.JWindow $r23, $r27, $r28, $r30, $r31, $r32;
+        java.awt.Dimension $r24, $r33, r36, r38, r36_1, r36_2, r36_3;
+        int $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15;
+        java.awt.Container $r29;
+        java.lang.Exception $r34, r35;
+        java.awt.GraphicsConfiguration r37;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $l0 = java.lang.System.currentTimeMillis();
+
+        r0.firstAdvanceTime = $l0;
+
+        $l1 = java.lang.System.currentTimeMillis();
+
+        r0.lastAdvanceTime = $l1;
+
+        $r6 = javax.swing.UIManager.getFont("Label.font");
+
+        $r7 = $r6.deriveFont(9.8F);
+
+        r0.labelFont = $r7;
+
+        $r8 = new java.awt.Color;
+
+        specialinvoke $r8.<init>(55, 55, 55);
+
+        r0.versionColor1 = $r8;
+
+        $r9 = new java.awt.Color;
+
+        specialinvoke $r9.<init>(255, 255, 255, 50);
+
+        r0.versionColor2 = $r9;
+
+        $r10 = java.awt.SplashScreen.getSplashScreen();
+
+        r0.realSplash = $r10;
+
+        $r11 = r0.labelFont;
+
+        $r12 = r0.getFontMetrics($r11);
+
+        r0.fm = $r12;
+
+        $r13 = r0.realSplash;
+
+        if $r13 != null goto label6;
+
+        $r14 = java.awt.Cursor.getPredefinedCursor(3);
+
+        r0.setCursor($r14);
+
+        $r15 = java.awt.Color.white;
+
+        r0.setBackground($r15);
+
+        $r16 = r0.getToolkit();
+
+        $r17 = r0.getClass();
+
+        $r18 = $r17.getResource("/org/gjt/sp/jedit/icons/splash.png");
+
+        $r19 = $r16.getImage($r18);
+
+        r0.image = $r19;
+
+        $r20 = new java.awt.MediaTracker;
+
+        specialinvoke $r20.<init>(r0);
+
+        r1 = $r20;
+
+        $r21 = r0.image;
+
+        r1.addImage($r21, 0);
+
+     label1:
+        r1.waitForAll();
+
+     label2:
+        goto label4;
+
+     label3:
+        $r34 := @caughtexception;
+
+        r35 = $r34;
+
+        org.gjt.sp.util.Log.log(9, r0, r35);
+
+     label4:
+        $r22 = r0.getToolkit();
+
+        r36 = $r22.getScreenSize();
+
+        $r23 = new javax.swing.JWindow;
+
+        specialinvoke $r23.<init>();
+
+        r0.win = $r23;
+
+        r2 = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment();
+
+        r3 = r2.getScreenDevices();
+
+        r4 = r3[0];
+
+(0)     if r4 == null goto label5;
+
+        r37 = r4.getDefaultConfiguration();
+
+(1)     if r37 == null goto label5;
+
+        r5 = r37.getBounds();
+
+        $r33 = new java.awt.Dimension;
+
+        $i15 = r5.width;
+
+        $i14 = r5.height;
+
+        specialinvoke $r33.<init>($i15, $i14);
+
+(2)     r36_1 = $r33;
+
+     label5:
+        r36_2 = Phi(r36 #0, r36 #1, r36_1 #2);
+
+        $r24 = new java.awt.Dimension;
+
+        $r25 = r0.image;
+
+        $i2 = $r25.getWidth(r0);
+
+        $i3 = $i2 + 2;
+
+        $r26 = r0.image;
+
+        $i4 = $r26.getHeight(r0);
+
+        $i5 = $i4 + 2;
+
+        specialinvoke $r24.<init>($i3, $i5);
+
+        r38 = $r24;
+
+        $r27 = r0.win;
+
+        $r27.setSize(r38);
+
+        $r28 = r0.win;
+
+        $r29 = $r28.getContentPane();
+
+        $r29.add(r0, "Center");
+
+        $r30 = r0.win;
+
+        $i7 = r36_2.width;
+
+        $i6 = r38.width;
+
+        $i8 = $i7 - $i6;
+
+        $i13 = $i8 / 2;
+
+        $i10 = r36_2.height;
+
+        $i9 = r38.height;
+
+        $i11 = $i10 - $i9;
+
+        $i12 = $i11 / 2;
+
+        $r30.setLocation($i13, $i12);
+
+        $r31 = r0.win;
+
+        $r31.validate();
+
+        $r32 = r0.win;
+
+        $r32.setVisible(1);
+
+(3)     goto label7;
+
+     label6:
+        r0.win = null;
+
+(4)     r0.image = null;
+
+     label7:
+        r36_3 = Phi(r36_2 #3, r36 #4);
+
+        return;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    public void dispose()
+    {
+        org.gjt.sp.jedit.gui.SplashScreen r0;
+        java.awt.SplashScreen $r1, $r2, $r3;
+        boolean $z0;
+        javax.swing.JWindow $r4;
+
+        r0 := @this;
+
+        $r1 = r0.realSplash;
+
+        if $r1 != null goto label1;
+
+        $r4 = r0.win;
+
+        $r4.dispose();
+
+        goto label2;
+
+     label1:
+        $r2 = r0.realSplash;
+
+        $z0 = $r2.isVisible();
+
+        if $z0 == 0 goto label2;
+
+        $r3 = r0.realSplash;
+
+        $r3.close();
+
+     label2:
+        return;
+    }
+
+    public synchronized void advance()
+    {
+        org.gjt.sp.jedit.gui.SplashScreen r0;
+        java.lang.InterruptedException r1, $r3;
+        int $i0, $i1;
+        java.awt.SplashScreen $r2;
+
+        r0 := @this;
+
+        specialinvoke r0.logAdvanceTime(null);
+
+        $i0 = r0.progress;
+
+        $i1 = $i0 + 1;
+
+        r0.progress = $i1;
+
+        r0.repaint();
+
+        $r2 = r0.realSplash;
+
+        if $r2 != null goto label4;
+
+     label1:
+        r0.wait();
+
+     label2:
+        goto label4;
+
+     label3:
+        $r3 := @caughtexception;
+
+        r1 = $r3;
+
+        org.gjt.sp.util.Log.log(9, r0, r1);
+
+     label4:
+        return;
+
+        catch java.lang.InterruptedException from label1 to label2 with label3;
+    }
+
+    public synchronized void advance(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.SplashScreen r0;
+        java.lang.String r1;
+        java.lang.InterruptedException r2, $r4;
+        int $i0, $i1;
+        java.awt.SplashScreen $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.logAdvanceTime(r1);
+
+        $i0 = r0.progress;
+
+        $i1 = $i0 + 1;
+
+        r0.progress = $i1;
+
+        r0.label = r1;
+
+        r0.repaint();
+
+        $r3 = r0.realSplash;
+
+        if $r3 != null goto label4;
+
+     label1:
+        r0.wait();
+
+     label2:
+        goto label4;
+
+     label3:
+        $r4 := @caughtexception;
+
+        r2 = $r4;
+
+        org.gjt.sp.util.Log.log(9, r0, r2);
+
+     label4:
+        return;
+
+        catch java.lang.InterruptedException from label1 to label2 with label3;
+    }
+
+    private void logAdvanceTime(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.SplashScreen r0;
+        java.lang.String r1, $r2, $r4, $r11;
+        long l0, $l1, $l2, $l3, $l4;
+        java.lang.StringBuilder $r3, $r5, $r6, $r7, $r8, $r9, $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        l0 = java.lang.System.currentTimeMillis();
+
+        $r2 = r0.lastLabel;
+
+        if $r2 == null goto label1;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = r0.lastLabel;
+
+        $r5 = $r3.append($r4);
+
+        $r6 = $r5.append(58);
+
+        $l1 = r0.lastAdvanceTime;
+
+        $l2 = l0 - $l1;
+
+        $r7 = $r6.append($l2);
+
+        $r8 = $r7.append("/");
+
+        $l3 = r0.firstAdvanceTime;
+
+        $l4 = l0 - $l3;
+
+        $r9 = $r8.append($l4);
+
+        $r10 = $r9.append("ms");
+
+        $r11 = $r10.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/gui/SplashScreen", $r11);
+
+     label1:
+        if r1 == null goto label2;
+
+        r0.lastLabel = r1;
+
+        r0.lastAdvanceTime = l0;
+
+     label2:
+        return;
+    }
+
+    public void repaint()
+    {
+        org.gjt.sp.jedit.gui.SplashScreen r0;
+        java.awt.Graphics2D r1;
+        java.awt.Dimension r2;
+        java.awt.SplashScreen $r3, $r4, $r5, $r7;
+        java.awt.AlphaComposite $r6;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        $r3 = r0.realSplash;
+
+        if $r3 != null goto label1;
+
+        specialinvoke r0.repaint();
+
+        return;
+
+     label1:
+        $r4 = r0.realSplash;
+
+        r1 = $r4.createGraphics();
+
+        if r1 != null goto label2;
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/gui/SplashScreen", "using native splash screen, but can\'t obtain graphics from it");
+
+        return;
+
+     label2:
+        $r5 = r0.realSplash;
+
+        r2 = $r5.getSize();
+
+        $r6 = java.awt.AlphaComposite.Clear;
+
+        r1.setComposite($r6);
+
+        $i1 = r2.width;
+
+        $i0 = r2.height;
+
+        r1.fillRect(0, 0, $i1, $i0);
+
+        r1.setPaintMode();
+
+        specialinvoke r0.doPaintContents(r1, r2);
+
+        $r7 = r0.realSplash;
+
+        $r7.update();
+
+        return;
+    }
+
+    public synchronized void paintComponent(java.awt.Graphics)
+    {
+        org.gjt.sp.jedit.gui.SplashScreen r0;
+        java.awt.Graphics r1;
+        java.awt.Dimension r2;
+        java.awt.Image $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r0.getSize();
+
+        $r3 = r0.image;
+
+        r1.drawImage($r3, 1, 1, r0);
+
+        specialinvoke r0.doPaintContents(r1, r2);
+
+        r0.notify();
+
+        return;
+    }
+
+    private void doPaintContents(java.awt.Graphics, java.awt.Dimension)
+    {
+        org.gjt.sp.jedit.gui.SplashScreen r0;
+        java.awt.Graphics r1;
+        java.awt.Dimension r2;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i20, $i21, $i22, $i23, $i24, $i25, $i26, $i27, $i28, $i29, $i30, $i31, i32, i33, i34;
+        java.awt.Color $r3, $r4, $r5;
+        java.lang.String $r6, $r9, $r13, $r17, r18;
+        java.lang.StringBuilder $r7, $r8, $r10;
+        java.awt.FontMetrics $r11, $r12, $r14, $r15, $r16;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = java.awt.Color.black;
+
+        r1.setColor($r3);
+
+        $i1 = r2.width;
+
+        $i4 = $i1 - 1;
+
+        $i2 = r2.height;
+
+        $i3 = $i2 - 1;
+
+        r1.drawRect(0, 0, $i4, $i3);
+
+        $r4 = java.awt.Color.white;
+
+        r1.setColor($r4);
+
+        $i5 = r2.height;
+
+        $i6 = $i5 - 1;
+
+        $i12 = $i6 - 20;
+
+        $i7 = r2.width;
+
+        $i9 = $i7 - 2;
+
+        $i8 = r0.progress;
+
+        $i10 = $i9 * $i8;
+
+        $i11 = $i10 / 28;
+
+        r1.fillRect(1, $i12, $i11, 20);
+
+        $r5 = java.awt.Color.black;
+
+        r1.setColor($r5);
+
+        $r6 = r0.label;
+
+        if $r6 == null goto label1;
+
+        $i21 = r2.width;
+
+        $r14 = r0.fm;
+
+        $r13 = r0.label;
+
+        $i22 = $r14.stringWidth($r13);
+
+        $i23 = $i21 - $i22;
+
+        i32 = $i23 / 2;
+
+        $i24 = r2.height;
+
+        $i25 = $i24 - 2;
+
+        $i26 = $i25 - 20;
+
+        $r15 = r0.fm;
+
+        $i27 = $r15.getAscent();
+
+        $i28 = 20 + $i27;
+
+        $r16 = r0.fm;
+
+        $i29 = $r16.getDescent();
+
+        $i30 = $i28 + $i29;
+
+        $i31 = $i30 / 2;
+
+        i33 = $i26 + $i31;
+
+        $r17 = r0.label;
+
+        specialinvoke r0.paintString(r1, $r17, i32, i33);
+
+     label1:
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("version ");
+
+        $r9 = org.gjt.sp.jedit.jEdit.getVersion();
+
+        $r10 = $r8.append($r9);
+
+        r18 = $r10.toString();
+
+        $i13 = r2.width;
+
+        $i14 = $i13 / 2;
+
+        $r11 = r0.fm;
+
+        $i15 = $r11.stringWidth(r18);
+
+        $i16 = $i15 / 2;
+
+        i34 = $i14 - $i16;
+
+        $i17 = r2.height;
+
+        $i18 = $i17 - 20;
+
+        $r12 = r0.fm;
+
+        $i19 = $r12.getDescent();
+
+        $i20 = $i18 - $i19;
+
+        i0 = $i20 - 3;
+
+        specialinvoke r0.paintString(r1, r18, i34, i0);
+
+        return;
+    }
+
+    private void paintString(java.awt.Graphics, java.lang.String, int, int)
+    {
+        org.gjt.sp.jedit.gui.SplashScreen r0;
+        java.awt.Graphics r1;
+        java.lang.String r2;
+        int i0, i1, $i2, $i3;
+        java.awt.Font $r3;
+        java.awt.Color $r4, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        i1 := @parameter3;
+
+        $r3 = r0.labelFont;
+
+        r1.setFont($r3);
+
+        $r4 = r0.versionColor1;
+
+        r1.setColor($r4);
+
+        r1.drawString(r2, i0, i1);
+
+        $r5 = r0.versionColor2;
+
+        r1.setColor($r5);
+
+        $i3 = i0 + 1;
+
+        $i2 = i1 + 1;
+
+        r1.drawString(r2, $i3, $i2);
+
+        return;
+    }
+}

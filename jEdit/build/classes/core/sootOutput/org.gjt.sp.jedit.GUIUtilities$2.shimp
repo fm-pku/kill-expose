@@ -1,0 +1,52 @@
+final class org.gjt.sp.jedit.GUIUtilities$2 extends java.lang.Object implements java.lang.Runnable
+{
+    final java.awt.Component val$comp;
+    final java.lang.String val$name;
+    final java.lang.Object[] val$args;
+
+    void <init>(java.awt.Component, java.lang.String, java.lang.Object[])
+    {
+        org.gjt.sp.jedit.GUIUtilities$2 r0;
+        java.awt.Component r1;
+        java.lang.String r2;
+        java.lang.Object[] r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.val$comp = r1;
+
+        r0.val$name = r2;
+
+        r0.val$args = r3;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.GUIUtilities$2 r0;
+        java.lang.Object[] $r1;
+        java.lang.String $r2;
+        java.awt.Component $r3;
+
+        r0 := @this;
+
+        $r3 = r0.val$comp;
+
+        $r2 = r0.val$name;
+
+        $r1 = r0.val$args;
+
+        org.gjt.sp.jedit.GUIUtilities.error($r3, $r2, $r1);
+
+        return;
+    }
+}

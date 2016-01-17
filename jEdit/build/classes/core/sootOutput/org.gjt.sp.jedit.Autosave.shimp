@@ -1,0 +1,156 @@
+class org.gjt.sp.jedit.Autosave extends java.lang.Object implements java.awt.event.ActionListener
+{
+    private static javax.swing.Timer timer;
+
+    public static void setInterval(int)
+    {
+        javax.swing.Timer $r0, $r1, $r2, $r4, $r5, $r6;
+        org.gjt.sp.jedit.Autosave $r3;
+        int i0, i1;
+
+        i0 := @parameter0;
+
+        if i0 != 0 goto label2;
+
+        $r5 = org.gjt.sp.jedit.Autosave.timer;
+
+        if $r5 == null goto label1;
+
+        $r6 = org.gjt.sp.jedit.Autosave.timer;
+
+        $r6.stop();
+
+        org.gjt.sp.jedit.Autosave.timer = null;
+
+     label1:
+        return;
+
+     label2:
+        i1 = i0 * 1000;
+
+        $r0 = org.gjt.sp.jedit.Autosave.timer;
+
+        if $r0 != null goto label3;
+
+        $r2 = new javax.swing.Timer;
+
+        $r3 = new org.gjt.sp.jedit.Autosave;
+
+        specialinvoke $r3.<init>();
+
+        specialinvoke $r2.<init>(i1, $r3);
+
+        org.gjt.sp.jedit.Autosave.timer = $r2;
+
+        $r4 = org.gjt.sp.jedit.Autosave.timer;
+
+        $r4.start();
+
+        goto label4;
+
+     label3:
+        $r1 = org.gjt.sp.jedit.Autosave.timer;
+
+        $r1.setDelay(i1);
+
+     label4:
+        return;
+    }
+
+    public static void stop()
+    {
+        javax.swing.Timer $r0, $r1;
+
+        $r0 = org.gjt.sp.jedit.Autosave.timer;
+
+        if $r0 == null goto label1;
+
+        $r1 = org.gjt.sp.jedit.Autosave.timer;
+
+        $r1.stop();
+
+     label1:
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.Autosave r0;
+        java.awt.event.ActionEvent r1;
+        boolean z0, $z1, $z2;
+        org.gjt.sp.jedit.Buffer[] r2, r3;
+        int i0, $i1, $i2, i3;
+        org.gjt.sp.jedit.Buffer r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i1 = org.gjt.sp.jedit.jEdit.getIntegerProperty("autosave", 0);
+
+        if $i1 != 0 goto label1;
+
+        return;
+
+     label1:
+        $i2 = org.gjt.sp.jedit.jEdit.getViewCount();
+
+        if $i2 == 0 goto label2;
+
+        $z2 = org.gjt.sp.jedit.PerspectiveManager.isPerspectiveDirty();
+
+        if $z2 == 0 goto label2;
+
+        org.gjt.sp.jedit.PerspectiveManager.setPerspectiveDirty(0);
+
+        org.gjt.sp.jedit.PerspectiveManager.savePerspective(1);
+
+     label2:
+        z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("autosaveUntitled");
+
+        r2 = org.gjt.sp.jedit.jEdit.getBuffers();
+
+        r3 = r2;
+
+        i0 = lengthof r3;
+
+(0)     i3 = 0;
+
+     label3:
+        i3 = Phi(i3 #0, i3 #1);
+
+        if i3 >= i0 goto label6;
+
+        r4 = r3[i3];
+
+        if z0 != 0 goto label4;
+
+        $z1 = r4.isUntitled();
+
+        if $z1 != 0 goto label5;
+
+     label4:
+        r4.autosave();
+
+     label5:
+        i3 = i3 + 1;
+
+(1)     goto label3;
+
+     label6:
+        org.gjt.sp.util.Log.flushStream();
+
+        return;
+    }
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.Autosave r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

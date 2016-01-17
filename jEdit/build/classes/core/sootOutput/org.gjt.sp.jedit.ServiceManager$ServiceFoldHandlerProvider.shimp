@@ -1,0 +1,52 @@
+public class org.gjt.sp.jedit.ServiceManager$ServiceFoldHandlerProvider extends java.lang.Object implements org.gjt.sp.jedit.buffer.FoldHandlerProvider
+{
+    public static final java.lang.String SERVICE;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.ServiceManager$ServiceFoldHandlerProvider r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.buffer.FoldHandler getFoldHandler(java.lang.String)
+    {
+        org.gjt.sp.jedit.ServiceManager$ServiceFoldHandlerProvider r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.buffer.FoldHandler r2;
+        java.lang.Object $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = org.gjt.sp.jedit.ServiceManager.getService("org.gjt.sp.jedit.buffer.FoldHandler", r1);
+
+        r2 = (org.gjt.sp.jedit.buffer.FoldHandler) $r3;
+
+        return r2;
+    }
+
+    public java.lang.String[] getFoldModes()
+    {
+        org.gjt.sp.jedit.ServiceManager$ServiceFoldHandlerProvider r0;
+        java.lang.String[] r1;
+        org.gjt.sp.util.StandardUtilities$StringCompare $r2;
+
+        r0 := @this;
+
+        r1 = org.gjt.sp.jedit.ServiceManager.getServiceNames("org.gjt.sp.jedit.buffer.FoldHandler");
+
+        $r2 = new org.gjt.sp.util.StandardUtilities$StringCompare;
+
+        specialinvoke $r2.<init>();
+
+        java.util.Arrays.sort(r1, $r2);
+
+        return r1;
+    }
+}

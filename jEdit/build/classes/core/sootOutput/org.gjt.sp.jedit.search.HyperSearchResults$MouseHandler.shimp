@@ -1,0 +1,311 @@
+class org.gjt.sp.jedit.search.HyperSearchResults$MouseHandler extends java.awt.event.MouseAdapter
+{
+    private javax.swing.JPopupMenu popupMenu;
+    final org.gjt.sp.jedit.search.HyperSearchResults this$0;
+
+    void <init>(org.gjt.sp.jedit.search.HyperSearchResults)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$MouseHandler r0;
+        org.gjt.sp.jedit.search.HyperSearchResults r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mousePressed(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$MouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        javax.swing.tree.TreePath r2;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.search.HyperSearchResults $r3, $r5, $r7;
+        javax.swing.JTree $r4, $r6;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1.isConsumed();
+
+        if $z0 == 0 goto label1;
+
+        return;
+
+     label1:
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r3);
+
+        $i0 = r1.getX();
+
+        $i1 = r1.getY();
+
+        r2 = $r4.getPathForLocation($i0, $i1);
+
+        if r2 != null goto label2;
+
+        return;
+
+     label2:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r5);
+
+        $r6.setSelectionPath(r2);
+
+        $z1 = org.gjt.sp.jedit.GUIUtilities.isPopupTrigger(r1);
+
+        if $z1 == 0 goto label3;
+
+        specialinvoke r0.showPopupMenu(r1);
+
+        goto label4;
+
+     label3:
+        $r7 = r0.this$0;
+
+        org.gjt.sp.jedit.search.HyperSearchResults.access$1100($r7, 0);
+
+     label4:
+        return;
+    }
+
+    private void showPopupMenu(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$MouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        javax.swing.tree.TreePath r2;
+        javax.swing.tree.DefaultMutableTreeNode r3;
+        java.lang.Object r4, $r9;
+        org.gjt.sp.jedit.search.HyperSearchOperationNode r5, $r51;
+        javax.swing.JCheckBoxMenuItem r6, $r44;
+        org.gjt.sp.jedit.search.HyperSearchResults $r7, $r12, $r16, $r20, $r24, $r28, $r32, $r36, $r47, $r52, $r56, $r60;
+        javax.swing.JTree $r8;
+        javax.swing.JPopupMenu $r10, $r13, $r17, $r21, $r25, $r29, $r33, $r37, $r39, $r42, $r48, $r53, $r57, $r61;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7;
+        org.gjt.sp.jedit.search.HyperSearchResults$GoToNodeAction $r11, $r15, $r19, $r23;
+        org.gjt.sp.jedit.search.HyperSearchResults$ExpandChildTreeNodesAction $r27;
+        org.gjt.sp.jedit.search.HyperSearchResults$CollapseChildTreeNodesAction $r31;
+        org.gjt.sp.jedit.search.HyperSearchResults$CopyToClipboardAction $r35;
+        java.awt.Component $r40;
+        int $i0, $i1;
+        javax.swing.JPopupMenu$Separator $r41;
+        java.lang.String $r45;
+        org.gjt.sp.jedit.search.HyperSearchResults$TreeDisplayAction $r46;
+        org.gjt.sp.jedit.search.HyperSearchResults$RedoSearchAction $r50;
+        org.gjt.sp.jedit.search.HyperSearchResults$NewSearchAction $r55;
+        org.gjt.sp.jedit.search.HyperSearchResults$RemoveTreeNodeAction $r59;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r7);
+
+        r2 = $r8.getSelectionPath();
+
+        $r9 = r2.getLastPathComponent();
+
+        r3 = (javax.swing.tree.DefaultMutableTreeNode) $r9;
+
+        $r10 = new javax.swing.JPopupMenu;
+
+        specialinvoke $r10.<init>();
+
+        r0.popupMenu = $r10;
+
+        r4 = r3.getUserObject();
+
+        $z0 = r4 instanceof org.gjt.sp.jedit.search.HyperSearchFileNode;
+
+        if $z0 != 0 goto label1;
+
+        $z7 = r4 instanceof org.gjt.sp.jedit.search.HyperSearchResult;
+
+        if $z7 == 0 goto label2;
+
+     label1:
+        $r13 = r0.popupMenu;
+
+        $r11 = new org.gjt.sp.jedit.search.HyperSearchResults$GoToNodeAction;
+
+        $r12 = r0.this$0;
+
+        specialinvoke $r11.<init>($r12, "hypersearch-results.open", 0);
+
+        $r13.add($r11);
+
+        $r17 = r0.popupMenu;
+
+        $r15 = new org.gjt.sp.jedit.search.HyperSearchResults$GoToNodeAction;
+
+        $r16 = r0.this$0;
+
+        specialinvoke $r15.<init>($r16, "hypersearch-results.open-view", 1);
+
+        $r17.add($r15);
+
+        $r21 = r0.popupMenu;
+
+        $r19 = new org.gjt.sp.jedit.search.HyperSearchResults$GoToNodeAction;
+
+        $r20 = r0.this$0;
+
+        specialinvoke $r19.<init>($r20, "hypersearch-results.open-plain-view", 2);
+
+        $r21.add($r19);
+
+        $r25 = r0.popupMenu;
+
+        $r23 = new org.gjt.sp.jedit.search.HyperSearchResults$GoToNodeAction;
+
+        $r24 = r0.this$0;
+
+        specialinvoke $r23.<init>($r24, "hypersearch-results.open-split", 3);
+
+        $r25.add($r23);
+
+     label2:
+        $z1 = r4 instanceof org.gjt.sp.jedit.search.HyperSearchFolderNode;
+
+        if $z1 != 0 goto label3;
+
+        $r61 = r0.popupMenu;
+
+        $r59 = new org.gjt.sp.jedit.search.HyperSearchResults$RemoveTreeNodeAction;
+
+        $r60 = r0.this$0;
+
+        specialinvoke $r59.<init>($r60);
+
+        $r61.add($r59);
+
+     label3:
+        $r29 = r0.popupMenu;
+
+        $r27 = new org.gjt.sp.jedit.search.HyperSearchResults$ExpandChildTreeNodesAction;
+
+        $r28 = r0.this$0;
+
+        specialinvoke $r27.<init>($r28);
+
+        $r29.add($r27);
+
+        $z2 = r4 instanceof org.gjt.sp.jedit.search.HyperSearchFolderNode;
+
+        if $z2 != 0 goto label4;
+
+        $z6 = r4 instanceof org.gjt.sp.jedit.search.HyperSearchOperationNode;
+
+        if $z6 == 0 goto label5;
+
+     label4:
+        $r33 = r0.popupMenu;
+
+        $r31 = new org.gjt.sp.jedit.search.HyperSearchResults$CollapseChildTreeNodesAction;
+
+        $r32 = r0.this$0;
+
+        specialinvoke $r31.<init>($r32);
+
+        $r33.add($r31);
+
+        $z3 = r4 instanceof org.gjt.sp.jedit.search.HyperSearchFolderNode;
+
+        if $z3 == 0 goto label5;
+
+        $r57 = r0.popupMenu;
+
+        $r55 = new org.gjt.sp.jedit.search.HyperSearchResults$NewSearchAction;
+
+        $r56 = r0.this$0;
+
+        specialinvoke $r55.<init>($r56);
+
+        $r57.add($r55);
+
+     label5:
+        $z4 = r4 instanceof org.gjt.sp.jedit.search.HyperSearchOperationNode;
+
+        if $z4 == 0 goto label6;
+
+        $r42 = r0.popupMenu;
+
+        $r41 = new javax.swing.JPopupMenu$Separator;
+
+        specialinvoke $r41.<init>();
+
+        $r42.add($r41);
+
+        r5 = (org.gjt.sp.jedit.search.HyperSearchOperationNode) r4;
+
+        $r44 = new javax.swing.JCheckBoxMenuItem;
+
+        $r45 = org.gjt.sp.jedit.jEdit.getProperty("hypersearch-results.tree-view");
+
+        $z5 = r5.isTreeViewDisplayed();
+
+        specialinvoke $r44.<init>($r45, $z5);
+
+        r6 = $r44;
+
+        $r46 = new org.gjt.sp.jedit.search.HyperSearchResults$TreeDisplayAction;
+
+        $r47 = r0.this$0;
+
+        specialinvoke $r46.<init>($r47);
+
+        r6.addActionListener($r46);
+
+        $r48 = r0.popupMenu;
+
+        $r48.add(r6);
+
+        $r53 = r0.popupMenu;
+
+        $r50 = new org.gjt.sp.jedit.search.HyperSearchResults$RedoSearchAction;
+
+        $r52 = r0.this$0;
+
+        $r51 = (org.gjt.sp.jedit.search.HyperSearchOperationNode) r4;
+
+        specialinvoke $r50.<init>($r52, $r51);
+
+        $r53.add($r50);
+
+     label6:
+        $r37 = r0.popupMenu;
+
+        $r35 = new org.gjt.sp.jedit.search.HyperSearchResults$CopyToClipboardAction;
+
+        $r36 = r0.this$0;
+
+        specialinvoke $r35.<init>($r36);
+
+        $r37.add($r35);
+
+        $r39 = r0.popupMenu;
+
+        $r40 = r1.getComponent();
+
+        $i0 = r1.getX();
+
+        $i1 = r1.getY();
+
+        org.gjt.sp.jedit.GUIUtilities.showPopupMenu($r39, $r40, $i0, $i1);
+
+        r1.consume();
+
+        return;
+    }
+}

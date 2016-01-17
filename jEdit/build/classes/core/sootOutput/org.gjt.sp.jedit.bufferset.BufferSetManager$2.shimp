@@ -1,0 +1,64 @@
+class org.gjt.sp.jedit.bufferset.BufferSetManager$2 extends org.gjt.sp.jedit.visitors.JEditVisitorAdapter
+{
+    final org.gjt.sp.jedit.Buffer[] val$buffers;
+    final org.gjt.sp.jedit.bufferset.BufferSetManager this$0;
+
+    void <init>(org.gjt.sp.jedit.bufferset.BufferSetManager, org.gjt.sp.jedit.Buffer[])
+    {
+        org.gjt.sp.jedit.bufferset.BufferSetManager$2 r0;
+        org.gjt.sp.jedit.bufferset.BufferSetManager r1;
+        org.gjt.sp.jedit.Buffer[] r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$buffers = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void visit(org.gjt.sp.jedit.EditPane)
+    {
+        org.gjt.sp.jedit.bufferset.BufferSetManager$2 r0;
+        org.gjt.sp.jedit.EditPane r1;
+        org.gjt.sp.jedit.bufferset.BufferSet r2;
+        org.gjt.sp.jedit.Buffer[] r3;
+        int i0, i1;
+        org.gjt.sp.jedit.Buffer r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getBufferSet();
+
+        r3 = r0.val$buffers;
+
+        i0 = lengthof r3;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label2;
+
+        r4 = r3[i1];
+
+        r2.addBuffer(r4);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return;
+    }
+}

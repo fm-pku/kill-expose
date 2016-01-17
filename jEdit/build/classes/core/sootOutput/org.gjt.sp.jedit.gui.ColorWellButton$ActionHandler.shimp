@@ -1,0 +1,76 @@
+class org.gjt.sp.jedit.gui.ColorWellButton$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.ColorWellButton this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.ColorWellButton)
+    {
+        org.gjt.sp.jedit.gui.ColorWellButton$ActionHandler r0;
+        org.gjt.sp.jedit.gui.ColorWellButton r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.ColorWellButton$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        javax.swing.JDialog r2;
+        org.gjt.sp.jedit.gui.ColorWellButton $r3, $r4, $r7, $r9, $r11;
+        java.awt.Component $r5;
+        java.lang.String $r6, $r10;
+        java.awt.Color $r8, $r12, r13, r13_1, r13_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.this$0;
+
+        r2 = org.gjt.sp.jedit.GUIUtilities.getParentDialog($r3);
+
+        if r2 == null goto label1;
+
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty("colorChooser.title");
+
+        $r11 = r0.this$0;
+
+        $r12 = $r11.getSelectedColor();
+
+        r13 = javax.swing.JColorChooser.showDialog(r2, $r10, $r12);
+
+(0)     goto label2;
+
+     label1:
+        $r4 = r0.this$0;
+
+        $r5 = javax.swing.SwingUtilities.getRoot($r4);
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("colorChooser.title");
+
+        $r7 = r0.this$0;
+
+        $r8 = $r7.getSelectedColor();
+
+(1)     r13_1 = javax.swing.JColorChooser.showDialog($r5, $r6, $r8);
+
+     label2:
+        r13_2 = Phi(r13 #0, r13_1 #1);
+
+        if r13_2 == null goto label3;
+
+        $r9 = r0.this$0;
+
+        $r9.setSelectedColor(r13_2);
+
+     label3:
+        return;
+    }
+}

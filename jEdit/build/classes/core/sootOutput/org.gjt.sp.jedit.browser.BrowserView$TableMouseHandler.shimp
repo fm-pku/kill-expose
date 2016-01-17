@@ -1,0 +1,446 @@
+class org.gjt.sp.jedit.browser.BrowserView$TableMouseHandler extends java.awt.event.MouseAdapter
+{
+    final org.gjt.sp.jedit.browser.BrowserView this$0;
+
+    private void <init>(org.gjt.sp.jedit.browser.BrowserView)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$TableMouseHandler r0;
+        org.gjt.sp.jedit.browser.BrowserView r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mouseClicked(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$TableMouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        java.awt.Point r2;
+        int i0, i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry r3;
+        org.gjt.sp.jedit.browser.BrowserView $r4, $r6, $r8, $r11, $r13, $r16, $r18;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r5, $r7, $r9, $r14, $r19;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        javax.swing.ListSelectionModel $r10, $r15;
+        org.gjt.sp.jedit.browser.VFSBrowser $r12, $r17;
+        javax.swing.table.TableModel $r20;
+        java.lang.Object $r21;
+        byte $b9, $b10, $b9_1, $b9_2, $b10_1, $b10_2, $b9_3, $b10_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getPoint();
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r4);
+
+        i0 = $r5.rowAtPoint(r2);
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r6);
+
+        i1 = $r7.columnAtPoint(r2);
+
+        if i0 != -1 goto label01;
+
+        return;
+
+     label01:
+        if i1 != 0 goto label02;
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r18);
+
+        $r20 = $r19.getModel();
+
+        $r21 = $r20.getValueAt(i0, 0);
+
+        r3 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry) $r21;
+
+        $i8 = r3.level;
+
+        $i7 = r2.x;
+
+        $z4 = org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder.isExpansionToggle($i8, $i7);
+
+        if $z4 == 0 goto label02;
+
+        return;
+
+     label02:
+        $i2 = r1.getModifiers();
+
+        $i3 = $i2 & 16;
+
+        if $i3 == 0 goto label05;
+
+        $i5 = r1.getClickCount();
+
+        $i6 = $i5 % 2;
+
+        if $i6 != 0 goto label05;
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.browser.BrowserView.access$600($r16);
+
+        $z3 = r1.isShiftDown();
+
+        if $z3 == 0 goto label03;
+
+        $b9 = 1;
+
+(0)     goto label04;
+
+     label03:
+(1)     $b9_1 = 0;
+
+     label04:
+        $b9_2 = Phi($b9 #0, $b9_1 #1);
+
+        $r17.filesActivated($b9_2, 1);
+
+(2)     goto label10;
+
+     label05:
+        $i4 = r1.getModifiers();
+
+        $z0 = org.gjt.sp.jedit.GUIUtilities.isMiddleButton($i4);
+
+(3)     if $z0 == 0 goto label10;
+
+        $z1 = r1.isShiftDown();
+
+        if $z1 == 0 goto label06;
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r13);
+
+        $r15 = $r14.getSelectionModel();
+
+        $r15.addSelectionInterval(i0, i0);
+
+        goto label07;
+
+     label06:
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r8);
+
+        $r10 = $r9.getSelectionModel();
+
+        $r10.setSelectionInterval(i0, i0);
+
+     label07:
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.browser.BrowserView.access$600($r11);
+
+        $z2 = r1.isShiftDown();
+
+        if $z2 == 0 goto label08;
+
+        $b10 = 1;
+
+(4)     goto label09;
+
+     label08:
+(5)     $b10_1 = 0;
+
+     label09:
+        $b10_2 = Phi($b10 #4, $b10_1 #5);
+
+(6)     $r12.filesActivated($b10_2, 1);
+
+     label10:
+        $b9_3 = Phi($b9_2 #2, $b9 #3, $b9 #6);
+
+        $b10_3 = Phi($b10 #2, $b10 #3, $b10_2 #6);
+
+        return;
+    }
+
+    public void mousePressed(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$TableMouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        java.awt.Point r2, $r21, $r28;
+        int i0, i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry r3;
+        java.lang.Object $r4, $r44;
+        org.gjt.sp.jedit.browser.BrowserView $r5, $r7, $r9, $r11, $r13, $r16, $r17, $r19, $r22, $r25, $r26, $r29, $r31, $r33, $r35, $r38, $r41, $r45, $r47, $r49;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r6, $r8, $r10, $r14, $r20, $r23, $r27, $r36, $r39, $r42, $r46, $r48, $r50;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu $r12, $r30, $r32;
+        javax.swing.ListSelectionModel $r15, $r24, $r37, $r40;
+        org.gjt.sp.jedit.io.VFSFile[] $r18;
+        javax.swing.table.TableModel $r43;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getPoint();
+
+        $r4 = r1.getSource();
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r5);
+
+        if $r4 == $r6 goto label1;
+
+        $i5 = r2.x;
+
+        $r47 = r0.this$0;
+
+        $r48 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r47);
+
+        $i6 = $r48.getX();
+
+        $i7 = $i5 - $i6;
+
+        r2.x = $i7;
+
+        $i8 = r2.y;
+
+        $r49 = r0.this$0;
+
+        $r50 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r49);
+
+        $i9 = $r50.getY();
+
+        $i10 = $i8 - $i9;
+
+        r2.y = $i10;
+
+     label1:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r7);
+
+        i0 = $r8.rowAtPoint(r2);
+
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r9);
+
+        i1 = $r10.columnAtPoint(r2);
+
+        if i1 != 0 goto label2;
+
+        if i0 == -1 goto label2;
+
+        $r41 = r0.this$0;
+
+        $r42 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r41);
+
+        $r43 = $r42.getModel();
+
+        $r44 = $r43.getValueAt(i0, 0);
+
+        r3 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry) $r44;
+
+        $i4 = r3.level;
+
+        $i3 = r2.x;
+
+        $z5 = org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder.isExpansionToggle($i4, $i3);
+
+        if $z5 == 0 goto label2;
+
+        $r45 = r0.this$0;
+
+        $r46 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r45);
+
+        $r46.toggleExpanded(i0);
+
+        return;
+
+     label2:
+        $i2 = r1.getModifiers();
+
+        $z0 = org.gjt.sp.jedit.GUIUtilities.isMiddleButton($i2);
+
+        if $z0 == 0 goto label5;
+
+        if i0 != -1 goto label3;
+
+        goto label9;
+
+     label3:
+        $z4 = r1.isShiftDown();
+
+        if $z4 == 0 goto label4;
+
+        $r38 = r0.this$0;
+
+        $r39 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r38);
+
+        $r40 = $r39.getSelectionModel();
+
+        $r40.addSelectionInterval(i0, i0);
+
+        goto label9;
+
+     label4:
+        $r35 = r0.this$0;
+
+        $r36 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r35);
+
+        $r37 = $r36.getSelectionModel();
+
+        $r37.setSelectionInterval(i0, i0);
+
+        goto label9;
+
+     label5:
+        $z1 = org.gjt.sp.jedit.GUIUtilities.isPopupTrigger(r1);
+
+        if $z1 == 0 goto label9;
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.browser.BrowserView.access$800($r11);
+
+        if $r12 == null goto label6;
+
+        $r29 = r0.this$0;
+
+        $r30 = org.gjt.sp.jedit.browser.BrowserView.access$800($r29);
+
+        $z3 = $r30.isVisible();
+
+        if $z3 == 0 goto label6;
+
+        $r31 = r0.this$0;
+
+        $r32 = org.gjt.sp.jedit.browser.BrowserView.access$800($r31);
+
+        $r32.setVisible(0);
+
+        $r33 = r0.this$0;
+
+        org.gjt.sp.jedit.browser.BrowserView.access$802($r33, null);
+
+        return;
+
+     label6:
+        if i0 != -1 goto label7;
+
+        $r26 = r0.this$0;
+
+        $r25 = r0.this$0;
+
+        $r27 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r25);
+
+        $r28 = r1.getPoint();
+
+        org.gjt.sp.jedit.browser.BrowserView.access$900($r26, null, $r27, $r28);
+
+        goto label9;
+
+     label7:
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r13);
+
+        $r15 = $r14.getSelectionModel();
+
+        $z2 = $r15.isSelectedIndex(i0);
+
+        if $z2 != 0 goto label8;
+
+        $r22 = r0.this$0;
+
+        $r23 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r22);
+
+        $r24 = $r23.getSelectionModel();
+
+        $r24.setSelectionInterval(i0, i0);
+
+     label8:
+        $r17 = r0.this$0;
+
+        $r16 = r0.this$0;
+
+        $r18 = $r16.getSelectedFiles();
+
+        $r19 = r0.this$0;
+
+        $r20 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r19);
+
+        $r21 = r1.getPoint();
+
+        org.gjt.sp.jedit.browser.BrowserView.access$900($r17, $r18, $r20, $r21);
+
+     label9:
+        return;
+    }
+
+    public void mouseReleased(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$TableMouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        boolean $z0;
+        org.gjt.sp.jedit.browser.BrowserView $r2, $r4;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r3;
+        int $i0;
+        org.gjt.sp.jedit.browser.VFSBrowser $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = org.gjt.sp.jedit.GUIUtilities.isPopupTrigger(r1);
+
+        if $z0 != 0 goto label1;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.browser.BrowserView.access$1000($r2);
+
+        $i0 = $r3.getSelectedRow();
+
+        if $i0 == -1 goto label1;
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.browser.BrowserView.access$600($r4);
+
+        $r5.filesSelected();
+
+     label1:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.browser.BrowserView, org.gjt.sp.jedit.browser.BrowserView$1)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$TableMouseHandler r0;
+        org.gjt.sp.jedit.browser.BrowserView r1;
+        org.gjt.sp.jedit.browser.BrowserView$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

@@ -1,0 +1,94 @@
+class org.gjt.sp.jedit.BeanShellAction$CachedBshMethod extends java.lang.Object
+{
+    private final java.lang.String name;
+    private final java.lang.String source;
+    private java.lang.ref.SoftReference cache;
+
+    public void <init>(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.BeanShellAction$CachedBshMethod r0;
+        java.lang.String r1, r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.name = r1;
+
+        r0.source = r2;
+
+        Packer.Unpack(r0);
+
+        r0.cache = null;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.BshMethod get() throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.BeanShellAction$CachedBshMethod r0;
+        java.lang.ref.SoftReference $r1, $r4, $r5;
+        java.lang.String $r2, $r3;
+        java.lang.Object $r6;
+        org.gjt.sp.jedit.bsh.BshMethod r7, r8;
+
+        r0 := @this;
+
+        $r1 = r0.cache;
+
+        if $r1 == null goto label1;
+
+        $r5 = r0.cache;
+
+        Packer.Unpack(r0);
+
+        $r6 = $r5.get();
+
+        Packer.Pack(r0);
+
+        r7 = (org.gjt.sp.jedit.bsh.BshMethod) $r6;
+
+        if r7 == null goto label1;
+
+        return r7;
+
+     label1:
+        Packer.Unpack(r0);
+
+        Packer.Unpack(r0);
+
+        $r3 = r0.name;
+
+        $r2 = r0.source;
+
+        r8 = org.gjt.sp.jedit.BeanShell.cacheBlock($r3, $r2, 1);
+
+        $r4 = new java.lang.ref.SoftReference;
+
+        specialinvoke $r4.<init>(r8);
+
+        r0.cache = $r4;
+
+        Packer.Pack(r0);
+
+        return r8;
+    }
+
+    public java.lang.String getSource()
+    {
+        org.gjt.sp.jedit.BeanShellAction$CachedBshMethod r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.source;
+
+        return $r1;
+    }
+}

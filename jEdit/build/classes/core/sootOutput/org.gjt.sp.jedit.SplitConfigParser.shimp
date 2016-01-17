@@ -1,0 +1,436 @@
+public class org.gjt.sp.jedit.SplitConfigParser extends java.lang.Object
+{
+    private java.lang.String splitConfig;
+    private boolean includeSplits;
+    private boolean includeFiles;
+    private boolean includeRemotes;
+
+    public void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.SplitConfigParser r0;
+        java.lang.String r1, $r2, $r2_1, $r2_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.includeSplits = 1;
+
+        r0.includeFiles = 1;
+
+        r0.includeRemotes = 0;
+
+        if r1 != null goto label1;
+
+        $r2 = "";
+
+(0)     goto label2;
+
+     label1:
+(1)     $r2_1 = r1;
+
+     label2:
+        $r2_2 = Phi($r2 #0, $r2_1 #1);
+
+        r0.splitConfig = $r2_2;
+
+        return;
+    }
+
+    public void setIncludeSplits(boolean)
+    {
+        org.gjt.sp.jedit.SplitConfigParser r0;
+        boolean z0;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        r0.includeSplits = z0;
+
+        return;
+    }
+
+    public void setIncludeFiles(boolean)
+    {
+        org.gjt.sp.jedit.SplitConfigParser r0;
+        boolean z0;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        r0.includeFiles = z0;
+
+        return;
+    }
+
+    public void setIncludeRemoteFiles(boolean)
+    {
+        org.gjt.sp.jedit.SplitConfigParser r0;
+        boolean z0, $z1, $z2, $z2_1, $z2_2;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        $z1 = r0.includeFiles;
+
+        if $z1 == 0 goto label1;
+
+        if z0 == 0 goto label1;
+
+        $z2 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z2_1 = 0;
+
+     label2:
+        $z2_2 = Phi($z2 #0, $z2_1 #1);
+
+        r0.includeRemotes = $z2_2;
+
+        return;
+    }
+
+    public java.lang.String parse()
+    {
+        org.gjt.sp.jedit.SplitConfigParser r0;
+        java.util.ArrayDeque r1, r2, $r5, $r6;
+        int i0, $i1, $i2, i3;
+        java.lang.String $r3, $r4, $r10, $r13, $r15, $r16, $r17, $r19, $r20, $r22, $r25, $r27, $r28, $r30, $r33, $r34, $r35, $r36, $r37, $r38, $r39, $r40, $r41, $r42, $r45;
+        org.gjt.sp.jedit.SplitConfigParser$BufferSet $r7, $r12, $r43, r46, r54, r55;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z10, $z11, z12;
+        java.io.StreamTokenizer $r8, r47;
+        java.io.StringReader $r9;
+        java.lang.StringBuilder $r11, $r23, r53;
+        java.lang.Object $r18, $r21, $r31, r48, r49, r51, r52;
+        double $d0;
+        java.lang.Integer $r26, $r32;
+        org.gjt.sp.jedit.SplitConfigParser$Split $r29, r50;
+        java.io.IOException $r44, r56;
+
+        r0 := @this;
+
+        $r3 = r0.splitConfig;
+
+        if $r3 == null goto label01;
+
+        $r4 = r0.splitConfig;
+
+        $i1 = $r4.length();
+
+        if $i1 != 0 goto label02;
+
+     label01:
+        return "";
+
+     label02:
+        $r5 = new java.util.ArrayDeque;
+
+        specialinvoke $r5.<init>();
+
+        r1 = $r5;
+
+        $r6 = new java.util.ArrayDeque;
+
+        specialinvoke $r6.<init>();
+
+        r2 = $r6;
+
+        $r7 = new org.gjt.sp.jedit.SplitConfigParser$BufferSet;
+
+        $z1 = r0.includeFiles;
+
+        $z0 = r0.includeRemotes;
+
+        specialinvoke $r7.<init>(r0, $z1, $z0);
+
+        r46 = $r7;
+
+        z12 = 0;
+
+     label03:
+        $r8 = new java.io.StreamTokenizer;
+
+        $r9 = new java.io.StringReader;
+
+(0)     $r10 = r0.splitConfig;
+
+        specialinvoke $r9.<init>($r10);
+
+        specialinvoke $r8.<init>($r9);
+
+        r47 = $r8;
+
+        r47.whitespaceChars(0, 32);
+
+        r47.wordChars(35, 126);
+
+        r47.commentChar(33);
+
+        r47.quoteChar(34);
+
+        r47.eolIsSignificant(0);
+
+(1)     i3 = r47.nextToken();
+
+     label04:
+        r46 = Phi(r46 #1, r46 #10);
+
+        i3 = Phi(i3 #1, i3 #10);
+
+        z12 = Phi(z12 #1, z12 #10);
+
+        if i3 == -1 goto label13;
+
+(2)     lookupswitch(i3)
+        {
+            case -3: goto label05;
+            case -2: goto label10;
+            case 34: goto label11;
+            default: goto label12;
+        };
+
+     label05:
+        $r28 = "vertical";
+
+        $r27 = r47.sval;
+
+        $z4 = $r28.equals($r27);
+
+        if $z4 != 0 goto label06;
+
+        $r34 = "horizontal";
+
+        $r33 = r47.sval;
+
+        $z6 = $r34.equals($r33);
+
+        if $z6 == 0 goto label07;
+
+     label06:
+        $z5 = r0.includeSplits;
+
+(3)     if $z5 == 0 goto label12;
+
+        r48 = r2.pop();
+
+        r49 = r2.pop();
+
+        $r29 = new org.gjt.sp.jedit.SplitConfigParser$Split;
+
+        specialinvoke $r29.<init>(r0, null);
+
+        r50 = $r29;
+
+        r50.setLeft(r49);
+
+        r50.setRight(r48);
+
+        $r30 = r47.sval;
+
+        r50.setDirection($r30);
+
+        $r31 = r1.pop();
+
+        $r32 = (java.lang.Integer) $r31;
+
+        i0 = $r32.intValue();
+
+        r50.setOffset(i0);
+
+        r2.push(r50);
+
+        z12 = 1;
+
+(4)     goto label12;
+
+     label07:
+        $r36 = "buffer";
+
+        $r35 = r47.sval;
+
+        $z7 = $r36.equals($r35);
+
+        if $z7 != 0 goto label08;
+
+        $r39 = "buff";
+
+        $r38 = r47.sval;
+
+        $z8 = $r39.equals($r38);
+
+        if $z8 == 0 goto label09;
+
+     label08:
+        r51 = r1.pop();
+
+        $r37 = r51.toString();
+
+        r46.addBuffer($r37);
+
+(5)     goto label12;
+
+     label09:
+        $r41 = "bufferset";
+
+        $r40 = r47.sval;
+
+        $z9 = $r41.equals($r40);
+
+(6)     if $z9 == 0 goto label12;
+
+        r52 = r1.pop();
+
+        $r42 = r52.toString();
+
+        r46.setScope($r42);
+
+        r2.push(r46);
+
+        $r43 = new org.gjt.sp.jedit.SplitConfigParser$BufferSet;
+
+        $z11 = r0.includeFiles;
+
+        $z10 = r0.includeRemotes;
+
+        specialinvoke $r43.<init>(r0, $z11, $z10);
+
+        r46 = $r43;
+
+(7)     goto label12;
+
+     label10:
+        $d0 = r47.nval;
+
+        $i2 = (int) $d0;
+
+        $r26 = java.lang.Integer.valueOf($i2);
+
+        r1.push($r26);
+
+(8)     goto label12;
+
+     label11:
+        $r25 = r47.sval;
+
+(9)     r1.push($r25);
+
+     label12:
+        r46 = Phi(r46 #2, r46 #3, r46 #4, r46 #5, r46 #6, r46 #7, r46 #8, r46 #9);
+
+        z12 = Phi(z12 #2, z12 #3, z12 #4, z12 #5, z12 #6, z12 #7, z12 #8, z12 #9);
+
+        i3 = r47.nextToken();
+
+(10)    goto label04;
+
+     label13:
+(11)    $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        r53 = $r11;
+
+(12)    if z12 == 0 goto label15;
+
+     label14:
+        r46 = Phi(r46 #12, r46 #15);
+
+        i3 = Phi(i3 #12, i3 #15);
+
+        z12 = Phi(z12 #12, z12 #15);
+
+(13)    $z3 = r2.isEmpty();
+
+(14)    if $z3 != 0 goto label19;
+
+        $r21 = r2.pop();
+
+        $r22 = $r21.toString();
+
+        $r23 = r53.append($r22);
+
+        $r23.append(32);
+
+(15)    goto label14;
+
+     label15:
+        $r12 = new org.gjt.sp.jedit.SplitConfigParser$BufferSet;
+
+        specialinvoke $r12.<init>(r0);
+
+(16)    r54 = $r12;
+
+     label16:
+        r46 = Phi(r46 #16, r46 #18);
+
+        i3 = Phi(i3 #16, i3 #18);
+
+        z12 = Phi(z12 #16, z12 #18);
+
+(17)    $z2 = r2.isEmpty();
+
+        if $z2 != 0 goto label18;
+
+        $r18 = r2.pop();
+
+        r55 = (org.gjt.sp.jedit.SplitConfigParser$BufferSet) $r18;
+
+        $r19 = r54.getScope();
+
+        if $r19 != null goto label17;
+
+        $r20 = r55.getScope();
+
+        r54.setScope($r20);
+
+     label17:
+        r54.addBufferSet(r55);
+
+(18)    goto label16;
+
+     label18:
+        $r13 = r54.toString();
+
+(19)    r53.append($r13);
+
+     label19:
+        r46 = Phi(r46 #14, r46 #19);
+
+        i3 = Phi(i3 #14, i3 #19);
+
+        z12 = Phi(z12 #14, z12 #19);
+
+(20)    $r15 = r53.toString();
+
+        $r16 = $r15.replaceAll("\\\\", "\\\\\\\\");
+
+        $r17 = $r16.trim();
+
+     label20:
+        return $r17;
+
+     label21:
+        $r44 := @caughtexception;
+
+        r46 = Phi(r46 #0, r46 #2, r46 #11, r46 #13, r46 #17, r46 #20);
+
+        i3 = Phi(i3 #0, i3 #2, i3 #11, i3 #13, i3 #17, i3 #20);
+
+        z12 = Phi(z12 #0, z12 #2, z12 #11, z12 #13, z12 #17, z12 #20);
+
+        r56 = $r44;
+
+        $r45 = r0.splitConfig;
+
+        return $r45;
+
+        catch java.io.IOException from label03 to label20 with label21;
+    }
+}

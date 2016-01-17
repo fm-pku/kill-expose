@@ -1,0 +1,285 @@
+public class org.gjt.sp.jedit.options.PrintOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private org.gjt.sp.jedit.gui.FontSelector font;
+    private javax.swing.JCheckBox printHeader;
+    private javax.swing.JCheckBox printFooter;
+    private javax.swing.JCheckBox printLineNumbers;
+    private javax.swing.JCheckBox printFolds;
+    private javax.swing.JCheckBox color;
+    private javax.swing.JComboBox tabSize;
+    private javax.swing.JCheckBox glyphVector;
+    private javax.swing.JCheckBox force13;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.PrintOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("print");
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.PrintOptionPane r0;
+        java.lang.String[] r1, $r22;
+        org.gjt.sp.jedit.gui.FontSelector $r2, $r5;
+        java.awt.Font $r3;
+        java.lang.String $r4, $r7, $r11, $r15, $r19, $r26, $r27, $r30, $r34, $r38;
+        javax.swing.JCheckBox $r6, $r8, $r9, $r10, $r12, $r13, $r14, $r16, $r17, $r18, $r20, $r21, $r29, $r31, $r32, $r33, $r35, $r36, $r37, $r39, $r40;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6;
+        javax.swing.JComboBox $r23, $r24, $r25, $r28;
+
+        r0 := @this;
+
+        $r2 = new org.gjt.sp.jedit.gui.FontSelector;
+
+        $r3 = org.gjt.sp.jedit.jEdit.getFontProperty("print.font");
+
+        specialinvoke $r2.<init>($r3);
+
+        r0.font = $r2;
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("options.print.font");
+
+        $r5 = r0.font;
+
+        r0.addComponent($r4, $r5);
+
+        $r6 = new javax.swing.JCheckBox;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getProperty("options.print.header");
+
+        specialinvoke $r6.<init>($r7);
+
+        r0.printHeader = $r6;
+
+        $r8 = r0.printHeader;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.header");
+
+        $r8.setSelected($z0);
+
+        $r9 = r0.printHeader;
+
+        r0.addComponent($r9);
+
+        $r10 = new javax.swing.JCheckBox;
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty("options.print.footer");
+
+        specialinvoke $r10.<init>($r11);
+
+        r0.printFooter = $r10;
+
+        $r12 = r0.printFooter;
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.footer");
+
+        $r12.setSelected($z1);
+
+        $r13 = r0.printFooter;
+
+        r0.addComponent($r13);
+
+        $r14 = new javax.swing.JCheckBox;
+
+        $r15 = org.gjt.sp.jedit.jEdit.getProperty("options.print.lineNumbers");
+
+        specialinvoke $r14.<init>($r15);
+
+        r0.printLineNumbers = $r14;
+
+        $r16 = r0.printLineNumbers;
+
+        $z2 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.lineNumbers");
+
+        $r16.setSelected($z2);
+
+        $r17 = r0.printLineNumbers;
+
+        r0.addComponent($r17);
+
+        $r18 = new javax.swing.JCheckBox;
+
+        $r19 = org.gjt.sp.jedit.jEdit.getProperty("options.print.color");
+
+        specialinvoke $r18.<init>($r19);
+
+        r0.color = $r18;
+
+        $r20 = r0.color;
+
+        $z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.color");
+
+        $r20.setSelected($z3);
+
+        $r21 = r0.color;
+
+        r0.addComponent($r21);
+
+        $r22 = newarray (java.lang.String)[3];
+
+        $r22[0] = "2";
+
+        $r22[1] = "4";
+
+        $r22[2] = "8";
+
+        r1 = $r22;
+
+        $r23 = new javax.swing.JComboBox;
+
+        specialinvoke $r23.<init>(r1);
+
+        r0.tabSize = $r23;
+
+        $r24 = r0.tabSize;
+
+        $r24.setEditable(1);
+
+        $r25 = r0.tabSize;
+
+        $r26 = org.gjt.sp.jedit.jEdit.getProperty("print.tabSize");
+
+        $r25.setSelectedItem($r26);
+
+        $r27 = org.gjt.sp.jedit.jEdit.getProperty("options.print.tabSize");
+
+        $r28 = r0.tabSize;
+
+        r0.addComponent($r27, $r28);
+
+        $r29 = new javax.swing.JCheckBox;
+
+        $r30 = org.gjt.sp.jedit.jEdit.getProperty("options.print.folds");
+
+        specialinvoke $r29.<init>($r30);
+
+        r0.printFolds = $r29;
+
+        $r31 = r0.printFolds;
+
+        $z4 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.folds", 1);
+
+        $r31.setSelected($z4);
+
+        $r32 = r0.printFolds;
+
+        r0.addComponent($r32);
+
+        r0.addSeparator("options.print.workarounds");
+
+        $r33 = new javax.swing.JCheckBox;
+
+        $r34 = org.gjt.sp.jedit.jEdit.getProperty("options.print.glyphVector");
+
+        specialinvoke $r33.<init>($r34);
+
+        r0.glyphVector = $r33;
+
+        $r35 = r0.glyphVector;
+
+        $z5 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.glyphVector");
+
+        $r35.setSelected($z5);
+
+        $r36 = r0.glyphVector;
+
+        r0.addComponent($r36);
+
+        $r37 = new javax.swing.JCheckBox;
+
+        $r38 = org.gjt.sp.jedit.jEdit.getProperty("options.print.force13");
+
+        specialinvoke $r37.<init>($r38);
+
+        r0.force13 = $r37;
+
+        $r39 = r0.force13;
+
+        $z6 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.force13");
+
+        $r39.setSelected($z6);
+
+        $r40 = r0.force13;
+
+        r0.addComponent($r40);
+
+        return;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.options.PrintOptionPane r0;
+        org.gjt.sp.jedit.gui.FontSelector $r1;
+        java.awt.Font $r2;
+        javax.swing.JCheckBox $r3, $r4, $r5, $r6, $r10, $r11, $r12;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6;
+        javax.swing.JComboBox $r7;
+        java.lang.Object $r8;
+        java.lang.String $r9;
+
+        r0 := @this;
+
+        $r1 = r0.font;
+
+        $r2 = $r1.getFont();
+
+        org.gjt.sp.jedit.jEdit.setFontProperty("print.font", $r2);
+
+        $r3 = r0.printHeader;
+
+        $z0 = $r3.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("print.header", $z0);
+
+        $r4 = r0.printFooter;
+
+        $z1 = $r4.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("print.footer", $z1);
+
+        $r5 = r0.printLineNumbers;
+
+        $z2 = $r5.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("print.lineNumbers", $z2);
+
+        $r6 = r0.color;
+
+        $z3 = $r6.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("print.color", $z3);
+
+        $r7 = r0.tabSize;
+
+        $r8 = $r7.getSelectedItem();
+
+        $r9 = (java.lang.String) $r8;
+
+        org.gjt.sp.jedit.jEdit.setProperty("print.tabSize", $r9);
+
+        $r10 = r0.glyphVector;
+
+        $z4 = $r10.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("print.glyphVector", $z4);
+
+        $r11 = r0.force13;
+
+        $z5 = $r11.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("print.force13", $z5);
+
+        $r12 = r0.printFolds;
+
+        $z6 = $r12.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("print.folds", $z6);
+
+        return;
+    }
+}

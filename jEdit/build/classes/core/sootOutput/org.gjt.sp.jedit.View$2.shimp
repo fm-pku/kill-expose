@@ -1,0 +1,98 @@
+class org.gjt.sp.jedit.View$2 extends org.gjt.sp.jedit.visitors.JEditVisitorAdapter
+{
+    final org.gjt.sp.jedit.EditPane val$ep;
+    final org.gjt.sp.jedit.bufferset.BufferSet$Scope val$scope;
+    final org.gjt.sp.jedit.View val$view;
+    final org.gjt.sp.jedit.Buffer val$b;
+    final org.gjt.sp.jedit.View this$0;
+
+    void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.EditPane, org.gjt.sp.jedit.bufferset.BufferSet$Scope, org.gjt.sp.jedit.View, org.gjt.sp.jedit.Buffer)
+    {
+        org.gjt.sp.jedit.View$2 r0;
+        org.gjt.sp.jedit.View r1, r4;
+        org.gjt.sp.jedit.EditPane r2;
+        org.gjt.sp.jedit.bufferset.BufferSet$Scope r3;
+        org.gjt.sp.jedit.Buffer r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        r0.this$0 = r1;
+
+        r0.val$ep = r2;
+
+        r0.val$scope = r3;
+
+        r0.val$view = r4;
+
+        r0.val$b = r5;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void visit(org.gjt.sp.jedit.EditPane)
+    {
+        org.gjt.sp.jedit.View$2 r0;
+        org.gjt.sp.jedit.EditPane r1, $r2;
+        org.gjt.sp.jedit.bufferset.BufferSet$Scope $r3, $r4;
+        org.gjt.sp.jedit.bufferset.BufferSet $r5;
+        org.gjt.sp.jedit.Buffer $r6, $r8;
+        int $i0;
+        org.gjt.sp.jedit.bufferset.BufferSetManager $r7;
+        org.gjt.sp.jedit.View $r9, $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.val$ep;
+
+        if r1 == $r2 goto label1;
+
+        $r4 = r0.val$scope;
+
+        $r3 = org.gjt.sp.jedit.bufferset.BufferSet$Scope.view;
+
+        if $r4 != $r3 goto label2;
+
+        $r9 = r1.getView();
+
+        $r10 = r0.val$view;
+
+        if $r9 != $r10 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        $r5 = r1.getBufferSet();
+
+        $r6 = r0.val$b;
+
+        $i0 = $r5.indexOf($r6);
+
+        if $i0 >= 0 goto label3;
+
+        return;
+
+     label3:
+        $r7 = org.gjt.sp.jedit.jEdit.getBufferSetManager();
+
+        $r8 = r0.val$b;
+
+        $r7.removeBuffer(r1, $r8);
+
+        return;
+    }
+}

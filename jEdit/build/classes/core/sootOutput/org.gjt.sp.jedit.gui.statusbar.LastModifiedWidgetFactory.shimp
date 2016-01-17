@@ -1,0 +1,33 @@
+public class org.gjt.sp.jedit.gui.statusbar.LastModifiedWidgetFactory extends java.lang.Object implements org.gjt.sp.jedit.gui.statusbar.StatusWidgetFactory
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.gui.statusbar.LastModifiedWidgetFactory r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.gui.statusbar.Widget getWidget(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.statusbar.LastModifiedWidgetFactory r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.gui.statusbar.LastModifiedWidgetFactory$LastModifiedWidget r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new org.gjt.sp.jedit.gui.statusbar.LastModifiedWidgetFactory$LastModifiedWidget;
+
+        specialinvoke $r3.<init>(r1);
+
+        r2 = $r3;
+
+        return r2;
+    }
+}

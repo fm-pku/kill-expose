@@ -1,0 +1,61 @@
+class org.gjt.sp.jedit.gui.BufferSwitcher$ComboBoxTransferHandler extends javax.swing.TransferHandler
+{
+    javax.swing.JComboBox comboBox;
+    final org.gjt.sp.jedit.gui.BufferSwitcher this$0;
+
+    public void <init>(org.gjt.sp.jedit.gui.BufferSwitcher, javax.swing.JComboBox)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$ComboBoxTransferHandler r0;
+        org.gjt.sp.jedit.gui.BufferSwitcher r1;
+        javax.swing.JComboBox r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.comboBox = r2;
+
+        return;
+    }
+
+    public boolean canImport(javax.swing.TransferHandler$TransferSupport)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$ComboBoxTransferHandler r0;
+        javax.swing.TransferHandler$TransferSupport r1;
+        java.awt.datatransfer.DataFlavor $r2;
+        boolean $z0, $z1;
+        javax.swing.JComboBox $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.gui.BufferSwitcher.BufferDataFlavor;
+
+        $z0 = r1.isDataFlavorSupported($r2);
+
+        if $z0 != 0 goto label1;
+
+        return 0;
+
+     label1:
+        $r3 = r0.comboBox;
+
+        $z1 = $r3.isPopupVisible();
+
+        if $z1 != 0 goto label2;
+
+        $r4 = r0.comboBox;
+
+        $r4.showPopup();
+
+     label2:
+        return 0;
+    }
+}

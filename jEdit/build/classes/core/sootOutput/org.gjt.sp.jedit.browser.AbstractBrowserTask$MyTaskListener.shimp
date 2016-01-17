@@ -1,0 +1,134 @@
+class org.gjt.sp.jedit.browser.AbstractBrowserTask$MyTaskListener extends java.lang.Object implements org.gjt.sp.util.TaskListener
+{
+    private final java.lang.Runnable runnable;
+    final org.gjt.sp.jedit.browser.AbstractBrowserTask this$0;
+
+    private void <init>(org.gjt.sp.jedit.browser.AbstractBrowserTask, java.lang.Runnable)
+    {
+        org.gjt.sp.jedit.browser.AbstractBrowserTask$MyTaskListener r0;
+        org.gjt.sp.jedit.browser.AbstractBrowserTask r1;
+        java.lang.Runnable r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.runnable = r2;
+
+        return;
+    }
+
+    public void waiting(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.browser.AbstractBrowserTask$MyTaskListener r0;
+        org.gjt.sp.util.Task r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void running(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.browser.AbstractBrowserTask$MyTaskListener r0;
+        org.gjt.sp.util.Task r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void done(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.browser.AbstractBrowserTask$MyTaskListener r0;
+        org.gjt.sp.util.Task r1;
+        org.gjt.sp.jedit.browser.AbstractBrowserTask $r2;
+        org.gjt.sp.util.TaskManager $r3;
+        java.lang.Runnable $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        if r1 != $r2 goto label1;
+
+        $r3 = org.gjt.sp.util.TaskManager.instance;
+
+        $r3.removeTaskListener(r0);
+
+        $r4 = r0.runnable;
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread($r4);
+
+     label1:
+        return;
+    }
+
+    public void statusUpdated(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.browser.AbstractBrowserTask$MyTaskListener r0;
+        org.gjt.sp.util.Task r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void maximumUpdated(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.browser.AbstractBrowserTask$MyTaskListener r0;
+        org.gjt.sp.util.Task r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void valueUpdated(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.browser.AbstractBrowserTask$MyTaskListener r0;
+        org.gjt.sp.util.Task r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.browser.AbstractBrowserTask, java.lang.Runnable, org.gjt.sp.jedit.browser.AbstractBrowserTask$1)
+    {
+        org.gjt.sp.jedit.browser.AbstractBrowserTask$MyTaskListener r0;
+        org.gjt.sp.jedit.browser.AbstractBrowserTask r1;
+        java.lang.Runnable r2;
+        org.gjt.sp.jedit.browser.AbstractBrowserTask$1 r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        specialinvoke r0.<init>(r1, r2);
+
+        return;
+    }
+}

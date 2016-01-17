@@ -1,0 +1,5 @@
+public interface  org.gjt.sp.jedit.input.InputHandlerProvider extends java.lang.Object
+{
+
+    public abstract org.gjt.sp.jedit.input.AbstractInputHandler getInputHandler();
+}

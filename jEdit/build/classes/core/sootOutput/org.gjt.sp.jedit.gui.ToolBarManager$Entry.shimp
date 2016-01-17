@@ -1,0 +1,26 @@
+class org.gjt.sp.jedit.gui.ToolBarManager$Entry extends java.lang.Object
+{
+    int layer;
+    java.awt.Component toolbar;
+
+    void <init>(int, java.awt.Component)
+    {
+        org.gjt.sp.jedit.gui.ToolBarManager$Entry r0;
+        int i0;
+        java.awt.Component r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.layer = i0;
+
+        r0.toolbar = r1;
+
+        return;
+    }
+}

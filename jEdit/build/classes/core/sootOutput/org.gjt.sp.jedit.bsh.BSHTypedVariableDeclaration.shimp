@@ -1,0 +1,212 @@
+class org.gjt.sp.jedit.bsh.BSHTypedVariableDeclaration extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+    public org.gjt.sp.jedit.bsh.Modifiers modifiers;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHTypedVariableDeclaration r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    private org.gjt.sp.jedit.bsh.BSHType getTypeNode()
+    {
+        org.gjt.sp.jedit.bsh.BSHTypedVariableDeclaration r0;
+        org.gjt.sp.jedit.bsh.Node $r1;
+        org.gjt.sp.jedit.bsh.BSHType $r2;
+
+        r0 := @this;
+
+        $r1 = r0.jjtGetChild(0);
+
+        $r2 = (org.gjt.sp.jedit.bsh.BSHType) $r1;
+
+        return $r2;
+    }
+
+    java.lang.Class evalType(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHTypedVariableDeclaration r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.BSHType r3;
+        java.lang.Class $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 = specialinvoke r0.getTypeNode();
+
+        $r4 = r3.getType(r1, r2);
+
+        return $r4;
+    }
+
+    org.gjt.sp.jedit.bsh.BSHVariableDeclarator[] getDeclarators()
+    {
+        org.gjt.sp.jedit.bsh.BSHTypedVariableDeclaration r0;
+        int i0, $i2, $i3, i4;
+        byte b1;
+        org.gjt.sp.jedit.bsh.BSHVariableDeclarator[] r1;
+        org.gjt.sp.jedit.bsh.Node $r2;
+        org.gjt.sp.jedit.bsh.BSHVariableDeclarator $r3;
+
+        r0 := @this;
+
+        i0 = r0.jjtGetNumChildren();
+
+        b1 = 1;
+
+        $i2 = i0 - b1;
+
+        r1 = newarray (org.gjt.sp.jedit.bsh.BSHVariableDeclarator)[$i2];
+
+(0)     i4 = b1;
+
+     label1:
+        i4 = Phi(i4 #0, i4 #1);
+
+        if i4 >= i0 goto label2;
+
+        $i3 = i4 - b1;
+
+        $r2 = r0.jjtGetChild(i4);
+
+        $r3 = (org.gjt.sp.jedit.bsh.BSHVariableDeclarator) $r2;
+
+        r1[$i3] = $r3;
+
+        i4 = i4 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return r1;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHTypedVariableDeclaration r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.BSHType r3;
+        java.lang.Class r4;
+        org.gjt.sp.jedit.bsh.BSHVariableDeclarator[] r5;
+        org.gjt.sp.jedit.bsh.BSHVariableDeclarator r6;
+        java.lang.Object r7;
+        org.gjt.sp.jedit.bsh.UtilEvalError r8, $r12;
+        int $i0, i1;
+        org.gjt.sp.jedit.bsh.Primitive $r9;
+        org.gjt.sp.jedit.bsh.Modifiers $r10;
+        java.lang.String $r11;
+        org.gjt.sp.jedit.bsh.EvalError $r13, $r14, r16;
+        org.gjt.sp.jedit.bsh.NameSpace r15;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+(0)     r2 := @parameter1;
+
+     label1:
+        r15 = r1.top();
+
+        r3 = specialinvoke r0.getTypeNode();
+
+        r4 = r3.getType(r1, r2);
+
+        r5 = r0.getDeclarators();
+
+(1)     i1 = 0;
+
+     label2:
+        i1 = Phi(i1 #1, i1 #3);
+
+        $i0 = lengthof r5;
+
+        if i1 >= $i0 goto label7;
+
+(2)     r6 = r5[i1];
+
+        r7 = r6.eval(r3, r1, r2);
+
+     label3:
+        $r11 = r6.name;
+
+        $r10 = r0.modifiers;
+
+        r15.setTypedVariable($r11, r4, r7, $r10);
+
+     label4:
+        goto label6;
+
+     label5:
+        $r12 := @caughtexception;
+
+        r8 = $r12;
+
+        $r13 = r8.toEvalError(r0, r1);
+
+        throw $r13;
+
+     label6:
+        i1 = i1 + 1;
+
+(3)     goto label2;
+
+     label7:
+(4)     goto label9;
+
+     label8:
+        $r14 := @caughtexception;
+
+        i1 = Phi(i1 #0, i1 #2);
+
+        r16 = $r14;
+
+(5)     r16.reThrow("Typed variable declaration");
+
+     label9:
+        i1 = Phi(i1 #4, i1 #5);
+
+        $r9 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        return $r9;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label3 to label4 with label5;
+        catch org.gjt.sp.jedit.bsh.EvalError from label1 to label7 with label8;
+    }
+
+    public java.lang.String getTypeDescriptor(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter, java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BSHTypedVariableDeclaration r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        java.lang.String r3, $r5;
+        org.gjt.sp.jedit.bsh.BSHType $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = specialinvoke r0.getTypeNode();
+
+        $r5 = $r4.getTypeDescriptor(r1, r2, r3);
+
+        return $r5;
+    }
+}

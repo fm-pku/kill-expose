@@ -1,0 +1,77 @@
+class org.gjt.sp.jedit.JARClassLoader$1SingleElementEnumeration extends java.lang.Object implements java.util.Enumeration
+{
+    private java.lang.Object element;
+    final org.gjt.sp.jedit.JARClassLoader this$0;
+
+    void <init>(org.gjt.sp.jedit.JARClassLoader, java.lang.Object)
+    {
+        org.gjt.sp.jedit.JARClassLoader$1SingleElementEnumeration r0;
+        org.gjt.sp.jedit.JARClassLoader r1;
+        java.lang.Object r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.element = r2;
+
+        return;
+    }
+
+    public boolean hasMoreElements()
+    {
+        org.gjt.sp.jedit.JARClassLoader$1SingleElementEnumeration r0;
+        java.lang.Object $r1;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        $r1 = r0.element;
+
+        if $r1 == null goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    public java.lang.Object nextElement()
+    {
+        org.gjt.sp.jedit.JARClassLoader$1SingleElementEnumeration r0;
+        java.lang.Object r1, $r2;
+        java.util.NoSuchElementException $r3;
+
+        r0 := @this;
+
+        $r2 = r0.element;
+
+        if $r2 == null goto label1;
+
+        r1 = r0.element;
+
+        r0.element = null;
+
+        return r1;
+
+     label1:
+        $r3 = new java.util.NoSuchElementException;
+
+        specialinvoke $r3.<init>();
+
+        throw $r3;
+    }
+}

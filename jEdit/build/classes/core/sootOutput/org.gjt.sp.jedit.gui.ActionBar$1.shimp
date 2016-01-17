@@ -1,0 +1,101 @@
+class org.gjt.sp.jedit.gui.ActionBar$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.EditAction val$act;
+    final java.lang.String val$finalCmd;
+    final org.gjt.sp.jedit.gui.ActionBar this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.ActionBar, org.gjt.sp.jedit.EditAction, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.ActionBar$1 r0;
+        org.gjt.sp.jedit.gui.ActionBar r1;
+        org.gjt.sp.jedit.EditAction r2;
+        java.lang.String r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$0 = r1;
+
+        r0.val$act = r2;
+
+        r0.val$finalCmd = r3;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.gui.ActionBar$1 r0;
+        org.gjt.sp.jedit.gui.ActionBar $r1, $r5, $r8, $r9, $r14;
+        org.gjt.sp.jedit.View $r2, $r6, $r10, $r15;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r3;
+        org.gjt.sp.jedit.EditAction $r4, $r12;
+        org.gjt.sp.jedit.gui.InputHandler $r7, $r11;
+        int $i0;
+        java.lang.String $r13, $r17;
+        org.gjt.sp.jedit.gui.StatusBar $r16;
+
+        r0 := @this;
+
+        $r1 = r0.this$0;
+
+        $r2 = org.gjt.sp.jedit.gui.ActionBar.access$200($r1);
+
+        $r3 = $r2.getTextArea();
+
+        $r3.requestFocus();
+
+        $r4 = r0.val$act;
+
+        if $r4 != null goto label1;
+
+        $r13 = r0.val$finalCmd;
+
+        if $r13 == null goto label2;
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.gui.ActionBar.access$200($r14);
+
+        $r16 = $r15.getStatus();
+
+        $r17 = org.gjt.sp.jedit.jEdit.getProperty("view.action.no-completions");
+
+        $r16.setMessageAndClear($r17);
+
+        goto label2;
+
+     label1:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.ActionBar.access$200($r5);
+
+        $r7 = $r6.getInputHandler();
+
+        $r8 = r0.this$0;
+
+        $i0 = org.gjt.sp.jedit.gui.ActionBar.access$300($r8);
+
+        $r7.setRepeatCount($i0);
+
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.gui.ActionBar.access$200($r9);
+
+        $r11 = $r10.getInputHandler();
+
+        $r12 = r0.val$act;
+
+        $r11.invokeAction($r12);
+
+     label2:
+        return;
+    }
+}

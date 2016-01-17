@@ -1,0 +1,365 @@
+class org.gjt.sp.jedit.bsh.BSHUnaryExpression extends org.gjt.sp.jedit.bsh.SimpleNode implements org.gjt.sp.jedit.bsh.ParserConstants
+{
+    public int kind;
+    public boolean postfix;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHUnaryExpression r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        r0.postfix = 0;
+
+        return;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHUnaryExpression r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.SimpleNode r3;
+        org.gjt.sp.jedit.bsh.Node $r4;
+        int $i0, $i1, $i2;
+        org.gjt.sp.jedit.bsh.BSHPrimaryExpression $r5;
+        boolean $z0;
+        java.lang.Object $r6, $r7, $r8;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r9, r12;
+        org.gjt.sp.jedit.bsh.EvalError $r10;
+        org.gjt.sp.jedit.bsh.LHS r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = r0.jjtGetChild(0);
+
+        r3 = (org.gjt.sp.jedit.bsh.SimpleNode) $r4;
+
+     label1:
+        $i0 = r0.kind;
+
+        if $i0 == 100 goto label2;
+
+        $i1 = r0.kind;
+
+        if $i1 != 101 goto label4;
+
+     label2:
+        $r5 = (org.gjt.sp.jedit.bsh.BSHPrimaryExpression) r3;
+
+        r11 = $r5.toLHS(r1, r2);
+
+        $z0 = r2.getStrictJava();
+
+        $r6 = specialinvoke r0.lhsUnaryOperation(r11, $z0);
+
+     label3:
+        return $r6;
+
+     label4:
+        $r7 = r3.eval(r1, r2);
+
+        $i2 = r0.kind;
+
+        $r8 = specialinvoke r0.unaryOperation($r7, $i2);
+
+     label5:
+        return $r8;
+
+     label6:
+        $r9 := @caughtexception;
+
+        r12 = $r9;
+
+        $r10 = r12.toEvalError(r0, r1);
+
+        throw $r10;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label3 with label6;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label4 to label5 with label6;
+    }
+
+    private java.lang.Object lhsUnaryOperation(org.gjt.sp.jedit.bsh.LHS, boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHUnaryExpression r0;
+        org.gjt.sp.jedit.bsh.LHS r1;
+        boolean z0, $z1, $z2;
+        java.lang.Object r2, r3, r5, r5_1, r5_2;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        $z1 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z1 == 0 goto label1;
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug("lhsUnaryOperation");
+
+     label1:
+        r2 = r1.getValue();
+
+        $i0 = r0.kind;
+
+        r3 = specialinvoke r0.unaryOperation(r2, $i0);
+
+        $z2 = r0.postfix;
+
+        if $z2 == 0 goto label2;
+
+        r5 = r2;
+
+(0)     goto label3;
+
+     label2:
+(1)     r5_1 = r3;
+
+     label3:
+        r5_2 = Phi(r5 #0, r5_1 #1);
+
+        r1.assign(r3, z0);
+
+        return r5_2;
+    }
+
+    private java.lang.Object unaryOperation(java.lang.Object, int) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHUnaryExpression r0;
+        java.lang.Object r1, $r2;
+        int i0;
+        boolean $z0, $z1, $z2, $z3;
+        org.gjt.sp.jedit.bsh.Primitive $r3, $r4;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r5;
+        java.lang.StringBuilder $r6, $r7, $r10, $r11;
+        java.lang.String[] $r8;
+        java.lang.String $r9, $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        $z0 = r1 instanceof java.lang.Boolean;
+
+        if $z0 != 0 goto label1;
+
+        $z1 = r1 instanceof java.lang.Character;
+
+        if $z1 != 0 goto label1;
+
+        $z2 = r1 instanceof java.lang.Number;
+
+        if $z2 == 0 goto label2;
+
+     label1:
+        $r2 = specialinvoke r0.primitiveWrapperUnaryOperation(r1, i0);
+
+        return $r2;
+
+     label2:
+        $z3 = r1 instanceof org.gjt.sp.jedit.bsh.Primitive;
+
+        if $z3 != 0 goto label3;
+
+        $r5 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("Unary operation ");
+
+        $r8 = org.gjt.sp.jedit.bsh.BSHUnaryExpression.tokenImage;
+
+        $r9 = $r8[i0];
+
+        $r10 = $r7.append($r9);
+
+        $r11 = $r10.append(" inappropriate for object");
+
+        $r12 = $r11.toString();
+
+        specialinvoke $r5.<init>($r12);
+
+        throw $r5;
+
+     label3:
+        $r3 = (org.gjt.sp.jedit.bsh.Primitive) r1;
+
+        $r4 = org.gjt.sp.jedit.bsh.Primitive.unaryOperation($r3, i0);
+
+        return $r4;
+    }
+
+    private java.lang.Object primitiveWrapperUnaryOperation(java.lang.Object, int) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHUnaryExpression r0;
+        java.lang.Object r1, r3;
+        int i0, i1;
+        java.lang.Class r2, $r12, $r13, $r14;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        org.gjt.sp.jedit.bsh.InterpreterError $r4;
+        java.lang.Double $r5, $r6;
+        double $d0;
+        java.lang.Float $r7, $r8;
+        float $f0;
+        java.lang.Long $r9, $r10;
+        long $l2;
+        java.lang.Integer $r11, $r15;
+        java.lang.Character $r16;
+        char $c3;
+        java.lang.Short $r17;
+        short $s4;
+        java.lang.Byte $r18;
+        byte $b5;
+        java.lang.Boolean $r19, $r20;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        r2 = r1.getClass();
+
+        r3 = org.gjt.sp.jedit.bsh.Primitive.promoteToInteger(r1);
+
+        $z0 = r3 instanceof java.lang.Boolean;
+
+        if $z0 == 0 goto label1;
+
+        $r19 = new java.lang.Boolean;
+
+        $r20 = (java.lang.Boolean) r3;
+
+        $z5 = org.gjt.sp.jedit.bsh.Primitive.booleanUnaryOperation($r20, i0);
+
+        specialinvoke $r19.<init>($z5);
+
+        return $r19;
+
+     label1:
+        $z1 = r3 instanceof java.lang.Integer;
+
+        if $z1 == 0 goto label6;
+
+        $r11 = (java.lang.Integer) r3;
+
+        i1 = org.gjt.sp.jedit.bsh.Primitive.intUnaryOperation($r11, i0);
+
+        if i0 == 100 goto label2;
+
+        if i0 != 101 goto label5;
+
+     label2:
+        $r12 = java.lang.Byte.TYPE;
+
+        if r2 != $r12 goto label3;
+
+        $r18 = new java.lang.Byte;
+
+        $b5 = (byte) i1;
+
+        specialinvoke $r18.<init>($b5);
+
+        return $r18;
+
+     label3:
+        $r13 = java.lang.Short.TYPE;
+
+        if r2 != $r13 goto label4;
+
+        $r17 = new java.lang.Short;
+
+        $s4 = (short) i1;
+
+        specialinvoke $r17.<init>($s4);
+
+        return $r17;
+
+     label4:
+        $r14 = java.lang.Character.TYPE;
+
+        if r2 != $r14 goto label5;
+
+        $r16 = new java.lang.Character;
+
+        $c3 = (char) i1;
+
+        specialinvoke $r16.<init>($c3);
+
+        return $r16;
+
+     label5:
+        $r15 = new java.lang.Integer;
+
+        specialinvoke $r15.<init>(i1);
+
+        return $r15;
+
+     label6:
+        $z2 = r3 instanceof java.lang.Long;
+
+        if $z2 == 0 goto label7;
+
+        $r9 = new java.lang.Long;
+
+        $r10 = (java.lang.Long) r3;
+
+        $l2 = org.gjt.sp.jedit.bsh.Primitive.longUnaryOperation($r10, i0);
+
+        specialinvoke $r9.<init>($l2);
+
+        return $r9;
+
+     label7:
+        $z3 = r3 instanceof java.lang.Float;
+
+        if $z3 == 0 goto label8;
+
+        $r7 = new java.lang.Float;
+
+        $r8 = (java.lang.Float) r3;
+
+        $f0 = org.gjt.sp.jedit.bsh.Primitive.floatUnaryOperation($r8, i0);
+
+        specialinvoke $r7.<init>($f0);
+
+        return $r7;
+
+     label8:
+        $z4 = r3 instanceof java.lang.Double;
+
+        if $z4 == 0 goto label9;
+
+        $r5 = new java.lang.Double;
+
+        $r6 = (java.lang.Double) r3;
+
+        $d0 = org.gjt.sp.jedit.bsh.Primitive.doubleUnaryOperation($r6, i0);
+
+        specialinvoke $r5.<init>($d0);
+
+        return $r5;
+
+     label9:
+        $r4 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        specialinvoke $r4.<init>("An error occurred.  Please call technical support.");
+
+        throw $r4;
+    }
+}

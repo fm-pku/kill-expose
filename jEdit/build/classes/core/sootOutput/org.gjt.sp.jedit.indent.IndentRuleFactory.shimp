@@ -1,0 +1,156 @@
+public class org.gjt.sp.jedit.indent.IndentRuleFactory extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.indent.IndentRuleFactory r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static org.gjt.sp.jedit.indent.IndentRule indentNextLines(java.lang.String) throws java.util.regex.PatternSyntaxException
+    {
+        java.lang.String r0;
+        org.gjt.sp.jedit.indent.RegexpIndentRule $r1;
+        org.gjt.sp.jedit.indent.IndentAction$Increase $r2;
+
+        r0 := @parameter0;
+
+        $r1 = new org.gjt.sp.jedit.indent.RegexpIndentRule;
+
+        $r2 = new org.gjt.sp.jedit.indent.IndentAction$Increase;
+
+        specialinvoke $r2.<init>();
+
+        specialinvoke $r1.<init>(r0, null, $r2, null, 0);
+
+        return $r1;
+    }
+
+    public static org.gjt.sp.jedit.indent.IndentRule indentNextLine(java.lang.String) throws java.util.regex.PatternSyntaxException
+    {
+        java.lang.String r0;
+        org.gjt.sp.jedit.indent.RegexpIndentRule $r1;
+        org.gjt.sp.jedit.indent.IndentAction$Decrease $r2;
+        org.gjt.sp.jedit.indent.IndentAction$Increase $r3;
+
+        r0 := @parameter0;
+
+        $r1 = new org.gjt.sp.jedit.indent.RegexpIndentRule;
+
+        $r2 = new org.gjt.sp.jedit.indent.IndentAction$Decrease;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = new org.gjt.sp.jedit.indent.IndentAction$Increase;
+
+        specialinvoke $r3.<init>();
+
+        specialinvoke $r1.<init>(r0, $r2, $r3, null, 1);
+
+        return $r1;
+    }
+
+    public static org.gjt.sp.jedit.indent.IndentRule unindentThisLine(java.lang.String) throws java.util.regex.PatternSyntaxException
+    {
+        java.lang.String r0;
+        org.gjt.sp.jedit.indent.RegexpIndentRule $r1;
+        org.gjt.sp.jedit.indent.IndentAction$Increase $r2;
+        org.gjt.sp.jedit.indent.IndentAction$Decrease $r3;
+
+        r0 := @parameter0;
+
+        $r1 = new org.gjt.sp.jedit.indent.RegexpIndentRule;
+
+        $r2 = new org.gjt.sp.jedit.indent.IndentAction$Increase;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = new org.gjt.sp.jedit.indent.IndentAction$Decrease;
+
+        specialinvoke $r3.<init>();
+
+        specialinvoke $r1.<init>(r0, null, $r2, $r3, 0);
+
+        return $r1;
+    }
+
+    public static org.gjt.sp.jedit.indent.IndentRule unindentNextLines(java.lang.String) throws java.util.regex.PatternSyntaxException
+    {
+        java.lang.String r0;
+        org.gjt.sp.jedit.indent.RegexpIndentRule $r1;
+        org.gjt.sp.jedit.indent.IndentAction$Decrease $r2;
+
+        r0 := @parameter0;
+
+        $r1 = new org.gjt.sp.jedit.indent.RegexpIndentRule;
+
+        $r2 = new org.gjt.sp.jedit.indent.IndentAction$Decrease;
+
+        specialinvoke $r2.<init>();
+
+        specialinvoke $r1.<init>(r0, null, $r2, null, 0);
+
+        return $r1;
+    }
+
+    public static org.gjt.sp.jedit.indent.IndentRule indentOpenBracket(char) throws java.util.regex.PatternSyntaxException
+    {
+        char c0;
+        org.gjt.sp.jedit.indent.OpenBracketIndentRule $r0;
+
+        c0 := @parameter0;
+
+        $r0 = new org.gjt.sp.jedit.indent.OpenBracketIndentRule;
+
+        specialinvoke $r0.<init>(c0, 1);
+
+        return $r0;
+    }
+
+    public static org.gjt.sp.jedit.indent.IndentRule indentCloseBracket(char) throws java.util.regex.PatternSyntaxException
+    {
+        char c0;
+        org.gjt.sp.jedit.indent.CloseBracketIndentRule $r0;
+
+        c0 := @parameter0;
+
+        $r0 = new org.gjt.sp.jedit.indent.CloseBracketIndentRule;
+
+        specialinvoke $r0.<init>(c0, 1);
+
+        return $r0;
+    }
+
+    public static org.gjt.sp.jedit.indent.IndentRule unalignedOpenBracket(char) throws java.util.regex.PatternSyntaxException
+    {
+        char c0;
+        org.gjt.sp.jedit.indent.OpenBracketIndentRule $r0;
+
+        c0 := @parameter0;
+
+        $r0 = new org.gjt.sp.jedit.indent.OpenBracketIndentRule;
+
+        specialinvoke $r0.<init>(c0, 0);
+
+        return $r0;
+    }
+
+    public static org.gjt.sp.jedit.indent.IndentRule unalignedCloseBracket(char) throws java.util.regex.PatternSyntaxException
+    {
+        char c0;
+        org.gjt.sp.jedit.indent.CloseBracketIndentRule $r0;
+
+        c0 := @parameter0;
+
+        $r0 = new org.gjt.sp.jedit.indent.CloseBracketIndentRule;
+
+        specialinvoke $r0.<init>(c0, 0);
+
+        return $r0;
+    }
+}

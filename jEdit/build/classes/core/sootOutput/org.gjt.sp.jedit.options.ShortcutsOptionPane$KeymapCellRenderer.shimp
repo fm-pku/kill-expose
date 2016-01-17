@@ -1,0 +1,75 @@
+class org.gjt.sp.jedit.options.ShortcutsOptionPane$KeymapCellRenderer extends javax.swing.DefaultListCellRenderer
+{
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$KeymapCellRenderer r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.awt.Component getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$KeymapCellRenderer r0;
+        javax.swing.JList r1;
+        java.lang.Object r2;
+        int i0;
+        boolean z0, z1;
+        java.lang.String r3, $r9, $r10, $r11;
+        java.lang.StringBuilder $r5, $r6, $r7, $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        specialinvoke r0.getListCellRendererComponent(r1, r2, i0, z0, z1);
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append("keymaps.");
+
+        $r7 = $r6.append(r2);
+
+        $r8 = $r7.append(".label");
+
+        $r9 = $r8.toString();
+
+        $r10 = java.lang.String.valueOf(r2);
+
+        $r11 = $r10.replace(95, 32);
+
+        r3 = org.gjt.sp.jedit.jEdit.getProperty($r9, $r11);
+
+        r0.setText(r3);
+
+        return r0;
+    }
+
+    void <init>(org.gjt.sp.jedit.options.ShortcutsOptionPane$1)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$KeymapCellRenderer r0;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

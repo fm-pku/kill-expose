@@ -1,0 +1,78 @@
+class org.gjt.sp.jedit.help.HistoryButton$HistoryListActionHandler extends javax.swing.AbstractAction
+{
+    org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry entry;
+    final org.gjt.sp.jedit.help.HistoryButton this$0;
+
+    void <init>(org.gjt.sp.jedit.help.HistoryButton, org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry)
+    {
+        org.gjt.sp.jedit.help.HistoryButton$HistoryListActionHandler r0;
+        org.gjt.sp.jedit.help.HistoryButton r1;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry r2;
+        java.lang.String $r3, $r5, $r9;
+        java.lang.StringBuilder $r4, $r6, $r7, $r8;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        $r3 = r2.title;
+
+        specialinvoke r0.<init>($r3);
+
+        r0.entry = r2;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = r2.url;
+
+        $r6 = $r4.append($r5);
+
+        $r7 = $r6.append(58);
+
+        $i0 = r2.scrollPosition;
+
+        $r8 = $r7.append($i0);
+
+        $r9 = $r8.toString();
+
+        r0.putValue("ActionCommandKey", $r9);
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.help.HistoryButton$HistoryListActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.help.HistoryButton $r2, $r3, $r4;
+        org.gjt.sp.jedit.help.HelpHistoryModel $r5;
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.help.HistoryButton.access$300($r2);
+
+        $r3.actionPerformed(r1);
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.help.HistoryButton.access$200($r4);
+
+        $r6 = r0.entry;
+
+        $r5.setCurrentEntry($r6);
+
+        return;
+    }
+}

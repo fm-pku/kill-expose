@@ -1,0 +1,50 @@
+final class org.gjt.sp.jedit.jEdit$7 extends java.lang.Object implements java.lang.Runnable
+{
+    final java.lang.String val$sLf;
+
+    void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.jEdit$7 r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.val$sLf = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.jEdit$7 r0;
+        java.lang.Exception r1, $r3;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+     label1:
+        $r2 = r0.val$sLf;
+
+        javax.swing.UIManager.setLookAndFeel($r2);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r3 := @caughtexception;
+
+        r1 = $r3;
+
+     label4:
+        return;
+
+        catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+        catch java.lang.IllegalAccessException from label1 to label2 with label3;
+        catch java.lang.InstantiationException from label1 to label2 with label3;
+        catch javax.swing.UnsupportedLookAndFeelException from label1 to label2 with label3;
+    }
+}

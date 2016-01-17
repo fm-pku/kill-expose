@@ -1,0 +1,38 @@
+class org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$1 extends javax.swing.JPanel
+{
+    final org.gjt.sp.jedit.gui.ActionBar val$this$0;
+    final org.gjt.sp.jedit.gui.ActionBar$CompletionPopup this$1;
+
+    void <init>(org.gjt.sp.jedit.gui.ActionBar$CompletionPopup, java.awt.LayoutManager, org.gjt.sp.jedit.gui.ActionBar)
+    {
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$1 r0;
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup r1;
+        java.awt.LayoutManager r2;
+        org.gjt.sp.jedit.gui.ActionBar r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$1 = r1;
+
+        r0.val$this$0 = r3;
+
+        specialinvoke r0.<init>(r2);
+
+        return;
+    }
+
+    public boolean getFocusTraversalKeysEnabled()
+    {
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$1 r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+}

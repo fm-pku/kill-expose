@@ -1,0 +1,141 @@
+class org.gjt.sp.jedit.Registers$DefaultRegister extends java.lang.Object implements org.gjt.sp.jedit.Registers$Register
+{
+    private java.awt.datatransfer.Transferable transferable;
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.Registers$DefaultRegister r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void setValue(java.lang.String)
+    {
+        org.gjt.sp.jedit.Registers$DefaultRegister r0;
+        java.lang.String r1;
+        java.awt.datatransfer.StringSelection $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.awt.datatransfer.StringSelection;
+
+        specialinvoke $r2.<init>(r1);
+
+        r0.transferable = $r2;
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.Registers$DefaultRegister r0;
+        java.awt.datatransfer.Transferable $r1, $r3, $r4, $r7;
+        java.awt.datatransfer.DataFlavor $r2, $r6;
+        boolean $z0;
+        java.lang.String $r5, $r9;
+        java.lang.Object $r8;
+        java.io.IOException $r10, r13;
+        java.awt.datatransfer.UnsupportedFlavorException $r11, r12;
+
+        r0 := @this;
+
+        $r1 = r0.transferable;
+
+        if $r1 != null goto label1;
+
+        return null;
+
+     label1:
+        $r3 = r0.transferable;
+
+        $r2 = java.awt.datatransfer.DataFlavor.stringFlavor;
+
+        $z0 = $r3.isDataFlavorSupported($r2);
+
+        if $z0 == 0 goto label6;
+
+     label2:
+        $r7 = r0.transferable;
+
+        $r6 = java.awt.datatransfer.DataFlavor.stringFlavor;
+
+        $r8 = $r7.getTransferData($r6);
+
+        $r9 = $r8.toString();
+
+     label3:
+        return $r9;
+
+     label4:
+        $r11 := @caughtexception;
+
+        r12 = $r11;
+
+        org.gjt.sp.util.Log.log(9, r0, r12);
+
+        goto label6;
+
+     label5:
+        $r10 := @caughtexception;
+
+        r13 = $r10;
+
+        org.gjt.sp.util.Log.log(9, r0, r13);
+
+     label6:
+        $r4 = r0.transferable;
+
+        $r5 = $r4.toString();
+
+        return $r5;
+
+        catch java.awt.datatransfer.UnsupportedFlavorException from label2 to label3 with label4;
+        catch java.io.IOException from label2 to label3 with label5;
+    }
+
+    public java.awt.datatransfer.Transferable getTransferable()
+    {
+        org.gjt.sp.jedit.Registers$DefaultRegister r0;
+        java.awt.datatransfer.Transferable $r1;
+
+        r0 := @this;
+
+        $r1 = r0.transferable;
+
+        return $r1;
+    }
+
+    public void setTransferable(java.awt.datatransfer.Transferable)
+    {
+        org.gjt.sp.jedit.Registers$DefaultRegister r0;
+        java.awt.datatransfer.Transferable r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.transferable = r1;
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.Registers$1)
+    {
+        org.gjt.sp.jedit.Registers$DefaultRegister r0;
+        org.gjt.sp.jedit.Registers$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

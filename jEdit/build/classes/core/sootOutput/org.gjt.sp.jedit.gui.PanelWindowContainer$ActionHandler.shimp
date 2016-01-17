@@ -1,0 +1,106 @@
+class org.gjt.sp.jedit.gui.PanelWindowContainer$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.PanelWindowContainer this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.PanelWindowContainer)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$ActionHandler r0;
+        org.gjt.sp.jedit.gui.PanelWindowContainer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.gui.PanelWindowContainer $r2, $r5, $r7, $r10, $r14, $r16, $r17, $r19;
+        javax.swing.JPopupMenu $r3, $r18, $r20;
+        java.lang.Object $r4;
+        javax.swing.JButton $r6;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r8, $r11;
+        java.lang.String $r9, $r12;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry $r13, $r15;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.PanelWindowContainer.access$000($r2);
+
+        if $r3 == null goto label1;
+
+        $r17 = r0.this$0;
+
+        $r18 = org.gjt.sp.jedit.gui.PanelWindowContainer.access$000($r17);
+
+        $z1 = $r18.isVisible();
+
+        if $z1 == 0 goto label1;
+
+        $r19 = r0.this$0;
+
+        $r20 = org.gjt.sp.jedit.gui.PanelWindowContainer.access$000($r19);
+
+        $r20.setVisible(0);
+
+     label1:
+        $r4 = r1.getSource();
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.PanelWindowContainer.access$100($r5);
+
+        if $r4 != $r6 goto label2;
+
+        $r16 = r0.this$0;
+
+        $r15 = (org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry) null;
+
+        $r16.show($r15);
+
+        goto label4;
+
+     label2:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.PanelWindowContainer.access$200($r7);
+
+        $r9 = r1.getActionCommand();
+
+        $z0 = $r8.isDockableWindowVisible($r9);
+
+        if $z0 == 0 goto label3;
+
+        $r14 = r0.this$0;
+
+        $r13 = (org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry) null;
+
+        $r14.show($r13);
+
+        goto label4;
+
+     label3:
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.gui.PanelWindowContainer.access$200($r10);
+
+        $r12 = r1.getActionCommand();
+
+        $r11.showDockableWindow($r12);
+
+     label4:
+        return;
+    }
+}

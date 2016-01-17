@@ -1,0 +1,144 @@
+public class org.gjt.sp.jedit.search.CurrentBufferSet extends java.lang.Object implements org.gjt.sp.jedit.search.SearchFileSet
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.search.CurrentBufferSet r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.lang.String getFirstFile(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.search.CurrentBufferSet r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Buffer $r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getBuffer();
+
+        $r3 = $r2.getPath();
+
+        return $r3;
+    }
+
+    public java.lang.String getLastFile(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.search.CurrentBufferSet r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Buffer $r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getBuffer();
+
+        $r3 = $r2.getPath();
+
+        return $r3;
+    }
+
+    public java.lang.String getNextFile(org.gjt.sp.jedit.View, java.lang.String)
+    {
+        org.gjt.sp.jedit.search.CurrentBufferSet r0;
+        org.gjt.sp.jedit.View r1;
+        java.lang.String r2, $r4;
+        org.gjt.sp.jedit.Buffer $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        if r2 != null goto label1;
+
+        $r3 = r1.getBuffer();
+
+        $r4 = $r3.getPath();
+
+        return $r4;
+
+     label1:
+        return null;
+    }
+
+    public java.lang.String getPrevFile(org.gjt.sp.jedit.View, java.lang.String)
+    {
+        org.gjt.sp.jedit.search.CurrentBufferSet r0;
+        org.gjt.sp.jedit.View r1;
+        java.lang.String r2, $r4;
+        org.gjt.sp.jedit.Buffer $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        if r2 != null goto label1;
+
+        $r3 = r1.getBuffer();
+
+        $r4 = $r3.getPath();
+
+        return $r4;
+
+     label1:
+        return null;
+    }
+
+    public java.lang.String[] getFiles(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.search.CurrentBufferSet r0;
+        org.gjt.sp.jedit.View r1;
+        java.lang.String[] $r2;
+        org.gjt.sp.jedit.Buffer $r3;
+        java.lang.String $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = newarray (java.lang.String)[1];
+
+        $r3 = r1.getBuffer();
+
+        $r4 = $r3.getPath();
+
+        $r2[0] = $r4;
+
+        return $r2;
+    }
+
+    public int getFileCount(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.search.CurrentBufferSet r0;
+        org.gjt.sp.jedit.View r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return 1;
+    }
+
+    public java.lang.String getCode()
+    {
+        org.gjt.sp.jedit.search.CurrentBufferSet r0;
+
+        r0 := @this;
+
+        return "new CurrentBufferSet()";
+    }
+}

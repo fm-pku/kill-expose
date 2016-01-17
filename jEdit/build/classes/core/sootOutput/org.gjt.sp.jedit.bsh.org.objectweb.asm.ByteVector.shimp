@@ -1,0 +1,660 @@
+final class org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector extends java.lang.Object
+{
+    byte[] data;
+    int length;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector r0;
+        byte[] $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = newarray (byte)[64];
+
+        r0.data = $r1;
+
+        return;
+    }
+
+    public void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector r0;
+        int i0;
+        byte[] $r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        $r1 = newarray (byte)[i0];
+
+        r0.data = $r1;
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector put1(int)
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector r0;
+        int i0, $i1, $i2, i4, i5;
+        byte[] $r1, $r2;
+        byte $b3;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i4 = r0.length;
+
+        $i2 = i4 + 1;
+
+        $r1 = r0.data;
+
+        $i1 = lengthof $r1;
+
+        if $i2 <= $i1 goto label1;
+
+        specialinvoke r0.enlarge(1);
+
+     label1:
+        $r2 = r0.data;
+
+        i5 = i4 + 1;
+
+        $b3 = (byte) i0;
+
+        $r2[i4] = $b3;
+
+        r0.length = i5;
+
+        return r0;
+    }
+
+    public org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector put11(int, int)
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector r0;
+        int i0, i1, $i2, $i3, i6, i7, i8;
+        byte[] r1, $r2;
+        byte $b4, $b5;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        i6 = r0.length;
+
+        $i3 = i6 + 2;
+
+        $r2 = r0.data;
+
+        $i2 = lengthof $r2;
+
+        if $i3 <= $i2 goto label1;
+
+        specialinvoke r0.enlarge(2);
+
+     label1:
+        r1 = r0.data;
+
+        i7 = i6 + 1;
+
+        $b4 = (byte) i0;
+
+        r1[i6] = $b4;
+
+        i8 = i7 + 1;
+
+        $b5 = (byte) i1;
+
+        r1[i7] = $b5;
+
+        r0.length = i8;
+
+        return r0;
+    }
+
+    public org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector put2(int)
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector r0;
+        int i0, $i1, $i2, $i3, i6, i7, i8;
+        byte[] r1, $r2;
+        byte $b4, $b5;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i6 = r0.length;
+
+        $i2 = i6 + 2;
+
+        $r2 = r0.data;
+
+        $i1 = lengthof $r2;
+
+        if $i2 <= $i1 goto label1;
+
+        specialinvoke r0.enlarge(2);
+
+     label1:
+        r1 = r0.data;
+
+        i7 = i6 + 1;
+
+        $i3 = i0 >>> 8;
+
+        $b4 = (byte) $i3;
+
+        r1[i6] = $b4;
+
+        i8 = i7 + 1;
+
+        $b5 = (byte) i0;
+
+        r1[i7] = $b5;
+
+        r0.length = i8;
+
+        return r0;
+    }
+
+    public org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector put12(int, int)
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector r0;
+        int i0, i1, $i2, $i3, $i5, i8, i9, i10, i11;
+        byte[] r1, $r2;
+        byte $b4, $b6, $b7;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        i8 = r0.length;
+
+        $i3 = i8 + 3;
+
+        $r2 = r0.data;
+
+        $i2 = lengthof $r2;
+
+        if $i3 <= $i2 goto label1;
+
+        specialinvoke r0.enlarge(3);
+
+     label1:
+        r1 = r0.data;
+
+        i9 = i8 + 1;
+
+        $b4 = (byte) i0;
+
+        r1[i8] = $b4;
+
+        i10 = i9 + 1;
+
+        $i5 = i1 >>> 8;
+
+        $b6 = (byte) $i5;
+
+        r1[i9] = $b6;
+
+        i11 = i10 + 1;
+
+        $b7 = (byte) i1;
+
+        r1[i10] = $b7;
+
+        r0.length = i11;
+
+        return r0;
+    }
+
+    public org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector put4(int)
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector r0;
+        int i0, $i1, $i2, $i3, $i5, $i7, i10, i11, i12, i13, i14;
+        byte[] r1, $r2;
+        byte $b4, $b6, $b8, $b9;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i10 = r0.length;
+
+        $i2 = i10 + 4;
+
+        $r2 = r0.data;
+
+        $i1 = lengthof $r2;
+
+        if $i2 <= $i1 goto label1;
+
+        specialinvoke r0.enlarge(4);
+
+     label1:
+        r1 = r0.data;
+
+        i11 = i10 + 1;
+
+        $i3 = i0 >>> 24;
+
+        $b4 = (byte) $i3;
+
+        r1[i10] = $b4;
+
+        i12 = i11 + 1;
+
+        $i5 = i0 >>> 16;
+
+        $b6 = (byte) $i5;
+
+        r1[i11] = $b6;
+
+        i13 = i12 + 1;
+
+        $i7 = i0 >>> 8;
+
+        $b8 = (byte) $i7;
+
+        r1[i12] = $b8;
+
+        i14 = i13 + 1;
+
+        $b9 = (byte) i0;
+
+        r1[i13] = $b9;
+
+        r0.length = i14;
+
+        return r0;
+    }
+
+    public org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector put8(long)
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector r0;
+        long l0, $l3;
+        byte[] r1, $r2;
+        int $i1, $i2, $i4, $i6, $i8, $i11, $i13, $i15, i18, i19, i20, i21, i22, i23, i24, i25, i26, i27, i28;
+        byte $b5, $b7, $b9, $b10, $b12, $b14, $b16, $b17;
+
+        r0 := @this;
+
+        l0 := @parameter0;
+
+        i18 = r0.length;
+
+        $i2 = i18 + 8;
+
+        $r2 = r0.data;
+
+        $i1 = lengthof $r2;
+
+        if $i2 <= $i1 goto label1;
+
+        specialinvoke r0.enlarge(8);
+
+     label1:
+        r1 = r0.data;
+
+        $l3 = l0 >>> 32;
+
+        i19 = (int) $l3;
+
+        i20 = i18 + 1;
+
+        $i4 = i19 >>> 24;
+
+        $b5 = (byte) $i4;
+
+        r1[i18] = $b5;
+
+        i21 = i20 + 1;
+
+        $i6 = i19 >>> 16;
+
+        $b7 = (byte) $i6;
+
+        r1[i20] = $b7;
+
+        i22 = i21 + 1;
+
+        $i8 = i19 >>> 8;
+
+        $b9 = (byte) $i8;
+
+        r1[i21] = $b9;
+
+        i23 = i22 + 1;
+
+        $b10 = (byte) i19;
+
+        r1[i22] = $b10;
+
+        i24 = (int) l0;
+
+        i25 = i23 + 1;
+
+        $i11 = i24 >>> 24;
+
+        $b12 = (byte) $i11;
+
+        r1[i23] = $b12;
+
+        i26 = i25 + 1;
+
+        $i13 = i24 >>> 16;
+
+        $b14 = (byte) $i13;
+
+        r1[i25] = $b14;
+
+        i27 = i26 + 1;
+
+        $i15 = i24 >>> 8;
+
+        $b16 = (byte) $i15;
+
+        r1[i26] = $b16;
+
+        i28 = i27 + 1;
+
+        $b17 = (byte) i24;
+
+        r1[i27] = $b17;
+
+        r0.length = i28;
+
+        return r0;
+    }
+
+    public org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector putUTF(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector r0;
+        java.lang.String r1;
+        int i0, $i2, $i3, $i4, $i5, $i26, $i28, i29, i30, i32, i33, i34, i35, i36, i37, i38;
+        char c1, $c8, $c9, $c10, $c12, $c13, $c15, $c16, $c17, $c19, $c20, $c21, $c23, $c24, c31;
+        byte[] $r2, r4;
+        byte $b6, $b7, $b11, $b14, $b18, $b22, $b25, $b27;
+        java.lang.IllegalArgumentException $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 = r1.length();
+
+        i29 = 0;
+
+(0)     i30 = 0;
+
+     label01:
+        i30 = Phi(i30 #0, i30 #4);
+
+        i29 = Phi(i29 #0, i29 #4);
+
+        if i30 >= i0 goto label05;
+
+        c31 = r1.charAt(i30);
+
+        if c31 < 1 goto label02;
+
+        if c31 > 127 goto label02;
+
+        i29 = i29 + 1;
+
+(1)     goto label04;
+
+     label02:
+        if c31 <= 2047 goto label03;
+
+        i29 = i29 + 3;
+
+(2)     goto label04;
+
+     label03:
+(3)     i29 = i29 + 2;
+
+     label04:
+        i29 = Phi(i29 #1, i29 #2, i29 #3);
+
+        i30 = i30 + 1;
+
+(4)     goto label01;
+
+     label05:
+        if i29 <= 65535 goto label06;
+
+        $r3 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $r3.<init>();
+
+        throw $r3;
+
+     label06:
+        i32 = r0.length;
+
+        $i2 = i32 + 2;
+
+        $i4 = $i2 + i29;
+
+        $r2 = r0.data;
+
+        $i3 = lengthof $r2;
+
+        if $i4 <= $i3 goto label07;
+
+        $i28 = 2 + i29;
+
+        specialinvoke r0.enlarge($i28);
+
+     label07:
+        r4 = r0.data;
+
+        i33 = i32 + 1;
+
+        $i5 = i29 >>> 8;
+
+        $b6 = (byte) $i5;
+
+        r4[i32] = $b6;
+
+        i34 = i33 + 1;
+
+        $b7 = (byte) i29;
+
+        r4[i33] = $b7;
+
+(5)     i35 = 0;
+
+     label08:
+        i35 = Phi(i35 #5, i35 #9);
+
+        i30 = Phi(i30 #5, i30 #9);
+
+        i29 = Phi(i29 #5, i29 #9);
+
+        i34 = Phi(i34 #5, i34 #9);
+
+        if i35 >= i0 goto label12;
+
+        c1 = r1.charAt(i35);
+
+        if c1 < 1 goto label09;
+
+        if c1 > 127 goto label09;
+
+        $i26 = i34;
+
+        i34 = i34 + 1;
+
+        $b27 = (byte) c1;
+
+        r4[$i26] = $b27;
+
+(6)     goto label11;
+
+     label09:
+        if c1 <= 2047 goto label10;
+
+        i36 = i34 + 1;
+
+        $c15 = c1 >> 12;
+
+        $c16 = $c15 & 15;
+
+        $c17 = 224 | $c16;
+
+        $b18 = (byte) $c17;
+
+        r4[i34] = $b18;
+
+        i37 = i36 + 1;
+
+        $c19 = c1 >> 6;
+
+        $c20 = $c19 & 63;
+
+        $c21 = 128 | $c20;
+
+        $b22 = (byte) $c21;
+
+        r4[i36] = $b22;
+
+        i34 = i37 + 1;
+
+        $c23 = c1 & 63;
+
+        $c24 = 128 | $c23;
+
+        $b25 = (byte) $c24;
+
+        r4[i37] = $b25;
+
+(7)     goto label11;
+
+     label10:
+        i38 = i34 + 1;
+
+        $c8 = c1 >> 6;
+
+        $c9 = $c8 & 31;
+
+        $c10 = 192 | $c9;
+
+        $b11 = (byte) $c10;
+
+        r4[i34] = $b11;
+
+        i34 = i38 + 1;
+
+        $c12 = c1 & 63;
+
+        $c13 = 128 | $c12;
+
+        $b14 = (byte) $c13;
+
+(8)     r4[i38] = $b14;
+
+     label11:
+        i34 = Phi(i34 #6, i34 #7, i34 #8);
+
+        i35 = i35 + 1;
+
+(9)     goto label08;
+
+     label12:
+        r0.length = i34;
+
+        return r0;
+    }
+
+    public org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector putByteArray(byte[], int, int)
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector r0;
+        byte[] r1, $r2, $r3;
+        int i0, i1, $i2, $i3, $i4, $i5, $i6, $i7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        $i2 = r0.length;
+
+        $i4 = $i2 + i1;
+
+        $r2 = r0.data;
+
+        $i3 = lengthof $r2;
+
+        if $i4 <= $i3 goto label1;
+
+        specialinvoke r0.enlarge(i1);
+
+     label1:
+        if r1 == null goto label2;
+
+        $r3 = r0.data;
+
+        $i7 = r0.length;
+
+        java.lang.System.arraycopy(r1, i0, $r3, $i7, i1);
+
+     label2:
+        $i5 = r0.length;
+
+        $i6 = $i5 + i1;
+
+        r0.length = $i6;
+
+        return r0;
+    }
+
+    private void enlarge(int)
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ByteVector r0;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6;
+        byte[] r1, $r2, $r3;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r2 = r0.data;
+
+        $i1 = lengthof $r2;
+
+        $i4 = 2 * $i1;
+
+        $i2 = r0.length;
+
+        $i3 = $i2 + i0;
+
+        $i5 = java.lang.Math.max($i4, $i3);
+
+        r1 = newarray (byte)[$i5];
+
+        $r3 = r0.data;
+
+        $i6 = r0.length;
+
+        java.lang.System.arraycopy($r3, 0, r1, 0, $i6);
+
+        r0.data = r1;
+
+        return;
+    }
+}

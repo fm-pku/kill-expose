@@ -1,0 +1,380 @@
+class org.gjt.sp.jedit.options.ToolBarOptionPane$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.options.ToolBarOptionPane this$0;
+
+    void <init>(org.gjt.sp.jedit.options.ToolBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane$ActionHandler r0;
+        org.gjt.sp.jedit.options.ToolBarOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2, $r30, r93, r94;
+        java.lang.String r3, r97, r98;
+        org.gjt.sp.jedit.options.ToolBarOptionPane $r4, $r6, $r8, $r10, $r12, $r14, $r16, $r18, $r19, $r21, $r23, $r25, $r26, $r28, $r32, $r34, $r36, $r38, $r40, $r42, $r44, $r46, $r48, $r50, $r52, $r54, $r56, $r58, $r60, $r62, $r64, $r66, $r68, $r70, $r71, $r73, $r75, $r78, $r79, $r81, $r83, $r85, $r87, $r89;
+        org.gjt.sp.jedit.gui.RolloverButton $r5, $r7, $r9, $r11, $r13, $r15;
+        javax.swing.JList $r17, $r20, $r22, $r29, $r33, $r37, $r39, $r41, $r43, $r49, $r51, $r53, $r55, $r61, $r63, $r65, $r74, $r76, $r82, $r86, $r88;
+        org.gjt.sp.jedit.options.ToolBarEditDialog $r24, $r77, r91, r95;
+        javax.swing.DefaultComboBoxModel $r27, $r80;
+        org.gjt.sp.jedit.options.ToolBarOptionPane$Button $r31, r92, r96;
+        javax.swing.DefaultListModel $r35, $r45, $r47, $r57, $r59, $r67, $r69, $r72, $r84, $r90;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, i9, i10, i11, i12, i13, i14, i15, i10_1, i10_2, i10_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$000($r4);
+
+        if r2 != $r5 goto label04;
+
+        $r77 = new org.gjt.sp.jedit.options.ToolBarEditDialog;
+
+        $r79 = r0.this$0;
+
+        $r78 = r0.this$0;
+
+        $r80 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$100($r78);
+
+        specialinvoke $r77.<init>($r79, $r80, null);
+
+        r91 = $r77;
+
+        r92 = r91.getSelection();
+
+        if r92 != null goto label01;
+
+        return;
+
+     label01:
+        $r81 = r0.this$0;
+
+        $r82 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r81);
+
+        i9 = $r82.getSelectedIndex();
+
+        if i9 != -1 goto label02;
+
+        $r89 = r0.this$0;
+
+        $r90 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$300($r89);
+
+        i10 = $r90.getSize();
+
+(0)     goto label03;
+
+     label02:
+(1)     i10_1 = i9 + 1;
+
+     label03:
+        i10_2 = Phi(i10 #0, i10_1 #1);
+
+        $r83 = r0.this$0;
+
+        $r84 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$300($r83);
+
+        $r84.insertElementAt(r92, i10_2);
+
+        $r85 = r0.this$0;
+
+        $r86 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r85);
+
+        $r86.setSelectedIndex(i10_2);
+
+        $r87 = r0.this$0;
+
+        $r88 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r87);
+
+        $r88.ensureIndexIsVisible(i10_2);
+
+(2)     goto label12;
+
+     label04:
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$400($r6);
+
+        if r2 != $r7 goto label07;
+
+        $r64 = r0.this$0;
+
+        $r65 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r64);
+
+        i11 = $r65.getSelectedIndex();
+
+        $r66 = r0.this$0;
+
+        $r67 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$300($r66);
+
+        $r67.removeElementAt(i11);
+
+        $r68 = r0.this$0;
+
+        $r69 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$300($r68);
+
+        $i6 = $r69.getSize();
+
+        if $i6 == 0 goto label06;
+
+        $r71 = r0.this$0;
+
+        $r72 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$300($r71);
+
+        $i7 = $r72.getSize();
+
+        if $i7 != i11 goto label05;
+
+        $r75 = r0.this$0;
+
+        $r76 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r75);
+
+        $i8 = i11 - 1;
+
+        $r76.setSelectedIndex($i8);
+
+        goto label06;
+
+     label05:
+        $r73 = r0.this$0;
+
+        $r74 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r73);
+
+        $r74.setSelectedIndex(i11);
+
+     label06:
+        $r70 = r0.this$0;
+
+        org.gjt.sp.jedit.options.ToolBarOptionPane.access$500($r70);
+
+(3)     goto label12;
+
+     label07:
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$600($r8);
+
+        if r2 != $r9 goto label08;
+
+        $r52 = r0.this$0;
+
+        $r53 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r52);
+
+        i12 = $r53.getSelectedIndex();
+
+        $r54 = r0.this$0;
+
+        $r55 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r54);
+
+        r93 = $r55.getSelectedValue();
+
+        $r56 = r0.this$0;
+
+        $r57 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$300($r56);
+
+        $r57.removeElementAt(i12);
+
+        $r58 = r0.this$0;
+
+        $r59 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$300($r58);
+
+        $i3 = i12 - 1;
+
+        $r59.insertElementAt(r93, $i3);
+
+        $r60 = r0.this$0;
+
+        $r61 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r60);
+
+        $i4 = i12 - 1;
+
+        $r61.setSelectedIndex($i4);
+
+        $r62 = r0.this$0;
+
+        $r63 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r62);
+
+        $i5 = i12 - 1;
+
+        $r63.ensureIndexIsVisible($i5);
+
+(4)     goto label12;
+
+     label08:
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$700($r10);
+
+        if r2 != $r11 goto label09;
+
+        $r40 = r0.this$0;
+
+        $r41 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r40);
+
+        i13 = $r41.getSelectedIndex();
+
+        $r42 = r0.this$0;
+
+        $r43 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r42);
+
+        r94 = $r43.getSelectedValue();
+
+        $r44 = r0.this$0;
+
+        $r45 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$300($r44);
+
+        $r45.removeElementAt(i13);
+
+        $r46 = r0.this$0;
+
+        $r47 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$300($r46);
+
+        $i0 = i13 + 1;
+
+        $r47.insertElementAt(r94, $i0);
+
+        $r48 = r0.this$0;
+
+        $r49 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r48);
+
+        $i1 = i13 + 1;
+
+        $r49.setSelectedIndex($i1);
+
+        $r50 = r0.this$0;
+
+        $r51 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r50);
+
+        $i2 = i13 + 1;
+
+        $r51.ensureIndexIsVisible($i2);
+
+(5)     goto label12;
+
+     label09:
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$800($r12);
+
+        if r2 != $r13 goto label11;
+
+        $r24 = new org.gjt.sp.jedit.options.ToolBarEditDialog;
+
+        $r26 = r0.this$0;
+
+        $r25 = r0.this$0;
+
+        $r27 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$100($r25);
+
+        $r28 = r0.this$0;
+
+        $r29 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r28);
+
+        $r30 = $r29.getSelectedValue();
+
+        $r31 = (org.gjt.sp.jedit.options.ToolBarOptionPane$Button) $r30;
+
+        specialinvoke $r24.<init>($r26, $r27, $r31);
+
+        r95 = $r24;
+
+        r96 = r95.getSelection();
+
+        if r96 != null goto label10;
+
+        return;
+
+     label10:
+        $r32 = r0.this$0;
+
+        $r33 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r32);
+
+        i14 = $r33.getSelectedIndex();
+
+        $r34 = r0.this$0;
+
+        $r35 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$300($r34);
+
+        $r35.setElementAt(r96, i14);
+
+        $r36 = r0.this$0;
+
+        $r37 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r36);
+
+        $r37.setSelectedIndex(i14);
+
+        $r38 = r0.this$0;
+
+        $r39 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r38);
+
+        $r39.ensureIndexIsVisible(i14);
+
+(6)     goto label12;
+
+     label11:
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$900($r14);
+
+(7)     if r2 != $r15 goto label12;
+
+        r97 = "options.toolbar.reset.dialog";
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r16);
+
+        i15 = org.gjt.sp.jedit.GUIUtilities.confirm($r17, r97, null, 0, 2);
+
+(8)     if i15 != 0 goto label12;
+
+        r98 = org.gjt.sp.jedit.jEdit.getProperty("view.toolbar");
+
+        org.gjt.sp.jedit.jEdit.resetProperty("view.toolbar");
+
+        r3 = org.gjt.sp.jedit.jEdit.getProperty("view.toolbar");
+
+        org.gjt.sp.jedit.jEdit.setProperty("view.toolbar", r98);
+
+        $r18 = r0.this$0;
+
+        org.gjt.sp.jedit.options.ToolBarOptionPane.access$1000($r18, r3);
+
+        $r19 = r0.this$0;
+
+        $r20 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r19);
+
+        $r20.setSelectedIndex(0);
+
+        $r21 = r0.this$0;
+
+        $r22 = org.gjt.sp.jedit.options.ToolBarOptionPane.access$200($r21);
+
+        $r22.ensureIndexIsVisible(0);
+
+        $r23 = r0.this$0;
+
+(9)     org.gjt.sp.jedit.options.ToolBarOptionPane.access$500($r23);
+
+     label12:
+        i10_3 = Phi(i10_2 #2, i10 #3, i10 #4, i10 #5, i10 #6, i10 #7, i10 #8, i10 #9);
+
+        return;
+    }
+}

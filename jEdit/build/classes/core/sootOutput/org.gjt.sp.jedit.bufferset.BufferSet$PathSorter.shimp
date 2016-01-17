@@ -1,0 +1,58 @@
+public class org.gjt.sp.jedit.bufferset.BufferSet$PathSorter extends java.lang.Object implements java.util.Comparator
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bufferset.BufferSet$PathSorter r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public int compare(org.gjt.sp.jedit.Buffer, org.gjt.sp.jedit.Buffer)
+    {
+        org.gjt.sp.jedit.bufferset.BufferSet$PathSorter r0;
+        org.gjt.sp.jedit.Buffer r1, r2;
+        java.lang.String $r3, $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r1.getPath();
+
+        $r4 = r2.getPath();
+
+        $i0 = org.gjt.sp.util.StandardUtilities.compareStrings($r3, $r4, 1);
+
+        return $i0;
+    }
+
+    public volatile int compare(java.lang.Object, java.lang.Object)
+    {
+        org.gjt.sp.jedit.bufferset.BufferSet$PathSorter r0;
+        java.lang.Object r1, r2;
+        org.gjt.sp.jedit.Buffer $r3, $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = (org.gjt.sp.jedit.Buffer) r1;
+
+        $r3 = (org.gjt.sp.jedit.Buffer) r2;
+
+        $i0 = r0.compare($r4, $r3);
+
+        return $i0;
+    }
+}

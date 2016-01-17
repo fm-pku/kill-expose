@@ -1,0 +1,188 @@
+public class thoughtworks.problem.salesTax.test.CategoryLookupTest extends junit.framework.TestCase
+{
+    thoughtworks.problem.salesTax.application.CategoryLookup lookup;
+
+    public void <init>()
+    {
+        thoughtworks.problem.salesTax.test.CategoryLookupTest r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void setUp() throws java.lang.Exception
+    {
+        thoughtworks.problem.salesTax.test.CategoryLookupTest r0;
+        thoughtworks.problem.salesTax.application.CategoryLookup $r1;
+
+        r0 := @this;
+
+        $r1 = thoughtworks.problem.salesTax.application.CategoryLookup.getInstance();
+
+        Packer.Unpack(r0);
+
+        r0.lookup = $r1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void testObjectCreation()
+    {
+        thoughtworks.problem.salesTax.test.CategoryLookupTest r0;
+        thoughtworks.problem.salesTax.application.CategoryLookup $r1;
+
+        r0 := @this;
+
+        $r1 = r0.lookup;
+
+        Packer.Unpack(r0);
+
+        thoughtworks.problem.salesTax.test.CategoryLookupTest.assertNotNull($r1);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void testcheckSingletonBehavior()
+    {
+        thoughtworks.problem.salesTax.test.CategoryLookupTest r0;
+        thoughtworks.problem.salesTax.application.CategoryLookup r1, $r2;
+
+        r0 := @this;
+
+        r1 = thoughtworks.problem.salesTax.application.CategoryLookup.getInstance();
+
+        $r2 = r0.lookup;
+
+        Packer.Unpack(r0);
+
+        thoughtworks.problem.salesTax.test.CategoryLookupTest.assertSame($r2, r1);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void testDefaultLookupValuesPresent()
+    {
+        thoughtworks.problem.salesTax.test.CategoryLookupTest r0;
+        thoughtworks.problem.salesTax.application.CategoryLookup $r1, $r2, $r3, $r4, $r5, $r6;
+        boolean $z0;
+        java.lang.String r7, r8, r9, r10, r11, r12;
+
+        r0 := @this;
+
+        $r1 = r0.lookup;
+
+        Packer.Unpack(r0);
+
+        r7 = $r1.getCategoryFor("book");
+
+        thoughtworks.problem.salesTax.test.CategoryLookupTest.assertEquals(r7, "Book");
+
+        $r2 = r0.lookup;
+
+        r8 = $r2.getCategoryFor("books");
+
+        thoughtworks.problem.salesTax.test.CategoryLookupTest.assertEquals(r8, "Book");
+
+        $r3 = r0.lookup;
+
+        r9 = $r3.getCategoryFor("chocolate");
+
+        thoughtworks.problem.salesTax.test.CategoryLookupTest.assertEquals(r9, "Food");
+
+        $r4 = r0.lookup;
+
+        r10 = $r4.getCategoryFor("chocolates");
+
+        thoughtworks.problem.salesTax.test.CategoryLookupTest.assertEquals(r10, "Food");
+
+        $r5 = r0.lookup;
+
+        r11 = $r5.getCategoryFor("pills");
+
+        thoughtworks.problem.salesTax.test.CategoryLookupTest.assertEquals(r11, "Medical");
+
+        $r6 = r0.lookup;
+
+        r12 = $r6.getCategoryFor("productNameNotInTheLookup");
+
+        Packer.Pack(r0);
+
+        $z0 = r12.equals("Book");
+
+        thoughtworks.problem.salesTax.test.CategoryLookupTest.assertFalse("Invalid product category returned", $z0);
+
+        return;
+    }
+
+    public void testCanAddProduct()
+    {
+        thoughtworks.problem.salesTax.test.CategoryLookupTest r0;
+        java.lang.String r1;
+        thoughtworks.problem.salesTax.application.CategoryLookup $r2, $r3;
+
+        r0 := @this;
+
+        $r2 = r0.lookup;
+
+        Packer.Unpack(r0);
+
+        $r2.addProduct("MacBook", "Electronics");
+
+        $r3 = r0.lookup;
+
+        r1 = $r3.getCategoryFor("MacBook");
+
+        Packer.Pack(r0);
+
+        thoughtworks.problem.salesTax.test.CategoryLookupTest.assertEquals(r1, "Electronics");
+
+        return;
+    }
+
+    public void testCanRemoveProduct()
+    {
+        thoughtworks.problem.salesTax.test.CategoryLookupTest r0;
+        thoughtworks.problem.salesTax.application.CategoryLookup $r1, $r2, $r3, $r4;
+        boolean $z0;
+        java.lang.String r5, r6;
+
+        r0 := @this;
+
+        $r1 = r0.lookup;
+
+        Packer.Unpack(r0);
+
+        $r1.addProduct("MacBook", "Electronics");
+
+        $r2 = r0.lookup;
+
+        r5 = $r2.getCategoryFor("MacBook");
+
+        thoughtworks.problem.salesTax.test.CategoryLookupTest.assertEquals(r5, "Electronics");
+
+        $r3 = r0.lookup;
+
+        $r3.removeProduct("MacBook");
+
+        $r4 = r0.lookup;
+
+        r6 = $r4.getCategoryFor("MacBook");
+
+        Packer.Pack(r0);
+
+        $z0 = r6.equals("Electronics");
+
+        thoughtworks.problem.salesTax.test.CategoryLookupTest.assertFalse($z0);
+
+        return;
+    }
+}

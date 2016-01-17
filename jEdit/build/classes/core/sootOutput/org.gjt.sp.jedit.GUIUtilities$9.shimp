@@ -1,0 +1,50 @@
+final class org.gjt.sp.jedit.GUIUtilities$9 extends java.awt.event.WindowAdapter
+{
+    final java.awt.Component val$comp;
+    final java.awt.Window val$win;
+
+    void <init>(java.awt.Component, java.awt.Window)
+    {
+        org.gjt.sp.jedit.GUIUtilities$9 r0;
+        java.awt.Component r1;
+        java.awt.Window r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.val$comp = r1;
+
+        r0.val$win = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void windowGainedFocus(java.awt.event.WindowEvent)
+    {
+        org.gjt.sp.jedit.GUIUtilities$9 r0;
+        java.awt.event.WindowEvent r1;
+        org.gjt.sp.jedit.GUIUtilities$9$1 $r2;
+        java.awt.Window $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new org.gjt.sp.jedit.GUIUtilities$9$1;
+
+        specialinvoke $r2.<init>(r0);
+
+        java.awt.EventQueue.invokeLater($r2);
+
+        $r3 = r0.val$win;
+
+        $r3.removeWindowFocusListener(r0);
+
+        return;
+    }
+}

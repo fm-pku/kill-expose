@@ -1,0 +1,175 @@
+class org.gjt.sp.jedit.SettingsReloader extends java.lang.Object
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.SettingsReloader r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void handleVFSUpdate(org.gjt.sp.jedit.msg.VFSUpdate)
+    {
+        org.gjt.sp.jedit.SettingsReloader r0;
+        org.gjt.sp.jedit.msg.VFSUpdate r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getPath();
+
+        specialinvoke r0.maybeReload($r2);
+
+        return;
+    }
+
+    private void maybeReload(java.lang.String)
+    {
+        org.gjt.sp.jedit.SettingsReloader r0;
+        org.gjt.sp.jedit.search.SearchFileSet r1;
+        org.gjt.sp.jedit.search.DirectoryListSet r2;
+        java.lang.String r3, $r5, $r6, r7, r8, r9, r10, r7_1, r7_2, r7_3, r8_1, r9_1, r7_4, r9_2, r8_2, r10_1, r10_2, r10_3, r10_4;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z10;
+        org.gjt.sp.jedit.io.VFS $r4;
+        int $i0, $i1, $i2, $i3;
+
+        r0 := @this;
+
+        r7 := @parameter0;
+
+        r8 = org.gjt.sp.jedit.jEdit.getJEditHome();
+
+        r9 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        $z0 = org.gjt.sp.jedit.MiscUtilities.isURL(r7);
+
+(0)     if $z0 != 0 goto label01;
+
+(1)     r7_1 = org.gjt.sp.jedit.MiscUtilities.resolveSymlinks(r7);
+
+     label01:
+        r7_2 = Phi(r7 #0, r7_1 #1);
+
+        $r4 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r7_2);
+
+        $i0 = $r4.getCapabilities();
+
+        $i1 = $i0 & 128;
+
+(2)     if $i1 == 0 goto label02;
+
+        r7_3 = r7_2.toLowerCase();
+
+        r8_1 = r8.toLowerCase();
+
+(3)     if r9 == null goto label02;
+
+(4)     r9_1 = r9.toLowerCase();
+
+     label02:
+        r7_4 = Phi(r7_2 #2, r7_3 #3, r7_3 #4);
+
+        r9_2 = Phi(r9 #2, r9 #3, r9_1 #4);
+
+        r8_2 = Phi(r8 #2, r8_1 #3, r8_1 #4);
+
+        r1 = org.gjt.sp.jedit.search.SearchAndReplace.getSearchFileSet();
+
+        $z1 = r1 instanceof org.gjt.sp.jedit.search.DirectoryListSet;
+
+        if $z1 == 0 goto label03;
+
+        r2 = (org.gjt.sp.jedit.search.DirectoryListSet) r1;
+
+        $r6 = r2.getDirectory();
+
+        r3 = org.gjt.sp.jedit.MiscUtilities.resolveSymlinks($r6);
+
+        $z10 = r7_4.startsWith(r3);
+
+        if $z10 == 0 goto label03;
+
+        r2.invalidateCachedList();
+
+     label03:
+        if r8_2 == null goto label04;
+
+        $z9 = r7_4.startsWith(r8_2);
+
+        if $z9 == 0 goto label04;
+
+        $i3 = r8_2.length();
+
+        r10 = r7_4.substring($i3);
+
+(5)     goto label06;
+
+     label04:
+        if r9_2 == null goto label05;
+
+        $z2 = r7_4.startsWith(r9_2);
+
+        if $z2 == 0 goto label05;
+
+        $i2 = r9_2.length();
+
+        r10_1 = r7_4.substring($i2);
+
+(6)     goto label06;
+
+     label05:
+        return;
+
+     label06:
+        r10_2 = Phi(r10 #5, r10_1 #6);
+
+        $r5 = java.io.File.separator;
+
+        $z3 = r10_2.startsWith($r5);
+
+        if $z3 != 0 goto label07;
+
+        $z8 = r10_2.startsWith("/");
+
+(7)     if $z8 == 0 goto label08;
+
+     label07:
+(8)     r10_3 = r10_2.substring(1);
+
+     label08:
+        r10_4 = Phi(r10_2 #7, r10_3 #8);
+
+        $z4 = r10_4.startsWith("macros");
+
+        if $z4 == 0 goto label09;
+
+        org.gjt.sp.jedit.Macros.loadMacros();
+
+        goto label11;
+
+     label09:
+        $z5 = r10_4.startsWith("modes");
+
+        if $z5 == 0 goto label11;
+
+        $z6 = r10_4.endsWith(".xml");
+
+        if $z6 != 0 goto label10;
+
+        $z7 = r10_4.endsWith("catalog");
+
+        if $z7 == 0 goto label11;
+
+     label10:
+        org.gjt.sp.jedit.jEdit.reloadModes();
+
+     label11:
+        return;
+    }
+}

@@ -1,0 +1,113 @@
+public class org.gjt.sp.jedit.msg.EditPaneUpdate extends org.gjt.sp.jedit.EBMessage
+{
+    public static final java.lang.Object CREATED;
+    public static final java.lang.Object DESTROYED;
+    public static final java.lang.Object BUFFER_CHANGED;
+    public static final java.lang.Object POSITION_CHANGING;
+    public static final java.lang.Object BUFFER_CHANGING;
+    public static final java.lang.Object BUFFERSET_CHANGED;
+    private java.lang.Object what;
+
+    public void <init>(org.gjt.sp.jedit.EditPane, java.lang.Object)
+    {
+        org.gjt.sp.jedit.msg.EditPaneUpdate r0;
+        org.gjt.sp.jedit.EditPane r1;
+        java.lang.Object r2;
+        java.lang.NullPointerException $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        if r2 != null goto label1;
+
+        $r3 = new java.lang.NullPointerException;
+
+        specialinvoke $r3.<init>("What must be non-null");
+
+        throw $r3;
+
+     label1:
+        r0.what = r2;
+
+        return;
+    }
+
+    public java.lang.Object getWhat()
+    {
+        org.gjt.sp.jedit.msg.EditPaneUpdate r0;
+        java.lang.Object $r1;
+
+        r0 := @this;
+
+        $r1 = r0.what;
+
+        return $r1;
+    }
+
+    public org.gjt.sp.jedit.EditPane getEditPane()
+    {
+        org.gjt.sp.jedit.msg.EditPaneUpdate r0;
+        java.lang.Object $r1;
+        org.gjt.sp.jedit.EditPane $r2;
+
+        r0 := @this;
+
+        $r1 = r0.getSource();
+
+        $r2 = (org.gjt.sp.jedit.EditPane) $r1;
+
+        return $r2;
+    }
+
+    public java.lang.String paramString()
+    {
+        org.gjt.sp.jedit.msg.EditPaneUpdate r0;
+        java.lang.StringBuilder $r1, $r2, $r4, $r5, $r7;
+        java.lang.Object $r3;
+        java.lang.String $r6, $r8;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("what=");
+
+        $r3 = r0.what;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.append(",");
+
+        $r6 = specialinvoke r0.paramString();
+
+        $r7 = $r5.append($r6);
+
+        $r8 = $r7.toString();
+
+        return $r8;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.msg.EditPaneUpdate.CREATED = "CREATED";
+
+        org.gjt.sp.jedit.msg.EditPaneUpdate.DESTROYED = "DESTROYED";
+
+        org.gjt.sp.jedit.msg.EditPaneUpdate.BUFFER_CHANGED = "BUFFER_CHANGED";
+
+        org.gjt.sp.jedit.msg.EditPaneUpdate.POSITION_CHANGING = "POSITION_CHANGING";
+
+        org.gjt.sp.jedit.msg.EditPaneUpdate.BUFFER_CHANGING = "BUFFER_CHANGING";
+
+        org.gjt.sp.jedit.msg.EditPaneUpdate.BUFFERSET_CHANGED = "BUFFERSET_CHANGED";
+
+        return;
+    }
+}

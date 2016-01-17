@@ -1,0 +1,162 @@
+public class thoughtworks.problem.salesTax.shoppingCart.CustomerCart extends java.lang.Object implements thoughtworks.problem.salesTax.shoppingCart.ShoppingCart
+{
+    private java.lang.String customerName;
+    private java.lang.String cashierName;
+    private java.lang.String date;
+    private java.util.ArrayList cart;
+    private static java.util.Iterator iterator;
+
+    public void <init>(java.lang.String, java.lang.String, java.lang.String)
+    {
+        thoughtworks.problem.salesTax.shoppingCart.CustomerCart r0;
+        java.lang.String r1, r2, r3;
+        java.util.ArrayList $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.customerName = r1;
+
+        r0.cashierName = r2;
+
+        r0.date = r3;
+
+        $r4 = new java.util.ArrayList;
+
+        specialinvoke $r4.<init>();
+
+        r0.cart = $r4;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void addProduct(thoughtworks.problem.salesTax.products.Product)
+    {
+        thoughtworks.problem.salesTax.shoppingCart.CustomerCart r0;
+        thoughtworks.problem.salesTax.products.Product r1;
+        java.util.ArrayList $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.cart;
+
+        Packer.Unpack(r0);
+
+        $r2.add(r1);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public int getItemCount()
+    {
+        thoughtworks.problem.salesTax.shoppingCart.CustomerCart r0;
+        java.util.ArrayList $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.cart;
+
+        Packer.Unpack(r0);
+
+        $i0 = $r1.size();
+
+        Packer.Pack(r0);
+
+        return $i0;
+    }
+
+    public java.util.Iterator iterator()
+    {
+        thoughtworks.problem.salesTax.shoppingCart.CustomerCart r0;
+        java.util.ArrayList $r1;
+        java.util.Iterator $r2;
+
+        r0 := @this;
+
+        $r1 = r0.cart;
+
+        Packer.Unpack(r0);
+
+        $r2 = $r1.iterator();
+
+        Packer.Pack(r0);
+
+        return $r2;
+    }
+
+    public void getProduct(thoughtworks.problem.salesTax.products.Product)
+    {
+        thoughtworks.problem.salesTax.shoppingCart.CustomerCart r0;
+        thoughtworks.problem.salesTax.products.Product r1;
+        java.util.ArrayList $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.cart;
+
+        Packer.Unpack(r0);
+
+        $r2.remove(r1);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void empty()
+    {
+        thoughtworks.problem.salesTax.shoppingCart.CustomerCart r0;
+        java.util.ArrayList $r1;
+
+        r0 := @this;
+
+        $r1 = r0.cart;
+
+        Packer.Unpack(r0);
+
+        $r1.clear();
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void removeProduct(thoughtworks.problem.salesTax.products.Product)
+    {
+        thoughtworks.problem.salesTax.shoppingCart.CustomerCart r0;
+        thoughtworks.problem.salesTax.products.Product r1;
+        java.util.ArrayList $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.cart;
+
+        Packer.Unpack(r0);
+
+        $r2.remove(r1);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+}

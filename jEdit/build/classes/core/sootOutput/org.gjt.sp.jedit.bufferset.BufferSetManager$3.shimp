@@ -1,0 +1,79 @@
+class org.gjt.sp.jedit.bufferset.BufferSetManager$3 extends org.gjt.sp.jedit.visitors.JEditVisitorAdapter
+{
+    final java.util.Map val$buffersMap;
+    final org.gjt.sp.jedit.bufferset.BufferSetManager this$0;
+
+    void <init>(org.gjt.sp.jedit.bufferset.BufferSetManager, java.util.Map)
+    {
+        org.gjt.sp.jedit.bufferset.BufferSetManager$3 r0;
+        org.gjt.sp.jedit.bufferset.BufferSetManager r1;
+        java.util.Map r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$buffersMap = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void visit(org.gjt.sp.jedit.EditPane)
+    {
+        org.gjt.sp.jedit.bufferset.BufferSetManager$3 r0;
+        org.gjt.sp.jedit.EditPane r1;
+        org.gjt.sp.jedit.bufferset.BufferSet r2;
+        org.gjt.sp.jedit.Buffer[] r3;
+        java.util.Map $r4, $r9;
+        org.gjt.sp.jedit.View $r5, $r10;
+        java.lang.Object $r6;
+        java.util.List $r7;
+        java.util.HashSet $r8;
+        java.util.Set r12, r12_1, r12_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getBufferSet();
+
+        r3 = r2.getAllBuffers();
+
+        $r4 = r0.val$buffersMap;
+
+        $r5 = r1.getView();
+
+        $r6 = $r4.get($r5);
+
+        r12 = (java.util.Set) $r6;
+
+(0)     if r12 != null goto label1;
+
+        $r8 = new java.util.HashSet;
+
+        specialinvoke $r8.<init>();
+
+        r12_1 = $r8;
+
+        $r9 = r0.val$buffersMap;
+
+        $r10 = r1.getView();
+
+(1)     $r9.put($r10, r12_1);
+
+     label1:
+        r12_2 = Phi(r12 #0, r12_1 #1);
+
+        $r7 = java.util.Arrays.asList(r3);
+
+        r12_2.addAll($r7);
+
+        return;
+    }
+}

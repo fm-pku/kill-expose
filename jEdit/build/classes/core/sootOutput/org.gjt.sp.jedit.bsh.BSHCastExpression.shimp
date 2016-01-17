@@ -1,0 +1,70 @@
+class org.gjt.sp.jedit.bsh.BSHCastExpression extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+
+    public void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHCastExpression r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHCastExpression r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        java.lang.Class r4;
+        org.gjt.sp.jedit.bsh.SimpleNode r5;
+        java.lang.Object r6, $r12;
+        org.gjt.sp.jedit.bsh.UtilEvalError r8, $r13;
+        org.gjt.sp.jedit.bsh.Node $r9, $r11;
+        org.gjt.sp.jedit.bsh.BSHType $r10;
+        org.gjt.sp.jedit.bsh.EvalError $r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r1.top();
+
+        $r9 = r0.jjtGetChild(0);
+
+        $r10 = (org.gjt.sp.jedit.bsh.BSHType) $r9;
+
+        r4 = $r10.getType(r1, r2);
+
+        $r11 = r0.jjtGetChild(1);
+
+        r5 = (org.gjt.sp.jedit.bsh.SimpleNode) $r11;
+
+        r6 = r5.eval(r1, r2);
+
+        r6.getClass();
+
+     label1:
+        $r12 = org.gjt.sp.jedit.bsh.Types.castObject(r6, r4, 0);
+
+     label2:
+        return $r12;
+
+     label3:
+        $r13 := @caughtexception;
+
+        r8 = $r13;
+
+        $r14 = r8.toEvalError(r0, r1);
+
+        throw $r14;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label2 with label3;
+    }
+}

@@ -1,0 +1,234 @@
+class org.gjt.sp.jedit.pluginmgr.InstallPanel$EntryCompare extends java.lang.Object implements java.util.Comparator
+{
+    private static final int COLUMN_INSTALL;
+    private static final int COLUMN_NAME;
+    private static final int COLUMN_CATEGORY;
+    private static final int COLUMN_VERSION;
+    private static final int COLUMN_SIZE;
+    private static final int COLUMN_RELEASE;
+    private final int type;
+    private final int sortDirection;
+
+    void <init>(int, int)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$EntryCompare r0;
+        int i0, i1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.type = i0;
+
+        r0.sortDirection = i1;
+
+        return;
+    }
+
+    public int compare(org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry, org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$EntryCompare r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry r1, r2;
+        int $i0, $i1, $i2, $i9, $i10, $i11, $i12, i14, i14_1, i14_2, i14_3, i14_4, i14_5, i14_6, i14_7, i14_8;
+        boolean $z0, $z1, $z2;
+        long $l3, $l4, $l6, $l7;
+        byte $b5, $b8, $b13, $b15, $b16, $b13_1, $b13_2, $b13_3, $b15_1, $b15_2, $b15_3, $b16_1, $b16_2, $b16_3, $b15_4, $b13_4, $b16_4;
+        java.lang.String $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $i0 = r0.type;
+
+        tableswitch($i0)
+        {
+            case 0: goto label01;
+            case 1: goto label05;
+            case 2: goto label06;
+            case 3: goto label07;
+            case 4: goto label08;
+            case 5: goto label12;
+            default: goto label16;
+        };
+
+     label01:
+        $z1 = r1.install;
+
+        $z0 = r2.install;
+
+        if $z1 != $z0 goto label02;
+
+        $b13 = 0;
+
+(0)     goto label04;
+
+     label02:
+        $z2 = r1.install;
+
+        if $z2 == 0 goto label03;
+
+        $b13_1 = 1;
+
+(1)     goto label04;
+
+     label03:
+(2)     $b13_2 = -1;
+
+     label04:
+        $b13_3 = Phi($b13 #0, $b13_1 #1, $b13_2 #2);
+
+        i14 = $b13_3;
+
+(3)     goto label17;
+
+     label05:
+        $r10 = r1.name;
+
+        $r9 = r2.name;
+
+        i14_1 = $r10.compareToIgnoreCase($r9);
+
+(4)     goto label17;
+
+     label06:
+        $r6 = r1.set;
+
+        $r5 = r2.set;
+
+        i14_2 = $r6.compareToIgnoreCase($r5);
+
+(5)     if i14_2 != 0 goto label17;
+
+        $r8 = r1.name;
+
+        $r7 = r2.name;
+
+        i14_3 = $r8.compareToIgnoreCase($r7);
+
+(6)     goto label17;
+
+     label07:
+        $r4 = r1.version;
+
+        $r3 = r2.version;
+
+        i14_4 = org.gjt.sp.util.StandardUtilities.compareStrings($r4, $r3, 1);
+
+(7)     goto label17;
+
+     label08:
+        $i10 = r1.size;
+
+        $i9 = r2.size;
+
+        if $i10 >= $i9 goto label09;
+
+        $b15 = -1;
+
+(8)     goto label11;
+
+     label09:
+        $i12 = r1.size;
+
+        $i11 = r2.size;
+
+        if $i12 != $i11 goto label10;
+
+        $b15_1 = 0;
+
+(9)     goto label11;
+
+     label10:
+(10)    $b15_2 = 1;
+
+     label11:
+        $b15_3 = Phi($b15 #8, $b15_1 #9, $b15_2 #10);
+
+        i14_5 = $b15_3;
+
+(11)    goto label17;
+
+     label12:
+        $l4 = r1.timestamp;
+
+        $l3 = r2.timestamp;
+
+        $b5 = $l4 cmp $l3;
+
+        if $b5 >= 0 goto label13;
+
+        $b16 = -1;
+
+(12)    goto label15;
+
+     label13:
+        $l7 = r1.timestamp;
+
+        $l6 = r2.timestamp;
+
+        $b8 = $l7 cmp $l6;
+
+        if $b8 != 0 goto label14;
+
+        $b16_1 = 0;
+
+(13)    goto label15;
+
+     label14:
+(14)    $b16_2 = 1;
+
+     label15:
+        $b16_3 = Phi($b16 #12, $b16_1 #13, $b16_2 #14);
+
+        i14_6 = $b16_3;
+
+(15)    goto label17;
+
+     label16:
+(16)    i14_7 = 0;
+
+     label17:
+        $b15_4 = Phi($b15 #3, $b15 #4, $b15 #5, $b15 #6, $b15 #7, $b15_3 #11, $b15 #15, $b15 #16);
+
+        i14_8 = Phi(i14 #3, i14_1 #4, i14_2 #5, i14_3 #6, i14_4 #7, i14_5 #11, i14_6 #15, i14_7 #16);
+
+        $b13_4 = Phi($b13_3 #3, $b13 #4, $b13 #5, $b13 #6, $b13 #7, $b13 #11, $b13 #15, $b13 #16);
+
+        $b16_4 = Phi($b16 #3, $b16 #4, $b16 #5, $b16 #6, $b16 #7, $b16 #11, $b16_3 #15, $b16 #16);
+
+        $i1 = r0.sortDirection;
+
+        $i2 = i14_8 * $i1;
+
+        return $i2;
+    }
+
+    public volatile int compare(java.lang.Object, java.lang.Object)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$EntryCompare r0;
+        java.lang.Object r1, r2;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry $r3, $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) r1;
+
+        $r3 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) r2;
+
+        $i0 = r0.compare($r4, $r3);
+
+        return $i0;
+    }
+}

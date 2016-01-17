@@ -1,0 +1,58 @@
+class org.gjt.sp.jedit.bsh.BSHStatementExpressionList extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHStatementExpressionList r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHStatementExpressionList r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        int i0, i1;
+        org.gjt.sp.jedit.bsh.SimpleNode r3;
+        org.gjt.sp.jedit.bsh.Primitive $r4;
+        org.gjt.sp.jedit.bsh.Node $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 = r0.jjtGetNumChildren();
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label2;
+
+        $r5 = r0.jjtGetChild(i1);
+
+        r3 = (org.gjt.sp.jedit.bsh.SimpleNode) $r5;
+
+        r3.eval(r1, r2);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        $r4 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        return $r4;
+    }
+}

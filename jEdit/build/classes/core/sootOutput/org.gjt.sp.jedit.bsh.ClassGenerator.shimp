@@ -1,0 +1,76 @@
+public abstract class org.gjt.sp.jedit.bsh.ClassGenerator extends java.lang.Object
+{
+    private static org.gjt.sp.jedit.bsh.ClassGenerator cg;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.ClassGenerator r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static org.gjt.sp.jedit.bsh.ClassGenerator getClassGenerator() throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.ClassGenerator $r0, $r1, $r3;
+        java.lang.Object $r2;
+        java.lang.Exception $r4, r11;
+        org.gjt.sp.jedit.bsh.Capabilities$Unavailable $r5;
+        java.lang.StringBuilder $r6, $r7, $r8;
+        java.lang.String $r9;
+        java.lang.Class r10;
+
+        $r0 = org.gjt.sp.jedit.bsh.ClassGenerator.cg;
+
+        if $r0 != null goto label4;
+
+     label1:
+        r10 = java.lang.Class.forName("org.gjt.sp.jedit.bsh.ClassGeneratorImpl");
+
+        $r2 = r10.newInstance();
+
+        $r3 = (org.gjt.sp.jedit.bsh.ClassGenerator) $r2;
+
+        org.gjt.sp.jedit.bsh.ClassGenerator.cg = $r3;
+
+     label2:
+        goto label4;
+
+     label3:
+        $r4 := @caughtexception;
+
+        r11 = $r4;
+
+        $r5 = new org.gjt.sp.jedit.bsh.Capabilities$Unavailable;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("ClassGenerator unavailable: ");
+
+        $r8 = $r7.append(r11);
+
+        $r9 = $r8.toString();
+
+        specialinvoke $r5.<init>($r9);
+
+        throw $r5;
+
+     label4:
+        $r1 = org.gjt.sp.jedit.bsh.ClassGenerator.cg;
+
+        return $r1;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    public abstract java.lang.Class generateClass(java.lang.String, org.gjt.sp.jedit.bsh.Modifiers, java.lang.Class[], java.lang.Class, org.gjt.sp.jedit.bsh.BSHBlock, boolean, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError;
+
+    public abstract java.lang.Object invokeSuperclassMethod(org.gjt.sp.jedit.bsh.BshClassManager, java.lang.Object, java.lang.String, java.lang.Object[]) throws org.gjt.sp.jedit.bsh.UtilEvalError, org.gjt.sp.jedit.bsh.ReflectError, java.lang.reflect.InvocationTargetException;
+
+    public abstract void setInstanceNameSpaceParent(java.lang.Object, java.lang.String, org.gjt.sp.jedit.bsh.NameSpace);
+}

@@ -1,0 +1,246 @@
+final class org.gjt.sp.jedit.jEdit$8 extends java.lang.Object implements java.lang.Runnable
+{
+    final boolean val$restore;
+    final boolean val$gui;
+    final boolean val$newPlainView;
+    final java.lang.String[] val$args;
+    final java.lang.String val$userDir;
+
+    void <init>(boolean, boolean, boolean, java.lang.String[], java.lang.String)
+    {
+        org.gjt.sp.jedit.jEdit$8 r0;
+        boolean z0, z1, z2;
+        java.lang.String[] r1;
+        java.lang.String r2;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        z1 := @parameter1;
+
+        z2 := @parameter2;
+
+        r1 := @parameter3;
+
+        r2 := @parameter4;
+
+        r0.val$restore = z0;
+
+        r0.val$gui = z1;
+
+        r0.val$newPlainView = z2;
+
+        r0.val$args = r1;
+
+        r0.val$userDir = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.jEdit$8 r0;
+        int i0, $i4, $i5, $i6, $i7, $i8;
+        boolean z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z7_1, $z7_2;
+        java.lang.String[] r1, $r3, $r19, $r21, $r23, $r25;
+        java.util.Vector $r2, $r12, $r18, $r20, $r22;
+        java.lang.String $r4, $r11, $r24, $r26;
+        org.gjt.sp.jedit.msg.EditorStarted $r5;
+        org.gjt.sp.jedit.EditServer $r6, $r17;
+        java.lang.StringBuilder $r7, $r8, $r9, $r10;
+        long $l1, $l2, $l3;
+        java.util.List $r13;
+        java.lang.Boolean $r14;
+        org.gjt.sp.jedit.View r28, r28_1, r28_2, r28_3, r28_4, r28_5;
+        org.gjt.sp.jedit.Buffer r29, r29_1, r29_2, r29_3;
+
+        r0 := @this;
+
+        i0 = org.gjt.sp.jedit.jEdit.getBufferCount();
+
+        $z1 = r0.val$restore;
+
+        if $z1 == 0 goto label02;
+
+        $z5 = org.gjt.sp.jedit.jEdit.getBooleanProperty("restore");
+
+        if $z5 == 0 goto label02;
+
+        if i0 == 0 goto label01;
+
+        $z6 = org.gjt.sp.jedit.jEdit.getBooleanProperty("restore.cli");
+
+        if $z6 == 0 goto label02;
+
+     label01:
+        $z7 = 1;
+
+(0)     goto label03;
+
+     label02:
+(1)     $z7_1 = 0;
+
+     label03:
+        $z7_2 = Phi($z7 #0, $z7_1 #1);
+
+        z0 = $z7_2;
+
+        $z2 = r0.val$gui;
+
+        if $z2 != 0 goto label04;
+
+        if i0 == 0 goto label11;
+
+     label04:
+        $z3 = r0.val$newPlainView;
+
+        if $z3 == 0 goto label05;
+
+        r28 = org.gjt.sp.jedit.jEdit.newView(null, null, 1);
+
+(2)     goto label06;
+
+     label05:
+(3)     r28_1 = org.gjt.sp.jedit.PerspectiveManager.loadPerspective(z0);
+
+     label06:
+        r28_2 = Phi(r28 #2, r28_1 #3);
+
+(4)     if r28_2 != null goto label07;
+
+(5)     r28_3 = org.gjt.sp.jedit.jEdit.newView(null, null);
+
+     label07:
+        r28_4 = Phi(r28_2 #4, r28_3 #5);
+
+        $r2 = org.gjt.sp.jedit.jEdit.access$100();
+
+        $z4 = $r2.isEmpty();
+
+        if $z4 != 0 goto label08;
+
+        $r18 = org.gjt.sp.jedit.jEdit.access$100();
+
+        $i4 = $r18.size();
+
+        $r19 = r0.val$args;
+
+        $i5 = lengthof $r19;
+
+        $i6 = $i4 + $i5;
+
+        r1 = newarray (java.lang.String)[$i6];
+
+        $r20 = org.gjt.sp.jedit.jEdit.access$100();
+
+        $r20.copyInto(r1);
+
+        $r21 = r0.val$args;
+
+        $r22 = org.gjt.sp.jedit.jEdit.access$100();
+
+        $i7 = $r22.size();
+
+        $r23 = r0.val$args;
+
+        $i8 = lengthof $r23;
+
+        java.lang.System.arraycopy($r21, 0, r1, $i7, $i8);
+
+        $r24 = r0.val$userDir;
+
+        r29 = org.gjt.sp.jedit.jEdit.openFiles(null, $r24, r1);
+
+(6)     goto label09;
+
+     label08:
+        $r4 = r0.val$userDir;
+
+        $r3 = r0.val$args;
+
+(7)     r29_1 = org.gjt.sp.jedit.jEdit.openFiles(null, $r4, $r3);
+
+     label09:
+        r29_2 = Phi(r29 #6, r29_1 #7);
+
+        if r29_2 == null goto label10;
+
+        r28_4.setBuffer(r29_2);
+
+     label10:
+        r28_4.toFront();
+
+(8)     goto label12;
+
+     label11:
+        $r26 = r0.val$userDir;
+
+        $r25 = r0.val$args;
+
+(9)     org.gjt.sp.jedit.jEdit.openFiles(null, $r26, $r25);
+
+     label12:
+        r29_3 = Phi(r29_2 #8, r29 #9);
+
+        r28_5 = Phi(r28_4 #8, r28 #9);
+
+        $r5 = new org.gjt.sp.jedit.msg.EditorStarted;
+
+        specialinvoke $r5.<init>(null);
+
+        org.gjt.sp.jedit.EditBus.send($r5);
+
+        org.gjt.sp.jedit.io.VFSManager.start();
+
+        $r6 = org.gjt.sp.jedit.jEdit.access$200();
+
+        if $r6 == null goto label13;
+
+        $r17 = org.gjt.sp.jedit.jEdit.access$200();
+
+        $r17.start();
+
+     label13:
+        org.gjt.sp.jedit.GUIUtilities.hideSplashScreen();
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("Startup complete: ");
+
+        $l1 = java.lang.System.currentTimeMillis();
+
+        $l2 = org.gjt.sp.jedit.jEdit.access$300();
+
+        $l3 = $l1 - $l2;
+
+        $r9 = $r8.append($l3);
+
+        $r10 = $r9.append(" ms");
+
+        $r11 = $r10.toString();
+
+        org.gjt.sp.util.Log.log(3, class "org/gjt/sp/jedit/jEdit", $r11);
+
+        $r12 = org.gjt.sp.jedit.jEdit.access$400();
+
+        if $r12 == null goto label14;
+
+        org.gjt.sp.jedit.jEdit.access$000();
+
+     label14:
+        $r13 = org.gjt.sp.jedit.jEdit.access$500();
+
+        $r14 = java.lang.Boolean.valueOf(1);
+
+        $r13.set(0, $r14);
+
+        java.awt.Toolkit.getDefaultToolkit();
+
+        return;
+    }
+}

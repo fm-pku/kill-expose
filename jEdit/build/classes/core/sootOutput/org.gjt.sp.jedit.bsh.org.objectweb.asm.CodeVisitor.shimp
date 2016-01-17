@@ -1,0 +1,37 @@
+public interface  org.gjt.sp.jedit.bsh.org.objectweb.asm.CodeVisitor extends java.lang.Object
+{
+
+    public abstract void visitInsn(int);
+
+    public abstract void visitIntInsn(int, int);
+
+    public abstract void visitVarInsn(int, int);
+
+    public abstract void visitTypeInsn(int, java.lang.String);
+
+    public abstract void visitFieldInsn(int, java.lang.String, java.lang.String, java.lang.String);
+
+    public abstract void visitMethodInsn(int, java.lang.String, java.lang.String, java.lang.String);
+
+    public abstract void visitJumpInsn(int, org.gjt.sp.jedit.bsh.org.objectweb.asm.Label);
+
+    public abstract void visitLabel(org.gjt.sp.jedit.bsh.org.objectweb.asm.Label);
+
+    public abstract void visitLdcInsn(java.lang.Object);
+
+    public abstract void visitIincInsn(int, int);
+
+    public abstract void visitTableSwitchInsn(int, int, org.gjt.sp.jedit.bsh.org.objectweb.asm.Label, org.gjt.sp.jedit.bsh.org.objectweb.asm.Label[]);
+
+    public abstract void visitLookupSwitchInsn(org.gjt.sp.jedit.bsh.org.objectweb.asm.Label, int[], org.gjt.sp.jedit.bsh.org.objectweb.asm.Label[]);
+
+    public abstract void visitMultiANewArrayInsn(java.lang.String, int);
+
+    public abstract void visitTryCatchBlock(org.gjt.sp.jedit.bsh.org.objectweb.asm.Label, org.gjt.sp.jedit.bsh.org.objectweb.asm.Label, org.gjt.sp.jedit.bsh.org.objectweb.asm.Label, java.lang.String);
+
+    public abstract void visitMaxs(int, int);
+
+    public abstract void visitLocalVariable(java.lang.String, java.lang.String, org.gjt.sp.jedit.bsh.org.objectweb.asm.Label, org.gjt.sp.jedit.bsh.org.objectweb.asm.Label, int);
+
+    public abstract void visitLineNumber(int, org.gjt.sp.jedit.bsh.org.objectweb.asm.Label);
+}

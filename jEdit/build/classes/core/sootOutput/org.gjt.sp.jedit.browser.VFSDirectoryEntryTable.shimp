@@ -1,0 +1,1658 @@
+public class org.gjt.sp.jedit.browser.VFSDirectoryEntryTable extends javax.swing.JTable
+{
+    private final org.gjt.sp.jedit.browser.BrowserView browserView;
+    private final javax.swing.table.JTableHeader header;
+    private final org.gjt.sp.jedit.browser.FileCellRenderer renderer;
+    private final java.lang.StringBuffer typeSelectBuffer;
+    private final javax.swing.Timer timer;
+    private boolean resizingColumns;
+    static final javax.swing.Icon ASC_ICON;
+    static final javax.swing.Icon DESC_ICON;
+
+    void <init>(org.gjt.sp.jedit.browser.BrowserView)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        org.gjt.sp.jedit.browser.BrowserView r1;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel $r2;
+        java.lang.StringBuffer $r3;
+        javax.swing.Timer $r4;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$ClearTypeSelect $r5;
+        java.awt.Dimension $r6;
+        org.gjt.sp.jedit.browser.FileCellRenderer $r7;
+        javax.swing.table.JTableHeader $r8, $r9, $r12, $r14, $r15;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$MainMouseHandler $r10;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$MouseHandler $r11;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$HeaderRenderer $r13;
+        javax.swing.table.TableCellRenderer $r16;
+        javax.swing.table.DefaultTableCellRenderer $r17;
+        javax.swing.table.TableColumnModel $r18;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$ColumnHandler $r19;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel;
+
+        specialinvoke $r2.<init>();
+
+        specialinvoke r0.<init>($r2);
+
+        $r3 = new java.lang.StringBuffer;
+
+        Packer.Unpack(r0);
+
+        specialinvoke $r3.<init>();
+
+        r0.typeSelectBuffer = $r3;
+
+        Packer.Pack(r0);
+
+        $r4 = new javax.swing.Timer;
+
+        $r5 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$ClearTypeSelect;
+
+        specialinvoke $r5.<init>(r0);
+
+        Packer.Unpack(r0);
+
+        specialinvoke $r4.<init>(0, $r5);
+
+        r0.timer = $r4;
+
+        r0.browserView = r1;
+
+        Packer.Pack(r0);
+
+        r0.setShowGrid(0);
+
+        $r6 = new java.awt.Dimension;
+
+        specialinvoke $r6.<init>(0, 0);
+
+        r0.setIntercellSpacing($r6);
+
+        $r7 = new org.gjt.sp.jedit.browser.FileCellRenderer;
+
+        Packer.Unpack(r0);
+
+        specialinvoke $r7.<init>();
+
+        r0.renderer = $r7;
+
+        r0.setDefaultRenderer(class "org/gjt/sp/jedit/browser/VFSDirectoryEntryTableModel$Entry", $r7);
+
+        Packer.Pack(r0);
+
+        $r8 = r0.getTableHeader();
+
+        Packer.Unpack(r0);
+
+        r0.header = $r8;
+
+        $r9 = r0.header;
+
+        $r9.setReorderingAllowed(1);
+
+        Packer.Pack(r0);
+
+        $r10 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$MainMouseHandler;
+
+        specialinvoke $r10.<init>(r0);
+
+        r0.addMouseListener($r10);
+
+        $r12 = r0.header;
+
+        $r11 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$MouseHandler;
+
+        specialinvoke $r11.<init>(r0);
+
+        Packer.Unpack(r0);
+
+        $r12.addMouseListener($r11);
+
+        $r15 = r0.header;
+
+        $r13 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$HeaderRenderer;
+
+        $r14 = r0.header;
+
+        $r16 = $r14.getDefaultRenderer();
+
+        $r17 = (javax.swing.table.DefaultTableCellRenderer) $r16;
+
+        specialinvoke $r13.<init>($r17);
+
+        $r15.setDefaultRenderer($r13);
+
+        Packer.Pack(r0);
+
+        r0.setRowSelectionAllowed(1);
+
+        $r18 = r0.getColumnModel();
+
+        $r19 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$ColumnHandler;
+
+        specialinvoke $r19.<init>(r0);
+
+        $r18.addColumnModelListener($r19);
+
+        r0.setAutoResizeMode(0);
+
+        return;
+    }
+
+    public boolean selectFile(java.lang.String)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        java.lang.String r1, $r5;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry r2;
+        int $i0, i1;
+        java.lang.Object $r3;
+        org.gjt.sp.jedit.io.VFSFile $r4;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $i0 = r0.getRowCount();
+
+        if i1 >= $i0 goto label3;
+
+        $r3 = r0.getValueAt(i1, 1);
+
+        r2 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry) $r3;
+
+        $r4 = r2.dirEntry;
+
+        $r5 = $r4.getPath();
+
+        $z0 = $r5.equals(r1);
+
+        if $z0 == 0 goto label2;
+
+        r0.setSelectedRow(i1);
+
+        return 1;
+
+     label2:
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        return 0;
+    }
+
+    public void doTypeSelect(java.lang.String, boolean)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        java.lang.String r1;
+        boolean z0, z1;
+        int i0, $i1, $i2, $i3, $i4;
+        javax.swing.ListSelectionModel $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        $i1 = r1.length();
+
+        if $i1 != 0 goto label1;
+
+        r0.clearSelection();
+
+        goto label3;
+
+     label1:
+        $i2 = r0.getSelectedRow();
+
+        if $i2 != -1 goto label2;
+
+        $i4 = r0.getRowCount();
+
+        specialinvoke r0.doTypeSelect(r1, 0, $i4, z0);
+
+        goto label3;
+
+     label2:
+        $r2 = r0.getSelectionModel();
+
+        i0 = $r2.getMaxSelectionIndex();
+
+        $i3 = r0.getRowCount();
+
+        z1 = specialinvoke r0.doTypeSelect(r1, i0, $i3, z0);
+
+        if z1 != 0 goto label3;
+
+        specialinvoke r0.doTypeSelect(r1, 0, i0, z0);
+
+     label3:
+        return;
+    }
+
+    public org.gjt.sp.jedit.io.VFSFile[] getSelectedFiles()
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r1;
+        java.util.LinkedList r2, $r6;
+        int[] r3, r4;
+        int i0, i1, $i2, i3;
+        javax.swing.table.TableModel $r5;
+        org.gjt.sp.jedit.io.VFSFile[] $r7, $r9;
+        java.lang.Object[] $r8;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] $r10;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry $r11;
+        org.gjt.sp.jedit.io.VFSFile $r12;
+
+        r0 := @this;
+
+        $r5 = r0.getModel();
+
+        r1 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel) $r5;
+
+        $r6 = new java.util.LinkedList;
+
+        specialinvoke $r6.<init>();
+
+        r2 = $r6;
+
+        r3 = r0.getSelectedRows();
+
+        r4 = r3;
+
+        i0 = lengthof r4;
+
+(0)     i3 = 0;
+
+     label1:
+        i3 = Phi(i3 #0, i3 #1);
+
+        if i3 >= i0 goto label2;
+
+        i1 = r4[i3];
+
+        $r10 = r1.files;
+
+        $r11 = $r10[i1];
+
+        $r12 = $r11.dirEntry;
+
+        r2.add($r12);
+
+        i3 = i3 + 1;
+
+(1)     goto label1;
+
+     label2:
+        $i2 = r2.size();
+
+        $r7 = newarray (org.gjt.sp.jedit.io.VFSFile)[$i2];
+
+        $r8 = r2.toArray($r7);
+
+        $r9 = (org.gjt.sp.jedit.io.VFSFile[]) $r8;
+
+        return $r9;
+    }
+
+    public void getExpandedDirectories(java.util.Set)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        java.util.Set r1;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r2;
+        javax.swing.table.TableModel $r3;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] $r4, $r5, $r6, $r8;
+        int $i0, i1;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry $r7, $r9;
+        boolean $z0;
+        org.gjt.sp.jedit.io.VFSFile $r10;
+        java.lang.String $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.getModel();
+
+        r2 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel) $r3;
+
+        $r4 = r2.files;
+
+(0)     if $r4 == null goto label3;
+
+(1)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #1, i1 #3);
+
+        $r5 = r2.files;
+
+        $i0 = lengthof $r5;
+
+(2)     if i1 >= $i0 goto label3;
+
+        $r6 = r2.files;
+
+        $r7 = $r6[i1];
+
+        $z0 = $r7.expanded;
+
+        if $z0 == 0 goto label2;
+
+        $r8 = r2.files;
+
+        $r9 = $r8[i1];
+
+        $r10 = $r9.dirEntry;
+
+        $r11 = $r10.getPath();
+
+        r1.add($r11);
+
+     label2:
+        i1 = i1 + 1;
+
+(3)     goto label1;
+
+     label3:
+        i1 = Phi(i1 #0, i1 #2);
+
+        return;
+    }
+
+    public void toggleExpanded(int)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        int i0, $i1;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r1;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry r2;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$1 r3, $r7;
+        javax.swing.table.TableModel $r4;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] $r5;
+        org.gjt.sp.jedit.io.VFSFile $r6, $r9, $r12;
+        boolean $z0;
+        org.gjt.sp.jedit.browser.BrowserView $r8, $r10;
+        java.lang.String $r11, $r13;
+        org.gjt.sp.jedit.io.VFS $r14;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r4 = r0.getModel();
+
+        r1 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel) $r4;
+
+        $r5 = r1.files;
+
+        r2 = $r5[i0];
+
+        $r6 = r2.dirEntry;
+
+        $i1 = $r6.getType();
+
+        if $i1 != 0 goto label1;
+
+        return;
+
+     label1:
+        $r7 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$1;
+
+        specialinvoke $r7.<init>(r0, i0);
+
+        r3 = $r7;
+
+        $z0 = r2.expanded;
+
+        if $z0 == 0 goto label2;
+
+        $r12 = r2.dirEntry;
+
+        $r13 = $r12.getPath();
+
+        $r14 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath($r13);
+
+        r1.collapse($r14, i0);
+
+        specialinvoke r0.resizeColumns();
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread(r3);
+
+        goto label3;
+
+     label2:
+        $r8 = r0.browserView;
+
+        Packer.Unpack(r0);
+
+        $r8.clearExpansionState();
+
+        $r10 = r0.browserView;
+
+        $r9 = r2.dirEntry;
+
+        $r11 = $r9.getPath();
+
+        $r10.loadDirectory(r2, $r11, 0, r3);
+
+     label3:
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void setDirectory(org.gjt.sp.jedit.io.VFS, java.lang.Object, java.util.List, java.util.Set)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        org.gjt.sp.jedit.io.VFS r1;
+        java.lang.Object r2;
+        java.util.List r3;
+        java.util.Set r4;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r5;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry r6, $r11;
+        java.lang.String r7;
+        javax.swing.Timer $r8;
+        java.lang.StringBuffer $r9;
+        javax.swing.table.TableModel $r10;
+        int $i0, $i1, i2, i3, i4, i2_1, i2_2;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] $r12;
+        org.gjt.sp.jedit.io.VFSFile $r13;
+        boolean $z0;
+        org.gjt.sp.jedit.browser.BrowserView $r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        $r8 = r0.timer;
+
+        Packer.Unpack(r0);
+
+        $r8.stop();
+
+        $r9 = r0.typeSelectBuffer;
+
+        $r9.setLength(0);
+
+        Packer.Pack(r0);
+
+        $r10 = r0.getModel();
+
+        r5 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel) $r10;
+
+        if r2 != null goto label1;
+
+        i2 = 0;
+
+        r5.setRoot(r1, r3);
+
+(0)     goto label2;
+
+     label1:
+        $r11 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry) r2;
+
+        i3 = r5.expand(r1, $r11, r3);
+
+(1)     i2_1 = i3 + 1;
+
+     label2:
+        i2_2 = Phi(i2 #0, i2_1 #1);
+
+(2)     i4 = 0;
+
+     label3:
+        i4 = Phi(i4 #2, i4 #3);
+
+        i2 = Phi(i2_2 #2, i2 #3);
+
+        $i0 = r3.size();
+
+        if i4 >= $i0 goto label5;
+
+        $r12 = r5.files;
+
+        $i1 = i2 + i4;
+
+        r6 = $r12[$i1];
+
+        $r13 = r6.dirEntry;
+
+        r7 = $r13.getPath();
+
+        $z0 = r4.contains(r7);
+
+        if $z0 == 0 goto label4;
+
+        Packer.Unpack(r0);
+
+        $r14 = r0.browserView;
+
+        $r14.loadDirectory(r6, r7, 0);
+
+        Packer.Pack(r0);
+
+        r4.remove(r7);
+
+     label4:
+        i4 = i4 + 1;
+
+(3)     goto label3;
+
+     label5:
+        specialinvoke r0.resizeColumns();
+
+        return;
+    }
+
+    public void maybeReloadDirectory(java.lang.String)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        java.lang.String r1, $r9, r12;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r2;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry r3;
+        org.gjt.sp.jedit.io.VFSFile r4, $r8;
+        javax.swing.table.TableModel $r5;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] $r6, $r7;
+        int $i0, $i1, i2;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.browser.BrowserView $r10, $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r5 = r0.getModel();
+
+        r2 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel) $r5;
+
+(0)     i2 = 0;
+
+     label1:
+        r12 = Phi(r12 #0, r12 #6);
+
+        i2 = Phi(i2 #0, i2 #6);
+
+        $r6 = r2.files;
+
+        $i0 = lengthof $r6;
+
+        if i2 >= $i0 goto label6;
+
+        $r7 = r2.files;
+
+        r3 = $r7[i2];
+
+        $z0 = r3.expanded;
+
+(1)     if $z0 == 0 goto label5;
+
+        $r8 = r3.dirEntry;
+
+        $i1 = $r8.getType();
+
+        if $i1 != 0 goto label2;
+
+(2)     goto label5;
+
+     label2:
+        r4 = r3.dirEntry;
+
+        $r9 = r4.getSymlinkPath();
+
+        if $r9 != null goto label3;
+
+        r12 = r4.getPath();
+
+(3)     goto label4;
+
+     label3:
+(4)     r12 = r4.getSymlinkPath();
+
+     label4:
+        r12 = Phi(r12 #3, r12 #4);
+
+        $z1 = org.gjt.sp.jedit.MiscUtilities.pathsEqual(r1, r12);
+
+(5)     if $z1 == 0 goto label5;
+
+        $r10 = r0.browserView;
+
+        Packer.Unpack(r0);
+
+        $r10.saveExpansionState();
+
+        $r11 = r0.browserView;
+
+        $r11.loadDirectory(r3, r1, 0);
+
+        Packer.Pack(r0);
+
+        return;
+
+     label5:
+        r12 = Phi(r12 #1, r12 #2, r12 #5);
+
+        i2 = i2 + 1;
+
+(6)     goto label1;
+
+     label6:
+        return;
+    }
+
+    public void propertiesChanged()
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        org.gjt.sp.jedit.io.VFSFile r1, $r4;
+        java.awt.Dimension r2, $r8, $r9;
+        org.gjt.sp.jedit.browser.FileCellRenderer $r3, $r6;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry $r5;
+        java.awt.Component $r7;
+        int $i0, $i1, $i2, $i3;
+
+        r0 := @this;
+
+        $r3 = r0.renderer;
+
+        Packer.Unpack(r0);
+
+        $r3.propertiesChanged();
+
+        Packer.Pack(r0);
+
+        $r4 = new org.gjt.sp.jedit.io.VFSFile;
+
+        specialinvoke $r4.<init>("foo", "foo", "foo", 0, 0L, 0);
+
+        r1 = $r4;
+
+        $r6 = r0.renderer;
+
+        $r5 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry;
+
+        specialinvoke $r5.<init>(r1, 0);
+
+        $r7 = $r6.getTableCellRendererComponent(r0, $r5, 0, 0, 0, 0);
+
+        $r8 = $r7.getPreferredSize();
+
+        $i0 = $r8.height;
+
+        r0.setRowHeight($i0);
+
+        r2 = r0.getPreferredSize();
+
+        $r9 = new java.awt.Dimension;
+
+        $i1 = r2.width;
+
+        $i2 = r0.getRowHeight();
+
+        $i3 = $i2 * 12;
+
+        specialinvoke $r9.<init>($i1, $i3);
+
+        r0.setPreferredScrollableViewportSize($r9);
+
+        return;
+    }
+
+    public void scrollRectToVisible(java.awt.Rectangle)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        java.awt.Rectangle r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r1.width = 0;
+
+        specialinvoke r0.scrollRectToVisible(r1);
+
+        return;
+    }
+
+    public void processKeyEvent(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        java.awt.event.KeyEvent r1;
+        int i0, $i1, $i2, $i4, $i5, $i6, $i8, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i20, $i21, $i22, i23;
+        org.gjt.sp.jedit.ActionContext r2;
+        org.gjt.sp.jedit.EditAction r4, r6, r7, r8, r45, r46, r47;
+        org.gjt.sp.jedit.browser.VFSBrowser r5, $r27, $r29, $r39, r48;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z9_1, $z9_2;
+        org.gjt.sp.jedit.browser.BrowserView $r9, $r23, $r26, $r28, $r38, $r40;
+        char $c3, $c7, $c9;
+        java.lang.String $r10, $r13, $r17, r43, r44;
+        org.gjt.sp.jedit.View $r11;
+        org.gjt.sp.jedit.Buffer $r12;
+        java.lang.StringBuffer $r14, $r16;
+        javax.swing.Timer $r18, $r19, $r20, $r21;
+        javax.swing.table.TableModel $r22;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] $r24, $r30, $r32, $r34, $r36;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry $r25, $r31, $r33, $r35, $r37;
+        javax.swing.JList $r41;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r42;
+        byte $b24, $b24_1, $b24_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i1 = r1.getID();
+
+        if $i1 != 401 goto label23;
+
+        $r22 = r0.getModel();
+
+        r42 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel) $r22;
+
+        i0 = r0.getSelectedRow();
+
+        r2 = org.gjt.sp.jedit.browser.VFSBrowser.getActionContext();
+
+        org.gjt.sp.jedit.jEdit.getActionContext();
+
+        r4 = r2.getAction("vfs.browser.up");
+
+        $r23 = r0.browserView;
+
+        Packer.Unpack(r0);
+
+        r5 = $r23.getBrowser();
+
+        Packer.Pack(r0);
+
+        $i10 = r1.getKeyCode();
+
+(0)     lookupswitch($i10)
+        {
+            case 8: goto label09;
+            case 9: goto label07;
+            case 10: goto label19;
+            case 27: goto label14;
+            case 37: goto label01;
+            case 38: goto label10;
+            case 39: goto label17;
+            case 78: goto label12;
+            case 113: goto label15;
+            case 116: goto label16;
+            case 117: goto label17;
+            case 127: goto label11;
+            case 155: goto label13;
+            default: goto label22;
+        };
+
+     label01:
+        r1.consume();
+
+        $i17 = r1.getModifiers();
+
+        $i18 = $i17 & 8;
+
+        if $i18 <= 0 goto label02;
+
+        r5.previousDirectory();
+
+(1)     goto label22;
+
+     label02:
+(2)     if i0 == -1 goto label06;
+
+        $r30 = r42.files;
+
+        $r31 = $r30[i0];
+
+        $z6 = $r31.expanded;
+
+        if $z6 == 0 goto label03;
+
+        r0.toggleExpanded(i0);
+
+        return;
+
+     label03:
+(3)     i23 = i0 - 1;
+
+     label04:
+        i23 = Phi(i23 #3, i23 #5);
+
+(4)     if i23 < 0 goto label06;
+
+        $r32 = r42.files;
+
+        $r33 = $r32[i23];
+
+        $z7 = $r33.expanded;
+
+        if $z7 == 0 goto label05;
+
+        $r34 = r42.files;
+
+        $r35 = $r34[i23];
+
+        $i20 = $r35.level;
+
+        $r36 = r42.files;
+
+        $r37 = $r36[i0];
+
+        $i19 = $r37.level;
+
+        if $i20 >= $i19 goto label05;
+
+        r0.setSelectedRow(i23);
+
+        return;
+
+     label05:
+        i23 = i23 + -1;
+
+(5)     goto label04;
+
+     label06:
+        Packer.Unpack(r0);
+
+        Packer.Unpack(r0);
+
+        i23 = Phi(i23 #2, i23 #4);
+
+        $r26 = r0.browserView;
+
+        $r27 = $r26.getBrowser();
+
+        r43 = $r27.getDirectory();
+
+        r44 = org.gjt.sp.jedit.MiscUtilities.getParentOfPath(r43);
+
+        $r28 = r0.browserView;
+
+        $r29 = $r28.getBrowser();
+
+        Packer.Pack(r0);
+
+        $r29.setDirectory(r44);
+
+(6)     goto label22;
+
+     label07:
+        r1.consume();
+
+        $i21 = r1.getModifiers();
+
+        $i22 = $i21 & 1;
+
+        if $i22 <= 0 goto label08;
+
+        Packer.Unpack(r0);
+
+        $r40 = r0.browserView;
+
+        $r41 = $r40.getParentDirectoryList();
+
+        Packer.Pack(r0);
+
+        $r41.requestFocus();
+
+(7)     goto label22;
+
+     label08:
+        r5.focusOnDefaultComponent();
+
+(8)     goto label22;
+
+     label09:
+        r1.consume();
+
+        r2.invokeAction(r1, r4);
+
+(9)     goto label22;
+
+     label10:
+        $i15 = r1.getModifiers();
+
+        $i16 = $i15 & 8;
+
+(10)    if $i16 <= 0 goto label22;
+
+        r1.consume();
+
+        r2.invokeAction(r1, r4);
+
+(11)    goto label22;
+
+     label11:
+        r1.consume();
+
+        r45 = r2.getAction("vfs.browser.delete");
+
+        r2.invokeAction(r1, r45);
+
+(12)    goto label22;
+
+     label12:
+        $i11 = r1.getModifiersEx();
+
+        $i12 = $i11 & 128;
+
+(13)    if $i12 != 128 goto label22;
+
+        r1.consume();
+
+        r46 = r2.getAction("vfs.browser.new-file");
+
+        r2.invokeAction(r1, r46);
+
+(14)    goto label22;
+
+     label13:
+        r1.consume();
+
+        r47 = r2.getAction("vfs.browser.new-directory");
+
+        r2.invokeAction(r1, r47);
+
+(15)    goto label22;
+
+     label14:
+        r6 = r2.getAction("vfs.browser.closedialog");
+
+        r2.invokeAction(r1, r6);
+
+(16)    goto label22;
+
+     label15:
+        r7 = r2.getAction("vfs.browser.rename");
+
+        r1.consume();
+
+        r2.invokeAction(r1, r7);
+
+(17)    goto label22;
+
+     label16:
+        r1.consume();
+
+        r8 = r2.getAction("vfs.browser.reload");
+
+        r2.invokeAction(r1, r8);
+
+(18)    goto label22;
+
+     label17:
+        r1.consume();
+
+        $i13 = r1.getModifiers();
+
+        $i14 = $i13 & 8;
+
+        if $i14 <= 0 goto label18;
+
+        r5.nextDirectory();
+
+(19)    goto label22;
+
+     label18:
+(20)    if i0 == -1 goto label22;
+
+        $r24 = r42.files;
+
+        $r25 = $r24[i0];
+
+        $z5 = $r25.expanded;
+
+(21)    if $z5 != 0 goto label22;
+
+        r0.toggleExpanded(i0);
+
+(22)    goto label22;
+
+     label19:
+        Packer.Unpack(r0);
+
+        r1.consume();
+
+        $r38 = r0.browserView;
+
+        $r39 = $r38.getBrowser();
+
+        Packer.Pack(r0);
+
+        $z8 = r1.isShiftDown();
+
+        if $z8 == 0 goto label20;
+
+        $b24 = 1;
+
+(23)    goto label21;
+
+     label20:
+(24)    $b24_1 = 0;
+
+     label21:
+        $b24_2 = Phi($b24 #23, $b24_1 #24);
+
+(25)    $r39.filesActivated($b24_2, 0);
+
+     label22:
+        $b24 = Phi($b24 #0, $b24 #1, $b24 #6, $b24 #7, $b24 #8, $b24 #9, $b24 #10, $b24 #11, $b24 #12, $b24 #13, $b24 #14, $b24 #15, $b24 #16, $b24 #17, $b24 #18, $b24 #19, $b24 #20, $b24 #21, $b24 #22, $b24_2 #25);
+
+        i23 = Phi(i23 #0, i23 #1, i23 #6, i23 #7, i23 #8, i23 #9, i23 #10, i23 #11, i23 #12, i23 #13, i23 #14, i23 #15, i23 #16, i23 #17, i23 #18, i23 #19, i23 #20, i23 #21, i23 #22, i23 #25);
+
+(26)    goto label33;
+
+     label23:
+        $i2 = r1.getID();
+
+(27)    if $i2 != 400 goto label33;
+
+        $z1 = r1.isControlDown();
+
+        if $z1 != 0 goto label24;
+
+        $z2 = r1.isAltDown();
+
+        if $z2 != 0 goto label24;
+
+        $z3 = r1.isMetaDown();
+
+        if $z3 == 0 goto label25;
+
+     label24:
+        r1.consume();
+
+        return;
+
+     label25:
+        $z4 = r1.isShiftDown();
+
+        if $z4 == 0 goto label26;
+
+        $c9 = r1.getKeyChar();
+
+        if $c9 != 10 goto label26;
+
+        r1.consume();
+
+        return;
+
+     label26:
+        $r9 = r0.browserView;
+
+        Packer.Unpack(r0);
+
+        r48 = $r9.getBrowser();
+
+        Packer.Pack(r0);
+
+        $c3 = r1.getKeyChar();
+
+        lookupswitch($c3)
+        {
+            case 45: goto label29;
+            case 47: goto label28;
+            case 126: goto label27;
+            default: goto label30;
+        };
+
+     label27:
+        r1.consume();
+
+        $i4 = r48.getMode();
+
+(28)    if $i4 != 2 goto label33;
+
+        $r10 = java.lang.System.getProperty("user.home");
+
+        r48.setDirectory($r10);
+
+(29)    goto label33;
+
+     label28:
+        r1.consume();
+
+        $i5 = r48.getMode();
+
+(30)    if $i5 != 2 goto label33;
+
+        r48.rootDirectory();
+
+(31)    goto label33;
+
+     label29:
+        r1.consume();
+
+        $i6 = r48.getMode();
+
+(32)    if $i6 != 2 goto label33;
+
+        $r11 = r48.getView();
+
+        $r12 = $r11.getBuffer();
+
+        $r13 = $r12.getDirectory();
+
+        r48.setDirectory($r13);
+
+(33)    goto label33;
+
+     label30:
+        Packer.Unpack(r0);
+
+        r1.consume();
+
+        $r14 = r0.typeSelectBuffer;
+
+        $c7 = r1.getKeyChar();
+
+        $r14.append($c7);
+
+        $r16 = r0.typeSelectBuffer;
+
+        $r17 = $r16.toString();
+
+        Packer.Pack(r0);
+
+        $i8 = r48.getMode();
+
+        if $i8 != 3 goto label31;
+
+        $z9 = 1;
+
+(34)    goto label32;
+
+     label31:
+(35)    $z9_1 = 0;
+
+     label32:
+        $z9_2 = Phi($z9 #34, $z9_1 #35);
+
+        r0.doTypeSelect($r17, $z9_2);
+
+        $r18 = r0.timer;
+
+        Packer.Unpack(r0);
+
+        $r18.stop();
+
+        $r19 = r0.timer;
+
+        $r19.setInitialDelay(750);
+
+        $r20 = r0.timer;
+
+        $r20.setRepeats(0);
+
+        $r21 = r0.timer;
+
+        $r21.start();
+
+        Packer.Pack(r0);
+
+        return;
+
+     label33:
+        $b24 = Phi($b24 #26, $b24 #27, $b24 #28, $b24 #29, $b24 #30, $b24 #31, $b24 #32, $b24 #33);
+
+        i23 = Phi(i23 #26, i23 #27, i23 #28, i23 #29, i23 #30, i23 #31, i23 #32, i23 #33);
+
+        $z0 = r1.isConsumed();
+
+        if $z0 != 0 goto label34;
+
+        specialinvoke r0.processKeyEvent(r1);
+
+     label34:
+        return;
+    }
+
+    public void setSelectedRow(int)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        int i0;
+        javax.swing.ListSelectionModel $r1;
+        java.awt.Rectangle $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.getSelectionModel();
+
+        $r1.setSelectionInterval(i0, i0);
+
+        $r2 = r0.getCellRect(i0, 0, 1);
+
+        r0.scrollRectToVisible($r2);
+
+        return;
+    }
+
+    private boolean doTypeSelect(java.lang.String, int, int, boolean)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        java.lang.String r1;
+        int i0, i1, i2;
+        boolean z0;
+        org.gjt.sp.jedit.io.VFSFile[] r2;
+        javax.swing.table.TableModel $r3;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        z0 := @parameter3;
+
+        $r3 = r0.getModel();
+
+        $r4 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel) $r3;
+
+        r2 = $r4.getFiles();
+
+        i2 = org.gjt.sp.jedit.io.VFSFile.findCompletion(r2, i0, i1, r1, z0);
+
+        if i2 == -1 goto label1;
+
+        r0.setSelectedRow(i2);
+
+        return 1;
+
+     label1:
+        return 0;
+    }
+
+    private void resizeColumns()
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r1;
+        java.awt.font.FontRenderContext r2, $r7;
+        int[] r3;
+        java.awt.Font r4, $r17, $r22;
+        java.lang.Throwable r5, $r19;
+        javax.swing.table.TableModel $r6;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, i17, i18, i19, i20;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] $r8, $r11;
+        javax.swing.table.TableColumn $r9, $r10;
+        org.gjt.sp.jedit.io.VFSFile $r12;
+        org.gjt.sp.jedit.browser.FileCellRenderer $r13, $r14, $r15, $r16;
+        java.awt.geom.Rectangle2D $r18;
+        double $d0;
+        java.lang.String r20;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry r21;
+        javax.swing.table.TableColumnModel r23;
+
+        r0 := @this;
+
+        $r6 = r0.getModel();
+
+        r1 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel) $r6;
+
+        $r7 = new java.awt.font.FontRenderContext;
+
+        specialinvoke $r7.<init>(null, 1, 0);
+
+        r2 = $r7;
+
+        $i0 = r1.getColumnCount();
+
+        r3 = newarray (int)[$i0];
+
+(0)     i17 = 0;
+
+     label01:
+        i17 = Phi(i17 #0, i17 #1);
+
+        $i1 = lengthof r3;
+
+        if i17 >= $i1 goto label03;
+
+        r20 = r1.getColumnName(i17);
+
+        if r20 == null goto label02;
+
+        Packer.Unpack(r0);
+
+        Packer.Unpack($r16);
+
+        $r16 = r0.renderer;
+
+        $r17 = $r16.plainFont;
+
+        $r18 = $r17.getStringBounds(r20, r2);
+
+        Packer.Pack($r16);
+
+        Packer.Pack(r0);
+
+        $d0 = $r18.getWidth();
+
+        $i16 = (int) $d0;
+
+        r3[i17] = $i16;
+
+     label02:
+        i17 = i17 + 1;
+
+(1)     goto label01;
+
+     label03:
+(2)     i18 = 1;
+
+     label04:
+        i17 = Phi(i17 #2, i17 #3);
+
+        i18 = Phi(i18 #2, i18 #3);
+
+        $i2 = lengthof r3;
+
+        if i18 >= $i2 goto label05;
+
+        $i13 = r3[i18];
+
+        $i14 = r1.getColumnWidth(i18);
+
+        $i15 = java.lang.Math.max($i13, $i14);
+
+        r3[i18] = $i15;
+
+        i18 = i18 + 1;
+
+(3)     goto label04;
+
+     label05:
+(4)     i19 = 0;
+
+     label06:
+        $r22 = Phi($r22 #4, $r22 #7);
+
+        i17 = Phi(i17 #4, i17 #7);
+
+        i19 = Phi(i19 #4, i19 #7);
+
+        i18 = Phi(i18 #4, i18 #7);
+
+        $r8 = r1.files;
+
+        $i3 = lengthof $r8;
+
+        if i19 >= $i3 goto label09;
+
+        Packer.Unpack(r0);
+
+        $r11 = r1.files;
+
+        r21 = $r11[i19];
+
+        $r12 = r21.dirEntry;
+
+        $i9 = $r12.getType();
+
+        if $i9 != 0 goto label07;
+
+        $r15 = r0.renderer;
+
+        $r22 = $r15.plainFont;
+
+(5)     goto label08;
+
+     label07:
+        $r13 = r0.renderer;
+
+(6)     $r22 = $r13.boldFont;
+
+     label08:
+        $r22 = Phi($r22 #5, $r22 #6);
+
+        r4 = $r22;
+
+        $i10 = r3[0];
+
+        $r14 = r0.renderer;
+
+        $i11 = $r14.getEntryWidth(r21, r4, r2);
+
+        Packer.Pack(r0);
+
+        $i12 = java.lang.Math.max($i10, $i11);
+
+        r3[0] = $i12;
+
+        i19 = i19 + 1;
+
+(7)     goto label06;
+
+     label09:
+        $i4 = r3[0];
+
+        $i5 = $i4 + 10;
+
+        r3[0] = $i5;
+
+(8)     r23 = r0.getColumnModel();
+
+     label10:
+        Packer.Unpack(r0);
+
+        r0.resizingColumns = 1;
+
+        Packer.Pack(r0);
+
+(9)     i20 = 0;
+
+     label11:
+        $r22 = Phi($r22 #9, $r22 #11);
+
+        i20 = Phi(i20 #9, i20 #11);
+
+        i17 = Phi(i17 #9, i17 #11);
+
+        i19 = Phi(i19 #9, i19 #11);
+
+        i18 = Phi(i18 #9, i18 #11);
+
+(10)    $i6 = lengthof r3;
+
+        if i20 >= $i6 goto label12;
+
+        $r9 = r23.getColumn(i20);
+
+        $i7 = r3[i20];
+
+        $r9.setPreferredWidth($i7);
+
+        $r10 = r23.getColumn(i20);
+
+        $i8 = r3[i20];
+
+        $r10.setWidth($i8);
+
+        i20 = i20 + 1;
+
+(11)    goto label11;
+
+     label12:
+        Packer.Unpack(r0);
+
+        r0.resizingColumns = 0;
+
+        Packer.Pack(r0);
+
+        goto label15;
+
+     label13:
+        $r19 := @caughtexception;
+
+        $r22 = Phi($r22 #8, $r22 #10, $r22 #12);
+
+        i20 = Phi(i20 #8, i20 #10, i20 #12);
+
+        i17 = Phi(i17 #8, i17 #10, i17 #12);
+
+        i19 = Phi(i19 #8, i19 #10, i19 #12);
+
+(12)    i18 = Phi(i18 #8, i18 #10, i18 #12);
+
+        r5 = $r19;
+
+     label14:
+        Packer.Unpack(r0);
+
+        r0.resizingColumns = 0;
+
+        Packer.Pack(r0);
+
+        throw r5;
+
+     label15:
+        r0.doLayout();
+
+        return;
+
+        catch java.lang.Throwable from label10 to label12 with label13;
+        catch java.lang.Throwable from label13 to label14 with label13;
+    }
+
+    private void saveWidths()
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r1;
+        javax.swing.table.TableColumnModel r2;
+        boolean $z0;
+        javax.swing.table.TableModel $r3;
+        int $i0, $i1, i2;
+        javax.swing.table.TableColumn $r4;
+
+        r0 := @this;
+
+        $z0 = r0.resizingColumns;
+
+        if $z0 == 0 goto label1;
+
+        return;
+
+     label1:
+        $r3 = r0.getModel();
+
+        r1 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel) $r3;
+
+        r2 = r0.getColumnModel();
+
+(0)     i2 = 1;
+
+     label2:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $i0 = r1.getColumnCount();
+
+        if i2 >= $i0 goto label3;
+
+        $r4 = r2.getColumn(i2);
+
+        $i1 = $r4.getWidth();
+
+        r1.setColumnWidth(i2, $i1);
+
+        i2 = i2 + 1;
+
+(1)     goto label2;
+
+     label3:
+        return;
+    }
+
+    static java.lang.StringBuffer access$000(org.gjt.sp.jedit.browser.VFSDirectoryEntryTable)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        java.lang.StringBuffer $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.typeSelectBuffer;
+
+        return $r1;
+    }
+
+    static void access$100(org.gjt.sp.jedit.browser.VFSDirectoryEntryTable)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.saveWidths();
+
+        return;
+    }
+
+    static org.gjt.sp.jedit.browser.BrowserView access$200(org.gjt.sp.jedit.browser.VFSDirectoryEntryTable)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        org.gjt.sp.jedit.browser.BrowserView $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.browserView;
+
+        return $r1;
+    }
+
+    static javax.swing.table.JTableHeader access$300(org.gjt.sp.jedit.browser.VFSDirectoryEntryTable)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+        javax.swing.table.JTableHeader $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.header;
+
+        return $r1;
+    }
+
+    static void access$400(org.gjt.sp.jedit.browser.VFSDirectoryEntryTable)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.resizeColumns();
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        javax.swing.Icon $r0, $r1;
+
+        $r0 = org.gjt.sp.jedit.GUIUtilities.loadIcon("arrow-asc.png");
+
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable.ASC_ICON = $r0;
+
+        $r1 = org.gjt.sp.jedit.GUIUtilities.loadIcon("arrow-desc.png");
+
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable.DESC_ICON = $r1;
+
+        return;
+    }
+}

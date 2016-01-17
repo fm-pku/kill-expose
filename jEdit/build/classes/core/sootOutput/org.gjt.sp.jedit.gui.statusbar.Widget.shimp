@@ -1,0 +1,9 @@
+public interface  org.gjt.sp.jedit.gui.statusbar.Widget extends java.lang.Object
+{
+
+    public abstract javax.swing.JComponent getComponent();
+
+    public abstract void propertiesChanged();
+
+    public abstract void update();
+}

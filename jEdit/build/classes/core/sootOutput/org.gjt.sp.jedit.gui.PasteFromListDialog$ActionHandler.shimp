@@ -1,0 +1,61 @@
+class org.gjt.sp.jedit.gui.PasteFromListDialog$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.PasteFromListDialog this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.PasteFromListDialog)
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog$ActionHandler r0;
+        org.gjt.sp.jedit.gui.PasteFromListDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2;
+        org.gjt.sp.jedit.gui.PasteFromListDialog $r3, $r5, $r7, $r8;
+        javax.swing.JButton $r4, $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.PasteFromListDialog.access$000($r3);
+
+        if r2 != $r4 goto label1;
+
+        $r8 = r0.this$0;
+
+        $r8.ok();
+
+        goto label2;
+
+     label1:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.PasteFromListDialog.access$100($r5);
+
+        if r2 != $r6 goto label2;
+
+        $r7 = r0.this$0;
+
+        $r7.cancel();
+
+     label2:
+        return;
+    }
+}

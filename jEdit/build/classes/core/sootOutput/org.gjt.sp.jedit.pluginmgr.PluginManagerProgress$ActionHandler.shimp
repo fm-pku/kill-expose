@@ -1,0 +1,55 @@
+class org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.pluginmgr.PluginManagerProgress this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$ActionHandler r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object $r2;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress $r3, $r5, $r7;
+        javax.swing.JButton $r4;
+        java.lang.Thread $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getSource();
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.pluginmgr.PluginManagerProgress.access$400($r3);
+
+        if $r2 != $r4 goto label1;
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.pluginmgr.PluginManagerProgress.access$500($r5);
+
+        $r6.stop();
+
+        $r7 = r0.this$0;
+
+        $r7.dispose();
+
+     label1:
+        return;
+    }
+}

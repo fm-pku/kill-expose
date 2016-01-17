@@ -1,0 +1,111 @@
+class org.gjt.sp.jedit.browser.BrowserCommandsMenu$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.browser.BrowserCommandsMenu this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.BrowserCommandsMenu)
+    {
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu$ActionHandler r0;
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.String r2, r3, $r6, $r9, $r10;
+        boolean $z0, $z1, $z2, $z3;
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu $r4, $r7, $r11, $r13, $r15;
+        org.gjt.sp.jedit.browser.VFSBrowser $r5, $r8, $r12, $r14;
+        javax.swing.JCheckBoxMenuItem $r16;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getActionCommand();
+
+        $z0 = r2.equals("auto-detect");
+
+        if $z0 == 0 goto label1;
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.browser.BrowserCommandsMenu.access$000($r13);
+
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.browser.BrowserCommandsMenu.access$100($r15);
+
+        $z3 = $r16.isSelected();
+
+        Packer.Unpack($r14);
+
+        $r14.autoDetectEncoding = $z3;
+
+        Packer.Pack($r14);
+
+        goto label4;
+
+     label1:
+        $z1 = r2.equals("other-encoding");
+
+        if $z1 == 0 goto label3;
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.browser.BrowserCommandsMenu.access$000($r7);
+
+        $r9 = java.lang.System.getProperty("file.encoding");
+
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty("buffer.encoding", $r9);
+
+        r3 = org.gjt.sp.jedit.GUIUtilities.input($r8, "encoding-prompt", null, $r10);
+
+        if r3 != null goto label2;
+
+        return;
+
+     label2:
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.browser.BrowserCommandsMenu.access$000($r11);
+
+        Packer.Unpack($r12);
+
+        $r12.currentEncoding = r3;
+
+        Packer.Pack($r12);
+
+        goto label4;
+
+     label3:
+        $z2 = r2.startsWith("encoding@");
+
+        if $z2 == 0 goto label4;
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.browser.BrowserCommandsMenu.access$000($r4);
+
+        $r6 = r2.substring(9);
+
+        Packer.Unpack($r5);
+
+        $r5.currentEncoding = $r6;
+
+     label4:
+        Packer.Pack($r5);
+
+        return;
+    }
+}

@@ -1,0 +1,102 @@
+class org.gjt.sp.jedit.jEdit$MyFocusManager extends java.awt.DefaultKeyboardFocusManager
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.jEdit$MyFocusManager r0;
+        javax.swing.LayoutFocusTraversalPolicy $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new javax.swing.LayoutFocusTraversalPolicy;
+
+        specialinvoke $r1.<init>();
+
+        r0.setDefaultFocusTraversalPolicy($r1);
+
+        return;
+    }
+
+    public boolean postProcessKeyEvent(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.jEdit$MyFocusManager r0;
+        java.awt.event.KeyEvent r1;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6;
+        java.lang.Object $r2;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r3;
+        org.gjt.sp.jedit.View $r4;
+        org.gjt.sp.jedit.gui.InputHandler $r5;
+        java.awt.Component r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1.isConsumed();
+
+(0)     if $z0 != 0 goto label5;
+
+        $r2 = r1.getSource();
+
+        r6 = (java.awt.Component) $r2;
+
+        $z2 = r6.isShowing();
+
+(1)     if $z2 != 0 goto label1;
+
+        return 1;
+
+     label1:
+        r6 = Phi(r6 #1, r6 #4);
+
+        $z3 = r6 instanceof org.gjt.sp.jedit.View;
+
+        if $z3 == 0 goto label2;
+
+        $r4 = (org.gjt.sp.jedit.View) r6;
+
+        $r5 = $r4.getInputHandler();
+
+        $r5.processKeyEvent(r1, 0, 0);
+
+        return 1;
+
+     label2:
+        if r6 == null goto label3;
+
+        $z5 = r6 instanceof java.awt.Window;
+
+        if $z5 != 0 goto label3;
+
+        $z6 = r6 instanceof org.gjt.sp.jedit.textarea.JEditTextArea;
+
+        if $z6 == 0 goto label4;
+
+     label3:
+        $z4 = r6 instanceof org.gjt.sp.jedit.pluginmgr.PluginManager;
+
+(2)     if $z4 == 0 goto label5;
+
+        r1.setSource(r6);
+
+        $r3 = (org.gjt.sp.jedit.pluginmgr.PluginManager) r6;
+
+        $r3.processKeyEvents(r1);
+
+(3)     goto label5;
+
+     label4:
+        r6 = r6.getParent();
+
+(4)     goto label1;
+
+     label5:
+        r6 = Phi(r6 #0, r6 #2, r6 #3);
+
+        $z1 = specialinvoke r0.postProcessKeyEvent(r1);
+
+        return $z1;
+    }
+}

@@ -1,0 +1,655 @@
+public abstract class org.gjt.sp.jedit.input.TextAreaInputHandler extends org.gjt.sp.jedit.input.AbstractInputHandler
+{
+    private final org.gjt.sp.jedit.textarea.TextArea textArea;
+
+    protected void <init>(org.gjt.sp.jedit.textarea.TextArea)
+    {
+        org.gjt.sp.jedit.input.TextAreaInputHandler r0;
+        org.gjt.sp.jedit.textarea.TextArea r1;
+        java.util.Hashtable $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.textArea = r1;
+
+        $r2 = new java.util.Hashtable;
+
+        specialinvoke $r2.<init>();
+
+        r0.currentBindings = $r2;
+
+        r0.bindings = $r2;
+
+        return;
+    }
+
+    public void processKeyEvent(java.awt.event.KeyEvent, int, boolean)
+    {
+        org.gjt.sp.jedit.input.TextAreaInputHandler r0;
+        int i0, $i1, $i2;
+        boolean z0, z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8;
+        java.awt.event.KeyListener $r1, $r3, $r4, $r5, $r6, $r7;
+        org.gjt.sp.jedit.textarea.TextArea $r2;
+        java.lang.StringBuilder $r8, $r9, $r11, $r12, $r13, $r15, $r16, $r18, $r20, $r21, $r23, $r24, $r25;
+        java.lang.String $r10, $r14, $r17, $r19, $r22, $r26;
+        java.awt.event.KeyEvent r27, r28;
+
+        r0 := @this;
+
+        r27 := @parameter0;
+
+        i0 := @parameter1;
+
+        z0 := @parameter2;
+
+        $z2 = org.gjt.sp.jedit.Debug.DUMP_KEY_EVENTS;
+
+        if $z2 == 0 goto label01;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<init>();
+
+        $r21 = $r20.append("Key event                 : ");
+
+        $r22 = org.gjt.sp.jedit.input.TextAreaInputHandler.toString(r27);
+
+        $r23 = $r21.append($r22);
+
+        $r24 = $r23.append(" from ");
+
+        $r25 = $r24.append(i0);
+
+        $r26 = $r25.toString();
+
+        org.gjt.sp.util.Log.log(1, r0, $r26);
+
+     label01:
+        $z3 = r27.isConsumed();
+
+        if $z3 == 0 goto label02;
+
+        return;
+
+     label02:
+        $z4 = org.gjt.sp.jedit.Debug.DUMP_KEY_EVENTS;
+
+        if $z4 == 0 goto label03;
+
+        $r15 = new java.lang.StringBuilder;
+
+        specialinvoke $r15.<init>();
+
+        $r16 = $r15.append("Key event (preprocessing) : ");
+
+        $r17 = org.gjt.sp.jedit.input.TextAreaInputHandler.toString(r27);
+
+        $r18 = $r16.append($r17);
+
+        $r19 = $r18.toString();
+
+        org.gjt.sp.util.Log.log(1, r0, $r19);
+
+     label03:
+        r28 = org.gjt.sp.jedit.gui.KeyEventWorkaround.processKeyEvent(r27);
+
+        if r28 != null goto label04;
+
+        return;
+
+     label04:
+        $z5 = org.gjt.sp.jedit.Debug.DUMP_KEY_EVENTS;
+
+        if $z5 == 0 goto label05;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("Key event after workaround: ");
+
+        $r10 = org.gjt.sp.jedit.input.TextAreaInputHandler.toString(r28);
+
+        $r11 = $r9.append($r10);
+
+        $r12 = $r11.append(" from ");
+
+        $r13 = $r12.append(i0);
+
+        $r14 = $r13.toString();
+
+        org.gjt.sp.util.Log.log(1, r0, $r14);
+
+     label05:
+        z1 = 0;
+
+        $i1 = r28.getID();
+
+        tableswitch($i1)
+        {
+            case 400: goto label06;
+            case 401: goto label10;
+            case 402: goto label12;
+            default: goto label13;
+        };
+
+     label06:
+        $r1 = r0.keyEventInterceptor;
+
+        if $r1 == null goto label07;
+
+        $r3 = r0.keyEventInterceptor;
+
+        $r3.keyTyped(r28);
+
+        goto label09;
+
+     label07:
+        $z6 = r0.isPrefixActive();
+
+        if $z6 != 0 goto label08;
+
+        $r2 = r0.textArea;
+
+        $z7 = $r2.hasFocus();
+
+        if $z7 == 0 goto label09;
+
+     label08:
+        r0.processKeyEventKeyStrokeHandling(r28, i0, "type ", z0);
+
+     label09:
+        specialinvoke r0.processKeyEventSub(z1);
+
+        goto label13;
+
+     label10:
+        $r6 = r0.keyEventInterceptor;
+
+        if $r6 == null goto label11;
+
+        $r7 = r0.keyEventInterceptor;
+
+        $r7.keyPressed(r28);
+
+        goto label13;
+
+     label11:
+        $i2 = r28.getKeyCode();
+
+        $z8 = org.gjt.sp.jedit.gui.KeyEventWorkaround.isBindable($i2);
+
+        if $z8 == 0 goto label13;
+
+        r0.processKeyEventKeyStrokeHandling(r28, i0, "press", z0);
+
+        specialinvoke r0.processKeyEventSub(z1);
+
+        goto label13;
+
+     label12:
+        $r4 = r0.keyEventInterceptor;
+
+        if $r4 == null goto label13;
+
+        $r5 = r0.keyEventInterceptor;
+
+        $r5.keyReleased(r28);
+
+     label13:
+        return;
+    }
+
+    private void processKeyEventSub(boolean)
+    {
+        org.gjt.sp.jedit.input.TextAreaInputHandler r0;
+        boolean z0, $z1;
+        org.gjt.sp.jedit.textarea.TextArea $r1;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        $z1 = r0.isPrefixActive();
+
+        if $z1 == 0 goto label1;
+
+        if z0 == 0 goto label1;
+
+        $r1 = r0.textArea;
+
+        $r1.requestFocus();
+
+     label1:
+        return;
+    }
+
+    protected abstract org.gjt.sp.jedit.JEditBeanShellAction getAction(java.lang.String);
+
+    public void invokeAction(java.lang.String)
+    {
+        org.gjt.sp.jedit.input.TextAreaInputHandler r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.JEditBeanShellAction $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.getAction(r1);
+
+        r0.invokeAction($r2);
+
+        return;
+    }
+
+    public void invokeAction(org.gjt.sp.jedit.JEditBeanShellAction)
+    {
+        org.gjt.sp.jedit.input.TextAreaInputHandler r0;
+        org.gjt.sp.jedit.JEditBeanShellAction r1;
+        org.gjt.sp.jedit.buffer.JEditBuffer r2;
+        int i0, $i1, $i2, i3;
+        java.lang.Throwable r3, $r9;
+        org.gjt.sp.jedit.textarea.TextArea $r4, $r5, $r7;
+        boolean $z0, $z1;
+        java.lang.String $r6;
+        org.gjt.sp.jedit.JEditAbstractEditAction $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.textArea;
+
+        r2 = $r4.getBuffer();
+
+        $z0 = r1.noRememberLast();
+
+        if $z0 != 0 goto label02;
+
+        $r8 = r0.lastAction;
+
+        if $r8 != r1 goto label01;
+
+        $i1 = r0.lastActionCount;
+
+        $i2 = $i1 + 1;
+
+        r0.lastActionCount = $i2;
+
+        goto label02;
+
+     label01:
+        r0.lastAction = r1;
+
+        r0.lastActionCount = 1;
+
+     label02:
+        i0 = r0.repeatCount;
+
+        $z1 = r1.noRepeat();
+
+        if $z1 != 0 goto label03;
+
+(0)     if i0 != 1 goto label04;
+
+     label03:
+        $r5 = r0.textArea;
+
+        r1.invoke($r5);
+
+(1)     goto label09;
+
+     label04:
+        r2.beginCompoundEdit();
+
+(2)     i3 = 0;
+
+     label05:
+        i3 = Phi(i3 #2, i3 #4);
+
+(3)     if i3 >= i0 goto label06;
+
+        $r7 = r0.textArea;
+
+        r1.invoke($r7);
+
+        i3 = i3 + 1;
+
+(4)     goto label05;
+
+     label06:
+        r2.endCompoundEdit();
+
+(5)     goto label09;
+
+     label07:
+        $r9 := @caughtexception;
+
+(6)     i3 = Phi(i3 #0, i3 #3, i3 #6);
+
+        r3 = $r9;
+
+     label08:
+        r2.endCompoundEdit();
+
+        throw r3;
+
+     label09:
+        i3 = Phi(i3 #1, i3 #5);
+
+        if i0 == 1 goto label11;
+
+        $r6 = r0.readNextChar;
+
+        if $r6 == null goto label10;
+
+        return;
+
+     label10:
+        r0.repeatCount = 1;
+
+     label11:
+        return;
+
+        catch java.lang.Throwable from label04 to label06 with label07;
+        catch java.lang.Throwable from label07 to label08 with label07;
+    }
+
+    public boolean handleKey(org.gjt.sp.jedit.gui.KeyEventTranslator$Key, boolean)
+    {
+        org.gjt.sp.jedit.input.TextAreaInputHandler r0;
+        org.gjt.sp.jedit.gui.KeyEventTranslator$Key r1;
+        boolean z0, $z1, $z2, $z3, $z4, $z5;
+        java.lang.Object r2;
+        java.lang.String $r3, $r4, $r9, $r17;
+        int $i0, $i1;
+        java.util.Hashtable $r5, $r6, $r8, $r10, $r11, $r12, $r13, $r15, $r16;
+        org.gjt.sp.jedit.JEditBeanShellAction $r7;
+        java.awt.Toolkit $r14;
+        char c2, c2_1, c2_2, c2_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        c2 = 0;
+
+        $r3 = r1.modifiers;
+
+        if $r3 == null goto label01;
+
+        $r17 = r1.modifiers;
+
+        $z5 = $r17.equals("S");
+
+(0)     if $z5 == 0 goto label04;
+
+     label01:
+        $i0 = r1.key;
+
+        lookupswitch($i0)
+        {
+            case 9: goto label02;
+            case 10: goto label02;
+            default: goto label03;
+        };
+
+     label02:
+        $i1 = r1.key;
+
+        c2_1 = (char) $i1;
+
+(1)     goto label04;
+
+     label03:
+(2)     c2_2 = r1.input;
+
+     label04:
+        c2_3 = Phi(c2 #0, c2_1 #1, c2_2 #2);
+
+        $r4 = r0.readNextChar;
+
+        if $r4 == null goto label07;
+
+        if c2_3 == 0 goto label06;
+
+        if z0 != 0 goto label05;
+
+        $r16 = r0.bindings;
+
+        r0.setCurrentBindings($r16);
+
+        r0.invokeReadNextChar(c2_3);
+
+        r0.repeatCount = 1;
+
+     label05:
+        return 1;
+
+     label06:
+        if z0 != 0 goto label07;
+
+        r0.readNextChar = null;
+
+     label07:
+        $r5 = r0.currentBindings;
+
+        r2 = $r5.get(r1);
+
+        if r2 != null goto label10;
+
+        if z0 != 0 goto label16;
+
+        $r13 = r0.currentBindings;
+
+        $r12 = r0.bindings;
+
+        if $r13 == $r12 goto label08;
+
+        $r14 = java.awt.Toolkit.getDefaultToolkit();
+
+        $r14.beep();
+
+        r0.repeatCount = 1;
+
+        $r15 = r0.bindings;
+
+        r0.setCurrentBindings($r15);
+
+        goto label09;
+
+     label08:
+        if c2_3 == 0 goto label09;
+
+        $z4 = r1.isFromGlobalContext();
+
+        if $z4 != 0 goto label09;
+
+        r0.userInput(c2_3);
+
+     label09:
+        r0.sendShortcutPrefixOff();
+
+        goto label16;
+
+     label10:
+        $z1 = r2 instanceof java.util.Hashtable;
+
+        if $z1 == 0 goto label12;
+
+        if z0 != 0 goto label11;
+
+        $r10 = (java.util.Hashtable) r2;
+
+        r0.setCurrentBindings($r10);
+
+        $r11 = r0.currentBindings;
+
+        org.gjt.sp.jedit.gui.ShortcutPrefixActiveEvent.firePrefixStateChange($r11, 1);
+
+        r0.shortcutOn = 1;
+
+     label11:
+        return 1;
+
+     label12:
+        $z2 = r2 instanceof java.lang.String;
+
+        if $z2 == 0 goto label14;
+
+        if z0 != 0 goto label13;
+
+        $r8 = r0.bindings;
+
+        r0.setCurrentBindings($r8);
+
+        r0.sendShortcutPrefixOff();
+
+        $r9 = (java.lang.String) r2;
+
+        r0.invokeAction($r9);
+
+     label13:
+        return 1;
+
+     label14:
+        $z3 = r2 instanceof org.gjt.sp.jedit.JEditBeanShellAction;
+
+        if $z3 == 0 goto label16;
+
+        if z0 != 0 goto label15;
+
+        $r6 = r0.bindings;
+
+        r0.setCurrentBindings($r6);
+
+        r0.sendShortcutPrefixOff();
+
+        $r7 = (org.gjt.sp.jedit.JEditBeanShellAction) r2;
+
+        r0.invokeAction($r7);
+
+     label15:
+        return 1;
+
+     label16:
+        if z0 != 0 goto label17;
+
+        r0.sendShortcutPrefixOff();
+
+     label17:
+        return 0;
+    }
+
+    protected void userInput(char)
+    {
+        org.gjt.sp.jedit.input.TextAreaInputHandler r0;
+        char c0;
+        int $i1;
+        org.gjt.sp.jedit.textarea.TextArea $r1;
+
+        r0 := @this;
+
+        c0 := @parameter0;
+
+        r0.lastActionCount = 0;
+
+        $i1 = r0.repeatCount;
+
+        if $i1 != 1 goto label1;
+
+        $r1 = r0.textArea;
+
+        $r1.userInput(c0);
+
+     label1:
+        r0.repeatCount = 1;
+
+        return;
+    }
+
+    protected void invokeReadNextChar(char)
+    {
+        org.gjt.sp.jedit.input.TextAreaInputHandler r0;
+        char c0;
+        java.lang.String r1, $r2, $r3, $r5, $r6, $r11, $r12, $r14;
+        int i1, $i2, $i3;
+        java.lang.StringBuilder $r4, $r7, $r8, $r9, $r10, $r13;
+
+        r0 := @this;
+
+        c0 := @parameter0;
+
+        $r2 = java.lang.String.valueOf(c0);
+
+        r1 = org.gjt.sp.util.StandardUtilities.charsToEscapes($r2);
+
+     label1:
+        $r3 = r0.readNextChar;
+
+        $i2 = $r3.indexOf("__char__");
+
+        i1 = $i2;
+
+        if $i2 == -1 goto label2;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = r0.readNextChar;
+
+        $r6 = $r5.substring(0, i1);
+
+        $r7 = $r4.append($r6);
+
+        $r8 = $r7.append(39);
+
+        $r9 = $r8.append(r1);
+
+        $r10 = $r9.append(39);
+
+        $r11 = r0.readNextChar;
+
+        $i3 = i1 + 8;
+
+        $r12 = $r11.substring($i3);
+
+        $r13 = $r10.append($r12);
+
+        $r14 = $r13.toString();
+
+        r0.readNextChar = $r14;
+
+        goto label1;
+
+     label2:
+        r0.readNextChar = null;
+
+        return;
+    }
+
+    public volatile void invokeAction(org.gjt.sp.jedit.JEditAbstractEditAction)
+    {
+        org.gjt.sp.jedit.input.TextAreaInputHandler r0;
+        org.gjt.sp.jedit.JEditAbstractEditAction r1;
+        org.gjt.sp.jedit.JEditBeanShellAction $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = (org.gjt.sp.jedit.JEditBeanShellAction) r1;
+
+        r0.invokeAction($r2);
+
+        return;
+    }
+}

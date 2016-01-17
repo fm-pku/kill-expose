@@ -1,0 +1,179 @@
+public class org.gjt.sp.jedit.gui.RolloverButton extends javax.swing.JButton
+{
+    private static final java.awt.AlphaComposite c;
+    private boolean revalidateBlocked;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.gui.RolloverButton r0;
+        org.gjt.sp.jedit.gui.RolloverButton$MouseOverHandler $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new org.gjt.sp.jedit.gui.RolloverButton$MouseOverHandler;
+
+        specialinvoke $r1.<init>(r0);
+
+        r0.addMouseListener($r1);
+
+        return;
+    }
+
+    public void <init>(javax.swing.Icon)
+    {
+        org.gjt.sp.jedit.gui.RolloverButton r0;
+        javax.swing.Icon r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.setIcon(r1);
+
+        return;
+    }
+
+    public void updateUI()
+    {
+        org.gjt.sp.jedit.gui.RolloverButton r0;
+        java.awt.Insets $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.updateUI();
+
+        r0.setBorderPainted(0);
+
+        r0.setRequestFocusEnabled(0);
+
+        $r1 = new java.awt.Insets;
+
+        specialinvoke $r1.<init>(1, 1, 1, 1);
+
+        r0.setMargin($r1);
+
+        return;
+    }
+
+    public void setEnabled(boolean)
+    {
+        org.gjt.sp.jedit.gui.RolloverButton r0;
+        boolean z0;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        specialinvoke r0.setEnabled(z0);
+
+        r0.setBorderPainted(0);
+
+        r0.repaint();
+
+        return;
+    }
+
+    public void setBorderPainted(boolean)
+    {
+        org.gjt.sp.jedit.gui.RolloverButton r0;
+        boolean z0;
+        java.lang.Throwable r1, $r2;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+     label1:
+        r0.revalidateBlocked = 1;
+
+        specialinvoke r0.setBorderPainted(z0);
+
+        r0.setContentAreaFilled(z0);
+
+     label2:
+        r0.revalidateBlocked = 0;
+
+        goto label5;
+
+     label3:
+        $r2 := @caughtexception;
+
+        r1 = $r2;
+
+     label4:
+        r0.revalidateBlocked = 0;
+
+        throw r1;
+
+     label5:
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+
+    public void revalidate()
+    {
+        org.gjt.sp.jedit.gui.RolloverButton r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.revalidateBlocked;
+
+        if $z0 != 0 goto label1;
+
+        specialinvoke r0.revalidate();
+
+     label1:
+        return;
+    }
+
+    public void paint(java.awt.Graphics)
+    {
+        org.gjt.sp.jedit.gui.RolloverButton r0;
+        java.awt.Graphics r1;
+        java.awt.Graphics2D r2;
+        boolean $z0;
+        java.awt.AlphaComposite $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r0.isEnabled();
+
+        if $z0 == 0 goto label1;
+
+        specialinvoke r0.paint(r1);
+
+        goto label2;
+
+     label1:
+        r2 = (java.awt.Graphics2D) r1;
+
+        $r3 = org.gjt.sp.jedit.gui.RolloverButton.c;
+
+        r2.setComposite($r3);
+
+        specialinvoke r0.paint(r2);
+
+     label2:
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.awt.AlphaComposite $r0;
+
+        $r0 = java.awt.AlphaComposite.getInstance(3, 0.5F);
+
+        org.gjt.sp.jedit.gui.RolloverButton.c = $r0;
+
+        return;
+    }
+}

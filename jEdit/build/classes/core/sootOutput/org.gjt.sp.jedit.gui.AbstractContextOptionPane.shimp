@@ -1,0 +1,678 @@
+public abstract class org.gjt.sp.jedit.gui.AbstractContextOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private final org.gjt.sp.jedit.ActionContext actionContext;
+    private javax.swing.DefaultListModel listModel;
+    private javax.swing.JList list;
+    private javax.swing.JButton add;
+    private javax.swing.JButton remove;
+    private javax.swing.JButton moveUp;
+    private javax.swing.JButton moveDown;
+    private javax.swing.JButton reset;
+    private javax.swing.JLabel caption;
+    private javax.swing.JPanel buttons;
+
+    protected void <init>(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        java.lang.String r1, r2;
+        org.gjt.sp.jedit.ActionContext $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = org.gjt.sp.jedit.jEdit.getActionContext();
+
+        specialinvoke r0.<init>(r1, r2, $r3);
+
+        return;
+    }
+
+    protected void <init>(java.lang.String, java.lang.String, org.gjt.sp.jedit.ActionContext)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        java.lang.String r1, r2;
+        org.gjt.sp.jedit.ActionContext r3;
+        javax.swing.JLabel $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        specialinvoke r0.<init>(r1);
+
+        r0.actionContext = r3;
+
+        $r4 = new javax.swing.JLabel;
+
+        specialinvoke $r4.<init>(r2);
+
+        r0.caption = $r4;
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane$ActionHandler r1, $r21;
+        java.awt.BorderLayout $r2;
+        javax.swing.JLabel $r3;
+        javax.swing.DefaultListModel $r5, $r8;
+        java.lang.String $r6, $r23, $r26, $r35, $r38, $r47, $r50, $r59, $r62, $r71, $r74;
+        javax.swing.JList $r7, $r9, $r11, $r13;
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane$ListHandler $r10;
+        javax.swing.JScrollPane $r12;
+        javax.swing.JPanel $r15, $r17, $r19, $r20, $r29, $r31, $r41, $r43, $r53, $r55, $r65, $r67, $r77, $r79;
+        javax.swing.border.EmptyBorder $r16;
+        javax.swing.BoxLayout $r18;
+        org.gjt.sp.jedit.gui.RolloverButton $r22, $r34, $r46, $r58, $r70;
+        javax.swing.Icon $r24, $r36, $r48, $r60, $r72;
+        javax.swing.JButton $r25, $r27, $r28, $r37, $r39, $r40, $r49, $r51, $r52, $r61, $r63, $r64, $r73, $r75, $r76;
+        java.awt.Component $r32, $r44, $r56, $r68;
+
+        r0 := @this;
+
+        $r2 = new java.awt.BorderLayout;
+
+        specialinvoke $r2.<init>();
+
+        r0.setLayout($r2);
+
+        $r3 = r0.caption;
+
+        r0.add("North", $r3);
+
+        $r5 = new javax.swing.DefaultListModel;
+
+        specialinvoke $r5.<init>();
+
+        r0.listModel = $r5;
+
+        $r6 = r0.getContextMenu();
+
+        specialinvoke r0.reloadContextList($r6);
+
+        $r7 = new javax.swing.JList;
+
+        $r8 = r0.listModel;
+
+        specialinvoke $r7.<init>($r8);
+
+        r0.list = $r7;
+
+        $r9 = r0.list;
+
+        $r9.setSelectionMode(0);
+
+        $r11 = r0.list;
+
+        $r10 = new org.gjt.sp.jedit.gui.AbstractContextOptionPane$ListHandler;
+
+        specialinvoke $r10.<init>(r0);
+
+        $r11.addListSelectionListener($r10);
+
+        $r12 = new javax.swing.JScrollPane;
+
+        $r13 = r0.list;
+
+        specialinvoke $r12.<init>($r13);
+
+        r0.add("Center", $r12);
+
+        $r15 = new javax.swing.JPanel;
+
+        specialinvoke $r15.<init>();
+
+        r0.buttons = $r15;
+
+        $r17 = r0.buttons;
+
+        $r16 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r16.<init>(3, 0, 0, 0);
+
+        $r17.setBorder($r16);
+
+        $r20 = r0.buttons;
+
+        $r18 = new javax.swing.BoxLayout;
+
+        $r19 = r0.buttons;
+
+        specialinvoke $r18.<init>($r19, 0);
+
+        $r20.setLayout($r18);
+
+        $r21 = new org.gjt.sp.jedit.gui.AbstractContextOptionPane$ActionHandler;
+
+        specialinvoke $r21.<init>(r0);
+
+        r1 = $r21;
+
+        $r22 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r23 = org.gjt.sp.jedit.jEdit.getProperty("options.context.add.icon");
+
+        $r24 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r23);
+
+        specialinvoke $r22.<init>($r24);
+
+        r0.add = $r22;
+
+        $r25 = r0.add;
+
+        $r26 = org.gjt.sp.jedit.jEdit.getProperty("common.add");
+
+        $r25.setToolTipText($r26);
+
+        $r27 = r0.add;
+
+        $r27.addActionListener(r1);
+
+        $r29 = r0.buttons;
+
+        $r28 = r0.add;
+
+        $r29.add($r28);
+
+        $r31 = r0.buttons;
+
+        $r32 = javax.swing.Box.createHorizontalStrut(6);
+
+        $r31.add($r32);
+
+        $r34 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r35 = org.gjt.sp.jedit.jEdit.getProperty("options.context.remove.icon");
+
+        $r36 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r35);
+
+        specialinvoke $r34.<init>($r36);
+
+        r0.remove = $r34;
+
+        $r37 = r0.remove;
+
+        $r38 = org.gjt.sp.jedit.jEdit.getProperty("common.remove");
+
+        $r37.setToolTipText($r38);
+
+        $r39 = r0.remove;
+
+        $r39.addActionListener(r1);
+
+        $r41 = r0.buttons;
+
+        $r40 = r0.remove;
+
+        $r41.add($r40);
+
+        $r43 = r0.buttons;
+
+        $r44 = javax.swing.Box.createHorizontalStrut(6);
+
+        $r43.add($r44);
+
+        $r46 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r47 = org.gjt.sp.jedit.jEdit.getProperty("options.context.moveUp.icon");
+
+        $r48 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r47);
+
+        specialinvoke $r46.<init>($r48);
+
+        r0.moveUp = $r46;
+
+        $r49 = r0.moveUp;
+
+        $r50 = org.gjt.sp.jedit.jEdit.getProperty("common.moveUp");
+
+        $r49.setToolTipText($r50);
+
+        $r51 = r0.moveUp;
+
+        $r51.addActionListener(r1);
+
+        $r53 = r0.buttons;
+
+        $r52 = r0.moveUp;
+
+        $r53.add($r52);
+
+        $r55 = r0.buttons;
+
+        $r56 = javax.swing.Box.createHorizontalStrut(6);
+
+        $r55.add($r56);
+
+        $r58 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r59 = org.gjt.sp.jedit.jEdit.getProperty("options.context.moveDown.icon");
+
+        $r60 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r59);
+
+        specialinvoke $r58.<init>($r60);
+
+        r0.moveDown = $r58;
+
+        $r61 = r0.moveDown;
+
+        $r62 = org.gjt.sp.jedit.jEdit.getProperty("common.moveDown");
+
+        $r61.setToolTipText($r62);
+
+        $r63 = r0.moveDown;
+
+        $r63.addActionListener(r1);
+
+        $r65 = r0.buttons;
+
+        $r64 = r0.moveDown;
+
+        $r65.add($r64);
+
+        $r67 = r0.buttons;
+
+        $r68 = javax.swing.Box.createGlue();
+
+        $r67.add($r68);
+
+        $r70 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r71 = org.gjt.sp.jedit.jEdit.getProperty("options.context.reset.icon");
+
+        $r72 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r71);
+
+        specialinvoke $r70.<init>($r72);
+
+        r0.reset = $r70;
+
+        $r73 = r0.reset;
+
+        $r74 = org.gjt.sp.jedit.jEdit.getProperty("options.context.reset");
+
+        $r73.setToolTipText($r74);
+
+        $r75 = r0.reset;
+
+        $r75.addActionListener(r1);
+
+        $r77 = r0.buttons;
+
+        $r76 = r0.reset;
+
+        $r77.add($r76);
+
+        specialinvoke r0.updateButtons();
+
+        $r79 = r0.buttons;
+
+        r0.add("South", $r79);
+
+        return;
+    }
+
+    protected abstract java.lang.String getContextMenu();
+
+    protected abstract void saveContextMenu(java.lang.String);
+
+    protected void addButton(javax.swing.JComponent)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        javax.swing.JComponent r1;
+        javax.swing.JPanel $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.buttons;
+
+        $r2.add(r1);
+
+        return;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        java.lang.StringBuilder r1, $r2;
+        javax.swing.DefaultListModel $r3, $r5;
+        int $i0, i1;
+        java.lang.String $r4, $r8;
+        java.lang.Object $r6;
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem $r7;
+
+        r0 := @this;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $r3 = r0.listModel;
+
+        $i0 = $r3.getSize();
+
+        if i1 >= $i0 goto label3;
+
+        if i1 == 0 goto label2;
+
+        r1.append(32);
+
+     label2:
+        $r5 = r0.listModel;
+
+        $r6 = $r5.elementAt(i1);
+
+        $r7 = (org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem) $r6;
+
+        $r8 = $r7.actionName;
+
+        r1.append($r8);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        $r4 = r1.toString();
+
+        r0.saveContextMenu($r4);
+
+        return;
+    }
+
+    private void updateButtons()
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        int i0, $i1, $i2, $i3;
+        javax.swing.JList $r1;
+        javax.swing.JButton $r2, $r3, $r4;
+        javax.swing.DefaultListModel $r5, $r6;
+        boolean $z0, $z1, $z2, $z0_1, $z0_2, $z1_1, $z1_2, $z2_1, $z2_2;
+
+        r0 := @this;
+
+        $r1 = r0.list;
+
+        i0 = $r1.getSelectedIndex();
+
+        $r2 = r0.remove;
+
+        if i0 == -1 goto label1;
+
+        $r6 = r0.listModel;
+
+        $i3 = $r6.getSize();
+
+        if $i3 == 0 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        $r2.setEnabled($z0_2);
+
+        $r3 = r0.moveUp;
+
+        if i0 <= 0 goto label3;
+
+        $z1 = 1;
+
+(2)     goto label4;
+
+     label3:
+(3)     $z1_1 = 0;
+
+     label4:
+        $z1_2 = Phi($z1 #2, $z1_1 #3);
+
+        $r3.setEnabled($z1_2);
+
+        $r4 = r0.moveDown;
+
+        if i0 == -1 goto label5;
+
+        $r5 = r0.listModel;
+
+        $i1 = $r5.getSize();
+
+        $i2 = $i1 - 1;
+
+        if i0 == $i2 goto label5;
+
+        $z2 = 1;
+
+(4)     goto label6;
+
+     label5:
+(5)     $z2_1 = 0;
+
+     label6:
+        $z2_2 = Phi($z2 #4, $z2_1 #5);
+
+        $r4.setEnabled($z2_2);
+
+        return;
+    }
+
+    private void reloadContextList(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        java.lang.String r1, r3, r5;
+        java.util.StringTokenizer r2, $r7;
+        org.gjt.sp.jedit.EditAction r4;
+        javax.swing.DefaultListModel $r6, $r10, $r12;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.ActionContext $r8;
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem $r9, $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r6 = r0.listModel;
+
+        $r6.clear();
+
+        $r7 = new java.util.StringTokenizer;
+
+        specialinvoke $r7.<init>(r1);
+
+        r2 = $r7;
+
+     label1:
+        $z0 = r2.hasMoreTokens();
+
+        if $z0 == 0 goto label6;
+
+        r3 = r2.nextToken();
+
+        $z1 = r3.equals("-");
+
+        if $z1 == 0 goto label2;
+
+        $r12 = r0.listModel;
+
+        $r11 = new org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem;
+
+        specialinvoke $r11.<init>("-", "-");
+
+        $r12.addElement($r11);
+
+        goto label5;
+
+     label2:
+        $r8 = r0.actionContext;
+
+        r4 = $r8.getAction(r3);
+
+        if r4 != null goto label3;
+
+        goto label1;
+
+     label3:
+        r5 = r4.getLabel();
+
+        if r5 != null goto label4;
+
+        goto label1;
+
+     label4:
+        $r10 = r0.listModel;
+
+        $r9 = new org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem;
+
+        specialinvoke $r9.<init>(r3, r5);
+
+        $r10.addElement($r9);
+
+     label5:
+        goto label1;
+
+     label6:
+        return;
+    }
+
+    static javax.swing.JButton access$000(org.gjt.sp.jedit.gui.AbstractContextOptionPane)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.add;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.ActionContext access$100(org.gjt.sp.jedit.gui.AbstractContextOptionPane)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        org.gjt.sp.jedit.ActionContext $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.actionContext;
+
+        return $r1;
+    }
+
+    static javax.swing.JList access$200(org.gjt.sp.jedit.gui.AbstractContextOptionPane)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        javax.swing.JList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.list;
+
+        return $r1;
+    }
+
+    static javax.swing.DefaultListModel access$300(org.gjt.sp.jedit.gui.AbstractContextOptionPane)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        javax.swing.DefaultListModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.listModel;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$400(org.gjt.sp.jedit.gui.AbstractContextOptionPane)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.remove;
+
+        return $r1;
+    }
+
+    static void access$500(org.gjt.sp.jedit.gui.AbstractContextOptionPane)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updateButtons();
+
+        return;
+    }
+
+    static javax.swing.JButton access$600(org.gjt.sp.jedit.gui.AbstractContextOptionPane)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.moveUp;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$700(org.gjt.sp.jedit.gui.AbstractContextOptionPane)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.moveDown;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$800(org.gjt.sp.jedit.gui.AbstractContextOptionPane)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.reset;
+
+        return $r1;
+    }
+
+    static void access$900(org.gjt.sp.jedit.gui.AbstractContextOptionPane, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane r0;
+        java.lang.String r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        specialinvoke r0.reloadContextList(r1);
+
+        return;
+    }
+}

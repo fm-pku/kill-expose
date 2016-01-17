@@ -1,0 +1,41 @@
+public class org.gjt.sp.jedit.gui.statusbar.TaskMonitorWidgetFactory extends java.lang.Object implements org.gjt.sp.jedit.gui.statusbar.StatusWidgetFactory
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.gui.statusbar.TaskMonitorWidgetFactory r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.gui.statusbar.Widget getWidget(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.statusbar.TaskMonitorWidgetFactory r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.gui.statusbar.TaskMonitorWidgetFactory$TaskMonitorWidget r2, $r3;
+        javax.swing.JComponent $r4;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new org.gjt.sp.jedit.gui.statusbar.TaskMonitorWidgetFactory$TaskMonitorWidget;
+
+        specialinvoke $r3.<init>(r1, null);
+
+        r2 = $r3;
+
+        $r4 = r2.getComponent();
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("statusbar.task-monitor.tooltip");
+
+        $r4.setToolTipText($r5);
+
+        return r2;
+    }
+}

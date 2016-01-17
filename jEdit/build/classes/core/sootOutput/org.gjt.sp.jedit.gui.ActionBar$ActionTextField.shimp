@@ -1,0 +1,309 @@
+class org.gjt.sp.jedit.gui.ActionBar$ActionTextField extends org.gjt.sp.jedit.gui.HistoryTextField
+{
+    boolean repeat;
+    boolean nonDigit;
+    final org.gjt.sp.jedit.gui.ActionBar this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.ActionBar)
+    {
+        org.gjt.sp.jedit.gui.ActionBar$ActionTextField r0;
+        org.gjt.sp.jedit.gui.ActionBar r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>("action");
+
+        r0.setSelectAllOnFocus(1);
+
+        return;
+    }
+
+    public boolean getFocusTraversalKeysEnabled()
+    {
+        org.gjt.sp.jedit.gui.ActionBar$ActionTextField r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+
+    public void processKeyEvent(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.gui.ActionBar$ActionTextField r0;
+        char c0;
+        int i1, $i2, $i3;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8;
+        org.gjt.sp.jedit.gui.ActionBar $r1, $r3, $r6, $r8, $r9, $r12, $r14, $r15, $r17, $r19, $r21, $r22, $r23;
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup $r2, $r4, $r7, $r16;
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$CompletionList $r5;
+        org.gjt.sp.jedit.View $r10, $r13;
+        org.gjt.sp.jedit.EditPane $r11;
+        org.gjt.sp.jedit.gui.HistoryTextField $r20, $r24;
+        java.lang.String $r25;
+        java.awt.event.KeyEvent r26, r27;
+
+        r0 := @this;
+
+        r26 := @parameter0;
+
+        r27 = org.gjt.sp.jedit.gui.KeyEventWorkaround.processKeyEvent(r26);
+
+        if r27 != null goto label01;
+
+        return;
+
+     label01:
+        $i2 = r27.getID();
+
+        lookupswitch($i2)
+        {
+            case 400: goto label02;
+            case 401: goto label05;
+            default: goto label14;
+        };
+
+     label02:
+        c0 = r27.getKeyChar();
+
+        $z6 = r0.nonDigit;
+
+        if $z6 != 0 goto label03;
+
+        $z8 = java.lang.Character.isDigit(c0);
+
+        if $z8 == 0 goto label03;
+
+        specialinvoke r0.processKeyEvent(r27);
+
+        r0.repeat = 1;
+
+        $r23 = r0.this$0;
+
+        $r22 = r0.this$0;
+
+        $r24 = org.gjt.sp.jedit.gui.ActionBar.access$800($r22);
+
+        $r25 = $r24.getText();
+
+        $i3 = java.lang.Integer.parseInt($r25);
+
+        org.gjt.sp.jedit.gui.ActionBar.access$302($r23, $i3);
+
+        goto label14;
+
+     label03:
+        r0.nonDigit = 1;
+
+        $z7 = r0.repeat;
+
+        if $z7 == 0 goto label04;
+
+        specialinvoke r0.passToView(r27);
+
+        goto label14;
+
+     label04:
+        specialinvoke r0.processKeyEvent(r27);
+
+        goto label14;
+
+     label05:
+        i1 = r27.getKeyCode();
+
+        $z0 = r27.isActionKey();
+
+        if $z0 != 0 goto label06;
+
+        $z3 = r27.isControlDown();
+
+        if $z3 != 0 goto label06;
+
+        $z4 = r27.isAltDown();
+
+        if $z4 != 0 goto label06;
+
+        $z5 = r27.isMetaDown();
+
+        if $z5 != 0 goto label06;
+
+        if i1 == 8 goto label06;
+
+        if i1 == 127 goto label06;
+
+        if i1 == 10 goto label06;
+
+        if i1 == 9 goto label06;
+
+        if i1 != 27 goto label13;
+
+     label06:
+        r0.nonDigit = 1;
+
+        $z1 = r0.repeat;
+
+        if $z1 == 0 goto label07;
+
+        specialinvoke r0.passToView(r27);
+
+        goto label14;
+
+     label07:
+        if i1 != 9 goto label08;
+
+        $r21 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.ActionBar.access$700($r21, 1);
+
+        r27.consume();
+
+        goto label13;
+
+     label08:
+        if i1 != 27 goto label11;
+
+        r27.consume();
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.gui.ActionBar.access$600($r6);
+
+        if $r7 == null goto label09;
+
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.gui.ActionBar.access$600($r15);
+
+        $r16.dispose();
+
+        $r17 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.ActionBar.access$602($r17, null);
+
+        $r19 = r0.this$0;
+
+        $r20 = org.gjt.sp.jedit.gui.ActionBar.access$800($r19);
+
+        $r20.requestFocus();
+
+        goto label14;
+
+     label09:
+        $r8 = r0.this$0;
+
+        $z2 = org.gjt.sp.jedit.gui.ActionBar.access$900($r8);
+
+        if $z2 == 0 goto label10;
+
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.gui.ActionBar.access$200($r12);
+
+        $r14 = r0.this$0;
+
+        $r13.removeToolBar($r14);
+
+     label10:
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.gui.ActionBar.access$200($r9);
+
+        $r11 = $r10.getEditPane();
+
+        $r11.focusOnTextArea();
+
+        goto label14;
+
+     label11:
+        if i1 == 38 goto label12;
+
+        if i1 != 40 goto label13;
+
+     label12:
+        $r1 = r0.this$0;
+
+        $r2 = org.gjt.sp.jedit.gui.ActionBar.access$600($r1);
+
+        if $r2 == null goto label13;
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.ActionBar.access$600($r3);
+
+        $r5 = $r4.list;
+
+        $r5.processKeyEvent(r27);
+
+        goto label14;
+
+     label13:
+        specialinvoke r0.processKeyEvent(r27);
+
+     label14:
+        return;
+    }
+
+    private void passToView(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.gui.ActionBar$ActionTextField r0;
+        java.awt.event.KeyEvent r1;
+        org.gjt.sp.jedit.gui.ActionBar $r2, $r3, $r7, $r9;
+        boolean $z0;
+        org.gjt.sp.jedit.View $r4, $r8;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r5;
+        org.gjt.sp.jedit.gui.ActionBar$ActionTextField$1 $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $z0 = org.gjt.sp.jedit.gui.ActionBar.access$900($r2);
+
+        if $z0 == 0 goto label1;
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.ActionBar.access$200($r7);
+
+        $r9 = r0.this$0;
+
+        $r8.removeToolBar($r9);
+
+     label1:
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.ActionBar.access$200($r3);
+
+        $r5 = $r4.getTextArea();
+
+        $r5.requestFocus();
+
+        $r6 = new org.gjt.sp.jedit.gui.ActionBar$ActionTextField$1;
+
+        specialinvoke $r6.<init>(r0, r1);
+
+        javax.swing.SwingUtilities.invokeLater($r6);
+
+        return;
+    }
+
+    public void addNotify()
+    {
+        org.gjt.sp.jedit.gui.ActionBar$ActionTextField r0;
+
+        r0 := @this;
+
+        specialinvoke r0.addNotify();
+
+        r0.nonDigit = 0;
+
+        r0.repeat = 0;
+
+        return;
+    }
+}

@@ -1,0 +1,383 @@
+class org.gjt.sp.jedit.gui.PingPongList$MyTransferHandler extends javax.swing.TransferHandler
+{
+    private javax.swing.JList sourceList;
+    private int[] indices;
+    final org.gjt.sp.jedit.gui.PingPongList this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.PingPongList)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyTransferHandler r0;
+        org.gjt.sp.jedit.gui.PingPongList r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public int getSourceActions(javax.swing.JComponent)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyTransferHandler r0;
+        javax.swing.JComponent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return 2;
+    }
+
+    public boolean importData(javax.swing.JComponent, java.awt.datatransfer.Transferable)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyTransferHandler r0;
+        javax.swing.JComponent r1;
+        java.awt.datatransfer.Transferable r2;
+        javax.swing.JList r3, $r10, $r12, $r13;
+        org.gjt.sp.jedit.gui.PingPongList$MyListModel r4, r5;
+        java.awt.datatransfer.DataFlavor $r6;
+        java.lang.Object $r7;
+        java.lang.Object[] $r8, r25;
+        javax.swing.ListModel $r9, $r11;
+        int[] $r14, $r15, $r16, $r17, $r18, $r19, $r20, $r21, $r22;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, i8, i9, i10, i11, i12, i13, i8_1, i8_2;
+        java.awt.datatransfer.UnsupportedFlavorException $r23, r26;
+        java.io.IOException $r24, r27;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+     label01:
+(0)     $r6 = org.gjt.sp.jedit.gui.PingPongList$MyTransferable.javaListFlavor;
+
+        $r7 = r2.getTransferData($r6);
+
+        $r8 = (java.lang.Object[]) $r7;
+
+        r25 = (java.lang.Object[]) $r8;
+
+        r3 = (javax.swing.JList) r1;
+
+        $r9 = r3.getModel();
+
+        r4 = (org.gjt.sp.jedit.gui.PingPongList$MyListModel) $r9;
+
+        $r10 = r0.sourceList;
+
+        $r11 = $r10.getModel();
+
+        r5 = (org.gjt.sp.jedit.gui.PingPongList$MyListModel) $r11;
+
+        i8 = r3.getSelectedIndex();
+
+(1)     if i8 != -1 goto label02;
+
+(2)     i8_1 = 0;
+
+     label02:
+        i8_2 = Phi(i8 #1, i8_1 #2);
+
+(3)     r4.add(i8_2, r25);
+
+        i9 = i8_2;
+
+        $r12 = r0.sourceList;
+
+        if r3 != $r12 goto label09;
+
+        $r18 = r0.indices;
+
+        $i3 = lengthof $r18;
+
+(4)     i10 = $i3 - 1;
+
+     label03:
+        i9 = Phi(i9 #4, i9 #8);
+
+        i11 = Phi(i11 #4, i11 #8);
+
+        i10 = Phi(i10 #4, i10 #8);
+
+        i8 = Phi(i8_2 #4, i8 #8);
+
+        if i10 < 0 goto label06;
+
+        $r21 = r0.indices;
+
+        i11 = $r21[i10];
+
+        $r22 = r0.indices;
+
+        $i6 = $r22[i10];
+
+        if $i6 < i8 goto label04;
+
+        $i7 = lengthof r25;
+
+        i11 = i11 + $i7;
+
+(5)     goto label05;
+
+     label04:
+(6)     i9 = i9 + -1;
+
+     label05:
+        i9 = Phi(i9 #5, i9 #6);
+
+        i11 = Phi(i11 #5, i11 #6);
+
+(7)     r5.remove(i11);
+
+        i10 = i10 + -1;
+
+(8)     goto label03;
+
+     label06:
+        $r19 = r0.indices;
+
+        $i4 = lengthof $r19;
+
+(9)     i12 = $i4 - 1;
+
+     label07:
+        i12 = Phi(i12 #9, i12 #10);
+
+        i9 = Phi(i9 #9, i9 #10);
+
+        i11 = Phi(i11 #9, i11 #10);
+
+        i10 = Phi(i10 #9, i10 #10);
+
+        i8 = Phi(i8 #9, i8 #10);
+
+        if i12 < 0 goto label08;
+
+        $r20 = r0.indices;
+
+        $i5 = i9 + i12;
+
+        $r20[i12] = $i5;
+
+        i12 = i12 + -1;
+
+(10)    goto label07;
+
+     label08:
+(11)    goto label11;
+
+     label09:
+        $r13 = r0.sourceList;
+
+        $r13.clearSelection();
+
+        $r14 = r0.indices;
+
+        $i0 = lengthof $r14;
+
+(12)    i13 = $i0 - 1;
+
+     label10:
+        i13 = Phi(i13 #12, i13 #15);
+
+        i9 = Phi(i9 #12, i9 #15);
+
+        i8 = Phi(i8_2 #12, i8 #15);
+
+(13)    if i13 < 0 goto label11;
+
+        $r16 = r0.indices;
+
+(14)    $i1 = $r16[i13];
+
+        r5.remove($i1);
+
+        $r17 = r0.indices;
+
+        $i2 = i8 + i13;
+
+        $r17[i13] = $i2;
+
+        i13 = i13 + -1;
+
+(15)    goto label10;
+
+     label11:
+        i13 = Phi(i13 #11, i13 #13);
+
+        i12 = Phi(i12 #11, i12 #13);
+
+        i9 = Phi(i9 #11, i9 #13);
+
+        i11 = Phi(i11 #11, i11 #13);
+
+        i10 = Phi(i10 #11, i10 #13);
+
+        i8 = Phi(i8 #11, i8 #13);
+
+(16)    $r15 = r0.indices;
+
+        r3.setSelectedIndices($r15);
+
+     label12:
+        return 1;
+
+     label13:
+        $r23 := @caughtexception;
+
+        i13 = Phi(i13 #0, i13 #5, i13 #6, i13 #7, i13 #14, i13 #16);
+
+        i12 = Phi(i12 #0, i12 #5, i12 #6, i12 #7, i12 #14, i12 #16);
+
+        i9 = Phi(i9 #0, i9 #5, i9 #6, i9 #7, i9 #14, i9 #16);
+
+        i11 = Phi(i11 #0, i11 #5, i11 #6, i11 #7, i11 #14, i11 #16);
+
+        i10 = Phi(i10 #0, i10 #5, i10 #6, i10 #7, i10 #14, i10 #16);
+
+        i8 = Phi(i8 #0, i8_1 #2, i8_2 #3, i8 #5, i8 #6, i8 #7, i8 #14, i8 #16);
+
+        r26 = $r23;
+
+        org.gjt.sp.util.Log.log(9, r0, r26);
+
+(17)    goto label15;
+
+     label14:
+        $r24 := @caughtexception;
+
+        i13 = Phi(i13 #0, i13 #5, i13 #6, i13 #7, i13 #14, i13 #16);
+
+        i12 = Phi(i12 #0, i12 #5, i12 #6, i12 #7, i12 #14, i12 #16);
+
+        i9 = Phi(i9 #0, i9 #5, i9 #6, i9 #7, i9 #14, i9 #16);
+
+        i11 = Phi(i11 #0, i11 #5, i11 #6, i11 #7, i11 #14, i11 #16);
+
+        i10 = Phi(i10 #0, i10 #5, i10 #6, i10 #7, i10 #14, i10 #16);
+
+        i8 = Phi(i8 #0, i8_1 #2, i8_2 #3, i8 #5, i8 #6, i8 #7, i8 #14, i8 #16);
+
+        r27 = $r24;
+
+(18)    org.gjt.sp.util.Log.log(9, r0, r27);
+
+     label15:
+        i13 = Phi(i13 #17, i13 #18);
+
+        i12 = Phi(i12 #17, i12 #18);
+
+        i9 = Phi(i9 #17, i9 #18);
+
+        i11 = Phi(i11 #17, i11 #18);
+
+        i10 = Phi(i10 #17, i10 #18);
+
+        i8 = Phi(i8 #17, i8 #18);
+
+        return 0;
+
+        catch java.awt.datatransfer.UnsupportedFlavorException from label01 to label12 with label13;
+        catch java.io.IOException from label01 to label12 with label14;
+    }
+
+    protected java.awt.datatransfer.Transferable createTransferable(javax.swing.JComponent)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyTransferHandler r0;
+        javax.swing.JComponent r1;
+        java.lang.Object[] r2, $r7;
+        javax.swing.JList $r3, $r4, $r6;
+        int[] $r5;
+        org.gjt.sp.jedit.gui.PingPongList$MyTransferable $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = (javax.swing.JList) r1;
+
+        r0.sourceList = $r3;
+
+        $r4 = r0.sourceList;
+
+        $r5 = $r4.getSelectedIndices();
+
+        r0.indices = $r5;
+
+        $r6 = r0.sourceList;
+
+        $r7 = $r6.getSelectedValues();
+
+        r2 = (java.lang.Object[]) $r7;
+
+        $r8 = new org.gjt.sp.jedit.gui.PingPongList$MyTransferable;
+
+        specialinvoke $r8.<init>(r2, null);
+
+        return $r8;
+    }
+
+    public boolean canImport(javax.swing.JComponent, java.awt.datatransfer.DataFlavor[])
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyTransferHandler r0;
+        javax.swing.JComponent r1;
+        java.awt.datatransfer.DataFlavor[] r2;
+        org.gjt.sp.jedit.gui.PingPongList $r3, $r5;
+        javax.swing.JList $r4, $r6;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.PingPongList.access$600($r3);
+
+        if r1 == $r4 goto label1;
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.PingPongList.access$700($r5);
+
+        if r1 != $r6 goto label2;
+
+     label1:
+        $z0_1 = 1;
+
+(0)     goto label3;
+
+     label2:
+(1)     $z0 = 0;
+
+     label3:
+        $z0_2 = Phi($z0_1 #0, $z0 #1);
+
+        return $z0_2;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.PingPongList, org.gjt.sp.jedit.gui.PingPongList$1)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyTransferHandler r0;
+        org.gjt.sp.jedit.gui.PingPongList r1;
+        org.gjt.sp.jedit.gui.PingPongList$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

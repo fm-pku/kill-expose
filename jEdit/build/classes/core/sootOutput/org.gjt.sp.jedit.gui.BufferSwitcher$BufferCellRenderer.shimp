@@ -1,0 +1,60 @@
+class org.gjt.sp.jedit.gui.BufferSwitcher$BufferCellRenderer extends javax.swing.DefaultListCellRenderer
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferCellRenderer r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.awt.Component getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$BufferCellRenderer r0;
+        javax.swing.JList r1;
+        java.lang.Object r2;
+        int i0;
+        boolean z0, z1;
+        org.gjt.sp.jedit.Buffer r3;
+        javax.swing.Icon $r5;
+        java.lang.String $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        specialinvoke r0.getListCellRendererComponent(r1, r2, i0, z0, z1);
+
+        r3 = (org.gjt.sp.jedit.Buffer) r2;
+
+        if r3 != null goto label1;
+
+        r0.setIcon(null);
+
+        goto label2;
+
+     label1:
+        $r5 = r3.getIcon();
+
+        r0.setIcon($r5);
+
+        $r6 = r3.getPath();
+
+        r0.setToolTipText($r6);
+
+     label2:
+        return r0;
+    }
+}

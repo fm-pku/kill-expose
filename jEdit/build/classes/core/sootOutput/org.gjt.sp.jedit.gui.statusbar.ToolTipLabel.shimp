@@ -1,0 +1,34 @@
+public class org.gjt.sp.jedit.gui.statusbar.ToolTipLabel extends javax.swing.JLabel
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.gui.statusbar.ToolTipLabel r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.awt.Point getToolTipLocation(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.statusbar.ToolTipLabel r0;
+        java.awt.event.MouseEvent r1;
+        java.awt.Point $r2;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.awt.Point;
+
+        $i0 = r1.getX();
+
+        specialinvoke $r2.<init>($i0, -20);
+
+        return $r2;
+    }
+}

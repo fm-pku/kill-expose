@@ -1,0 +1,45 @@
+public class thoughtworks.problem.salesTax.products.Book extends thoughtworks.problem.salesTax.products.Product
+{
+    private double salesTaxPercent;
+
+    public void <init>(java.lang.String, double, int, boolean)
+    {
+        thoughtworks.problem.salesTax.products.Book r0;
+        java.lang.String r1;
+        double d0;
+        int i0;
+        boolean z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        d0 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        specialinvoke r0.<init>(r1, d0, i0, z0);
+
+        Packer.Unpack(r0);
+
+        r0.salesTaxPercent = 0.0;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public double getSalesTax()
+    {
+        thoughtworks.problem.salesTax.products.Book r0;
+        double $d0;
+
+        r0 := @this;
+
+        $d0 = r0.salesTaxPercent;
+
+        return $d0;
+    }
+}

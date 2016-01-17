@@ -1,0 +1,1254 @@
+public class org.gjt.sp.jedit.bsh.org.objectweb.asm.Type extends java.lang.Object
+{
+    public static final int VOID;
+    public static final int BOOLEAN;
+    public static final int CHAR;
+    public static final int BYTE;
+    public static final int SHORT;
+    public static final int INT;
+    public static final int FLOAT;
+    public static final int LONG;
+    public static final int DOUBLE;
+    public static final int ARRAY;
+    public static final int OBJECT;
+    public static final org.gjt.sp.jedit.bsh.org.objectweb.asm.Type VOID_TYPE;
+    public static final org.gjt.sp.jedit.bsh.org.objectweb.asm.Type BOOLEAN_TYPE;
+    public static final org.gjt.sp.jedit.bsh.org.objectweb.asm.Type CHAR_TYPE;
+    public static final org.gjt.sp.jedit.bsh.org.objectweb.asm.Type BYTE_TYPE;
+    public static final org.gjt.sp.jedit.bsh.org.objectweb.asm.Type SHORT_TYPE;
+    public static final org.gjt.sp.jedit.bsh.org.objectweb.asm.Type INT_TYPE;
+    public static final org.gjt.sp.jedit.bsh.org.objectweb.asm.Type FLOAT_TYPE;
+    public static final org.gjt.sp.jedit.bsh.org.objectweb.asm.Type LONG_TYPE;
+    public static final org.gjt.sp.jedit.bsh.org.objectweb.asm.Type DOUBLE_TYPE;
+    private final int sort;
+    private char[] buf;
+    private int off;
+    private int len;
+
+    private void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.sort = i0;
+
+        r0.len = 1;
+
+        return;
+    }
+
+    private void <init>(int, char[], int, int)
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type r0;
+        int i0, i1, i2;
+        char[] r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        specialinvoke r0.<init>();
+
+        r0.sort = i0;
+
+        r0.buf = r1;
+
+        r0.off = i1;
+
+        r0.len = i2;
+
+        return;
+    }
+
+    public static org.gjt.sp.jedit.bsh.org.objectweb.asm.Type getType(java.lang.String)
+    {
+        java.lang.String r0;
+        char[] $r1;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type $r2;
+
+        r0 := @parameter0;
+
+        $r1 = r0.toCharArray();
+
+        $r2 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getType($r1, 0);
+
+        return $r2;
+    }
+
+    public static org.gjt.sp.jedit.bsh.org.objectweb.asm.Type getType(java.lang.Class)
+    {
+        java.lang.Class r0, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10;
+        boolean $z0;
+        java.lang.String $r1;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type $r2, $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18, $r19;
+
+        r0 := @parameter0;
+
+        $z0 = r0.isPrimitive();
+
+        if $z0 == 0 goto label9;
+
+        $r3 = java.lang.Integer.TYPE;
+
+        if r0 != $r3 goto label1;
+
+        $r19 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.INT_TYPE;
+
+        return $r19;
+
+     label1:
+        $r4 = java.lang.Void.TYPE;
+
+        if r0 != $r4 goto label2;
+
+        $r18 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.VOID_TYPE;
+
+        return $r18;
+
+     label2:
+        $r5 = java.lang.Boolean.TYPE;
+
+        if r0 != $r5 goto label3;
+
+        $r17 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.BOOLEAN_TYPE;
+
+        return $r17;
+
+     label3:
+        $r6 = java.lang.Byte.TYPE;
+
+        if r0 != $r6 goto label4;
+
+        $r16 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.BYTE_TYPE;
+
+        return $r16;
+
+     label4:
+        $r7 = java.lang.Character.TYPE;
+
+        if r0 != $r7 goto label5;
+
+        $r15 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.CHAR_TYPE;
+
+        return $r15;
+
+     label5:
+        $r8 = java.lang.Short.TYPE;
+
+        if r0 != $r8 goto label6;
+
+        $r14 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.SHORT_TYPE;
+
+        return $r14;
+
+     label6:
+        $r9 = java.lang.Double.TYPE;
+
+        if r0 != $r9 goto label7;
+
+        $r13 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.DOUBLE_TYPE;
+
+        return $r13;
+
+     label7:
+        $r10 = java.lang.Float.TYPE;
+
+        if r0 != $r10 goto label8;
+
+        $r12 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.FLOAT_TYPE;
+
+        return $r12;
+
+     label8:
+        $r11 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.LONG_TYPE;
+
+        return $r11;
+
+     label9:
+        $r1 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getDescriptor(r0);
+
+        $r2 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getType($r1);
+
+        return $r2;
+    }
+
+    public static org.gjt.sp.jedit.bsh.org.objectweb.asm.Type[] getArgumentTypes(java.lang.String)
+    {
+        java.lang.String r0;
+        char[] r1;
+        int $i0, $i1, $i4, i5, i6, i8, i9;
+        char $c2, $c3, c7;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type $r2, $r3;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type[] r4;
+
+        r0 := @parameter0;
+
+        r1 = r0.toCharArray();
+
+        i5 = 1;
+
+(0)     i6 = 0;
+
+     label1:
+        i5 = Phi(i5 #0, i5 #6);
+
+        i6 = Phi(i6 #0, i6 #6);
+
+        $i0 = i5;
+
+        i5 = i5 + 1;
+
+        c7 = r1[$i0];
+
+        if c7 != 41 goto label2;
+
+        goto label7;
+
+     label2:
+(1)     if c7 != 76 goto label5;
+
+     label3:
+        i5 = Phi(i5 #1, i5 #2);
+
+        i6 = Phi(i6 #1, i6 #2);
+
+        $i1 = i5;
+
+        i5 = i5 + 1;
+
+        $c2 = r1[$i1];
+
+        if $c2 == 59 goto label4;
+
+(2)     goto label3;
+
+     label4:
+        i6 = i6 + 1;
+
+(3)     goto label6;
+
+     label5:
+(4)     if c7 == 91 goto label6;
+
+(5)     i6 = i6 + 1;
+
+     label6:
+        i5 = Phi(i5 #3, i5 #4, i5 #5);
+
+        i6 = Phi(i6 #3, i6 #4, i6 #5);
+
+(6)     goto label1;
+
+     label7:
+        r4 = newarray (org.gjt.sp.jedit.bsh.org.objectweb.asm.Type)[i6];
+
+        i8 = 1;
+
+(7)     i9 = 0;
+
+     label8:
+        i5 = Phi(i5 #7, i5 #8);
+
+        i6 = Phi(i6 #7, i6 #8);
+
+        i9 = Phi(i9 #7, i9 #8);
+
+        i8 = Phi(i8 #7, i8 #8);
+
+        $c3 = r1[i8];
+
+        if $c3 == 41 goto label9;
+
+        $r2 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getType(r1, i8);
+
+        r4[i9] = $r2;
+
+        $r3 = r4[i9];
+
+        $i4 = $r3.len;
+
+        i8 = i8 + $i4;
+
+        i9 = i9 + 1;
+
+(8)     goto label8;
+
+     label9:
+        return r4;
+    }
+
+    public static org.gjt.sp.jedit.bsh.org.objectweb.asm.Type[] getArgumentTypes(java.lang.reflect.Method)
+    {
+        java.lang.reflect.Method r0;
+        java.lang.Class[] r1;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type[] r2;
+        int $i0, $i1, i2;
+        java.lang.Class $r3;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type $r4;
+
+        r0 := @parameter0;
+
+        r1 = r0.getParameterTypes();
+
+        $i0 = lengthof r1;
+
+        r2 = newarray (org.gjt.sp.jedit.bsh.org.objectweb.asm.Type)[$i0];
+
+        $i1 = lengthof r1;
+
+(0)     i2 = $i1 - 1;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 < 0 goto label2;
+
+        $r3 = r1[i2];
+
+        $r4 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getType($r3);
+
+        r2[i2] = $r4;
+
+        i2 = i2 + -1;
+
+(1)     goto label1;
+
+     label2:
+        return r2;
+    }
+
+    public static org.gjt.sp.jedit.bsh.org.objectweb.asm.Type getReturnType(java.lang.String)
+    {
+        java.lang.String r0;
+        char[] r1;
+        int $i0, $i1;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type $r2;
+
+        r0 := @parameter0;
+
+        r1 = r0.toCharArray();
+
+        $i0 = r0.indexOf(41);
+
+        $i1 = $i0 + 1;
+
+        $r2 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getType(r1, $i1);
+
+        return $r2;
+    }
+
+    public static org.gjt.sp.jedit.bsh.org.objectweb.asm.Type getReturnType(java.lang.reflect.Method)
+    {
+        java.lang.reflect.Method r0;
+        java.lang.Class $r1;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type $r2;
+
+        r0 := @parameter0;
+
+        $r1 = r0.getReturnType();
+
+        $r2 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getType($r1);
+
+        return $r2;
+    }
+
+    private static org.gjt.sp.jedit.bsh.org.objectweb.asm.Type getType(char[], int)
+    {
+        char[] r0;
+        int i0, $i2, $i4, $i6, $i7, $i9, $i11, i12, i13;
+        char $c1, $c3, $c5, $c8, $c10;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        $c1 = r0[i0];
+
+        tableswitch($c1)
+        {
+            case 66: goto label04;
+            case 67: goto label03;
+            case 68: goto label09;
+            case 69: goto label15;
+            case 70: goto label07;
+            case 71: goto label15;
+            case 72: goto label15;
+            case 73: goto label06;
+            case 74: goto label08;
+            case 75: goto label15;
+            case 76: goto label15;
+            case 77: goto label15;
+            case 78: goto label15;
+            case 79: goto label15;
+            case 80: goto label15;
+            case 81: goto label15;
+            case 82: goto label15;
+            case 83: goto label05;
+            case 84: goto label15;
+            case 85: goto label15;
+            case 86: goto label01;
+            case 87: goto label15;
+            case 88: goto label15;
+            case 89: goto label15;
+            case 90: goto label02;
+            case 91: goto label10;
+            default: goto label15;
+        };
+
+     label01:
+        $r1 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.VOID_TYPE;
+
+        return $r1;
+
+     label02:
+        $r3 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.BOOLEAN_TYPE;
+
+        return $r3;
+
+     label03:
+        $r9 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.CHAR_TYPE;
+
+        return $r9;
+
+     label04:
+        $r10 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.BYTE_TYPE;
+
+        return $r10;
+
+     label05:
+        $r4 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.SHORT_TYPE;
+
+        return $r4;
+
+     label06:
+        $r6 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.INT_TYPE;
+
+        return $r6;
+
+     label07:
+        $r7 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.FLOAT_TYPE;
+
+        return $r7;
+
+     label08:
+        $r5 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.LONG_TYPE;
+
+        return $r5;
+
+     label09:
+        $r8 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.DOUBLE_TYPE;
+
+        return $r8;
+
+     label10:
+(0)     i12 = 1;
+
+     label11:
+        i12 = Phi(i12 #0, i12 #1);
+
+        $i2 = i0 + i12;
+
+        $c3 = r0[$i2];
+
+        if $c3 != 91 goto label12;
+
+        i12 = i12 + 1;
+
+(1)     goto label11;
+
+     label12:
+        $i4 = i0 + i12;
+
+        $c5 = r0[$i4];
+
+(2)     if $c5 != 76 goto label14;
+
+(3)     i12 = i12 + 1;
+
+     label13:
+        i12 = Phi(i12 #3, i12 #5);
+
+        $i7 = i0 + i12;
+
+        $c8 = r0[$i7];
+
+(4)     if $c8 == 59 goto label14;
+
+        i12 = i12 + 1;
+
+(5)     goto label13;
+
+     label14:
+        i12 = Phi(i12 #2, i12 #4);
+
+        $r2 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.Type;
+
+        $i6 = i12 + 1;
+
+        specialinvoke $r2.<init>(9, r0, i0, $i6);
+
+        return $r2;
+
+     label15:
+(6)     i13 = 1;
+
+     label16:
+        i13 = Phi(i13 #6, i13 #7);
+
+        $i9 = i0 + i13;
+
+        $c10 = r0[$i9];
+
+        if $c10 == 59 goto label17;
+
+        i13 = i13 + 1;
+
+(7)     goto label16;
+
+     label17:
+        $r11 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.Type;
+
+        $i11 = i13 + 1;
+
+        specialinvoke $r11.<init>(10, r0, i0, $i11);
+
+        return $r11;
+    }
+
+    public int getSort()
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.sort;
+
+        return $i0;
+    }
+
+    public int getDimensions()
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type r0;
+        int $i0, $i1, i3;
+        char[] $r1;
+        char $c2;
+
+        r0 := @this;
+
+(0)     i3 = 1;
+
+     label1:
+        i3 = Phi(i3 #0, i3 #1);
+
+        $r1 = r0.buf;
+
+        $i0 = r0.off;
+
+        $i1 = $i0 + i3;
+
+        $c2 = $r1[$i1];
+
+        if $c2 != 91 goto label2;
+
+        i3 = i3 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return i3;
+    }
+
+    public org.gjt.sp.jedit.bsh.org.objectweb.asm.Type getElementType()
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type r0, $r2;
+        char[] $r1;
+        int $i0, $i1, $i2;
+
+        r0 := @this;
+
+        $r1 = r0.buf;
+
+        $i0 = r0.off;
+
+        $i1 = r0.getDimensions();
+
+        $i2 = $i0 + $i1;
+
+        $r2 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getType($r1, $i2);
+
+        return $r2;
+    }
+
+    public java.lang.String getClassName()
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type r0;
+        java.lang.String $r1, $r3;
+        int $i0, $i1, $i2, $i3;
+        char[] $r2;
+
+        r0 := @this;
+
+        $r1 = new java.lang.String;
+
+        $r2 = r0.buf;
+
+        $i0 = r0.off;
+
+        $i3 = $i0 + 1;
+
+        $i1 = r0.len;
+
+        $i2 = $i1 - 2;
+
+        specialinvoke $r1.<init>($r2, $i3, $i2);
+
+        $r3 = $r1.replace(47, 46);
+
+        return $r3;
+    }
+
+    public java.lang.String getInternalName()
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type r0;
+        java.lang.String $r1;
+        int $i0, $i1, $i2, $i3;
+        char[] $r2;
+
+        r0 := @this;
+
+        $r1 = new java.lang.String;
+
+        $r2 = r0.buf;
+
+        $i0 = r0.off;
+
+        $i3 = $i0 + 1;
+
+        $i1 = r0.len;
+
+        $i2 = $i1 - 2;
+
+        specialinvoke $r1.<init>($r2, $i3, $i2);
+
+        return $r1;
+    }
+
+    public java.lang.String getDescriptor()
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type r0;
+        java.lang.StringBuilder r1, $r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+        specialinvoke r0.getDescriptor(r1);
+
+        $r3 = r1.toString();
+
+        return $r3;
+    }
+
+    public static java.lang.String getMethodDescriptor(org.gjt.sp.jedit.bsh.org.objectweb.asm.Type, org.gjt.sp.jedit.bsh.org.objectweb.asm.Type[])
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type r0, $r7;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type[] r1;
+        java.lang.StringBuilder r2, $r3;
+        int $i0, i1;
+        java.lang.String $r6;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        r2 = $r3;
+
+        r2.append(40);
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $i0 = lengthof r1;
+
+        if i1 >= $i0 goto label2;
+
+        $r7 = r1[i1];
+
+        specialinvoke $r7.getDescriptor(r2);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        r2.append(41);
+
+        specialinvoke r0.getDescriptor(r2);
+
+        $r6 = r2.toString();
+
+        return $r6;
+    }
+
+    private void getDescriptor(java.lang.StringBuilder)
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type r0;
+        java.lang.StringBuilder r1;
+        int $i0, $i1, $i2;
+        char[] $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r0.sort;
+
+        tableswitch($i0)
+        {
+            case 0: goto label01;
+            case 1: goto label02;
+            case 2: goto label03;
+            case 3: goto label04;
+            case 4: goto label05;
+            case 5: goto label06;
+            case 6: goto label07;
+            case 7: goto label08;
+            case 8: goto label09;
+            default: goto label10;
+        };
+
+     label01:
+        r1.append(86);
+
+        return;
+
+     label02:
+        r1.append(90);
+
+        return;
+
+     label03:
+        r1.append(67);
+
+        return;
+
+     label04:
+        r1.append(66);
+
+        return;
+
+     label05:
+        r1.append(83);
+
+        return;
+
+     label06:
+        r1.append(73);
+
+        return;
+
+     label07:
+        r1.append(70);
+
+        return;
+
+     label08:
+        r1.append(74);
+
+        return;
+
+     label09:
+        r1.append(68);
+
+        return;
+
+     label10:
+        $r11 = r0.buf;
+
+        $i2 = r0.off;
+
+        $i1 = r0.len;
+
+        r1.append($r11, $i2, $i1);
+
+        return;
+    }
+
+    public static java.lang.String getInternalName(java.lang.Class)
+    {
+        java.lang.Class r0;
+        java.lang.String $r1, $r2;
+
+        r0 := @parameter0;
+
+        $r1 = r0.getName();
+
+        $r2 = $r1.replace(46, 47);
+
+        return $r2;
+    }
+
+    public static java.lang.String getDescriptor(java.lang.Class)
+    {
+        java.lang.Class r0;
+        java.lang.StringBuilder r1, $r2;
+        java.lang.String $r3;
+
+        r0 := @parameter0;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getDescriptor(r1, r0);
+
+        $r3 = r1.toString();
+
+        return $r3;
+    }
+
+    public static java.lang.String getMethodDescriptor(java.lang.reflect.Method)
+    {
+        java.lang.reflect.Method r0;
+        java.lang.Class[] r1;
+        java.lang.StringBuilder r2, $r3;
+        int $i0, i1;
+        java.lang.Class $r6, $r8;
+        java.lang.String $r7;
+
+        r0 := @parameter0;
+
+        r1 = r0.getParameterTypes();
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        r2 = $r3;
+
+        r2.append(40);
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $i0 = lengthof r1;
+
+        if i1 >= $i0 goto label2;
+
+        $r8 = r1[i1];
+
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getDescriptor(r2, $r8);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        r2.append(41);
+
+        $r6 = r0.getReturnType();
+
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getDescriptor(r2, $r6);
+
+        $r7 = r2.toString();
+
+        return $r7;
+    }
+
+    private static void getDescriptor(java.lang.StringBuilder, java.lang.Class)
+    {
+        java.lang.StringBuilder r0;
+        java.lang.Class r1, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r13, r15;
+        int i0, i3;
+        char c1, c2, $c4;
+        boolean $z0, $z1;
+        java.lang.String r16;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+(0)     r15 = r1;
+
+     label01:
+        r15 = Phi(r15 #0, r15 #10);
+
+        $z0 = r15.isPrimitive();
+
+        if $z0 == 0 goto label11;
+
+        $r6 = java.lang.Integer.TYPE;
+
+        if r15 != $r6 goto label02;
+
+        c2 = 73;
+
+(1)     goto label10;
+
+     label02:
+        $r7 = java.lang.Void.TYPE;
+
+        if r15 != $r7 goto label03;
+
+        c2 = 86;
+
+(2)     goto label10;
+
+     label03:
+        $r8 = java.lang.Boolean.TYPE;
+
+        if r15 != $r8 goto label04;
+
+        c2 = 90;
+
+(3)     goto label10;
+
+     label04:
+        $r9 = java.lang.Byte.TYPE;
+
+        if r15 != $r9 goto label05;
+
+        c2 = 66;
+
+(4)     goto label10;
+
+     label05:
+        $r10 = java.lang.Character.TYPE;
+
+        if r15 != $r10 goto label06;
+
+        c2 = 67;
+
+(5)     goto label10;
+
+     label06:
+        $r11 = java.lang.Short.TYPE;
+
+        if r15 != $r11 goto label07;
+
+        c2 = 83;
+
+(6)     goto label10;
+
+     label07:
+        $r12 = java.lang.Double.TYPE;
+
+        if r15 != $r12 goto label08;
+
+        c2 = 68;
+
+(7)     goto label10;
+
+     label08:
+        $r13 = java.lang.Float.TYPE;
+
+        if r15 != $r13 goto label09;
+
+        c2 = 70;
+
+(8)     goto label10;
+
+     label09:
+(9)     c2 = 74;
+
+     label10:
+        c2 = Phi(c2 #1, c2 #2, c2 #3, c2 #4, c2 #5, c2 #6, c2 #7, c2 #8, c2 #9);
+
+        r0.append(c2);
+
+        return;
+
+     label11:
+        $z1 = r15.isArray();
+
+        if $z1 == 0 goto label12;
+
+        r0.append(91);
+
+        r15 = r15.getComponentType();
+
+(10)    goto label01;
+
+     label12:
+        r0.append(76);
+
+        r16 = r15.getName();
+
+        i0 = r16.length();
+
+(11)    i3 = 0;
+
+     label13:
+        i3 = Phi(i3 #11, i3 #14);
+
+        r15 = Phi(r15 #11, r15 #14);
+
+        $c4 = Phi($c4 #11, $c4 #14);
+
+        if i3 >= i0 goto label16;
+
+        c1 = r16.charAt(i3);
+
+        if c1 != 46 goto label14;
+
+        $c4 = 47;
+
+(12)    goto label15;
+
+     label14:
+(13)    $c4 = c1;
+
+     label15:
+        $c4 = Phi($c4 #12, $c4 #13);
+
+        r0.append($c4);
+
+        i3 = i3 + 1;
+
+(14)    goto label13;
+
+     label16:
+        r0.append(59);
+
+        return;
+    }
+
+    public int getSize()
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type r0;
+        int $i0, $i1;
+        byte $b2, $b2_1, $b2_2;
+
+        r0 := @this;
+
+        $i0 = r0.sort;
+
+        if $i0 == 7 goto label1;
+
+        $i1 = r0.sort;
+
+        if $i1 != 8 goto label2;
+
+     label1:
+        $b2_1 = 2;
+
+(0)     goto label3;
+
+     label2:
+(1)     $b2 = 1;
+
+     label3:
+        $b2_2 = Phi($b2_1 #0, $b2 #1);
+
+        return $b2_2;
+    }
+
+    public int getOpcode(int)
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type r0;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        if i0 == 46 goto label01;
+
+        if i0 != 79 goto label11;
+
+     label01:
+        $i1 = r0.sort;
+
+        tableswitch($i1)
+        {
+            case 0: goto label02;
+            case 1: goto label03;
+            case 2: goto label04;
+            case 3: goto label03;
+            case 4: goto label05;
+            case 5: goto label06;
+            case 6: goto label07;
+            case 7: goto label08;
+            case 8: goto label09;
+            default: goto label10;
+        };
+
+     label02:
+        $i2 = i0 + 5;
+
+        return $i2;
+
+     label03:
+        $i8 = i0 + 6;
+
+        return $i8;
+
+     label04:
+        $i7 = i0 + 7;
+
+        return $i7;
+
+     label05:
+        $i6 = i0 + 8;
+
+        return $i6;
+
+     label06:
+        return i0;
+
+     label07:
+        $i5 = i0 + 2;
+
+        return $i5;
+
+     label08:
+        $i4 = i0 + 1;
+
+        return $i4;
+
+     label09:
+        $i3 = i0 + 3;
+
+        return $i3;
+
+     label10:
+        $i9 = i0 + 4;
+
+        return $i9;
+
+     label11:
+        $i10 = r0.sort;
+
+        tableswitch($i10)
+        {
+            case 0: goto label12;
+            case 1: goto label13;
+            case 2: goto label13;
+            case 3: goto label13;
+            case 4: goto label13;
+            case 5: goto label13;
+            case 6: goto label14;
+            case 7: goto label15;
+            case 8: goto label16;
+            default: goto label17;
+        };
+
+     label12:
+        $i11 = i0 + 5;
+
+        return $i11;
+
+     label13:
+        return i0;
+
+     label14:
+        $i14 = i0 + 2;
+
+        return $i14;
+
+     label15:
+        $i13 = i0 + 1;
+
+        return $i13;
+
+     label16:
+        $i12 = i0 + 3;
+
+        return $i12;
+
+     label17:
+        $i15 = i0 + 4;
+
+        return $i15;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type $r0, $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8;
+
+        $r0 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.Type;
+
+        specialinvoke $r0.<init>(0);
+
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.VOID_TYPE = $r0;
+
+        $r1 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.Type;
+
+        specialinvoke $r1.<init>(1);
+
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.BOOLEAN_TYPE = $r1;
+
+        $r2 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.Type;
+
+        specialinvoke $r2.<init>(2);
+
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.CHAR_TYPE = $r2;
+
+        $r3 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.Type;
+
+        specialinvoke $r3.<init>(3);
+
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.BYTE_TYPE = $r3;
+
+        $r4 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.Type;
+
+        specialinvoke $r4.<init>(4);
+
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.SHORT_TYPE = $r4;
+
+        $r5 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.Type;
+
+        specialinvoke $r5.<init>(5);
+
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.INT_TYPE = $r5;
+
+        $r6 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.Type;
+
+        specialinvoke $r6.<init>(6);
+
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.FLOAT_TYPE = $r6;
+
+        $r7 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.Type;
+
+        specialinvoke $r7.<init>(7);
+
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.LONG_TYPE = $r7;
+
+        $r8 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.Type;
+
+        specialinvoke $r8.<init>(8);
+
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.DOUBLE_TYPE = $r8;
+
+        return;
+    }
+}

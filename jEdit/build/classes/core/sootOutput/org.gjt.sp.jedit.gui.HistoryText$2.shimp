@@ -1,0 +1,45 @@
+class org.gjt.sp.jedit.gui.HistoryText$2 extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.HistoryText this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.HistoryText)
+    {
+        org.gjt.sp.jedit.gui.HistoryText$2 r0;
+        org.gjt.sp.jedit.gui.HistoryText r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.HistoryText$2 r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.gui.ListModelEditor $r2;
+        org.gjt.sp.jedit.gui.HistoryText $r3;
+        org.gjt.sp.jedit.gui.HistoryModel $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new org.gjt.sp.jedit.gui.ListModelEditor;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.HistoryText.access$100($r3);
+
+        $r2.open($r4);
+
+        return;
+    }
+}

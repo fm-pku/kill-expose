@@ -1,0 +1,100 @@
+class org.gjt.sp.jedit.gui.PingPongList$MyTransferable extends java.lang.Object implements java.awt.datatransfer.Transferable
+{
+    public static final java.awt.datatransfer.DataFlavor javaListFlavor;
+    private final java.lang.Object[] data;
+
+    private void <init>(java.lang.Object[])
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyTransferable r0;
+        java.lang.Object[] r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.data = r1;
+
+        return;
+    }
+
+    public java.awt.datatransfer.DataFlavor[] getTransferDataFlavors()
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyTransferable r0;
+        java.awt.datatransfer.DataFlavor[] $r1;
+        java.awt.datatransfer.DataFlavor $r2;
+
+        r0 := @this;
+
+        $r1 = newarray (java.awt.datatransfer.DataFlavor)[1];
+
+        $r2 = org.gjt.sp.jedit.gui.PingPongList$MyTransferable.javaListFlavor;
+
+        $r1[0] = $r2;
+
+        return $r1;
+    }
+
+    public boolean isDataFlavorSupported(java.awt.datatransfer.DataFlavor)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyTransferable r0;
+        java.awt.datatransfer.DataFlavor r1, $r2;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.gui.PingPongList$MyTransferable.javaListFlavor;
+
+        $z0 = r1.equals($r2);
+
+        return $z0;
+    }
+
+    public java.lang.Object getTransferData(java.awt.datatransfer.DataFlavor) throws java.awt.datatransfer.UnsupportedFlavorException, java.io.IOException
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyTransferable r0;
+        java.awt.datatransfer.DataFlavor r1;
+        java.lang.Object[] $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.data;
+
+        return $r2;
+    }
+
+    void <init>(java.lang.Object[], org.gjt.sp.jedit.gui.PingPongList$1)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$MyTransferable r0;
+        java.lang.Object[] r1;
+        org.gjt.sp.jedit.gui.PingPongList$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.awt.datatransfer.DataFlavor $r0;
+
+        $r0 = new java.awt.datatransfer.DataFlavor;
+
+        specialinvoke $r0.<init>(class "java/util/Collection", "java.util.Collection");
+
+        org.gjt.sp.jedit.gui.PingPongList$MyTransferable.javaListFlavor = $r0;
+
+        return;
+    }
+}

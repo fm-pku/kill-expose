@@ -1,0 +1,161 @@
+public abstract class org.gjt.sp.jedit.Macros$Handler extends java.lang.Object
+{
+    private java.lang.String name;
+    private java.lang.String label;
+    private java.util.regex.Pattern filter;
+
+    public java.lang.String getName()
+    {
+        org.gjt.sp.jedit.Macros$Handler r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.name;
+
+        return $r1;
+    }
+
+    public java.lang.String getLabel()
+    {
+        org.gjt.sp.jedit.Macros$Handler r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.label;
+
+        return $r1;
+    }
+
+    public boolean accept(java.lang.String)
+    {
+        org.gjt.sp.jedit.Macros$Handler r0;
+        java.lang.String r1, $r3;
+        java.util.regex.Pattern $r2;
+        java.util.regex.Matcher $r4;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.filter;
+
+        $r3 = org.gjt.sp.jedit.MiscUtilities.getFileName(r1);
+
+        $r4 = $r2.matcher($r3);
+
+        $z0 = $r4.matches();
+
+        return $z0;
+    }
+
+    public abstract org.gjt.sp.jedit.Macros$Macro createMacro(java.lang.String, java.lang.String);
+
+    public abstract void runMacro(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Macros$Macro);
+
+    public void runMacro(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Macros$Macro, boolean)
+    {
+        org.gjt.sp.jedit.Macros$Handler r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Macros$Macro r2;
+        boolean z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        r0.runMacro(r1, r2);
+
+        return;
+    }
+
+    protected void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.Macros$Handler r0;
+        java.lang.String r1, $r7, $r8, $r13, $r14, $r15, $r22;
+        java.lang.Exception r2, $r17;
+        java.lang.StringBuilder $r3, $r4, $r5, $r6, $r9, $r10, $r11, $r12, $r19, $r20, $r21;
+        java.util.regex.Pattern $r16;
+        java.lang.InternalError $r18;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.name = r1;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("macro-handler.");
+
+        $r5 = $r4.append(r1);
+
+        $r6 = $r5.append(".label");
+
+        $r7 = $r6.toString();
+
+        $r8 = org.gjt.sp.jedit.jEdit.getProperty($r7, r1);
+
+        r0.label = $r8;
+
+     label1:
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("macro-handler.");
+
+        $r11 = $r10.append(r1);
+
+        $r12 = $r11.append(".glob");
+
+        $r13 = $r12.toString();
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty($r13);
+
+        $r15 = org.gjt.sp.util.StandardUtilities.globToRE($r14);
+
+        $r16 = java.util.regex.Pattern.compile($r15);
+
+        r0.filter = $r16;
+
+     label2:
+        goto label4;
+
+     label3:
+        $r17 := @caughtexception;
+
+        r2 = $r17;
+
+        $r18 = new java.lang.InternalError;
+
+        $r19 = new java.lang.StringBuilder;
+
+        specialinvoke $r19.<init>();
+
+        $r20 = $r19.append("Missing or invalid glob for handler ");
+
+        $r21 = $r20.append(r1);
+
+        $r22 = $r21.toString();
+
+        specialinvoke $r18.<init>($r22);
+
+        throw $r18;
+
+     label4:
+        return;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+}

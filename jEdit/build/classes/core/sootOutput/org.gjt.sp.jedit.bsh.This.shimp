@@ -1,0 +1,635 @@
+public class org.gjt.sp.jedit.bsh.This extends java.lang.Object implements java.io.Serializable, java.lang.Runnable
+{
+    org.gjt.sp.jedit.bsh.NameSpace namespace;
+    transient org.gjt.sp.jedit.bsh.Interpreter declaringInterpreter;
+
+    static org.gjt.sp.jedit.bsh.This getThis(org.gjt.sp.jedit.bsh.NameSpace, org.gjt.sp.jedit.bsh.Interpreter)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        org.gjt.sp.jedit.bsh.Interpreter r1;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.bsh.This $r2, $r5;
+        java.lang.Object[] $r3;
+        java.lang.Object $r4;
+        java.lang.Exception $r6, r13;
+        org.gjt.sp.jedit.bsh.InterpreterError $r7;
+        java.lang.StringBuilder $r8, $r9, $r10;
+        java.lang.String $r11;
+        java.lang.Class r12, r12_1, r12_2, r12_3;
+
+        r0 := @parameter0;
+
+(0)     r1 := @parameter1;
+
+     label1:
+        $z0 = org.gjt.sp.jedit.bsh.Capabilities.canGenerateInterfaces();
+
+        if $z0 == 0 goto label2;
+
+        r12 = java.lang.Class.forName("org.gjt.sp.jedit.bsh.XThis");
+
+(1)     goto label5;
+
+     label2:
+        $z1 = org.gjt.sp.jedit.bsh.Capabilities.haveSwing();
+
+        if $z1 == 0 goto label3;
+
+(2)     r12_1 = java.lang.Class.forName("org.gjt.sp.jedit.bsh.JThis");
+
+(3)     goto label5;
+
+     label3:
+        $r2 = new org.gjt.sp.jedit.bsh.This;
+
+        specialinvoke $r2.<init>(r0, r1);
+
+     label4:
+        return $r2;
+
+     label5:
+        r12_2 = Phi(r12 #1, r12_1 #3);
+
+(4)     $r3 = newarray (java.lang.Object)[2];
+
+        $r3[0] = r0;
+
+        $r3[1] = r1;
+
+        $r4 = org.gjt.sp.jedit.bsh.Reflect.constructObject(r12_2, $r3);
+
+        $r5 = (org.gjt.sp.jedit.bsh.This) $r4;
+
+     label6:
+        return $r5;
+
+     label7:
+        $r6 := @caughtexception;
+
+        r12_3 = Phi(r12 #0, r12_1 #2, r12_2 #4);
+
+        r13 = $r6;
+
+        $r7 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("internal error 1 in This: ");
+
+        $r10 = $r9.append(r13);
+
+        $r11 = $r10.toString();
+
+        specialinvoke $r7.<init>($r11);
+
+        throw $r7;
+
+        catch java.lang.Exception from label1 to label4 with label7;
+        catch java.lang.Exception from label5 to label6 with label7;
+    }
+
+    public java.lang.Object getInterface(java.lang.Class) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.This r0;
+        java.lang.Class r1;
+        boolean $z0;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r2;
+        java.lang.StringBuilder $r3, $r4, $r5;
+        java.lang.String $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1.isInstance(r0);
+
+        if $z0 == 0 goto label1;
+
+        return r0;
+
+     label1:
+        $r2 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("Dynamic proxy mechanism not available. Cannot construct interface type: ");
+
+        $r5 = $r4.append(r1);
+
+        $r6 = $r5.toString();
+
+        specialinvoke $r2.<init>($r6);
+
+        throw $r2;
+    }
+
+    public java.lang.Object getInterface(java.lang.Class[]) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.This r0;
+        java.lang.Class[] r1;
+        int $i0, i1;
+        java.lang.Class $r2, $r6;
+        boolean $z0;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r3;
+        java.lang.StringBuilder $r4, $r5, $r7;
+        java.lang.String $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $i0 = lengthof r1;
+
+        if i1 >= $i0 goto label3;
+
+        $r2 = r1[i1];
+
+        $z0 = $r2.isInstance(r0);
+
+        if $z0 != 0 goto label2;
+
+        $r3 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("Dynamic proxy mechanism not available. Cannot construct interface type: ");
+
+        $r6 = r1[i1];
+
+        $r7 = $r5.append($r6);
+
+        $r8 = $r7.toString();
+
+        specialinvoke $r3.<init>($r8);
+
+        throw $r3;
+
+     label2:
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        return r0;
+    }
+
+    protected void <init>(org.gjt.sp.jedit.bsh.NameSpace, org.gjt.sp.jedit.bsh.Interpreter)
+    {
+        org.gjt.sp.jedit.bsh.This r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.namespace = r1;
+
+        r0.declaringInterpreter = r2;
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.NameSpace getNameSpace()
+    {
+        org.gjt.sp.jedit.bsh.This r0;
+        org.gjt.sp.jedit.bsh.NameSpace $r1;
+
+        r0 := @this;
+
+        $r1 = r0.namespace;
+
+        return $r1;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.bsh.This r0;
+        java.lang.StringBuilder $r1, $r2, $r4;
+        org.gjt.sp.jedit.bsh.NameSpace $r3;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("\'this\' reference to Bsh object: ");
+
+        $r3 = r0.namespace;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.toString();
+
+        return $r5;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.bsh.This r0;
+        org.gjt.sp.jedit.bsh.EvalError r1, $r4;
+        java.lang.Object[] $r2;
+        java.lang.StringBuilder $r5, $r7, $r8;
+        org.gjt.sp.jedit.bsh.Interpreter $r6;
+        java.lang.String $r9;
+
+        r0 := @this;
+
+     label1:
+        $r2 = newarray (java.lang.Object)[0];
+
+        r0.invokeMethod("run", $r2);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r4 := @caughtexception;
+
+        r1 = $r4;
+
+        $r6 = r0.declaringInterpreter;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r7 = $r5.append("Exception in runnable:");
+
+        $r8 = $r7.append(r1);
+
+        $r9 = $r8.toString();
+
+        $r6.error($r9);
+
+     label4:
+        return;
+
+        catch org.gjt.sp.jedit.bsh.EvalError from label1 to label2 with label3;
+    }
+
+    public java.lang.Object invokeMethod(java.lang.String, java.lang.Object[]) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.This r0;
+        java.lang.String r1;
+        java.lang.Object[] r2;
+        java.lang.Object $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r0.invokeMethod(r1, r2, null, null, null, 0);
+
+        return $r3;
+    }
+
+    public java.lang.Object invokeMethod(java.lang.String, java.lang.Object[], org.gjt.sp.jedit.bsh.Interpreter, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.SimpleNode, boolean) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.This r0;
+        java.lang.String r1, $r8, $r12, $r14, $r19;
+        boolean z0, $z1, $z2, $z3, $z4;
+        org.gjt.sp.jedit.bsh.NameSpace $r2, $r4, $r11, $r22;
+        java.lang.Class[] $r3, r32;
+        org.gjt.sp.jedit.bsh.EvalError $r5;
+        java.lang.StringBuilder $r6, $r7, $r9, $r10, $r13;
+        java.lang.Object[] $r15, r26, r30;
+        java.lang.Object $r16, $r20, $r23, $r31, r35;
+        java.lang.Boolean $r17;
+        java.lang.Integer $r18;
+        int $i0, $i1, $i2, i3;
+        org.gjt.sp.jedit.bsh.CallStack $r21, r28;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r24, $r25, r34, r36;
+        org.gjt.sp.jedit.bsh.Interpreter r27;
+        org.gjt.sp.jedit.bsh.SimpleNode r29;
+        org.gjt.sp.jedit.bsh.BshMethod r33;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r26 := @parameter1;
+
+        r27 := @parameter2;
+
+        r28 := @parameter3;
+
+        r29 := @parameter4;
+
+        z0 := @parameter5;
+
+(0)     if r26 == null goto label05;
+
+        $i1 = lengthof r26;
+
+        r30 = newarray (java.lang.Object)[$i1];
+
+(1)     i3 = 0;
+
+     label01:
+        r29 = Phi(r29 #1, r29 #4);
+
+        r26 = Phi(r26 #1, r26 #4);
+
+        i3 = Phi(i3 #1, i3 #4);
+
+        $r31 = Phi($r31 #1, $r31 #4);
+
+        r28 = Phi(r28 #1, r28 #4);
+
+        r27 = Phi(r27 #1, r27 #4);
+
+        $i2 = lengthof r26;
+
+        if i3 >= $i2 goto label04;
+
+        $r23 = r26[i3];
+
+        if $r23 != null goto label02;
+
+        $r31 = org.gjt.sp.jedit.bsh.Primitive.NULL;
+
+(2)     goto label03;
+
+     label02:
+(3)     $r31 = r26[i3];
+
+     label03:
+        $r31 = Phi($r31 #2, $r31 #3);
+
+        r30[i3] = $r31;
+
+        i3 = i3 + 1;
+
+(4)     goto label01;
+
+     label04:
+(5)     r26 = r30;
+
+     label05:
+        r29 = Phi(r29 #0, r29 #5);
+
+        r26 = Phi(r26 #0, r26 #5);
+
+        i3 = Phi(i3 #0, i3 #5);
+
+        $r31 = Phi($r31 #0, $r31 #5);
+
+        r28 = Phi(r28 #0, r28 #5);
+
+        r27 = Phi(r27 #0, r27 #5);
+
+(6)     if r27 != null goto label06;
+
+(7)     r27 = r0.declaringInterpreter;
+
+     label06:
+        r27 = Phi(r27 #6, r27 #7);
+
+(8)     if r28 != null goto label07;
+
+        $r21 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        $r22 = r0.namespace;
+
+        specialinvoke $r21.<init>($r22);
+
+(9)     r28 = $r21;
+
+     label07:
+        r28 = Phi(r28 #8, r28 #9);
+
+(10)    if r29 != null goto label08;
+
+(11)    r29 = org.gjt.sp.jedit.bsh.SimpleNode.JAVACODE;
+
+     label08:
+        r29 = Phi(r29 #10, r29 #11);
+
+        r32 = org.gjt.sp.jedit.bsh.Types.getTypes(r26);
+
+        r33 = null;
+
+     label09:
+(12)    $r2 = r0.namespace;
+
+        r33 = $r2.getMethod(r1, r32, z0);
+
+     label10:
+(13)    goto label12;
+
+     label11:
+        $r24 := @caughtexception;
+
+        r33 = Phi(r33 #12);
+
+(14)    r34 = $r24;
+
+     label12:
+        r33 = Phi(r33 #13, r33 #14);
+
+        if r33 == null goto label13;
+
+        $r20 = r33.invoke(r26, r27, r28, r29);
+
+        return $r20;
+
+     label13:
+        $z1 = r1.equals("toString");
+
+        if $z1 == 0 goto label14;
+
+        $r19 = r0.toString();
+
+        return $r19;
+
+     label14:
+        $z2 = r1.equals("hashCode");
+
+        if $z2 == 0 goto label15;
+
+        $r18 = new java.lang.Integer;
+
+        $i0 = r0.hashCode();
+
+        specialinvoke $r18.<init>($i0);
+
+        return $r18;
+
+     label15:
+        $z3 = r1.equals("equals");
+
+        if $z3 == 0 goto label18;
+
+        r35 = r26[0];
+
+        $r17 = new java.lang.Boolean;
+
+        if r0 != r35 goto label16;
+
+        $z4 = 1;
+
+(15)    goto label17;
+
+     label16:
+(16)    $z4 = 0;
+
+     label17:
+        $z4 = Phi($z4 #15, $z4 #16);
+
+        specialinvoke $r17.<init>($z4);
+
+        return $r17;
+
+     label18:
+        $r4 = r0.namespace;
+
+        $r3 = newarray (java.lang.Class)[2];
+
+        $r3[0] = null;
+
+(17)    $r3[1] = null;
+
+        r33 = $r4.getMethod("invoke", $r3);
+
+     label19:
+(18)    goto label21;
+
+     label20:
+        $r25 := @caughtexception;
+
+        r33 = Phi(r33 #17);
+
+(19)    r36 = $r25;
+
+     label21:
+        r33 = Phi(r33 #18, r33 #19);
+
+        if r33 == null goto label22;
+
+        $r15 = newarray (java.lang.Object)[2];
+
+        $r15[0] = r1;
+
+        $r15[1] = r26;
+
+        $r16 = r33.invoke($r15, r27, r28, r29);
+
+        return $r16;
+
+     label22:
+        $r5 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("Method ");
+
+        $r8 = org.gjt.sp.jedit.bsh.StringUtil.methodString(r1, r32);
+
+        $r9 = $r7.append($r8);
+
+        $r10 = $r9.append(" not found in bsh scripted object: ");
+
+        $r11 = r0.namespace;
+
+        $r12 = $r11.getName();
+
+        $r13 = $r10.append($r12);
+
+        $r14 = $r13.toString();
+
+        specialinvoke $r5.<init>($r14, r29, r28);
+
+        throw $r5;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label09 to label10 with label11;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label18 to label19 with label20;
+    }
+
+    public static void bind(org.gjt.sp.jedit.bsh.This, org.gjt.sp.jedit.bsh.NameSpace, org.gjt.sp.jedit.bsh.Interpreter)
+    {
+        org.gjt.sp.jedit.bsh.This r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1, $r3;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        $r3 = r0.namespace;
+
+        $r3.setParent(r1);
+
+        r0.declaringInterpreter = r2;
+
+        return;
+    }
+
+    static boolean isExposedThisMethod(java.lang.String)
+    {
+        java.lang.String r0;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z6_1, $z6_2;
+
+        r0 := @parameter0;
+
+        $z0 = r0.equals("getClass");
+
+        if $z0 != 0 goto label1;
+
+        $z1 = r0.equals("invokeMethod");
+
+        if $z1 != 0 goto label1;
+
+        $z2 = r0.equals("getInterface");
+
+        if $z2 != 0 goto label1;
+
+        $z3 = r0.equals("wait");
+
+        if $z3 != 0 goto label1;
+
+        $z4 = r0.equals("notify");
+
+        if $z4 != 0 goto label1;
+
+        $z5 = r0.equals("notifyAll");
+
+        if $z5 == 0 goto label2;
+
+     label1:
+        $z6_1 = 1;
+
+(0)     goto label3;
+
+     label2:
+(1)     $z6 = 0;
+
+     label3:
+        $z6_2 = Phi($z6_1 #0, $z6 #1);
+
+        return $z6_2;
+    }
+}

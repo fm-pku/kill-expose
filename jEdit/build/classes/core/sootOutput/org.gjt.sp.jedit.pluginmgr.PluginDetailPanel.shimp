@@ -1,0 +1,436 @@
+class org.gjt.sp.jedit.pluginmgr.PluginDetailPanel extends javax.swing.JPanel
+{
+    private final javax.swing.JEditorPane pluginDetail;
+    private final javax.swing.JLabel title;
+    private org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry entry;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginDetailPanel r0;
+        javax.swing.JScrollPane r1, $r14;
+        java.awt.BorderLayout $r2;
+        javax.swing.JEditorPane $r3, $r4, $r5, $r6, $r8, $r10, $r15;
+        java.awt.Color $r7, $r9;
+        java.lang.Boolean $r11;
+        javax.swing.JLabel $r12, $r13;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r2 = new java.awt.BorderLayout;
+
+        specialinvoke $r2.<init>();
+
+        r0.setLayout($r2);
+
+        $r3 = new javax.swing.JEditorPane;
+
+        specialinvoke $r3.<init>();
+
+        r0.pluginDetail = $r3;
+
+        $r4 = r0.pluginDetail;
+
+        $r4.setEditable(0);
+
+        $r5 = r0.pluginDetail;
+
+        $r5.setContentType("text/html");
+
+        $r6 = r0.pluginDetail;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getColorProperty("view.bgColor");
+
+        $r6.setBackground($r7);
+
+        $r8 = r0.pluginDetail;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getColorProperty("view.fgColor");
+
+        $r8.setForeground($r9);
+
+        $r10 = r0.pluginDetail;
+
+        $r11 = java.lang.Boolean.valueOf(1);
+
+        $r10.putClientProperty("JEditorPane.honorDisplayProperties", $r11);
+
+        $r12 = new javax.swing.JLabel;
+
+        specialinvoke $r12.<init>();
+
+        r0.title = $r12;
+
+        $r13 = r0.title;
+
+        r0.add($r13, "North");
+
+        $r14 = new javax.swing.JScrollPane;
+
+        $r15 = r0.pluginDetail;
+
+        specialinvoke $r14.<init>($r15);
+
+        r1 = $r14;
+
+        r1.setHorizontalScrollBarPolicy(31);
+
+        r0.add(r1);
+
+        return;
+    }
+
+    void setPlugin(org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginDetailPanel r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r1, $r4;
+        java.lang.String r2, $r5, $r9, $r12, $r15, $r20, $r27, $r28, $r31, $r38, $r39, $r46, $r47, $r49, $r52, $r53, $r57, $r60, $r62, $r63, $r64, $r65, $r68, $r70, $r73, $r76, $r80, $r83, $r89, $r92;
+        java.lang.StringBuilder r3, $r6, $r8, $r10, $r11, $r18, $r19, $r21, $r22, $r23, $r24, $r25, $r26, $r30, $r32, $r33, $r34, $r35, $r36, $r37, $r41, $r42, $r43, $r44, $r45, $r54, $r56, $r58, $r59, $r61, $r69, $r72, $r74, $r75, $r77, $r79, $r81, $r82, $r84, $r86, $r88, $r90, $r91, r93;
+        boolean $z0;
+        javax.swing.JLabel $r7, $r55, $r87;
+        org.gjt.sp.jedit.PluginJAR $r13, r94;
+        java.io.File $r14;
+        org.gjt.sp.jedit.EditPlugin $r16, $r17;
+        javax.swing.JEditorPane $r51, $r67;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.entry;
+
+        if r1 == $r4 goto label8;
+
+        $r5 = r1.status;
+
+        $z0 = $r5.equals("loaded");
+
+        if $z0 == 0 goto label6;
+
+        $r53 = r1.name;
+
+        if $r53 != null goto label1;
+
+        $r87 = r0.title;
+
+        $r86 = new java.lang.StringBuilder;
+
+        specialinvoke $r86.<init>();
+
+        $r88 = $r86.append("<html><b>");
+
+        $r89 = r1.jar;
+
+        $r90 = $r88.append($r89);
+
+        $r91 = $r90.append("</b></html>");
+
+        $r92 = $r91.toString();
+
+        $r87.setText($r92);
+
+        goto label2;
+
+     label1:
+        $r55 = r0.title;
+
+        $r54 = new java.lang.StringBuilder;
+
+        specialinvoke $r54.<init>();
+
+        $r56 = $r54.append("<html><b>");
+
+        $r57 = r1.name;
+
+        $r58 = $r56.append($r57);
+
+        $r59 = $r58.append("</b></html>");
+
+        $r60 = $r59.toString();
+
+        $r55.setText($r60);
+
+     label2:
+        $r61 = new java.lang.StringBuilder;
+
+        specialinvoke $r61.<init>();
+
+        r93 = $r61;
+
+        $r62 = r1.version;
+
+        if $r62 == null goto label3;
+
+        $r79 = r93.append("<b>");
+
+        $r80 = org.gjt.sp.jedit.jEdit.getProperty("install-plugins.info.version", "Version");
+
+        $r81 = $r79.append($r80);
+
+        $r82 = $r81.append("</b>: ");
+
+        $r83 = r1.version;
+
+        $r84 = $r82.append($r83);
+
+        $r84.append("<br>");
+
+     label3:
+        $r63 = r1.author;
+
+        if $r63 == null goto label4;
+
+        $r72 = r93.append("<b>");
+
+        $r73 = org.gjt.sp.jedit.jEdit.getProperty("install-plugins.info.author", "Author");
+
+        $r74 = $r72.append($r73);
+
+        $r75 = $r74.append("</b>: ");
+
+        $r76 = r1.author;
+
+        $r77 = $r75.append($r76);
+
+        $r77.append("<br>");
+
+     label4:
+        $r64 = r1.description;
+
+        if $r64 == null goto label5;
+
+        $r69 = r93.append("<br>");
+
+        $r70 = r1.description;
+
+        $r69.append($r70);
+
+     label5:
+        $r65 = specialinvoke r0.getDepends(r1);
+
+        r93.append($r65);
+
+        $r67 = r0.pluginDetail;
+
+        $r68 = r93.toString();
+
+        $r67.setText($r68);
+
+        goto label7;
+
+     label6:
+        $r7 = r0.title;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r8 = $r6.append("<html><b>");
+
+        $r9 = r1.jar;
+
+        $r10 = $r8.append($r9);
+
+        $r11 = $r10.append("</b></html>");
+
+        $r12 = $r11.toString();
+
+        $r7.setText($r12);
+
+        $r13 = new org.gjt.sp.jedit.PluginJAR;
+
+        $r14 = new java.io.File;
+
+        $r15 = r1.jar;
+
+        specialinvoke $r14.<init>($r15);
+
+        specialinvoke $r13.<init>($r14);
+
+        r94 = $r13;
+
+        r94.init();
+
+        $r16 = r94.getPlugin();
+
+        r1.plugin = $r16;
+
+        $r17 = r94.getPlugin();
+
+        r2 = $r17.getClassName();
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<init>(256);
+
+        r3 = $r18;
+
+        $r19 = r3.append("<b>");
+
+        $r20 = org.gjt.sp.jedit.jEdit.getProperty("install-plugin.info.version", "Version");
+
+        $r21 = $r19.append($r20);
+
+        $r22 = $r21.append("</b>: ");
+
+        $r23 = new java.lang.StringBuilder;
+
+        specialinvoke $r23.<init>();
+
+        $r24 = $r23.append("plugin.");
+
+        $r25 = $r24.append(r2);
+
+        $r26 = $r25.append(".version");
+
+        $r27 = $r26.toString();
+
+        $r28 = org.gjt.sp.jedit.jEdit.getProperty($r27, "");
+
+        $r22.append($r28);
+
+        $r30 = r3.append("<br><b>");
+
+        $r31 = org.gjt.sp.jedit.jEdit.getProperty("install-plugin.info.author", "Author");
+
+        $r32 = $r30.append($r31);
+
+        $r33 = $r32.append("</b>: ");
+
+        $r34 = new java.lang.StringBuilder;
+
+        specialinvoke $r34.<init>();
+
+        $r35 = $r34.append("plugin.");
+
+        $r36 = $r35.append(r2);
+
+        $r37 = $r36.append(".author");
+
+        $r38 = $r37.toString();
+
+        $r39 = org.gjt.sp.jedit.jEdit.getProperty($r38, "");
+
+        $r33.append($r39);
+
+        $r41 = r3.append("<br>");
+
+        $r42 = new java.lang.StringBuilder;
+
+        specialinvoke $r42.<init>();
+
+        $r43 = $r42.append("plugin.");
+
+        $r44 = $r43.append(r2);
+
+        $r45 = $r44.append(".description");
+
+        $r46 = $r45.toString();
+
+        $r47 = org.gjt.sp.jedit.jEdit.getProperty($r46, "");
+
+        $r41.append($r47);
+
+        $r49 = specialinvoke r0.getDepends(r1);
+
+        r3.append($r49);
+
+        $r51 = r0.pluginDetail;
+
+        $r52 = r3.toString();
+
+        $r51.setText($r52);
+
+        r94.uninit(0);
+
+     label7:
+        r0.entry = r1;
+
+     label8:
+        return;
+    }
+
+    private java.lang.String getDepends(org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginDetailPanel r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r1;
+        java.lang.StringBuilder r2, $r7, $r9, $r11, $r15;
+        java.util.Set r3;
+        java.util.ArrayList r4, $r13;
+        java.util.Iterator r5;
+        java.lang.String r6, $r8, $r10;
+        boolean $z0, $z1;
+        java.lang.Object $r14;
+        int i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        r2 = $r7;
+
+        r3 = r1.getDependencies();
+
+(0)     if r3 == null goto label3;
+
+        $z0 = r3.isEmpty();
+
+(1)     if $z0 != 0 goto label3;
+
+        $r9 = r2.append("<br><br><b>");
+
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty("install-plugins.info.depends", "Depends on");
+
+        $r11 = $r9.append($r10);
+
+        $r11.append("</b>:");
+
+        $r13 = new java.util.ArrayList;
+
+        specialinvoke $r13.<init>(r3);
+
+        r4 = $r13;
+
+        java.util.Collections.sort(r4);
+
+        i0 = 0;
+
+(2)     r5 = r4.iterator();
+
+     label1:
+        i0 = Phi(i0 #2, i0 #4);
+
+        $z1 = r5.hasNext();
+
+(3)     if $z1 == 0 goto label3;
+
+        $r14 = r5.next();
+
+        r6 = (java.lang.String) $r14;
+
+        if i0 <= 0 goto label2;
+
+        r2.append(",");
+
+     label2:
+        $r15 = r2.append(" ");
+
+        $r15.append(r6);
+
+        i0 = i0 + 1;
+
+(4)     goto label1;
+
+     label3:
+        i0 = Phi(i0 #0, i0 #1, i0 #3);
+
+        $r8 = r2.toString();
+
+        return $r8;
+    }
+}

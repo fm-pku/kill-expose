@@ -1,0 +1,238 @@
+class org.gjt.sp.jedit.bsh.BSHSwitchStatement extends org.gjt.sp.jedit.bsh.SimpleNode implements org.gjt.sp.jedit.bsh.ParserConstants
+{
+
+    public void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHSwitchStatement r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHSwitchStatement r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        int i0, $i1, $i2, $i3, i5, i6;
+        org.gjt.sp.jedit.bsh.SimpleNode r3, $r9;
+        java.lang.Object r4, r5, $r10;
+        org.gjt.sp.jedit.bsh.Node $r6, $r7, r14, r15;
+        org.gjt.sp.jedit.bsh.Primitive $r8;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        org.gjt.sp.jedit.bsh.EvalError $r11;
+        byte b4;
+        org.gjt.sp.jedit.bsh.ReturnControl r12;
+        org.gjt.sp.jedit.bsh.BSHSwitchLabel r13;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 = r0.jjtGetNumChildren();
+
+        b4 = 0;
+
+        i5 = b4 + 1;
+
+        $r6 = r0.jjtGetChild(b4);
+
+        r3 = (org.gjt.sp.jedit.bsh.SimpleNode) $r6;
+
+        r4 = r3.eval(r1, r2);
+
+        r12 = null;
+
+        if i5 < i0 goto label1;
+
+        $r11 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        specialinvoke $r11.<init>("Empty switch statement.", r0, r1);
+
+        throw $r11;
+
+     label1:
+        i6 = i5 + 1;
+
+        $r7 = r0.jjtGetChild(i5);
+
+(0)     r13 = (org.gjt.sp.jedit.bsh.BSHSwitchLabel) $r7;
+
+     label2:
+        i6 = Phi(i6 #0, i6 #3, i6 #5, i6 #7, i6 #9);
+
+        r13 = Phi(r13 #0, r13 #3, r13 #5, r13 #7, r13 #9);
+
+        r12 = Phi(r12 #0, r12 #3, r12 #5, r12 #7, r12 #9);
+
+        if i6 >= i0 goto label7;
+
+        if r12 != null goto label7;
+
+        $z0 = r13.isDefault;
+
+(1)     if $z0 != 0 goto label3;
+
+        $r10 = r13.eval(r1, r2);
+
+        $z3 = specialinvoke r0.primitiveEquals(r4, $r10, r1, r3);
+
+(2)     if $z3 == 0 goto label6;
+
+     label3:
+        i6 = Phi(i6 #1, i6 #2, i6 #4, i6 #6);
+
+        r13 = Phi(r13 #1, r13 #2, r13 #4, r13 #6);
+
+        r12 = Phi(r12 #1, r12 #2, r12 #4, r12 #6);
+
+(3)     if i6 >= i0 goto label2;
+
+        $i2 = i6;
+
+        i6 = i6 + 1;
+
+        r14 = r0.jjtGetChild($i2);
+
+        $z1 = r14 instanceof org.gjt.sp.jedit.bsh.BSHSwitchLabel;
+
+        if $z1 == 0 goto label4;
+
+(4)     goto label3;
+
+     label4:
+        $r9 = (org.gjt.sp.jedit.bsh.SimpleNode) r14;
+
+        r5 = $r9.eval(r1, r2);
+
+        $z2 = r5 instanceof org.gjt.sp.jedit.bsh.ReturnControl;
+
+        if $z2 == 0 goto label5;
+
+        r12 = (org.gjt.sp.jedit.bsh.ReturnControl) r5;
+
+(5)     goto label2;
+
+     label5:
+(6)     goto label3;
+
+     label6:
+        i6 = Phi(i6 #2, i6 #8);
+
+        r13 = Phi(r13 #2, r13 #8);
+
+        r12 = Phi(r12 #2, r12 #8);
+
+(7)     if i6 >= i0 goto label2;
+
+        $i3 = i6;
+
+        i6 = i6 + 1;
+
+        r15 = r0.jjtGetChild($i3);
+
+        $z4 = r15 instanceof org.gjt.sp.jedit.bsh.BSHSwitchLabel;
+
+(8)     if $z4 == 0 goto label6;
+
+        r13 = (org.gjt.sp.jedit.bsh.BSHSwitchLabel) r15;
+
+(9)     goto label2;
+
+     label7:
+        if r12 == null goto label8;
+
+        $i1 = r12.kind;
+
+        if $i1 != 46 goto label8;
+
+        return r12;
+
+     label8:
+        $r8 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        return $r8;
+    }
+
+    private boolean primitiveEquals(java.lang.Object, java.lang.Object, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.SimpleNode) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHSwitchStatement r0;
+        java.lang.Object r1, r2, r14, r15;
+        org.gjt.sp.jedit.bsh.CallStack r3;
+        org.gjt.sp.jedit.bsh.SimpleNode r4;
+        boolean $z0, $z1, $z2, $z3;
+        java.lang.Boolean $r5;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r6, r16;
+        java.lang.StringBuilder $r7, $r8, $r10, $r11;
+        java.lang.String $r9, $r12;
+        org.gjt.sp.jedit.bsh.EvalError $r13;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.bsh.Primitive;
+
+        if $z0 != 0 goto label1;
+
+        $z2 = r2 instanceof org.gjt.sp.jedit.bsh.Primitive;
+
+        if $z2 == 0 goto label4;
+
+     label1:
+        r14 = org.gjt.sp.jedit.bsh.Primitive.binaryOperation(r1, r2, 90);
+
+        r15 = org.gjt.sp.jedit.bsh.Primitive.unwrap(r14);
+
+        $r5 = java.lang.Boolean.TRUE;
+
+        $z1 = r15.equals($r5);
+
+     label2:
+        return $z1;
+
+     label3:
+        $r6 := @caughtexception;
+
+        r16 = $r6;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("Switch value: ");
+
+        $r9 = r4.getText();
+
+        $r10 = $r8.append($r9);
+
+        $r11 = $r10.append(": ");
+
+        $r12 = $r11.toString();
+
+        $r13 = r16.toEvalError($r12, r0, r3);
+
+        throw $r13;
+
+     label4:
+        $z3 = r1.equals(r2);
+
+        return $z3;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label2 with label3;
+    }
+}

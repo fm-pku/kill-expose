@@ -1,0 +1,145 @@
+class org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler extends javax.swing.event.MouseInputAdapter
+{
+    boolean selectAll;
+    final org.gjt.sp.jedit.gui.HistoryTextField this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.HistoryTextField)
+    {
+        org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler r0;
+        org.gjt.sp.jedit.gui.HistoryTextField r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mousePressed(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        org.gjt.sp.jedit.gui.HistoryTextField $r2, $r3;
+        boolean $z0, $z1, $z2, $z2_1, $z2_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $z0 = $r2.hasFocus();
+
+        if $z0 != 0 goto label1;
+
+        $r3 = r0.this$0;
+
+        $z1 = org.gjt.sp.jedit.gui.HistoryTextField.access$000($r3);
+
+        if $z1 == 0 goto label1;
+
+        $z2 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z2_1 = 0;
+
+     label2:
+        $z2_2 = Phi($z2 #0, $z2_1 #1);
+
+        r0.selectAll = $z2_2;
+
+        return;
+    }
+
+    public void mouseReleased(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler$1 $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler$1;
+
+        specialinvoke $r2.<init>(r0);
+
+        javax.swing.SwingUtilities.invokeLater($r2);
+
+        return;
+    }
+
+    public void mouseMoved(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        javax.swing.border.Border r2;
+        java.awt.Insets r3;
+        org.gjt.sp.jedit.gui.HistoryTextField $r4, $r5, $r6, $r7, $r9;
+        int $i0, $i1, $i2, $i3;
+        java.awt.Cursor $r8, $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.this$0;
+
+        r2 = $r4.getBorder();
+
+        $r5 = r0.this$0;
+
+        r3 = r2.getBorderInsets($r5);
+
+        $i0 = r1.getX();
+
+        $r6 = r0.this$0;
+
+        $i1 = $r6.getWidth();
+
+        $i2 = r3.right;
+
+        $i3 = $i1 - $i2;
+
+        if $i0 < $i3 goto label1;
+
+        $r9 = r0.this$0;
+
+        $r10 = java.awt.Cursor.getDefaultCursor();
+
+        $r9.setCursor($r10);
+
+        goto label2;
+
+     label1:
+        $r7 = r0.this$0;
+
+        $r8 = java.awt.Cursor.getPredefinedCursor(2);
+
+        $r7.setCursor($r8);
+
+     label2:
+        return;
+    }
+
+    public void mouseDragged(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler r0;
+        java.awt.event.MouseEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.selectAll = 0;
+
+        return;
+    }
+}

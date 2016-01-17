@@ -1,0 +1,57 @@
+class org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry extends java.lang.Object
+{
+    org.gjt.sp.jedit.io.VFSFile dirEntry;
+    boolean expanded;
+    int level;
+    org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry parent;
+    java.lang.String extension;
+
+    void <init>(org.gjt.sp.jedit.io.VFSFile, int, org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry r0, r2;
+        org.gjt.sp.jedit.io.VFSFile r1;
+        int i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        r2 := @parameter2;
+
+        specialinvoke r0.<init>(r1, i0);
+
+        r0.parent = r2;
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.io.VFSFile, int)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry r0;
+        org.gjt.sp.jedit.io.VFSFile r1;
+        int i0;
+        java.lang.String $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.dirEntry = r1;
+
+        r0.level = i0;
+
+        $r2 = r1.getName();
+
+        $r3 = org.gjt.sp.jedit.MiscUtilities.getFileExtension($r2);
+
+        r0.extension = $r3;
+
+        return;
+    }
+}

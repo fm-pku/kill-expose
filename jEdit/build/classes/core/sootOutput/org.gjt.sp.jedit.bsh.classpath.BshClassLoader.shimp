@@ -1,0 +1,263 @@
+public class org.gjt.sp.jedit.bsh.classpath.BshClassLoader extends java.net.URLClassLoader
+{
+    org.gjt.sp.jedit.bsh.BshClassManager classManager;
+
+    public void <init>(org.gjt.sp.jedit.bsh.BshClassManager, java.net.URL[])
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader r0;
+        org.gjt.sp.jedit.bsh.BshClassManager r1;
+        java.net.URL[] r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r2);
+
+        Packer.Unpack(r0);
+
+        r0.classManager = r1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void <init>(org.gjt.sp.jedit.bsh.BshClassManager, org.gjt.sp.jedit.bsh.classpath.BshClassPath)
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader r0;
+        org.gjt.sp.jedit.bsh.BshClassManager r1;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath r2;
+        java.net.URL[] $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r2.getPathComponents();
+
+        specialinvoke r0.<init>(r1, $r3);
+
+        return;
+    }
+
+    protected void <init>(org.gjt.sp.jedit.bsh.BshClassManager)
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader r0;
+        org.gjt.sp.jedit.bsh.BshClassManager r1;
+        java.net.URL[] $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = newarray (java.net.URL)[0];
+
+        specialinvoke r0.<init>(r1, $r2);
+
+        return;
+    }
+
+    public void addURL(java.net.URL)
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader r0;
+        java.net.URL r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.addURL(r1);
+
+        return;
+    }
+
+    public java.lang.Class loadClass(java.lang.String, boolean) throws java.lang.ClassNotFoundException
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader r0;
+        java.lang.String r1;
+        boolean z0, $z1;
+        java.lang.ClassNotFoundException $r2, $r6, $r7;
+        java.lang.Class $r3, $r5, r8, r8_1, r8_2, r8_3;
+        java.lang.ClassLoader $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        r8 = r0.findLoadedClass(r1);
+
+        if r8 == null goto label01;
+
+        return r8;
+
+     label01:
+        $z1 = r1.startsWith("org.gjt.sp.jedit.bsh");
+
+(0)     if $z1 == 0 goto label05;
+
+     label02:
+        $r3 = class "org/gjt/sp/jedit/bsh/Interpreter";
+
+        $r4 = $r3.getClassLoader();
+
+        $r5 = $r4.loadClass(r1);
+
+     label03:
+        return $r5;
+
+     label04:
+        $r7 := @caughtexception;
+
+     label05:
+(1)     r8_1 = r0.findClass(r1);
+
+     label06:
+(2)     goto label08;
+
+     label07:
+        $r6 := @caughtexception;
+
+(3)     r8_2 = Phi(r8 #0, r8_1 #1);
+
+     label08:
+        r8_3 = Phi(r8_1 #2, r8_2 #3);
+
+        if r8_3 != null goto label09;
+
+        $r2 = new java.lang.ClassNotFoundException;
+
+        specialinvoke $r2.<init>("here in loaClass");
+
+        throw $r2;
+
+     label09:
+        if z0 == 0 goto label10;
+
+        r0.resolveClass(r8_3);
+
+     label10:
+        return r8_3;
+
+        catch java.lang.ClassNotFoundException from label02 to label03 with label04;
+        catch java.lang.ClassNotFoundException from label05 to label06 with label07;
+    }
+
+    protected java.lang.Class findClass(java.lang.String) throws java.lang.ClassNotFoundException
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader r0;
+        java.lang.String r1, $r14;
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r2;
+        org.gjt.sp.jedit.bsh.BshClassManager $r3;
+        java.net.URL[] $r4;
+        int $i0;
+        java.lang.Class $r5, $r6, $r7, $r8;
+        java.lang.ClassNotFoundException $r9, $r10, $r15, $r16, r18, r19, r21;
+        java.lang.StringBuilder $r11, $r12, $r13;
+        java.lang.ClassLoader r17, r20;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.getClassManager();
+
+        r2 = (org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl) $r3;
+
+        r17 = r2.getLoaderForClass(r1);
+
+        if r17 == null goto label04;
+
+        if r17 == r0 goto label04;
+
+     label01:
+        $r8 = r17.loadClass(r1);
+
+     label02:
+        return $r8;
+
+     label03:
+        $r9 := @caughtexception;
+
+        r18 = $r9;
+
+        $r10 = new java.lang.ClassNotFoundException;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = $r11.append("Designated loader could not find class: ");
+
+        $r13 = $r12.append(r18);
+
+        $r14 = $r13.toString();
+
+        specialinvoke $r10.<init>($r14);
+
+        throw $r10;
+
+     label04:
+        $r4 = r0.getURLs();
+
+        $i0 = lengthof $r4;
+
+        if $i0 <= 0 goto label08;
+
+     label05:
+        $r7 = specialinvoke r0.findClass(r1);
+
+     label06:
+        return $r7;
+
+     label07:
+        $r16 := @caughtexception;
+
+        r19 = $r16;
+
+     label08:
+        r20 = r2.getBaseLoader();
+
+        if r20 == null goto label12;
+
+        if r20 == r0 goto label12;
+
+     label09:
+        $r6 = r20.loadClass(r1);
+
+     label10:
+        return $r6;
+
+     label11:
+        $r15 := @caughtexception;
+
+        r21 = $r15;
+
+     label12:
+        $r5 = r2.plainClassForName(r1);
+
+        return $r5;
+
+        catch java.lang.ClassNotFoundException from label01 to label02 with label03;
+        catch java.lang.ClassNotFoundException from label05 to label06 with label07;
+        catch java.lang.ClassNotFoundException from label09 to label10 with label11;
+    }
+
+    org.gjt.sp.jedit.bsh.BshClassManager getClassManager()
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader r0;
+        org.gjt.sp.jedit.bsh.BshClassManager $r1;
+
+        r0 := @this;
+
+        $r1 = r0.classManager;
+
+        return $r1;
+    }
+}

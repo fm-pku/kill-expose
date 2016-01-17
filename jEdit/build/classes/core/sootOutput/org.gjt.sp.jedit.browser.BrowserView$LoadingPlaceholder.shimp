@@ -1,0 +1,28 @@
+class org.gjt.sp.jedit.browser.BrowserView$LoadingPlaceholder extends java.lang.Object
+{
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.browser.BrowserView$LoadingPlaceholder r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.browser.BrowserView$1)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$LoadingPlaceholder r0;
+        org.gjt.sp.jedit.browser.BrowserView$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

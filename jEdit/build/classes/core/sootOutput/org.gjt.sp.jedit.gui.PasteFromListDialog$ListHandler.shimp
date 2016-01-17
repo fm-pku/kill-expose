@@ -1,0 +1,41 @@
+class org.gjt.sp.jedit.gui.PasteFromListDialog$ListHandler extends java.lang.Object implements javax.swing.event.ListSelectionListener
+{
+    final org.gjt.sp.jedit.gui.PasteFromListDialog this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.PasteFromListDialog)
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog$ListHandler r0;
+        org.gjt.sp.jedit.gui.PasteFromListDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void valueChanged(javax.swing.event.ListSelectionEvent)
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog$ListHandler r0;
+        javax.swing.event.ListSelectionEvent r1;
+        org.gjt.sp.jedit.gui.PasteFromListDialog $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.PasteFromListDialog.access$200($r2);
+
+        $r3 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.PasteFromListDialog.access$300($r3);
+
+        return;
+    }
+}

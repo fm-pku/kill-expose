@@ -1,0 +1,90 @@
+class org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler$1$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler$1 this$2;
+
+    void <init>(org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler$1)
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler$1$1 r0;
+        org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$2 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler$1$1 r0;
+        org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler$1 $r1, $r3, $r7, $r9, $r15;
+        java.util.Vector $r2, $r8;
+        boolean $z0;
+        org.gjt.sp.jedit.help.HelpSearchPanel$ActionHandler $r4, $r10, $r16;
+        org.gjt.sp.jedit.help.HelpSearchPanel $r5, $r11, $r17;
+        javax.swing.JList $r6, $r12;
+        java.lang.String[] $r13;
+        java.lang.String $r14;
+        java.awt.Toolkit $r18;
+
+        r0 := @this;
+
+        $r1 = r0.this$2;
+
+        $r2 = $r1.val$resultModel;
+
+        $z0 = $r2.isEmpty();
+
+        if $z0 == 0 goto label1;
+
+        $r9 = r0.this$2;
+
+        $r10 = $r9.this$1;
+
+        $r11 = $r10.this$0;
+
+        $r12 = org.gjt.sp.jedit.help.HelpSearchPanel.access$100($r11);
+
+        $r13 = newarray (java.lang.String)[1];
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.no-results");
+
+        $r13[0] = $r14;
+
+        $r12.setListData($r13);
+
+        $r15 = r0.this$2;
+
+        $r16 = $r15.this$1;
+
+        $r17 = $r16.this$0;
+
+        $r18 = $r17.getToolkit();
+
+        $r18.beep();
+
+        goto label2;
+
+     label1:
+        $r3 = r0.this$2;
+
+        $r4 = $r3.this$1;
+
+        $r5 = $r4.this$0;
+
+        $r6 = org.gjt.sp.jedit.help.HelpSearchPanel.access$100($r5);
+
+        $r7 = r0.this$2;
+
+        $r8 = $r7.val$resultModel;
+
+        $r6.setListData($r8);
+
+     label2:
+        return;
+    }
+}

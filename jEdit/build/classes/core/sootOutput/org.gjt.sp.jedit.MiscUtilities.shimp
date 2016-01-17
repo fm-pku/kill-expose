@@ -1,0 +1,3081 @@
+public class org.gjt.sp.jedit.MiscUtilities extends java.lang.Object
+{
+    static final java.lang.String varPatternString;
+    static final java.lang.String varPatternString2;
+    static final java.lang.String winPatternString;
+    static final java.util.regex.Pattern varPattern;
+    static final java.util.regex.Pattern varPattern2;
+    static final java.util.regex.Pattern winPattern;
+    static org.gjt.sp.jedit.MiscUtilities$VarCompressor svc;
+
+    public static java.lang.String canonPath(java.lang.String)
+    {
+        int $i0, $i2, $i4, $i6, $i8, $i9, i10;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6;
+        char $c1, $c3, $c5, $c7;
+        java.lang.StringBuilder $r0, $r1, $r3, $r13, $r14, $r16, $r17, $r19, $r20, $r21;
+        java.lang.String $r2, $r4, $r5, $r6, $r9, $r10, $r11, $r12, $r15, $r18, $r22, $r23, $r24, r25, r26, r27, r28, r25_1, r25_2, r25_3;
+        org.gjt.sp.jedit.View $r7;
+        org.gjt.sp.jedit.Buffer $r8;
+
+        r25 := @parameter0;
+
+        $i0 = r25.length();
+
+        if $i0 != 0 goto label01;
+
+        return r25;
+
+     label01:
+        $z0 = r25.startsWith("file://");
+
+        if $z0 == 0 goto label02;
+
+        $r24 = "file://";
+
+        $i9 = $r24.length();
+
+        r25_1 = r25.substring($i9);
+
+(0)     goto label04;
+
+     label02:
+        $z1 = r25.startsWith("file:");
+
+        if $z1 == 0 goto label03;
+
+        $r23 = "file:";
+
+        $i8 = $r23.length();
+
+        r25_2 = r25.substring($i8);
+
+(1)     goto label04;
+
+     label03:
+        $z2 = org.gjt.sp.jedit.MiscUtilities.isURL(r25);
+
+(2)     if $z2 == 0 goto label04;
+
+        return r25;
+
+     label04:
+        r25_3 = Phi(r25_1 #0, r25_2 #1, r25 #2);
+
+        $c1 = java.io.File.separatorChar;
+
+(3)     if $c1 != 92 goto label09;
+
+        r26 = r25_3.replace(47, 92);
+
+(4)     i10 = r26.length();
+
+     label05:
+        i10 = Phi(i10 #4, i10 #5);
+
+        r25 = Phi(r25_3 #4, r25 #5);
+
+        $i2 = i10 - 1;
+
+        $c3 = r26.charAt($i2);
+
+        if $c3 != 32 goto label06;
+
+        i10 = i10 + -1;
+
+(5)     goto label05;
+
+     label06:
+        $i4 = i10 - 1;
+
+        $c5 = r26.charAt($i4);
+
+(6)     if $c5 != 92 goto label08;
+
+     label07:
+        i10 = Phi(i10 #6, i10 #9);
+
+        r25 = Phi(r25 #6, r25 #9);
+
+(7)     if i10 <= 1 goto label08;
+
+        $i6 = i10 - 2;
+
+        $c7 = r26.charAt($i6);
+
+(8)     if $c7 != 92 goto label08;
+
+        i10 = i10 + -1;
+
+(9)     goto label07;
+
+     label08:
+        i10 = Phi(i10 #6, i10 #7, i10 #8);
+
+        r25 = Phi(r25 #6, r25 #7, r25 #8);
+
+(10)    r25 = r26.substring(0, i10);
+
+     label09:
+        i10 = Phi(i10 #3, i10 #10);
+
+        r25 = Phi(r25_3 #3, r25 #10);
+
+        $r0 = new java.lang.StringBuilder;
+
+        specialinvoke $r0.<init>();
+
+        $r1 = $r0.append(126);
+
+        $r2 = java.io.File.separator;
+
+        $r3 = $r1.append($r2);
+
+        $r4 = $r3.toString();
+
+        $z3 = r25.startsWith($r4);
+
+        if $z3 == 0 goto label11;
+
+        r27 = r25.substring(2);
+
+        r28 = java.lang.System.getProperty("user.home");
+
+        $r12 = java.io.File.separator;
+
+        $z6 = r28.endsWith($r12);
+
+        if $z6 == 0 goto label10;
+
+        $r19 = new java.lang.StringBuilder;
+
+        specialinvoke $r19.<init>();
+
+        $r20 = $r19.append(r28);
+
+        $r21 = $r20.append(r27);
+
+        $r22 = $r21.toString();
+
+        return $r22;
+
+     label10:
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r14 = $r13.append(r28);
+
+        $r15 = java.io.File.separator;
+
+        $r16 = $r14.append($r15);
+
+        $r17 = $r16.append(r27);
+
+        $r18 = $r17.toString();
+
+        return $r18;
+
+     label11:
+        $r5 = "~";
+
+        $z4 = $r5.equals(r25);
+
+        if $z4 == 0 goto label12;
+
+        $r11 = java.lang.System.getProperty("user.home");
+
+        return $r11;
+
+     label12:
+        $r6 = "-";
+
+        $z5 = $r6.equals(r25);
+
+        if $z5 == 0 goto label13;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        $r8 = $r7.getBuffer();
+
+        $r9 = $r8.getPath();
+
+        $r10 = org.gjt.sp.jedit.MiscUtilities.getParentOfPath($r9);
+
+        return $r10;
+
+     label13:
+        return r25;
+    }
+
+    private static java.lang.String win2unix(java.lang.String)
+    {
+        java.lang.String r0, r1, r3, r4, $r6;
+        java.util.regex.Matcher r2;
+        java.util.regex.Pattern $r5;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        r1 = r0.replace(92, 47);
+
+        $r5 = org.gjt.sp.jedit.MiscUtilities.winPattern;
+
+        r2 = $r5.matcher(r1);
+
+        $z0 = r2.find();
+
+        if $z0 == 0 goto label1;
+
+        r3 = r2.group(2);
+
+        r4 = java.lang.System.getenv(r3);
+
+        if r4 == null goto label1;
+
+        $r6 = r2.replaceFirst(r4);
+
+        return $r6;
+
+     label1:
+        return r1;
+    }
+
+    public static java.lang.String expandVariables(java.lang.String)
+    {
+        java.lang.String r0, r1, $r3, $r5, $r7, $r9, $r10, r14, r15, r16, r17, r15_1, r15_2;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6;
+        java.lang.StringBuilder $r2, $r4, $r6;
+        java.util.regex.Pattern $r8, r12, r12_1, r12_2, r12_3, r12_4;
+        java.util.regex.Matcher r11, r13, r13_1, r13_2, r13_3, r13_4;
+
+        r0 := @parameter0;
+
+        $z0 = r0.startsWith("~/");
+
+        if $z0 != 0 goto label1;
+
+        $z1 = r0.startsWith("~\\");
+
+        if $z1 == 0 goto label2;
+
+     label1:
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = java.lang.System.getProperty("user.home");
+
+        $r4 = $r2.append($r3);
+
+        $r5 = r0.substring(1);
+
+        $r6 = $r4.append($r5);
+
+        $r7 = $r6.toString();
+
+        return $r7;
+
+     label2:
+        $r8 = org.gjt.sp.jedit.MiscUtilities.winPattern;
+
+        r11 = $r8.matcher(r0);
+
+        $z2 = org.gjt.sp.jedit.OperatingSystem.isWindows();
+
+        if $z2 != 0 goto label3;
+
+        $z6 = r11.find();
+
+        if $z6 == 0 goto label3;
+
+        $r10 = org.gjt.sp.jedit.MiscUtilities.win2unix(r0);
+
+        return $r10;
+
+     label3:
+        r12 = org.gjt.sp.jedit.MiscUtilities.varPattern;
+
+        r13 = r12.matcher(r0);
+
+        $z3 = r13.find();
+
+(0)     if $z3 != 0 goto label6;
+
+        $z4 = org.gjt.sp.jedit.OperatingSystem.isWindows();
+
+        if $z4 == 0 goto label4;
+
+        r12_1 = org.gjt.sp.jedit.MiscUtilities.winPattern;
+
+(1)     goto label5;
+
+     label4:
+(2)     r12_2 = org.gjt.sp.jedit.MiscUtilities.varPattern2;
+
+     label5:
+        r12_3 = Phi(r12_1 #1, r12_2 #2);
+
+        r13_1 = r12_3.matcher(r0);
+
+        $z5 = r13_1.find();
+
+(3)     if $z5 != 0 goto label6;
+
+        return r0;
+
+     label6:
+        r12_4 = Phi(r12 #0, r12_3 #3);
+
+        r13_2 = Phi(r13 #0, r13_1 #3);
+
+        r14 = r13_2.group(2);
+
+        r15 = java.lang.System.getenv(r14);
+
+(4)     if r15 != null goto label7;
+
+        r16 = r14.toUpperCase();
+
+        r1 = r0.toUpperCase();
+
+        r13_3 = r12_4.matcher(r1);
+
+(5)     r15_1 = java.lang.System.getenv(r16);
+
+     label7:
+        r13_4 = Phi(r13_2 #4, r13_3 #5);
+
+        r15_2 = Phi(r15 #4, r15_1 #5);
+
+        if r15_2 == null goto label8;
+
+        r17 = r15_2.replace("\\", "\\\\");
+
+        $r9 = r13_4.replaceFirst(r17);
+
+        return $r9;
+
+     label8:
+        return r0;
+    }
+
+    public static java.lang.String abbreviate(java.lang.String)
+    {
+        java.lang.String r0, $r3;
+        org.gjt.sp.jedit.MiscUtilities$VarCompressor $r1, $r2, $r4;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.MiscUtilities.svc;
+
+        if $r1 != null goto label1;
+
+        $r4 = new org.gjt.sp.jedit.MiscUtilities$VarCompressor;
+
+        specialinvoke $r4.<init>();
+
+        org.gjt.sp.jedit.MiscUtilities.svc = $r4;
+
+     label1:
+        $r2 = org.gjt.sp.jedit.MiscUtilities.svc;
+
+        $r3 = $r2.compress(r0);
+
+        return $r3;
+    }
+
+    public static java.lang.String abbreviateView(java.lang.String)
+    {
+        java.lang.String r0, $r1;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.abbreviatePaths");
+
+        if $z0 != 0 goto label1;
+
+        return r0;
+
+     label1:
+        $r1 = org.gjt.sp.jedit.MiscUtilities.abbreviate(r0);
+
+        return $r1;
+    }
+
+    public static java.lang.String resolveSymlinks(java.lang.String)
+    {
+        java.lang.String r0, $r3;
+        java.io.IOException r1, $r4;
+        boolean $z0, $z1, $z2;
+        java.io.File $r2;
+        int $i0, $i2;
+        char $c1;
+
+        r0 := @parameter0;
+
+        $z0 = org.gjt.sp.jedit.MiscUtilities.isURL(r0);
+
+        if $z0 == 0 goto label1;
+
+        return r0;
+
+     label1:
+        $z1 = org.gjt.sp.jedit.OperatingSystem.isOS2();
+
+        if $z1 == 0 goto label2;
+
+        return r0;
+
+     label2:
+        $z2 = org.gjt.sp.jedit.OperatingSystem.isWindows();
+
+        if $z2 == 0 goto label4;
+
+        $i0 = r0.length();
+
+        if $i0 == 2 goto label3;
+
+        $i2 = r0.length();
+
+        if $i2 != 3 goto label4;
+
+     label3:
+        $c1 = r0.charAt(1);
+
+        if $c1 != 58 goto label4;
+
+        return r0;
+
+     label4:
+        $r2 = new java.io.File;
+
+        specialinvoke $r2.<init>(r0);
+
+        $r3 = $r2.getCanonicalPath();
+
+     label5:
+        return $r3;
+
+     label6:
+        $r4 := @caughtexception;
+
+        r1 = $r4;
+
+        return r0;
+
+        catch java.io.IOException from label4 to label5 with label6;
+    }
+
+    public static boolean isAbsolutePath(java.lang.String)
+    {
+        java.lang.String r0, $r3, $r5, $r6, $r7;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9;
+        java.lang.StringBuilder $r1, $r2, $r4;
+        int $i0, $i2, $i3;
+        char $c1, $c4, $c5, $c6, $c7;
+
+        r0 := @parameter0;
+
+        $z0 = org.gjt.sp.jedit.MiscUtilities.isURL(r0);
+
+        if $z0 == 0 goto label01;
+
+        return 1;
+
+     label01:
+        $z1 = r0.startsWith("~/");
+
+        if $z1 != 0 goto label02;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append(126);
+
+        $r3 = java.io.File.separator;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.toString();
+
+        $z2 = r0.startsWith($r5);
+
+        if $z2 != 0 goto label02;
+
+        $r6 = "~";
+
+        $z3 = $r6.equals(r0);
+
+        if $z3 == 0 goto label03;
+
+     label02:
+        return 1;
+
+     label03:
+        $r7 = "-";
+
+        $z4 = $r7.equals(r0);
+
+        if $z4 == 0 goto label04;
+
+        return 1;
+
+     label04:
+        $z5 = org.gjt.sp.jedit.OperatingSystem.isWindows();
+
+        if $z5 == 0 goto label09;
+
+        $i2 = r0.length();
+
+        if $i2 != 2 goto label05;
+
+        $c7 = r0.charAt(1);
+
+        if $c7 != 58 goto label05;
+
+        return 1;
+
+     label05:
+        $i3 = r0.length();
+
+        if $i3 <= 2 goto label07;
+
+        $c4 = r0.charAt(1);
+
+        if $c4 != 58 goto label07;
+
+        $c5 = r0.charAt(2);
+
+        if $c5 == 92 goto label06;
+
+        $c6 = r0.charAt(2);
+
+        if $c6 != 47 goto label07;
+
+     label06:
+        return 1;
+
+     label07:
+        $z8 = r0.startsWith("\\\\");
+
+        if $z8 != 0 goto label08;
+
+        $z9 = r0.startsWith("//");
+
+        if $z9 == 0 goto label11;
+
+     label08:
+        return 1;
+
+     label09:
+        $z6 = org.gjt.sp.jedit.OperatingSystem.isUnix();
+
+        if $z6 != 0 goto label10;
+
+        $z7 = org.gjt.sp.jedit.OperatingSystem.isVMS();
+
+        if $z7 == 0 goto label11;
+
+     label10:
+        $i0 = r0.length();
+
+        if $i0 <= 0 goto label11;
+
+        $c1 = r0.charAt(0);
+
+        if $c1 != 47 goto label11;
+
+        return 1;
+
+     label11:
+        return 0;
+    }
+
+    public static java.lang.String constructPath(java.lang.String, java.lang.String)
+    {
+        java.lang.String r0, r1, $r5, $r9, $r11, $r12, $r13, $r14, $r15, $r17, $r20, $r22, $r23, r24, r25, r26, r24_1, r24_2;
+        org.gjt.sp.jedit.io.VFS r2;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9;
+        int $i0, $i1, $i3, $i4;
+        java.lang.StringBuilder $r3, $r4, $r6, $r7, $r8, $r10, $r16, $r18, $r19, $r21;
+        char $c2, $c5, $c6, $c7;
+
+        r24 := @parameter0;
+
+        r25 := @parameter1;
+
+        $z0 = org.gjt.sp.jedit.MiscUtilities.isAbsolutePath(r25);
+
+        if $z0 == 0 goto label01;
+
+        $r23 = org.gjt.sp.jedit.MiscUtilities.canonPath(r25);
+
+        return $r23;
+
+     label01:
+(0)     if r24 != null goto label02;
+
+(1)     r24_1 = java.lang.System.getProperty("user.dir");
+
+     label02:
+        r24_2 = Phi(r24 #0, r24_1 #1);
+
+        if r25 == null goto label03;
+
+        $i0 = r25.length();
+
+        if $i0 != 0 goto label04;
+
+     label03:
+        return r24_2;
+
+     label04:
+        $z1 = org.gjt.sp.jedit.OperatingSystem.isWindows();
+
+        if $z1 == 0 goto label06;
+
+        $i3 = r25.length();
+
+        if $i3 != 2 goto label05;
+
+        $c7 = r25.charAt(1);
+
+        if $c7 != 58 goto label05;
+
+        return r25;
+
+     label05:
+        $i4 = r25.length();
+
+        if $i4 <= 2 goto label06;
+
+        $c5 = r25.charAt(1);
+
+        if $c5 != 58 goto label06;
+
+        $c6 = r25.charAt(2);
+
+        if $c6 == 92 goto label06;
+
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<init>();
+
+        $r17 = r25.substring(0, 2);
+
+        $r18 = $r16.append($r17);
+
+        $r19 = $r18.append(92);
+
+        $r20 = r25.substring(2);
+
+        $r21 = $r19.append($r20);
+
+        r26 = $r21.toString();
+
+        $r22 = org.gjt.sp.jedit.MiscUtilities.canonPath(r26);
+
+        return $r22;
+
+     label06:
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("..");
+
+        $r5 = java.io.File.separator;
+
+        $r6 = $r4.append($r5);
+
+        r0 = $r6.toString();
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append(46);
+
+        $r9 = java.io.File.separator;
+
+        $r10 = $r8.append($r9);
+
+(2)     r1 = $r10.toString();
+
+     label07:
+        r25 = Phi(r25 #2, r25 #3, r25 #4);
+
+        r24 = Phi(r24_2 #2, r24 #3, r24 #4);
+
+        $r11 = ".";
+
+        $z2 = $r11.equals(r25);
+
+        if $z2 == 0 goto label08;
+
+        return r24;
+
+     label08:
+        $r12 = "..";
+
+        $z3 = $r12.equals(r25);
+
+        if $z3 == 0 goto label09;
+
+        $r15 = org.gjt.sp.jedit.MiscUtilities.getParentOfPath(r24);
+
+        return $r15;
+
+     label09:
+        $z4 = r25.startsWith(r0);
+
+        if $z4 != 0 goto label10;
+
+        $z5 = r25.startsWith("../");
+
+        if $z5 == 0 goto label11;
+
+     label10:
+        r24 = org.gjt.sp.jedit.MiscUtilities.getParentOfPath(r24);
+
+        r25 = r25.substring(3);
+
+(3)     goto label07;
+
+     label11:
+        $z6 = r25.startsWith(r1);
+
+        if $z6 != 0 goto label12;
+
+        $z7 = r25.startsWith("./");
+
+        if $z7 == 0 goto label13;
+
+     label12:
+        r25 = r25.substring(2);
+
+(4)     goto label07;
+
+     label13:
+        $i1 = r25.length();
+
+        if $i1 != 0 goto label14;
+
+        return r24;
+
+     label14:
+        $z8 = org.gjt.sp.jedit.OperatingSystem.isWindows();
+
+(5)     if $z8 == 0 goto label15;
+
+        $z9 = org.gjt.sp.jedit.MiscUtilities.isURL(r24);
+
+(6)     if $z9 != 0 goto label15;
+
+        $c2 = r25.charAt(0);
+
+(7)     if $c2 != 92 goto label15;
+
+(8)     r24 = r24.substring(0, 2);
+
+     label15:
+        r24 = Phi(r24 #5, r24 #6, r24 #7, r24 #8);
+
+        r2 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r24);
+
+        $r13 = r2.constructPath(r24, r25);
+
+        $r14 = org.gjt.sp.jedit.MiscUtilities.canonPath($r13);
+
+        return $r14;
+    }
+
+    public static java.lang.String constructPath(java.lang.String, java.lang.String, java.lang.String)
+    {
+        java.lang.String r0, r1, r2, $r3, $r4;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        $r3 = org.gjt.sp.jedit.MiscUtilities.constructPath(r0, r1);
+
+        $r4 = org.gjt.sp.jedit.MiscUtilities.constructPath($r3, r2);
+
+        return $r4;
+    }
+
+    public static java.lang.String concatPath(java.lang.String, java.lang.String)
+    {
+        java.lang.String $r0, $r1, $r4, $r7, $r11, r12, r13, r14, r15, r15_1, r15_2, r15_3, r14_1, r14_2;
+        boolean $z0, $z1;
+        int $i0;
+        java.lang.StringBuilder $r2, $r3, $r5, $r6, $r8, $r9, $r10;
+        char $c1, $c2;
+
+        r12 := @parameter0;
+
+        r13 := @parameter1;
+
+        r14 = org.gjt.sp.jedit.MiscUtilities.canonPath(r12);
+
+        r15 = org.gjt.sp.jedit.MiscUtilities.canonPath(r13);
+
+        $r0 = java.io.File.separator;
+
+        $z0 = r15.startsWith($r0);
+
+        if $z0 == 0 goto label1;
+
+        r15_1 = r15.substring(1);
+
+(0)     goto label2;
+
+     label1:
+        $i0 = r15.length();
+
+(1)     if $i0 < 3 goto label2;
+
+        $c1 = r15.charAt(1);
+
+(2)     if $c1 != 58 goto label2;
+
+        $c2 = java.io.File.separatorChar;
+
+(3)     r15_2 = r15.replace(58, $c2);
+
+     label2:
+        r15_3 = Phi(r15_1 #0, r15 #1, r15 #2, r15_2 #3);
+
+(4)     if r14 != null goto label3;
+
+(5)     r14_1 = java.lang.System.getProperty("user.dir");
+
+     label3:
+        r14_2 = Phi(r14 #4, r14_1 #5);
+
+        $r1 = java.io.File.separator;
+
+        $z1 = r14_2.endsWith($r1);
+
+        if $z1 == 0 goto label4;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append(r14_2);
+
+        $r10 = $r9.append(r15_3);
+
+        $r11 = $r10.toString();
+
+        return $r11;
+
+     label4:
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append(r14_2);
+
+        $r4 = java.io.File.separator;
+
+        $r5 = $r3.append($r4);
+
+        $r6 = $r5.append(r15_3);
+
+        $r7 = $r6.toString();
+
+        return $r7;
+    }
+
+    public static int getFirstSeparatorIndex(java.lang.String)
+    {
+        java.lang.String r0;
+        int i0, i2, i2_1, i2_2;
+        char $c1;
+
+        r0 := @parameter0;
+
+        i0 = org.gjt.sp.jedit.MiscUtilities.getPathStart(r0);
+
+        i2 = r0.indexOf(47, i0);
+
+(0)     if i2 != -1 goto label1;
+
+        $c1 = java.io.File.separatorChar;
+
+(1)     i2_1 = r0.indexOf($c1, i0);
+
+     label1:
+        i2_2 = Phi(i2 #0, i2_1 #1);
+
+        return i2_2;
+    }
+
+    public static int getLastSeparatorIndex(java.lang.String)
+    {
+        int i0, i1, $i2, $i4, $i5;
+        char $c3;
+        java.lang.String r0, r0_1, r0_2;
+
+        r0 := @parameter0;
+
+        i0 = org.gjt.sp.jedit.MiscUtilities.getPathStart(r0);
+
+(0)     if i0 == 0 goto label1;
+
+(1)     r0_1 = r0.substring(i0);
+
+     label1:
+        r0_2 = Phi(r0 #0, r0_1 #1);
+
+        $i2 = r0_2.lastIndexOf(47);
+
+        $c3 = java.io.File.separatorChar;
+
+        $i4 = r0_2.lastIndexOf($c3);
+
+        i1 = java.lang.Math.max($i2, $i4);
+
+        if i1 != -1 goto label2;
+
+        return i1;
+
+     label2:
+        $i5 = i1 + i0;
+
+        return $i5;
+    }
+
+    public static java.lang.String getFileExtension(java.lang.String)
+    {
+        java.lang.String r0, $r1;
+        int i0, i1;
+
+        r0 := @parameter0;
+
+        i0 = org.gjt.sp.jedit.MiscUtilities.getLastSeparatorIndex(r0);
+
+        i1 = r0.lastIndexOf(46);
+
+        if i1 == -1 goto label1;
+
+        if i1 >= i0 goto label2;
+
+     label1:
+        return "";
+
+     label2:
+        $r1 = r0.substring(i1);
+
+        return $r1;
+    }
+
+    public static java.lang.String getFileName(java.lang.String)
+    {
+        java.lang.String r0, $r2;
+        org.gjt.sp.jedit.io.VFS $r1;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r0);
+
+        $r2 = $r1.getFileName(r0);
+
+        return $r2;
+    }
+
+    public static java.lang.String getCompleteBaseName(java.lang.String)
+    {
+        java.lang.String r0, r1, $r2;
+        int i0;
+
+        r0 := @parameter0;
+
+        r1 = org.gjt.sp.jedit.MiscUtilities.getFileName(r0);
+
+        i0 = r1.lastIndexOf(46);
+
+        if i0 != -1 goto label1;
+
+        return r1;
+
+     label1:
+        $r2 = r1.substring(0, i0);
+
+        return $r2;
+    }
+
+    public static java.lang.String getBaseName(java.lang.String)
+    {
+        java.lang.String r0, r1, $r2;
+        int i0;
+
+        r0 := @parameter0;
+
+        r1 = org.gjt.sp.jedit.MiscUtilities.getFileName(r0);
+
+        i0 = r1.indexOf(46);
+
+        if i0 != -1 goto label1;
+
+        return r1;
+
+     label1:
+        $r2 = r1.substring(0, i0);
+
+        return $r2;
+    }
+
+    public static java.lang.String getFileNameNoExtension(java.lang.String)
+    {
+        java.lang.String r0, $r1;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.MiscUtilities.getBaseName(r0);
+
+        return $r1;
+    }
+
+    public static java.lang.String getParentOfPath(java.lang.String)
+    {
+        java.lang.String r0, $r2;
+        org.gjt.sp.jedit.io.VFS $r1;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r0);
+
+        $r2 = $r1.getParentOfPath(r0);
+
+        return $r2;
+    }
+
+    public static java.lang.String getProtocolOfURL(java.lang.String)
+    {
+        java.lang.String r0, $r1;
+        int $i0;
+
+        r0 := @parameter0;
+
+        $i0 = r0.indexOf(58);
+
+        $r1 = r0.substring(0, $i0);
+
+        return $r1;
+    }
+
+    public static boolean isURL(java.lang.String)
+    {
+        java.lang.String r0, r1;
+        int i0, i1;
+        org.gjt.sp.jedit.io.VFS r2;
+        java.net.MalformedURLException r3, $r5;
+        java.net.URL $r4;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        i0 = org.gjt.sp.jedit.MiscUtilities.getLastSeparatorIndex(r0);
+
+        if i0 != 0 goto label1;
+
+        return 0;
+
+     label1:
+        if i0 != 2 goto label2;
+
+        return 0;
+
+     label2:
+        i1 = r0.indexOf(58);
+
+        if i1 > 1 goto label3;
+
+        return 0;
+
+     label3:
+        r1 = r0.substring(0, i1);
+
+        r2 = org.gjt.sp.jedit.io.VFSManager.getVFSForProtocol(r1);
+
+        if r2 == null goto label4;
+
+        $z0 = r2 instanceof org.gjt.sp.jedit.io.UrlVFS;
+
+        if $z0 != 0 goto label4;
+
+        return 1;
+
+     label4:
+        $r4 = new java.net.URL;
+
+        specialinvoke $r4.<init>(r0);
+
+     label5:
+        return 1;
+
+     label6:
+        $r5 := @caughtexception;
+
+        r3 = $r5;
+
+        return 0;
+
+        catch java.net.MalformedURLException from label4 to label5 with label6;
+    }
+
+    public static java.io.File getNthBackupFile(java.lang.String, int, int, java.lang.String, java.lang.String, java.lang.String)
+    {
+        java.lang.String r0, r1, $r9, $r15, r16, r17, r16_1, r16_2, r17_1, r17_2;
+        int i0, i1;
+        java.io.File $r2, $r10, r18, r18_1, r18_2;
+        java.lang.StringBuilder $r3, $r4, $r5, $r6, $r7, $r8, $r11, $r12, $r13, $r14;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        r16 := @parameter3;
+
+        r17 := @parameter4;
+
+        r1 := @parameter5;
+
+(0)     if r16 != null goto label1;
+
+(1)     r16_1 = "";
+
+     label1:
+        r16_2 = Phi(r16 #0, r16_1 #1);
+
+(2)     if r17 != null goto label2;
+
+(3)     r17_1 = "";
+
+     label2:
+        r17_2 = Phi(r17 #2, r17_1 #3);
+
+        if i1 > 1 goto label3;
+
+        $r10 = new java.io.File;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = $r11.append(r16_2);
+
+        $r13 = $r12.append(r0);
+
+        $r14 = $r13.append(r17_2);
+
+        $r15 = $r14.toString();
+
+        specialinvoke $r10.<init>(r1, $r15);
+
+        r18 = $r10;
+
+(4)     goto label4;
+
+     label3:
+        $r2 = new java.io.File;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append(r16_2);
+
+        $r5 = $r4.append(r0);
+
+        $r6 = $r5.append(r17_2);
+
+        $r7 = $r6.append(i0);
+
+        $r8 = $r7.append(r17_2);
+
+        $r9 = $r8.toString();
+
+        specialinvoke $r2.<init>(r1, $r9);
+
+(5)     r18_1 = $r2;
+
+     label4:
+        r18_2 = Phi(r18 #4, r18_1 #5);
+
+        return r18_2;
+    }
+
+    public static void openInDesktop(java.lang.String)
+    {
+        java.lang.String r0, $r5, $r7, $r21;
+        org.gjt.sp.util.StringList r1, $r2;
+        boolean $z0, $z1, $z2, $z3, $z7;
+        java.lang.StringBuilder $r3, $r4, $r6, $r18, $r19, $r20;
+        java.lang.Runtime $r8;
+        java.lang.String[] $r9;
+        java.awt.Desktop $r11, $r14;
+        java.io.File $r12;
+        java.net.URI $r13, r22;
+        java.net.URISyntaxException $r15, r24;
+        java.io.IOException $r16, $r17, r23, r25;
+
+        r0 := @parameter0;
+
+        $r2 = new org.gjt.sp.util.StringList;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+        $z0 = org.gjt.sp.jedit.OperatingSystem.isWindows();
+
+        if $z0 == 0 goto label06;
+
+        $z7 = org.gjt.sp.jedit.MiscUtilities.isURL(r0);
+
+        if $z7 == 0 goto label05;
+
+     label01:
+        $r13 = new java.net.URI;
+
+        specialinvoke $r13.<init>(r0);
+
+        r22 = $r13;
+
+        $r14 = java.awt.Desktop.getDesktop();
+
+        $r14.browse(r22);
+
+     label02:
+        return;
+
+     label03:
+        $r16 := @caughtexception;
+
+        r23 = $r16;
+
+        org.gjt.sp.util.Log.log(9, r0, "Can\'t open URI", r23);
+
+        goto label08;
+
+     label04:
+        $r15 := @caughtexception;
+
+        r24 = $r15;
+
+        org.gjt.sp.util.Log.log(9, r0, "Bad URI syntax:", r24);
+
+        goto label08;
+
+     label05:
+        r1.add("rundll32");
+
+        r1.add("SHELL32.DLL,ShellExec_RunDLL");
+
+        goto label08;
+
+     label06:
+        $z1 = org.gjt.sp.jedit.OperatingSystem.isMacOS();
+
+        if $z1 == 0 goto label07;
+
+        r1.add("open");
+
+        goto label08;
+
+     label07:
+        $z2 = org.gjt.sp.jedit.OperatingSystem.isX11();
+
+        if $z2 == 0 goto label08;
+
+        r1.add("xdg-open");
+
+     label08:
+        $z3 = r1.isEmpty();
+
+        if $z3 == 0 goto label09;
+
+        $r11 = java.awt.Desktop.getDesktop();
+
+        $r12 = new java.io.File;
+
+        specialinvoke $r12.<init>(r0);
+
+        $r11.open($r12);
+
+        goto label10;
+
+     label09:
+        r1.add(r0);
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("openInDesktop: ");
+
+        $r5 = r1.join(" ");
+
+        $r6 = $r4.append($r5);
+
+        $r7 = $r6.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/MiscUtilities", $r7);
+
+        $r8 = java.lang.Runtime.getRuntime();
+
+        $r9 = r1.toArray();
+
+        $r8.exec($r9);
+
+     label10:
+        goto label12;
+
+     label11:
+        $r17 := @caughtexception;
+
+        r25 = $r17;
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<init>();
+
+        $r19 = $r18.append("openInDesktop failed: ");
+
+        $r20 = $r19.append(r0);
+
+        $r21 = $r20.toString();
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/MiscUtilities", $r21, r25);
+
+     label12:
+        return;
+
+        catch java.io.IOException from label01 to label02 with label03;
+        catch java.net.URISyntaxException from label01 to label02 with label04;
+        catch java.io.IOException from label08 to label10 with label11;
+    }
+
+    public static java.io.File prepareBackupDirectory(java.lang.String)
+    {
+        java.lang.String r0, $r3, $r5, $r6, r9, r11, r13, r14;
+        boolean z0, $z1;
+        org.gjt.sp.jedit.io.VFS $r1;
+        java.io.File $r2, $r4, $r7, $r8, r10, r12, r10_1, r10_2, r12_1, r12_2;
+        int $i0;
+
+        r0 := @parameter0;
+
+        r9 = org.gjt.sp.jedit.jEdit.getProperty("backup.directory");
+
+        $r1 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r0);
+
+        z0 = $r1 instanceof org.gjt.sp.jedit.io.FileVFS;
+
+        if z0 == 0 goto label1;
+
+        $r8 = new java.io.File;
+
+        specialinvoke $r8.<init>(r0);
+
+        r10 = $r8;
+
+(0)     goto label2;
+
+     label1:
+        $r2 = new java.io.File;
+
+        $r3 = org.gjt.sp.jedit.MiscUtilities.replaceNonPathChars(r0, "_");
+
+        specialinvoke $r2.<init>($r3);
+
+(1)     r10_1 = $r2;
+
+     label2:
+        r10_2 = Phi(r10 #0, r10_1 #1);
+
+        if r9 == null goto label3;
+
+        $i0 = r9.length();
+
+        if $i0 != 0 goto label5;
+
+     label3:
+        if z0 != 0 goto label4;
+
+        return null;
+
+     label4:
+        r11 = r10_2.getParent();
+
+        $r4 = new java.io.File;
+
+        specialinvoke $r4.<init>(r11);
+
+        r12_1 = $r4;
+
+(2)     goto label6;
+
+     label5:
+        $r5 = java.lang.System.getProperty("user.home");
+
+        r13 = org.gjt.sp.jedit.MiscUtilities.constructPath($r5, r9);
+
+        $r6 = r10_2.getParent();
+
+        r14 = org.gjt.sp.jedit.MiscUtilities.concatPath(r13, $r6);
+
+        $r7 = new java.io.File;
+
+        specialinvoke $r7.<init>(r14);
+
+        r12 = $r7;
+
+        $z1 = r12.exists();
+
+(3)     if $z1 != 0 goto label6;
+
+(4)     r12.mkdirs();
+
+     label6:
+        r12_2 = Phi(r12_1 #2, r12 #3, r12 #4);
+
+        return r12_2;
+    }
+
+    public static java.io.File prepareBackupFile(java.lang.String, java.io.File)
+    {
+        java.lang.String r0, r2, r3, $r4;
+        java.io.File r1, $r5;
+        int i0, i1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("backups", 1);
+
+        r2 = org.gjt.sp.jedit.jEdit.getProperty("backup.prefix");
+
+        r3 = org.gjt.sp.jedit.jEdit.getProperty("backup.suffix");
+
+        i1 = org.gjt.sp.jedit.jEdit.getIntegerProperty("backup.minTime", 0);
+
+        $r4 = r1.getPath();
+
+        $r5 = org.gjt.sp.jedit.MiscUtilities.prepareBackupFile(r0, i0, r2, r3, $r4, i1);
+
+        return $r5;
+    }
+
+    public static java.io.File prepareBackupFile(java.lang.String, int, java.lang.String, java.lang.String, java.lang.String, int)
+    {
+        java.lang.String r0, r1, r2, r3, r4, $r11, $r13, $r16, $r18;
+        int i0, i1, $i7, i8;
+        boolean z0, $z1, $z2;
+        java.io.File r5, r6, r7, r8, $r10, $r19, r20, r20_1, r20_2;
+        long l2, $l3, $l4, $l5;
+        org.gjt.sp.jedit.io.VFS $r9;
+        byte $b6;
+        java.lang.StringBuilder $r12, $r14, $r15, $r17;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        r2 := @parameter3;
+
+        r3 := @parameter4;
+
+        i1 := @parameter5;
+
+        $r9 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r0);
+
+        z0 = $r9 instanceof org.gjt.sp.jedit.io.FileVFS;
+
+        if z0 == 0 goto label1;
+
+        $r19 = new java.io.File;
+
+        specialinvoke $r19.<init>(r0);
+
+        r20 = $r19;
+
+(0)     goto label2;
+
+     label1:
+        $r10 = new java.io.File;
+
+        $r11 = org.gjt.sp.jedit.MiscUtilities.replaceNonPathChars(r0, "_");
+
+        specialinvoke $r10.<init>($r11);
+
+(1)     r20_1 = $r10;
+
+     label2:
+        r20_2 = Phi(r20 #0, r20_1 #1);
+
+        r4 = r20_2.getName();
+
+        r5 = org.gjt.sp.jedit.MiscUtilities.getNthBackupFile(r4, 1, i0, r1, r2, r3);
+
+        $z1 = r5.equals(r20_2);
+
+        if $z1 == 0 goto label3;
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = org.gjt.sp.jedit.jEdit.getProperty("ioerror.backup-same-name");
+
+        $r14 = $r12.append($r13);
+
+        $r15 = $r14.append(" ");
+
+        $r16 = org.gjt.sp.jedit.jEdit.getProperty("ioerror.backup-failed");
+
+        $r17 = $r15.append($r16);
+
+        $r18 = $r17.toString();
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/MiscUtilities", $r18);
+
+        return null;
+
+     label3:
+        l2 = r5.lastModified();
+
+        $l3 = java.lang.System.currentTimeMillis();
+
+        $l5 = $l3 - l2;
+
+        $l4 = (long) i1;
+
+        $b6 = $l5 cmp $l4;
+
+        if $b6 >= 0 goto label4;
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/MiscUtilities", "Backup not done because of backup.minTime");
+
+        return null;
+
+     label4:
+        r6 = org.gjt.sp.jedit.MiscUtilities.getNthBackupFile(r4, i0, i0, r1, r2, r3);
+
+        $z2 = r6.equals(r20_2);
+
+        if $z2 != 0 goto label5;
+
+        r6.delete();
+
+     label5:
+(2)     if i0 <= 1 goto label7;
+
+(3)     i8 = i0 - 1;
+
+     label6:
+        i8 = Phi(i8 #3, i8 #5);
+
+        r20 = Phi(r20_2 #3, r20 #5);
+
+(4)     if i8 <= 0 goto label7;
+
+        r7 = org.gjt.sp.jedit.MiscUtilities.getNthBackupFile(r4, i8, i0, r1, r2, r3);
+
+        $i7 = i8 + 1;
+
+        r8 = org.gjt.sp.jedit.MiscUtilities.getNthBackupFile(r4, $i7, i0, r1, r2, r3);
+
+        r7.renameTo(r8);
+
+        i8 = i8 + -1;
+
+(5)     goto label6;
+
+     label7:
+        i8 = Phi(i8 #2, i8 #4);
+
+        r20 = Phi(r20_2 #2, r20 #4);
+
+        return r5;
+    }
+
+    public static void saveBackup(java.io.File)
+    {
+        java.io.File r0, r1, r2;
+        java.lang.String $r3, $r4;
+
+        r0 := @parameter0;
+
+        $r3 = r0.toString();
+
+        r1 = org.gjt.sp.jedit.MiscUtilities.prepareBackupDirectory($r3);
+
+        $r4 = r0.toString();
+
+        r2 = org.gjt.sp.jedit.MiscUtilities.prepareBackupFile($r4, r1);
+
+        if r2 == null goto label1;
+
+        org.gjt.sp.jedit.MiscUtilities.saveBackup(r0, r2);
+
+     label1:
+        return;
+    }
+
+    public static void saveBackup(java.io.File, int, java.lang.String, java.lang.String, java.lang.String)
+    {
+        java.io.File r0;
+        int i0;
+        java.lang.String r1, r2, r3;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        r2 := @parameter3;
+
+        r3 := @parameter4;
+
+        org.gjt.sp.jedit.MiscUtilities.saveBackup(r0, i0, r1, r2, r3, 0);
+
+        return;
+    }
+
+    public static void saveBackup(java.io.File, int, java.lang.String, java.lang.String, java.lang.String, int)
+    {
+        java.io.File r0, r4;
+        int i0, i1;
+        java.lang.String r1, r2, r3, $r5;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        r2 := @parameter3;
+
+        r3 := @parameter4;
+
+        i1 := @parameter5;
+
+        $r5 = r0.toString();
+
+        r4 = org.gjt.sp.jedit.MiscUtilities.prepareBackupFile($r5, i0, r1, r2, r3, i1);
+
+        if r4 != null goto label1;
+
+        return;
+
+     label1:
+        org.gjt.sp.jedit.MiscUtilities.saveBackup(r0, r4);
+
+        return;
+    }
+
+    public static void saveBackup(java.io.File, java.io.File)
+    {
+        java.io.File r0, r1;
+        java.lang.StringBuilder $r2, $r3, $r5, $r6, $r8, $r9;
+        java.lang.String $r4, $r7, $r10;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append("Saving backup of file \"");
+
+        $r4 = r0.getAbsolutePath();
+
+        $r5 = $r3.append($r4);
+
+        $r6 = $r5.append("\" to \"");
+
+        $r7 = r1.getAbsolutePath();
+
+        $r8 = $r6.append($r7);
+
+        $r9 = $r8.append(34);
+
+        $r10 = $r9.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/MiscUtilities", $r10);
+
+        $z0 = r0.renameTo(r1);
+
+        if $z0 != 0 goto label1;
+
+        org.gjt.sp.util.IOUtilities.moveFile(r0, r1);
+
+     label1:
+        return;
+    }
+
+    public static boolean isBinary(java.io.InputStream) throws java.io.IOException
+    {
+        java.io.InputStream r0;
+        org.gjt.sp.jedit.io.AutoDetection$Result r1, $r3;
+        java.nio.charset.MalformedInputException r2, $r7;
+        java.lang.String $r4;
+        java.io.InputStreamReader $r5;
+        java.io.BufferedInputStream $r6;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $r3 = new org.gjt.sp.jedit.io.AutoDetection$Result;
+
+        specialinvoke $r3.<init>(r0);
+
+        r1 = $r3;
+
+        $r4 = r1.getDetectedEncoding();
+
+        if $r4 == null goto label1;
+
+        return 0;
+
+     label1:
+        $r5 = new java.io.InputStreamReader;
+
+        $r6 = r1.getRewindedStream();
+
+        specialinvoke $r5.<init>($r6);
+
+        $z0 = org.gjt.sp.jedit.MiscUtilities.containsNullCharacter($r5);
+
+     label2:
+        return $z0;
+
+     label3:
+        $r7 := @caughtexception;
+
+        r2 = $r7;
+
+        return 1;
+
+        catch java.nio.charset.MalformedInputException from label1 to label2 with label3;
+    }
+
+    public static boolean isBackup(java.lang.String)
+    {
+        java.lang.String r0;
+        boolean $z0, $z1, $z2;
+
+        r0 := @parameter0;
+
+        $z0 = r0.startsWith("#");
+
+        if $z0 == 0 goto label1;
+
+        return 1;
+
+     label1:
+        $z1 = r0.endsWith("~");
+
+        if $z1 == 0 goto label2;
+
+        return 1;
+
+     label2:
+        $z2 = r0.endsWith(".bak");
+
+        if $z2 == 0 goto label3;
+
+        return 1;
+
+     label3:
+        return 0;
+    }
+
+    public static java.io.Reader autodetect(java.io.InputStream, org.gjt.sp.jedit.Buffer) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.Buffer r0;
+        java.lang.String r1, $r6, r8, r8_1, r8_2, r8_3, r8_4, r8_5;
+        org.gjt.sp.jedit.io.AutoDetection$Result $r2, r9;
+        java.lang.StringBuilder $r3, $r4, $r5;
+        boolean $z0, z1, z1_1, z1_2;
+        java.io.InputStream r7;
+        java.io.BufferedInputStream r10, r10_1, r10_2;
+        java.io.Reader r11;
+
+        r7 := @parameter0;
+
+        r0 := @parameter1;
+
+        if r0 != null goto label1;
+
+        r8 = java.lang.System.getProperty("file.encoding");
+
+(0)     goto label2;
+
+     label1:
+(1)     r8_1 = r0.getStringProperty("encoding");
+
+     label2:
+        r8_2 = Phi(r8 #0, r8_1 #1);
+
+        z1 = 0;
+
+        if r0 == null goto label3;
+
+        $z0 = r0.getBooleanProperty("encodingAutodetect");
+
+        if $z0 == 0 goto label6;
+
+     label3:
+        $r2 = new org.gjt.sp.jedit.io.AutoDetection$Result;
+
+        specialinvoke $r2.<init>(r7);
+
+        r9 = $r2;
+
+        z1_1 = r9.streamIsGzipped();
+
+        if z1_1 == 0 goto label4;
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/MiscUtilities", "Stream is Gzipped");
+
+     label4:
+        r1 = r9.getDetectedEncoding();
+
+(2)     if r1 == null goto label5;
+
+        r8_3 = r1;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("Stream encoding detected is ");
+
+        $r5 = $r4.append(r1);
+
+        $r6 = $r5.toString();
+
+(3)     org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/MiscUtilities", $r6);
+
+     label5:
+        r8_4 = Phi(r8_2 #2, r8_3 #3);
+
+        r10_1 = r9.getRewindedStream();
+
+(4)     goto label7;
+
+     label6:
+(5)     r10 = org.gjt.sp.jedit.io.AutoDetection.getMarkedStream(r7);
+
+     label7:
+        z1_2 = Phi(z1_1 #4, z1 #5);
+
+        r10_2 = Phi(r10_1 #4, r10 #5);
+
+        r8_5 = Phi(r8_4 #4, r8_2 #5);
+
+        r11 = org.gjt.sp.jedit.io.EncodingServer.getTextReader(r10_2, r8_5);
+
+        if r0 == null goto label9;
+
+        if z1_2 == 0 goto label8;
+
+        r0.setBooleanProperty("gzipped", 1);
+
+     label8:
+        r0.setProperty("encoding", r8_5);
+
+     label9:
+        return r11;
+    }
+
+    public static java.lang.String fileToClass(java.lang.String)
+    {
+        java.lang.String r0, $r2;
+        char[] r1;
+        int $i0, $i1, $i2, i4;
+        char $c3;
+
+        r0 := @parameter0;
+
+        r1 = r0.toCharArray();
+
+        $i0 = lengthof r1;
+
+(0)     i4 = $i0 - 6;
+
+     label1:
+        i4 = Phi(i4 #0, i4 #1);
+
+        if i4 < 0 goto label3;
+
+        $c3 = r1[i4];
+
+        if $c3 != 47 goto label2;
+
+        r1[i4] = 46;
+
+     label2:
+        i4 = i4 + -1;
+
+(1)     goto label1;
+
+     label3:
+        $r2 = new java.lang.String;
+
+        $i1 = lengthof r1;
+
+        $i2 = $i1 - 6;
+
+        specialinvoke $r2.<init>(r1, 0, $i2);
+
+        return $r2;
+    }
+
+    public static java.lang.String classToFile(java.lang.String)
+    {
+        java.lang.String r0, $r1, $r2;
+
+        r0 := @parameter0;
+
+        $r1 = r0.replace(46, 47);
+
+        $r2 = $r1.concat(".class");
+
+        return $r2;
+    }
+
+    public static boolean pathsEqual(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.io.VFS r0, r1;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        int $i0, $i1, $i2, $i3, $i4, $i5;
+        java.lang.String $r2, $r3, r4, r5, r4_1, r4_2, r5_1, r5_2;
+
+        r4 := @parameter0;
+
+        r5 := @parameter1;
+
+        r0 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r4);
+
+        r1 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r5);
+
+        if r0 == r1 goto label1;
+
+        return 0;
+
+     label1:
+        $z0 = r4.endsWith("/");
+
+        if $z0 != 0 goto label2;
+
+        $r3 = java.io.File.separator;
+
+        $z5 = r4.endsWith($r3);
+
+(0)     if $z5 == 0 goto label3;
+
+     label2:
+        $i0 = r4.length();
+
+        $i1 = $i0 - 1;
+
+(1)     r4_1 = r4.substring(0, $i1);
+
+     label3:
+        r4_2 = Phi(r4 #0, r4_1 #1);
+
+        $z1 = r5.endsWith("/");
+
+        if $z1 != 0 goto label4;
+
+        $r2 = java.io.File.separator;
+
+        $z4 = r5.endsWith($r2);
+
+(2)     if $z4 == 0 goto label5;
+
+     label4:
+        $i2 = r5.length();
+
+        $i3 = $i2 - 1;
+
+(3)     r5_1 = r5.substring(0, $i3);
+
+     label5:
+        r5_2 = Phi(r5 #2, r5_1 #3);
+
+        $i4 = r0.getCapabilities();
+
+        $i5 = $i4 & 128;
+
+        if $i5 == 0 goto label6;
+
+        $z3 = r4_2.equalsIgnoreCase(r5_2);
+
+        return $z3;
+
+     label6:
+        $z2 = r4_2.equals(r5_2);
+
+        return $z2;
+    }
+
+    public static java.lang.String escapesToChars(java.lang.String)
+    {
+        java.lang.String r0, $r3;
+        java.lang.StringBuilder r1, $r2;
+        int $i0, $i1, $i2, i3;
+        char c4, c5;
+
+        r0 := @parameter0;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+(0)     i3 = 0;
+
+     label1:
+        i3 = Phi(i3 #0, i3 #6);
+
+        $i0 = r0.length();
+
+        if i3 >= $i0 goto label9;
+
+        c4 = r0.charAt(i3);
+
+        lookupswitch(c4)
+        {
+            case 92: goto label2;
+            default: goto label7;
+        };
+
+     label2:
+        $i1 = r0.length();
+
+        $i2 = $i1 - 1;
+
+        if i3 != $i2 goto label3;
+
+        r1.append(92);
+
+(1)     goto label8;
+
+     label3:
+        i3 = i3 + 1;
+
+        c5 = r0.charAt(i3);
+
+        lookupswitch(c5)
+        {
+            case 110: goto label4;
+            case 116: goto label5;
+            default: goto label6;
+        };
+
+     label4:
+        r1.append(10);
+
+(2)     goto label8;
+
+     label5:
+        r1.append(9);
+
+(3)     goto label8;
+
+     label6:
+        r1.append(c5);
+
+(4)     goto label8;
+
+     label7:
+(5)     r1.append(c4);
+
+     label8:
+        i3 = Phi(i3 #1, i3 #2, i3 #3, i3 #4, i3 #5);
+
+        i3 = i3 + 1;
+
+(6)     goto label1;
+
+     label9:
+        $r3 = r1.toString();
+
+        return $r3;
+    }
+
+    public static java.lang.String getLongestPrefix(java.util.List, boolean)
+    {
+        java.util.List r0;
+        boolean z0, $z1, $z2;
+        char c0, $c4;
+        java.lang.Object $r1, $r2, $r3;
+        int $i1, $i2, $i3, i5, i6;
+        java.lang.String $r4, $r5, r6, r7;
+
+        r0 := @parameter0;
+
+        z0 := @parameter1;
+
+        $z1 = r0.isEmpty();
+
+        if $z1 == 0 goto label1;
+
+        return "";
+
+     label1:
+(0)     i5 = 0;
+
+     label2:
+        i6 = Phi(i6 #0, i6 #6);
+
+        i5 = Phi(i5 #0, i5 #6);
+
+        $r1 = r0.get(0);
+
+        r6 = (java.lang.String) $r1;
+
+        $i1 = r6.length();
+
+        if i5 < $i1 goto label3;
+
+(1)     goto label8;
+
+     label3:
+        c0 = r6.charAt(i5);
+
+(2)     i6 = 1;
+
+     label4:
+        i6 = Phi(i6 #2, i6 #5);
+
+        i5 = Phi(i5 #2, i5 #5);
+
+        $i2 = r0.size();
+
+        if i6 >= $i2 goto label7;
+
+        $r2 = r0.get(i6);
+
+        r7 = (java.lang.String) $r2;
+
+        $i3 = r7.length();
+
+        if i5 < $i3 goto label5;
+
+(3)     goto label8;
+
+     label5:
+        $c4 = r7.charAt(i5);
+
+        $z2 = org.gjt.sp.jedit.MiscUtilities.compareChars($c4, c0, z0);
+
+        if $z2 != 0 goto label6;
+
+(4)     goto label8;
+
+     label6:
+        i6 = i6 + 1;
+
+(5)     goto label4;
+
+     label7:
+        i5 = i5 + 1;
+
+(6)     goto label2;
+
+     label8:
+        i6 = Phi(i6 #1, i6 #3, i6 #4);
+
+        i5 = Phi(i5 #1, i5 #3, i5 #4);
+
+        $r3 = r0.get(0);
+
+        $r4 = (java.lang.String) $r3;
+
+        $r5 = $r4.substring(0, i5);
+
+        return $r5;
+    }
+
+    public static java.lang.String getLongestPrefix(java.lang.String[], boolean)
+    {
+        java.lang.String[] r0;
+        boolean z0;
+        java.lang.Object[] $r1;
+        java.lang.String $r2;
+
+        r0 := @parameter0;
+
+        z0 := @parameter1;
+
+        $r1 = (java.lang.Object[]) r0;
+
+        $r2 = org.gjt.sp.jedit.MiscUtilities.getLongestPrefix($r1, z0);
+
+        return $r2;
+    }
+
+    public static java.lang.String getLongestPrefix(java.lang.Object[], boolean)
+    {
+        java.lang.Object[] r0;
+        boolean z0, $z1;
+        java.lang.String r1, r2, $r5;
+        char c0, $c5;
+        int $i1, $i2, $i3, $i4, i6, i7;
+        java.lang.Object $r3, $r4;
+
+        r0 := @parameter0;
+
+        z0 := @parameter1;
+
+        $i1 = lengthof r0;
+
+        if $i1 != 0 goto label1;
+
+        return "";
+
+     label1:
+        i6 = 0;
+
+        $r3 = r0[0];
+
+(0)     r1 = $r3.toString();
+
+     label2:
+        i7 = Phi(i7 #0, i7 #6);
+
+        i6 = Phi(i6 #0, i6 #6);
+
+        $i2 = r1.length();
+
+        if i6 < $i2 goto label3;
+
+(1)     goto label8;
+
+     label3:
+        c0 = r1.charAt(i6);
+
+(2)     i7 = 1;
+
+     label4:
+        i7 = Phi(i7 #2, i7 #5);
+
+        i6 = Phi(i6 #2, i6 #5);
+
+        $i3 = lengthof r0;
+
+        if i7 >= $i3 goto label7;
+
+        $r4 = r0[i7];
+
+        r2 = $r4.toString();
+
+        $i4 = r2.length();
+
+        if i6 < $i4 goto label5;
+
+(3)     goto label8;
+
+     label5:
+        $c5 = r2.charAt(i6);
+
+        $z1 = org.gjt.sp.jedit.MiscUtilities.compareChars($c5, c0, z0);
+
+        if $z1 != 0 goto label6;
+
+(4)     goto label8;
+
+     label6:
+        i7 = i7 + 1;
+
+(5)     goto label4;
+
+     label7:
+        i6 = i6 + 1;
+
+(6)     goto label2;
+
+     label8:
+        i7 = Phi(i7 #1, i7 #3, i7 #4);
+
+        i6 = Phi(i6 #1, i6 #3, i6 #4);
+
+        $r5 = r1.substring(0, i6);
+
+        return $r5;
+    }
+
+    public static java.lang.String buildToVersion(java.lang.String)
+    {
+        java.lang.String r0, $r1, $r2, $r3, $r4, $r13, $r21, $r22, $r22_1, $r22_2;
+        int i0, i1, i2, i3, $i4;
+        java.lang.StringBuilder $r5, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r14, $r15, $r16, $r17, $r18, $r19, $r20;
+
+        r0 := @parameter0;
+
+        $i4 = r0.length();
+
+        if $i4 == 11 goto label1;
+
+        $r17 = new java.lang.StringBuilder;
+
+        specialinvoke $r17.<init>();
+
+        $r18 = $r17.append("<unknown version: ");
+
+        $r19 = $r18.append(r0);
+
+        $r20 = $r19.append(62);
+
+        $r21 = $r20.toString();
+
+        return $r21;
+
+     label1:
+        $r1 = r0.substring(0, 2);
+
+        i0 = java.lang.Integer.parseInt($r1);
+
+        $r2 = r0.substring(3, 5);
+
+        i1 = java.lang.Integer.parseInt($r2);
+
+        $r3 = r0.substring(6, 8);
+
+        i2 = java.lang.Integer.parseInt($r3);
+
+        $r4 = r0.substring(9, 11);
+
+        i3 = java.lang.Integer.parseInt($r4);
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append(i0);
+
+        $r7 = $r6.append(".");
+
+        $r8 = $r7.append(i1);
+
+        if i2 == 99 goto label2;
+
+        $r14 = new java.lang.StringBuilder;
+
+        specialinvoke $r14.<init>();
+
+        $r15 = $r14.append("pre");
+
+        $r16 = $r15.append(i2);
+
+        $r22 = $r16.toString();
+
+(0)     goto label3;
+
+     label2:
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append(".");
+
+        $r11 = $r10.append(i3);
+
+(1)     $r22_1 = $r11.toString();
+
+     label3:
+        $r22_2 = Phi($r22 #0, $r22_1 #1);
+
+        $r12 = $r8.append($r22_2);
+
+        $r13 = $r12.toString();
+
+        return $r13;
+    }
+
+    public static boolean isToolsJarAvailable()
+    {
+        java.util.LinkedList r0, $r2;
+        org.gjt.sp.jedit.PluginJAR r1;
+        java.lang.StringBuilder $r3, $r4, $r6, $r11, $r13, $r14, $r17, $r18, $r19, $r20, $r22, $r23, $r25;
+        java.lang.String $r5, $r7, $r10, $r12, $r15, $r21, $r24, $r26, r33, r34, r35, r36, r37, r38, r37_1, r37_2;
+        java.lang.ClassNotFoundException $r9, $r29, r31, r32;
+        boolean $z1, $z3, $z5, $z7;
+        java.io.File $r16, $r27, $r28;
+        int $i0, $i1;
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/MiscUtilities", "Searching for tools.jar...");
+
+        $r2 = new java.util.LinkedList;
+
+        specialinvoke $r2.<init>();
+
+        r0 = $r2;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("System classpath: ");
+
+        $r5 = java.lang.System.getProperty("java.class.path");
+
+        $r6 = $r4.append($r5);
+
+        $r7 = $r6.toString();
+
+        r0.add($r7);
+
+     label01:
+        java.lang.Class.forName("sun.tools.javac.Main");
+
+     label02:
+        goto label04;
+
+     label03:
+        $r29 := @caughtexception;
+
+        r31 = $r29;
+
+        java.lang.Class.forName("com.sun.tools.javac.Main");
+
+     label04:
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/MiscUtilities", "- is in classpath. Fine.");
+
+     label05:
+        return 1;
+
+     label06:
+        $r9 := @caughtexception;
+
+        r32 = $r9;
+
+        r33 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        if r33 == null goto label07;
+
+        r34 = org.gjt.sp.jedit.MiscUtilities.constructPath(r33, "jars", "tools.jar");
+
+        r0.add(r34);
+
+        $r28 = new java.io.File;
+
+        specialinvoke $r28.<init>(r34);
+
+        $z7 = $r28.exists();
+
+        if $z7 == 0 goto label07;
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/MiscUtilities", "- is in the user\'s jars folder. Fine.");
+
+        return 1;
+
+     label07:
+        r35 = org.gjt.sp.jedit.jEdit.getJEditHome();
+
+        if r35 == null goto label08;
+
+        r36 = org.gjt.sp.jedit.MiscUtilities.constructPath(r35, "jars", "tools.jar");
+
+        r0.add(r36);
+
+        $r27 = new java.io.File;
+
+        specialinvoke $r27.<init>(r36);
+
+        $z5 = $r27.exists();
+
+        if $z5 == 0 goto label08;
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/MiscUtilities", "- is in jEdit\'s system jars folder. Fine.");
+
+        return 1;
+
+     label08:
+        r37 = java.lang.System.getProperty("java.home");
+
+        $r10 = r37.toLowerCase();
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = java.io.File.separator;
+
+        $r13 = $r11.append($r12);
+
+        $r14 = $r13.append("jre");
+
+        $r15 = $r14.toString();
+
+        $z1 = $r10.endsWith($r15);
+
+(0)     if $z1 == 0 goto label09;
+
+        $i0 = r37.length();
+
+        $i1 = $i0 - 4;
+
+(1)     r37_1 = r37.substring(0, $i1);
+
+     label09:
+        r37_2 = Phi(r37 #0, r37_1 #1);
+
+        r38 = org.gjt.sp.jedit.MiscUtilities.constructPath(r37_2, "lib", "tools.jar");
+
+        r0.add(r38);
+
+        $r16 = new java.io.File;
+
+        specialinvoke $r16.<init>(r38);
+
+        $z3 = $r16.exists();
+
+        if $z3 != 0 goto label10;
+
+        $r22 = new java.lang.StringBuilder;
+
+        specialinvoke $r22.<init>();
+
+        $r23 = $r22.append("Could not find tools.jar.\nI checked the following locations:\n");
+
+        $r24 = r0.toString();
+
+        $r25 = $r23.append($r24);
+
+        $r26 = $r25.toString();
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/MiscUtilities", $r26);
+
+        return 0;
+
+     label10:
+        r1 = org.gjt.sp.jedit.jEdit.getPluginJAR(r38);
+
+        if r1 != null goto label11;
+
+        $r17 = new java.lang.StringBuilder;
+
+        specialinvoke $r17.<init>();
+
+        $r18 = $r17.append("- adding ");
+
+        $r19 = $r18.append(r38);
+
+        $r20 = $r19.append(" to jEdit plugins.");
+
+        $r21 = $r20.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/MiscUtilities", $r21);
+
+        org.gjt.sp.jedit.jEdit.addPluginJAR(r38);
+
+        goto label12;
+
+     label11:
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/MiscUtilities", "- has been loaded before.");
+
+     label12:
+        return 1;
+
+        catch java.lang.ClassNotFoundException from label01 to label02 with label03;
+        catch java.lang.ClassNotFoundException from label01 to label05 with label06;
+    }
+
+    public static int parsePermissions(java.lang.String)
+    {
+        java.lang.String r0;
+        int $i0, i16, i16_1, i16_2, i16_3, i16_4, i16_5, i16_6, i16_7, i16_8, i16_9, i16_10, i16_11, i16_12, i16_13, i16_14, i16_15, i16_16, i16_17, i16_18, i16_19, i16_20, i16_21, i16_22, i16_23, i16_24;
+        char $c1, $c2, $c3, $c4, $c5, $c6, $c7, $c8, $c9, $c10, $c11, $c12, $c13, $c14, $c15;
+
+        r0 := @parameter0;
+
+        i16 = 0;
+
+        $i0 = r0.length();
+
+(0)     if $i0 != 9 goto label15;
+
+        $c1 = r0.charAt(0);
+
+(1)     if $c1 != 114 goto label01;
+
+(2)     i16_1 = i16 + 256;
+
+     label01:
+        i16_2 = Phi(i16 #1, i16_1 #2);
+
+        $c2 = r0.charAt(1);
+
+(3)     if $c2 != 119 goto label02;
+
+(4)     i16_3 = i16_2 + 128;
+
+     label02:
+        i16_4 = Phi(i16_2 #3, i16_3 #4);
+
+        $c3 = r0.charAt(2);
+
+        if $c3 != 120 goto label03;
+
+        i16_5 = i16_4 + 64;
+
+(5)     goto label05;
+
+     label03:
+        $c4 = r0.charAt(2);
+
+        if $c4 != 115 goto label04;
+
+        i16_6 = i16_4 + 2112;
+
+(6)     goto label05;
+
+     label04:
+        $c5 = r0.charAt(2);
+
+(7)     if $c5 != 83 goto label05;
+
+(8)     i16_7 = i16_4 + 2048;
+
+     label05:
+        i16_8 = Phi(i16_5 #5, i16_6 #6, i16_4 #7, i16_7 #8);
+
+        $c6 = r0.charAt(3);
+
+(9)     if $c6 != 114 goto label06;
+
+(10)    i16_9 = i16_8 + 32;
+
+     label06:
+        i16_10 = Phi(i16_8 #9, i16_9 #10);
+
+        $c7 = r0.charAt(4);
+
+(11)    if $c7 != 119 goto label07;
+
+(12)    i16_11 = i16_10 + 16;
+
+     label07:
+        i16_12 = Phi(i16_10 #11, i16_11 #12);
+
+        $c8 = r0.charAt(5);
+
+        if $c8 != 120 goto label08;
+
+        i16_13 = i16_12 + 8;
+
+(13)    goto label10;
+
+     label08:
+        $c9 = r0.charAt(5);
+
+        if $c9 != 115 goto label09;
+
+        i16_14 = i16_12 + 1032;
+
+(14)    goto label10;
+
+     label09:
+        $c10 = r0.charAt(5);
+
+(15)    if $c10 != 83 goto label10;
+
+(16)    i16_15 = i16_12 + 1024;
+
+     label10:
+        i16_16 = Phi(i16_13 #13, i16_14 #14, i16_12 #15, i16_15 #16);
+
+        $c11 = r0.charAt(6);
+
+(17)    if $c11 != 114 goto label11;
+
+(18)    i16_17 = i16_16 + 4;
+
+     label11:
+        i16_18 = Phi(i16_16 #17, i16_17 #18);
+
+        $c12 = r0.charAt(7);
+
+(19)    if $c12 != 119 goto label12;
+
+(20)    i16_19 = i16_18 + 2;
+
+     label12:
+        i16_20 = Phi(i16_18 #19, i16_19 #20);
+
+        $c13 = r0.charAt(8);
+
+        if $c13 != 120 goto label13;
+
+        i16_21 = i16_20 + 1;
+
+(21)    goto label15;
+
+     label13:
+        $c14 = r0.charAt(8);
+
+        if $c14 != 116 goto label14;
+
+        i16_22 = i16_20 + 513;
+
+(22)    goto label15;
+
+     label14:
+        $c15 = r0.charAt(8);
+
+(23)    if $c15 != 84 goto label15;
+
+(24)    i16_23 = i16_20 + 512;
+
+     label15:
+        i16_24 = Phi(i16 #0, i16_21 #21, i16_22 #22, i16_20 #23, i16_23 #24);
+
+        return i16_24;
+    }
+
+    public static java.lang.String[] getEncodings(boolean)
+    {
+        boolean z0;
+        int $i0;
+        java.lang.String[] $r0, $r2;
+        java.lang.Object[] $r1;
+        java.util.Set r3, r3_1, r3_2;
+
+        z0 := @parameter0;
+
+        if z0 == 0 goto label1;
+
+        r3 = org.gjt.sp.jedit.io.EncodingServer.getSelectedNames();
+
+(0)     goto label2;
+
+     label1:
+(1)     r3_1 = org.gjt.sp.jedit.io.EncodingServer.getAvailableNames();
+
+     label2:
+        r3_2 = Phi(r3 #0, r3_1 #1);
+
+        $i0 = r3_2.size();
+
+        $r0 = newarray (java.lang.String)[$i0];
+
+        $r1 = r3_2.toArray($r0);
+
+        $r2 = (java.lang.String[]) $r1;
+
+        return $r2;
+    }
+
+    public static java.lang.String throwableToString(java.lang.Throwable)
+    {
+        java.lang.Throwable r0;
+        java.io.StringWriter r1, $r2;
+        java.io.PrintWriter $r3;
+        java.lang.String $r4;
+
+        r0 := @parameter0;
+
+        $r2 = new java.io.StringWriter;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+        $r3 = new java.io.PrintWriter;
+
+        specialinvoke $r3.<init>(r1);
+
+        r0.printStackTrace($r3);
+
+        $r4 = r1.toString();
+
+        return $r4;
+    }
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.MiscUtilities r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    private static boolean compareChars(char, char, boolean)
+    {
+        char c0, c1, $c2, $c3;
+        boolean z0, $z1, $z2, $z1_1, $z1_2, $z2_1, $z2_2;
+
+        c0 := @parameter0;
+
+        c1 := @parameter1;
+
+        z0 := @parameter2;
+
+        if z0 == 0 goto label3;
+
+        $c2 = java.lang.Character.toUpperCase(c0);
+
+        $c3 = java.lang.Character.toUpperCase(c1);
+
+        if $c2 != $c3 goto label1;
+
+        $z1 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z1_1 = 0;
+
+     label2:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        return $z1_2;
+
+     label3:
+        if c0 != c1 goto label4;
+
+        $z2 = 1;
+
+(2)     goto label5;
+
+     label4:
+(3)     $z2_1 = 0;
+
+     label5:
+        $z2_2 = Phi($z2 #2, $z2_1 #3);
+
+        return $z2_2;
+    }
+
+    private static int getPathStart(java.lang.String)
+    {
+        java.lang.String r0;
+        boolean $z0, $z1;
+        int $i0;
+        char $c1, $c2, $c3;
+
+        r0 := @parameter0;
+
+        $z0 = r0.startsWith("/");
+
+        if $z0 == 0 goto label1;
+
+        return 0;
+
+     label1:
+        $z1 = org.gjt.sp.jedit.OperatingSystem.isWindows();
+
+        if $z1 == 0 goto label3;
+
+        $i0 = r0.length();
+
+        if $i0 < 3 goto label3;
+
+        $c1 = r0.charAt(1);
+
+        if $c1 != 58 goto label3;
+
+        $c2 = r0.charAt(2);
+
+        if $c2 == 47 goto label2;
+
+        $c3 = r0.charAt(2);
+
+        if $c3 != 92 goto label3;
+
+     label2:
+        return 3;
+
+     label3:
+        return 0;
+    }
+
+    private static boolean containsNullCharacter(java.io.Reader) throws java.io.IOException
+    {
+        java.io.Reader r0;
+        int i0, i1, i4;
+        long $l2, l5;
+        byte $b3;
+
+        r0 := @parameter0;
+
+        i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("vfs.binaryCheck.length", 100);
+
+        i4 = org.gjt.sp.jedit.jEdit.getIntegerProperty("vfs.binaryCheck.count", 1);
+
+(0)     l5 = 0L;
+
+     label1:
+        i4 = Phi(i4 #0, i4 #3);
+
+        l5 = Phi(l5 #0, l5 #3);
+
+        $l2 = (long) i0;
+
+        $b3 = l5 cmp $l2;
+
+        if $b3 >= 0 goto label4;
+
+        i1 = r0.read();
+
+        if i1 != -1 goto label2;
+
+        return 0;
+
+     label2:
+(1)     if i1 != 0 goto label3;
+
+        i4 = i4 + -1;
+
+(2)     if i4 != 0 goto label3;
+
+        return 1;
+
+     label3:
+        i4 = Phi(i4 #1, i4 #2);
+
+        l5 = l5 + 1L;
+
+(3)     goto label1;
+
+     label4:
+        return 0;
+    }
+
+    private static java.lang.String replaceNonPathChars(java.lang.String, java.lang.String)
+    {
+        java.lang.String r0, r1, r2, $r9, $r10;
+        java.lang.StringBuilder r3, $r4, $r5, $r6, $r7, $r8;
+        int $i0, i2;
+        char $c1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        if r0 != null goto label1;
+
+        return null;
+
+     label1:
+        r2 = ":*?\"<>|";
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>(20);
+
+        r3 = $r4;
+
+(0)     i2 = 0;
+
+     label2:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $i0 = r2.length();
+
+        if i2 >= $i0 goto label3;
+
+        r3.append("\\");
+
+        $c1 = r2.charAt(i2);
+
+        r3.append($c1);
+
+        i2 = i2 + 1;
+
+(1)     goto label2;
+
+     label3:
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append("[");
+
+        $r7 = $r6.append(r3);
+
+        $r8 = $r7.append("]");
+
+        $r9 = $r8.toString();
+
+        $r10 = r0.replaceAll($r9, r1);
+
+        return $r10;
+    }
+
+    public static void storeProperties(java.util.Properties, java.io.OutputStream, java.lang.String) throws java.io.IOException
+    {
+        java.util.Properties r0;
+        java.io.OutputStream r1;
+        java.lang.String r2;
+        org.gjt.sp.jedit.MiscUtilities$1 r3, $r4;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        $r4 = new org.gjt.sp.jedit.MiscUtilities$1;
+
+        specialinvoke $r4.<init>();
+
+        r3 = $r4;
+
+        r3.putAll(r0);
+
+        r3.store(r1, r2);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.util.regex.Pattern $r0, $r1, $r2;
+
+        $r0 = java.util.regex.Pattern.compile("(\\$([a-zA-Z0-9_]+))");
+
+        org.gjt.sp.jedit.MiscUtilities.varPattern = $r0;
+
+        $r1 = java.util.regex.Pattern.compile("(\\$\\{([^}]+)\\})");
+
+        org.gjt.sp.jedit.MiscUtilities.varPattern2 = $r1;
+
+        $r2 = java.util.regex.Pattern.compile("(%([^%]+)%)");
+
+        org.gjt.sp.jedit.MiscUtilities.winPattern = $r2;
+
+        org.gjt.sp.jedit.MiscUtilities.svc = null;
+
+        return;
+    }
+}

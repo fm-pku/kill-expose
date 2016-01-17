@@ -1,0 +1,1849 @@
+public class org.gjt.sp.jedit.bsh.JavaCharStream extends java.lang.Object
+{
+    public static final boolean staticFlag;
+    public int bufpos;
+    int bufsize;
+    int available;
+    int tokenBegin;
+    protected int[] bufline;
+    protected int[] bufcolumn;
+    protected int column;
+    protected int line;
+    protected boolean prevCharIsCR;
+    protected boolean prevCharIsLF;
+    protected java.io.Reader inputStream;
+    protected char[] nextCharBuf;
+    protected char[] buffer;
+    protected int maxNextCharInd;
+    protected int nextCharInd;
+    protected int inBuf;
+
+    static final int hexval(char) throws java.io.IOException
+    {
+        char c0;
+        java.io.IOException $r0;
+
+        c0 := @parameter0;
+
+        tableswitch(c0)
+        {
+            case 48: goto label01;
+            case 49: goto label02;
+            case 50: goto label03;
+            case 51: goto label04;
+            case 52: goto label05;
+            case 53: goto label06;
+            case 54: goto label07;
+            case 55: goto label08;
+            case 56: goto label09;
+            case 57: goto label10;
+            case 58: goto label17;
+            case 59: goto label17;
+            case 60: goto label17;
+            case 61: goto label17;
+            case 62: goto label17;
+            case 63: goto label17;
+            case 64: goto label17;
+            case 65: goto label11;
+            case 66: goto label12;
+            case 67: goto label13;
+            case 68: goto label14;
+            case 69: goto label15;
+            case 70: goto label16;
+            case 71: goto label17;
+            case 72: goto label17;
+            case 73: goto label17;
+            case 74: goto label17;
+            case 75: goto label17;
+            case 76: goto label17;
+            case 77: goto label17;
+            case 78: goto label17;
+            case 79: goto label17;
+            case 80: goto label17;
+            case 81: goto label17;
+            case 82: goto label17;
+            case 83: goto label17;
+            case 84: goto label17;
+            case 85: goto label17;
+            case 86: goto label17;
+            case 87: goto label17;
+            case 88: goto label17;
+            case 89: goto label17;
+            case 90: goto label17;
+            case 91: goto label17;
+            case 92: goto label17;
+            case 93: goto label17;
+            case 94: goto label17;
+            case 95: goto label17;
+            case 96: goto label17;
+            case 97: goto label11;
+            case 98: goto label12;
+            case 99: goto label13;
+            case 100: goto label14;
+            case 101: goto label15;
+            case 102: goto label16;
+            default: goto label17;
+        };
+
+     label01:
+        return 0;
+
+     label02:
+        return 1;
+
+     label03:
+        return 2;
+
+     label04:
+        return 3;
+
+     label05:
+        return 4;
+
+     label06:
+        return 5;
+
+     label07:
+        return 6;
+
+     label08:
+        return 7;
+
+     label09:
+        return 8;
+
+     label10:
+        return 9;
+
+     label11:
+        return 10;
+
+     label12:
+        return 11;
+
+     label13:
+        return 12;
+
+     label14:
+        return 13;
+
+     label15:
+        return 14;
+
+     label16:
+        return 15;
+
+     label17:
+        $r0 = new java.io.IOException;
+
+        specialinvoke $r0.<init>();
+
+        throw $r0;
+    }
+
+    protected void ExpandBuff(boolean)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        boolean z0;
+        char[] r1, $r5, $r8, $r9;
+        int[] r2, r3, $r6, $r7, $r10, $r11, $r12, $r13;
+        java.lang.Throwable r4, $r14;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i20, $i21, $i22, $i23, $i24, $i25, $i26, $i27, $i28, $i29, $i30, $i31, $i32, $i33, $i34, $i35, $i36, $i37, $i38, $i39, $i40, $i41, $i42, $i43, $i44, $i45, $i46, $i47, $i48, $i49, $i50, $i51;
+        java.lang.Error $r15;
+        java.lang.String $r16;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        $i0 = r0.bufsize;
+
+        $i1 = $i0 + 2048;
+
+        r1 = newarray (char)[$i1];
+
+        $i2 = r0.bufsize;
+
+        $i3 = $i2 + 2048;
+
+        r2 = newarray (int)[$i3];
+
+        $i4 = r0.bufsize;
+
+        $i5 = $i4 + 2048;
+
+        r3 = newarray (int)[$i5];
+
+     label1:
+        if z0 == 0 goto label2;
+
+        $r8 = r0.buffer;
+
+        $i26 = r0.tokenBegin;
+
+        $i24 = r0.bufsize;
+
+        $i23 = r0.tokenBegin;
+
+        $i25 = $i24 - $i23;
+
+        java.lang.System.arraycopy($r8, $i26, r1, 0, $i25);
+
+        $r9 = r0.buffer;
+
+        $i28 = r0.bufsize;
+
+        $i27 = r0.tokenBegin;
+
+        $i30 = $i28 - $i27;
+
+        $i29 = r0.bufpos;
+
+        java.lang.System.arraycopy($r9, 0, r1, $i30, $i29);
+
+        r0.buffer = r1;
+
+        $r10 = r0.bufline;
+
+        $i34 = r0.tokenBegin;
+
+        $i32 = r0.bufsize;
+
+        $i31 = r0.tokenBegin;
+
+        $i33 = $i32 - $i31;
+
+        java.lang.System.arraycopy($r10, $i34, r2, 0, $i33);
+
+        $r11 = r0.bufline;
+
+        $i36 = r0.bufsize;
+
+        $i35 = r0.tokenBegin;
+
+        $i38 = $i36 - $i35;
+
+        $i37 = r0.bufpos;
+
+        java.lang.System.arraycopy($r11, 0, r2, $i38, $i37);
+
+        r0.bufline = r2;
+
+        $r12 = r0.bufcolumn;
+
+        $i42 = r0.tokenBegin;
+
+        $i40 = r0.bufsize;
+
+        $i39 = r0.tokenBegin;
+
+        $i41 = $i40 - $i39;
+
+        java.lang.System.arraycopy($r12, $i42, r3, 0, $i41);
+
+        $r13 = r0.bufcolumn;
+
+        $i44 = r0.bufsize;
+
+        $i43 = r0.tokenBegin;
+
+        $i46 = $i44 - $i43;
+
+        $i45 = r0.bufpos;
+
+        java.lang.System.arraycopy($r13, 0, r3, $i46, $i45);
+
+        r0.bufcolumn = r3;
+
+        $i50 = r0.bufpos;
+
+        $i48 = r0.bufsize;
+
+        $i47 = r0.tokenBegin;
+
+        $i49 = $i48 - $i47;
+
+        $i51 = $i50 + $i49;
+
+        r0.bufpos = $i51;
+
+        goto label3;
+
+     label2:
+        $r5 = r0.buffer;
+
+        $i9 = r0.tokenBegin;
+
+        $i7 = r0.bufsize;
+
+        $i6 = r0.tokenBegin;
+
+        $i8 = $i7 - $i6;
+
+        java.lang.System.arraycopy($r5, $i9, r1, 0, $i8);
+
+        r0.buffer = r1;
+
+        $r6 = r0.bufline;
+
+        $i13 = r0.tokenBegin;
+
+        $i11 = r0.bufsize;
+
+        $i10 = r0.tokenBegin;
+
+        $i12 = $i11 - $i10;
+
+        java.lang.System.arraycopy($r6, $i13, r2, 0, $i12);
+
+        r0.bufline = r2;
+
+        $r7 = r0.bufcolumn;
+
+        $i17 = r0.tokenBegin;
+
+        $i15 = r0.bufsize;
+
+        $i14 = r0.tokenBegin;
+
+        $i16 = $i15 - $i14;
+
+        java.lang.System.arraycopy($r7, $i17, r3, 0, $i16);
+
+        r0.bufcolumn = r3;
+
+        $i19 = r0.bufpos;
+
+        $i18 = r0.tokenBegin;
+
+        $i20 = $i19 - $i18;
+
+        r0.bufpos = $i20;
+
+     label3:
+        goto label5;
+
+     label4:
+        $r14 := @caughtexception;
+
+        r4 = $r14;
+
+        $r15 = new java.lang.Error;
+
+        $r16 = r4.getMessage();
+
+        specialinvoke $r15.<init>($r16);
+
+        throw $r15;
+
+     label5:
+        $i21 = r0.bufsize;
+
+        $i22 = $i21 + 2048;
+
+        r0.bufsize = $i22;
+
+        r0.available = $i22;
+
+        r0.tokenBegin = 0;
+
+        return;
+
+        catch java.lang.Throwable from label1 to label3 with label4;
+    }
+
+    protected void FillBuff() throws java.io.IOException
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i9, $i10, $i11, $i12, $i13, $i14, $i15;
+        java.io.IOException r1, $r5, $r6;
+        char[] $r2;
+        java.io.Reader $r3, $r4;
+        int[] $r7, $r8;
+
+        r0 := @this;
+
+        $i1 = r0.maxNextCharInd;
+
+        if $i1 != 4096 goto label1;
+
+        r0.nextCharInd = 0;
+
+        r0.maxNextCharInd = 0;
+
+     label1:
+        $r3 = r0.inputStream;
+
+        $r2 = r0.nextCharBuf;
+
+        $i4 = r0.maxNextCharInd;
+
+        $i2 = r0.maxNextCharInd;
+
+        $i3 = 4096 - $i2;
+
+        $i5 = $r3.read($r2, $i4, $i3);
+
+        i0 = $i5;
+
+        if $i5 != -1 goto label2;
+
+        $r4 = r0.inputStream;
+
+        $r4.close();
+
+        $r5 = new java.io.IOException;
+
+        specialinvoke $r5.<init>();
+
+        throw $r5;
+
+     label2:
+        $i6 = r0.maxNextCharInd;
+
+        $i7 = $i6 + i0;
+
+        r0.maxNextCharInd = $i7;
+
+     label3:
+        return;
+
+     label4:
+        $r6 := @caughtexception;
+
+        r1 = $r6;
+
+        $i9 = r0.bufpos;
+
+        if $i9 == 0 goto label5;
+
+        $i14 = r0.bufpos;
+
+        $i15 = $i14 - 1;
+
+        r0.bufpos = $i15;
+
+        r0.backup(0);
+
+        goto label6;
+
+     label5:
+        $r7 = r0.bufline;
+
+        $i11 = r0.bufpos;
+
+        $i10 = r0.line;
+
+        $r7[$i11] = $i10;
+
+        $r8 = r0.bufcolumn;
+
+        $i13 = r0.bufpos;
+
+        $i12 = r0.column;
+
+        $r8[$i13] = $i12;
+
+     label6:
+        throw r1;
+
+        catch java.io.IOException from label1 to label3 with label4;
+    }
+
+    protected char ReadByte() throws java.io.IOException
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int $i0, $i1, $i2, $i3;
+        char[] $r1;
+        char $c4;
+
+        r0 := @this;
+
+        $i0 = r0.nextCharInd;
+
+        $i1 = $i0 + 1;
+
+        r0.nextCharInd = $i1;
+
+        $i2 = r0.maxNextCharInd;
+
+        if $i1 < $i2 goto label1;
+
+        r0.FillBuff();
+
+     label1:
+        $r1 = r0.nextCharBuf;
+
+        $i3 = r0.nextCharInd;
+
+        $c4 = $r1[$i3];
+
+        return $c4;
+    }
+
+    public char BeginToken() throws java.io.IOException
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int $i0, $i2, $i3, $i4, $i5, $i6, $i7, $i8;
+        char $c1, $c9;
+        char[] $r1;
+
+        r0 := @this;
+
+        $i0 = r0.inBuf;
+
+        if $i0 <= 0 goto label2;
+
+        $i2 = r0.inBuf;
+
+        $i3 = $i2 - 1;
+
+        r0.inBuf = $i3;
+
+        $i4 = r0.bufpos;
+
+        $i5 = $i4 + 1;
+
+        r0.bufpos = $i5;
+
+        $i6 = r0.bufsize;
+
+        if $i5 != $i6 goto label1;
+
+        r0.bufpos = 0;
+
+     label1:
+        $i7 = r0.bufpos;
+
+        r0.tokenBegin = $i7;
+
+        $r1 = r0.buffer;
+
+        $i8 = r0.bufpos;
+
+        $c9 = $r1[$i8];
+
+        return $c9;
+
+     label2:
+        r0.tokenBegin = 0;
+
+        r0.bufpos = -1;
+
+        $c1 = r0.readChar();
+
+        return $c1;
+    }
+
+    protected void AdjustBuffSize()
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10;
+
+        r0 := @this;
+
+        $i1 = r0.available;
+
+        $i0 = r0.bufsize;
+
+        if $i1 != $i0 goto label2;
+
+        $i9 = r0.tokenBegin;
+
+        if $i9 <= 2048 goto label1;
+
+        r0.bufpos = 0;
+
+        $i10 = r0.tokenBegin;
+
+        r0.available = $i10;
+
+        goto label5;
+
+     label1:
+        r0.ExpandBuff(0);
+
+        goto label5;
+
+     label2:
+        $i3 = r0.available;
+
+        $i2 = r0.tokenBegin;
+
+        if $i3 <= $i2 goto label3;
+
+        $i8 = r0.bufsize;
+
+        r0.available = $i8;
+
+        goto label5;
+
+     label3:
+        $i5 = r0.tokenBegin;
+
+        $i4 = r0.available;
+
+        $i6 = $i5 - $i4;
+
+        if $i6 >= 2048 goto label4;
+
+        r0.ExpandBuff(1);
+
+        goto label5;
+
+     label4:
+        $i7 = r0.tokenBegin;
+
+        r0.available = $i7;
+
+     label5:
+        return;
+    }
+
+    protected void UpdateLineColumn(char)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        char c0;
+        int $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i16, $i17, $i19;
+        boolean $z0, $z1;
+        int[] $r1, $r2;
+
+        r0 := @this;
+
+        c0 := @parameter0;
+
+        $i1 = r0.column;
+
+        $i2 = $i1 + 1;
+
+        r0.column = $i2;
+
+        $z0 = r0.prevCharIsLF;
+
+        if $z0 == 0 goto label1;
+
+        r0.prevCharIsLF = 0;
+
+        $i17 = r0.line;
+
+        r0.column = 1;
+
+        $i19 = $i17 + 1;
+
+        r0.line = $i19;
+
+        goto label3;
+
+     label1:
+        $z1 = r0.prevCharIsCR;
+
+        if $z1 == 0 goto label3;
+
+        r0.prevCharIsCR = 0;
+
+        if c0 != 10 goto label2;
+
+        r0.prevCharIsLF = 1;
+
+        goto label3;
+
+     label2:
+        $i14 = r0.line;
+
+        r0.column = 1;
+
+        $i16 = $i14 + 1;
+
+        r0.line = $i16;
+
+     label3:
+        tableswitch(c0)
+        {
+            case 9: goto label6;
+            case 10: goto label5;
+            case 11: goto label7;
+            case 12: goto label7;
+            case 13: goto label4;
+            default: goto label7;
+        };
+
+     label4:
+        r0.prevCharIsCR = 1;
+
+        goto label7;
+
+     label5:
+        r0.prevCharIsLF = 1;
+
+        goto label7;
+
+     label6:
+        $i7 = r0.column;
+
+        $i8 = $i7 - 1;
+
+        r0.column = $i8;
+
+        $i12 = r0.column;
+
+        $i9 = r0.column;
+
+        $i10 = $i9 & 7;
+
+        $i11 = 8 - $i10;
+
+        $i13 = $i12 + $i11;
+
+        r0.column = $i13;
+
+        goto label7;
+
+     label7:
+        $r1 = r0.bufline;
+
+        $i4 = r0.bufpos;
+
+        $i3 = r0.line;
+
+        $r1[$i4] = $i3;
+
+        $r2 = r0.bufcolumn;
+
+        $i6 = r0.bufpos;
+
+        $i5 = r0.column;
+
+        $r2[$i6] = $i5;
+
+        return;
+    }
+
+    public char readChar() throws java.io.IOException
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int $i0, $i1, $i2, $i3, $i4, $i6, $i7, $i8, $i9, $i11, $i12, $i13, $i15, $i16, $i17, $i19, $i20, $i21, $i23, $i24, $i25, $i27, $i28, $i30, $i31, $i32, $i33, $i34, $i35, $i36, $i37, $i38, $i39, $i40, $i41, $i42, $i44, $i45, i47;
+        char[] $r1, $r2, $r3, $r4;
+        char $c5, $c10, $c14, $c18, $c22, $c26, $c29, $c43, c46, c48, c49, c50;
+        java.io.IOException $r5, $r14, r15, r16;
+        java.lang.Error $r6;
+        java.lang.StringBuilder $r7, $r8, $r9, $r10, $r11, $r12;
+        java.lang.String $r13;
+
+        r0 := @this;
+
+        $i0 = r0.inBuf;
+
+        if $i0 <= 0 goto label02;
+
+        $i37 = r0.inBuf;
+
+        $i38 = $i37 - 1;
+
+        r0.inBuf = $i38;
+
+        $i39 = r0.bufpos;
+
+        $i40 = $i39 + 1;
+
+        r0.bufpos = $i40;
+
+        $i41 = r0.bufsize;
+
+        if $i40 != $i41 goto label01;
+
+        r0.bufpos = 0;
+
+     label01:
+        $r4 = r0.buffer;
+
+        $i42 = r0.bufpos;
+
+        $c43 = $r4[$i42];
+
+        return $c43;
+
+     label02:
+        $i1 = r0.bufpos;
+
+        $i2 = $i1 + 1;
+
+        r0.bufpos = $i2;
+
+        $i3 = r0.available;
+
+        if $i2 != $i3 goto label03;
+
+        r0.AdjustBuffSize();
+
+     label03:
+        $r1 = r0.buffer;
+
+        $i4 = r0.bufpos;
+
+        $c5 = r0.ReadByte();
+
+        c46 = $c5;
+
+        $r1[$i4] = $c5;
+
+        if $c5 != 92 goto label19;
+
+        r0.UpdateLineColumn(c46);
+
+(0)     i47 = 1;
+
+     label04:
+        i47 = Phi(i47 #0, i47 #2);
+
+        $i6 = r0.bufpos;
+
+        $i7 = $i6 + 1;
+
+        r0.bufpos = $i7;
+
+        $i8 = r0.available;
+
+        if $i7 != $i8 goto label05;
+
+        r0.AdjustBuffSize();
+
+     label05:
+        $r2 = r0.buffer;
+
+        $i9 = r0.bufpos;
+
+        $c10 = r0.ReadByte();
+
+        c48 = $c10;
+
+        $r2[$i9] = $c10;
+
+        if $c10 == 92 goto label09;
+
+        r0.UpdateLineColumn(c48);
+
+        if c48 != 117 goto label07;
+
+        $i11 = i47 & 1;
+
+        if $i11 != 1 goto label07;
+
+        $i12 = r0.bufpos;
+
+        $i13 = $i12 - 1;
+
+        r0.bufpos = $i13;
+
+        if $i13 >= 0 goto label06;
+
+        $i35 = r0.bufsize;
+
+        $i36 = $i35 - 1;
+
+        r0.bufpos = $i36;
+
+     label06:
+(1)     goto label13;
+
+     label07:
+        r0.backup(i47);
+
+     label08:
+        return 92;
+
+     label09:
+        goto label12;
+
+     label10:
+        $r14 := @caughtexception;
+
+        r15 = $r14;
+
+        if i47 <= 1 goto label11;
+
+        r0.backup(i47);
+
+     label11:
+        return 92;
+
+     label12:
+        r0.UpdateLineColumn(c48);
+
+        i47 = i47 + 1;
+
+(2)     goto label04;
+
+     label13:
+        i47 = Phi(i47 #1, i47 #4);
+
+(3)     $c14 = r0.ReadByte();
+
+        c49 = $c14;
+
+        if $c14 != 117 goto label14;
+
+        $i33 = r0.column;
+
+        $i34 = $i33 + 1;
+
+        r0.column = $i34;
+
+(4)     goto label13;
+
+     label14:
+        $r3 = r0.buffer;
+
+        $i15 = r0.bufpos;
+
+        $i16 = org.gjt.sp.jedit.bsh.JavaCharStream.hexval(c49);
+
+        $i17 = $i16 << 12;
+
+        $c18 = r0.ReadByte();
+
+        $i19 = org.gjt.sp.jedit.bsh.JavaCharStream.hexval($c18);
+
+        $i20 = $i19 << 8;
+
+        $i21 = $i17 | $i20;
+
+        $c22 = r0.ReadByte();
+
+        $i23 = org.gjt.sp.jedit.bsh.JavaCharStream.hexval($c22);
+
+        $i24 = $i23 << 4;
+
+        $i25 = $i21 | $i24;
+
+        $c26 = r0.ReadByte();
+
+        $i27 = org.gjt.sp.jedit.bsh.JavaCharStream.hexval($c26);
+
+        $i28 = $i25 | $i27;
+
+        $c29 = (char) $i28;
+
+        c50 = $c29;
+
+        $r3[$i15] = $c29;
+
+        $i30 = r0.column;
+
+        $i31 = $i30 + 4;
+
+        r0.column = $i31;
+
+     label15:
+        goto label17;
+
+     label16:
+        $r5 := @caughtexception;
+
+        i47 = Phi(i47 #1, i47 #3);
+
+        r16 = $r5;
+
+        $r6 = new java.lang.Error;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("Invalid escape character at line ");
+
+        $i44 = r0.line;
+
+        $r9 = $r8.append($i44);
+
+        $r10 = $r9.append(" column ");
+
+        $i45 = r0.column;
+
+        $r11 = $r10.append($i45);
+
+        $r12 = $r11.append(".");
+
+        $r13 = $r12.toString();
+
+        specialinvoke $r6.<init>($r13);
+
+        throw $r6;
+
+     label17:
+        if i47 != 1 goto label18;
+
+        return c50;
+
+     label18:
+        $i32 = i47 - 1;
+
+        r0.backup($i32);
+
+        return 92;
+
+     label19:
+        r0.UpdateLineColumn(c46);
+
+        return c46;
+
+        catch java.io.IOException from label05 to label06 with label10;
+        catch java.io.IOException from label07 to label08 with label10;
+        catch java.io.IOException from label13 to label15 with label16;
+    }
+
+    public int getColumn()
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int $i0, $i1;
+        int[] $r1;
+
+        r0 := @this;
+
+        $r1 = r0.bufcolumn;
+
+        $i0 = r0.bufpos;
+
+        $i1 = $r1[$i0];
+
+        return $i1;
+    }
+
+    public int getLine()
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int $i0, $i1;
+        int[] $r1;
+
+        r0 := @this;
+
+        $r1 = r0.bufline;
+
+        $i0 = r0.bufpos;
+
+        $i1 = $r1[$i0];
+
+        return $i1;
+    }
+
+    public int getEndColumn()
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int $i0, $i1;
+        int[] $r1;
+
+        r0 := @this;
+
+        $r1 = r0.bufcolumn;
+
+        $i0 = r0.bufpos;
+
+        $i1 = $r1[$i0];
+
+        return $i1;
+    }
+
+    public int getEndLine()
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int $i0, $i1;
+        int[] $r1;
+
+        r0 := @this;
+
+        $r1 = r0.bufline;
+
+        $i0 = r0.bufpos;
+
+        $i1 = $r1[$i0];
+
+        return $i1;
+    }
+
+    public int getBeginColumn()
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int $i0, $i1;
+        int[] $r1;
+
+        r0 := @this;
+
+        $r1 = r0.bufcolumn;
+
+        $i0 = r0.tokenBegin;
+
+        $i1 = $r1[$i0];
+
+        return $i1;
+    }
+
+    public int getBeginLine()
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int $i0, $i1;
+        int[] $r1;
+
+        r0 := @this;
+
+        $r1 = r0.bufline;
+
+        $i0 = r0.tokenBegin;
+
+        $i1 = $r1[$i0];
+
+        return $i1;
+    }
+
+    public void backup(int)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $i1 = r0.inBuf;
+
+        $i2 = $i1 + i0;
+
+        r0.inBuf = $i2;
+
+        $i3 = r0.bufpos;
+
+        $i4 = $i3 - i0;
+
+        r0.bufpos = $i4;
+
+        if $i4 >= 0 goto label1;
+
+        $i6 = r0.bufpos;
+
+        $i5 = r0.bufsize;
+
+        $i7 = $i6 + $i5;
+
+        r0.bufpos = $i7;
+
+     label1:
+        return;
+    }
+
+    public void <init>(java.io.Reader, int, int, int)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        java.io.Reader r1;
+        int i0, i1, i2, $i3;
+        char[] $r2, $r5;
+        int[] $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        specialinvoke r0.<init>();
+
+        r0.bufpos = -1;
+
+        r0.column = 0;
+
+        r0.line = 1;
+
+        r0.prevCharIsCR = 0;
+
+        r0.prevCharIsLF = 0;
+
+        r0.maxNextCharInd = 0;
+
+        r0.nextCharInd = -1;
+
+        r0.inBuf = 0;
+
+        r0.inputStream = r1;
+
+        r0.line = i0;
+
+        $i3 = i1 - 1;
+
+        r0.column = $i3;
+
+        r0.bufsize = i2;
+
+        r0.available = i2;
+
+        $r2 = newarray (char)[i2];
+
+        r0.buffer = $r2;
+
+        $r3 = newarray (int)[i2];
+
+        r0.bufline = $r3;
+
+        $r4 = newarray (int)[i2];
+
+        r0.bufcolumn = $r4;
+
+        $r5 = newarray (char)[4096];
+
+        r0.nextCharBuf = $r5;
+
+        return;
+    }
+
+    public void <init>(java.io.Reader, int, int)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        java.io.Reader r1;
+        int i0, i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        specialinvoke r0.<init>(r1, i0, i1, 4096);
+
+        return;
+    }
+
+    public void <init>(java.io.Reader)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        java.io.Reader r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(r1, 1, 1, 4096);
+
+        return;
+    }
+
+    public void ReInit(java.io.Reader, int, int, int)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        java.io.Reader r1;
+        int i0, i1, i2, $i3, $i6;
+        char[] $r2, $r3, $r6, $r7;
+        int[] $r4, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        r0.inputStream = r1;
+
+        r0.line = i0;
+
+        $i3 = i1 - 1;
+
+        r0.column = $i3;
+
+        $r2 = r0.buffer;
+
+        if $r2 == null goto label1;
+
+        $r7 = r0.buffer;
+
+        $i6 = lengthof $r7;
+
+        if i2 == $i6 goto label2;
+
+     label1:
+        r0.bufsize = i2;
+
+        r0.available = i2;
+
+        $r3 = newarray (char)[i2];
+
+        r0.buffer = $r3;
+
+        $r4 = newarray (int)[i2];
+
+        r0.bufline = $r4;
+
+        $r5 = newarray (int)[i2];
+
+        r0.bufcolumn = $r5;
+
+        $r6 = newarray (char)[4096];
+
+        r0.nextCharBuf = $r6;
+
+     label2:
+        r0.prevCharIsCR = 0;
+
+        r0.prevCharIsLF = 0;
+
+        r0.maxNextCharInd = 0;
+
+        r0.inBuf = 0;
+
+        r0.tokenBegin = 0;
+
+        r0.bufpos = -1;
+
+        r0.nextCharInd = -1;
+
+        return;
+    }
+
+    public void ReInit(java.io.Reader, int, int)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        java.io.Reader r1;
+        int i0, i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        r0.ReInit(r1, i0, i1, 4096);
+
+        return;
+    }
+
+    public void ReInit(java.io.Reader)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        java.io.Reader r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.ReInit(r1, 1, 1, 4096);
+
+        return;
+    }
+
+    public void <init>(java.io.InputStream, int, int, int)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        java.io.InputStream r1;
+        int i0, i1, i2;
+        java.io.InputStreamReader $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        $r2 = new java.io.InputStreamReader;
+
+        specialinvoke $r2.<init>(r1);
+
+        specialinvoke r0.<init>($r2, i0, i1, 4096);
+
+        return;
+    }
+
+    public void <init>(java.io.InputStream, int, int)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        java.io.InputStream r1;
+        int i0, i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        specialinvoke r0.<init>(r1, i0, i1, 4096);
+
+        return;
+    }
+
+    public void <init>(java.io.InputStream)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        java.io.InputStream r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(r1, 1, 1, 4096);
+
+        return;
+    }
+
+    public void ReInit(java.io.InputStream, int, int, int)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        java.io.InputStream r1;
+        int i0, i1, i2;
+        java.io.InputStreamReader $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        $r2 = new java.io.InputStreamReader;
+
+        specialinvoke $r2.<init>(r1);
+
+        r0.ReInit($r2, i0, i1, 4096);
+
+        return;
+    }
+
+    public void ReInit(java.io.InputStream, int, int)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        java.io.InputStream r1;
+        int i0, i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        r0.ReInit(r1, i0, i1, 4096);
+
+        return;
+    }
+
+    public void ReInit(java.io.InputStream)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        java.io.InputStream r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.ReInit(r1, 1, 1, 4096);
+
+        return;
+    }
+
+    public java.lang.String GetImage()
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12;
+        java.lang.StringBuilder $r1, $r4, $r7;
+        java.lang.String $r2, $r5, $r8, $r9;
+        char[] $r3, $r6, $r10;
+
+        r0 := @this;
+
+        $i1 = r0.bufpos;
+
+        $i0 = r0.tokenBegin;
+
+        if $i1 < $i0 goto label1;
+
+        $r9 = new java.lang.String;
+
+        $r10 = r0.buffer;
+
+        $i12 = r0.tokenBegin;
+
+        $i9 = r0.bufpos;
+
+        $i8 = r0.tokenBegin;
+
+        $i10 = $i9 - $i8;
+
+        $i11 = $i10 + 1;
+
+        specialinvoke $r9.<init>($r10, $i12, $i11);
+
+        return $r9;
+
+     label1:
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = new java.lang.String;
+
+        $r3 = r0.buffer;
+
+        $i5 = r0.tokenBegin;
+
+        $i3 = r0.bufsize;
+
+        $i2 = r0.tokenBegin;
+
+        $i4 = $i3 - $i2;
+
+        specialinvoke $r2.<init>($r3, $i5, $i4);
+
+        $r4 = $r1.append($r2);
+
+        $r5 = new java.lang.String;
+
+        $r6 = r0.buffer;
+
+        $i6 = r0.bufpos;
+
+        $i7 = $i6 + 1;
+
+        specialinvoke $r5.<init>($r6, 0, $i7);
+
+        $r7 = $r4.append($r5);
+
+        $r8 = $r7.toString();
+
+        return $r8;
+    }
+
+    public char[] GetSuffix(int)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18;
+        char[] r1, $r2, $r3, $r4;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 = newarray (char)[i0];
+
+        $i1 = r0.bufpos;
+
+        $i2 = $i1 + 1;
+
+        if $i2 < i0 goto label1;
+
+        $r4 = r0.buffer;
+
+        $i16 = r0.bufpos;
+
+        $i17 = $i16 - i0;
+
+        $i18 = $i17 + 1;
+
+        java.lang.System.arraycopy($r4, $i18, r1, 0, i0);
+
+        goto label2;
+
+     label1:
+        $r2 = r0.buffer;
+
+        $i6 = r0.bufsize;
+
+        $i3 = r0.bufpos;
+
+        $i4 = i0 - $i3;
+
+        $i5 = $i4 - 1;
+
+        $i10 = $i6 - $i5;
+
+        $i7 = r0.bufpos;
+
+        $i8 = i0 - $i7;
+
+        $i9 = $i8 - 1;
+
+        java.lang.System.arraycopy($r2, $i10, r1, 0, $i9);
+
+        $r3 = r0.buffer;
+
+        $i11 = r0.bufpos;
+
+        $i12 = i0 - $i11;
+
+        $i15 = $i12 - 1;
+
+        $i13 = r0.bufpos;
+
+        $i14 = $i13 + 1;
+
+        java.lang.System.arraycopy($r3, 0, r1, $i15, $i14);
+
+     label2:
+        return r1;
+    }
+
+    public void Done()
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+
+        r0 := @this;
+
+        r0.nextCharBuf = null;
+
+        r0.buffer = null;
+
+        r0.bufline = null;
+
+        r0.bufcolumn = null;
+
+        return;
+    }
+
+    public void adjustBeginLineColumn(int, int)
+    {
+        org.gjt.sp.jedit.bsh.JavaCharStream r0;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i20, $i21, $i22, $i23, $i24, $i25, $i26, $i27, $i28, $i29, $i30, $i31, $i32, $i33, $i34, $i35, i36, i37, i38, i39, i40, i41, i42, i43, i44, i38_1, i38_2;
+        int[] $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r13, $r14;
+        boolean z0, z1;
+
+        r0 := @this;
+
+        i36 := @parameter0;
+
+        i0 := @parameter1;
+
+        i37 = r0.tokenBegin;
+
+        $i2 = r0.bufpos;
+
+        $i1 = r0.tokenBegin;
+
+        if $i2 < $i1 goto label1;
+
+        $i32 = r0.bufpos;
+
+        $i31 = r0.tokenBegin;
+
+        $i34 = $i32 - $i31;
+
+        $i33 = r0.inBuf;
+
+        $i35 = $i34 + $i33;
+
+        i38 = $i35 + 1;
+
+(0)     goto label2;
+
+     label1:
+        $i4 = r0.bufsize;
+
+        $i3 = r0.tokenBegin;
+
+        $i6 = $i4 - $i3;
+
+        $i5 = r0.bufpos;
+
+        $i7 = $i6 + $i5;
+
+        $i9 = $i7 + 1;
+
+        $i8 = r0.inBuf;
+
+(1)     i38_1 = $i9 + $i8;
+
+     label2:
+        i38_2 = Phi(i38 #0, i38_1 #1);
+
+        i39 = 0;
+
+        i40 = 0;
+
+        z0 = 0;
+
+        z1 = 0;
+
+(2)     i41 = 0;
+
+     label3:
+        i39 = Phi(i39 #2, i39 #5);
+
+        i40 = Phi(i40 #2, i40 #5);
+
+        i41 = Phi(i41 #2, i41 #5);
+
+        i38 = Phi(i38_2 #2, i38 #5);
+
+        i37 = Phi(i37 #2, i37 #5);
+
+(3)     if i39 >= i38 goto label4;
+
+        $r9 = r0.bufline;
+
+        $i21 = r0.bufsize;
+
+        $i22 = i37 % $i21;
+
+        i40 = $i22;
+
+        $i26 = $r9[$i22];
+
+        $r10 = r0.bufline;
+
+        i37 = i37 + 1;
+
+        $i23 = r0.bufsize;
+
+        $i24 = i37 % $i23;
+
+        i42 = $i24;
+
+        $i25 = $r10[$i24];
+
+(4)     if $i26 != $i25 goto label4;
+
+        $r11 = r0.bufline;
+
+        $r11[i40] = i36;
+
+        $r12 = r0.bufcolumn;
+
+        $i27 = $r12[i42];
+
+        $i29 = i41 + $i27;
+
+        $r13 = r0.bufcolumn;
+
+        $i28 = $r13[i40];
+
+        i43 = $i29 - $i28;
+
+        $r14 = r0.bufcolumn;
+
+        $i30 = i0 + i41;
+
+        $r14[i40] = $i30;
+
+        i41 = i43;
+
+        i39 = i39 + 1;
+
+(5)     goto label3;
+
+     label4:
+        i40 = Phi(i40 #3, i40 #4);
+
+        i37 = Phi(i37 #3, i37 #4);
+
+(6)     if i39 >= i38 goto label7;
+
+        $r3 = r0.bufline;
+
+        i44 = i36 + 1;
+
+        $r3[i40] = i36;
+
+        $r4 = r0.bufcolumn;
+
+        $i12 = i0 + i41;
+
+(7)     $r4[i40] = $i12;
+
+     label5:
+        i44 = Phi(i44 #7, i44 #9, i44 #10);
+
+        i39 = Phi(i39 #7, i39 #9, i39 #10);
+
+        i40 = Phi(i40 #7, i40 #9, i40 #10);
+
+        i41 = Phi(i41 #7, i41 #9, i41 #10);
+
+        i38 = Phi(i38 #7, i38 #9, i38 #10);
+
+        i37 = Phi(i37 #7, i37 #9, i37 #10);
+
+        $i13 = i39;
+
+        i39 = i39 + 1;
+
+(8)     if $i13 >= i38 goto label7;
+
+        $r5 = r0.bufline;
+
+        $i14 = r0.bufsize;
+
+        $i15 = i37 % $i14;
+
+        i40 = $i15;
+
+        $i19 = $r5[$i15];
+
+        $r6 = r0.bufline;
+
+        i37 = i37 + 1;
+
+        $i16 = r0.bufsize;
+
+        $i17 = i37 % $i16;
+
+        $i18 = $r6[$i17];
+
+        if $i19 == $i18 goto label6;
+
+        $r8 = r0.bufline;
+
+        $i20 = i44;
+
+        i44 = i44 + 1;
+
+        $r8[i40] = $i20;
+
+(9)     goto label5;
+
+     label6:
+        $r7 = r0.bufline;
+
+        $r7[i40] = i44;
+
+(10)    goto label5;
+
+     label7:
+        i44 = Phi(i44 #6, i44 #8);
+
+        i39 = Phi(i39 #6, i39 #8);
+
+        i40 = Phi(i40 #6, i40 #8);
+
+        i41 = Phi(i41 #6, i41 #8);
+
+        i38 = Phi(i38 #6, i38 #8);
+
+        i37 = Phi(i37 #6, i37 #8);
+
+        $r1 = r0.bufline;
+
+        $i10 = $r1[i40];
+
+        r0.line = $i10;
+
+        $r2 = r0.bufcolumn;
+
+        $i11 = $r2[i40];
+
+        r0.column = $i11;
+
+        return;
+    }
+}

@@ -1,0 +1,244 @@
+class org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread extends org.gjt.sp.util.Task
+{
+    private final boolean download;
+    final org.gjt.sp.jedit.options.PluginManagerOptionPane this$0;
+
+    void <init>(org.gjt.sp.jedit.options.PluginManagerOptionPane, boolean)
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread r0;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane r1;
+        boolean z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.download = z0;
+
+        return;
+    }
+
+    public void _run()
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread r0;
+        java.util.ArrayList r1, $r4;
+        java.lang.Throwable r2, $r10;
+        java.lang.String $r3, $r9;
+        org.gjt.sp.jedit.pluginmgr.MirrorList $r5, r14;
+        boolean $z0, $z1, $z3;
+        java.util.List $r6;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread$2 $r7;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread$3 $r8, $r11;
+        java.lang.Exception $r12, r15;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread$1 $r13;
+
+        r0 := @this;
+
+     label01:
+        $r3 = org.gjt.sp.jedit.jEdit.getProperty("options.plugin-manager.workthread");
+
+        r0.setStatus($r3);
+
+        r0.setMaximum(3L);
+
+        r0.setValue(0L);
+
+        $r4 = new java.util.ArrayList;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4;
+
+     label02:
+        $r5 = new org.gjt.sp.jedit.pluginmgr.MirrorList;
+
+        $z0 = r0.download;
+
+        specialinvoke $r5.<init>($z0, r0);
+
+        r14 = $r5;
+
+        $z1 = r0.download;
+
+        if $z1 == 0 goto label03;
+
+        $r9 = r14.getXml();
+
+        specialinvoke r0.saveMirrorList($r9);
+
+     label03:
+        $r6 = r14.getMirrors();
+
+        r1.addAll($r6);
+
+     label04:
+        goto label06;
+
+     label05:
+        $r12 := @caughtexception;
+
+        r15 = $r12;
+
+        $z3 = r0.download;
+
+        if $z3 == 0 goto label06;
+
+        org.gjt.sp.util.Log.log(9, r0, r15);
+
+        $r13 = new org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread$1;
+
+        specialinvoke $r13.<init>(r0, r15);
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread($r13);
+
+     label06:
+        $r7 = new org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread$2;
+
+        specialinvoke $r7.<init>(r0, r1);
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread($r7);
+
+        r0.setValue(3L);
+
+     label07:
+        $r8 = new org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread$3;
+
+        specialinvoke $r8.<init>(r0);
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread($r8);
+
+        goto label10;
+
+     label08:
+        $r10 := @caughtexception;
+
+        r2 = $r10;
+
+     label09:
+        $r11 = new org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread$3;
+
+        specialinvoke $r11.<init>(r0);
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread($r11);
+
+        throw r2;
+
+     label10:
+        return;
+
+        catch java.lang.Exception from label02 to label04 with label05;
+        catch java.lang.Throwable from label01 to label07 with label08;
+        catch java.lang.Throwable from label08 to label09 with label08;
+    }
+
+    private void saveMirrorList(java.lang.String)
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread r0;
+        java.lang.String r1, r2, $r7, $r16;
+        java.io.File r3, $r6;
+        java.io.IOException r4, $r12;
+        java.lang.Throwable r5, $r17;
+        java.io.BufferedOutputStream $r8, r18, r18_1, r18_2, r18_3;
+        java.io.FileOutputStream $r9;
+        java.io.ByteArrayInputStream $r10;
+        byte[] $r11;
+        java.lang.StringBuilder $r13, $r14, $r15;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        if r2 != null goto label1;
+
+        return;
+
+     label1:
+        $r6 = new java.io.File;
+
+        $r7 = org.gjt.sp.jedit.MiscUtilities.constructPath(r2, "mirrorList.xml");
+
+        specialinvoke $r6.<init>($r7);
+
+        r3 = $r6;
+
+(0)     r18 = null;
+
+     label2:
+        $r8 = new java.io.BufferedOutputStream;
+
+(1)     $r9 = new java.io.FileOutputStream;
+
+        specialinvoke $r9.<init>(r3);
+
+        specialinvoke $r8.<init>($r9);
+
+(2)     r18_1 = $r8;
+
+(3)     $r10 = new java.io.ByteArrayInputStream;
+
+        $r11 = r1.getBytes();
+
+        specialinvoke $r10.<init>($r11);
+
+        org.gjt.sp.util.IOUtilities.copyStream(null, $r10, r18_1, 0);
+
+     label3:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r18_1);
+
+(4)     goto label8;
+
+     label4:
+(5)     $r12 := @caughtexception;
+
+        r18_2 = Phi(r18 #1, r18_1 #3);
+
+        r4 = $r12;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r14 = $r13.append("Unable to write cached mirror list : ");
+
+        $r15 = $r14.append(r3);
+
+        $r16 = $r15.toString();
+
+        org.gjt.sp.util.Log.log(9, r0, $r16);
+
+     label5:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r18_2);
+
+(6)     goto label8;
+
+     label6:
+        $r17 := @caughtexception;
+
+(7)     r18 = Phi(r18 #0, r18_1 #2, r18_2 #5, r18 #7);
+
+        r5 = $r17;
+
+     label7:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r18);
+
+        throw r5;
+
+     label8:
+        r18_3 = Phi(r18_1 #4, r18_2 #6);
+
+        return;
+
+        catch java.io.IOException from label2 to label3 with label4;
+        catch java.lang.Throwable from label2 to label3 with label6;
+        catch java.lang.Throwable from label4 to label5 with label6;
+        catch java.lang.Throwable from label6 to label7 with label6;
+    }
+}

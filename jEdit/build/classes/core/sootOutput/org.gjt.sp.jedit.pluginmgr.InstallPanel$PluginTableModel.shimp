@@ -1,0 +1,1682 @@
+class org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel extends javax.swing.table.AbstractTableModel
+{
+    private final java.util.List entries;
+    private final java.util.List filteredEntries;
+    private int sortType;
+    private java.lang.String filterString;
+    int sortDirection;
+    final org.gjt.sp.jedit.pluginmgr.InstallPanel this$0;
+
+    private void <init>(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r1;
+        java.util.ArrayList $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r2 = new java.util.ArrayList;
+
+        specialinvoke $r2.<init>();
+
+        r0.entries = $r2;
+
+        $r3 = new java.util.ArrayList;
+
+        specialinvoke $r3.<init>();
+
+        r0.filteredEntries = $r3;
+
+        r0.sortType = 1;
+
+        r0.sortDirection = 1;
+
+        return;
+    }
+
+    public void setFilterString(java.lang.String)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.filterString = r1;
+
+        r0.updateFilteredEntries();
+
+        return;
+    }
+
+    void updateFilteredEntries()
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry r1, r34;
+        java.lang.String r2, $r5, $r6, $r7, $r13, $r16, $r19, $r21, $r23, $r29, r37;
+        java.lang.String[] r3, r35;
+        int i0, $i1, i2;
+        java.util.List $r4, $r8, $r22, $r24, $r26, $r28, $r31, $r32;
+        boolean $z0, $z1, $z2, $z4, $z5, $z7, $z8, $z9, $z11, z13, z14;
+        javax.swing.event.TableModelEvent $r9;
+        java.lang.Object $r10, $r27;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r11, $r25, $r30;
+        java.lang.StringBuilder $r12, $r14, $r15, $r17, $r18, $r20;
+        java.util.Iterator r33, r36;
+
+        r0 := @this;
+
+        $r4 = r0.filteredEntries;
+
+        $r4.clear();
+
+        $r5 = r0.filterString;
+
+        if $r5 != null goto label06;
+
+        $r25 = r0.this$0;
+
+        $z7 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$600($r25);
+
+        if $z7 != 0 goto label01;
+
+        $r32 = r0.filteredEntries;
+
+        $r31 = r0.entries;
+
+        $r32.addAll($r31);
+
+(0)     goto label17;
+
+     label01:
+        $r26 = r0.entries;
+
+        r33 = $r26.iterator();
+
+     label02:
+        $z8 = r33.hasNext();
+
+        if $z8 == 0 goto label05;
+
+        $r27 = r33.next();
+
+        r34 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) $r27;
+
+        $z9 = r34.install;
+
+        if $z9 != 0 goto label03;
+
+        $r29 = r34.installedVersion;
+
+        if $r29 == null goto label03;
+
+        $r30 = r0.this$0;
+
+        $z11 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$800($r30);
+
+        if $z11 == 0 goto label04;
+
+     label03:
+        $r28 = r0.filteredEntries;
+
+        $r28.add(r34);
+
+     label04:
+        goto label02;
+
+     label05:
+(1)     goto label17;
+
+     label06:
+        $r6 = r0.filterString;
+
+        $r7 = $r6.toLowerCase();
+
+        r35 = $r7.split("\\s+");
+
+        $r8 = r0.entries;
+
+(2)     r36 = $r8.iterator();
+
+     label07:
+        r37 = Phi(r37 #2, r37 #4, r37 #5, r37 #14);
+
+        z13 = Phi(z13 #2, z13 #4, z13 #5, z13 #14);
+
+        i2 = Phi(i2 #2, i2 #4, i2 #5, i2 #14);
+
+        z14 = Phi(z14 #2, z14 #4, z14 #5, z14 #14);
+
+        $z0 = r36.hasNext();
+
+(3)     if $z0 == 0 goto label17;
+
+        $r10 = r36.next();
+
+        r1 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) $r10;
+
+        $z1 = r1.install;
+
+        if $z1 == 0 goto label08;
+
+        $r24 = r0.filteredEntries;
+
+        $r24.add(r1);
+
+(4)     goto label07;
+
+     label08:
+        $r11 = r0.this$0;
+
+        $z2 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$600($r11);
+
+        if $z2 == 0 goto label09;
+
+        $r23 = r1.installedVersion;
+
+        if $r23 == null goto label09;
+
+(5)     goto label07;
+
+     label09:
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = r1.name;
+
+        $r14 = $r12.append($r13);
+
+        $r15 = $r14.append(32);
+
+        $r16 = r1.set;
+
+        $r17 = $r15.append($r16);
+
+        $r18 = $r17.append(32);
+
+        $r19 = r1.description;
+
+        $r20 = $r18.append($r19);
+
+        $r21 = $r20.toString();
+
+        r2 = $r21.toLowerCase();
+
+        z13 = 1;
+
+        z14 = 0;
+
+        r3 = r35;
+
+        i0 = lengthof r3;
+
+(6)     i2 = 0;
+
+     label10:
+        r37 = Phi(r37 #6, r37 #13);
+
+        z13 = Phi(z13 #6, z13 #13);
+
+        i2 = Phi(i2 #6, i2 #13);
+
+        z14 = Phi(z14 #6, z14 #13);
+
+(7)     if i2 >= i0 goto label15;
+
+        r37 = r3[i2];
+
+        $z4 = r37.startsWith("-");
+
+(8)     if $z4 == 0 goto label11;
+
+        r37 = r37.substring(1);
+
+(9)     z14 = 1;
+
+     label11:
+        r37 = Phi(r37 #8, r37 #9);
+
+        z14 = Phi(z14 #8, z14 #9);
+
+        $i1 = r37.length();
+
+        if $i1 != 0 goto label12;
+
+(10)    goto label14;
+
+     label12:
+        $z5 = r2.contains(r37);
+
+        if z14 != $z5 goto label13;
+
+        z13 = 0;
+
+(11)    goto label15;
+
+     label13:
+(12)    z14 = 0;
+
+     label14:
+        z14 = Phi(z14 #10, z14 #12);
+
+        i2 = i2 + 1;
+
+(13)    goto label10;
+
+     label15:
+        r37 = Phi(r37 #7, r37 #11);
+
+        z13 = Phi(z13 #7, z13 #11);
+
+        z14 = Phi(z14 #7, z14 #11);
+
+        if z13 == 0 goto label16;
+
+        $r22 = r0.filteredEntries;
+
+        $r22.add(r1);
+
+     label16:
+(14)    goto label07;
+
+     label17:
+        r37 = Phi(r37 #0, r37 #1, r37 #3);
+
+        z13 = Phi(z13 #0, z13 #1, z13 #3);
+
+        i2 = Phi(i2 #0, i2 #1, i2 #3);
+
+        z14 = Phi(z14 #0, z14 #1, z14 #3);
+
+        $r9 = new javax.swing.event.TableModelEvent;
+
+        specialinvoke $r9.<init>(r0);
+
+        r0.fireTableChanged($r9);
+
+        return;
+    }
+
+    public java.lang.Class getColumnClass(int)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        int i0;
+        java.lang.Error $r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        tableswitch(i0)
+        {
+            case 0: goto label1;
+            case 1: goto label2;
+            case 2: goto label2;
+            case 3: goto label2;
+            case 4: goto label2;
+            case 5: goto label2;
+            default: goto label3;
+        };
+
+     label1:
+        return class "java/lang/Boolean";
+
+     label2:
+        return class "java/lang/Object";
+
+     label3:
+        $r1 = new java.lang.Error;
+
+        specialinvoke $r1.<init>("Column out of range");
+
+        throw $r1;
+    }
+
+    public int getColumnCount()
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+
+        r0 := @this;
+
+        return 6;
+    }
+
+    public java.lang.String getColumnName(int)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        int i0;
+        java.lang.StringBuilder $r1, $r2, $r4, $r6, $r7, $r9, $r11, $r12, $r14, $r16, $r17, $r19, $r21, $r22, $r24;
+        java.lang.String $r3, $r5, $r8, $r10, $r13, $r15, $r18, $r20, $r23, $r25;
+        java.lang.Error $r26;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        tableswitch(i0)
+        {
+            case 0: goto label1;
+            case 1: goto label2;
+            case 2: goto label3;
+            case 3: goto label4;
+            case 4: goto label5;
+            case 5: goto label6;
+            default: goto label7;
+        };
+
+     label1:
+        return " ";
+
+     label2:
+        $r21 = new java.lang.StringBuilder;
+
+        specialinvoke $r21.<init>();
+
+        $r22 = $r21.append(32);
+
+        $r23 = org.gjt.sp.jedit.jEdit.getProperty("install-plugins.info.name");
+
+        $r24 = $r22.append($r23);
+
+        $r25 = $r24.toString();
+
+        return $r25;
+
+     label3:
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<init>();
+
+        $r17 = $r16.append(32);
+
+        $r18 = org.gjt.sp.jedit.jEdit.getProperty("install-plugins.info.category");
+
+        $r19 = $r17.append($r18);
+
+        $r20 = $r19.toString();
+
+        return $r20;
+
+     label4:
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = $r11.append(32);
+
+        $r13 = org.gjt.sp.jedit.jEdit.getProperty("install-plugins.info.version");
+
+        $r14 = $r12.append($r13);
+
+        $r15 = $r14.toString();
+
+        return $r15;
+
+     label5:
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append(32);
+
+        $r8 = org.gjt.sp.jedit.jEdit.getProperty("install-plugins.info.size");
+
+        $r9 = $r7.append($r8);
+
+        $r10 = $r9.toString();
+
+        return $r10;
+
+     label6:
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append(32);
+
+        $r3 = org.gjt.sp.jedit.jEdit.getProperty("install-plugins.info.releaseDate");
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.toString();
+
+        return $r5;
+
+     label7:
+        $r26 = new java.lang.Error;
+
+        specialinvoke $r26.<init>("Column out of range");
+
+        throw $r26;
+    }
+
+    public int getRowCount()
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        java.util.List $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.filteredEntries;
+
+        $i0 = $r1.size();
+
+        return $i0;
+    }
+
+    public java.lang.Object getValueAt(int, int)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        int i0, i1, $i2;
+        java.lang.Object r1;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry r2;
+        java.util.List $r3;
+        boolean $z0, $z1;
+        java.lang.Boolean $r4;
+        java.lang.String $r5, $r6, $r7, $r8, $r10, $r13, $r15, $r16, $r17;
+        java.lang.StringBuilder $r9, $r11, $r12, $r14;
+        java.lang.Error $r18;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $r3 = r0.filteredEntries;
+
+        r1 = $r3.get(i0);
+
+        $z0 = r1 instanceof java.lang.String;
+
+        if $z0 == 0 goto label02;
+
+        if i1 != 1 goto label01;
+
+        return r1;
+
+     label01:
+        return null;
+
+     label02:
+        r2 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) r1;
+
+        tableswitch(i1)
+        {
+            case 0: goto label03;
+            case 1: goto label04;
+            case 2: goto label05;
+            case 3: goto label06;
+            case 4: goto label08;
+            case 5: goto label09;
+            default: goto label10;
+        };
+
+     label03:
+        $z1 = r2.install;
+
+        $r4 = java.lang.Boolean.valueOf($z1);
+
+        return $r4;
+
+     label04:
+        $r17 = r2.name;
+
+        return $r17;
+
+     label05:
+        $r16 = r2.set;
+
+        return $r16;
+
+     label06:
+        $r7 = r2.installedVersion;
+
+        if $r7 == null goto label07;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = r2.installedVersion;
+
+        $r11 = $r9.append($r10);
+
+        $r12 = $r11.append("->");
+
+        $r13 = r2.version;
+
+        $r14 = $r12.append($r13);
+
+        $r15 = $r14.toString();
+
+        return $r15;
+
+     label07:
+        $r8 = r2.version;
+
+        return $r8;
+
+     label08:
+        $i2 = r2.size;
+
+        $r6 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$900($i2);
+
+        return $r6;
+
+     label09:
+        $r5 = r2.date;
+
+        return $r5;
+
+     label10:
+        $r18 = new java.lang.Error;
+
+        specialinvoke $r18.<init>("Column out of range");
+
+        throw $r18;
+    }
+
+    public boolean isCellEditable(int, int)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        int i0, i1;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        if i1 != 0 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    public void setSelectAll(boolean)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        boolean z0, $z1;
+        int i0, i1;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry r1;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r2;
+        javax.swing.event.TableModelEvent $r3;
+        java.util.List $r4;
+        java.lang.Object $r5;
+        java.util.LinkedList $r6;
+        java.lang.Boolean $r7;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $z1 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$1000($r2);
+
+        if $z1 == 0 goto label1;
+
+        return;
+
+     label1:
+        i0 = r0.getRowCount();
+
+(0)     i1 = 0;
+
+     label2:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label5;
+
+        if z0 == 0 goto label3;
+
+        $r7 = java.lang.Boolean.TRUE;
+
+        r0.setValueAt($r7, i1, 0);
+
+        goto label4;
+
+     label3:
+        $r4 = r0.filteredEntries;
+
+        $r5 = $r4.get(i1);
+
+        r1 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) $r5;
+
+        $r6 = new java.util.LinkedList;
+
+        specialinvoke $r6.<init>();
+
+        r1.dependents = $r6;
+
+        r1.install = 0;
+
+     label4:
+        i1 = i1 + 1;
+
+(1)     goto label2;
+
+     label5:
+        $r3 = new javax.swing.event.TableModelEvent;
+
+        specialinvoke $r3.<init>(r0);
+
+        r0.fireTableChanged($r3);
+
+        return;
+    }
+
+    public void setSortType(int)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r0.sortType = i0;
+
+        r0.sort(i0);
+
+        return;
+    }
+
+    private boolean deselectDependents(org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry r1, r5;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry[] r2, r4;
+        java.lang.String[] r3, $r6;
+        int i0, i1, $i2, i3;
+        java.lang.String $r7;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r8;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getTransitiveDependents();
+
+        $i2 = lengthof r2;
+
+        if $i2 != 0 goto label1;
+
+        return 1;
+
+     label1:
+        $r6 = newarray (java.lang.String)[1];
+
+        $r7 = r1.name;
+
+        $r6[0] = $r7;
+
+        r3 = $r6;
+
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$1100($r8);
+
+        i0 = org.gjt.sp.jedit.GUIUtilities.listConfirm($r9, "plugin-manager.dependency", r3, r2);
+
+        if i0 == 0 goto label2;
+
+        r1.install = 1;
+
+        return 0;
+
+     label2:
+        r4 = r2;
+
+        i1 = lengthof r4;
+
+(0)     i3 = 0;
+
+     label3:
+        i3 = Phi(i3 #0, i3 #1);
+
+        if i3 >= i1 goto label4;
+
+        r5 = r4[i3];
+
+        r5.install = 0;
+
+        r5.checked = 0;
+
+        specialinvoke r0.updateDeps(r5);
+
+        i3 = i3 + 1;
+
+(1)     goto label3;
+
+     label4:
+        return 1;
+    }
+
+    public void setValueAt(java.lang.Object, int, int)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        java.lang.Object r1, $r6, $r14, $r17, $r20;
+        int i0, i1, $i2, $i3, $i4, i5;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry r2, r4, r22;
+        boolean z0, $z1, $z2, $z3, $z4, $z5, $z6, $z9, $z10, $z12, $z14, z15;
+        java.util.ArrayList r3, $r8, $r11, r23;
+        java.util.List $r5, $r9, $r10, $r12, $r13, $r18, $r19;
+        java.lang.Boolean $r7;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r15;
+        javax.swing.JTable $r16;
+        java.util.Iterator r21, r24;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        if i1 == 0 goto label01;
+
+        return;
+
+     label01:
+        $r5 = r0.filteredEntries;
+
+        $r6 = $r5.get(i0);
+
+        r2 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) $r6;
+
+        z0 = r2.install;
+
+        $r7 = java.lang.Boolean.TRUE;
+
+        $z1 = $r7.equals(r1);
+
+        r2.install = $z1;
+
+        $z2 = r2.install;
+
+        if z0 != $z2 goto label02;
+
+        return;
+
+     label02:
+        $z3 = r2.install;
+
+        if $z3 != 0 goto label03;
+
+        $z14 = specialinvoke r0.deselectDependents(r2);
+
+        if $z14 != 0 goto label03;
+
+        return;
+
+     label03:
+        $z4 = r2.install;
+
+        r2.checked = $z4;
+
+        specialinvoke r0.updateDeps(r2);
+
+        $r8 = new java.util.ArrayList;
+
+        $r9 = r0.entries;
+
+        $i2 = $r9.size();
+
+        specialinvoke $r8.<init>($i2);
+
+        r3 = $r8;
+
+        $r10 = r0.entries;
+
+        r21 = $r10.iterator();
+
+     label04:
+        $z5 = r21.hasNext();
+
+        if $z5 == 0 goto label06;
+
+        $r20 = r21.next();
+
+        r22 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) $r20;
+
+        $z12 = r22.install;
+
+        if $z12 == 0 goto label05;
+
+        r3.add(r22);
+
+     label05:
+        goto label04;
+
+     label06:
+        $r11 = new java.util.ArrayList;
+
+        $i3 = r3.size();
+
+        specialinvoke $r11.<init>($i3);
+
+(0)     r23 = $r11;
+
+     label07:
+        z15 = Phi(z15 #0, z15 #6);
+
+        z15 = 0;
+
+(1)     r24 = r3.iterator();
+
+     label08:
+        z15 = Phi(z15 #1, z15 #5);
+
+        $z6 = r24.hasNext();
+
+        if $z6 == 0 goto label10;
+
+        $r17 = r24.next();
+
+        r4 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) $r17;
+
+        $r18 = r4.dependents;
+
+        $r18.removeAll(r23);
+
+        $z9 = r4.checked;
+
+(2)     if $z9 != 0 goto label09;
+
+        $r19 = r4.dependents;
+
+        $z10 = $r19.isEmpty();
+
+(3)     if $z10 == 0 goto label09;
+
+        r23.add(r4);
+
+        r4.install = 0;
+
+(4)     z15 = 1;
+
+     label09:
+        z15 = Phi(z15 #2, z15 #3, z15 #4);
+
+(5)     goto label08;
+
+     label10:
+        r3.removeAll(r23);
+
+(6)     if z15 != 0 goto label07;
+
+        r0.updateFilteredEntries();
+
+(7)     i5 = 0;
+
+     label11:
+        i5 = Phi(i5 #7, i5 #8);
+
+        z15 = Phi(z15 #7, z15 #8);
+
+        $r12 = r0.filteredEntries;
+
+        $i4 = $r12.size();
+
+        if i5 >= $i4 goto label13;
+
+        $r13 = r0.filteredEntries;
+
+        $r14 = $r13.get(i5);
+
+        if r2 != $r14 goto label12;
+
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300($r15);
+
+        $r16.setRowSelectionInterval(i5, i5);
+
+        goto label13;
+
+     label12:
+        i5 = i5 + 1;
+
+(8)     goto label11;
+
+     label13:
+        return;
+    }
+
+    private void updateDeps(org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry r1, r6;
+        java.util.List r2, $r12, $r16, $r17;
+        java.util.Iterator r3, r5;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Dependency r4;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin $r7, $r14, $r15, $r19;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Branch $r8;
+        boolean $z0, $z1, $z2, $z3, $z6, $z7;
+        java.lang.Object $r9, $r13;
+        java.lang.String $r10, $r11, $r18;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r7 = r1.plugin;
+
+        $r8 = $r7.getCompatibleBranch();
+
+        r2 = $r8.deps;
+
+        r3 = r2.iterator();
+
+     label1:
+        $z0 = r3.hasNext();
+
+        if $z0 == 0 goto label8;
+
+        $r9 = r3.next();
+
+        r4 = (org.gjt.sp.jedit.pluginmgr.PluginList$Dependency) $r9;
+
+        $r11 = "plugin";
+
+        $r10 = r4.what;
+
+        $z1 = $r11.equals($r10);
+
+        if $z1 == 0 goto label7;
+
+        $r12 = r0.entries;
+
+        r5 = $r12.iterator();
+
+     label2:
+        $z2 = r5.hasNext();
+
+        if $z2 == 0 goto label7;
+
+        $r13 = r5.next();
+
+        r6 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) $r13;
+
+        $r15 = r6.plugin;
+
+        $r14 = r4.plugin;
+
+        if $r15 != $r14 goto label6;
+
+        $z3 = r1.install;
+
+        if $z3 == 0 goto label5;
+
+        $r17 = r6.dependents;
+
+        $r17.add(r1);
+
+        $z6 = r6.install;
+
+        if $z6 != 0 goto label7;
+
+        $r18 = r6.installedVersion;
+
+        if $r18 != null goto label3;
+
+        r6.install = 1;
+
+        goto label4;
+
+     label3:
+        $r19 = r6.plugin;
+
+        $z7 = $r19.loaded;
+
+        if $z7 != 0 goto label4;
+
+        r6.install = 1;
+
+     label4:
+        specialinvoke r0.updateDeps(r6);
+
+        goto label7;
+
+     label5:
+        $r16 = r6.dependents;
+
+        $r16.remove(r1);
+
+        goto label7;
+
+     label6:
+        goto label2;
+
+     label7:
+        goto label1;
+
+     label8:
+        return;
+    }
+
+    public void sort(int)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        int i0, $i1, $i2;
+        java.util.HashSet r1, r2, $r3, $r4;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$EntryCompare $r5;
+        java.util.List $r6;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r7;
+        javax.swing.JTable $r8;
+        javax.swing.table.JTableHeader $r9;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r3 = new java.util.HashSet;
+
+        specialinvoke $r3.<init>();
+
+        r1 = $r3;
+
+        $r4 = new java.util.HashSet;
+
+        specialinvoke $r4.<init>();
+
+        r2 = $r4;
+
+        r0.saveSelection(r1, r2);
+
+        $i1 = r0.sortType;
+
+        if $i1 == i0 goto label1;
+
+        r0.sortDirection = 1;
+
+     label1:
+        r0.sortType = i0;
+
+        $r6 = r0.entries;
+
+        $r5 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$EntryCompare;
+
+        $i2 = r0.sortDirection;
+
+        specialinvoke $r5.<init>(i0, $i2);
+
+        java.util.Collections.sort($r6, $r5);
+
+        r0.updateFilteredEntries();
+
+        r0.restoreSelection(r1, r2);
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300($r7);
+
+        $r9 = $r8.getTableHeader();
+
+        $r9.repaint();
+
+        return;
+    }
+
+    public void update()
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        java.util.HashSet r1, r2, $r9, $r10;
+        org.gjt.sp.jedit.pluginmgr.PluginList r3;
+        java.util.Iterator r4;
+        org.gjt.sp.jedit.pluginmgr.PluginList$PluginSet r5;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin r6;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Branch r7;
+        java.lang.String r8, $r23, $r25, $r27;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r11, $r21;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r12;
+        java.util.List $r13, $r14, $r16, $r17, $r24, $r28;
+        boolean $z0, $z1, $z2, $z4;
+        int $i0, $i1, $i2, i3;
+        java.lang.Object $r15, $r19, $r20;
+        java.util.Map $r18;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry $r22, $r26;
+
+        r0 := @this;
+
+        $r9 = new java.util.HashSet;
+
+        specialinvoke $r9.<init>();
+
+        r1 = $r9;
+
+        $r10 = new java.util.HashSet;
+
+        specialinvoke $r10.<init>();
+
+        r2 = $r10;
+
+        r0.saveSelection(r1, r2);
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$1100($r11);
+
+        r3 = $r12.getPluginList();
+
+        if r3 != null goto label1;
+
+        return;
+
+     label1:
+        $r13 = r0.entries;
+
+        $r13.clear();
+
+        $r14 = r3.pluginSets;
+
+(0)     r4 = $r14.iterator();
+
+     label2:
+        i3 = Phi(i3 #0, i3 #3);
+
+        $z0 = r4.hasNext();
+
+        if $z0 == 0 goto label7;
+
+        $r15 = r4.next();
+
+        r5 = (org.gjt.sp.jedit.pluginmgr.PluginList$PluginSet) $r15;
+
+(1)     i3 = 0;
+
+     label3:
+        i3 = Phi(i3 #1, i3 #2);
+
+        $r16 = r5.plugins;
+
+        $i1 = $r16.size();
+
+        if i3 >= $i1 goto label6;
+
+        $r18 = r3.pluginHash;
+
+        $r17 = r5.plugins;
+
+        $r19 = $r17.get(i3);
+
+        $r20 = $r18.get($r19);
+
+        r6 = (org.gjt.sp.jedit.pluginmgr.PluginList$Plugin) $r20;
+
+        r7 = r6.getCompatibleBranch();
+
+        r8 = r6.getInstalledVersion();
+
+        $r21 = r0.this$0;
+
+        $z1 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$800($r21);
+
+        if $z1 == 0 goto label4;
+
+        if r7 == null goto label5;
+
+        $z4 = r7.canSatisfyDependencies();
+
+        if $z4 == 0 goto label5;
+
+        if r8 == null goto label5;
+
+        $r25 = r7.version;
+
+        $i2 = org.gjt.sp.util.StandardUtilities.compareStrings($r25, r8, 0);
+
+        if $i2 <= 0 goto label5;
+
+        $r28 = r0.entries;
+
+        $r26 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry;
+
+        $r27 = r5.name;
+
+        specialinvoke $r26.<init>(r6, $r27);
+
+        $r28.add($r26);
+
+        goto label5;
+
+     label4:
+        $z2 = r6.canBeInstalled();
+
+        if $z2 == 0 goto label5;
+
+        $r24 = r0.entries;
+
+        $r22 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry;
+
+        $r23 = r5.name;
+
+        specialinvoke $r22.<init>(r6, $r23);
+
+        $r24.add($r22);
+
+     label5:
+        i3 = i3 + 1;
+
+(2)     goto label3;
+
+     label6:
+(3)     goto label2;
+
+     label7:
+        $i0 = r0.sortType;
+
+        r0.sort($i0);
+
+        r0.restoreSelection(r1, r2);
+
+        return;
+    }
+
+    public void saveSelection(java.util.Set, java.util.Set)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        java.util.Set r1, r2;
+        int i0, i1, i2, i3, i4;
+        java.util.List $r3, $r6, $r12;
+        boolean $z0, $z2;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r4;
+        javax.swing.JTable $r5;
+        java.lang.Object $r7, $r10, $r13;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry $r8, $r14;
+        java.lang.String $r9, $r15;
+        java.lang.Boolean $r11;
+        int[] r16, r17;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r0.entries;
+
+        $z0 = $r3.isEmpty();
+
+        if $z0 == 0 goto label1;
+
+        return;
+
+     label1:
+        i2 = 0;
+
+(0)     i3 = r0.getRowCount();
+
+     label2:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 >= i3 goto label4;
+
+        $r10 = r0.getValueAt(i2, 0);
+
+        $r11 = (java.lang.Boolean) $r10;
+
+        $z2 = $r11.booleanValue();
+
+        if $z2 == 0 goto label3;
+
+        $r12 = r0.filteredEntries;
+
+        $r13 = $r12.get(i2);
+
+        $r14 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) $r13;
+
+        $r15 = $r14.toString();
+
+        r1.add($r15);
+
+     label3:
+        i2 = i2 + 1;
+
+(1)     goto label2;
+
+     label4:
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300($r4);
+
+        r16 = $r5.getSelectedRows();
+
+        r17 = r16;
+
+        i0 = lengthof r17;
+
+(2)     i4 = 0;
+
+     label5:
+        i4 = Phi(i4 #2, i4 #3);
+
+        i2 = Phi(i2 #2, i2 #3);
+
+        if i4 >= i0 goto label6;
+
+        i1 = r17[i4];
+
+        $r6 = r0.filteredEntries;
+
+        $r7 = $r6.get(i1);
+
+        $r8 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) $r7;
+
+        $r9 = $r8.toString();
+
+        r2.add($r9);
+
+        i4 = i4 + 1;
+
+(3)     goto label5;
+
+     label6:
+        return;
+    }
+
+    public void clearSelection()
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        java.util.Set $r1, $r2;
+
+        r0 := @this;
+
+        $r1 = java.util.Collections.emptySet();
+
+        $r2 = java.util.Collections.emptySet();
+
+        r0.restoreSelection($r1, $r2);
+
+        return;
+    }
+
+    public void restoreSelection(java.util.Set, java.util.Set)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        java.util.Set r1, r2;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r3, $r5, $r7, $r9, $r11, $r13, $r21, $r24;
+        javax.swing.JTable $r4, $r6, $r8, $r12, $r14, $r22;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        int $i0, $i1, i2, i3, i4, i5;
+        javax.swing.JScrollPane $r10;
+        java.util.List $r15, $r18, $r23;
+        java.lang.Object $r16, $r19, r30;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry $r17, $r20, $r28;
+        java.util.Collection $r25;
+        java.lang.Boolean $r26, $r27;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin $r29;
+        java.lang.String r31, r32, r34;
+        javax.swing.ListSelectionModel r33;
+        javax.swing.JScrollBar r35;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i2 = 0;
+
+(0)     i3 = r0.getRowCount();
+
+     label01:
+        i2 = Phi(i2 #0, i2 #3);
+
+        r31 = Phi(r31 #0, r31 #3);
+
+        if i2 >= i3 goto label05;
+
+        $r23 = r0.filteredEntries;
+
+        r30 = $r23.get(i2);
+
+        r31 = r30.toString();
+
+        $z3 = r30 instanceof org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry;
+
+(1)     if $z3 == 0 goto label02;
+
+        $r28 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) r30;
+
+        $r29 = $r28.plugin;
+
+(2)     r31 = $r29.jar;
+
+     label02:
+        r31 = Phi(r31 #1, r31 #2);
+
+        $r24 = r0.this$0;
+
+        $r25 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$1200($r24);
+
+        $z4 = $r25.contains(r31);
+
+        if $z4 == 0 goto label03;
+
+        $r27 = java.lang.Boolean.valueOf(1);
+
+        r0.setValueAt($r27, i2, 0);
+
+        goto label04;
+
+     label03:
+        $z5 = r1.contains(r31);
+
+        $r26 = java.lang.Boolean.valueOf($z5);
+
+        r0.setValueAt($r26, i2, 0);
+
+     label04:
+        i2 = i2 + 1;
+
+(3)     goto label01;
+
+     label05:
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300($r3);
+
+        if $r4 != null goto label06;
+
+        return;
+
+     label06:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300($r5);
+
+        $r6.setColumnSelectionInterval(0, 0);
+
+        $z0 = r2.isEmpty();
+
+        if $z0 != 0 goto label13;
+
+        i4 = 0;
+
+(4)     i5 = r0.getRowCount();
+
+     label07:
+        i2 = Phi(i2 #4, i2 #5);
+
+        r31 = Phi(r31 #4, r31 #5);
+
+        i4 = Phi(i4 #4, i4 #5);
+
+        if i4 >= i5 goto label09;
+
+        $r18 = r0.filteredEntries;
+
+        $r19 = $r18.get(i4);
+
+        $r20 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) $r19;
+
+        r32 = $r20.toString();
+
+        $z2 = r2.contains(r32);
+
+        if $z2 == 0 goto label08;
+
+        $r21 = r0.this$0;
+
+        $r22 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300($r21);
+
+        $r22.setRowSelectionInterval(i4, i4);
+
+        goto label09;
+
+     label08:
+        i4 = i4 + 1;
+
+(5)     goto label07;
+
+     label09:
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300($r13);
+
+(6)     r33 = $r14.getSelectionModel();
+
+     label10:
+        i2 = Phi(i2 #6, i2 #7);
+
+        r31 = Phi(r31 #6, r31 #7);
+
+        i4 = Phi(i4 #6, i4 #7);
+
+        if i4 >= i5 goto label12;
+
+        $r15 = r0.filteredEntries;
+
+        $r16 = $r15.get(i4);
+
+        $r17 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) $r16;
+
+        r34 = $r17.toString();
+
+        $z1 = r2.contains(r34);
+
+        if $z1 == 0 goto label11;
+
+        r33.addSelectionInterval(i4, i4);
+
+     label11:
+        i4 = i4 + 1;
+
+(7)     goto label10;
+
+     label12:
+(8)     goto label15;
+
+     label13:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300($r7);
+
+        $i0 = $r8.getRowCount();
+
+        if $i0 == 0 goto label14;
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300($r11);
+
+        $r12.setRowSelectionInterval(0, 0);
+
+     label14:
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$1300($r9);
+
+        r35 = $r10.getVerticalScrollBar();
+
+        $i1 = r35.getMinimum();
+
+(9)     r35.setValue($i1);
+
+     label15:
+        i2 = Phi(i2 #8, i2 #9);
+
+        r31 = Phi(r31 #8, r31 #9);
+
+        i4 = Phi(i4 #8, i4 #9);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.InstallPanel, org.gjt.sp.jedit.pluginmgr.InstallPanel$1)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r1;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+
+    static java.util.List access$1400(org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        java.util.List $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.filteredEntries;
+
+        return $r1;
+    }
+
+    static java.util.List access$1500(org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        java.util.List $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.entries;
+
+        return $r1;
+    }
+
+    static int access$1700(org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel r0;
+        int $i0;
+
+        r0 := @parameter0;
+
+        $i0 = r0.sortType;
+
+        return $i0;
+    }
+}

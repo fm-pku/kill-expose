@@ -1,0 +1,165 @@
+class org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$KeyHandler extends java.awt.event.KeyAdapter
+{
+    final org.gjt.sp.jedit.gui.ActionBar$CompletionPopup this$1;
+
+    private void <init>(org.gjt.sp.jedit.gui.ActionBar$CompletionPopup)
+    {
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$KeyHandler r0;
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$1 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void keyTyped(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$KeyHandler r0;
+        java.awt.event.KeyEvent r1;
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup $r2;
+        org.gjt.sp.jedit.gui.ActionBar $r3;
+        org.gjt.sp.jedit.gui.HistoryTextField $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$1;
+
+        $r3 = $r2.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.ActionBar.access$800($r3);
+
+        $r4.processKeyEvent(r1);
+
+        return;
+    }
+
+    public void keyPressed(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$KeyHandler r0;
+        java.awt.event.KeyEvent r1;
+        int i0, $i1, $i2, $i3, $i4, i5, i6;
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup $r2, $r4, $r7, $r9, $r11, $r12, $r16, $r18;
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$CompletionList $r3, $r5, $r8, $r10, $r13, $r14;
+        javax.swing.ListModel $r6, $r15;
+        org.gjt.sp.jedit.gui.ActionBar $r17, $r19;
+        org.gjt.sp.jedit.gui.HistoryTextField $r20;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 = r1.getKeyCode();
+
+        if i0 != 27 goto label1;
+
+        $r18 = r0.this$1;
+
+        $r19 = $r18.this$0;
+
+        $r20 = org.gjt.sp.jedit.gui.ActionBar.access$800($r19);
+
+        $r20.processKeyEvent(r1);
+
+        goto label5;
+
+     label1:
+        if i0 != 10 goto label2;
+
+        $r16 = r0.this$1;
+
+        $r17 = $r16.this$0;
+
+        org.gjt.sp.jedit.gui.ActionBar.access$500($r17);
+
+        goto label5;
+
+     label2:
+        if i0 != 38 goto label4;
+
+        $r9 = r0.this$1;
+
+        $r10 = $r9.list;
+
+        i5 = $r10.getSelectedIndex();
+
+        if i5 != 0 goto label3;
+
+        $r11 = r0.this$1;
+
+        $r14 = $r11.list;
+
+        $r12 = r0.this$1;
+
+        $r13 = $r12.list;
+
+        $r15 = $r13.getModel();
+
+        $i3 = $r15.getSize();
+
+        $i4 = $i3 - 1;
+
+        $r14.setSelectedIndex($i4);
+
+        r1.consume();
+
+     label3:
+        goto label5;
+
+     label4:
+        if i0 != 40 goto label5;
+
+        $r2 = r0.this$1;
+
+        $r3 = $r2.list;
+
+        i6 = $r3.getSelectedIndex();
+
+        $r4 = r0.this$1;
+
+        $r5 = $r4.list;
+
+        $r6 = $r5.getModel();
+
+        $i1 = $r6.getSize();
+
+        $i2 = $i1 - 1;
+
+        if i6 != $i2 goto label5;
+
+        $r7 = r0.this$1;
+
+        $r8 = $r7.list;
+
+        $r8.setSelectedIndex(0);
+
+        r1.consume();
+
+     label5:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.ActionBar$CompletionPopup, org.gjt.sp.jedit.gui.ActionBar$1)
+    {
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$KeyHandler r0;
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup r1;
+        org.gjt.sp.jedit.gui.ActionBar$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

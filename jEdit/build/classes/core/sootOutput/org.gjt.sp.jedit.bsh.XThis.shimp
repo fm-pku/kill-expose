@@ -1,0 +1,156 @@
+public class org.gjt.sp.jedit.bsh.XThis extends org.gjt.sp.jedit.bsh.This
+{
+    java.util.Hashtable interfaces;
+    java.lang.reflect.InvocationHandler invocationHandler;
+
+    public void <init>(org.gjt.sp.jedit.bsh.NameSpace, org.gjt.sp.jedit.bsh.Interpreter)
+    {
+        org.gjt.sp.jedit.bsh.XThis r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.XThis$Handler $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1, r2);
+
+        $r3 = new org.gjt.sp.jedit.bsh.XThis$Handler;
+
+        specialinvoke $r3.<init>(r0);
+
+        r0.invocationHandler = $r3;
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.bsh.XThis r0;
+        java.lang.StringBuilder $r1, $r2, $r4;
+        org.gjt.sp.jedit.bsh.NameSpace $r3;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("\'this\' reference (XThis) to Bsh object: ");
+
+        $r3 = r0.namespace;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.toString();
+
+        return $r5;
+    }
+
+    public java.lang.Object getInterface(java.lang.Class)
+    {
+        org.gjt.sp.jedit.bsh.XThis r0;
+        java.lang.Class r1;
+        java.lang.Class[] $r2;
+        java.lang.Object $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = newarray (java.lang.Class)[1];
+
+        $r2[0] = r1;
+
+        $r3 = r0.getInterface($r2);
+
+        return $r3;
+    }
+
+    public java.lang.Object getInterface(java.lang.Class[])
+    {
+        org.gjt.sp.jedit.bsh.XThis r0;
+        java.lang.Class[] r1;
+        java.lang.ClassLoader r2;
+        java.util.Hashtable $r3, $r5, $r8, $r11;
+        int $i0, $i1, $i2, i3, i4;
+        java.lang.Integer $r4, r12;
+        java.lang.Class $r6, $r10;
+        java.lang.reflect.InvocationHandler $r7;
+        java.lang.Object r13;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.interfaces;
+
+        if $r3 != null goto label1;
+
+        $r11 = new java.util.Hashtable;
+
+        specialinvoke $r11.<init>();
+
+        r0.interfaces = $r11;
+
+     label1:
+        i3 = 21;
+
+(0)     i4 = 0;
+
+     label2:
+        i4 = Phi(i4 #0, i4 #1);
+
+        i3 = Phi(i3 #0, i3 #1);
+
+        $i0 = lengthof r1;
+
+        if i4 >= $i0 goto label3;
+
+        $r10 = r1[i4];
+
+        $i1 = $r10.hashCode();
+
+        $i2 = $i1 + 3;
+
+        i3 = i3 * $i2;
+
+        i4 = i4 + 1;
+
+(1)     goto label2;
+
+     label3:
+        $r4 = new java.lang.Integer;
+
+        specialinvoke $r4.<init>(i3);
+
+        r12 = $r4;
+
+        $r5 = r0.interfaces;
+
+        r13 = $r5.get(r12);
+
+(2)     if r13 != null goto label4;
+
+        $r6 = r1[0];
+
+        r2 = $r6.getClassLoader();
+
+        $r7 = r0.invocationHandler;
+
+        r13 = java.lang.reflect.Proxy.newProxyInstance(r2, r1, $r7);
+
+        $r8 = r0.interfaces;
+
+(3)     $r8.put(r12, r13);
+
+     label4:
+        r13 = Phi(r13 #2, r13 #3);
+
+        return r13;
+    }
+}

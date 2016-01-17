@@ -1,0 +1,86 @@
+class org.gjt.sp.jedit.gui.BufferSwitcher$2$1 extends java.lang.Object implements java.util.Comparator
+{
+    final org.gjt.sp.jedit.gui.BufferSwitcher$2 this$1;
+
+    void <init>(org.gjt.sp.jedit.gui.BufferSwitcher$2)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$2$1 r0;
+        org.gjt.sp.jedit.gui.BufferSwitcher$2 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$1 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public int compare(org.gjt.sp.jedit.Buffer, org.gjt.sp.jedit.Buffer)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$2$1 r0;
+        org.gjt.sp.jedit.Buffer r1, r2;
+        boolean $z0;
+        java.lang.String $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("bufferswitcher.sortByName", 1);
+
+        if $z0 == 0 goto label1;
+
+        $r7 = r1.getName();
+
+        $r8 = $r7.toLowerCase();
+
+        $r9 = r2.getName();
+
+        $r10 = $r9.toLowerCase();
+
+        $i1 = $r8.compareTo($r10);
+
+        return $i1;
+
+     label1:
+        $r3 = r1.getPath();
+
+        $r4 = $r3.toLowerCase();
+
+        $r5 = r2.getPath();
+
+        $r6 = $r5.toLowerCase();
+
+        $i0 = $r4.compareTo($r6);
+
+        return $i0;
+    }
+
+    public volatile int compare(java.lang.Object, java.lang.Object)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$2$1 r0;
+        java.lang.Object r1, r2;
+        org.gjt.sp.jedit.Buffer $r3, $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = (org.gjt.sp.jedit.Buffer) r1;
+
+        $r3 = (org.gjt.sp.jedit.Buffer) r2;
+
+        $i0 = r0.compare($r4, $r3);
+
+        return $i0;
+    }
+}

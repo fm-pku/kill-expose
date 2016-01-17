@@ -1,0 +1,34 @@
+class org.gjt.sp.jedit.help.HelpSearchPanel$Result extends java.lang.Object
+{
+    java.lang.String file;
+    java.lang.String title;
+    int rank;
+
+    void <init>(org.gjt.sp.jedit.help.HelpIndex$HelpFile, int)
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel$Result r0;
+        org.gjt.sp.jedit.help.HelpIndex$HelpFile r1;
+        int i0;
+        java.lang.String $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        $r2 = r1.file;
+
+        r0.file = $r2;
+
+        $r3 = r1.title;
+
+        r0.title = $r3;
+
+        r0.rank = i0;
+
+        return;
+    }
+}

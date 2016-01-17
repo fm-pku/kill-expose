@@ -1,0 +1,69 @@
+public class org.gjt.sp.jedit.bufferset.BufferSet$NameSorter extends java.lang.Object implements java.util.Comparator
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bufferset.BufferSet$NameSorter r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public int compare(org.gjt.sp.jedit.Buffer, org.gjt.sp.jedit.Buffer)
+    {
+        org.gjt.sp.jedit.bufferset.BufferSet$NameSorter r0;
+        org.gjt.sp.jedit.Buffer r1, r2;
+        java.lang.String $r3, $r4, $r5, $r6;
+        int i0, i0_1, i0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r1.getName();
+
+        $r4 = r2.getName();
+
+        i0 = org.gjt.sp.util.StandardUtilities.compareStrings($r3, $r4, 1);
+
+(0)     if i0 != 0 goto label1;
+
+        $r5 = r1.getPath();
+
+        $r6 = r2.getPath();
+
+(1)     i0_1 = org.gjt.sp.util.StandardUtilities.compareStrings($r5, $r6, 1);
+
+     label1:
+        i0_2 = Phi(i0 #0, i0_1 #1);
+
+        return i0_2;
+    }
+
+    public volatile int compare(java.lang.Object, java.lang.Object)
+    {
+        org.gjt.sp.jedit.bufferset.BufferSet$NameSorter r0;
+        java.lang.Object r1, r2;
+        org.gjt.sp.jedit.Buffer $r3, $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = (org.gjt.sp.jedit.Buffer) r1;
+
+        $r3 = (org.gjt.sp.jedit.Buffer) r2;
+
+        $i0 = r0.compare($r4, $r3);
+
+        return $i0;
+    }
+}

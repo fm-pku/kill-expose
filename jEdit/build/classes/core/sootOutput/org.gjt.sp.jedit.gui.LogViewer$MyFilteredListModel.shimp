@@ -1,0 +1,124 @@
+class org.gjt.sp.jedit.gui.LogViewer$MyFilteredListModel extends org.gjt.sp.jedit.gui.FilteredListModel
+{
+
+    void <init>(javax.swing.ListModel)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$MyFilteredListModel r0;
+        javax.swing.ListModel r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+
+    public java.lang.String prepareFilter(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$MyFilteredListModel r0;
+        java.lang.String r1, $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.toLowerCase();
+
+        return $r2;
+    }
+
+    public boolean passFilter(int, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$MyFilteredListModel r0;
+        int i0;
+        java.lang.String r1, r2, $r5;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z10, $z11;
+        javax.swing.ListModel $r3;
+        java.lang.Object $r4;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        if r1 == null goto label1;
+
+        $z0 = r1.isEmpty();
+
+        if $z0 == 0 goto label2;
+
+     label1:
+        return 1;
+
+     label2:
+        $r3 = r0.delegated;
+
+        $r4 = $r3.getElementAt(i0);
+
+        $r5 = $r4.toString();
+
+        r2 = $r5.toLowerCase();
+
+        $z1 = org.gjt.sp.jedit.gui.LogViewer.access$1000();
+
+        if $z1 != 0 goto label3;
+
+        $z11 = r2.contains("[debug]");
+
+        if $z11 == 0 goto label3;
+
+        return 0;
+
+     label3:
+        $z2 = org.gjt.sp.jedit.gui.LogViewer.access$1100();
+
+        if $z2 != 0 goto label4;
+
+        $z10 = r2.contains("[message]");
+
+        if $z10 == 0 goto label4;
+
+        return 0;
+
+     label4:
+        $z3 = org.gjt.sp.jedit.gui.LogViewer.access$1200();
+
+        if $z3 != 0 goto label5;
+
+        $z9 = r2.contains("[notice]");
+
+        if $z9 == 0 goto label5;
+
+        return 0;
+
+     label5:
+        $z4 = org.gjt.sp.jedit.gui.LogViewer.access$1300();
+
+        if $z4 != 0 goto label6;
+
+        $z8 = r2.contains("[warning]");
+
+        if $z8 == 0 goto label6;
+
+        return 0;
+
+     label6:
+        $z5 = org.gjt.sp.jedit.gui.LogViewer.access$1400();
+
+        if $z5 != 0 goto label7;
+
+        $z7 = r2.contains("[error]");
+
+        if $z7 == 0 goto label7;
+
+        return 0;
+
+     label7:
+        $z6 = r2.contains(r1);
+
+        return $z6;
+    }
+}

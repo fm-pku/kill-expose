@@ -1,0 +1,1014 @@
+public class org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel extends javax.swing.table.AbstractTableModel
+{
+    org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] files;
+    private java.util.List extAttrs;
+    private int sortColumn;
+    private boolean ascending;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        java.util.ArrayList $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.ArrayList;
+
+        Packer.Unpack(r0);
+
+        specialinvoke $r1.<init>();
+
+        r0.extAttrs = $r1;
+
+        r0.sortColumn = 0;
+
+        r0.ascending = 1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void setRoot(org.gjt.sp.jedit.io.VFS, java.util.List)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        org.gjt.sp.jedit.io.VFS r1;
+        java.util.List r2, $r3;
+        int $i0, $i1, $i2, i3;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] $r4, $r5, $r7, $r10;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$EntryCompare $r6;
+        java.lang.String $r8;
+        boolean $z0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry $r9;
+        java.lang.Object $r11;
+        org.gjt.sp.jedit.io.VFSFile $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r0.extAttrs;
+
+        Packer.Unpack(r0);
+
+        $r3.clear();
+
+        Packer.Pack(r0);
+
+        specialinvoke r0.addExtendedAttributes(r1);
+
+        $i0 = r2.size();
+
+        $r4 = newarray (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry)[$i0];
+
+        Packer.Unpack(r0);
+
+        r0.files = $r4;
+
+        Packer.Pack(r0);
+
+(0)     i3 = 0;
+
+     label1:
+        i3 = Phi(i3 #0, i3 #1);
+
+        $r5 = r0.files;
+
+        $i1 = lengthof $r5;
+
+        if i3 >= $i1 goto label2;
+
+        $r10 = r0.files;
+
+        $r9 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry;
+
+        $r11 = r2.get(i3);
+
+        $r12 = (org.gjt.sp.jedit.io.VFSFile) $r11;
+
+        specialinvoke $r9.<init>($r12, 0);
+
+        $r10[i3] = $r9;
+
+        i3 = i3 + 1;
+
+(1)     goto label1;
+
+     label2:
+        Packer.Unpack(r0);
+
+        $r7 = r0.files;
+
+        $r6 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$EntryCompare;
+
+        $i2 = r0.sortColumn;
+
+        $r8 = r0.getSortAttribute($i2);
+
+        $z0 = r0.ascending;
+
+        specialinvoke $r6.<init>($r8, $z0);
+
+        java.util.Arrays.sort($r7, $r6);
+
+        Packer.Pack(r0);
+
+        r0.fireTableStructureChanged();
+
+        return;
+    }
+
+    public int expand(org.gjt.sp.jedit.io.VFS, org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry, java.util.List)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        org.gjt.sp.jedit.io.VFS r1;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry r2, $r12, $r16;
+        java.util.List r3;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] r4, $r5, $r6, $r9, $r10, $r11, $r15, r17;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, i14, i15, i16, i17;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$EntryCompare $r7;
+        java.lang.String $r8;
+        boolean $z0;
+        java.lang.Object $r13;
+        org.gjt.sp.jedit.io.VFSFile $r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        i14 = -1;
+
+(0)     i15 = 0;
+
+     label1:
+        i14 = Phi(i14 #0, i14 #3);
+
+        i15 = Phi(i15 #0, i15 #3);
+
+        $r5 = r0.files;
+
+        $i0 = lengthof $r5;
+
+        if i15 >= $i0 goto label3;
+
+        $r15 = r0.files;
+
+        $r16 = $r15[i15];
+
+(1)     if $r16 != r2 goto label2;
+
+(2)     i14 = i15;
+
+     label2:
+        i14 = Phi(i14 #1, i14 #2);
+
+        i15 = i15 + 1;
+
+(3)     goto label1;
+
+     label3:
+        if i14 == -1 goto label4;
+
+        r0.collapse(r1, i14);
+
+     label4:
+        specialinvoke r0.addExtendedAttributes(r1);
+
+        r2.expanded = 1;
+
+(4)     if r3 == null goto label7;
+
+        $r6 = r0.files;
+
+        $i1 = lengthof $r6;
+
+        $i2 = r3.size();
+
+        $i3 = $i1 + $i2;
+
+        r17 = newarray (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry)[$i3];
+
+        $i4 = r3.size();
+
+        r4 = newarray (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry)[$i4];
+
+(5)     i16 = 0;
+
+     label5:
+        i14 = Phi(i14 #5, i14 #6);
+
+        i15 = Phi(i15 #5, i15 #6);
+
+        i16 = Phi(i16 #5, i16 #6);
+
+        $i5 = r3.size();
+
+        if i16 >= $i5 goto label6;
+
+        $r12 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry;
+
+        $r13 = r3.get(i16);
+
+        $r14 = (org.gjt.sp.jedit.io.VFSFile) $r13;
+
+        $i12 = r2.level;
+
+        $i13 = $i12 + 1;
+
+        specialinvoke $r12.<init>($r14, $i13, r2);
+
+        r4[i16] = $r12;
+
+        i16 = i16 + 1;
+
+(6)     goto label5;
+
+     label6:
+        $r7 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$EntryCompare;
+
+        $i6 = r0.sortColumn;
+
+        Packer.Unpack(r0);
+
+        $r8 = r0.getSortAttribute($i6);
+
+        $z0 = r0.ascending;
+
+        specialinvoke $r7.<init>($r8, $z0);
+
+        java.util.Arrays.sort(r4, $r7);
+
+        i17 = i14 + 1;
+
+        $r9 = r0.files;
+
+        java.lang.System.arraycopy($r9, 0, r17, 0, i17);
+
+        $i7 = r3.size();
+
+        java.lang.System.arraycopy(r4, 0, r17, i17, $i7);
+
+        $r10 = r0.files;
+
+        $i8 = r3.size();
+
+        $i11 = i17 + $i8;
+
+        $r11 = r0.files;
+
+        $i9 = lengthof $r11;
+
+        $i10 = $i9 - i17;
+
+        java.lang.System.arraycopy($r10, i17, r17, $i11, $i10);
+
+(7)     r0.files = r17;
+
+     label7:
+        Packer.Pack(r0);
+
+        i14 = Phi(i14 #4, i14 #7);
+
+        i15 = Phi(i15 #4, i15 #7);
+
+        i16 = Phi(i16 #4, i16 #7);
+
+        r0.fireTableStructureChanged();
+
+        return i14;
+    }
+
+    public void collapse(org.gjt.sp.jedit.io.VFS, int)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        org.gjt.sp.jedit.io.VFS r1, $r12;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, i12;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry r2, r13;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] $r3, $r4, $r5, $r6, $r7, $r8, $r9, r14;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.io.VFSFile $r10;
+        java.lang.String $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        $r3 = r0.files;
+
+        r2 = $r3[i0];
+
+        $z0 = r2.expanded;
+
+        if $z0 != 0 goto label1;
+
+        return;
+
+     label1:
+        r2.expanded = 0;
+
+(0)     i12 = i0 + 1;
+
+     label2:
+        i12 = Phi(i12 #0, i12 #1);
+
+        $r4 = r0.files;
+
+        $i1 = lengthof $r4;
+
+        if i12 >= $i1 goto label5;
+
+        $r9 = r0.files;
+
+        r13 = $r9[i12];
+
+        $i11 = r13.level;
+
+        $i10 = r2.level;
+
+        if $i11 > $i10 goto label3;
+
+        goto label5;
+
+     label3:
+        i12 = i12 + 1;
+
+        $z1 = r13.expanded;
+
+        if $z1 == 0 goto label4;
+
+        $r10 = r13.dirEntry;
+
+        $r11 = $r10.getPath();
+
+        $r12 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath($r11);
+
+        specialinvoke r0.removeExtendedAttributes($r12);
+
+     label4:
+(1)     goto label2;
+
+     label5:
+        specialinvoke r0.removeExtendedAttributes(r1);
+
+        $r5 = r0.files;
+
+        $i2 = lengthof $r5;
+
+        $i3 = $i2 - i12;
+
+        $i4 = $i3 + i0;
+
+        $i5 = $i4 + 1;
+
+        r14 = newarray (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry)[$i5];
+
+        $r6 = r0.files;
+
+        $i6 = i0 + 1;
+
+        Packer.Unpack(r0);
+
+        java.lang.System.arraycopy($r6, 0, r14, 0, $i6);
+
+        $r8 = r0.files;
+
+        $i9 = i0 + 1;
+
+        $r7 = r0.files;
+
+        $i7 = lengthof $r7;
+
+        $i8 = $i7 - i12;
+
+        java.lang.System.arraycopy($r8, i12, r14, $i9, $i8);
+
+        r0.files = r14;
+
+        Packer.Pack(r0);
+
+        r0.fireTableStructureChanged();
+
+        return;
+    }
+
+    public int getColumnCount()
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        java.util.List $r1;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        $r1 = r0.extAttrs;
+
+        Packer.Unpack(r0);
+
+        $i0 = $r1.size();
+
+        Packer.Pack(r0);
+
+        $i1 = 1 + $i0;
+
+        return $i1;
+    }
+
+    public int getRowCount()
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] $r1, $r2;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.files;
+
+        if $r1 != null goto label1;
+
+        return 0;
+
+     label1:
+        $r2 = r0.files;
+
+        $i0 = lengthof $r2;
+
+        return $i0;
+    }
+
+    public java.lang.String getColumnName(int)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        int i0;
+        java.lang.StringBuilder $r1, $r2, $r4;
+        java.lang.String $r3, $r5, $r6, $r7;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        if i0 != 0 goto label1;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.name");
+
+        return $r7;
+
+     label1:
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("vfs.browser.");
+
+        $r3 = r0.getExtendedAttribute(i0);
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.toString();
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty($r5);
+
+        return $r6;
+    }
+
+    public java.lang.Class getColumnClass(int)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        return class "org/gjt/sp/jedit/browser/VFSDirectoryEntryTableModel$Entry";
+    }
+
+    public java.lang.Object getValueAt(int, int)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        int i0, i1;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] $r1, $r2;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry $r3;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $r1 = r0.files;
+
+        if $r1 != null goto label1;
+
+        return null;
+
+     label1:
+        $r2 = r0.files;
+
+        $r3 = $r2[i0];
+
+        return $r3;
+    }
+
+    public boolean getAscending()
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.ascending;
+
+        return $z0;
+    }
+
+    public int getSortColumn()
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.sortColumn;
+
+        return $i0;
+    }
+
+    public java.lang.String getSortAttribute(int)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        int i0;
+        java.lang.String $r1, $r1_1, $r1_2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        if i0 != 0 goto label1;
+
+        $r1 = "name";
+
+(0)     goto label2;
+
+     label1:
+(1)     $r1_1 = r0.getExtendedAttribute(i0);
+
+     label2:
+        $r1_2 = Phi($r1 #0, $r1_1 #1);
+
+        return $r1_2;
+    }
+
+    public boolean sortByColumn(int)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        int i0, $i1;
+        java.lang.String r1;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$EntryCompare $r2;
+        boolean $z0, $z1, $z2, $z2_1, $z2_2;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] $r3;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $i1 = r0.sortColumn;
+
+        if $i1 != i0 goto label1;
+
+        $z1 = r0.ascending;
+
+        if $z1 != 0 goto label2;
+
+     label1:
+        $z2_1 = 1;
+
+(0)     goto label3;
+
+     label2:
+(1)     $z2 = 0;
+
+     label3:
+        $z2_2 = Phi($z2_1 #0, $z2 #1);
+
+        Packer.Unpack(r0);
+
+        r0.ascending = $z2_2;
+
+        r1 = r0.getSortAttribute(i0);
+
+        Packer.Pack(r0);
+
+        if r1 != "status" goto label4;
+
+        return 0;
+
+     label4:
+        Packer.Unpack(r0);
+
+        $r3 = r0.files;
+
+        $r2 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$EntryCompare;
+
+        $z0 = r0.ascending;
+
+        specialinvoke $r2.<init>(r1, $z0);
+
+        java.util.Arrays.sort($r3, $r2);
+
+        r0.sortColumn = i0;
+
+        Packer.Pack(r0);
+
+        r0.fireTableStructureChanged();
+
+        return 1;
+    }
+
+    public java.lang.String getExtendedAttribute(int)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        int i0, $i1;
+        java.util.List $r1;
+        java.lang.Object $r2;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$ExtendedAttribute $r3;
+        java.lang.String $r4;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.extAttrs;
+
+        $i1 = i0 - 1;
+
+        Packer.Unpack(r0);
+
+        $r2 = $r1.get($i1);
+
+        Packer.Pack(r0);
+
+        $r3 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$ExtendedAttribute) $r2;
+
+        $r4 = $r3.name;
+
+        return $r4;
+    }
+
+    public int getColumnWidth(int)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        int i0, $i1;
+        java.lang.String r1, $r6;
+        java.lang.StringBuilder $r2, $r3, $r4, $r5;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 = r0.getExtendedAttribute(i0);
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append("vfs.browser.");
+
+        $r4 = $r3.append(r1);
+
+        $r5 = $r4.append(".width");
+
+        $r6 = $r5.toString();
+
+        $i1 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r6, 100);
+
+        return $i1;
+    }
+
+    public void setColumnWidth(int, int)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        int i0, i1;
+        java.lang.String r1, $r6;
+        java.lang.StringBuilder $r2, $r3, $r4, $r5;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        r1 = r0.getExtendedAttribute(i0);
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append("vfs.browser.");
+
+        $r4 = $r3.append(r1);
+
+        $r5 = $r4.append(".width");
+
+        $r6 = $r5.toString();
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty($r6, i1);
+
+        return;
+    }
+
+    protected void columnMoved(int, int)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        int i0, i1, $i2, $i3, $i4, $i5;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$ExtendedAttribute r1;
+        java.util.List $r2, $r4;
+        java.lang.Object $r3;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        if i0 != i1 goto label1;
+
+        return;
+
+     label1:
+        if i0 < 1 goto label2;
+
+        $i2 = r0.getColumnCount();
+
+        if i0 <= $i2 goto label3;
+
+     label2:
+        return;
+
+     label3:
+        if i1 < 1 goto label4;
+
+        $i3 = r0.getColumnCount();
+
+        if i1 <= $i3 goto label5;
+
+     label4:
+        return;
+
+     label5:
+        $r2 = r0.extAttrs;
+
+        $i4 = i0 - 1;
+
+        Packer.Unpack(r0);
+
+        $r3 = $r2.remove($i4);
+
+        r1 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$ExtendedAttribute) $r3;
+
+        $r4 = r0.extAttrs;
+
+        $i5 = i1 - 1;
+
+        $r4.add($i5, r1);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.io.VFSFile[] getFiles()
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        org.gjt.sp.jedit.io.VFSFile[] r1;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] $r2, $r3;
+        int $i0, $i1, i2;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry $r4;
+        org.gjt.sp.jedit.io.VFSFile $r5;
+
+        r0 := @this;
+
+        $r2 = r0.files;
+
+        $i0 = lengthof $r2;
+
+        r1 = newarray (org.gjt.sp.jedit.io.VFSFile)[$i0];
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $i1 = lengthof r1;
+
+        if i2 >= $i1 goto label2;
+
+        $r3 = r0.files;
+
+        $r4 = $r3[i2];
+
+        $r5 = $r4.dirEntry;
+
+        r1[i2] = $r5;
+
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return r1;
+    }
+
+    private void addExtendedAttributes(org.gjt.sp.jedit.io.VFS)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        org.gjt.sp.jedit.io.VFS r1;
+        java.lang.String[] r2;
+        java.util.Iterator r3;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$ExtendedAttribute r4, $r6;
+        int $i0, $i1, $i2, i3;
+        java.util.List $r5, $r8;
+        boolean $z0, $z2;
+        java.lang.String $r7, $r10, $r11;
+        java.lang.Object $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getExtendedAttributes();
+
+(0)     i3 = 0;
+
+     label1:
+        i3 = Phi(i3 #0, i3 #3);
+
+        $i0 = lengthof r2;
+
+        if i3 >= $i0 goto label6;
+
+        Packer.Unpack(r0);
+
+        $r5 = r0.extAttrs;
+
+(1)     r3 = $r5.iterator();
+
+     label2:
+        Packer.Pack(r0);
+
+        i3 = Phi(i3 #1, i3 #2);
+
+        $z0 = r3.hasNext();
+
+        if $z0 == 0 goto label4;
+
+        $r9 = r3.next();
+
+        r4 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$ExtendedAttribute) $r9;
+
+        $r11 = r2[i3];
+
+        $r10 = r4.name;
+
+        $z2 = $r11.equals($r10);
+
+        if $z2 == 0 goto label3;
+
+        $i1 = r4.ref;
+
+        $i2 = $i1 + 1;
+
+        r4.ref = $i2;
+
+        goto label5;
+
+     label3:
+(2)     goto label2;
+
+     label4:
+        Packer.Unpack(r0);
+
+        $r8 = r0.extAttrs;
+
+        $r6 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$ExtendedAttribute;
+
+        $r7 = r2[i3];
+
+        specialinvoke $r6.<init>($r7);
+
+        $r8.add($r6);
+
+     label5:
+        Packer.Pack(r0);
+
+        i3 = i3 + 1;
+
+(3)     goto label1;
+
+     label6:
+        return;
+    }
+
+    private void removeExtendedAttributes(org.gjt.sp.jedit.io.VFS)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r0;
+        org.gjt.sp.jedit.io.VFS r1;
+        java.lang.String[] r2;
+        java.util.Iterator r3;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$ExtendedAttribute r4;
+        int $i0, $i1, $i2, i3;
+        java.util.List $r5;
+        boolean $z0, $z1;
+        java.lang.StringBuilder $r6, $r7, $r9;
+        java.lang.String $r8, $r10, $r12, $r13;
+        java.lang.Object $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getExtendedAttributes();
+
+(0)     i3 = 0;
+
+     label1:
+        i3 = Phi(i3 #0, i3 #3);
+
+        $i0 = lengthof r2;
+
+        if i3 >= $i0 goto label6;
+
+        Packer.Unpack(r0);
+
+        $r5 = r0.extAttrs;
+
+(1)     r3 = $r5.iterator();
+
+     label2:
+        Packer.Pack(r0);
+
+        i3 = Phi(i3 #1, i3 #2);
+
+        $z0 = r3.hasNext();
+
+        if $z0 == 0 goto label4;
+
+        $r11 = r3.next();
+
+        r4 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$ExtendedAttribute) $r11;
+
+        $r13 = r2[i3];
+
+        $r12 = r4.name;
+
+        $z1 = $r13.equals($r12);
+
+        if $z1 == 0 goto label3;
+
+        $i1 = r4.ref;
+
+        $i2 = $i1 - 1;
+
+        r4.ref = $i2;
+
+        if $i2 != 0 goto label5;
+
+        r3.remove();
+
+        goto label5;
+
+     label3:
+(2)     goto label2;
+
+     label4:
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("We forgot about ");
+
+        $r8 = r2[i3];
+
+        $r9 = $r7.append($r8);
+
+        $r10 = $r9.toString();
+
+        org.gjt.sp.util.Log.log(7, r0, $r10);
+
+     label5:
+        i3 = i3 + 1;
+
+(3)     goto label1;
+
+     label6:
+        return;
+    }
+}

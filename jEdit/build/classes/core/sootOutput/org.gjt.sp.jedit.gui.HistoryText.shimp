@@ -1,0 +1,833 @@
+public class org.gjt.sp.jedit.gui.HistoryText extends java.lang.Object
+{
+    private javax.swing.text.JTextComponent text;
+    private org.gjt.sp.jedit.gui.HistoryModel historyModel;
+    private int index;
+    private java.lang.String current;
+    private javax.swing.JPopupMenu popup;
+    private boolean instantPopups;
+
+    public void <init>(javax.swing.text.JTextComponent, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        javax.swing.text.JTextComponent r1;
+        java.lang.String r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.text = r1;
+
+        r0.setModel(r2);
+
+        r0.index = -1;
+
+        return;
+    }
+
+    public void fireActionPerformed()
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+
+        r0 := @this;
+
+        return;
+    }
+
+    public int getIndex()
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.index;
+
+        return $i0;
+    }
+
+    public void setIndex(int)
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r0.index = i0;
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.gui.HistoryModel getModel()
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        org.gjt.sp.jedit.gui.HistoryModel $r1;
+
+        r0 := @this;
+
+        $r1 = r0.historyModel;
+
+        return $r1;
+    }
+
+    public void setModel(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.gui.HistoryModel $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 != null goto label1;
+
+        r0.historyModel = null;
+
+        goto label2;
+
+     label1:
+        $r2 = org.gjt.sp.jedit.gui.HistoryModel.getModel(r1);
+
+        r0.historyModel = $r2;
+
+     label2:
+        r0.index = -1;
+
+        return;
+    }
+
+    public void setInstantPopups(boolean)
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        boolean z0;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        r0.instantPopups = z0;
+
+        return;
+    }
+
+    public boolean getInstantPopups()
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.instantPopups;
+
+        return $z0;
+    }
+
+    public void addCurrentToHistory()
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        org.gjt.sp.jedit.gui.HistoryModel $r1, $r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        $r1 = r0.historyModel;
+
+        if $r1 == null goto label1;
+
+        $r2 = r0.historyModel;
+
+        $r3 = r0.getText();
+
+        $r2.addItem($r3);
+
+     label1:
+        r0.index = 0;
+
+        return;
+    }
+
+    public void doBackwardSearch()
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, i13;
+        java.lang.String r1, r2, $r6, $r13;
+        org.gjt.sp.jedit.gui.HistoryModel $r3, $r8, $r11;
+        javax.swing.text.JTextComponent $r4, $r7, $r9, $r12, $r14, $r16;
+        javax.swing.text.Document $r5, $r15, $r17;
+        java.awt.Toolkit $r10;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r3 = r0.historyModel;
+
+        if $r3 != null goto label1;
+
+        return;
+
+     label1:
+        $r4 = r0.text;
+
+        $i1 = $r4.getSelectionEnd();
+
+        $r5 = r0.getDocument();
+
+        $i2 = $r5.getLength();
+
+        if $i1 == $i2 goto label2;
+
+        $r16 = r0.text;
+
+        $r17 = r0.getDocument();
+
+        $i12 = $r17.getLength();
+
+        $r16.setCaretPosition($i12);
+
+     label2:
+        i0 = r0.getInputStart();
+
+        $r6 = r0.getText();
+
+        $r7 = r0.text;
+
+        $i3 = $r7.getSelectionStart();
+
+        $i4 = $i3 - i0;
+
+        r1 = $r6.substring(0, $i4);
+
+        if r1 != null goto label3;
+
+        r0.historyPrevious();
+
+        return;
+
+     label3:
+        $i5 = r0.index;
+
+(0)     i13 = $i5 + 1;
+
+     label4:
+        i13 = Phi(i13 #0, i13 #1);
+
+        $r8 = r0.historyModel;
+
+        $i6 = $r8.getSize();
+
+        if i13 >= $i6 goto label6;
+
+        $r11 = r0.historyModel;
+
+        r2 = $r11.getItem(i13);
+
+        $z0 = r2.startsWith(r1);
+
+        if $z0 == 0 goto label5;
+
+        $r12 = r0.text;
+
+        $i7 = r1.length();
+
+        $r13 = r2.substring($i7);
+
+        $r12.replaceSelection($r13);
+
+        $r14 = r0.text;
+
+        $i8 = r0.getInputStart();
+
+        $i9 = r1.length();
+
+        $i10 = $i8 + $i9;
+
+        $r15 = r0.getDocument();
+
+        $i11 = $r15.getLength();
+
+        $r14.select($i10, $i11);
+
+        r0.index = i13;
+
+        return;
+
+     label5:
+        i13 = i13 + 1;
+
+(1)     goto label4;
+
+     label6:
+        $r9 = r0.text;
+
+        $r10 = $r9.getToolkit();
+
+        $r10.beep();
+
+        return;
+    }
+
+    public void doForwardSearch()
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, i12;
+        java.lang.String r1, r2, $r6, $r12;
+        org.gjt.sp.jedit.gui.HistoryModel $r3, $r10;
+        javax.swing.text.JTextComponent $r4, $r7, $r8, $r11, $r13, $r15;
+        javax.swing.text.Document $r5, $r14, $r16;
+        java.awt.Toolkit $r9;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r3 = r0.historyModel;
+
+        if $r3 != null goto label1;
+
+        return;
+
+     label1:
+        $r4 = r0.text;
+
+        $i1 = $r4.getSelectionEnd();
+
+        $r5 = r0.getDocument();
+
+        $i2 = $r5.getLength();
+
+        if $i1 == $i2 goto label2;
+
+        $r15 = r0.text;
+
+        $r16 = r0.getDocument();
+
+        $i11 = $r16.getLength();
+
+        $r15.setCaretPosition($i11);
+
+     label2:
+        i0 = r0.getInputStart();
+
+        $r6 = r0.getText();
+
+        $r7 = r0.text;
+
+        $i3 = $r7.getSelectionStart();
+
+        $i4 = $i3 - i0;
+
+        r1 = $r6.substring(0, $i4);
+
+        if r1 != null goto label3;
+
+        r0.historyNext();
+
+        return;
+
+     label3:
+        $i5 = r0.index;
+
+(0)     i12 = $i5 - 1;
+
+     label4:
+        i12 = Phi(i12 #0, i12 #1);
+
+        if i12 < 0 goto label6;
+
+        $r10 = r0.historyModel;
+
+        r2 = $r10.getItem(i12);
+
+        $z0 = r2.startsWith(r1);
+
+        if $z0 == 0 goto label5;
+
+        $r11 = r0.text;
+
+        $i6 = r1.length();
+
+        $r12 = r2.substring($i6);
+
+        $r11.replaceSelection($r12);
+
+        $r13 = r0.text;
+
+        $i7 = r0.getInputStart();
+
+        $i8 = r1.length();
+
+        $i9 = $i7 + $i8;
+
+        $r14 = r0.getDocument();
+
+        $i10 = $r14.getLength();
+
+        $r13.select($i9, $i10);
+
+        r0.index = i12;
+
+        return;
+
+     label5:
+        i12 = i12 + -1;
+
+(1)     goto label4;
+
+     label6:
+        $r8 = r0.text;
+
+        $r9 = $r8.getToolkit();
+
+        $r9.beep();
+
+        return;
+    }
+
+    public void historyPrevious()
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        int i0, $i1, $i2, $i3, $i4, $i5;
+        org.gjt.sp.jedit.gui.HistoryModel $r1, $r2, $r3, $r6;
+        java.lang.String $r4, $r5, $r7;
+        javax.swing.text.JTextComponent $r8;
+        java.awt.Toolkit $r9;
+
+        r0 := @this;
+
+        $r1 = r0.historyModel;
+
+        if $r1 != null goto label1;
+
+        return;
+
+     label1:
+        $i1 = r0.index;
+
+        $r2 = r0.historyModel;
+
+        $i2 = $r2.getSize();
+
+        $i3 = $i2 - 1;
+
+        if $i1 != $i3 goto label2;
+
+        $r8 = r0.text;
+
+        $r9 = $r8.getToolkit();
+
+        $r9.beep();
+
+        goto label4;
+
+     label2:
+        $i4 = r0.index;
+
+        if $i4 != -1 goto label3;
+
+        $r5 = r0.getText();
+
+        r0.current = $r5;
+
+        $r6 = r0.historyModel;
+
+        $r7 = $r6.getItem(0);
+
+        r0.setText($r7);
+
+        r0.index = 0;
+
+        goto label4;
+
+     label3:
+        $i5 = r0.index;
+
+        i0 = $i5 + 1;
+
+        $r3 = r0.historyModel;
+
+        $r4 = $r3.getItem(i0);
+
+        r0.setText($r4);
+
+        r0.index = i0;
+
+     label4:
+        return;
+    }
+
+    public void historyNext()
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        int i0, $i1, $i2, $i3;
+        org.gjt.sp.jedit.gui.HistoryModel $r1, $r2;
+        java.lang.String $r3, $r4;
+        javax.swing.text.JTextComponent $r5;
+        java.awt.Toolkit $r6;
+
+        r0 := @this;
+
+        $r1 = r0.historyModel;
+
+        if $r1 != null goto label1;
+
+        return;
+
+     label1:
+        $i1 = r0.index;
+
+        if $i1 != -1 goto label2;
+
+        $r5 = r0.text;
+
+        $r6 = $r5.getToolkit();
+
+        $r6.beep();
+
+        goto label4;
+
+     label2:
+        $i2 = r0.index;
+
+        if $i2 != 0 goto label3;
+
+        $r4 = r0.current;
+
+        r0.setText($r4);
+
+        goto label4;
+
+     label3:
+        $i3 = r0.index;
+
+        i0 = $i3 - 1;
+
+        $r2 = r0.historyModel;
+
+        $r3 = $r2.getItem(i0);
+
+        r0.setText($r3);
+
+        r0.index = i0;
+
+     label4:
+        return;
+    }
+
+    public javax.swing.text.Document getDocument()
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        javax.swing.text.JTextComponent $r1;
+        javax.swing.text.Document $r2;
+
+        r0 := @this;
+
+        $r1 = r0.text;
+
+        $r2 = $r1.getDocument();
+
+        return $r2;
+    }
+
+    public java.lang.String getText()
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        javax.swing.text.JTextComponent $r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        $r1 = r0.text;
+
+        $r2 = $r1.getText();
+
+        return $r2;
+    }
+
+    public void setText(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        java.lang.String r1;
+        javax.swing.text.JTextComponent $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.index = -1;
+
+        $r2 = r0.text;
+
+        $r2.setText(r1);
+
+        return;
+    }
+
+    public int getInputStart()
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+
+    public void showPopupMenu(java.lang.String, int, int)
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        java.lang.String r1, r3, $r10, $r20;
+        int i0, i1, $i2, i3;
+        javax.swing.JMenuItem r2, r4, $r9, $r19;
+        org.gjt.sp.jedit.gui.HistoryModel $r5, $r15, $r18;
+        javax.swing.text.JTextComponent $r6, $r16;
+        javax.swing.JPopupMenu $r7, $r12, $r14, $r17, $r22, $r24, $r25;
+        org.gjt.sp.jedit.gui.HistoryText$1 $r8;
+        org.gjt.sp.jedit.gui.HistoryText$2 $r11;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.gui.HistoryText$ActionHandler $r21;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        $r5 = r0.historyModel;
+
+        if $r5 != null goto label1;
+
+        return;
+
+     label1:
+        $r6 = r0.text;
+
+        $r6.requestFocus();
+
+        $r7 = r0.popup;
+
+        if $r7 == null goto label2;
+
+        $r24 = r0.popup;
+
+        $z1 = $r24.isVisible();
+
+        if $z1 == 0 goto label2;
+
+        $r25 = r0.popup;
+
+        $r25.setVisible(0);
+
+        r0.popup = null;
+
+        return;
+
+     label2:
+        $r8 = new org.gjt.sp.jedit.gui.HistoryText$1;
+
+        specialinvoke $r8.<init>(r0);
+
+        r0.popup = $r8;
+
+        $r9 = new javax.swing.JMenuItem;
+
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty("history.caption");
+
+        specialinvoke $r9.<init>($r10);
+
+        r2 = $r9;
+
+        $r11 = new org.gjt.sp.jedit.gui.HistoryText$2;
+
+        specialinvoke $r11.<init>(r0);
+
+        r2.addActionListener($r11);
+
+        $r12 = r0.popup;
+
+        $r12.add(r2);
+
+        $r14 = r0.popup;
+
+        $r14.addSeparator();
+
+(0)     i3 = 0;
+
+     label3:
+        i3 = Phi(i3 #0, i3 #1);
+
+        $r15 = r0.historyModel;
+
+        $i2 = $r15.getSize();
+
+        if i3 >= $i2 goto label5;
+
+        $r18 = r0.historyModel;
+
+        r3 = $r18.getItem(i3);
+
+        $z0 = r3.startsWith(r1);
+
+        if $z0 == 0 goto label4;
+
+        $r19 = new javax.swing.JMenuItem;
+
+        specialinvoke $r19.<init>(r3);
+
+        r4 = $r19;
+
+        $r20 = java.lang.String.valueOf(i3);
+
+        r4.setActionCommand($r20);
+
+        $r21 = new org.gjt.sp.jedit.gui.HistoryText$ActionHandler;
+
+        specialinvoke $r21.<init>(r0);
+
+        r4.addActionListener($r21);
+
+        $r22 = r0.popup;
+
+        $r22.add(r4);
+
+     label4:
+        i3 = i3 + 1;
+
+(1)     goto label3;
+
+     label5:
+        $r17 = r0.popup;
+
+        $r16 = r0.text;
+
+        org.gjt.sp.jedit.GUIUtilities.showPopupMenu($r17, $r16, i0, i1, 0);
+
+        return;
+    }
+
+    public void showPopupMenu(boolean)
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        boolean z0;
+        javax.swing.text.JTextComponent $r1, $r3, $r5;
+        int $i0, $i1, $i2, $i3;
+        java.lang.String $r2, $r4;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        if z0 == 0 goto label1;
+
+        $r2 = r0.getText();
+
+        $i1 = r0.getInputStart();
+
+        $r3 = r0.text;
+
+        $i2 = $r3.getSelectionStart();
+
+        $r4 = $r2.substring($i1, $i2);
+
+        $r5 = r0.text;
+
+        $i3 = $r5.getHeight();
+
+        r0.showPopupMenu($r4, 0, $i3);
+
+        goto label2;
+
+     label1:
+        $r1 = r0.text;
+
+        $i0 = $r1.getHeight();
+
+        r0.showPopupMenu("", 0, $i0);
+
+     label2:
+        return;
+    }
+
+    static javax.swing.JPopupMenu access$002(org.gjt.sp.jedit.gui.HistoryText, javax.swing.JPopupMenu)
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        javax.swing.JPopupMenu r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.popup = r1;
+
+        return r1;
+    }
+
+    static org.gjt.sp.jedit.gui.HistoryModel access$100(org.gjt.sp.jedit.gui.HistoryText)
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        org.gjt.sp.jedit.gui.HistoryModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.historyModel;
+
+        return $r1;
+    }
+
+    static int access$200(org.gjt.sp.jedit.gui.HistoryText)
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        int $i0;
+
+        r0 := @parameter0;
+
+        $i0 = r0.index;
+
+        return $i0;
+    }
+
+    static java.lang.String access$300(org.gjt.sp.jedit.gui.HistoryText)
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        java.lang.String $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.current;
+
+        return $r1;
+    }
+
+    static int access$202(org.gjt.sp.jedit.gui.HistoryText, int)
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        int i0;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r0.index = i0;
+
+        return i0;
+    }
+
+    static boolean access$400(org.gjt.sp.jedit.gui.HistoryText)
+    {
+        org.gjt.sp.jedit.gui.HistoryText r0;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $z0 = r0.instantPopups;
+
+        return $z0;
+    }
+}

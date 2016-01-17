@@ -1,0 +1,1180 @@
+public class org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl extends org.gjt.sp.jedit.bsh.BshClassManager
+{
+    static final java.lang.String BSH_PACKAGE;
+    private org.gjt.sp.jedit.bsh.classpath.BshClassPath baseClassPath;
+    private boolean superImport;
+    private org.gjt.sp.jedit.bsh.classpath.BshClassPath fullClassPath;
+    private java.util.Vector listeners;
+    private java.lang.ref.ReferenceQueue refQueue;
+    private org.gjt.sp.jedit.bsh.classpath.BshClassLoader baseLoader;
+    private java.util.Map loaderMap;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        java.util.Vector $r1;
+        java.lang.ref.ReferenceQueue $r2;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.Vector;
+
+        specialinvoke $r1.<init>();
+
+        r0.listeners = $r1;
+
+        $r2 = new java.lang.ref.ReferenceQueue;
+
+        specialinvoke $r2.<init>();
+
+        r0.refQueue = $r2;
+
+        r0.reset();
+
+        return;
+    }
+
+    public java.lang.Class classForName(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        java.lang.String r1, $r17, $r21;
+        java.lang.ClassLoader r2, $r8, $r9, $r13, r37;
+        java.util.Hashtable $r3, $r5;
+        java.lang.Object $r4, $r6;
+        boolean $z0, $z1, $z2;
+        java.lang.Thread $r7;
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader $r10, $r11;
+        java.lang.Class $r12, r31, r31_1, r31_2, r31_3, r31_4, r31_5, r31_6, r31_7, r31_8, r31_9, r31_10, r31_11, r31_12, r31_13, r31_14, r31_15, r31_16, r31_17, r31_18, r31_19, r31_20, r31_21, r31_22, r31_23;
+        java.lang.StringBuilder $r14, $r15, $r16, $r18, $r19, $r20;
+        java.lang.ClassNotFoundException $r22, $r23, $r25, $r27, $r28, r34, r35, r36, r38, r40;
+        java.lang.Exception $r24, r32;
+        java.lang.SecurityException $r26, r39;
+        java.lang.NoClassDefFoundError $r29, r33;
+        java.lang.Error $r30;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.absoluteClassCache;
+
+        $r4 = $r3.get(r1);
+
+        r31 = (java.lang.Class) $r4;
+
+        if r31 == null goto label01;
+
+        return r31;
+
+     label01:
+        $r5 = r0.absoluteNonClasses;
+
+        $r6 = $r5.get(r1);
+
+        if $r6 == null goto label03;
+
+        $z2 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z2 == 0 goto label02;
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<init>();
+
+        $r19 = $r18.append("absoluteNonClass list hit: ");
+
+        $r20 = $r19.append(r1);
+
+        $r21 = $r20.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r21);
+
+     label02:
+        return null;
+
+     label03:
+        $z0 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z0 == 0 goto label04;
+
+        $r14 = new java.lang.StringBuilder;
+
+        specialinvoke $r14.<init>();
+
+        $r15 = $r14.append("Trying to load class: ");
+
+        $r16 = $r15.append(r1);
+
+        $r17 = $r16.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r17);
+
+     label04:
+        r2 = r0.getLoaderForClass(r1);
+
+(0)     if r2 == null goto label09;
+
+     label05:
+(1)     r31_1 = r2.loadClass(r1);
+
+     label06:
+(2)     goto label09;
+
+     label07:
+        $r24 := @caughtexception;
+
+        r31_2 = Phi(r31 #0, r31_1 #1);
+
+        r32 = $r24;
+
+(3)     goto label09;
+
+     label08:
+        $r29 := @caughtexception;
+
+        r31_3 = Phi(r31 #0, r31_1 #1);
+
+        r33 = $r29;
+
+        $r30 = org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl.noClassDefFound(r1, r33);
+
+        throw $r30;
+
+     label09:
+        r31_4 = Phi(r31 #0, r31_1 #2, r31_2 #3);
+
+(4)     if r31_4 != null goto label13;
+
+        $z1 = r1.startsWith("org.gjt.sp.jedit.bsh");
+
+(5)     if $z1 == 0 goto label13;
+
+     label10:
+(6)     $r12 = class "org/gjt/sp/jedit/bsh/Interpreter";
+
+        $r13 = $r12.getClassLoader();
+
+(7)     r31_5 = $r13.loadClass(r1);
+
+     label11:
+(8)     goto label13;
+
+     label12:
+        $r22 := @caughtexception;
+
+        r31_6 = Phi(r31_4 #6, r31_5 #7);
+
+(9)     r34 = $r22;
+
+     label13:
+        r31_7 = Phi(r31_4 #4, r31_4 #5, r31_5 #8, r31_6 #9);
+
+(10)    if r31_7 != null goto label17;
+
+        $r10 = r0.baseLoader;
+
+(11)    if $r10 == null goto label17;
+
+     label14:
+(12)    $r11 = r0.baseLoader;
+
+(13)    r31_8 = $r11.loadClass(r1);
+
+     label15:
+(14)    goto label17;
+
+     label16:
+        $r25 := @caughtexception;
+
+        r31_9 = Phi(r31_7 #12, r31_8 #13);
+
+(15)    r35 = $r25;
+
+     label17:
+        r31_10 = Phi(r31_7 #10, r31_7 #11, r31_8 #14, r31_9 #15);
+
+(16)    if r31_10 != null goto label21;
+
+        $r8 = r0.externalClassLoader;
+
+(17)    if $r8 == null goto label21;
+
+     label18:
+(18)    $r9 = r0.externalClassLoader;
+
+(19)    r31_11 = $r9.loadClass(r1);
+
+     label19:
+(20)    goto label21;
+
+     label20:
+        $r23 := @caughtexception;
+
+        r31_12 = Phi(r31_10 #18, r31_11 #19);
+
+(21)    r36 = $r23;
+
+     label21:
+        r31_13 = Phi(r31_10 #16, r31_10 #17, r31_11 #20, r31_12 #21);
+
+(22)    if r31_13 != null goto label26;
+
+     label22:
+        $r7 = java.lang.Thread.currentThread();
+
+        r37 = $r7.getContextClassLoader();
+
+(23)    if r37 == null goto label23;
+
+(24)    r31_14 = java.lang.Class.forName(r1, 1, r37);
+
+     label23:
+        r31_15 = Phi(r31_13 #23, r31_14 #24);
+
+(25)    goto label26;
+
+     label24:
+        $r27 := @caughtexception;
+
+        r31_16 = Phi(r31_13 #22, r31_14 #24);
+
+        r38 = $r27;
+
+(26)    goto label26;
+
+     label25:
+        $r26 := @caughtexception;
+
+        r31_17 = Phi(r31_13 #22, r31_14 #24);
+
+(27)    r39 = $r26;
+
+     label26:
+        r31_18 = Phi(r31_13 #22, r31_15 #25, r31_16 #26, r31_17 #27);
+
+(28)    if r31_18 != null goto label30;
+
+     label27:
+(29)    r31_19 = r0.plainClassForName(r1);
+
+     label28:
+(30)    goto label30;
+
+     label29:
+        $r28 := @caughtexception;
+
+        r31_20 = Phi(r31_18 #28, r31_19 #29);
+
+(31)    r40 = $r28;
+
+     label30:
+        r31_21 = Phi(r31_18 #28, r31_19 #30, r31_20 #31);
+
+(32)    if r31_21 != null goto label31;
+
+(33)    r31_22 = r0.loadSourceClass(r1);
+
+     label31:
+        r31_23 = Phi(r31_21 #32, r31_22 #33);
+
+        r0.cacheClassInfo(r1, r31_23);
+
+        return r31_23;
+
+        catch java.lang.Exception from label05 to label06 with label07;
+        catch java.lang.NoClassDefFoundError from label05 to label06 with label08;
+        catch java.lang.ClassNotFoundException from label10 to label11 with label12;
+        catch java.lang.ClassNotFoundException from label14 to label15 with label16;
+        catch java.lang.ClassNotFoundException from label18 to label19 with label20;
+        catch java.lang.ClassNotFoundException from label22 to label23 with label24;
+        catch java.lang.SecurityException from label22 to label23 with label25;
+        catch java.lang.ClassNotFoundException from label27 to label28 with label29;
+    }
+
+    public java.net.URL getResource(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        java.lang.String r1, $r4;
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader $r2, $r3;
+        java.net.URL r5, r5_1, r5_2, r5_3, r5_4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r5 = null;
+
+        $r2 = r0.baseLoader;
+
+(0)     if $r2 == null goto label1;
+
+        $r3 = r0.baseLoader;
+
+        $r4 = r1.substring(1);
+
+(1)     r5_1 = $r3.getResource($r4);
+
+     label1:
+        r5_2 = Phi(r5 #0, r5_1 #1);
+
+(2)     if r5_2 != null goto label2;
+
+(3)     r5_3 = specialinvoke r0.getResource(r1);
+
+     label2:
+        r5_4 = Phi(r5_2 #2, r5_3 #3);
+
+        return r5_4;
+    }
+
+    public java.io.InputStream getResourceAsStream(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        java.lang.String r1, $r4;
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader $r2, $r3;
+        java.io.InputStream r5, r5_1, r5_2, r5_3, r5_4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r5 = null;
+
+        $r2 = r0.baseLoader;
+
+(0)     if $r2 == null goto label1;
+
+        $r3 = r0.baseLoader;
+
+        $r4 = r1.substring(1);
+
+(1)     r5_1 = $r3.getResourceAsStream($r4);
+
+     label1:
+        r5_2 = Phi(r5 #0, r5_1 #1);
+
+(2)     if r5_2 != null goto label2;
+
+(3)     r5_3 = specialinvoke r0.getResourceAsStream(r1);
+
+     label2:
+        r5_4 = Phi(r5_2 #2, r5_3 #3);
+
+        return r5_4;
+    }
+
+    java.lang.ClassLoader getLoaderForClass(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        java.lang.String r1;
+        java.util.Map $r2;
+        java.lang.Object $r3;
+        java.lang.ClassLoader $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.loaderMap;
+
+        $r3 = $r2.get(r1);
+
+        $r4 = (java.lang.ClassLoader) $r3;
+
+        return $r4;
+    }
+
+    public void addClassPath(java.net.URL) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        java.net.URL r1;
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader $r2, $r3;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath $r4;
+        java.net.URL[] $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.baseLoader;
+
+        if $r2 != null goto label1;
+
+        $r5 = newarray (java.net.URL)[1];
+
+        $r5[0] = r1;
+
+        r0.setClassPath($r5);
+
+        goto label2;
+
+     label1:
+        $r3 = r0.baseLoader;
+
+        $r3.addURL(r1);
+
+        $r4 = r0.baseClassPath;
+
+        $r4.add(r1);
+
+        r0.classLoaderChanged();
+
+     label2:
+        return;
+    }
+
+    public void reset()
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath $r1;
+        java.util.HashMap $r2;
+
+        r0 := @this;
+
+        $r1 = new org.gjt.sp.jedit.bsh.classpath.BshClassPath;
+
+        specialinvoke $r1.<init>("baseClassPath");
+
+        r0.baseClassPath = $r1;
+
+        r0.baseLoader = null;
+
+        $r2 = new java.util.HashMap;
+
+        specialinvoke $r2.<init>();
+
+        r0.loaderMap = $r2;
+
+        r0.classLoaderChanged();
+
+        return;
+    }
+
+    public void setClassPath(java.net.URL[])
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        java.net.URL[] r1;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath $r2;
+        java.util.HashMap $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.baseClassPath;
+
+        $r2.setPath(r1);
+
+        specialinvoke r0.initBaseLoader();
+
+        $r3 = new java.util.HashMap;
+
+        specialinvoke $r3.<init>();
+
+        r0.loaderMap = $r3;
+
+        r0.classLoaderChanged();
+
+        return;
+    }
+
+    public void reloadAllClasses() throws org.gjt.sp.jedit.bsh.ClassPathException
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath r1, $r2, $r3, $r4;
+        java.net.URL[] $r5;
+
+        r0 := @this;
+
+        $r2 = new org.gjt.sp.jedit.bsh.classpath.BshClassPath;
+
+        specialinvoke $r2.<init>("temp");
+
+        r1 = $r2;
+
+        $r3 = r0.baseClassPath;
+
+        r1.addComponent($r3);
+
+        $r4 = org.gjt.sp.jedit.bsh.classpath.BshClassPath.getUserClassPath();
+
+        r1.addComponent($r4);
+
+        $r5 = r1.getPathComponents();
+
+        r0.setClassPath($r5);
+
+        return;
+    }
+
+    private void initBaseLoader()
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader $r1;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath $r2;
+
+        r0 := @this;
+
+        $r1 = new org.gjt.sp.jedit.bsh.classpath.BshClassLoader;
+
+        $r2 = r0.baseClassPath;
+
+        specialinvoke $r1.<init>(r0, $r2);
+
+        r0.baseLoader = $r1;
+
+        return;
+    }
+
+    public void reloadClasses(java.lang.String[]) throws org.gjt.sp.jedit.bsh.ClassPathException
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        java.lang.String[] r1;
+        org.gjt.sp.jedit.bsh.classpath.DiscreteFilesClassLoader$ClassSourceMap r2, $r4;
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader $r3;
+        int $i0, i1;
+        org.gjt.sp.jedit.bsh.classpath.DiscreteFilesClassLoader $r5, r28;
+        java.util.Set $r6;
+        boolean $z0, $z1;
+        java.util.Map $r7;
+        java.lang.Object $r8;
+        java.lang.String $r9, $r18, $r23, r26;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath $r11, $r24, $r25;
+        org.gjt.sp.jedit.bsh.ClassPathException $r12, $r19;
+        java.lang.StringBuilder $r13, $r14, $r15, $r16, $r17, $r20, $r21, $r22;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath$ClassSource r27;
+        java.util.Iterator r29;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.baseLoader;
+
+        if $r3 != null goto label1;
+
+        specialinvoke r0.initBaseLoader();
+
+     label1:
+        $r4 = new org.gjt.sp.jedit.bsh.classpath.DiscreteFilesClassLoader$ClassSourceMap;
+
+        specialinvoke $r4.<init>();
+
+        r2 = $r4;
+
+(0)     i1 = 0;
+
+     label2:
+        i1 = Phi(i1 #0, i1 #3);
+
+        r27 = Phi(r27 #0, r27 #3);
+
+        $i0 = lengthof r1;
+
+        if i1 >= $i0 goto label6;
+
+        r26 = r1[i1];
+
+        $r11 = r0.baseClassPath;
+
+        r27 = $r11.getClassSource(r26);
+
+(1)     if r27 != null goto label3;
+
+        $r24 = org.gjt.sp.jedit.bsh.classpath.BshClassPath.getUserClassPath();
+
+        $r24.insureInitialized();
+
+        $r25 = org.gjt.sp.jedit.bsh.classpath.BshClassPath.getUserClassPath();
+
+(2)     r27 = $r25.getClassSource(r26);
+
+     label3:
+        r27 = Phi(r27 #1, r27 #2);
+
+        if r27 != null goto label4;
+
+        $r19 = new org.gjt.sp.jedit.bsh.ClassPathException;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<init>();
+
+        $r21 = $r20.append("Nothing known about class: ");
+
+        $r22 = $r21.append(r26);
+
+        $r23 = $r22.toString();
+
+        specialinvoke $r19.<init>($r23);
+
+        throw $r19;
+
+     label4:
+        $z1 = r27 instanceof org.gjt.sp.jedit.bsh.classpath.BshClassPath$JarClassSource;
+
+        if $z1 == 0 goto label5;
+
+        $r12 = new org.gjt.sp.jedit.bsh.ClassPathException;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r14 = $r13.append("Cannot reload class: ");
+
+        $r15 = $r14.append(r26);
+
+        $r16 = $r15.append(" from source: ");
+
+        $r17 = $r16.append(r27);
+
+        $r18 = $r17.toString();
+
+        specialinvoke $r12.<init>($r18);
+
+        throw $r12;
+
+     label5:
+        r2.put(r26, r27);
+
+        i1 = i1 + 1;
+
+(3)     goto label2;
+
+     label6:
+        $r5 = new org.gjt.sp.jedit.bsh.classpath.DiscreteFilesClassLoader;
+
+        specialinvoke $r5.<init>(r0, r2);
+
+        r28 = $r5;
+
+        $r6 = r2.keySet();
+
+(4)     r29 = $r6.iterator();
+
+     label7:
+        i1 = Phi(i1 #4, i1 #5);
+
+        r27 = Phi(r27 #4, r27 #5);
+
+        $z0 = r29.hasNext();
+
+        if $z0 == 0 goto label8;
+
+        $r7 = r0.loaderMap;
+
+        $r8 = r29.next();
+
+        $r9 = (java.lang.String) $r8;
+
+        $r7.put($r9, r28);
+
+(5)     goto label7;
+
+     label8:
+        r0.classLoaderChanged();
+
+        return;
+    }
+
+    public void reloadPackage(java.lang.String) throws org.gjt.sp.jedit.bsh.ClassPathException
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        java.lang.String r1, $r11;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath $r2, $r12;
+        java.lang.String[] $r3, $r5, $r6;
+        java.lang.Object[] $r4;
+        org.gjt.sp.jedit.bsh.ClassPathException $r7;
+        java.lang.StringBuilder $r8, $r9, $r10;
+        java.util.Set r13, r13_1, r13_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.baseClassPath;
+
+        r13 = $r2.getClassesForPackage(r1);
+
+(0)     if r13 != null goto label1;
+
+        $r12 = org.gjt.sp.jedit.bsh.classpath.BshClassPath.getUserClassPath();
+
+(1)     r13_1 = $r12.getClassesForPackage(r1);
+
+     label1:
+        r13_2 = Phi(r13 #0, r13_1 #1);
+
+        if r13_2 != null goto label2;
+
+        $r7 = new org.gjt.sp.jedit.bsh.ClassPathException;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("No classes found for package: ");
+
+        $r10 = $r9.append(r1);
+
+        $r11 = $r10.toString();
+
+        specialinvoke $r7.<init>($r11);
+
+        throw $r7;
+
+     label2:
+        $r3 = newarray (java.lang.String)[0];
+
+        $r4 = r13_2.toArray($r3);
+
+        $r5 = (java.lang.String[]) $r4;
+
+        $r6 = (java.lang.String[]) $r5;
+
+        r0.reloadClasses($r6);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.classpath.BshClassPath getClassPath() throws org.gjt.sp.jedit.bsh.ClassPathException
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        org.gjt.sp.jedit.bsh.ClassPathException r1, $r12;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11;
+        java.io.PrintStream $r13;
+
+        r0 := @this;
+
+        $r2 = r0.fullClassPath;
+
+        if $r2 == null goto label1;
+
+        $r11 = r0.fullClassPath;
+
+        return $r11;
+
+     label1:
+        $r3 = new org.gjt.sp.jedit.bsh.classpath.BshClassPath;
+
+        specialinvoke $r3.<init>("BeanShell Full Class Path");
+
+        r0.fullClassPath = $r3;
+
+        $r4 = r0.fullClassPath;
+
+        $r5 = org.gjt.sp.jedit.bsh.classpath.BshClassPath.getUserClassPath();
+
+        $r4.addComponent($r5);
+
+     label2:
+        $r6 = r0.fullClassPath;
+
+        $r7 = org.gjt.sp.jedit.bsh.classpath.BshClassPath.getBootClassPath();
+
+        $r6.addComponent($r7);
+
+     label3:
+        goto label5;
+
+     label4:
+        $r12 := @caughtexception;
+
+        r1 = $r12;
+
+        $r13 = java.lang.System.err;
+
+        $r13.println("Warning: can\'t get boot class path");
+
+     label5:
+        $r9 = r0.fullClassPath;
+
+        $r8 = r0.baseClassPath;
+
+        $r9.addComponent($r8);
+
+        $r10 = r0.fullClassPath;
+
+        return $r10;
+
+        catch org.gjt.sp.jedit.bsh.ClassPathException from label2 to label3 with label4;
+    }
+
+    public void doSuperImport() throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        org.gjt.sp.jedit.bsh.ClassPathException r1, $r4;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath $r2;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r5;
+        java.lang.StringBuilder $r6, $r7, $r8;
+        java.lang.String $r9;
+
+        r0 := @this;
+
+     label1:
+        $r2 = r0.getClassPath();
+
+        $r2.insureInitialized();
+
+        r0.getClassNameByUnqName("");
+
+     label2:
+        goto label4;
+
+     label3:
+        $r4 := @caughtexception;
+
+        r1 = $r4;
+
+        $r5 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("Error importing classpath ");
+
+        $r8 = $r7.append(r1);
+
+        $r9 = $r8.toString();
+
+        specialinvoke $r5.<init>($r9);
+
+        throw $r5;
+
+     label4:
+        r0.superImport = 1;
+
+        return;
+
+        catch org.gjt.sp.jedit.bsh.ClassPathException from label1 to label2 with label3;
+    }
+
+    protected boolean hasSuperImport()
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.superImport;
+
+        return $z0;
+    }
+
+    public java.lang.String getClassNameByUnqName(java.lang.String) throws org.gjt.sp.jedit.bsh.ClassPathException
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        java.lang.String r1, $r3;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.getClassPath();
+
+        $r3 = $r2.getClassNameByUnqName(r1);
+
+        return $r3;
+    }
+
+    public void addListener(org.gjt.sp.jedit.bsh.BshClassManager$Listener)
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        org.gjt.sp.jedit.bsh.BshClassManager$Listener r1;
+        java.lang.ref.Reference r2, $r7;
+        boolean z0, $z1;
+        java.lang.ref.WeakReference $r3;
+        java.lang.ref.ReferenceQueue $r4, $r6;
+        java.util.Vector $r5, $r8;
+        java.lang.StringBuilder $r9, $r10, $r11;
+        java.lang.String $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r5 = r0.listeners;
+
+        $r3 = new java.lang.ref.WeakReference;
+
+        $r4 = r0.refQueue;
+
+        specialinvoke $r3.<init>(r1, $r4);
+
+        $r5.addElement($r3);
+
+     label1:
+        $r6 = r0.refQueue;
+
+        $r7 = $r6.poll();
+
+        r2 = $r7;
+
+        if $r7 == null goto label4;
+
+        $r8 = r0.listeners;
+
+        z0 = $r8.removeElement(r2);
+
+        if z0 == 0 goto label2;
+
+        goto label3;
+
+     label2:
+        $z1 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z1 == 0 goto label3;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("tried to remove non-existent weak ref: ");
+
+        $r11 = $r10.append(r2);
+
+        $r12 = $r11.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r12);
+
+     label3:
+        goto label1;
+
+     label4:
+        return;
+    }
+
+    public void removeListener(org.gjt.sp.jedit.bsh.BshClassManager$Listener)
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        org.gjt.sp.jedit.bsh.BshClassManager$Listener r1;
+        java.lang.Error $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.lang.Error;
+
+        specialinvoke $r2.<init>("unimplemented");
+
+        throw $r2;
+    }
+
+    public java.lang.ClassLoader getBaseLoader()
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader $r1;
+
+        r0 := @this;
+
+        $r1 = r0.baseLoader;
+
+        return $r1;
+    }
+
+    public java.lang.Class defineClass(java.lang.String, byte[])
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        java.lang.String r1, $r13;
+        byte[] r2;
+        org.gjt.sp.jedit.bsh.ClassPathException r3, $r8;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath$GeneratedClassSource $r4;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath $r5;
+        java.lang.String[] $r6;
+        java.lang.Class $r7;
+        org.gjt.sp.jedit.bsh.InterpreterError $r9;
+        java.lang.StringBuilder $r10, $r11, $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r5 = r0.baseClassPath;
+
+        $r4 = new org.gjt.sp.jedit.bsh.classpath.BshClassPath$GeneratedClassSource;
+
+        specialinvoke $r4.<init>(r2);
+
+        $r5.setClassSource(r1, $r4);
+
+     label1:
+        $r6 = newarray (java.lang.String)[1];
+
+        $r6[0] = r1;
+
+        r0.reloadClasses($r6);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r8 := @caughtexception;
+
+        r3 = $r8;
+
+        $r9 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("defineClass: ");
+
+        $r12 = $r11.append(r3);
+
+        $r13 = $r12.toString();
+
+        specialinvoke $r9.<init>($r13);
+
+        throw $r9;
+
+     label4:
+        $r7 = r0.classForName(r1);
+
+        return $r7;
+
+        catch org.gjt.sp.jedit.bsh.ClassPathException from label1 to label2 with label3;
+    }
+
+    protected void classLoaderChanged()
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        java.util.Vector r1, $r4, $r5, $r6;
+        java.lang.ref.WeakReference r2;
+        org.gjt.sp.jedit.bsh.BshClassManager$Listener r3;
+        boolean $z0, $z1;
+        java.lang.Object $r7, $r8, $r9;
+        java.util.Enumeration r10, r11;
+
+        r0 := @this;
+
+        r0.clearCaches();
+
+        $r4 = new java.util.Vector;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4;
+
+        $r5 = r0.listeners;
+
+        r10 = $r5.elements();
+
+     label1:
+        $z0 = r10.hasMoreElements();
+
+        if $z0 == 0 goto label4;
+
+        $r8 = r10.nextElement();
+
+        r2 = (java.lang.ref.WeakReference) $r8;
+
+        $r9 = r2.get();
+
+        r3 = (org.gjt.sp.jedit.bsh.BshClassManager$Listener) $r9;
+
+        if r3 != null goto label2;
+
+        r1.add(r2);
+
+        goto label3;
+
+     label2:
+        r3.classLoaderChanged();
+
+     label3:
+        goto label1;
+
+     label4:
+        r11 = r1.elements();
+
+     label5:
+        $z1 = r11.hasMoreElements();
+
+        if $z1 == 0 goto label6;
+
+        $r6 = r0.listeners;
+
+        $r7 = r11.nextElement();
+
+        $r6.removeElement($r7);
+
+        goto label5;
+
+     label6:
+        return;
+    }
+
+    public void dump(java.io.PrintWriter)
+    {
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl r0;
+        java.io.PrintWriter r1;
+        java.lang.StringBuilder $r2, $r3, $r5, $r7, $r8, $r10, $r12, $r13, $r15;
+        org.gjt.sp.jedit.bsh.classpath.BshClassLoader $r4;
+        java.lang.String $r6, $r11, $r16;
+        java.util.Map $r9;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath $r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r1.println("Bsh Class Manager Dump: ");
+
+        r1.println("----------------------- ");
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append("baseLoader = ");
+
+        $r4 = r0.baseLoader;
+
+        $r5 = $r3.append($r4);
+
+        $r6 = $r5.toString();
+
+        r1.println($r6);
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("loaderMap= ");
+
+        $r9 = r0.loaderMap;
+
+        $r10 = $r8.append($r9);
+
+        $r11 = $r10.toString();
+
+        r1.println($r11);
+
+        r1.println("----------------------- ");
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = $r12.append("baseClassPath = ");
+
+        $r14 = r0.baseClassPath;
+
+        $r15 = $r13.append($r14);
+
+        $r16 = $r15.toString();
+
+        r1.println($r16);
+
+        return;
+    }
+}

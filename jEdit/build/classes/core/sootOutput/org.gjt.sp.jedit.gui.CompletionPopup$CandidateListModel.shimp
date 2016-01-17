@@ -1,0 +1,73 @@
+class org.gjt.sp.jedit.gui.CompletionPopup$CandidateListModel extends javax.swing.AbstractListModel
+{
+    final org.gjt.sp.jedit.gui.CompletionPopup this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.CompletionPopup)
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$CandidateListModel r0;
+        org.gjt.sp.jedit.gui.CompletionPopup r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public int getSize()
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$CandidateListModel r0;
+        org.gjt.sp.jedit.gui.CompletionPopup $r1;
+        org.gjt.sp.jedit.gui.CompletionPopup$Candidates $r2;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.this$0;
+
+        $r2 = org.gjt.sp.jedit.gui.CompletionPopup.access$600($r1);
+
+        $i0 = $r2.getSize();
+
+        return $i0;
+    }
+
+    public java.lang.Object getElementAt(int)
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$CandidateListModel r0;
+        int i0;
+        org.gjt.sp.jedit.gui.CompletionPopup $r1;
+        org.gjt.sp.jedit.gui.CompletionPopup$Candidates $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.this$0;
+
+        $r2 = org.gjt.sp.jedit.gui.CompletionPopup.access$600($r1);
+
+        return $r2;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.CompletionPopup, org.gjt.sp.jedit.gui.CompletionPopup$1)
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$CandidateListModel r0;
+        org.gjt.sp.jedit.gui.CompletionPopup r1;
+        org.gjt.sp.jedit.gui.CompletionPopup$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

@@ -1,0 +1,748 @@
+class org.gjt.sp.jedit.bsh.BSHAllocationExpression extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+    private static int innerClassCount;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHAllocationExpression r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHAllocationExpression r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.SimpleNode r3, r4;
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName r5;
+        org.gjt.sp.jedit.bsh.Node $r6, $r7;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.bsh.BSHArrayDimensions $r8, $r11;
+        org.gjt.sp.jedit.bsh.BSHPrimitiveType $r9;
+        java.lang.Object $r10, $r12, $r14;
+        org.gjt.sp.jedit.bsh.BSHArguments $r13;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r6 = r0.jjtGetChild(0);
+
+        r3 = (org.gjt.sp.jedit.bsh.SimpleNode) $r6;
+
+        $r7 = r0.jjtGetChild(1);
+
+        r4 = (org.gjt.sp.jedit.bsh.SimpleNode) $r7;
+
+        $z0 = r3 instanceof org.gjt.sp.jedit.bsh.BSHAmbiguousName;
+
+        if $z0 == 0 goto label2;
+
+        r5 = (org.gjt.sp.jedit.bsh.BSHAmbiguousName) r3;
+
+        $z1 = r4 instanceof org.gjt.sp.jedit.bsh.BSHArguments;
+
+        if $z1 == 0 goto label1;
+
+        $r13 = (org.gjt.sp.jedit.bsh.BSHArguments) r4;
+
+        $r14 = specialinvoke r0.objectAllocation(r5, $r13, r1, r2);
+
+        return $r14;
+
+     label1:
+        $r11 = (org.gjt.sp.jedit.bsh.BSHArrayDimensions) r4;
+
+        $r12 = specialinvoke r0.objectArrayAllocation(r5, $r11, r1, r2);
+
+        return $r12;
+
+     label2:
+        $r9 = (org.gjt.sp.jedit.bsh.BSHPrimitiveType) r3;
+
+        $r8 = (org.gjt.sp.jedit.bsh.BSHArrayDimensions) r4;
+
+        $r10 = specialinvoke r0.primitiveArrayAllocation($r9, $r8, r1, r2);
+
+        return $r10;
+    }
+
+    private java.lang.Object objectAllocation(org.gjt.sp.jedit.bsh.BSHAmbiguousName, org.gjt.sp.jedit.bsh.BSHArguments, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHAllocationExpression r0;
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName r1;
+        org.gjt.sp.jedit.bsh.BSHArguments r2;
+        org.gjt.sp.jedit.bsh.CallStack r3;
+        org.gjt.sp.jedit.bsh.Interpreter r4;
+        java.lang.Object[] r5;
+        boolean z0, $z1, $z2, $z3, $z3_1, $z3_2;
+        org.gjt.sp.jedit.bsh.BSHBlock r6;
+        org.gjt.sp.jedit.bsh.EvalError $r7, $r18;
+        java.lang.StringBuilder $r8, $r9, $r11;
+        java.lang.String $r10, $r12;
+        org.gjt.sp.jedit.bsh.ClassIdentifier $r13;
+        int $i0;
+        java.lang.Object $r14, $r16, $r17, r19;
+        org.gjt.sp.jedit.bsh.Node $r15;
+        java.lang.Class r20;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r3.top();
+
+        r5 = r2.getArguments(r3, r4);
+
+        if r5 != null goto label1;
+
+        $r18 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        specialinvoke $r18.<init>("Null args in new.", r0, r3);
+
+        throw $r18;
+
+     label1:
+        r1.toObject(r3, r4, 0);
+
+        r19 = r1.toObject(r3, r4, 1);
+
+        $z1 = r19 instanceof org.gjt.sp.jedit.bsh.ClassIdentifier;
+
+        if $z1 == 0 goto label2;
+
+        $r13 = (org.gjt.sp.jedit.bsh.ClassIdentifier) r19;
+
+        r20 = $r13.getTargetClass();
+
+        goto label3;
+
+     label2:
+        $r7 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("Unknown class: ");
+
+        $r10 = r1.text;
+
+        Packer.Unpack(r1);
+
+        $r11 = $r9.append($r10);
+
+        Packer.Pack(r1);
+
+        $r12 = $r11.toString();
+
+        specialinvoke $r7.<init>($r12, r0, r3);
+
+        throw $r7;
+
+     label3:
+        $i0 = r0.jjtGetNumChildren();
+
+        if $i0 <= 2 goto label4;
+
+        $z3 = 1;
+
+(0)     goto label5;
+
+     label4:
+(1)     $z3_1 = 0;
+
+     label5:
+        $z3_2 = Phi($z3 #0, $z3_1 #1);
+
+        z0 = $z3_2;
+
+        if z0 == 0 goto label7;
+
+        $r15 = r0.jjtGetChild(2);
+
+        r6 = (org.gjt.sp.jedit.bsh.BSHBlock) $r15;
+
+        $z2 = r20.isInterface();
+
+        if $z2 == 0 goto label6;
+
+        $r17 = specialinvoke r0.constructWithInterfaceBody(r20, r5, r6, r3, r4);
+
+        return $r17;
+
+     label6:
+        $r16 = specialinvoke r0.constructWithClassBody(r20, r5, r6, r3, r4);
+
+        return $r16;
+
+     label7:
+        $r14 = specialinvoke r0.constructObject(r20, r5, r3);
+
+        return $r14;
+    }
+
+    private java.lang.Object constructObject(java.lang.Class, java.lang.Object[], org.gjt.sp.jedit.bsh.CallStack) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHAllocationExpression r0;
+        java.lang.Class r1;
+        java.lang.Object[] r2;
+        org.gjt.sp.jedit.bsh.CallStack r3;
+        java.lang.Object r4;
+        org.gjt.sp.jedit.bsh.This r5;
+        org.gjt.sp.jedit.bsh.NameSpace r6, $r8, $r9;
+        org.gjt.sp.jedit.bsh.UtilEvalError r7, $r31;
+        int $i0;
+        java.lang.StringBuilder $r10, $r12, $r13, $r18, $r19, $r21, $r24, $r25, $r27;
+        java.lang.String $r11, $r14, $r20, $r22, $r28, r35;
+        boolean $z0;
+        org.gjt.sp.jedit.bsh.ClassGenerator $r15;
+        org.gjt.sp.jedit.bsh.ReflectError $r16, r33;
+        org.gjt.sp.jedit.bsh.EvalError $r17, $r32;
+        java.lang.reflect.InvocationTargetException $r23, r34;
+        java.lang.Throwable $r26, $r30;
+        org.gjt.sp.jedit.bsh.TargetError $r29;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+     label01:
+        r4 = org.gjt.sp.jedit.bsh.Reflect.constructObject(r1, r2);
+
+     label02:
+        goto label05;
+
+     label03:
+        $r16 := @caughtexception;
+
+        r33 = $r16;
+
+        $r17 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<init>();
+
+        $r19 = $r18.append("Constructor error: ");
+
+        $r20 = r33.getMessage();
+
+        $r21 = $r19.append($r20);
+
+        $r22 = $r21.toString();
+
+        specialinvoke $r17.<init>($r22, r0, r3);
+
+        throw $r17;
+
+     label04:
+        $r23 := @caughtexception;
+
+        r34 = $r23;
+
+        $r24 = new java.lang.StringBuilder;
+
+        specialinvoke $r24.<init>();
+
+        $r25 = $r24.append("The constructor threw an exception:\n\t");
+
+        $r26 = r34.getTargetException();
+
+        $r27 = $r25.append($r26);
+
+        $r28 = $r27.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r28);
+
+        $r29 = new org.gjt.sp.jedit.bsh.TargetError;
+
+        $r30 = r34.getTargetException();
+
+        specialinvoke $r29.<init>("Object constructor", $r30, r0, r3, 1);
+
+        throw $r29;
+
+     label05:
+        r35 = r1.getName();
+
+        $i0 = r35.indexOf("$");
+
+        if $i0 != -1 goto label06;
+
+        return r4;
+
+     label06:
+        $r8 = r3.top();
+
+        r5 = $r8.getThis(null);
+
+        $r9 = r5.getNameSpace();
+
+        r6 = org.gjt.sp.jedit.bsh.Name.getClassNameSpace($r9);
+
+        if r6 == null goto label10;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = r6.getName();
+
+        $r12 = $r10.append($r11);
+
+        $r13 = $r12.append("$");
+
+        $r14 = $r13.toString();
+
+        $z0 = r35.startsWith($r14);
+
+        if $z0 == 0 goto label10;
+
+     label07:
+        $r15 = org.gjt.sp.jedit.bsh.ClassGenerator.getClassGenerator();
+
+        $r15.setInstanceNameSpaceParent(r4, r35, r6);
+
+     label08:
+        goto label10;
+
+     label09:
+        $r31 := @caughtexception;
+
+        r7 = $r31;
+
+        $r32 = r7.toEvalError(r0, r3);
+
+        throw $r32;
+
+     label10:
+        return r4;
+
+        catch org.gjt.sp.jedit.bsh.ReflectError from label01 to label02 with label03;
+        catch java.lang.reflect.InvocationTargetException from label01 to label02 with label04;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label07 to label08 with label09;
+    }
+
+    private java.lang.Object constructWithClassBody(java.lang.Class, java.lang.Object[], org.gjt.sp.jedit.bsh.BSHBlock, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHAllocationExpression r0;
+        java.lang.Class r1, r8;
+        java.lang.Object[] r2;
+        org.gjt.sp.jedit.bsh.BSHBlock r3;
+        org.gjt.sp.jedit.bsh.CallStack r4;
+        org.gjt.sp.jedit.bsh.Interpreter r5;
+        java.lang.String r6, $r11, $r25;
+        org.gjt.sp.jedit.bsh.Modifiers r7, $r15;
+        java.lang.StringBuilder $r9, $r12, $r13, $r14, $r22, $r23, $r24;
+        org.gjt.sp.jedit.bsh.NameSpace $r10;
+        int $i0, $i1;
+        org.gjt.sp.jedit.bsh.ClassGenerator $r16;
+        java.lang.Object $r17;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r18, r28;
+        org.gjt.sp.jedit.bsh.EvalError $r19, $r21;
+        java.lang.Exception $r20, r29, r29_1, r29_2;
+        boolean $z0;
+        java.lang.reflect.InvocationTargetException $r26;
+        java.lang.Throwable $r27;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = r4.top();
+
+        $r11 = $r10.getName();
+
+        $r12 = $r9.append($r11);
+
+        $r13 = $r12.append("$");
+
+        $i0 = org.gjt.sp.jedit.bsh.BSHAllocationExpression.innerClassCount;
+
+        $i1 = $i0 + 1;
+
+        org.gjt.sp.jedit.bsh.BSHAllocationExpression.innerClassCount = $i1;
+
+        $r14 = $r13.append($i1);
+
+        r6 = $r14.toString();
+
+        $r15 = new org.gjt.sp.jedit.bsh.Modifiers;
+
+        specialinvoke $r15.<init>();
+
+        r7 = $r15;
+
+        r7.addModifier(0, "public");
+
+     label1:
+        $r16 = org.gjt.sp.jedit.bsh.ClassGenerator.getClassGenerator();
+
+        r8 = $r16.generateClass(r6, r7, null, r1, r3, 0, r4, r5);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r18 := @caughtexception;
+
+        r28 = $r18;
+
+        $r19 = r28.toEvalError(r0, r4);
+
+        throw $r19;
+
+     label4:
+        $r17 = org.gjt.sp.jedit.bsh.Reflect.constructObject(r8, r2);
+
+     label5:
+        return $r17;
+
+     label6:
+        $r20 := @caughtexception;
+
+        r29 = $r20;
+
+        $z0 = r29 instanceof java.lang.reflect.InvocationTargetException;
+
+(0)     if $z0 == 0 goto label7;
+
+        $r26 = (java.lang.reflect.InvocationTargetException) r29;
+
+        $r27 = $r26.getTargetException();
+
+(1)     r29_1 = (java.lang.Exception) $r27;
+
+     label7:
+        r29_2 = Phi(r29 #0, r29_1 #1);
+
+        $r21 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r22 = new java.lang.StringBuilder;
+
+        specialinvoke $r22.<init>();
+
+        $r23 = $r22.append("Error constructing inner class instance: ");
+
+        $r24 = $r23.append(r29_2);
+
+        $r25 = $r24.toString();
+
+        specialinvoke $r21.<init>($r25, r0, r4);
+
+        throw $r21;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label2 with label3;
+        catch java.lang.Exception from label4 to label5 with label6;
+    }
+
+    private java.lang.Object constructWithInterfaceBody(java.lang.Class, java.lang.Object[], org.gjt.sp.jedit.bsh.BSHBlock, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHAllocationExpression r0;
+        java.lang.Class r1;
+        java.lang.Object[] r2;
+        org.gjt.sp.jedit.bsh.BSHBlock r3;
+        org.gjt.sp.jedit.bsh.CallStack r4;
+        org.gjt.sp.jedit.bsh.Interpreter r5;
+        org.gjt.sp.jedit.bsh.NameSpace r6, r7, $r9;
+        org.gjt.sp.jedit.bsh.UtilEvalError r8, $r14;
+        org.gjt.sp.jedit.bsh.This $r12;
+        java.lang.Object $r13;
+        org.gjt.sp.jedit.bsh.EvalError $r15;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        r6 = r4.top();
+
+        $r9 = new org.gjt.sp.jedit.bsh.NameSpace;
+
+        specialinvoke $r9.<init>(r6, "AnonymousBlock");
+
+        r7 = $r9;
+
+        r4.push(r7);
+
+        r3.eval(r4, r5, 1);
+
+        r4.pop();
+
+        r7.importStatic(r1);
+
+     label1:
+        $r12 = r7.getThis(r5);
+
+        $r13 = $r12.getInterface(r1);
+
+     label2:
+        return $r13;
+
+     label3:
+        $r14 := @caughtexception;
+
+        r8 = $r14;
+
+        $r15 = r8.toEvalError(r0, r4);
+
+        throw $r15;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label2 with label3;
+    }
+
+    private java.lang.Object objectArrayAllocation(org.gjt.sp.jedit.bsh.BSHAmbiguousName, org.gjt.sp.jedit.bsh.BSHArrayDimensions, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHAllocationExpression r0;
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName r1;
+        org.gjt.sp.jedit.bsh.BSHArrayDimensions r2;
+        org.gjt.sp.jedit.bsh.CallStack r3;
+        org.gjt.sp.jedit.bsh.Interpreter r4;
+        org.gjt.sp.jedit.bsh.NameSpace r5;
+        java.lang.Class r6;
+        java.lang.Object $r7;
+        org.gjt.sp.jedit.bsh.EvalError $r8;
+        java.lang.StringBuilder $r9, $r10, $r12, $r13;
+        org.gjt.sp.jedit.bsh.Name $r11;
+        java.lang.String $r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 = r3.top();
+
+        r6 = r1.toClass(r3, r4);
+
+        if r6 != null goto label1;
+
+        $r8 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("Class ");
+
+        $r11 = r1.getName(r5);
+
+        $r12 = $r10.append($r11);
+
+        $r13 = $r12.append(" not found.");
+
+        $r14 = $r13.toString();
+
+        specialinvoke $r8.<init>($r14, r0, r3);
+
+        throw $r8;
+
+     label1:
+        $r7 = specialinvoke r0.arrayAllocation(r2, r6, r3, r4);
+
+        return $r7;
+    }
+
+    private java.lang.Object primitiveArrayAllocation(org.gjt.sp.jedit.bsh.BSHPrimitiveType, org.gjt.sp.jedit.bsh.BSHArrayDimensions, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHAllocationExpression r0;
+        org.gjt.sp.jedit.bsh.BSHPrimitiveType r1;
+        org.gjt.sp.jedit.bsh.BSHArrayDimensions r2;
+        org.gjt.sp.jedit.bsh.CallStack r3;
+        org.gjt.sp.jedit.bsh.Interpreter r4;
+        java.lang.Class r5;
+        java.lang.Object $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 = r1.getType();
+
+        $r6 = specialinvoke r0.arrayAllocation(r2, r5, r3, r4);
+
+        return $r6;
+    }
+
+    private java.lang.Object arrayAllocation(org.gjt.sp.jedit.bsh.BSHArrayDimensions, java.lang.Class, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHAllocationExpression r0;
+        org.gjt.sp.jedit.bsh.BSHArrayDimensions r1;
+        java.lang.Class r2;
+        org.gjt.sp.jedit.bsh.CallStack r3;
+        org.gjt.sp.jedit.bsh.Interpreter r4;
+        java.lang.Object r5, $r7;
+        org.gjt.sp.jedit.bsh.Primitive $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 = r1.eval(r2, r3, r4);
+
+        $r6 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        if r5 == $r6 goto label1;
+
+        return r5;
+
+     label1:
+        $r7 = specialinvoke r0.arrayNewInstance(r2, r1, r3);
+
+        return $r7;
+    }
+
+    private java.lang.Object arrayNewInstance(java.lang.Class, org.gjt.sp.jedit.bsh.BSHArrayDimensions, org.gjt.sp.jedit.bsh.CallStack) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHAllocationExpression r0;
+        org.gjt.sp.jedit.bsh.BSHArrayDimensions r1;
+        org.gjt.sp.jedit.bsh.CallStack r2;
+        int $i0, $i1;
+        int[] $r3, $r5;
+        java.lang.Object $r4, r16;
+        java.lang.Exception $r6, r18;
+        org.gjt.sp.jedit.bsh.EvalError $r7;
+        java.lang.StringBuilder $r8, $r9, $r11;
+        java.lang.String $r10, $r12;
+        java.lang.NegativeArraySizeException $r13, r17;
+        org.gjt.sp.jedit.bsh.TargetError $r14;
+        java.lang.Class r15, r15_1, r15_2, r15_3;
+
+        r0 := @this;
+
+        r15 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        $i0 = r1.numUndefinedDims;
+
+(0)     if $i0 <= 0 goto label1;
+
+        $i1 = r1.numUndefinedDims;
+
+        $r5 = newarray (int)[$i1];
+
+        r16 = java.lang.reflect.Array.newInstance(r15, $r5);
+
+(1)     r15_1 = r16.getClass();
+
+     label1:
+        r15_2 = Phi(r15 #0, r15_1 #1);
+
+(2)     $r3 = r1.definedDimensions;
+
+        Packer.Unpack(r1);
+
+        $r4 = java.lang.reflect.Array.newInstance(r15_2, $r3);
+
+     label2:
+        Packer.Pack(r1);
+
+        return $r4;
+
+     label3:
+        $r13 := @caughtexception;
+
+        r17 = $r13;
+
+        $r14 = new org.gjt.sp.jedit.bsh.TargetError;
+
+        specialinvoke $r14.<init>(r17, r0, r2);
+
+        throw $r14;
+
+     label4:
+        $r6 := @caughtexception;
+
+        r15_3 = Phi(r15_2 #2, r15 #0, r15_1 #1);
+
+        r18 = $r6;
+
+        $r7 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("Can\'t construct primitive array: ");
+
+        $r10 = r18.getMessage();
+
+        $r11 = $r9.append($r10);
+
+        $r12 = $r11.toString();
+
+        specialinvoke $r7.<init>($r12, r0, r2);
+
+        throw $r7;
+
+        catch java.lang.NegativeArraySizeException from label1 to label2 with label3;
+        catch java.lang.Exception from label1 to label2 with label4;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.bsh.BSHAllocationExpression.innerClassCount = 0;
+
+        return;
+    }
+}

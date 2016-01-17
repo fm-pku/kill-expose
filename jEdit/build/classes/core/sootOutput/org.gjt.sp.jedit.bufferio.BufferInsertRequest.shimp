@@ -1,0 +1,422 @@
+public class org.gjt.sp.jedit.bufferio.BufferInsertRequest extends org.gjt.sp.jedit.bufferio.BufferIORequest
+{
+
+    public void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Buffer, java.lang.Object, org.gjt.sp.jedit.io.VFS, java.lang.String)
+    {
+        org.gjt.sp.jedit.bufferio.BufferInsertRequest r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Buffer r2;
+        java.lang.Object r3;
+        org.gjt.sp.jedit.io.VFS r4;
+        java.lang.String r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        specialinvoke r0.<init>(r1, r2, r3, r4, r5);
+
+        return;
+    }
+
+    public void _run()
+    {
+        org.gjt.sp.jedit.bufferio.BufferInsertRequest r0;
+        java.lang.String[] r1, r4, $r5, $r39, $r45, $r58, $r64, $r70, $r76, r82, r87, r90, r92, r94;
+        java.lang.Throwable r2, $r53;
+        java.lang.Exception r3, $r38, $r44, $r57, $r63, $r69, $r75, r84, r86, r89, r91, r93;
+        java.lang.String $r6, $r8, $r9, $r11, $r14, $r16, $r20, $r40, $r41, $r46, $r47, $r59, $r60, $r65, $r66, $r71, $r72, $r77, $r78;
+        org.gjt.sp.jedit.io.VFS $r7, $r13, $r18, $r22, $r28, $r31, $r37, $r52, $r56;
+        org.gjt.sp.jedit.View $r10, $r15, $r19, $r26, $r29, $r35, $r42, $r48, $r50, $r54, $r61, $r67, $r73, $r79;
+        java.lang.Object $r12, $r17, $r21, $r27, $r30, $r36, $r51, $r55;
+        java.io.Reader $r23;
+        org.gjt.sp.jedit.bufferio.BufferInsertRequest$1 $r24;
+        org.gjt.sp.util.AwtRunnableQueue $r25;
+        java.lang.InterruptedException $r32, r88;
+        org.gjt.sp.jedit.Buffer $r33, $r43, $r49, $r62, $r68, $r74, $r80;
+        java.lang.Thread $r34;
+        java.io.InputStream r81, r81_1, r81_2, r81_3, r81_4;
+        org.gjt.sp.jedit.io.VFSFile r83;
+        long l0, l0_1, l0_2, l0_3, l0_4, l0_5;
+        org.gjt.sp.util.SegmentBuffer r85;
+
+        r0 := @this;
+
+(0)     r81 = null;
+
+     label01:
+        $r5 = newarray (java.lang.String)[1];
+
+        $r7 = r0.vfs;
+
+(1)     $r6 = r0.path;
+
+        $r8 = $r7.getFileName($r6);
+
+        $r5[0] = $r8;
+
+        r82 = $r5;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("vfs.status.load", r82);
+
+        r0.setStatus($r9);
+
+        r0.setCancellable(1);
+
+        $r13 = r0.vfs;
+
+        $r12 = r0.session;
+
+        $r11 = r0.path;
+
+        $r10 = r0.view;
+
+        $r14 = $r13._canonPath($r12, $r11, $r10);
+
+        r0.path = $r14;
+
+        $r18 = r0.vfs;
+
+        $r17 = r0.session;
+
+        $r16 = r0.path;
+
+        $r15 = r0.view;
+
+        r83 = $r18._getFile($r17, $r16, $r15);
+
+        if r83 == null goto label02;
+
+        l0 = r83.getLength();
+
+(2)     goto label03;
+
+     label02:
+(3)     l0_1 = 0L;
+
+     label03:
+        l0_2 = Phi(l0 #2, l0_1 #3);
+
+(4)     $r22 = r0.vfs;
+
+        $r21 = r0.session;
+
+        $r20 = r0.path;
+
+(5)     $r19 = r0.view;
+
+(6)     r81_1 = $r22._createInputStream($r21, $r20, 0, $r19);
+
+        if r81_1 != null goto label09;
+
+     label04:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r81_1);
+
+     label05:
+        $r31 = r0.vfs;
+
+        $r30 = r0.session;
+
+        $r29 = r0.view;
+
+        $r31._endVFSSession($r30, $r29);
+
+     label06:
+        goto label08;
+
+     label07:
+        $r38 := @caughtexception;
+
+        r84 = $r38;
+
+        org.gjt.sp.util.Log.log(9, r0, r84);
+
+        $r39 = newarray (java.lang.String)[1];
+
+        $r40 = r84.toString();
+
+        $r39[0] = $r40;
+
+        r1 = $r39;
+
+        $r42 = r0.view;
+
+        $r41 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r42, $r41, "ioerror.read-error", r1);
+
+        $r43 = r0.buffer;
+
+        $r43.setBooleanProperty("BufferIORequest__error", 1);
+
+     label08:
+        return;
+
+     label09:
+        $r23 = r0.autodetect(r81_1);
+
+        r85 = r0.read($r23, l0_2, 1);
+
+        $r25 = org.gjt.sp.util.AwtRunnableQueue.INSTANCE;
+
+        $r24 = new org.gjt.sp.jedit.bufferio.BufferInsertRequest$1;
+
+        specialinvoke $r24.<init>(r0, r85);
+
+        $r25.runAfterIoTasks($r24);
+
+     label10:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r81_1);
+
+     label11:
+        $r28 = r0.vfs;
+
+        $r27 = r0.session;
+
+        $r26 = r0.view;
+
+        $r28._endVFSSession($r27, $r26);
+
+     label12:
+(7)     goto label30;
+
+     label13:
+        $r63 := @caughtexception;
+
+        r86 = $r63;
+
+        org.gjt.sp.util.Log.log(9, r0, r86);
+
+        $r64 = newarray (java.lang.String)[1];
+
+        $r65 = r86.toString();
+
+        $r64[0] = $r65;
+
+        r87 = $r64;
+
+        $r67 = r0.view;
+
+        $r66 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r67, $r66, "ioerror.read-error", r87);
+
+        $r68 = r0.buffer;
+
+        $r68.setBooleanProperty("BufferIORequest__error", 1);
+
+(8)     goto label30;
+
+     label14:
+(9)     $r32 := @caughtexception;
+
+        r81_2 = Phi(r81 #1, r81_1 #6);
+
+(10)    l0_3 = Phi(l0 #1, l0_2 #5);
+
+        r88 = $r32;
+
+        $r33 = r0.buffer;
+
+        $r33.setBooleanProperty("BufferIORequest__error", 1);
+
+        $r34 = java.lang.Thread.currentThread();
+
+        $r34.interrupt();
+
+     label15:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r81_2);
+
+     label16:
+        $r37 = r0.vfs;
+
+        $r36 = r0.session;
+
+        $r35 = r0.view;
+
+        $r37._endVFSSession($r36, $r35);
+
+     label17:
+(11)    goto label30;
+
+     label18:
+        $r75 := @caughtexception;
+
+        r89 = $r75;
+
+        org.gjt.sp.util.Log.log(9, r0, r89);
+
+        $r76 = newarray (java.lang.String)[1];
+
+        $r77 = r89.toString();
+
+        $r76[0] = $r77;
+
+        r90 = $r76;
+
+        $r79 = r0.view;
+
+        $r78 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r79, $r78, "ioerror.read-error", r90);
+
+        $r80 = r0.buffer;
+
+        $r80.setBooleanProperty("BufferIORequest__error", 1);
+
+(12)    goto label30;
+
+     label19:
+        $r44 := @caughtexception;
+
+        r81_3 = Phi(r81_1 #6, r81 #0);
+
+(13)    l0_4 = Phi(l0 #0, l0_1 #3, l0_2 #4);
+
+        r91 = $r44;
+
+        org.gjt.sp.util.Log.log(9, r0, r91);
+
+        $r45 = newarray (java.lang.String)[1];
+
+        $r46 = r91.toString();
+
+        $r45[0] = $r46;
+
+        r92 = $r45;
+
+        $r48 = r0.view;
+
+        $r47 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r48, $r47, "ioerror.read-error", r92);
+
+        $r49 = r0.buffer;
+
+        $r49.setBooleanProperty("BufferIORequest__error", 1);
+
+     label20:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r81_3);
+
+     label21:
+        $r52 = r0.vfs;
+
+        $r51 = r0.session;
+
+        $r50 = r0.view;
+
+        $r52._endVFSSession($r51, $r50);
+
+     label22:
+(14)    goto label30;
+
+     label23:
+        $r69 := @caughtexception;
+
+        r93 = $r69;
+
+        org.gjt.sp.util.Log.log(9, r0, r93);
+
+        $r70 = newarray (java.lang.String)[1];
+
+        $r71 = r93.toString();
+
+        $r70[0] = $r71;
+
+        r94 = $r70;
+
+        $r73 = r0.view;
+
+        $r72 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r73, $r72, "ioerror.read-error", r94);
+
+        $r74 = r0.buffer;
+
+        $r74.setBooleanProperty("BufferIORequest__error", 1);
+
+(15)    goto label30;
+
+     label24:
+        $r53 := @caughtexception;
+
+        r81 = Phi(r81_1 #6, r81 #0, r81_2 #10, r81_3 #13, r81 #16);
+
+(16)    l0 = Phi(l0 #0, l0_1 #3, l0_2 #4, l0_3 #9, l0_4 #13, l0 #16);
+
+        r2 = $r53;
+
+     label25:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r81);
+
+     label26:
+        $r56 = r0.vfs;
+
+        $r55 = r0.session;
+
+        $r54 = r0.view;
+
+        $r56._endVFSSession($r55, $r54);
+
+     label27:
+        goto label29;
+
+     label28:
+        $r57 := @caughtexception;
+
+        r3 = $r57;
+
+        org.gjt.sp.util.Log.log(9, r0, r3);
+
+        $r58 = newarray (java.lang.String)[1];
+
+        $r59 = r3.toString();
+
+        $r58[0] = $r59;
+
+        r4 = $r58;
+
+        $r61 = r0.view;
+
+        $r60 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r61, $r60, "ioerror.read-error", r4);
+
+        $r62 = r0.buffer;
+
+        $r62.setBooleanProperty("BufferIORequest__error", 1);
+
+     label29:
+        throw r2;
+
+     label30:
+        r81_4 = Phi(r81_1 #7, r81_1 #8, r81_2 #11, r81_2 #12, r81_3 #14, r81_3 #15);
+
+        l0_5 = Phi(l0_2 #7, l0_2 #8, l0_3 #11, l0_3 #12, l0_4 #14, l0_4 #15);
+
+        return;
+
+        catch java.lang.Exception from label05 to label06 with label07;
+        catch java.lang.Exception from label11 to label12 with label13;
+        catch java.lang.InterruptedException from label01 to label04 with label14;
+        catch java.lang.InterruptedException from label09 to label10 with label14;
+        catch java.lang.Exception from label16 to label17 with label18;
+        catch java.lang.Exception from label01 to label04 with label19;
+        catch java.lang.Exception from label09 to label10 with label19;
+        catch java.lang.Exception from label21 to label22 with label23;
+        catch java.lang.Throwable from label01 to label04 with label24;
+        catch java.lang.Throwable from label09 to label10 with label24;
+        catch java.lang.Throwable from label14 to label15 with label24;
+        catch java.lang.Throwable from label19 to label20 with label24;
+        catch java.lang.Exception from label26 to label27 with label28;
+        catch java.lang.Throwable from label24 to label25 with label24;
+    }
+}

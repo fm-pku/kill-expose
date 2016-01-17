@@ -1,0 +1,844 @@
+public class org.gjt.sp.jedit.help.HelpViewer extends javax.swing.JFrame implements org.gjt.sp.jedit.help.HelpViewerInterface, org.gjt.sp.jedit.help.HelpHistoryModelListener
+{
+    private static final long serialVersionUID;
+    private static final org.gjt.sp.jedit.io.RegexEncodingDetector ENCODING_DETECTOR;
+    private java.lang.String baseURL;
+    private java.lang.String shortURL;
+    private final org.gjt.sp.jedit.help.HistoryButton back;
+    private final org.gjt.sp.jedit.help.HistoryButton forward;
+    private final javax.swing.JEditorPane viewer;
+    private final javax.swing.JScrollPane viewerScrollPane;
+    private final javax.swing.JLabel title;
+    private final javax.swing.JSplitPane splitter;
+    private final org.gjt.sp.jedit.help.HelpHistoryModel historyModel;
+    private final org.gjt.sp.jedit.help.HelpTOCPanel toc;
+    private boolean queuedTOCReload;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("welcome.html");
+
+        return;
+    }
+
+    public void <init>(java.net.URL)
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        java.net.URL r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.toString();
+
+        specialinvoke r0.<init>($r2);
+
+        return;
+    }
+
+    public void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        java.lang.String r1, $r5, $r8, $r9, $r12, $r15, $r17;
+        javax.swing.JTabbedPane r2, $r14;
+        javax.swing.JPanel r3, $r20;
+        javax.swing.Box r4, $r22;
+        java.awt.Image $r6;
+        java.io.File $r7;
+        java.net.URI $r10;
+        java.net.URL $r11;
+        org.gjt.sp.jedit.help.HelpViewer$ActionHandler $r13, r71;
+        org.gjt.sp.jedit.help.HelpTOCPanel $r16;
+        org.gjt.sp.jedit.help.HelpSearchPanel $r18;
+        java.awt.Dimension $r19, $r40, $r67;
+        java.awt.BorderLayout $r21;
+        javax.swing.JLabel $r23;
+        java.awt.Component $r25;
+        org.gjt.sp.jedit.help.HelpHistoryModel $r27, $r29, $r34, $r65;
+        org.gjt.sp.jedit.help.HistoryButton $r28, $r30, $r31, $r33, $r35, $r36, $r38, $r39;
+        javax.swing.JEditorPane $r42, $r44, $r45, $r47, $r48, $r51, $r53, $r55, $r57;
+        java.lang.Boolean $r43;
+        org.gjt.sp.jedit.help.HelpViewer$LinkHandler $r46;
+        java.awt.Font $r49;
+        org.gjt.sp.jedit.help.HelpViewer$PropertyChangeHandler $r50;
+        org.gjt.sp.jedit.help.HelpViewer$KeyHandler $r52;
+        org.gjt.sp.jedit.help.HelpViewer$MouseHandler $r54;
+        javax.swing.JScrollPane $r56, $r58;
+        javax.swing.JSplitPane $r60, $r61, $r63;
+        java.awt.Container $r62;
+        javax.swing.JRootPane $r66;
+        org.gjt.sp.jedit.help.HelpViewer$1 $r68;
+        java.net.MalformedURLException $r69, r70;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.title");
+
+        specialinvoke r0.<init>($r5);
+
+        $r6 = org.gjt.sp.jedit.GUIUtilities.getEditorIcon();
+
+        r0.setIconImage($r6);
+
+     label1:
+        $r7 = new java.io.File;
+
+        $r8 = org.gjt.sp.jedit.jEdit.getJEditHome();
+
+        $r9 = org.gjt.sp.jedit.MiscUtilities.constructPath($r8, "doc");
+
+        specialinvoke $r7.<init>($r9);
+
+        $r10 = $r7.toURI();
+
+        $r11 = $r10.toURL();
+
+        $r12 = $r11.toString();
+
+        r0.baseURL = $r12;
+
+     label2:
+        goto label4;
+
+     label3:
+        $r69 := @caughtexception;
+
+        r70 = $r69;
+
+        org.gjt.sp.util.Log.log(9, r0, r70);
+
+     label4:
+        $r13 = new org.gjt.sp.jedit.help.HelpViewer$ActionHandler;
+
+        specialinvoke $r13.<init>(r0);
+
+        r71 = $r13;
+
+        $r14 = new javax.swing.JTabbedPane;
+
+        specialinvoke $r14.<init>();
+
+        r2 = $r14;
+
+        $r15 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.toc.label");
+
+        $r16 = new org.gjt.sp.jedit.help.HelpTOCPanel;
+
+        specialinvoke $r16.<init>(r0);
+
+        r0.toc = $r16;
+
+        r2.addTab($r15, $r16);
+
+        $r17 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.search.label");
+
+        $r18 = new org.gjt.sp.jedit.help.HelpSearchPanel;
+
+        specialinvoke $r18.<init>(r0);
+
+        r2.addTab($r17, $r18);
+
+        $r19 = new java.awt.Dimension;
+
+        specialinvoke $r19.<init>(0, 0);
+
+        r2.setMinimumSize($r19);
+
+        $r20 = new javax.swing.JPanel;
+
+        $r21 = new java.awt.BorderLayout;
+
+        specialinvoke $r21.<init>();
+
+        specialinvoke $r20.<init>($r21);
+
+        r3 = $r20;
+
+        $r22 = new javax.swing.Box;
+
+        specialinvoke $r22.<init>(0);
+
+        r4 = $r22;
+
+        $r23 = new javax.swing.JLabel;
+
+        specialinvoke $r23.<init>();
+
+        r0.title = $r23;
+
+        r4.add($r23);
+
+        $r25 = javax.swing.Box.createGlue();
+
+        r4.add($r25);
+
+        $r27 = new org.gjt.sp.jedit.help.HelpHistoryModel;
+
+        specialinvoke $r27.<init>(25);
+
+        r0.historyModel = $r27;
+
+        $r28 = new org.gjt.sp.jedit.help.HistoryButton;
+
+        $r29 = r0.historyModel;
+
+        specialinvoke $r28.<init>(0, $r29);
+
+        r0.back = $r28;
+
+        $r30 = r0.back;
+
+        $r30.addActionListener(r71);
+
+        $r31 = r0.back;
+
+        r4.add($r31);
+
+        $r33 = new org.gjt.sp.jedit.help.HistoryButton;
+
+        $r34 = r0.historyModel;
+
+        specialinvoke $r33.<init>(1, $r34);
+
+        r0.forward = $r33;
+
+        $r35 = r0.forward;
+
+        $r35.addActionListener(r71);
+
+        $r36 = r0.forward;
+
+        r4.add($r36);
+
+        $r39 = r0.back;
+
+        $r38 = r0.forward;
+
+        $r40 = $r38.getPreferredSize();
+
+        $r39.setPreferredSize($r40);
+
+        r3.add("North", r4);
+
+        $r42 = new javax.swing.JEditorPane;
+
+        specialinvoke $r42.<init>();
+
+        r0.viewer = $r42;
+
+        $r44 = r0.viewer;
+
+        $r43 = java.lang.Boolean.TRUE;
+
+        $r44.putClientProperty("JEditorPane.honorDisplayProperties", $r43);
+
+        $r45 = r0.viewer;
+
+        $r45.setEditable(0);
+
+        $r47 = r0.viewer;
+
+        $r46 = new org.gjt.sp.jedit.help.HelpViewer$LinkHandler;
+
+        specialinvoke $r46.<init>(r0);
+
+        $r47.addHyperlinkListener($r46);
+
+        $r48 = r0.viewer;
+
+        $r49 = org.gjt.sp.jedit.jEdit.getFontProperty("helpviewer.font");
+
+        $r48.setFont($r49);
+
+        $r51 = r0.viewer;
+
+        $r50 = new org.gjt.sp.jedit.help.HelpViewer$PropertyChangeHandler;
+
+        specialinvoke $r50.<init>(r0);
+
+        $r51.addPropertyChangeListener($r50);
+
+        $r53 = r0.viewer;
+
+        $r52 = new org.gjt.sp.jedit.help.HelpViewer$KeyHandler;
+
+        specialinvoke $r52.<init>(r0, null);
+
+        $r53.addKeyListener($r52);
+
+        $r55 = r0.viewer;
+
+        $r54 = new org.gjt.sp.jedit.help.HelpViewer$MouseHandler;
+
+        specialinvoke $r54.<init>(r0, null);
+
+        $r55.addMouseListener($r54);
+
+        $r56 = new javax.swing.JScrollPane;
+
+        $r57 = r0.viewer;
+
+        specialinvoke $r56.<init>($r57);
+
+        r0.viewerScrollPane = $r56;
+
+        $r58 = r0.viewerScrollPane;
+
+        r3.add("Center", $r58);
+
+        $r60 = new javax.swing.JSplitPane;
+
+        specialinvoke $r60.<init>(1, r2, r3);
+
+        r0.splitter = $r60;
+
+        $r61 = r0.splitter;
+
+        $r61.setBorder(null);
+
+        $r62 = r0.getContentPane();
+
+        $r63 = r0.splitter;
+
+        $r62.add("Center", $r63);
+
+        $r65 = r0.historyModel;
+
+        $r65.addHelpHistoryModelListener(r0);
+
+        r0.historyUpdated();
+
+        r0.gotoURL(r1, 1, 0);
+
+        r0.setDefaultCloseOperation(2);
+
+        $r66 = r0.getRootPane();
+
+        $r67 = new java.awt.Dimension;
+
+        specialinvoke $r67.<init>(750, 500);
+
+        $r66.setPreferredSize($r67);
+
+        r0.pack();
+
+        org.gjt.sp.jedit.GUIUtilities.loadGeometry(r0, "helpviewer");
+
+        org.gjt.sp.jedit.GUIUtilities.addSizeSaver(r0, "helpviewer");
+
+        org.gjt.sp.jedit.EditBus.addToBus(r0);
+
+        r0.setVisible(1);
+
+        $r68 = new org.gjt.sp.jedit.help.HelpViewer$1;
+
+        specialinvoke $r68.<init>(r0);
+
+        java.awt.EventQueue.invokeLater($r68);
+
+        return;
+
+        catch java.net.MalformedURLException from label1 to label2 with label3;
+    }
+
+    public void gotoURL(java.lang.String, boolean, int)
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        boolean z0, $z1, $z2, $z3, $z4, $z5;
+        int i0, $i1, $i2;
+        org.gjt.sp.jedit.help.HelpViewer$2 r1, $r16;
+        java.lang.String $r2, $r4, $r18, $r20, $r23, $r24, $r27, r28, r29, r31, r29_1, r29_2, r29_3, r28_1, r28_2, r29_4, r28_3;
+        java.lang.StringBuilder $r3, $r5, $r6, $r7, $r19, $r21, $r22;
+        javax.swing.JEditorPane $r8, $r11, $r13;
+        java.awt.Cursor $r9;
+        java.net.URL $r10, $r12, $r15, r30;
+        org.gjt.sp.jedit.help.HelpHistoryModel $r14;
+        javax.swing.JLabel $r17;
+        java.net.MalformedURLException $r25, r32;
+        java.lang.String[] $r26, r33;
+
+        r0 := @this;
+
+        r28 := @parameter0;
+
+        z0 := @parameter1;
+
+        i0 := @parameter2;
+
+        $z1 = org.gjt.sp.jedit.MiscUtilities.isURL(r28);
+
+        if $z1 == 0 goto label2;
+
+        $r23 = r0.baseURL;
+
+        $z4 = r28.startsWith($r23);
+
+        if $z4 == 0 goto label1;
+
+        $r24 = r0.baseURL;
+
+        $i2 = $r24.length();
+
+        r29 = r28.substring($i2);
+
+        $z5 = r29.startsWith("/");
+
+(0)     if $z5 == 0 goto label4;
+
+        r29_1 = r29.substring(1);
+
+(1)     goto label4;
+
+     label1:
+        r29_2 = r28;
+
+(2)     goto label4;
+
+     label2:
+        r29_3 = r28;
+
+        $r2 = r0.baseURL;
+
+        $z2 = $r2.endsWith("/");
+
+        if $z2 == 0 goto label3;
+
+        $r19 = new java.lang.StringBuilder;
+
+        specialinvoke $r19.<init>();
+
+        $r20 = r0.baseURL;
+
+        $r21 = $r19.append($r20);
+
+        $r22 = $r21.append(r28);
+
+        r28_1 = $r22.toString();
+
+(3)     goto label4;
+
+     label3:
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = r0.baseURL;
+
+        $r5 = $r3.append($r4);
+
+        $r6 = $r5.append(47);
+
+        $r7 = $r6.append(r28);
+
+(4)     r28_2 = $r7.toString();
+
+     label4:
+        r29_4 = Phi(r29 #0, r29_1 #1, r29_2 #2, r29_3 #3, r29_3 #4);
+
+        r28_3 = Phi(r28 #0, r28 #1, r28 #2, r28_1 #3, r28_2 #4);
+
+        $r8 = r0.viewer;
+
+        $r9 = java.awt.Cursor.getDefaultCursor();
+
+        $r8.setCursor($r9);
+
+     label5:
+        $r10 = new java.net.URL;
+
+        specialinvoke $r10.<init>(r28_3);
+
+        r30 = $r10;
+
+        r31 = r29_4;
+
+        $r11 = r0.viewer;
+
+        $r12 = $r11.getPage();
+
+        $z3 = r30.equals($r12);
+
+        if $z3 != 0 goto label6;
+
+        $r17 = r0.title;
+
+        $r18 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.loading");
+
+        $r17.setText($r18);
+
+     label6:
+        $r14 = r0.historyModel;
+
+        $r13 = r0.viewer;
+
+        $r15 = $r13.getPage();
+
+        $i1 = r0.getCurrentScrollPosition();
+
+        $r14.setCurrentScrollPosition($r15, $i1);
+
+        $r16 = new org.gjt.sp.jedit.help.HelpViewer$2;
+
+        specialinvoke $r16.<init>(r0, r30, i0, z0, r31);
+
+        r1 = $r16;
+
+        r1.execute();
+
+     label7:
+        goto label9;
+
+     label8:
+        $r25 := @caughtexception;
+
+        r32 = $r25;
+
+        org.gjt.sp.util.Log.log(9, r0, r32);
+
+        $r26 = newarray (java.lang.String)[2];
+
+        $r26[0] = r28_3;
+
+        $r27 = r32.getMessage();
+
+        $r26[1] = $r27;
+
+        r33 = $r26;
+
+        org.gjt.sp.jedit.GUIUtilities.error(r0, "badurl", r33);
+
+     label9:
+        return;
+
+        catch java.net.MalformedURLException from label5 to label7 with label8;
+    }
+
+    int getCurrentScrollPosition()
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        javax.swing.JScrollPane $r1;
+        javax.swing.JScrollBar $r2;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.viewerScrollPane;
+
+        $r2 = $r1.getVerticalScrollBar();
+
+        $i0 = $r2.getValue();
+
+        return $i0;
+    }
+
+    java.net.URL getCurrentPage()
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        javax.swing.JEditorPane $r1;
+        java.net.URL $r2;
+
+        r0 := @this;
+
+        $r1 = r0.viewer;
+
+        $r2 = $r1.getPage();
+
+        return $r2;
+    }
+
+    public void dispose()
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        javax.swing.JSplitPane $r1;
+        int $i0;
+
+        r0 := @this;
+
+        org.gjt.sp.jedit.EditBus.removeFromBus(r0);
+
+        $r1 = r0.splitter;
+
+        $i0 = $r1.getDividerLocation();
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty("helpviewer.splitter", $i0);
+
+        specialinvoke r0.dispose();
+
+        return;
+    }
+
+    public void handlePluginUpdate(org.gjt.sp.jedit.msg.PluginUpdate)
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        org.gjt.sp.jedit.msg.PluginUpdate r1;
+        java.lang.Object $r2, $r3, $r4, $r5;
+        boolean $z0, $z1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getWhat();
+
+        $r3 = org.gjt.sp.jedit.msg.PluginUpdate.LOADED;
+
+        if $r2 == $r3 goto label1;
+
+        $r4 = r1.getWhat();
+
+        $r5 = org.gjt.sp.jedit.msg.PluginUpdate.UNLOADED;
+
+        if $r4 != $r5 goto label3;
+
+     label1:
+        $z0 = r1.isExiting();
+
+        if $z0 != 0 goto label3;
+
+        $z1 = r0.queuedTOCReload;
+
+        if $z1 != 0 goto label2;
+
+        r0.queueTOCReload();
+
+     label2:
+        r0.queuedTOCReload = 1;
+
+     label3:
+        return;
+    }
+
+    public java.lang.String getBaseURL()
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.baseURL;
+
+        return $r1;
+    }
+
+    public java.lang.String getShortURL()
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.shortURL;
+
+        return $r1;
+    }
+
+    public void historyUpdated()
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        org.gjt.sp.jedit.help.HelpHistoryModel $r1, $r3;
+        org.gjt.sp.jedit.help.HistoryButton $r2, $r4;
+        boolean $z0, $z1;
+
+        r0 := @this;
+
+        $r2 = r0.back;
+
+        $r1 = r0.historyModel;
+
+        $z0 = $r1.hasPrevious();
+
+        $r2.setEnabled($z0);
+
+        $r4 = r0.forward;
+
+        $r3 = r0.historyModel;
+
+        $z1 = $r3.hasNext();
+
+        $r4.setEnabled($z1);
+
+        return;
+    }
+
+    public java.awt.Component getComponent()
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        javax.swing.JRootPane $r1;
+
+        r0 := @this;
+
+        $r1 = r0.getRootPane();
+
+        return $r1;
+    }
+
+    public void queueTOCReload()
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        org.gjt.sp.jedit.help.HelpViewer$3 $r1;
+
+        r0 := @this;
+
+        $r1 = new org.gjt.sp.jedit.help.HelpViewer$3;
+
+        specialinvoke $r1.<init>(r0);
+
+        java.awt.EventQueue.invokeLater($r1);
+
+        return;
+    }
+
+    static javax.swing.JSplitPane access$200(org.gjt.sp.jedit.help.HelpViewer)
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        javax.swing.JSplitPane $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.splitter;
+
+        return $r1;
+    }
+
+    static javax.swing.JEditorPane access$300(org.gjt.sp.jedit.help.HelpViewer)
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        javax.swing.JEditorPane $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.viewer;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.io.RegexEncodingDetector access$400()
+    {
+        org.gjt.sp.jedit.io.RegexEncodingDetector $r0;
+
+        $r0 = org.gjt.sp.jedit.help.HelpViewer.ENCODING_DETECTOR;
+
+        return $r0;
+    }
+
+    static javax.swing.JScrollPane access$500(org.gjt.sp.jedit.help.HelpViewer)
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        javax.swing.JScrollPane $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.viewerScrollPane;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.help.HelpHistoryModel access$600(org.gjt.sp.jedit.help.HelpViewer)
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        org.gjt.sp.jedit.help.HelpHistoryModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.historyModel;
+
+        return $r1;
+    }
+
+    static java.lang.String access$702(org.gjt.sp.jedit.help.HelpViewer, java.lang.String)
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        java.lang.String r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.shortURL = r1;
+
+        return r1;
+    }
+
+    static org.gjt.sp.jedit.help.HelpTOCPanel access$800(org.gjt.sp.jedit.help.HelpViewer)
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        org.gjt.sp.jedit.help.HelpTOCPanel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.toc;
+
+        return $r1;
+    }
+
+    static boolean access$902(org.gjt.sp.jedit.help.HelpViewer, boolean)
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        boolean z0;
+
+        r0 := @parameter0;
+
+        z0 := @parameter1;
+
+        r0.queuedTOCReload = z0;
+
+        return z0;
+    }
+
+    static org.gjt.sp.jedit.help.HistoryButton access$1000(org.gjt.sp.jedit.help.HelpViewer)
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        org.gjt.sp.jedit.help.HistoryButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.back;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.help.HistoryButton access$1100(org.gjt.sp.jedit.help.HelpViewer)
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        org.gjt.sp.jedit.help.HistoryButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.forward;
+
+        return $r1;
+    }
+
+    static javax.swing.JLabel access$1200(org.gjt.sp.jedit.help.HelpViewer)
+    {
+        org.gjt.sp.jedit.help.HelpViewer r0;
+        javax.swing.JLabel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.title;
+
+        return $r1;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.io.RegexEncodingDetector $r0;
+
+        $r0 = new org.gjt.sp.jedit.io.RegexEncodingDetector;
+
+        specialinvoke $r0.<init>(":encoding=([^:]+):", "$1");
+
+        org.gjt.sp.jedit.help.HelpViewer.ENCODING_DETECTOR = $r0;
+
+        return;
+    }
+}

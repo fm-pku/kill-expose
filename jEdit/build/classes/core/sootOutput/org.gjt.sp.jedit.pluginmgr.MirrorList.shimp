@@ -1,0 +1,324 @@
+public class org.gjt.sp.jedit.pluginmgr.MirrorList extends java.lang.Object
+{
+    private java.lang.String xml;
+    private final java.util.List mirrors;
+
+    public void <init>(boolean, org.gjt.sp.util.ProgressObserver) throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.pluginmgr.MirrorList r0;
+        boolean z0;
+        org.gjt.sp.util.ProgressObserver r1;
+        org.gjt.sp.jedit.pluginmgr.MirrorList$Mirror r2, $r9;
+        java.lang.String r3, $r13, $r16;
+        org.gjt.sp.jedit.pluginmgr.MirrorListHandler r4, $r12;
+        java.io.BufferedReader r5, $r14;
+        org.xml.sax.InputSource r6, $r17;
+        org.xml.sax.XMLReader r7;
+        java.util.ArrayList $r8;
+        java.util.List $r11;
+        java.io.StringReader $r15;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        r1 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        $r8 = new java.util.ArrayList;
+
+        specialinvoke $r8.<init>();
+
+        r0.mirrors = $r8;
+
+        $r9 = new org.gjt.sp.jedit.pluginmgr.MirrorList$Mirror;
+
+        specialinvoke $r9.<init>();
+
+        r2 = $r9;
+
+        r2.id = "NONE";
+
+        r2.continent = "";
+
+        r2.country = "";
+
+        r2.location = "";
+
+        r2.description = "";
+
+        $r11 = r0.mirrors;
+
+        $r11.add(r2);
+
+        r3 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.mirror-url");
+
+        $r12 = new org.gjt.sp.jedit.pluginmgr.MirrorListHandler;
+
+        specialinvoke $r12.<init>(r0, r3);
+
+        r4 = $r12;
+
+        if z0 == 0 goto label1;
+
+        org.gjt.sp.util.Log.log(5, r0, "Loading mirror list from internet");
+
+        specialinvoke r0.downloadXml(r3);
+
+        goto label2;
+
+     label1:
+        org.gjt.sp.util.Log.log(5, r0, "Loading mirror list from cache");
+
+        specialinvoke r0.readXml();
+
+     label2:
+        $r13 = r0.xml;
+
+        if $r13 != null goto label3;
+
+        return;
+
+     label3:
+        r1.setValue(1L);
+
+        $r14 = new java.io.BufferedReader;
+
+        $r15 = new java.io.StringReader;
+
+        $r16 = r0.xml;
+
+        specialinvoke $r15.<init>($r16);
+
+        specialinvoke $r14.<init>($r15);
+
+        r5 = $r14;
+
+        $r17 = new org.xml.sax.InputSource;
+
+        specialinvoke $r17.<init>(r5);
+
+        r6 = $r17;
+
+        r6.setSystemId("jedit.jar");
+
+        r7 = org.xml.sax.helpers.XMLReaderFactory.createXMLReader();
+
+        r7.setContentHandler(r4);
+
+        r7.setDTDHandler(r4);
+
+        r7.setEntityResolver(r4);
+
+        r7.setErrorHandler(r4);
+
+        r7.parse(r6);
+
+        r1.setValue(2L);
+
+        return;
+    }
+
+    public java.lang.String getXml()
+    {
+        org.gjt.sp.jedit.pluginmgr.MirrorList r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.xml;
+
+        return $r1;
+    }
+
+    public java.util.List getMirrors()
+    {
+        org.gjt.sp.jedit.pluginmgr.MirrorList r0;
+        java.util.List $r1;
+
+        r0 := @this;
+
+        $r1 = r0.mirrors;
+
+        return $r1;
+    }
+
+    private void readXml() throws java.io.IOException
+    {
+        org.gjt.sp.jedit.pluginmgr.MirrorList r0;
+        java.lang.String r1, $r6, $r10;
+        java.io.File r2, $r5;
+        java.io.ByteArrayOutputStream r3, $r9;
+        java.lang.Throwable r4, $r11;
+        boolean $z0;
+        java.io.BufferedInputStream $r7, r12, r12_1;
+        java.io.FileInputStream $r8;
+
+        r0 := @this;
+
+        r1 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        if r1 != null goto label1;
+
+        return;
+
+     label1:
+        $r5 = new java.io.File;
+
+        $r6 = org.gjt.sp.jedit.MiscUtilities.constructPath(r1, "mirrorList.xml");
+
+        specialinvoke $r5.<init>($r6);
+
+        r2 = $r5;
+
+        $z0 = r2.exists();
+
+        if $z0 != 0 goto label2;
+
+        return;
+
+     label2:
+(0)     r12 = null;
+
+     label3:
+        $r7 = new java.io.BufferedInputStream;
+
+        $r8 = new java.io.FileInputStream;
+
+        specialinvoke $r8.<init>(r2);
+
+        specialinvoke $r7.<init>($r8);
+
+(1)     r12_1 = $r7;
+
+        $r9 = new java.io.ByteArrayOutputStream;
+
+        specialinvoke $r9.<init>();
+
+        r3 = $r9;
+
+        org.gjt.sp.util.IOUtilities.copyStream(null, r12_1, r3, 0);
+
+        $r10 = r3.toString();
+
+        r0.xml = $r10;
+
+     label4:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r12_1);
+
+        goto label7;
+
+     label5:
+        $r11 := @caughtexception;
+
+(2)     r12 = Phi(r12 #0, r12_1 #1, r12 #2);
+
+        r4 = $r11;
+
+     label6:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r12);
+
+        throw r4;
+
+     label7:
+        return;
+
+        catch java.lang.Throwable from label3 to label4 with label5;
+        catch java.lang.Throwable from label5 to label6 with label5;
+    }
+
+    private void downloadXml(java.lang.String) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.pluginmgr.MirrorList r0;
+        java.lang.String r1, $r6;
+        java.io.ByteArrayOutputStream r2, $r5;
+        java.lang.Throwable r3, $r7;
+        java.net.URL $r4;
+        java.io.InputStream r8, r8_1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+(0)     r8 = null;
+
+     label1:
+        $r4 = new java.net.URL;
+
+        specialinvoke $r4.<init>(r1);
+
+(1)     r8_1 = $r4.openStream();
+
+        $r5 = new java.io.ByteArrayOutputStream;
+
+        specialinvoke $r5.<init>();
+
+        r2 = $r5;
+
+        org.gjt.sp.util.IOUtilities.copyStream(null, r8_1, r2, 0);
+
+        $r6 = r2.toString();
+
+        r0.xml = $r6;
+
+     label2:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r8_1);
+
+        goto label5;
+
+     label3:
+        $r7 := @caughtexception;
+
+(2)     r8 = Phi(r8 #0, r8_1 #1, r8 #2);
+
+        r3 = $r7;
+
+     label4:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r8);
+
+        throw r3;
+
+     label5:
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+
+    void add(org.gjt.sp.jedit.pluginmgr.MirrorList$Mirror)
+    {
+        org.gjt.sp.jedit.pluginmgr.MirrorList r0;
+        org.gjt.sp.jedit.pluginmgr.MirrorList$Mirror r1;
+        java.util.List $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.mirrors;
+
+        $r2.add(r1);
+
+        return;
+    }
+
+    void finished()
+    {
+        org.gjt.sp.jedit.pluginmgr.MirrorList r0;
+        org.gjt.sp.jedit.pluginmgr.MirrorList$MirrorCompare $r1;
+        java.util.List $r2;
+
+        r0 := @this;
+
+        $r2 = r0.mirrors;
+
+        $r1 = new org.gjt.sp.jedit.pluginmgr.MirrorList$MirrorCompare;
+
+        specialinvoke $r1.<init>(null);
+
+        java.util.Collections.sort($r2, $r1);
+
+        return;
+    }
+}

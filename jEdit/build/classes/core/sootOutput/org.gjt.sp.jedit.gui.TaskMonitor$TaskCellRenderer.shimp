@@ -1,0 +1,165 @@
+class org.gjt.sp.jedit.gui.TaskMonitor$TaskCellRenderer extends java.lang.Object implements javax.swing.table.TableCellRenderer
+{
+    private final javax.swing.JProgressBar progress;
+    private final javax.swing.JButton button;
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskCellRenderer r0;
+        javax.swing.JProgressBar $r1, $r5;
+        javax.swing.JButton $r2;
+        java.lang.String $r3;
+        javax.swing.Icon $r4;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new javax.swing.JProgressBar;
+
+        specialinvoke $r1.<init>();
+
+        r0.progress = $r1;
+
+        $r2 = new javax.swing.JButton;
+
+        $r3 = org.gjt.sp.jedit.jEdit.getProperty("close-buffer.icon");
+
+        $r4 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r3);
+
+        specialinvoke $r2.<init>($r4);
+
+        r0.button = $r2;
+
+        $r5 = r0.progress;
+
+        $r5.setStringPainted(1);
+
+        return;
+    }
+
+    public java.awt.Component getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskCellRenderer r0;
+        javax.swing.JTable r1;
+        java.lang.Object r2;
+        boolean z0, z1, $z2;
+        int i0, i1, $i5, $i6;
+        org.gjt.sp.util.Task r3;
+        javax.swing.JButton $r4, $r5;
+        long $l2, l7, l8, l7_1, l8_1, l8_2, l7_2, l8_3, l7_3;
+        byte $b3, $b4;
+        javax.swing.JProgressBar $r6, $r7, $r8, $r9, $r11, $r13, $r14;
+        java.lang.String $r10, $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        z1 := @parameter3;
+
+        i0 := @parameter4;
+
+        i1 := @parameter5;
+
+        r3 = (org.gjt.sp.util.Task) r2;
+
+        if i1 != 0 goto label4;
+
+        $l2 = r3.getMaximum();
+
+        $b3 = $l2 cmp 0L;
+
+        if $b3 != 0 goto label1;
+
+        $r14 = r0.progress;
+
+        $r14.setIndeterminate(1);
+
+(0)     goto label3;
+
+     label1:
+        $r6 = r0.progress;
+
+        $r6.setIndeterminate(0);
+
+        l7 = r3.getMaximum();
+
+        l8 = r3.getValue();
+
+        $b4 = l7 cmp 2147483647L;
+
+(1)     if $b4 <= 0 goto label2;
+
+        l7_1 = l7 >> 10;
+
+(2)     l8_1 = l8 >> 10;
+
+     label2:
+        l8_2 = Phi(l8 #1, l8_1 #2);
+
+        l7_2 = Phi(l7 #1, l7_1 #2);
+
+        $r7 = r0.progress;
+
+        $i5 = (int) l7_2;
+
+        $r7.setMaximum($i5);
+
+        $r8 = r0.progress;
+
+        $i6 = (int) l8_2;
+
+(3)     $r8.setValue($i6);
+
+     label3:
+        l8_3 = Phi(l8 #0, l8_2 #3);
+
+        l7_3 = Phi(l7 #0, l7_2 #3);
+
+        $r9 = r0.progress;
+
+        $r10 = r3.getLabel();
+
+        $r9.setToolTipText($r10);
+
+        $r11 = r0.progress;
+
+        $r12 = r3.getStatus();
+
+        $r11.setString($r12);
+
+        $r13 = r0.progress;
+
+        return $r13;
+
+     label4:
+        $r4 = r0.button;
+
+        $z2 = r3.isCancellable();
+
+        $r4.setEnabled($z2);
+
+        $r5 = r0.button;
+
+        return $r5;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.TaskMonitor$1)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskCellRenderer r0;
+        org.gjt.sp.jedit.gui.TaskMonitor$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

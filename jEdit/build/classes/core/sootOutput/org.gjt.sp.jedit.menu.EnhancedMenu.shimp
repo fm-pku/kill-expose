@@ -1,0 +1,353 @@
+public class org.gjt.sp.jedit.menu.EnhancedMenu extends javax.swing.JMenu implements javax.swing.event.MenuListener
+{
+    protected int initialComponentCount;
+    protected org.gjt.sp.jedit.ActionContext context;
+    protected java.lang.String providerCode;
+    protected org.gjt.sp.jedit.menu.DynamicMenuProvider provider;
+    protected org.gjt.sp.jedit.menu.EnhancedMenu$EditBusStub ebStub;
+
+    public void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.menu.EnhancedMenu r0;
+        java.lang.String r1, $r2, $r3;
+        org.gjt.sp.jedit.ActionContext $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.concat(".label");
+
+        $r3 = org.gjt.sp.jedit.jEdit.getProperty($r2);
+
+        $r4 = org.gjt.sp.jedit.jEdit.getActionContext();
+
+        specialinvoke r0.<init>(r1, $r3, $r4);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.menu.EnhancedMenu r0;
+        java.lang.String r1, r2;
+        org.gjt.sp.jedit.ActionContext $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = org.gjt.sp.jedit.jEdit.getActionContext();
+
+        specialinvoke r0.<init>(r1, r2, $r3);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.lang.String, org.gjt.sp.jedit.ActionContext)
+    {
+        org.gjt.sp.jedit.menu.EnhancedMenu r0;
+        java.lang.String r1, r3, r5, $r9, $r10, $r13, $r18, $r19, r20, r20_1, r20_2, r20_3, r20_4;
+        org.gjt.sp.jedit.ActionContext r2;
+        java.util.StringTokenizer r4, $r15;
+        boolean $z0, $z1, $z2;
+        int $i0, $i1, $i2, $i3, i5, i7;
+        java.lang.StringBuilder $r6, $r7, $r8;
+        org.gjt.sp.jedit.menu.EnhancedMenu$EditBusStub $r11, $r12, $r14;
+        javax.swing.JMenuItem $r16;
+        char $c4, c6, c6_1, c6_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r20 := @parameter1;
+
+        r2 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.context = r2;
+
+(0)     if r20 != null goto label1;
+
+(1)     r20_1 = r1;
+
+     label1:
+        r20_2 = Phi(r20 #0, r20_1 #1);
+
+        i5 = r20_2.indexOf(36);
+
+        if i5 == -1 goto label2;
+
+        $i1 = r20_2.length();
+
+        $i2 = $i1 - i5;
+
+        if $i2 <= 1 goto label2;
+
+        $i3 = i5 + 1;
+
+        $c4 = r20_2.charAt($i3);
+
+        c6 = java.lang.Character.toLowerCase($c4);
+
+        $r18 = r20_2.substring(0, i5);
+
+        i7 = i5 + 1;
+
+        $r19 = r20_2.substring(i7);
+
+        r20_3 = $r18.concat($r19);
+
+(2)     goto label3;
+
+     label2:
+(3)     c6_1 = 0;
+
+     label3:
+        c6_2 = Phi(c6 #2, c6_1 #3);
+
+        r20_4 = Phi(r20_3 #2, r20_2 #3);
+
+        r0.setText(r20_4);
+
+        $z0 = org.gjt.sp.jedit.OperatingSystem.isMacOS();
+
+        if $z0 != 0 goto label4;
+
+        r0.setMnemonic(c6_2);
+
+     label4:
+        r3 = org.gjt.sp.jedit.jEdit.getProperty(r1);
+
+(4)     if r3 == null goto label8;
+
+        $r15 = new java.util.StringTokenizer;
+
+        specialinvoke $r15.<init>(r3);
+
+(5)     r4 = $r15;
+
+     label5:
+        c6 = Phi(c6_2 #5, c6 #7);
+
+        r20 = Phi(r20_4 #5, r20 #7);
+
+        $z1 = r4.hasMoreTokens();
+
+(6)     if $z1 == 0 goto label8;
+
+        r5 = r4.nextToken();
+
+        $z2 = r5.equals("-");
+
+        if $z2 == 0 goto label6;
+
+        r0.addSeparator();
+
+        goto label7;
+
+     label6:
+        $r16 = org.gjt.sp.jedit.GUIUtilities.loadMenuItem(r2, r5, 1);
+
+        r0.add($r16);
+
+     label7:
+(7)     goto label5;
+
+     label8:
+        c6 = Phi(c6_2 #4, c6 #6);
+
+        r20 = Phi(r20_4 #4, r20 #6);
+
+        $i0 = r0.getMenuComponentCount();
+
+        r0.initialComponentCount = $i0;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append(r1);
+
+        $r8 = $r7.append(".code");
+
+        $r9 = $r8.toString();
+
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty($r9);
+
+        r0.providerCode = $r10;
+
+        $r11 = new org.gjt.sp.jedit.menu.EnhancedMenu$EditBusStub;
+
+        specialinvoke $r11.<init>(r1);
+
+        r0.ebStub = $r11;
+
+        $r12 = r0.ebStub;
+
+        $r12.menuOutOfDate = 1;
+
+        r0.addMenuListener(r0);
+
+        $r13 = r0.providerCode;
+
+        if $r13 == null goto label9;
+
+        $r14 = r0.ebStub;
+
+        org.gjt.sp.jedit.EditBus.addToBus($r14);
+
+     label9:
+        return;
+    }
+
+    public void menuSelected(javax.swing.event.MenuEvent)
+    {
+        org.gjt.sp.jedit.menu.EnhancedMenu r0;
+        javax.swing.event.MenuEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.init();
+
+        return;
+    }
+
+    public void menuDeselected(javax.swing.event.MenuEvent)
+    {
+        org.gjt.sp.jedit.menu.EnhancedMenu r0;
+        javax.swing.event.MenuEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void menuCanceled(javax.swing.event.MenuEvent)
+    {
+        org.gjt.sp.jedit.menu.EnhancedMenu r0;
+        javax.swing.event.MenuEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void init()
+    {
+        org.gjt.sp.jedit.menu.EnhancedMenu r0;
+        java.lang.Object r1;
+        java.lang.String $r2, $r11;
+        org.gjt.sp.jedit.menu.DynamicMenuProvider $r3, $r4, $r7, $r8, $r9, $r12;
+        org.gjt.sp.jedit.menu.EnhancedMenu$EditBusStub $r5, $r6;
+        boolean $z0, $z1;
+        int $i0, $i1, $i2, $i3;
+        org.gjt.sp.jedit.bsh.NameSpace $r10;
+
+        r0 := @this;
+
+        $r2 = r0.providerCode;
+
+        if $r2 != null goto label1;
+
+        return;
+
+     label1:
+        $r3 = r0.provider;
+
+        if $r3 != null goto label2;
+
+        $r10 = org.gjt.sp.jedit.BeanShell.getNameSpace();
+
+        $r11 = r0.providerCode;
+
+        r1 = org.gjt.sp.jedit.BeanShell.eval(null, $r10, $r11);
+
+        $r12 = (org.gjt.sp.jedit.menu.DynamicMenuProvider) r1;
+
+        r0.provider = $r12;
+
+     label2:
+        $r4 = r0.provider;
+
+        if $r4 != null goto label3;
+
+        r0.providerCode = null;
+
+        return;
+
+     label3:
+        $r5 = r0.ebStub;
+
+        $z0 = $r5.menuOutOfDate;
+
+        if $z0 != 0 goto label4;
+
+        $r9 = r0.provider;
+
+        $z1 = $r9.updateEveryTime();
+
+        if $z1 == 0 goto label7;
+
+     label4:
+        $r6 = r0.ebStub;
+
+        $r6.menuOutOfDate = 0;
+
+     label5:
+        $i0 = r0.getMenuComponentCount();
+
+        $i1 = r0.initialComponentCount;
+
+        if $i0 == $i1 goto label6;
+
+        $i2 = r0.getMenuComponentCount();
+
+        $i3 = $i2 - 1;
+
+        r0.remove($i3);
+
+        goto label5;
+
+     label6:
+        $r7 = r0.provider;
+
+        if $r7 == null goto label7;
+
+        $r8 = r0.provider;
+
+        $r8.update(r0);
+
+     label7:
+        return;
+    }
+
+    protected void finalize() throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.menu.EnhancedMenu r0;
+        org.gjt.sp.jedit.menu.EnhancedMenu$EditBusStub $r1, $r2;
+
+        r0 := @this;
+
+        $r1 = r0.ebStub;
+
+        if $r1 == null goto label1;
+
+        $r2 = r0.ebStub;
+
+        org.gjt.sp.jedit.EditBus.removeFromBus($r2);
+
+     label1:
+        return;
+    }
+}

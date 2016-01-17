@@ -1,0 +1,377 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$RemoveButton extends javax.swing.JButton implements javax.swing.event.ListSelectionListener, java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.pluginmgr.ManagePanel this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$RemoveButton r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+        java.lang.String $r2;
+        javax.swing.JTable $r3;
+        javax.swing.ListSelectionModel $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("manage-plugins.remove");
+
+        specialinvoke r0.<init>($r2);
+
+        $r3 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800(r1);
+
+        $r4 = $r3.getSelectionModel();
+
+        $r4.addListSelectionListener(r0);
+
+        r0.addActionListener(r0);
+
+        r0.setEnabled(0);
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$RemoveButton r0;
+        java.awt.event.ActionEvent r1;
+        int[] r2;
+        java.util.LinkedList r3, $r11;
+        org.gjt.sp.jedit.pluginmgr.Roster r4, $r12;
+        java.util.HashSet r5, r6, $r13, $r14;
+        java.lang.String r7, $r43, $r44, $r48, $r49, r57;
+        org.gjt.sp.jedit.PluginJAR r8;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r9, $r15, $r22, $r26, $r28, $r30, $r32, $r34, $r36, $r41, $r45;
+        javax.swing.JTable $r10, $r31, $r33, $r37, $r46;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, i7, i8, i9;
+        boolean $z0, $z2, $z3, $z4, $z6, $z8;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r16, $r17, $r23, $r27;
+        java.util.ArrayList $r18, r59;
+        java.lang.String[] $r19, $r21;
+        java.lang.Object[] $r20, $r24, r58;
+        org.gjt.sp.util.StandardUtilities$StringCompare $r25;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel $r29, $r42;
+        javax.swing.JScrollPane $r35;
+        java.lang.Object $r38, $r39;
+        java.io.File $r40;
+        javax.swing.ListSelectionModel $r47;
+        java.util.List $r50, $r51;
+        java.io.IOException $r52, r55;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r53;
+        java.util.Collection r54;
+        java.util.Iterator r56, r60;
+        javax.swing.JScrollBar r61;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r9);
+
+        r2 = $r10.getSelectedRows();
+
+        $r11 = new java.util.LinkedList;
+
+        specialinvoke $r11.<init>();
+
+        r3 = $r11;
+
+        $r12 = new org.gjt.sp.jedit.pluginmgr.Roster;
+
+        specialinvoke $r12.<init>();
+
+        r4 = $r12;
+
+        $r13 = new java.util.HashSet;
+
+        specialinvoke $r13.<init>();
+
+        r5 = $r13;
+
+        $r14 = new java.util.HashSet;
+
+        specialinvoke $r14.<init>();
+
+        r6 = $r14;
+
+(0)     i7 = 0;
+
+     label01:
+        i7 = Phi(i7 #0, i7 #1);
+
+        $i0 = lengthof r2;
+
+        if i7 >= $i0 goto label08;
+
+        $r41 = r0.this$0;
+
+        $r42 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$600($r41);
+
+        $i4 = r2[i7];
+
+        r53 = $r42.getEntry($i4);
+
+        $r43 = r53.status;
+
+        $z6 = $r43.equals("not-loaded");
+
+        if $z6 != 0 goto label02;
+
+        $r49 = r53.status;
+
+        $z8 = $r49.equals("disabled");
+
+        if $z8 == 0 goto label06;
+
+     label02:
+        $r44 = r53.jar;
+
+        if $r44 == null goto label07;
+
+     label03:
+        $r48 = r53.jar;
+
+        r54 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1200($r48);
+
+        r5.addAll(r54);
+
+     label04:
+        goto label07;
+
+     label05:
+        $r52 := @caughtexception;
+
+        r55 = $r52;
+
+        org.gjt.sp.util.Log.log(9, r0, r55);
+
+        goto label07;
+
+     label06:
+        $r50 = r53.jars;
+
+        r5.addAll($r50);
+
+        $r51 = r53.jars;
+
+        r6.addAll($r51);
+
+     label07:
+        $r45 = r0.this$0;
+
+        $r46 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r45);
+
+        $r47 = $r46.getSelectionModel();
+
+        $i6 = r2[i7];
+
+        $i5 = r2[i7];
+
+        $r47.removeSelectionInterval($i6, $i5);
+
+        i7 = i7 + 1;
+
+(1)     goto label01;
+
+     label08:
+(2)     r56 = r5.iterator();
+
+     label09:
+        i7 = Phi(i7 #2, i7 #3);
+
+        $z0 = r56.hasNext();
+
+        if $z0 == 0 goto label11;
+
+        $r39 = r56.next();
+
+        r57 = (java.lang.String) $r39;
+
+        $r40 = new java.io.File;
+
+        specialinvoke $r40.<init>(r57);
+
+        $z4 = $r40.exists();
+
+        if $z4 == 0 goto label10;
+
+        r3.add(r57);
+
+        r4.addRemove(r57);
+
+     label10:
+(3)     goto label09;
+
+     label11:
+        r58 = r3.toArray();
+
+        java.util.Arrays.sort(r58);
+
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1000($r15);
+
+        i8 = org.gjt.sp.jedit.GUIUtilities.listConfirm($r16, "plugin-manager.remove-confirm", null, r58);
+
+(4)     if i8 != 0 goto label17;
+
+        $r18 = new java.util.ArrayList;
+
+        specialinvoke $r18.<init>();
+
+        r59 = $r18;
+
+        $i1 = r6.size();
+
+        $r19 = newarray (java.lang.String)[$i1];
+
+        $r20 = r6.toArray($r19);
+
+        $r21 = (java.lang.String[]) $r20;
+
+        org.gjt.sp.jedit.PluginJAR.transitiveClosure($r21, r59);
+
+        r59.removeAll(r3);
+
+        $z2 = r59.isEmpty();
+
+        if $z2 == 0 goto label12;
+
+        i9 = 0;
+
+(5)     goto label13;
+
+     label12:
+        $r22 = r0.this$0;
+
+        $r23 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1000($r22);
+
+        $r24 = r59.toArray();
+
+        i9 = org.gjt.sp.jedit.GUIUtilities.listConfirm($r23, "plugin-manager.remove-dependencies", null, $r24);
+
+        $r25 = new org.gjt.sp.util.StandardUtilities$StringCompare;
+
+        specialinvoke $r25.<init>(1);
+
+(6)     java.util.Collections.sort(r59, $r25);
+
+     label13:
+        i9 = Phi(i9 #5, i9 #6);
+
+(7)     if i9 != 0 goto label17;
+
+(8)     r60 = r59.iterator();
+
+     label14:
+        i9 = Phi(i9 #8, i9 #9);
+
+        i7 = Phi(i7 #8, i7 #9);
+
+        $z3 = r60.hasNext();
+
+        if $z3 == 0 goto label15;
+
+        $r38 = r60.next();
+
+        r7 = (java.lang.String) $r38;
+
+        r8 = org.gjt.sp.jedit.jEdit.getPluginJAR(r7);
+
+        org.gjt.sp.jedit.jEdit.removePluginJAR(r8, 0);
+
+(9)     goto label14;
+
+     label15:
+        $r26 = r0.this$0;
+
+        $r27 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1000($r26);
+
+        r4.performOperationsInAWTThread($r27);
+
+        $r28 = r0.this$0;
+
+        $r29 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$600($r28);
+
+        $r29.update();
+
+        $r30 = r0.this$0;
+
+        $r31 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r30);
+
+        $i2 = $r31.getRowCount();
+
+        if $i2 == 0 goto label16;
+
+        $r36 = r0.this$0;
+
+        $r37 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r36);
+
+        $r37.setRowSelectionInterval(0, 0);
+
+     label16:
+        $r32 = r0.this$0;
+
+        $r33 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r32);
+
+        $r33.setColumnSelectionInterval(0, 0);
+
+        $r34 = r0.this$0;
+
+        $r35 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1100($r34);
+
+        r61 = $r35.getVerticalScrollBar();
+
+        $i3 = r61.getMinimum();
+
+(10)    r61.setValue($i3);
+
+     label17:
+        i9 = Phi(i9 #4, i9 #7, i9 #10);
+
+        i7 = Phi(i7 #4, i7 #7, i7 #10);
+
+        $r17 = org.gjt.sp.jedit.pluginmgr.PluginManager.getInstance();
+
+        $r17.pluginRemoved();
+
+        return;
+
+        catch java.io.IOException from label03 to label04 with label05;
+    }
+
+    public void valueChanged(javax.swing.event.ListSelectionEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$RemoveButton r0;
+        javax.swing.event.ListSelectionEvent r1;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r2;
+        javax.swing.JTable $r3;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r2);
+
+        $i0 = $r3.getSelectedRowCount();
+
+        if $i0 != 0 goto label1;
+
+        r0.setEnabled(0);
+
+        goto label2;
+
+     label1:
+        r0.setEnabled(1);
+
+     label2:
+        return;
+    }
+}

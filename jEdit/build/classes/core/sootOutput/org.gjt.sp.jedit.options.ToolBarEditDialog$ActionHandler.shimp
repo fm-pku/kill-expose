@@ -1,0 +1,189 @@
+class org.gjt.sp.jedit.options.ToolBarEditDialog$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.options.ToolBarEditDialog this$0;
+
+    void <init>(org.gjt.sp.jedit.options.ToolBarEditDialog)
+    {
+        org.gjt.sp.jedit.options.ToolBarEditDialog$ActionHandler r0;
+        org.gjt.sp.jedit.options.ToolBarEditDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.options.ToolBarEditDialog$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2;
+        java.lang.String[] r3;
+        java.net.MalformedURLException r4, $r39;
+        boolean $z0;
+        org.gjt.sp.jedit.options.ToolBarEditDialog $r5, $r7, $r9, $r11, $r13, $r15, $r18, $r24, $r28, $r30, $r32, $r35, $r36, $r37, $r38;
+        javax.swing.JButton $r6, $r8, $r12, $r25, $r31;
+        javax.swing.JComboBox $r10;
+        java.lang.String $r14, $r16, $r20, $r22, $r29, $r33, $r34, r40, r40_1, r40_2, r40_3;
+        java.lang.StringBuilder $r17, $r19, $r21;
+        javax.swing.ImageIcon $r26;
+        java.net.URL $r27;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $z0 = r2 instanceof javax.swing.JRadioButton;
+
+        if $z0 == 0 goto label01;
+
+        $r38 = r0.this$0;
+
+        org.gjt.sp.jedit.options.ToolBarEditDialog.access$000($r38);
+
+     label01:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.options.ToolBarEditDialog.access$100($r5);
+
+        if r2 != $r6 goto label02;
+
+        $r37 = r0.this$0;
+
+        $r37.ok();
+
+(0)     goto label12;
+
+     label02:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.options.ToolBarEditDialog.access$200($r7);
+
+        if r2 != $r8 goto label03;
+
+        $r36 = r0.this$0;
+
+        $r36.cancel();
+
+(1)     goto label12;
+
+     label03:
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.options.ToolBarEditDialog.access$300($r9);
+
+        if r2 != $r10 goto label04;
+
+        $r35 = r0.this$0;
+
+        org.gjt.sp.jedit.options.ToolBarEditDialog.access$400($r35);
+
+(2)     goto label12;
+
+     label04:
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.options.ToolBarEditDialog.access$500($r11);
+
+(3)     if r2 != $r12 goto label12;
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.options.ToolBarEditDialog.access$600($r13);
+
+        if $r14 != null goto label05;
+
+        r40 = null;
+
+(4)     goto label06;
+
+     label05:
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.options.ToolBarEditDialog.access$600($r15);
+
+(5)     r40_1 = org.gjt.sp.jedit.MiscUtilities.getParentOfPath($r16);
+
+     label06:
+        r40_2 = Phi(r40 #4, r40_1 #5);
+
+        r3 = org.gjt.sp.jedit.GUIUtilities.showVFSFileDialog(null, r40_2, 0, 0);
+
+        if r3 != null goto label07;
+
+        return;
+
+     label07:
+        $r18 = r0.this$0;
+
+        $r17 = new java.lang.StringBuilder;
+
+        specialinvoke $r17.<init>();
+
+        $r19 = $r17.append("file:");
+
+        $r20 = r3[0];
+
+        $r21 = $r19.append($r20);
+
+        $r22 = $r21.toString();
+
+        org.gjt.sp.jedit.options.ToolBarEditDialog.access$602($r18, $r22);
+
+     label08:
+        $r24 = r0.this$0;
+
+        $r25 = org.gjt.sp.jedit.options.ToolBarEditDialog.access$500($r24);
+
+        $r26 = new javax.swing.ImageIcon;
+
+        $r27 = new java.net.URL;
+
+        $r28 = r0.this$0;
+
+        $r29 = org.gjt.sp.jedit.options.ToolBarEditDialog.access$600($r28);
+
+        specialinvoke $r27.<init>($r29);
+
+        specialinvoke $r26.<init>($r27);
+
+        $r25.setIcon($r26);
+
+     label09:
+        goto label11;
+
+     label10:
+        $r39 := @caughtexception;
+
+        r4 = $r39;
+
+        org.gjt.sp.util.Log.log(9, r0, r4);
+
+     label11:
+        $r30 = r0.this$0;
+
+        $r31 = org.gjt.sp.jedit.options.ToolBarEditDialog.access$500($r30);
+
+        $r32 = r0.this$0;
+
+        $r33 = org.gjt.sp.jedit.options.ToolBarEditDialog.access$600($r32);
+
+        $r34 = org.gjt.sp.jedit.MiscUtilities.getFileName($r33);
+
+(6)     $r31.setText($r34);
+
+     label12:
+        r40_3 = Phi(r40 #0, r40 #1, r40 #2, r40 #3, r40_2 #6);
+
+        return;
+
+        catch java.net.MalformedURLException from label08 to label09 with label10;
+    }
+}

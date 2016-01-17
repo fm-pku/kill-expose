@@ -1,0 +1,1011 @@
+class org.gjt.sp.jedit.browser.BrowserView extends javax.swing.JPanel
+{
+    private final org.gjt.sp.jedit.browser.VFSBrowser browser;
+    private final javax.swing.JSplitPane splitPane;
+    private final javax.swing.JList parentDirectories;
+    private final org.gjt.sp.jedit.browser.VFSDirectoryEntryTable table;
+    private final java.util.Set tmpExpanded;
+    private org.gjt.sp.jedit.browser.BrowserCommandsMenu popup;
+    private boolean showIcons;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSBrowser)
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+        org.gjt.sp.jedit.gui.DockableWindowManager r2;
+        java.awt.event.KeyListener r3;
+        javax.swing.JScrollPane r4, r5, $r18, $r27;
+        java.util.HashSet $r6;
+        org.gjt.sp.jedit.View $r7;
+        org.gjt.sp.jedit.browser.BrowserView$ParentDirectoryList $r8;
+        javax.swing.JList $r9, $r10, $r11, $r14, $r15, $r17, $r19;
+        javax.swing.ListSelectionModel $r12, $r39, $r44;
+        org.gjt.sp.jedit.browser.BrowserView$ParentDirectoryRenderer $r13;
+        org.gjt.sp.jedit.browser.BrowserView$ParentMouseHandler $r16;
+        java.awt.Dimension $r20, $r29;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r21, $r23, $r25, $r26, $r28, $r31, $r38, $r43;
+        org.gjt.sp.jedit.browser.BrowserView$TableMouseHandler $r22, $r34;
+        org.gjt.sp.jedit.browser.BrowserView$TableKeyListener $r24;
+        javax.swing.JViewport $r30, $r33;
+        java.awt.Color $r32;
+        javax.swing.JSplitPane $r35, $r36, $r41;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.browser.BrowserView$1 $r37;
+        java.awt.BorderLayout $r40;
+        byte $b0, $b0_1, $b0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.browser = r1;
+
+        $r6 = new java.util.HashSet;
+
+        specialinvoke $r6.<init>();
+
+        r0.tmpExpanded = $r6;
+
+        Packer.Pack(r0);
+
+        $r7 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        r2 = $r7.getDockableWindowManager();
+
+        r3 = r2.closeListener("vfs.browser");
+
+        $r8 = new org.gjt.sp.jedit.browser.BrowserView$ParentDirectoryList;
+
+        specialinvoke $r8.<init>(r0);
+
+        Packer.Unpack(r0);
+
+        r0.parentDirectories = $r8;
+
+        $r9 = r0.parentDirectories;
+
+        $r9.addKeyListener(r3);
+
+        $r10 = r0.parentDirectories;
+
+        $r10.setName("parent");
+
+        $r11 = r0.parentDirectories;
+
+        $r12 = $r11.getSelectionModel();
+
+        Packer.Pack(r0);
+
+        $r12.setSelectionMode(0);
+
+        $r14 = r0.parentDirectories;
+
+        $r13 = new org.gjt.sp.jedit.browser.BrowserView$ParentDirectoryRenderer;
+
+        specialinvoke $r13.<init>(r0);
+
+        Packer.Unpack(r0);
+
+        $r14.setCellRenderer($r13);
+
+        $r15 = r0.parentDirectories;
+
+        $r15.setVisibleRowCount(5);
+
+        Packer.Pack(r0);
+
+        $r17 = r0.parentDirectories;
+
+        $r16 = new org.gjt.sp.jedit.browser.BrowserView$ParentMouseHandler;
+
+        specialinvoke $r16.<init>(r0, null);
+
+        Packer.Unpack(r0);
+
+        $r17.addMouseListener($r16);
+
+        $r18 = new javax.swing.JScrollPane;
+
+        $r19 = r0.parentDirectories;
+
+        specialinvoke $r18.<init>($r19);
+
+        Packer.Pack(r0);
+
+        r4 = $r18;
+
+        $r20 = new java.awt.Dimension;
+
+        specialinvoke $r20.<init>(0, 0);
+
+        r4.setMinimumSize($r20);
+
+        $r21 = new org.gjt.sp.jedit.browser.VFSDirectoryEntryTable;
+
+        specialinvoke $r21.<init>(r0);
+
+        Packer.Unpack(r0);
+
+        r0.table = $r21;
+
+        Packer.Pack(r0);
+
+        $r23 = r0.table;
+
+        $r22 = new org.gjt.sp.jedit.browser.BrowserView$TableMouseHandler;
+
+        specialinvoke $r22.<init>(r0, null);
+
+        Packer.Unpack(r0);
+
+        $r23.addMouseListener($r22);
+
+        Packer.Pack(r0);
+
+        $r25 = r0.table;
+
+        $r24 = new org.gjt.sp.jedit.browser.BrowserView$TableKeyListener;
+
+        specialinvoke $r24.<init>(r0, null);
+
+        Packer.Unpack(r0);
+
+        $r25.addKeyListener($r24);
+
+        $r26 = r0.table;
+
+        $r26.setName("file");
+
+        $r27 = new javax.swing.JScrollPane;
+
+        $r28 = r0.table;
+
+        specialinvoke $r27.<init>($r28);
+
+        r5 = $r27;
+
+        $r29 = new java.awt.Dimension;
+
+        specialinvoke $r29.<init>(0, 0);
+
+        r5.setMinimumSize($r29);
+
+        $r30 = r5.getViewport();
+
+        $r31 = r0.table;
+
+        $r32 = $r31.getBackground();
+
+        Packer.Pack(r0);
+
+        $r30.setBackground($r32);
+
+        $r33 = r5.getViewport();
+
+        $r34 = new org.gjt.sp.jedit.browser.BrowserView$TableMouseHandler;
+
+        specialinvoke $r34.<init>(r0, null);
+
+        $r33.addMouseListener($r34);
+
+        $r35 = new javax.swing.JSplitPane;
+
+        Packer.Unpack(r0);
+
+        $z0 = r1.isHorizontalLayout();
+
+        if $z0 == 0 goto label1;
+
+        $b0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $b0_1 = 0;
+
+     label2:
+        $b0_2 = Phi($b0 #0, $b0_1 #1);
+
+        specialinvoke $r35.<init>($b0_2, r4, r5);
+
+        r0.splitPane = $r35;
+
+        $r36 = r0.splitPane;
+
+        $r36.setOneTouchExpandable(1);
+
+        $r37 = new org.gjt.sp.jedit.browser.BrowserView$1;
+
+        specialinvoke $r37.<init>(r0, r1, r4);
+
+        java.awt.EventQueue.invokeLater($r37);
+
+        $z1 = r1.isMultipleSelectionEnabled();
+
+        if $z1 == 0 goto label3;
+
+        $r43 = r0.table;
+
+        $r44 = $r43.getSelectionModel();
+
+        Packer.Pack(r0);
+
+        $r44.setSelectionMode(2);
+
+        goto label4;
+
+     label3:
+        $r38 = r0.table;
+
+        $r39 = $r38.getSelectionModel();
+
+        Packer.Pack(r0);
+
+        $r39.setSelectionMode(0);
+
+     label4:
+        $r40 = new java.awt.BorderLayout;
+
+        specialinvoke $r40.<init>();
+
+        r0.setLayout($r40);
+
+        $r41 = r0.splitPane;
+
+        Packer.Unpack(r0);
+
+        r0.add("Center", $r41);
+
+        Packer.Pack(r0);
+
+        r0.propertiesChanged();
+
+        return;
+    }
+
+    public void focusOnFileView()
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r1;
+
+        r0 := @this;
+
+        $r1 = r0.table;
+
+        Packer.Unpack(r0);
+
+        $r1.requestFocus();
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void removeNotify()
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        java.lang.String r1, $r4, $r4_1, $r4_2;
+        org.gjt.sp.jedit.browser.VFSBrowser $r2;
+        boolean $z0;
+        javax.swing.JSplitPane $r3;
+        int $i0;
+
+        r0 := @this;
+
+        $r2 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        $z0 = $r2.isHorizontalLayout();
+
+        if $z0 == 0 goto label1;
+
+        $r4 = "vfs.browser.horizontalSplitter";
+
+(0)     goto label2;
+
+     label1:
+(1)     $r4_1 = "vfs.browser.splitter";
+
+     label2:
+        $r4_2 = Phi($r4 #0, $r4_1 #1);
+
+        r1 = $r4_2;
+
+        $r3 = r0.splitPane;
+
+        $i0 = $r3.getDividerLocation();
+
+        Packer.Pack(r0);
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty(r1, $i0);
+
+        specialinvoke r0.removeNotify();
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.io.VFSFile[] getSelectedFiles()
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r1;
+        org.gjt.sp.jedit.io.VFSFile[] $r2;
+
+        r0 := @this;
+
+        $r1 = r0.table;
+
+        Packer.Unpack(r0);
+
+        $r2 = $r1.getSelectedFiles();
+
+        Packer.Pack(r0);
+
+        return $r2;
+    }
+
+    public void selectNone()
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r1;
+
+        r0 := @this;
+
+        $r1 = r0.table;
+
+        Packer.Unpack(r0);
+
+        $r1.clearSelection();
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void saveExpansionState()
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        java.util.Set $r1, $r2;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r3;
+
+        r0 := @this;
+
+        $r1 = r0.tmpExpanded;
+
+        Packer.Unpack(r0);
+
+        $r1.clear();
+
+        $r3 = r0.table;
+
+        $r2 = r0.tmpExpanded;
+
+        $r3.getExpandedDirectories($r2);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void clearExpansionState()
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        java.util.Set $r1;
+
+        r0 := @this;
+
+        $r1 = r0.tmpExpanded;
+
+        Packer.Unpack(r0);
+
+        $r1.clear();
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void loadDirectory(java.lang.Object, java.lang.String, boolean)
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        java.lang.Object r1;
+        java.lang.String r2;
+        boolean z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        r0.loadDirectory(r1, r2, z0, null);
+
+        return;
+    }
+
+    public void loadDirectory(java.lang.Object, java.lang.String, boolean, java.lang.Runnable)
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        java.lang.Object r1, r4;
+        boolean z0;
+        java.lang.Runnable r2;
+        org.gjt.sp.jedit.io.VFS r3;
+        java.lang.Object[] r5, $r12;
+        org.gjt.sp.jedit.browser.BrowserView$2 r6, $r9;
+        org.gjt.sp.jedit.browser.VFSBrowser $r7, $r11;
+        java.lang.String $r8, r15, r16;
+        org.gjt.sp.jedit.browser.ListDirectoryBrowserTask $r10;
+        org.gjt.sp.jedit.browser.BrowserView$LoadingPlaceholder $r13;
+        javax.swing.JList $r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r15 := @parameter1;
+
+        z0 := @parameter2;
+
+        r2 := @parameter3;
+
+        $r7 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        $r8 = $r7.getDirectory();
+
+        Packer.Pack(r0);
+
+        r16 = org.gjt.sp.jedit.MiscUtilities.constructPath($r8, r15);
+
+        r3 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r16);
+
+        r4 = r3.createVFSSession(r16, r0);
+
+        if r4 != null goto label2;
+
+        if r2 == null goto label1;
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread(r2);
+
+     label1:
+        return;
+
+     label2:
+        if r1 != null goto label3;
+
+        $r14 = r0.parentDirectories;
+
+        $r12 = newarray (java.lang.Object)[1];
+
+        $r13 = new org.gjt.sp.jedit.browser.BrowserView$LoadingPlaceholder;
+
+        specialinvoke $r13.<init>(null);
+
+        $r12[0] = $r13;
+
+        Packer.Unpack(r0);
+
+        $r14.setListData($r12);
+
+     label3:
+        Packer.Pack(r0);
+
+        r5 = newarray (java.lang.Object)[2];
+
+        $r9 = new org.gjt.sp.jedit.browser.BrowserView$2;
+
+        specialinvoke $r9.<init>(r0, r1, r5, z0, r2);
+
+        r6 = $r9;
+
+        $r10 = new org.gjt.sp.jedit.browser.ListDirectoryBrowserTask;
+
+        $r11 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        specialinvoke $r10.<init>($r11, r4, r3, r16, r5, r6);
+
+        Packer.Pack(r0);
+
+        org.gjt.sp.util.ThreadUtilities.runInBackground($r10);
+
+        return;
+    }
+
+    public void directoryLoaded(java.lang.Object, java.lang.String, java.util.List)
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        java.lang.Object r1, r22;
+        java.lang.String r2, $r14, $r17, r19, r23;
+        java.util.List r3;
+        javax.swing.DefaultListModel r4, $r9;
+        java.io.IOException r5, $r18;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r6;
+        org.gjt.sp.jedit.io.VFS $r7, r20;
+        java.util.Set $r8;
+        boolean $z0, $z1;
+        javax.swing.JList $r10, $r11, $r12;
+        int $i0, i1;
+        org.gjt.sp.jedit.io.VFSFile $r13, r21;
+        org.gjt.sp.jedit.browser.VFSBrowser $r15, $r16;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+(0)     if r1 != null goto label9;
+
+        $r9 = new javax.swing.DefaultListModel;
+
+        specialinvoke $r9.<init>();
+
+        r4 = $r9;
+
+(1)     r19 = r2;
+
+     label1:
+        r21 = Phi(r21 #1, r21 #8);
+
+        r19 = Phi(r19 #1, r19 #8);
+
+        r20 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r19);
+
+        r21 = null;
+
+        $z0 = r20 instanceof org.gjt.sp.jedit.io.FileVFS;
+
+(2)     if $z0 == 0 goto label5;
+
+        Packer.Unpack(r0);
+
+        $r15 = r0.browser;
+
+        r22 = r20.createVFSSession(r2, $r15);
+
+     label2:
+(3)     $r16 = r0.browser;
+
+        r21 = r20._getFile(r22, r19, $r16);
+
+        Packer.Pack(r0);
+
+        if r21 == null goto label3;
+
+        $r17 = r20.getFileName(r19);
+
+        r21.setName($r17);
+
+     label3:
+(4)     goto label5;
+
+     label4:
+        $r18 := @caughtexception;
+
+        r21 = Phi(r21 #3);
+
+        r5 = $r18;
+
+(5)     org.gjt.sp.util.Log.log(9, r0, r5, r5);
+
+     label5:
+        r21 = Phi(r21 #2, r21 #4, r21 #5);
+
+(6)     if r21 != null goto label6;
+
+        $r13 = new org.gjt.sp.jedit.io.VFSFile;
+
+        $r14 = r20.getFileName(r19);
+
+        specialinvoke $r13.<init>($r14, r19, r19, 1, 0L, 0);
+
+(7)     r21 = $r13;
+
+     label6:
+        r21 = Phi(r21 #6, r21 #7);
+
+        r4.insertElementAt(r21, 0);
+
+        r23 = r20.getParentOfPath(r19);
+
+        if r23 == null goto label8;
+
+        $z1 = org.gjt.sp.jedit.MiscUtilities.pathsEqual(r19, r23);
+
+        if $z1 == 0 goto label7;
+
+        Packer.Unpack(r0);
+
+        goto label8;
+
+     label7:
+        r19 = r23;
+
+(8)     goto label1;
+
+     label8:
+        Packer.Unpack(r0);
+
+        $r10 = r0.parentDirectories;
+
+        $r10.setModel(r4);
+
+        $i0 = r4.getSize();
+
+        i1 = $i0 - 1;
+
+        $r11 = r0.parentDirectories;
+
+        $r11.setSelectedIndex(i1);
+
+        $r12 = r0.parentDirectories;
+
+(9)     $r12.ensureIndexIsVisible(i1);
+
+     label9:
+        Packer.Unpack(r0);
+
+        r21 = Phi(r21 #0, r21 #9);
+
+        r19 = Phi(r19 #0, r19 #9);
+
+        $r6 = r0.table;
+
+        $r7 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r2);
+
+        $r8 = r0.tmpExpanded;
+
+        $r6.setDirectory($r7, r1, r3, $r8);
+
+        Packer.Pack(r0);
+
+        return;
+
+        catch java.io.IOException from label2 to label3 with label4;
+    }
+
+    public void updateFileView()
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r1;
+
+        r0 := @this;
+
+        $r1 = r0.table;
+
+        Packer.Unpack(r0);
+
+        $r1.repaint();
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void maybeReloadDirectory(java.lang.String)
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        java.lang.String r1, r2, $r5, $r6, r7, r7_1, r7_2;
+        org.gjt.sp.jedit.browser.VFSBrowser $r3;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        r2 = $r3.getDirectory();
+
+        Packer.Pack(r0);
+
+        $z0 = org.gjt.sp.jedit.MiscUtilities.isURL(r2);
+
+        if $z0 == 0 goto label1;
+
+        r7 = r2;
+
+(0)     goto label2;
+
+     label1:
+(1)     r7_1 = org.gjt.sp.jedit.MiscUtilities.resolveSymlinks(r2);
+
+     label2:
+        r7_2 = Phi(r7 #0, r7_1 #1);
+
+        $z1 = org.gjt.sp.jedit.MiscUtilities.pathsEqual(r1, r7_2);
+
+        if $z1 == 0 goto label3;
+
+        r0.saveExpansionState();
+
+        r0.loadDirectory(null, r2, 0);
+
+     label3:
+        $z2 = r2.startsWith("favorites");
+
+        if $z2 != 0 goto label4;
+
+        $z6 = r2.startsWith("roots");
+
+        if $z6 != 0 goto label4;
+
+        $z7 = r1.startsWith(r7_2);
+
+        if $z7 != 0 goto label4;
+
+        return;
+
+     label4:
+        $z3 = r2.startsWith("roots");
+
+        if $z3 == 0 goto label5;
+
+        $z4 = org.gjt.sp.jedit.MiscUtilities.isURL(r1);
+
+        if $z4 == 0 goto label5;
+
+        $r5 = "file";
+
+        $r6 = org.gjt.sp.jedit.MiscUtilities.getProtocolOfURL(r1);
+
+        $z5 = $r5.equals($r6);
+
+        if $z5 != 0 goto label5;
+
+        return;
+
+     label5:
+        Packer.Unpack(r0);
+
+        Packer.Unpack(r0);
+
+        Packer.Unpack(r0);
+
+        $r4 = r0.table;
+
+        $r4.maybeReloadDirectory(r1);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void propertiesChanged()
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        boolean $z0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r1;
+        javax.swing.JSplitPane $r2;
+
+        r0 := @this;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.showIcons");
+
+        Packer.Unpack(r0);
+
+        r0.showIcons = $z0;
+
+        $r1 = r0.table;
+
+        $r1.propertiesChanged();
+
+        $r2 = r0.splitPane;
+
+        $r2.setBorder(null);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.browser.VFSBrowser getBrowser()
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        org.gjt.sp.jedit.browser.VFSBrowser $r1;
+
+        r0 := @this;
+
+        $r1 = r0.browser;
+
+        return $r1;
+    }
+
+    public org.gjt.sp.jedit.browser.VFSDirectoryEntryTable getTable()
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r1;
+
+        r0 := @this;
+
+        $r1 = r0.table;
+
+        return $r1;
+    }
+
+    public javax.swing.JList getParentDirectoryList()
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        javax.swing.JList $r1;
+
+        r0 := @this;
+
+        $r1 = r0.parentDirectories;
+
+        return $r1;
+    }
+
+    private void showFilePopup(org.gjt.sp.jedit.io.VFSFile[], java.awt.Component, java.awt.Point)
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        org.gjt.sp.jedit.io.VFSFile[] r1;
+        java.awt.Component r2;
+        java.awt.Point r3;
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu $r4, $r7, $r8;
+        org.gjt.sp.jedit.browser.VFSBrowser $r5;
+        org.gjt.sp.jedit.browser.BrowserView$3 $r6;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = new org.gjt.sp.jedit.browser.BrowserCommandsMenu;
+
+        $r5 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        specialinvoke $r4.<init>($r5, r1);
+
+        r0.popup = $r4;
+
+        Packer.Pack(r0);
+
+        $r7 = r0.popup;
+
+        $r6 = new org.gjt.sp.jedit.browser.BrowserView$3;
+
+        specialinvoke $r6.<init>(r0);
+
+        Packer.Unpack(r0);
+
+        $r7.addPopupMenuListener($r6);
+
+        $r8 = r0.popup;
+
+        $i1 = r3.x;
+
+        $i0 = r3.y;
+
+        org.gjt.sp.jedit.GUIUtilities.showPopupMenu($r8, r2, $i1, $i0);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    static javax.swing.JSplitPane access$300(org.gjt.sp.jedit.browser.BrowserView)
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        javax.swing.JSplitPane $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.splitPane;
+
+        return $r1;
+    }
+
+    static javax.swing.JList access$400(org.gjt.sp.jedit.browser.BrowserView)
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        javax.swing.JList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.parentDirectories;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.browser.VFSBrowser access$600(org.gjt.sp.jedit.browser.BrowserView)
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        org.gjt.sp.jedit.browser.VFSBrowser $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.browser;
+
+        return $r1;
+    }
+
+    static boolean access$700(org.gjt.sp.jedit.browser.BrowserView)
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $z0 = r0.showIcons;
+
+        return $z0;
+    }
+
+    static org.gjt.sp.jedit.browser.BrowserCommandsMenu access$800(org.gjt.sp.jedit.browser.BrowserView)
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.popup;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.browser.BrowserCommandsMenu access$802(org.gjt.sp.jedit.browser.BrowserView, org.gjt.sp.jedit.browser.BrowserCommandsMenu)
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.popup = r1;
+
+        return r1;
+    }
+
+    static void access$900(org.gjt.sp.jedit.browser.BrowserView, org.gjt.sp.jedit.io.VFSFile[], java.awt.Component, java.awt.Point)
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        org.gjt.sp.jedit.io.VFSFile[] r1;
+        java.awt.Component r2;
+        java.awt.Point r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        specialinvoke r0.showFilePopup(r1, r2, r3);
+
+        return;
+    }
+
+    static org.gjt.sp.jedit.browser.VFSDirectoryEntryTable access$1000(org.gjt.sp.jedit.browser.BrowserView)
+    {
+        org.gjt.sp.jedit.browser.BrowserView r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.table;
+
+        return $r1;
+    }
+}

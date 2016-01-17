@@ -1,0 +1,37 @@
+class org.gjt.sp.jedit.gui.PasteSpecialDialog$3 extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.PasteSpecialDialog this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.PasteSpecialDialog)
+    {
+        org.gjt.sp.jedit.gui.PasteSpecialDialog$3 r0;
+        org.gjt.sp.jedit.gui.PasteSpecialDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.PasteSpecialDialog$3 r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.gui.PasteSpecialDialog $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r2.cancel();
+
+        return;
+    }
+}

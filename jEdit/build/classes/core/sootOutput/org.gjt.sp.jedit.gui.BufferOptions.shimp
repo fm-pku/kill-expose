@@ -1,0 +1,202 @@
+public class org.gjt.sp.jedit.gui.BufferOptions extends org.gjt.sp.jedit.gui.EnhancedDialog
+{
+    private org.gjt.sp.jedit.View view;
+    private org.gjt.sp.jedit.Buffer buffer;
+    private org.gjt.sp.jedit.options.BufferOptionPane panel;
+    private javax.swing.JButton ok;
+    private javax.swing.JButton cancel;
+
+    public void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Buffer)
+    {
+        org.gjt.sp.jedit.gui.BufferOptions r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Buffer r2;
+        javax.swing.JPanel r3, r5, $r7, $r14;
+        org.gjt.sp.jedit.gui.BufferOptions$ActionHandler r4, $r10;
+        java.lang.String $r6, $r20, $r29;
+        java.awt.BorderLayout $r8;
+        javax.swing.border.EmptyBorder $r9, $r16;
+        org.gjt.sp.jedit.options.BufferOptionPane $r11, $r12;
+        javax.swing.BoxLayout $r15;
+        java.awt.Component $r17, $r26, $r33;
+        javax.swing.JButton $r19, $r21, $r23, $r24, $r28, $r30, $r31;
+        javax.swing.JRootPane $r22;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("buffer-options.title");
+
+        specialinvoke r0.<init>(r1, $r6, 1);
+
+        r0.view = r1;
+
+        r0.buffer = r2;
+
+        $r7 = new javax.swing.JPanel;
+
+        $r8 = new java.awt.BorderLayout;
+
+        specialinvoke $r8.<init>();
+
+        specialinvoke $r7.<init>($r8);
+
+        r3 = $r7;
+
+        $r9 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r9.<init>(12, 12, 12, 12);
+
+        r3.setBorder($r9);
+
+        r0.setContentPane(r3);
+
+        $r10 = new org.gjt.sp.jedit.gui.BufferOptions$ActionHandler;
+
+        specialinvoke $r10.<init>(r0);
+
+        r4 = $r10;
+
+        $r11 = new org.gjt.sp.jedit.options.BufferOptionPane;
+
+        specialinvoke $r11.<init>();
+
+        r0.panel = $r11;
+
+        $r12 = r0.panel;
+
+        r3.add("North", $r12);
+
+        $r14 = new javax.swing.JPanel;
+
+        specialinvoke $r14.<init>();
+
+        r5 = $r14;
+
+        $r15 = new javax.swing.BoxLayout;
+
+        specialinvoke $r15.<init>(r5, 0);
+
+        r5.setLayout($r15);
+
+        $r16 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r16.<init>(12, 0, 0, 0);
+
+        r5.setBorder($r16);
+
+        $r17 = javax.swing.Box.createGlue();
+
+        r5.add($r17);
+
+        $r19 = new javax.swing.JButton;
+
+        $r20 = org.gjt.sp.jedit.jEdit.getProperty("common.ok");
+
+        specialinvoke $r19.<init>($r20);
+
+        r0.ok = $r19;
+
+        $r21 = r0.ok;
+
+        $r21.addActionListener(r4);
+
+        $r22 = r0.getRootPane();
+
+        $r23 = r0.ok;
+
+        $r22.setDefaultButton($r23);
+
+        $r24 = r0.ok;
+
+        r5.add($r24);
+
+        $r26 = javax.swing.Box.createHorizontalStrut(6);
+
+        r5.add($r26);
+
+        $r28 = new javax.swing.JButton;
+
+        $r29 = org.gjt.sp.jedit.jEdit.getProperty("common.cancel");
+
+        specialinvoke $r28.<init>($r29);
+
+        r0.cancel = $r28;
+
+        $r30 = r0.cancel;
+
+        $r30.addActionListener(r4);
+
+        $r31 = r0.cancel;
+
+        r5.add($r31);
+
+        $r33 = javax.swing.Box.createGlue();
+
+        r5.add($r33);
+
+        r3.add("South", r5);
+
+        r0.pack();
+
+        r0.setLocationRelativeTo(r1);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.gui.BufferOptions r0;
+        org.gjt.sp.jedit.options.BufferOptionPane $r1;
+
+        r0 := @this;
+
+        $r1 = r0.panel;
+
+        $r1.save();
+
+        r0.dispose();
+
+        return;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.gui.BufferOptions r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    static javax.swing.JButton access$000(org.gjt.sp.jedit.gui.BufferOptions)
+    {
+        org.gjt.sp.jedit.gui.BufferOptions r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.ok;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$100(org.gjt.sp.jedit.gui.BufferOptions)
+    {
+        org.gjt.sp.jedit.gui.BufferOptions r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.cancel;
+
+        return $r1;
+    }
+}

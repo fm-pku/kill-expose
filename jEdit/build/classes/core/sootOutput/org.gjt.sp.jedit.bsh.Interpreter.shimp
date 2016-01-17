@@ -1,0 +1,3292 @@
+public class org.gjt.sp.jedit.bsh.Interpreter extends java.lang.Object implements java.lang.Runnable, org.gjt.sp.jedit.bsh.ConsoleInterface, java.io.Serializable
+{
+    public static final java.lang.String VERSION;
+    public static boolean DEBUG;
+    public static boolean TRACE;
+    public static boolean LOCALSCOPING;
+    static transient java.io.PrintStream debug;
+    static java.lang.String systemLineSeparator;
+    static org.gjt.sp.jedit.bsh.This sharedObject;
+    private boolean strictJava;
+    transient org.gjt.sp.jedit.bsh.Parser parser;
+    org.gjt.sp.jedit.bsh.NameSpace globalNameSpace;
+    transient java.io.Reader in;
+    transient java.io.PrintStream out;
+    transient java.io.PrintStream err;
+    org.gjt.sp.jedit.bsh.ConsoleInterface console;
+    org.gjt.sp.jedit.bsh.Interpreter parent;
+    java.lang.String sourceFileInfo;
+    private boolean exitOnEOF;
+    protected boolean evalOnly;
+    protected boolean interactive;
+    private boolean showResults;
+
+    public void <init>(java.io.Reader, java.io.PrintStream, java.io.PrintStream, boolean, org.gjt.sp.jedit.bsh.NameSpace, org.gjt.sp.jedit.bsh.Interpreter, java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0, r5;
+        java.io.Reader r1;
+        java.io.PrintStream r2, r3;
+        boolean z0, $z1, $z2, $z3;
+        org.gjt.sp.jedit.bsh.NameSpace r4, $r14;
+        java.lang.String r6, $r13;
+        long l0, l1, $l2;
+        org.gjt.sp.jedit.bsh.BshClassManager r7;
+        org.gjt.sp.jedit.bsh.Parser $r8;
+        java.lang.Object $r9;
+        java.lang.StringBuilder $r10, $r11, $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        z0 := @parameter3;
+
+        r4 := @parameter4;
+
+        r5 := @parameter5;
+
+        r6 := @parameter6;
+
+        specialinvoke r0.<init>();
+
+        r0.strictJava = 0;
+
+        r0.exitOnEOF = 1;
+
+        $r8 = new org.gjt.sp.jedit.bsh.Parser;
+
+        specialinvoke $r8.<init>(r1);
+
+        r0.parser = $r8;
+
+        l0 = java.lang.System.currentTimeMillis();
+
+        r0.in = r1;
+
+        r0.out = r2;
+
+        r0.err = r3;
+
+        r0.interactive = z0;
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug = r3;
+
+        r0.parent = r5;
+
+        if r5 == null goto label1;
+
+        $z3 = r5.getStrictJava();
+
+        r0.setStrictJava($z3);
+
+     label1:
+        r0.sourceFileInfo = r6;
+
+        r7 = org.gjt.sp.jedit.bsh.BshClassManager.createClassManager(r0);
+
+        if r4 != null goto label2;
+
+        $r14 = new org.gjt.sp.jedit.bsh.NameSpace;
+
+        specialinvoke $r14.<init>(r7, "global");
+
+        r0.globalNameSpace = $r14;
+
+        goto label3;
+
+     label2:
+        r0.globalNameSpace = r4;
+
+     label3:
+        $r9 = r0.getu("bsh");
+
+        $z1 = $r9 instanceof org.gjt.sp.jedit.bsh.This;
+
+        if $z1 != 0 goto label4;
+
+        specialinvoke r0.initRootSystemObject();
+
+     label4:
+        if z0 == 0 goto label5;
+
+        r0.loadRCFiles();
+
+     label5:
+        l1 = java.lang.System.currentTimeMillis();
+
+        $z2 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z2 == 0 goto label6;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("Time to initialize interpreter: ");
+
+        $l2 = l1 - l0;
+
+        $r12 = $r11.append($l2);
+
+        $r13 = $r12.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r13);
+
+     label6:
+        return;
+    }
+
+    public void <init>(java.io.Reader, java.io.PrintStream, java.io.PrintStream, boolean, org.gjt.sp.jedit.bsh.NameSpace)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.io.Reader r1;
+        java.io.PrintStream r2, r3;
+        boolean z0;
+        org.gjt.sp.jedit.bsh.NameSpace r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        z0 := @parameter3;
+
+        r4 := @parameter4;
+
+        specialinvoke r0.<init>(r1, r2, r3, z0, r4, null, null);
+
+        return;
+    }
+
+    public void <init>(java.io.Reader, java.io.PrintStream, java.io.PrintStream, boolean)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.io.Reader r1;
+        java.io.PrintStream r2, r3;
+        boolean z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        z0 := @parameter3;
+
+        specialinvoke r0.<init>(r1, r2, r3, z0, null);
+
+        return;
+    }
+
+    public void <init>(org.gjt.sp.jedit.bsh.ConsoleInterface, org.gjt.sp.jedit.bsh.NameSpace)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        org.gjt.sp.jedit.bsh.ConsoleInterface r1;
+        org.gjt.sp.jedit.bsh.NameSpace r2;
+        java.io.Reader $r3;
+        java.io.PrintStream $r4, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r1.getIn();
+
+        $r4 = r1.getOut();
+
+        $r5 = r1.getErr();
+
+        specialinvoke r0.<init>($r3, $r4, $r5, 1, r2);
+
+        r0.setConsole(r1);
+
+        return;
+    }
+
+    public void <init>(org.gjt.sp.jedit.bsh.ConsoleInterface)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        org.gjt.sp.jedit.bsh.ConsoleInterface r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(r1, null);
+
+        return;
+    }
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.io.StringReader $r1;
+        java.io.PrintStream $r2, $r3;
+        org.gjt.sp.jedit.bsh.Primitive $r4;
+
+        r0 := @this;
+
+        $r1 = new java.io.StringReader;
+
+        specialinvoke $r1.<init>("");
+
+        $r3 = java.lang.System.out;
+
+        $r2 = java.lang.System.err;
+
+        specialinvoke r0.<init>($r1, $r3, $r2, 0, null);
+
+        r0.evalOnly = 1;
+
+        $r4 = new org.gjt.sp.jedit.bsh.Primitive;
+
+        specialinvoke $r4.<init>(1);
+
+        r0.setu("bsh.evalOnly", $r4);
+
+        return;
+    }
+
+    public void setConsole(org.gjt.sp.jedit.bsh.ConsoleInterface)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        org.gjt.sp.jedit.bsh.ConsoleInterface r1;
+        java.io.PrintStream $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.console = r1;
+
+        r0.setu("bsh.console", r1);
+
+        $r2 = r1.getOut();
+
+        r0.setOut($r2);
+
+        $r3 = r1.getErr();
+
+        r0.setErr($r3);
+
+        return;
+    }
+
+    private void initRootSystemObject()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        org.gjt.sp.jedit.bsh.BshClassManager r1;
+        org.gjt.sp.jedit.bsh.This r2, $r5, $r6, $r7, $r8, $r14;
+        java.lang.SecurityException r3, $r15;
+        org.gjt.sp.jedit.bsh.NameSpace $r4, $r9, $r13;
+        java.lang.String $r10;
+        org.gjt.sp.jedit.bsh.Primitive $r11, $r12;
+        boolean $z0, $z1;
+
+        r0 := @this;
+
+        r1 = r0.getClassManager();
+
+        $r4 = new org.gjt.sp.jedit.bsh.NameSpace;
+
+        specialinvoke $r4.<init>(r1, "Bsh Object");
+
+        $r5 = $r4.getThis(r0);
+
+        r0.setu("bsh", $r5);
+
+        $r6 = org.gjt.sp.jedit.bsh.Interpreter.sharedObject;
+
+        if $r6 != null goto label1;
+
+        $r13 = new org.gjt.sp.jedit.bsh.NameSpace;
+
+        specialinvoke $r13.<init>(r1, "Bsh Shared System Object");
+
+        $r14 = $r13.getThis(r0);
+
+        org.gjt.sp.jedit.bsh.Interpreter.sharedObject = $r14;
+
+     label1:
+        $r7 = org.gjt.sp.jedit.bsh.Interpreter.sharedObject;
+
+        r0.setu("bsh.system", $r7);
+
+        $r8 = org.gjt.sp.jedit.bsh.Interpreter.sharedObject;
+
+        r0.setu("bsh.shared", $r8);
+
+        $r9 = new org.gjt.sp.jedit.bsh.NameSpace;
+
+        specialinvoke $r9.<init>(r1, "Bsh Command Help Text");
+
+        r2 = $r9.getThis(r0);
+
+        r0.setu("bsh.help", r2);
+
+     label2:
+        $r10 = java.lang.System.getProperty("user.dir");
+
+        r0.setu("bsh.cwd", $r10);
+
+     label3:
+        goto label5;
+
+     label4:
+        $r15 := @caughtexception;
+
+        r3 = $r15;
+
+        r0.setu("bsh.cwd", ".");
+
+     label5:
+        $r11 = new org.gjt.sp.jedit.bsh.Primitive;
+
+        $z0 = r0.interactive;
+
+        specialinvoke $r11.<init>($z0);
+
+        r0.setu("bsh.interactive", $r11);
+
+        $r12 = new org.gjt.sp.jedit.bsh.Primitive;
+
+        $z1 = r0.evalOnly;
+
+        specialinvoke $r12.<init>($z1);
+
+        r0.setu("bsh.evalOnly", $r12);
+
+        return;
+
+        catch java.lang.SecurityException from label2 to label3 with label4;
+    }
+
+    public void setNameSpace(org.gjt.sp.jedit.bsh.NameSpace)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.globalNameSpace = r1;
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.NameSpace getNameSpace()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        org.gjt.sp.jedit.bsh.NameSpace $r1;
+
+        r0 := @this;
+
+        $r1 = r0.globalNameSpace;
+
+        return $r1;
+    }
+
+    public static void main(java.lang.String[])
+    {
+        java.lang.String[] r0, r49, r49_1, r49_2, r49_3;
+        java.lang.Exception r1, $r39;
+        int $i0, $i1, $i2, $i3, $i4, $i5;
+        java.lang.String $r2, $r8, $r19, $r25, $r31, $r37, $r46, r48;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        org.gjt.sp.jedit.bsh.CommandLineReader $r3, r58;
+        java.io.InputStreamReader $r4;
+        org.gjt.sp.jedit.bsh.Interpreter $r5, $r11, r50, r59;
+        java.io.PrintStream $r6, $r7, $r16, $r22, $r28, $r34, $r38, $r41;
+        org.gjt.sp.jedit.bsh.Interpreter$1 $r9;
+        java.io.InputStream $r10, r57, r57_1, r57_2, r57_3;
+        org.gjt.sp.jedit.bsh.NameSpace $r12;
+        java.lang.Class $r13;
+        java.io.IOException $r14, r56;
+        java.lang.StringBuilder $r15, $r17, $r18, $r21, $r23, $r24, $r27, $r29, $r30, $r33, $r35, $r36, $r40, $r42, $r43, $r44, $r45;
+        java.io.FileNotFoundException $r20, r53;
+        org.gjt.sp.jedit.bsh.EvalError $r26, r55;
+        org.gjt.sp.jedit.bsh.TargetError $r32, r54;
+        java.lang.reflect.InvocationTargetException $r47;
+        java.lang.Object r51;
+        java.lang.Throwable r52, r52_1, r52_2, r52_3, r52_4, r52_5, r52_6, r52_7, r52_8, r52_9;
+
+        r0 := @parameter0;
+
+        $i0 = lengthof r0;
+
+        if $i0 <= 0 goto label15;
+
+        r48 = r0[0];
+
+        $i1 = lengthof r0;
+
+        if $i1 <= 1 goto label01;
+
+        $i2 = lengthof r0;
+
+        $i3 = $i2 - 1;
+
+        r49 = newarray (java.lang.String)[$i3];
+
+        $i4 = lengthof r0;
+
+        $i5 = $i4 - 1;
+
+        java.lang.System.arraycopy(r0, 1, r49, 0, $i5);
+
+(0)     goto label02;
+
+     label01:
+(1)     r49_1 = newarray (java.lang.String)[0];
+
+     label02:
+        r49_2 = Phi(r49 #0, r49_1 #1);
+
+        $r11 = new org.gjt.sp.jedit.bsh.Interpreter;
+
+        specialinvoke $r11.<init>();
+
+        r50 = $r11;
+
+        r50.setu("bsh.args", r49_2);
+
+     label03:
+(2)     $r12 = r50.globalNameSpace;
+
+        r51 = r50.source(r48, $r12);
+
+        $z2 = r51 instanceof java.lang.Class;
+
+(3)     if $z2 == 0 goto label08;
+
+     label04:
+        $r13 = (java.lang.Class) r51;
+
+        org.gjt.sp.jedit.bsh.Interpreter.invokeMain($r13, r49_2);
+
+     label05:
+(4)     goto label08;
+
+     label06:
+        $r39 := @caughtexception;
+
+        r1 = $r39;
+
+        r52 = r1;
+
+        $z5 = r1 instanceof java.lang.reflect.InvocationTargetException;
+
+(5)     if $z5 == 0 goto label07;
+
+        $r47 = (java.lang.reflect.InvocationTargetException) r1;
+
+(6)     r52_1 = $r47.getTargetException();
+
+     label07:
+        r52_2 = Phi(r52 #5, r52_1 #6);
+
+        $r41 = java.lang.System.err;
+
+(7)     $r40 = new java.lang.StringBuilder;
+
+        specialinvoke $r40.<init>();
+
+        $r42 = $r40.append("Class: ");
+
+        $r43 = $r42.append(r51);
+
+        $r44 = $r43.append(" main method threw exception:");
+
+        $r45 = $r44.append(r52_2);
+
+        $r46 = $r45.toString();
+
+(8)     $r41.println($r46);
+
+     label08:
+        r52_3 = Phi(r52 #3, r52 #4, r52_2 #8);
+
+(9)     goto label14;
+
+     label09:
+        $r20 := @caughtexception;
+
+        r52_4 = Phi(r52 #2, r52_1 #6, r52_2 #7);
+
+        r53 = $r20;
+
+        $r22 = java.lang.System.out;
+
+        $r21 = new java.lang.StringBuilder;
+
+        specialinvoke $r21.<init>();
+
+        $r23 = $r21.append("File not found: ");
+
+        $r24 = $r23.append(r53);
+
+        $r25 = $r24.toString();
+
+        $r22.println($r25);
+
+(10)    goto label14;
+
+     label10:
+        $r32 := @caughtexception;
+
+        r52_5 = Phi(r52 #2, r52_1 #6, r52_2 #7);
+
+        r54 = $r32;
+
+        $r34 = java.lang.System.out;
+
+        $r33 = new java.lang.StringBuilder;
+
+        specialinvoke $r33.<init>();
+
+        $r35 = $r33.append("Script threw exception: ");
+
+        $r36 = $r35.append(r54);
+
+        $r37 = $r36.toString();
+
+        $r34.println($r37);
+
+        $z3 = r54.inNativeCode();
+
+        if $z3 == 0 goto label11;
+
+        $z4 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        $r38 = java.lang.System.err;
+
+        r54.printStackTrace($z4, $r38);
+
+     label11:
+(11)    goto label14;
+
+     label12:
+        $r26 := @caughtexception;
+
+        r52_6 = Phi(r52 #2, r52_1 #6, r52_2 #7);
+
+        r55 = $r26;
+
+        $r28 = java.lang.System.out;
+
+        $r27 = new java.lang.StringBuilder;
+
+        specialinvoke $r27.<init>();
+
+        $r29 = $r27.append("Evaluation Error: ");
+
+        $r30 = $r29.append(r55);
+
+        $r31 = $r30.toString();
+
+        $r28.println($r31);
+
+(12)    goto label14;
+
+     label13:
+        $r14 := @caughtexception;
+
+        r52_7 = Phi(r52 #2, r52_1 #6, r52_2 #7);
+
+        r56 = $r14;
+
+        $r16 = java.lang.System.out;
+
+        $r15 = new java.lang.StringBuilder;
+
+        specialinvoke $r15.<init>();
+
+        $r17 = $r15.append("I/O Error: ");
+
+        $r18 = $r17.append(r56);
+
+        $r19 = $r18.toString();
+
+(13)    $r16.println($r19);
+
+     label14:
+        r52_8 = Phi(r52_3 #9, r52_4 #10, r52_5 #11, r52_6 #12, r52_7 #13);
+
+(14)    goto label18;
+
+     label15:
+        $r2 = java.lang.System.getProperty("os.name");
+
+        $z0 = $r2.startsWith("Windows");
+
+        if $z0 == 0 goto label16;
+
+        $r8 = java.lang.System.getProperty("java.version");
+
+        $z1 = $r8.startsWith("1.1.");
+
+        if $z1 == 0 goto label16;
+
+        $r9 = new org.gjt.sp.jedit.bsh.Interpreter$1;
+
+        $r10 = java.lang.System.in;
+
+        specialinvoke $r9.<init>($r10);
+
+        r57 = $r9;
+
+(15)    goto label17;
+
+     label16:
+(16)    r57_1 = java.lang.System.in;
+
+     label17:
+        r57_2 = Phi(r57 #15, r57_1 #16);
+
+        $r3 = new org.gjt.sp.jedit.bsh.CommandLineReader;
+
+        $r4 = new java.io.InputStreamReader;
+
+        specialinvoke $r4.<init>(r57_2);
+
+        specialinvoke $r3.<init>($r4);
+
+        r58 = $r3;
+
+        $r5 = new org.gjt.sp.jedit.bsh.Interpreter;
+
+        $r7 = java.lang.System.out;
+
+        $r6 = java.lang.System.err;
+
+        specialinvoke $r5.<init>(r58, $r7, $r6, 1);
+
+        r59 = $r5;
+
+(17)    r59.run();
+
+     label18:
+        r52_9 = Phi(r52_8 #14, r52 #17);
+
+        r57_3 = Phi(r57 #14, r57_2 #17);
+
+        r49_3 = Phi(r49_2 #14, r49 #17);
+
+        return;
+
+        catch java.lang.Exception from label04 to label05 with label06;
+        catch java.io.FileNotFoundException from label03 to label08 with label09;
+        catch org.gjt.sp.jedit.bsh.TargetError from label03 to label08 with label10;
+        catch org.gjt.sp.jedit.bsh.EvalError from label03 to label08 with label12;
+        catch java.io.IOException from label03 to label08 with label13;
+    }
+
+    public static void invokeMain(java.lang.Class, java.lang.String[]) throws java.lang.Exception
+    {
+        java.lang.Class r0;
+        java.lang.String[] r1;
+        java.lang.reflect.Method r2;
+        java.lang.Class[] $r3;
+        java.lang.Object[] $r4;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r3 = newarray (java.lang.Class)[1];
+
+        $r3[0] = class "[Ljava/lang/String;";
+
+        r2 = org.gjt.sp.jedit.bsh.Reflect.resolveJavaMethod(null, r0, "main", $r3, 1);
+
+        if r2 == null goto label1;
+
+        $r4 = newarray (java.lang.Object)[1];
+
+        $r4[0] = r1;
+
+        r2.invoke(null, $r4);
+
+     label1:
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.Throwable r1, $r28, $r83;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z10, $z11, $z12, $z13, $z14, $z15, $z16, $z17, $z18, $z19, $z20, z21;
+        org.gjt.sp.jedit.bsh.CallStack $r2, r88;
+        org.gjt.sp.jedit.bsh.NameSpace $r3, $r8, $r30, $r38, $r53, $r60, $r68, $r77, $r85;
+        java.io.PrintStream $r4, $r5, $r86;
+        org.gjt.sp.jedit.bsh.JJTParserState $r6, $r7, $r9, $r29, $r37, $r52, $r59, $r67, $r76, $r84;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9;
+        org.gjt.sp.jedit.bsh.Node $r10;
+        org.gjt.sp.jedit.bsh.SimpleNode $r11, r89;
+        org.gjt.sp.jedit.bsh.Primitive $r12;
+        java.lang.StringBuilder $r13, $r14, $r15, $r16, $r20, $r21, $r22, $r32, $r33, $r35, $r39, $r40, $r42, $r45, $r46, $r48, $r55, $r56, $r57, $r62, $r63, $r65, $r70, $r71, $r72, $r79, $r80, $r81;
+        java.lang.String $r17, $r23, $r24, $r34, $r36, $r41, $r43, $r47, $r49, $r58, $r64, $r66, $r73, $r82;
+        org.gjt.sp.jedit.bsh.ReturnControl $r18;
+        org.gjt.sp.jedit.bsh.InterpreterError $r19, $r61, r92;
+        java.lang.RuntimeException $r26;
+        org.gjt.sp.jedit.bsh.EvalError $r27, $r31, r87, r94;
+        org.gjt.sp.jedit.bsh.ParseException $r44, r91;
+        java.io.Reader $r50, $r74;
+        org.gjt.sp.jedit.bsh.Parser $r51, $r75;
+        java.lang.Exception $r54, r95;
+        org.gjt.sp.jedit.bsh.TokenMgrError $r69, r96;
+        org.gjt.sp.jedit.bsh.TargetError $r78, r93;
+        java.lang.Object r90;
+
+        r0 := @this;
+
+        $z0 = r0.evalOnly;
+
+        if $z0 == 0 goto label01;
+
+        $r26 = new java.lang.RuntimeException;
+
+        specialinvoke $r26.<init>("bsh Interpreter: No stream");
+
+        throw $r26;
+
+     label01:
+        $z1 = r0.interactive;
+
+        if $z1 == 0 goto label05;
+
+     label02:
+        r0.eval("printBanner();");
+
+     label03:
+        goto label05;
+
+     label04:
+        $r27 := @caughtexception;
+
+        r87 = $r27;
+
+        r0.println("BeanShell 2.0b4-jedit - by Pat Niemeyer (pat@pat.net)");
+
+     label05:
+        $r2 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        $r3 = r0.globalNameSpace;
+
+        specialinvoke $r2.<init>($r3);
+
+        r88 = $r2;
+
+(0)     z21 = 0;
+
+     label06:
+        r90 = Phi(r90 #0, r90 #36);
+
+        z21 = Phi(z21 #0, z21 #36);
+
+(1)     if z21 != 0 goto label37;
+
+     label07:
+(2)     $r4 = java.lang.System.out;
+
+        $r4.flush();
+
+        $r5 = java.lang.System.err;
+
+        $r5.flush();
+
+        java.lang.Thread.yield();
+
+        $z4 = r0.interactive;
+
+        if $z4 == 0 goto label08;
+
+        $r24 = specialinvoke r0.getBshPrompt();
+
+        r0.print($r24);
+
+     label08:
+        z21 = specialinvoke r0.Line();
+
+        $r6 = specialinvoke r0.get_jjtree();
+
+        $i0 = $r6.nodeArity();
+
+(3)     if $i0 <= 0 goto label12;
+
+        $r9 = specialinvoke r0.get_jjtree();
+
+        $r10 = $r9.rootNode();
+
+        $r11 = (org.gjt.sp.jedit.bsh.SimpleNode) $r10;
+
+        r89 = (org.gjt.sp.jedit.bsh.SimpleNode) $r11;
+
+        $z5 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z5 == 0 goto label09;
+
+        r89.dump(">");
+
+     label09:
+        r90 = r89.eval(r88, r0);
+
+        $i2 = r88.depth();
+
+        if $i2 <= 1 goto label10;
+
+        $r19 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<init>();
+
+        $r21 = $r20.append("Callstack growing: ");
+
+        $r22 = $r21.append(r88);
+
+        $r23 = $r22.toString();
+
+        specialinvoke $r19.<init>($r23);
+
+        throw $r19;
+
+     label10:
+        $z6 = r90 instanceof org.gjt.sp.jedit.bsh.ReturnControl;
+
+(4)     if $z6 == 0 goto label11;
+
+        $r18 = (org.gjt.sp.jedit.bsh.ReturnControl) r90;
+
+(5)     r90 = $r18.value;
+
+     label11:
+        r90 = Phi(r90 #4, r90 #5);
+
+        $r12 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+(6)     if r90 == $r12 goto label12;
+
+        r0.setu("$_", r90);
+
+        $z7 = r0.showResults;
+
+(7)     if $z7 == 0 goto label12;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r14 = $r13.append("<");
+
+        $r15 = $r14.append(r90);
+
+        $r16 = $r15.append(">");
+
+        $r17 = $r16.toString();
+
+(8)     r0.println($r17);
+
+     label12:
+        r90 = Phi(r90 #3, r90 #6, r90 #7, r90 #8);
+
+        $r7 = specialinvoke r0.get_jjtree();
+
+        $r7.reset();
+
+        $i1 = r88.depth();
+
+(9)     if $i1 <= 1 goto label36;
+
+        r88.clear();
+
+        $r8 = r0.globalNameSpace;
+
+        r88.push($r8);
+
+(10)    goto label36;
+
+     label13:
+        $r44 := @caughtexception;
+
+        r90 = Phi(r90 #2);
+
+        z21 = Phi(z21 #2);
+
+        r91 = $r44;
+
+        $r45 = new java.lang.StringBuilder;
+
+        specialinvoke $r45.<init>();
+
+        $r46 = $r45.append("Parser Error: ");
+
+        $z11 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        $r47 = r91.getMessage($z11);
+
+        $r48 = $r46.append($r47);
+
+        $r49 = $r48.toString();
+
+        r0.error($r49);
+
+        $z12 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z12 == 0 goto label14;
+
+        r91.printStackTrace();
+
+     label14:
+        $z13 = r0.interactive;
+
+(11)    if $z13 != 0 goto label15;
+
+(12)    z21 = 1;
+
+     label15:
+        z21 = Phi(z21 #11, z21 #12);
+
+        $r51 = r0.parser;
+
+        $r50 = r0.in;
+
+        $r51.reInitInput($r50);
+
+     label16:
+        $r52 = specialinvoke r0.get_jjtree();
+
+        $r52.reset();
+
+        $i5 = r88.depth();
+
+(13)    if $i5 <= 1 goto label36;
+
+        r88.clear();
+
+        $r53 = r0.globalNameSpace;
+
+        r88.push($r53);
+
+(14)    goto label36;
+
+     label17:
+        $r61 := @caughtexception;
+
+        r90 = Phi(r90 #2);
+
+        z21 = Phi(z21 #2);
+
+        r92 = $r61;
+
+        $r62 = new java.lang.StringBuilder;
+
+        specialinvoke $r62.<init>();
+
+        $r63 = $r62.append("Internal Error: ");
+
+        $r64 = r92.getMessage();
+
+        $r65 = $r63.append($r64);
+
+        $r66 = $r65.toString();
+
+        r0.error($r66);
+
+        r92.printStackTrace();
+
+        $z16 = r0.interactive;
+
+(15)    if $z16 != 0 goto label18;
+
+(16)    z21 = 1;
+
+     label18:
+        z21 = Phi(z21 #15, z21 #16);
+
+        $r67 = specialinvoke r0.get_jjtree();
+
+        $r67.reset();
+
+        $i7 = r88.depth();
+
+(17)    if $i7 <= 1 goto label36;
+
+        r88.clear();
+
+        $r68 = r0.globalNameSpace;
+
+        r88.push($r68);
+
+(18)    goto label36;
+
+     label19:
+        $r78 := @caughtexception;
+
+        r90 = Phi(r90 #2);
+
+        z21 = Phi(z21 #2);
+
+        r93 = $r78;
+
+        $r79 = new java.lang.StringBuilder;
+
+        specialinvoke $r79.<init>();
+
+        $r80 = $r79.append("// Uncaught Exception: ");
+
+        $r81 = $r80.append(r93);
+
+        $r82 = $r81.toString();
+
+        r0.error($r82);
+
+        $z18 = r93.inNativeCode();
+
+        if $z18 == 0 goto label20;
+
+        $z20 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        $r86 = r0.err;
+
+        r93.printStackTrace($z20, $r86);
+
+     label20:
+        $z19 = r0.interactive;
+
+(19)    if $z19 != 0 goto label21;
+
+(20)    z21 = 1;
+
+     label21:
+        z21 = Phi(z21 #19, z21 #20);
+
+        $r83 = r93.getTarget();
+
+        r0.setu("$_e", $r83);
+
+     label22:
+        $r84 = specialinvoke r0.get_jjtree();
+
+        $r84.reset();
+
+        $i9 = r88.depth();
+
+(21)    if $i9 <= 1 goto label36;
+
+        r88.clear();
+
+        $r85 = r0.globalNameSpace;
+
+        r88.push($r85);
+
+(22)    goto label36;
+
+     label23:
+        $r31 := @caughtexception;
+
+        r90 = Phi(r90 #2);
+
+        z21 = Phi(z21 #2);
+
+        r94 = $r31;
+
+        $z8 = r0.interactive;
+
+        if $z8 == 0 goto label24;
+
+        $r39 = new java.lang.StringBuilder;
+
+        specialinvoke $r39.<init>();
+
+        $r40 = $r39.append("EvalError: ");
+
+        $r41 = r94.toString();
+
+        $r42 = $r40.append($r41);
+
+        $r43 = $r42.toString();
+
+        r0.error($r43);
+
+        goto label25;
+
+     label24:
+        $r32 = new java.lang.StringBuilder;
+
+        specialinvoke $r32.<init>();
+
+        $r33 = $r32.append("EvalError: ");
+
+        $r34 = r94.getMessage();
+
+        $r35 = $r33.append($r34);
+
+        $r36 = $r35.toString();
+
+        r0.error($r36);
+
+     label25:
+        $z9 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z9 == 0 goto label26;
+
+        r94.printStackTrace();
+
+     label26:
+        $z10 = r0.interactive;
+
+(23)    if $z10 != 0 goto label27;
+
+(24)    z21 = 1;
+
+     label27:
+        z21 = Phi(z21 #23, z21 #24);
+
+        $r37 = specialinvoke r0.get_jjtree();
+
+        $r37.reset();
+
+        $i4 = r88.depth();
+
+(25)    if $i4 <= 1 goto label36;
+
+        r88.clear();
+
+        $r38 = r0.globalNameSpace;
+
+        r88.push($r38);
+
+(26)    goto label36;
+
+     label28:
+        $r54 := @caughtexception;
+
+        r90 = Phi(r90 #2);
+
+        z21 = Phi(z21 #2);
+
+        r95 = $r54;
+
+        $r55 = new java.lang.StringBuilder;
+
+        specialinvoke $r55.<init>();
+
+        $r56 = $r55.append("Unknown error: ");
+
+        $r57 = $r56.append(r95);
+
+        $r58 = $r57.toString();
+
+        r0.error($r58);
+
+        $z14 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z14 == 0 goto label29;
+
+        r95.printStackTrace();
+
+     label29:
+        $z15 = r0.interactive;
+
+(27)    if $z15 != 0 goto label30;
+
+(28)    z21 = 1;
+
+     label30:
+        z21 = Phi(z21 #27, z21 #28);
+
+        $r59 = specialinvoke r0.get_jjtree();
+
+        $r59.reset();
+
+        $i6 = r88.depth();
+
+(29)    if $i6 <= 1 goto label36;
+
+        r88.clear();
+
+        $r60 = r0.globalNameSpace;
+
+        r88.push($r60);
+
+(30)    goto label36;
+
+     label31:
+        $r69 := @caughtexception;
+
+        r90 = Phi(r90 #1);
+
+        z21 = Phi(z21 #1);
+
+        r96 = $r69;
+
+        $r70 = new java.lang.StringBuilder;
+
+        specialinvoke $r70.<init>();
+
+        $r71 = $r70.append("Error parsing input: ");
+
+        $r72 = $r71.append(r96);
+
+        $r73 = $r72.toString();
+
+        r0.error($r73);
+
+        $r75 = r0.parser;
+
+        $r74 = r0.in;
+
+        $r75.reInitTokenInput($r74);
+
+        $z17 = r0.interactive;
+
+(31)    if $z17 != 0 goto label32;
+
+(32)    z21 = 1;
+
+     label32:
+        z21 = Phi(z21 #31, z21 #32);
+
+        $r76 = specialinvoke r0.get_jjtree();
+
+        $r76.reset();
+
+        $i8 = r88.depth();
+
+(33)    if $i8 <= 1 goto label36;
+
+        r88.clear();
+
+        $r77 = r0.globalNameSpace;
+
+        r88.push($r77);
+
+(34)    goto label36;
+
+     label33:
+        $r28 := @caughtexception;
+
+        r90 = Phi(r90 #1, r90 #35);
+
+(35)    z21 = Phi(z21 #1, z21 #35);
+
+        r1 = $r28;
+
+     label34:
+        $r29 = specialinvoke r0.get_jjtree();
+
+        $r29.reset();
+
+        $i3 = r88.depth();
+
+        if $i3 <= 1 goto label35;
+
+        r88.clear();
+
+        $r30 = r0.globalNameSpace;
+
+        r88.push($r30);
+
+     label35:
+        throw r1;
+
+     label36:
+        r90 = Phi(r90 #9, r90 #10, r90 #13, r90 #14, r90 #17, r90 #18, r90 #21, r90 #22, r90 #25, r90 #26, r90 #29, r90 #30, r90 #33, r90 #34);
+
+        z21 = Phi(z21 #9, z21 #10, z21 #13, z21 #14, z21 #17, z21 #18, z21 #21, z21 #22, z21 #25, z21 #26, z21 #29, z21 #30, z21 #33, z21 #34);
+
+(36)    goto label06;
+
+     label37:
+        $z2 = r0.interactive;
+
+        if $z2 == 0 goto label38;
+
+        $z3 = r0.exitOnEOF;
+
+        if $z3 == 0 goto label38;
+
+        java.lang.System.exit(0);
+
+     label38:
+        return;
+
+        catch org.gjt.sp.jedit.bsh.EvalError from label02 to label03 with label04;
+        catch org.gjt.sp.jedit.bsh.ParseException from label07 to label12 with label13;
+        catch org.gjt.sp.jedit.bsh.InterpreterError from label07 to label12 with label17;
+        catch org.gjt.sp.jedit.bsh.TargetError from label07 to label12 with label19;
+        catch org.gjt.sp.jedit.bsh.EvalError from label07 to label12 with label23;
+        catch java.lang.Exception from label07 to label12 with label28;
+        catch org.gjt.sp.jedit.bsh.TokenMgrError from label07 to label12 with label31;
+        catch java.lang.Throwable from label07 to label12 with label33;
+        catch java.lang.Throwable from label13 to label16 with label33;
+        catch java.lang.Throwable from label17 to label18 with label33;
+        catch java.lang.Throwable from label19 to label22 with label33;
+        catch java.lang.Throwable from label23 to label27 with label33;
+        catch java.lang.Throwable from label28 to label30 with label33;
+        catch java.lang.Throwable from label31 to label32 with label33;
+        catch java.lang.Throwable from label33 to label34 with label33;
+    }
+
+    public java.lang.Object source(java.lang.String, org.gjt.sp.jedit.bsh.NameSpace) throws java.io.FileNotFoundException, java.io.IOException, org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1, $r12;
+        org.gjt.sp.jedit.bsh.NameSpace r2;
+        java.io.File r3;
+        java.io.BufferedReader r4, $r7;
+        java.lang.Object r5;
+        java.lang.Throwable r6, $r13;
+        boolean $z0;
+        java.io.FileReader $r8;
+        java.lang.StringBuilder $r9, $r10, $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 = r0.pathToFile(r1);
+
+        $z0 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z0 == 0 goto label1;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("Sourcing file: ");
+
+        $r11 = $r10.append(r3);
+
+        $r12 = $r11.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r12);
+
+     label1:
+        $r7 = new java.io.BufferedReader;
+
+        $r8 = new java.io.FileReader;
+
+        specialinvoke $r8.<init>(r3);
+
+        specialinvoke $r7.<init>($r8);
+
+        r4 = $r7;
+
+     label2:
+        r5 = r0.eval(r4, r2, r1);
+
+     label3:
+        r4.close();
+
+        return r5;
+
+     label4:
+        $r13 := @caughtexception;
+
+        r6 = $r13;
+
+     label5:
+        r4.close();
+
+        throw r6;
+
+        catch java.lang.Throwable from label2 to label3 with label4;
+        catch java.lang.Throwable from label4 to label5 with label4;
+    }
+
+    public java.lang.Object source(java.lang.String) throws java.io.FileNotFoundException, java.io.IOException, org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.bsh.NameSpace $r2;
+        java.lang.Object $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.globalNameSpace;
+
+        $r3 = r0.source(r1, $r2);
+
+        return $r3;
+    }
+
+    public java.lang.Object eval(java.io.Reader, org.gjt.sp.jedit.bsh.NameSpace, java.lang.String) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0, r4, $r7;
+        java.io.Reader r1;
+        org.gjt.sp.jedit.bsh.NameSpace r2;
+        java.lang.String r3, $r21, $r28, $r31, $r33, $r37, $r44, $r46, $r53, $r55, $r61, $r68, $r76, $r78, $r80;
+        org.gjt.sp.jedit.bsh.CallStack r5, $r10;
+        java.lang.Throwable r6, $r81;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, z8;
+        java.io.PrintStream $r8, $r9;
+        java.lang.Object $r11, r83;
+        org.gjt.sp.jedit.bsh.JJTParserState $r12, $r13, $r14, $r23, $r62, $r69, $r82;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6;
+        org.gjt.sp.jedit.bsh.Node $r15;
+        org.gjt.sp.jedit.bsh.Primitive $r16;
+        java.lang.StringBuilder $r17, $r18, $r19, $r20, $r25, $r26, $r27, $r29, $r30, $r32, $r34, $r35, $r36, $r40, $r41, $r42, $r43, $r45, $r49, $r50, $r51, $r52, $r54, $r58, $r59, $r60, $r65, $r66, $r67, $r72, $r73, $r74, $r75, $r77;
+        org.gjt.sp.jedit.bsh.ReturnControl $r22;
+        org.gjt.sp.jedit.bsh.InterpreterError $r24, $r70, r86;
+        org.gjt.sp.jedit.bsh.TokenMgrError $r38, r90;
+        org.gjt.sp.jedit.bsh.EvalError $r39, $r48, $r56, $r71, r88;
+        java.lang.Exception $r47, r89;
+        org.gjt.sp.jedit.bsh.SimpleNode $r57, $r64, r84;
+        org.gjt.sp.jedit.bsh.TargetError $r63, r87;
+        org.gjt.sp.jedit.bsh.ParseException $r79, r85;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r83 = null;
+
+        $z0 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z0 == 0 goto label01;
+
+        $r34 = new java.lang.StringBuilder;
+
+        specialinvoke $r34.<init>();
+
+        $r35 = $r34.append("eval: nameSpace = ");
+
+        $r36 = $r35.append(r2);
+
+        $r37 = $r36.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r37);
+
+     label01:
+        $r7 = new org.gjt.sp.jedit.bsh.Interpreter;
+
+        $r9 = r0.out;
+
+        $r8 = r0.err;
+
+        specialinvoke $r7.<init>(r1, $r9, $r8, 0, r2, r0, r3);
+
+        r4 = $r7;
+
+        $r10 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        specialinvoke $r10.<init>(r2);
+
+        r5 = $r10;
+
+(0)     z8 = 0;
+
+     label02:
+        r84 = Phi(r84 #0, r84 #16);
+
+        r83 = Phi(r83 #0, r83 #16);
+
+        z8 = Phi(z8 #0, z8 #16);
+
+(1)     if z8 != 0 goto label26;
+
+(2)     r84 = null;
+
+     label03:
+        z8 = specialinvoke r4.Line();
+
+        $r12 = specialinvoke r4.get_jjtree();
+
+        $i0 = $r12.nodeArity();
+
+(3)     if $i0 <= 0 goto label08;
+
+        $r14 = specialinvoke r4.get_jjtree();
+
+        $r15 = $r14.rootNode();
+
+        r84 = (org.gjt.sp.jedit.bsh.SimpleNode) $r15;
+
+        r84.setSourceFile(r3);
+
+        $z1 = org.gjt.sp.jedit.bsh.Interpreter.TRACE;
+
+        if $z1 == 0 goto label04;
+
+        $r29 = new java.lang.StringBuilder;
+
+        specialinvoke $r29.<init>();
+
+        $r30 = $r29.append("// ");
+
+        $r31 = r84.getText();
+
+        $r32 = $r30.append($r31);
+
+        $r33 = $r32.toString();
+
+        r0.println($r33);
+
+     label04:
+        r83 = r84.eval(r5, r4);
+
+        $i2 = r5.depth();
+
+        if $i2 <= 1 goto label05;
+
+        $r24 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r25 = new java.lang.StringBuilder;
+
+        specialinvoke $r25.<init>();
+
+        $r26 = $r25.append("Callstack growing: ");
+
+        $r27 = $r26.append(r5);
+
+        $r28 = $r27.toString();
+
+        specialinvoke $r24.<init>($r28);
+
+        throw $r24;
+
+     label05:
+        $z2 = r83 instanceof org.gjt.sp.jedit.bsh.ReturnControl;
+
+        if $z2 == 0 goto label07;
+
+        $r22 = (org.gjt.sp.jedit.bsh.ReturnControl) r83;
+
+        r83 = $r22.value;
+
+     label06:
+        $r23 = specialinvoke r4.get_jjtree();
+
+        $r23.reset();
+
+        $i3 = r5.depth();
+
+(4)     if $i3 <= 1 goto label26;
+
+        r5.clear();
+
+        r5.push(r2);
+
+(5)     goto label26;
+
+     label07:
+        $z3 = r4.showResults;
+
+(6)     if $z3 == 0 goto label08;
+
+        $r16 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+(7)     if r83 == $r16 goto label08;
+
+        $r17 = new java.lang.StringBuilder;
+
+        specialinvoke $r17.<init>();
+
+        $r18 = $r17.append("<");
+
+        $r19 = $r18.append(r83);
+
+        $r20 = $r19.append(">");
+
+        $r21 = $r20.toString();
+
+(8)     r0.println($r21);
+
+     label08:
+        r84 = Phi(r84 #3, r84 #6, r84 #7, r84 #8);
+
+        r83 = Phi(r83 #3, r83 #6, r83 #7, r83 #8);
+
+        $r13 = specialinvoke r4.get_jjtree();
+
+        $r13.reset();
+
+        $i1 = r5.depth();
+
+(9)     if $i1 <= 1 goto label25;
+
+        r5.clear();
+
+        r5.push(r2);
+
+(10)    goto label25;
+
+     label09:
+        $r79 := @caughtexception;
+
+        r84 = Phi(r84 #2);
+
+        r83 = Phi(r83 #2);
+
+        z8 = Phi(z8 #2);
+
+        r85 = $r79;
+
+        $z6 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z6 == 0 goto label10;
+
+        $z7 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        $r80 = r85.getMessage($z7);
+
+        r0.error($r80);
+
+     label10:
+        r85.setErrorSourceFile(r3);
+
+        throw r85;
+
+     label11:
+        $r70 := @caughtexception;
+
+        r84 = Phi(r84 #2);
+
+        r83 = Phi(r83 #2);
+
+        z8 = Phi(z8 #2);
+
+        r86 = $r70;
+
+        r86.printStackTrace();
+
+        $r71 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r72 = new java.lang.StringBuilder;
+
+        specialinvoke $r72.<init>();
+
+        $r73 = $r72.append("Sourced file: ");
+
+        $r74 = $r73.append(r3);
+
+        $r75 = $r74.append(" internal Error: ");
+
+        $r76 = r86.getMessage();
+
+        $r77 = $r75.append($r76);
+
+        $r78 = $r77.toString();
+
+        specialinvoke $r71.<init>($r78, r84, r5);
+
+        throw $r71;
+
+     label12:
+        $r63 := @caughtexception;
+
+        r84 = Phi(r84 #2);
+
+        r83 = Phi(r83 #2);
+
+        z8 = Phi(z8 #2);
+
+        r87 = $r63;
+
+        $r64 = r87.getNode();
+
+        if $r64 != null goto label13;
+
+        r87.setNode(r84);
+
+     label13:
+        $r65 = new java.lang.StringBuilder;
+
+        specialinvoke $r65.<init>();
+
+        $r66 = $r65.append("Sourced file: ");
+
+        $r67 = $r66.append(r3);
+
+        $r68 = $r67.toString();
+
+        r87.reThrow($r68);
+
+     label14:
+        $r69 = specialinvoke r4.get_jjtree();
+
+        $r69.reset();
+
+        $i5 = r5.depth();
+
+(11)    if $i5 <= 1 goto label25;
+
+        r5.clear();
+
+        r5.push(r2);
+
+(12)    goto label25;
+
+     label15:
+        $r56 := @caughtexception;
+
+        r84 = Phi(r84 #2);
+
+        r83 = Phi(r83 #2);
+
+        z8 = Phi(z8 #2);
+
+        r88 = $r56;
+
+        $z5 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z5 == 0 goto label16;
+
+        r88.printStackTrace();
+
+     label16:
+        $r57 = r88.getNode();
+
+        if $r57 != null goto label17;
+
+        r88.setNode(r84);
+
+     label17:
+        $r58 = new java.lang.StringBuilder;
+
+        specialinvoke $r58.<init>();
+
+        $r59 = $r58.append("Sourced file: ");
+
+        $r60 = $r59.append(r3);
+
+        $r61 = $r60.toString();
+
+        r88.reThrow($r61);
+
+     label18:
+        $r62 = specialinvoke r4.get_jjtree();
+
+        $r62.reset();
+
+        $i4 = r5.depth();
+
+(13)    if $i4 <= 1 goto label25;
+
+        r5.clear();
+
+        r5.push(r2);
+
+(14)    goto label25;
+
+     label19:
+        $r47 := @caughtexception;
+
+        r84 = Phi(r84 #2);
+
+        r83 = Phi(r83 #2);
+
+        z8 = Phi(z8 #2);
+
+        r89 = $r47;
+
+        $z4 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z4 == 0 goto label20;
+
+        r89.printStackTrace();
+
+     label20:
+        $r48 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r49 = new java.lang.StringBuilder;
+
+        specialinvoke $r49.<init>();
+
+        $r50 = $r49.append("Sourced file: ");
+
+        $r51 = $r50.append(r3);
+
+        $r52 = $r51.append(" unknown error: ");
+
+        $r53 = r89.getMessage();
+
+        $r54 = $r52.append($r53);
+
+        $r55 = $r54.toString();
+
+        specialinvoke $r48.<init>($r55, r84, r5);
+
+        throw $r48;
+
+     label21:
+        $r38 := @caughtexception;
+
+        r84 = Phi(r84 #2);
+
+        r83 = Phi(r83 #2);
+
+        z8 = Phi(z8 #2);
+
+        r90 = $r38;
+
+        $r39 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r40 = new java.lang.StringBuilder;
+
+        specialinvoke $r40.<init>();
+
+        $r41 = $r40.append("Sourced file: ");
+
+        $r42 = $r41.append(r3);
+
+        $r43 = $r42.append(" Token Parsing Error: ");
+
+        $r44 = r90.getMessage();
+
+        $r45 = $r43.append($r44);
+
+        $r46 = $r45.toString();
+
+        specialinvoke $r39.<init>($r46, r84, r5);
+
+        throw $r39;
+
+     label22:
+        $r81 := @caughtexception;
+
+        r84 = Phi(r84 #2, r84 #15);
+
+        r83 = Phi(r83 #2, r83 #15);
+
+(15)    z8 = Phi(z8 #2, z8 #15);
+
+        r6 = $r81;
+
+     label23:
+        $r82 = specialinvoke r4.get_jjtree();
+
+        $r82.reset();
+
+        $i6 = r5.depth();
+
+        if $i6 <= 1 goto label24;
+
+        r5.clear();
+
+        r5.push(r2);
+
+     label24:
+        throw r6;
+
+     label25:
+        r84 = Phi(r84 #9, r84 #10, r84 #11, r84 #12, r84 #13, r84 #14);
+
+        r83 = Phi(r83 #9, r83 #10, r83 #11, r83 #12, r83 #13, r83 #14);
+
+        z8 = Phi(z8 #9, z8 #10, z8 #11, z8 #12, z8 #13, z8 #14);
+
+(16)    goto label02;
+
+     label26:
+        r84 = Phi(r84 #1, r84 #4, r84 #5);
+
+        r83 = Phi(r83 #1, r83 #4, r83 #5);
+
+        z8 = Phi(z8 #1, z8 #4, z8 #5);
+
+        $r11 = org.gjt.sp.jedit.bsh.Primitive.unwrap(r83);
+
+        return $r11;
+
+        catch org.gjt.sp.jedit.bsh.ParseException from label03 to label06 with label09;
+        catch org.gjt.sp.jedit.bsh.ParseException from label07 to label08 with label09;
+        catch org.gjt.sp.jedit.bsh.InterpreterError from label03 to label06 with label11;
+        catch org.gjt.sp.jedit.bsh.InterpreterError from label07 to label08 with label11;
+        catch org.gjt.sp.jedit.bsh.TargetError from label03 to label06 with label12;
+        catch org.gjt.sp.jedit.bsh.TargetError from label07 to label08 with label12;
+        catch org.gjt.sp.jedit.bsh.EvalError from label03 to label06 with label15;
+        catch org.gjt.sp.jedit.bsh.EvalError from label07 to label08 with label15;
+        catch java.lang.Exception from label03 to label06 with label19;
+        catch java.lang.Exception from label07 to label08 with label19;
+        catch org.gjt.sp.jedit.bsh.TokenMgrError from label03 to label06 with label21;
+        catch org.gjt.sp.jedit.bsh.TokenMgrError from label07 to label08 with label21;
+        catch java.lang.Throwable from label03 to label06 with label22;
+        catch java.lang.Throwable from label07 to label08 with label22;
+        catch java.lang.Throwable from label09 to label14 with label22;
+        catch java.lang.Throwable from label15 to label18 with label22;
+        catch java.lang.Throwable from label19 to label23 with label22;
+    }
+
+    public java.lang.Object eval(java.io.Reader) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.io.Reader r1;
+        org.gjt.sp.jedit.bsh.NameSpace $r2;
+        java.lang.Object $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.globalNameSpace;
+
+        $r3 = r0.eval(r1, $r2, "eval stream");
+
+        return $r3;
+    }
+
+    public java.lang.Object eval(java.lang.String) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1, $r7;
+        boolean $z0;
+        org.gjt.sp.jedit.bsh.NameSpace $r2;
+        java.lang.Object $r3;
+        java.lang.StringBuilder $r4, $r5, $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z0 == 0 goto label1;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("eval(String): ");
+
+        $r6 = $r5.append(r1);
+
+        $r7 = $r6.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r7);
+
+     label1:
+        $r2 = r0.globalNameSpace;
+
+        $r3 = r0.eval(r1, $r2);
+
+        return $r3;
+    }
+
+    public java.lang.Object eval(java.lang.String, org.gjt.sp.jedit.bsh.NameSpace) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1, r3, $r10, $r13, $r15, $r15_1, $r15_2;
+        org.gjt.sp.jedit.bsh.NameSpace r2;
+        boolean $z0;
+        java.lang.StringBuilder $r4, $r5, $r6, $r8, $r9, $r11, $r12;
+        java.io.StringReader $r7;
+        java.lang.Object $r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $z0 = r1.endsWith(";");
+
+        if $z0 == 0 goto label1;
+
+        $r15 = r1;
+
+(0)     goto label2;
+
+     label1:
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append(r1);
+
+        $r6 = $r5.append(";");
+
+(1)     $r15_1 = $r6.toString();
+
+     label2:
+        $r15_2 = Phi($r15 #0, $r15_1 #1);
+
+        r3 = $r15_2;
+
+        $r7 = new java.io.StringReader;
+
+        specialinvoke $r7.<init>(r3);
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("inline evaluation of: ``");
+
+        $r10 = specialinvoke r0.showEvalString(r3);
+
+        $r11 = $r9.append($r10);
+
+        $r12 = $r11.append("\'\'");
+
+        $r13 = $r12.toString();
+
+        $r14 = r0.eval($r7, r2, $r13);
+
+        return $r14;
+    }
+
+    private java.lang.String showEvalString(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        int $i0;
+        java.lang.StringBuilder $r1, $r3, $r4;
+        java.lang.String $r2, r5, r6, r7, r7_1, r7_2;
+
+        r0 := @this;
+
+        r5 := @parameter0;
+
+        r6 = r5.replace(10, 32);
+
+        r7 = r6.replace(13, 32);
+
+        $i0 = r7.length();
+
+(0)     if $i0 <= 80 goto label1;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = r7.substring(0, 80);
+
+        $r3 = $r1.append($r2);
+
+        $r4 = $r3.append(" . . . ");
+
+(1)     r7_1 = $r4.toString();
+
+     label1:
+        r7_2 = Phi(r7 #0, r7_1 #1);
+
+        return r7_2;
+    }
+
+    public final void error(java.lang.Object)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.Object r1;
+        org.gjt.sp.jedit.bsh.ConsoleInterface $r2, $r10;
+        java.lang.StringBuilder $r3, $r5, $r6, $r9, $r11, $r12, $r13;
+        java.io.PrintStream $r4, $r8;
+        java.lang.String $r7, $r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.console;
+
+        if $r2 == null goto label1;
+
+        $r10 = r0.console;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r11 = $r9.append("// Error: ");
+
+        $r12 = $r11.append(r1);
+
+        $r13 = $r12.append("\n");
+
+        $r14 = $r13.toString();
+
+        $r10.error($r14);
+
+        goto label2;
+
+     label1:
+        $r4 = r0.err;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r5 = $r3.append("// Error: ");
+
+        $r6 = $r5.append(r1);
+
+        $r7 = $r6.toString();
+
+        $r4.println($r7);
+
+        $r8 = r0.err;
+
+        $r8.flush();
+
+     label2:
+        return;
+    }
+
+    public java.io.Reader getIn()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.io.Reader $r1;
+
+        r0 := @this;
+
+        $r1 = r0.in;
+
+        return $r1;
+    }
+
+    public java.io.PrintStream getOut()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.io.PrintStream $r1;
+
+        r0 := @this;
+
+        $r1 = r0.out;
+
+        return $r1;
+    }
+
+    public java.io.PrintStream getErr()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.io.PrintStream $r1;
+
+        r0 := @this;
+
+        $r1 = r0.err;
+
+        return $r1;
+    }
+
+    public final void println(java.lang.Object)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.Object r1;
+        java.lang.StringBuilder $r2, $r4, $r6;
+        java.lang.String $r3, $r5, $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = java.lang.String.valueOf(r1);
+
+        $r4 = $r2.append($r3);
+
+        $r5 = org.gjt.sp.jedit.bsh.Interpreter.systemLineSeparator;
+
+        $r6 = $r4.append($r5);
+
+        $r7 = $r6.toString();
+
+        r0.print($r7);
+
+        return;
+    }
+
+    public final void print(java.lang.Object)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.Object r1;
+        org.gjt.sp.jedit.bsh.ConsoleInterface $r2, $r5;
+        java.io.PrintStream $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.console;
+
+        if $r2 == null goto label1;
+
+        $r5 = r0.console;
+
+        $r5.print(r1);
+
+        goto label2;
+
+     label1:
+        $r3 = r0.out;
+
+        $r3.print(r1);
+
+        $r4 = r0.out;
+
+        $r4.flush();
+
+     label2:
+        return;
+    }
+
+    public static final void debug(java.lang.String)
+    {
+        java.lang.String r0, $r5;
+        boolean $z0;
+        java.lang.StringBuilder $r1, $r3, $r4;
+        java.io.PrintStream $r2;
+
+        r0 := @parameter0;
+
+        $z0 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = org.gjt.sp.jedit.bsh.Interpreter.debug;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r3 = $r1.append("// Debug: ");
+
+        $r4 = $r3.append(r0);
+
+        $r5 = $r4.toString();
+
+        $r2.println($r5);
+
+     label1:
+        return;
+    }
+
+    public java.lang.Object get(java.lang.String) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.bsh.NameSpace $r2;
+        java.lang.Object $r3, r8;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r4, r9;
+        org.gjt.sp.jedit.bsh.CallStack $r5;
+        org.gjt.sp.jedit.bsh.SimpleNode $r6;
+        org.gjt.sp.jedit.bsh.EvalError $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+     label1:
+        $r2 = r0.globalNameSpace;
+
+        r8 = $r2.get(r1, r0);
+
+        $r3 = org.gjt.sp.jedit.bsh.Primitive.unwrap(r8);
+
+     label2:
+        return $r3;
+
+     label3:
+        $r4 := @caughtexception;
+
+        r9 = $r4;
+
+        $r6 = org.gjt.sp.jedit.bsh.SimpleNode.JAVACODE;
+
+        $r5 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        specialinvoke $r5.<init>();
+
+        $r7 = r9.toEvalError($r6, $r5);
+
+        throw $r7;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label2 with label3;
+    }
+
+    java.lang.Object getu(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1, $r9;
+        org.gjt.sp.jedit.bsh.EvalError r2, $r4;
+        java.lang.Object $r3;
+        org.gjt.sp.jedit.bsh.InterpreterError $r5;
+        java.lang.StringBuilder $r6, $r7, $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+     label1:
+        $r3 = r0.get(r1);
+
+     label2:
+        return $r3;
+
+     label3:
+        $r4 := @caughtexception;
+
+        r2 = $r4;
+
+        $r5 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("set: ");
+
+        $r8 = $r7.append(r2);
+
+        $r9 = $r8.toString();
+
+        specialinvoke $r5.<init>($r9);
+
+        throw $r5;
+
+        catch org.gjt.sp.jedit.bsh.EvalError from label1 to label2 with label3;
+    }
+
+    public void set(java.lang.String, java.lang.Object) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.bsh.CallStack r2, $r3;
+        boolean $z0;
+        org.gjt.sp.jedit.bsh.NameSpace $r4, $r5;
+        org.gjt.sp.jedit.bsh.Name $r6;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r8, r13;
+        org.gjt.sp.jedit.bsh.SimpleNode $r9;
+        org.gjt.sp.jedit.bsh.EvalError $r10;
+        java.lang.Object r11, r11_1, r11_2;
+        org.gjt.sp.jedit.bsh.LHS r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r11 := @parameter1;
+
+(0)     if r11 != null goto label1;
+
+(1)     r11_1 = org.gjt.sp.jedit.bsh.Primitive.NULL;
+
+     label1:
+        r11_2 = Phi(r11 #0, r11_1 #1);
+
+        $r3 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        specialinvoke $r3.<init>();
+
+        r2 = $r3;
+
+     label2:
+        $z0 = org.gjt.sp.jedit.bsh.Name.isCompound(r1);
+
+        if $z0 == 0 goto label3;
+
+        $r5 = r0.globalNameSpace;
+
+        $r6 = $r5.getNameResolver(r1);
+
+        r12 = $r6.toLHS(r2, r0);
+
+        r12.assign(r11_2, 0);
+
+        goto label4;
+
+     label3:
+        $r4 = r0.globalNameSpace;
+
+        $r4.setVariable(r1, r11_2, 0);
+
+     label4:
+        goto label6;
+
+     label5:
+        $r8 := @caughtexception;
+
+        r13 = $r8;
+
+        $r9 = org.gjt.sp.jedit.bsh.SimpleNode.JAVACODE;
+
+        $r10 = r13.toEvalError($r9, r2);
+
+        throw $r10;
+
+     label6:
+        return;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label2 to label4 with label5;
+    }
+
+    void setu(java.lang.String, java.lang.Object)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1, $r9;
+        java.lang.Object r2;
+        org.gjt.sp.jedit.bsh.EvalError r3, $r4;
+        org.gjt.sp.jedit.bsh.InterpreterError $r5;
+        java.lang.StringBuilder $r6, $r7, $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+     label1:
+        r0.set(r1, r2);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r4 := @caughtexception;
+
+        r3 = $r4;
+
+        $r5 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("set: ");
+
+        $r8 = $r7.append(r3);
+
+        $r9 = $r8.toString();
+
+        specialinvoke $r5.<init>($r9);
+
+        throw $r5;
+
+     label4:
+        return;
+
+        catch org.gjt.sp.jedit.bsh.EvalError from label1 to label2 with label3;
+    }
+
+    public void set(java.lang.String, long) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1;
+        long l0;
+        org.gjt.sp.jedit.bsh.Primitive $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        l0 := @parameter1;
+
+        $r2 = new org.gjt.sp.jedit.bsh.Primitive;
+
+        specialinvoke $r2.<init>(l0);
+
+        r0.set(r1, $r2);
+
+        return;
+    }
+
+    public void set(java.lang.String, int) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1;
+        int i0;
+        org.gjt.sp.jedit.bsh.Primitive $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        $r2 = new org.gjt.sp.jedit.bsh.Primitive;
+
+        specialinvoke $r2.<init>(i0);
+
+        r0.set(r1, $r2);
+
+        return;
+    }
+
+    public void set(java.lang.String, double) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1;
+        double d0;
+        org.gjt.sp.jedit.bsh.Primitive $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        d0 := @parameter1;
+
+        $r2 = new org.gjt.sp.jedit.bsh.Primitive;
+
+        specialinvoke $r2.<init>(d0);
+
+        r0.set(r1, $r2);
+
+        return;
+    }
+
+    public void set(java.lang.String, float) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1;
+        float f0;
+        org.gjt.sp.jedit.bsh.Primitive $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        f0 := @parameter1;
+
+        $r2 = new org.gjt.sp.jedit.bsh.Primitive;
+
+        specialinvoke $r2.<init>(f0);
+
+        r0.set(r1, $r2);
+
+        return;
+    }
+
+    public void set(java.lang.String, boolean) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1;
+        boolean z0;
+        org.gjt.sp.jedit.bsh.Primitive $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        $r2 = new org.gjt.sp.jedit.bsh.Primitive;
+
+        specialinvoke $r2.<init>(z0);
+
+        r0.set(r1, $r2);
+
+        return;
+    }
+
+    public void unset(java.lang.String) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1, $r11, $r16;
+        org.gjt.sp.jedit.bsh.CallStack r2, $r3, $r12, $r17;
+        org.gjt.sp.jedit.bsh.NameSpace $r4, $r6;
+        org.gjt.sp.jedit.bsh.Name $r5;
+        int $i0;
+        org.gjt.sp.jedit.bsh.EvalError $r7, $r15;
+        java.lang.StringBuilder $r8, $r9, $r10;
+        org.gjt.sp.jedit.bsh.SimpleNode $r13, $r18;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r14, r20;
+        org.gjt.sp.jedit.bsh.LHS r19;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        specialinvoke $r3.<init>();
+
+        r2 = $r3;
+
+     label1:
+        $r4 = r0.globalNameSpace;
+
+        $r5 = $r4.getNameResolver(r1);
+
+        r19 = $r5.toLHS(r2, r0);
+
+        $i0 = r19.type;
+
+        if $i0 == 0 goto label2;
+
+        $r7 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("Can\'t unset, not a variable: ");
+
+        $r10 = $r9.append(r1);
+
+        $r11 = $r10.toString();
+
+        $r13 = org.gjt.sp.jedit.bsh.SimpleNode.JAVACODE;
+
+        $r12 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        specialinvoke $r12.<init>();
+
+        specialinvoke $r7.<init>($r11, $r13, $r12);
+
+        throw $r7;
+
+     label2:
+        $r6 = r19.nameSpace;
+
+        $r6.unsetVariable(r1);
+
+     label3:
+        goto label5;
+
+     label4:
+        $r14 := @caughtexception;
+
+        r20 = $r14;
+
+        $r15 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r16 = r20.getMessage();
+
+        $r18 = org.gjt.sp.jedit.bsh.SimpleNode.JAVACODE;
+
+        $r17 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        specialinvoke $r17.<init>();
+
+        specialinvoke $r15.<init>($r16, $r18, $r17);
+
+        throw $r15;
+
+     label5:
+        return;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label3 with label4;
+    }
+
+    public java.lang.Object getInterface(java.lang.Class) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.Class r1;
+        org.gjt.sp.jedit.bsh.UtilEvalError r2, $r6;
+        org.gjt.sp.jedit.bsh.NameSpace $r3;
+        org.gjt.sp.jedit.bsh.This $r4;
+        java.lang.Object $r5;
+        org.gjt.sp.jedit.bsh.CallStack $r7;
+        org.gjt.sp.jedit.bsh.SimpleNode $r8;
+        org.gjt.sp.jedit.bsh.EvalError $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+     label1:
+        $r3 = r0.globalNameSpace;
+
+        $r4 = $r3.getThis(r0);
+
+        $r5 = $r4.getInterface(r1);
+
+     label2:
+        return $r5;
+
+     label3:
+        $r6 := @caughtexception;
+
+        r2 = $r6;
+
+        $r8 = org.gjt.sp.jedit.bsh.SimpleNode.JAVACODE;
+
+        $r7 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        specialinvoke $r7.<init>();
+
+        $r9 = r2.toEvalError($r8, $r7);
+
+        throw $r9;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label2 with label3;
+    }
+
+    private org.gjt.sp.jedit.bsh.JJTParserState get_jjtree()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        org.gjt.sp.jedit.bsh.Parser $r1;
+        org.gjt.sp.jedit.bsh.JJTParserState $r2;
+
+        r0 := @this;
+
+        $r1 = r0.parser;
+
+        $r2 = $r1.jjtree;
+
+        return $r2;
+    }
+
+    private org.gjt.sp.jedit.bsh.JavaCharStream get_jj_input_stream()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        org.gjt.sp.jedit.bsh.Parser $r1;
+        org.gjt.sp.jedit.bsh.JavaCharStream $r2;
+
+        r0 := @this;
+
+        $r1 = r0.parser;
+
+        $r2 = $r1.jj_input_stream;
+
+        return $r2;
+    }
+
+    private boolean Line() throws org.gjt.sp.jedit.bsh.ParseException
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        org.gjt.sp.jedit.bsh.Parser $r1;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r1 = r0.parser;
+
+        $z0 = $r1.Line();
+
+        return $z0;
+    }
+
+    void loadRCFiles()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.StringBuilder $r1, $r3, $r5, $r6, $r10, $r11, $r12;
+        java.lang.String $r2, $r4, $r13, r14;
+        org.gjt.sp.jedit.bsh.NameSpace $r7;
+        java.lang.Exception $r9, r15;
+        boolean $z0;
+
+        r0 := @this;
+
+     label1:
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = java.lang.System.getProperty("user.home");
+
+        $r3 = $r1.append($r2);
+
+        $r4 = java.io.File.separator;
+
+        $r5 = $r3.append($r4);
+
+        $r6 = $r5.append(".bshrc");
+
+        r14 = $r6.toString();
+
+        $r7 = r0.globalNameSpace;
+
+        r0.source(r14, $r7);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r9 := @caughtexception;
+
+        r15 = $r9;
+
+        $z0 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z0 == 0 goto label4;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("Could not find rc file: ");
+
+        $r12 = $r11.append(r15);
+
+        $r13 = $r12.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r13);
+
+     label4:
+        return;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    public java.io.File pathToFile(java.lang.String) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String r1, r2, $r5, $r10, $r13;
+        java.io.File $r3, $r4, $r7, r14, r14_1, r14_2;
+        boolean $z0;
+        java.lang.Object $r6;
+        java.lang.StringBuilder $r8, $r9, $r11, $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new java.io.File;
+
+        specialinvoke $r3.<init>(r1);
+
+        r14 = $r3;
+
+        $z0 = r14.isAbsolute();
+
+(0)     if $z0 != 0 goto label1;
+
+        $r6 = r0.getu("bsh.cwd");
+
+        r2 = (java.lang.String) $r6;
+
+        $r7 = new java.io.File;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append(r2);
+
+        $r10 = java.io.File.separator;
+
+        $r11 = $r9.append($r10);
+
+        $r12 = $r11.append(r1);
+
+        $r13 = $r12.toString();
+
+        specialinvoke $r7.<init>($r13);
+
+(1)     r14_1 = $r7;
+
+     label1:
+        r14_2 = Phi(r14 #0, r14_1 #1);
+
+        $r4 = new java.io.File;
+
+        $r5 = r14_2.getCanonicalPath();
+
+        specialinvoke $r4.<init>($r5);
+
+        return $r4;
+    }
+
+    public static void redirectOutputToFile(java.lang.String)
+    {
+        java.lang.String r0, $r8;
+        java.io.PrintStream $r1, $r5, r9;
+        java.io.FileOutputStream $r2;
+        java.io.IOException $r3, r10;
+        java.lang.StringBuilder $r4, $r6, $r7;
+
+        r0 := @parameter0;
+
+     label1:
+        $r1 = new java.io.PrintStream;
+
+        $r2 = new java.io.FileOutputStream;
+
+        specialinvoke $r2.<init>(r0);
+
+        specialinvoke $r1.<init>($r2);
+
+        r9 = $r1;
+
+        java.lang.System.setOut(r9);
+
+        java.lang.System.setErr(r9);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r3 := @caughtexception;
+
+        r10 = $r3;
+
+        $r5 = java.lang.System.err;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r6 = $r4.append("Can\'t redirect output to file: ");
+
+        $r7 = $r6.append(r0);
+
+        $r8 = $r7.toString();
+
+        $r5.println($r8);
+
+     label4:
+        return;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    public void setClassLoader(java.lang.ClassLoader)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.ClassLoader r1;
+        org.gjt.sp.jedit.bsh.BshClassManager $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.getClassManager();
+
+        $r2.setClassLoader(r1);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.BshClassManager getClassManager()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        org.gjt.sp.jedit.bsh.NameSpace $r1;
+        org.gjt.sp.jedit.bsh.BshClassManager $r2;
+
+        r0 := @this;
+
+        $r1 = r0.getNameSpace();
+
+        $r2 = $r1.getClassManager();
+
+        return $r2;
+    }
+
+    public void setStrictJava(boolean)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        boolean z0;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        r0.strictJava = z0;
+
+        return;
+    }
+
+    public boolean getStrictJava()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.strictJava;
+
+        return $z0;
+    }
+
+    static void staticInit()
+    {
+        java.lang.String $r0, $r7, $r13, $r19, r20;
+        java.io.PrintStream $r1, $r4, $r10, $r16;
+        boolean $z0, $z1, $z2;
+        java.lang.Exception $r2, r22;
+        java.lang.StringBuilder $r3, $r5, $r6, $r9, $r11, $r12, $r15, $r17, $r18;
+        java.lang.Throwable $r8, r23;
+        java.lang.SecurityException $r14, r21;
+
+     label1:
+        $r0 = java.lang.System.getProperty("line.separator");
+
+        org.gjt.sp.jedit.bsh.Interpreter.systemLineSeparator = $r0;
+
+        $r1 = java.lang.System.err;
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug = $r1;
+
+        $z0 = java.lang.Boolean.getBoolean("debug");
+
+        org.gjt.sp.jedit.bsh.Interpreter.DEBUG = $z0;
+
+        $z1 = java.lang.Boolean.getBoolean("trace");
+
+        org.gjt.sp.jedit.bsh.Interpreter.TRACE = $z1;
+
+        $z2 = java.lang.Boolean.getBoolean("localscoping");
+
+        org.gjt.sp.jedit.bsh.Interpreter.LOCALSCOPING = $z2;
+
+        r20 = java.lang.System.getProperty("outfile");
+
+        if r20 == null goto label2;
+
+        org.gjt.sp.jedit.bsh.Interpreter.redirectOutputToFile(r20);
+
+     label2:
+        goto label6;
+
+     label3:
+        $r14 := @caughtexception;
+
+        r21 = $r14;
+
+        $r16 = java.lang.System.err;
+
+        $r15 = new java.lang.StringBuilder;
+
+        specialinvoke $r15.<init>();
+
+        $r17 = $r15.append("Could not init static:");
+
+        $r18 = $r17.append(r21);
+
+        $r19 = $r18.toString();
+
+        $r16.println($r19);
+
+        goto label6;
+
+     label4:
+        $r2 := @caughtexception;
+
+        r22 = $r2;
+
+        $r4 = java.lang.System.err;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r5 = $r3.append("Could not init static(2):");
+
+        $r6 = $r5.append(r22);
+
+        $r7 = $r6.toString();
+
+        $r4.println($r7);
+
+        goto label6;
+
+     label5:
+        $r8 := @caughtexception;
+
+        r23 = $r8;
+
+        $r10 = java.lang.System.err;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r11 = $r9.append("Could not init static(3):");
+
+        $r12 = $r11.append(r23);
+
+        $r13 = $r12.toString();
+
+        $r10.println($r13);
+
+     label6:
+        return;
+
+        catch java.lang.SecurityException from label1 to label2 with label3;
+        catch java.lang.Exception from label1 to label2 with label4;
+        catch java.lang.Throwable from label1 to label2 with label5;
+    }
+
+    public java.lang.String getSourceFileInfo()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.String $r1, $r2;
+
+        r0 := @this;
+
+        $r1 = r0.sourceFileInfo;
+
+        if $r1 == null goto label1;
+
+        $r2 = r0.sourceFileInfo;
+
+        return $r2;
+
+     label1:
+        return "<unknown source>";
+    }
+
+    public org.gjt.sp.jedit.bsh.Interpreter getParent()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0, $r1;
+
+        r0 := @this;
+
+        $r1 = r0.parent;
+
+        return $r1;
+    }
+
+    public void setOut(java.io.PrintStream)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.io.PrintStream r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.out = r1;
+
+        return;
+    }
+
+    public void setErr(java.io.PrintStream)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.io.PrintStream r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.err = r1;
+
+        return;
+    }
+
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.io.ObjectInputStream r1;
+        org.gjt.sp.jedit.bsh.ConsoleInterface $r2, $r5, $r7;
+        java.io.PrintStream $r3, $r4, $r6, $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r1.defaultReadObject();
+
+        $r2 = r0.console;
+
+        if $r2 == null goto label1;
+
+        $r5 = r0.console;
+
+        $r6 = $r5.getOut();
+
+        r0.setOut($r6);
+
+        $r7 = r0.console;
+
+        $r8 = $r7.getErr();
+
+        r0.setErr($r8);
+
+        goto label2;
+
+     label1:
+        $r3 = java.lang.System.out;
+
+        r0.setOut($r3);
+
+        $r4 = java.lang.System.err;
+
+        r0.setErr($r4);
+
+     label2:
+        return;
+    }
+
+    private java.lang.String getBshPrompt()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        java.lang.Exception r1, $r4;
+        java.lang.Object $r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+     label1:
+        $r2 = r0.eval("getBshPrompt()");
+
+        $r3 = (java.lang.String) $r2;
+
+     label2:
+        return $r3;
+
+     label3:
+        $r4 := @caughtexception;
+
+        r1 = $r4;
+
+        return "bsh % ";
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    public void setExitOnEOF(boolean)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        boolean z0;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        r0.exitOnEOF = z0;
+
+        return;
+    }
+
+    public void setShowResults(boolean)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        boolean z0;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        r0.showResults = z0;
+
+        return;
+    }
+
+    public boolean getShowResults()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.showResults;
+
+        return $z0;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.bsh.Interpreter.systemLineSeparator = "\n";
+
+        org.gjt.sp.jedit.bsh.Interpreter.staticInit();
+
+        return;
+    }
+}

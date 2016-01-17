@@ -1,0 +1,37 @@
+class org.gjt.sp.jedit.pluginmgr.PluginManager$2$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.pluginmgr.PluginManager$2 this$1;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.PluginManager$2)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManager$2$1 r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManager$2 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$1 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManager$2$1 r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManager$2 $r1;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r2;
+
+        r0 := @this;
+
+        $r1 = r0.this$1;
+
+        $r2 = $r1.this$0;
+
+        org.gjt.sp.jedit.pluginmgr.PluginManager.access$400($r2);
+
+        return;
+    }
+}

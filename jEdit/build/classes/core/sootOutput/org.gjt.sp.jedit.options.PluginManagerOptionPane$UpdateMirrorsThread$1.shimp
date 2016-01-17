@@ -1,0 +1,54 @@
+class org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final java.lang.Exception val$ex;
+    final org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread this$1;
+
+    void <init>(org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread, java.lang.Exception)
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread$1 r0;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread r1;
+        java.lang.Exception r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$1 = r1;
+
+        r0.val$ex = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread$1 r0;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread $r1;
+        java.lang.String[] $r2;
+        java.lang.Exception $r3;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane $r4;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        $r1 = r0.this$1;
+
+        $r4 = $r1.this$0;
+
+        $r2 = newarray (java.lang.String)[1];
+
+        $r3 = r0.val$ex;
+
+        $r5 = $r3.toString();
+
+        $r2[0] = $r5;
+
+        org.gjt.sp.jedit.GUIUtilities.error($r4, "ioerror", $r2);
+
+        return;
+    }
+}

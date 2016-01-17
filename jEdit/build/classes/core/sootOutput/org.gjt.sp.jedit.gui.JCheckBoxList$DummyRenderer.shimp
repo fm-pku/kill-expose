@@ -1,0 +1,56 @@
+class org.gjt.sp.jedit.gui.JCheckBoxList$DummyRenderer extends javax.swing.table.DefaultTableCellRenderer
+{
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList$DummyRenderer r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.awt.Component getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList$DummyRenderer r0;
+        javax.swing.JTable r1;
+        java.lang.Object r2;
+        boolean z0, z1;
+        int i0, i1;
+        java.awt.Component $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        z1 := @parameter3;
+
+        i0 := @parameter4;
+
+        i1 := @parameter5;
+
+        $r3 = specialinvoke r0.getTableCellRendererComponent(r1, null, z0, 0, i0, i1);
+
+        return $r3;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.JCheckBoxList$1)
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList$DummyRenderer r0;
+        org.gjt.sp.jedit.gui.JCheckBoxList$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

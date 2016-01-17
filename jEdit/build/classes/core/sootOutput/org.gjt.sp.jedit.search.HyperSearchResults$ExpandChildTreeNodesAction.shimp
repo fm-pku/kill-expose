@@ -1,0 +1,54 @@
+class org.gjt.sp.jedit.search.HyperSearchResults$ExpandChildTreeNodesAction extends javax.swing.AbstractAction
+{
+    final org.gjt.sp.jedit.search.HyperSearchResults this$0;
+
+    void <init>(org.gjt.sp.jedit.search.HyperSearchResults)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$ExpandChildTreeNodesAction r0;
+        org.gjt.sp.jedit.search.HyperSearchResults r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("hypersearch-results.expand-child-nodes");
+
+        specialinvoke r0.<init>($r2);
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$ExpandChildTreeNodesAction r0;
+        java.awt.event.ActionEvent r1;
+        javax.swing.tree.TreePath r2;
+        javax.swing.tree.DefaultMutableTreeNode r3;
+        org.gjt.sp.jedit.search.HyperSearchResults $r4, $r7;
+        javax.swing.JTree $r5;
+        java.lang.Object $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r4);
+
+        r2 = $r5.getSelectionPath();
+
+        $r6 = r2.getLastPathComponent();
+
+        r3 = (javax.swing.tree.DefaultMutableTreeNode) $r6;
+
+        $r7 = r0.this$0;
+
+        $r7.expandAllNodes(r3);
+
+        return;
+    }
+}

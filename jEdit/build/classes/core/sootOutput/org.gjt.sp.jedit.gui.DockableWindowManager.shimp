@@ -1,0 +1,1169 @@
+public abstract class org.gjt.sp.jedit.gui.DockableWindowManager extends javax.swing.JPanel
+{
+    public static final java.lang.String FLOATING;
+    public static final java.lang.String TOP;
+    public static final java.lang.String LEFT;
+    public static final java.lang.String BOTTOM;
+    public static final java.lang.String RIGHT;
+    private final java.util.Map plugins;
+    private final java.util.Map positions;
+    protected org.gjt.sp.jedit.View view;
+    protected org.gjt.sp.jedit.gui.DockableWindowFactory factory;
+    protected java.util.Map windows;
+    private boolean tBottom;
+    private boolean tTop;
+    private boolean tLeft;
+    private boolean tRight;
+    private boolean closeToggle;
+    private static final java.lang.String ALTERNATE_LAYOUT_PROP;
+    private boolean alternateLayout;
+
+    public void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.gui.DockableWindowFactory, org.gjt.sp.jedit.View$ViewConfig)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.gui.DockableWindowFactory r2;
+        org.gjt.sp.jedit.View$ViewConfig r3;
+        java.util.HashMap $r4, $r5, $r6;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        $r4 = new java.util.HashMap;
+
+        specialinvoke $r4.<init>();
+
+        r0.plugins = $r4;
+
+        $r5 = new java.util.HashMap;
+
+        specialinvoke $r5.<init>();
+
+        r0.positions = $r5;
+
+        $r6 = new java.util.HashMap;
+
+        specialinvoke $r6.<init>();
+
+        r0.windows = $r6;
+
+        r0.closeToggle = 1;
+
+        r0.view = r1;
+
+        r0.factory = r2;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.docking.alternateLayout");
+
+        r0.alternateLayout = $z0;
+
+        return;
+    }
+
+    public abstract void setMainPanel(javax.swing.JPanel);
+
+    public abstract void showDockableWindow(java.lang.String);
+
+    public abstract void hideDockableWindow(java.lang.String);
+
+    public abstract void disposeDockableWindow(java.lang.String);
+
+    public abstract javax.swing.JComponent floatDockableWindow(java.lang.String);
+
+    public abstract boolean isDockableWindowDocked(java.lang.String);
+
+    public abstract boolean isDockableWindowVisible(java.lang.String);
+
+    public abstract void closeCurrentArea();
+
+    public abstract org.gjt.sp.jedit.gui.DockableWindowManager$DockingLayout getDockingLayout(org.gjt.sp.jedit.View$ViewConfig);
+
+    public abstract org.gjt.sp.jedit.gui.DockableWindowManager$DockingArea getLeftDockingArea();
+
+    public abstract org.gjt.sp.jedit.gui.DockableWindowManager$DockingArea getRightDockingArea();
+
+    public abstract org.gjt.sp.jedit.gui.DockableWindowManager$DockingArea getTopDockingArea();
+
+    public abstract org.gjt.sp.jedit.gui.DockableWindowManager$DockingArea getBottomDockingArea();
+
+    public void init()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.util.Iterator r1;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window r2;
+        java.lang.String r3, $r7;
+        org.gjt.sp.jedit.gui.DockableWindowFactory $r4;
+        boolean $z0;
+        java.lang.Object $r5;
+        java.util.Map $r6;
+        org.gjt.sp.jedit.PluginJAR $r9;
+
+        r0 := @this;
+
+        org.gjt.sp.jedit.EditBus.addToBus(r0);
+
+        $r4 = r0.factory;
+
+        r1 = $r4.getDockableWindowIterator();
+
+     label1:
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r5 = r1.next();
+
+        r2 = (org.gjt.sp.jedit.gui.DockableWindowFactory$Window) $r5;
+
+        r3 = r2.name;
+
+        $r6 = r0.positions;
+
+        $r7 = r0.getDockablePosition(r3);
+
+        $r6.put(r3, $r7);
+
+        $r9 = r2.plugin;
+
+        specialinvoke r0.addPluginDockable($r9, r3);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public void close()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+
+        r0 := @this;
+
+        org.gjt.sp.jedit.EditBus.removeFromBus(r0);
+
+        return;
+    }
+
+    public void applyDockingLayout(org.gjt.sp.jedit.gui.DockableWindowManager$DockingLayout)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        org.gjt.sp.jedit.gui.DockableWindowManager$DockingLayout r1;
+        java.util.Iterator r2;
+        java.util.Map$Entry r3;
+        java.lang.String r4, r5;
+        java.util.Map $r6;
+        java.util.Set $r7;
+        boolean $z0, $z1;
+        java.lang.Object $r8, $r9, $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r6 = r0.positions;
+
+        $r7 = $r6.entrySet();
+
+        r2 = $r7.iterator();
+
+     label1:
+        $z0 = r2.hasNext();
+
+        if $z0 == 0 goto label3;
+
+        $r8 = r2.next();
+
+        r3 = (java.util.Map$Entry) $r8;
+
+        $r9 = r3.getKey();
+
+        r4 = (java.lang.String) $r9;
+
+        $r10 = r3.getValue();
+
+        r5 = (java.lang.String) $r10;
+
+        $z1 = r5.equals("floating");
+
+        if $z1 != 0 goto label2;
+
+        r0.showDockableWindow(r4);
+
+     label2:
+        goto label1;
+
+     label3:
+        return;
+    }
+
+    public void addDockableWindow(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.showDockableWindow(r1);
+
+        return;
+    }
+
+    public void removeDockableWindow(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.hideDockableWindow(r1);
+
+        return;
+    }
+
+    public void toggleDockableWindow(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r0.isDockableWindowVisible(r1);
+
+        if $z0 == 0 goto label1;
+
+        r0.removeDockableWindow(r1);
+
+        goto label2;
+
+     label1:
+        r0.addDockableWindow(r1);
+
+     label2:
+        return;
+    }
+
+    public javax.swing.JComponent getDockableWindow(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1;
+        javax.swing.JComponent $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.getDockable(r1);
+
+        return $r2;
+    }
+
+    public void toggleDockAreas()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z10, $z6_1, $z6_2, $z7_1, $z7_2, $z8_1, $z8_2, $z9_1, $z9_2, $z6_3, $z8_3, $z9_3, $z7_3, $z10_1, $z10_2;
+        org.gjt.sp.jedit.View $r1, $r2;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r3;
+        org.gjt.sp.jedit.gui.DockableWindowManager$DockingArea $r4, $r5, $r6, $r7, $r8, $r10, $r12, $r14, $r16, $r17, $r18, $r19;
+        java.lang.String $r9, $r11, $r13, $r15;
+
+        r0 := @this;
+
+        $z0 = r0.closeToggle;
+
+        if $z0 == 0 goto label09;
+
+        $r8 = r0.getTopDockingArea();
+
+        $r9 = $r8.getCurrent();
+
+        if $r9 == null goto label01;
+
+        $z6 = 1;
+
+(0)     goto label02;
+
+     label01:
+(1)     $z6_1 = 0;
+
+     label02:
+        $z6_2 = Phi($z6 #0, $z6_1 #1);
+
+        r0.tTop = $z6_2;
+
+        $r10 = r0.getLeftDockingArea();
+
+        $r11 = $r10.getCurrent();
+
+        if $r11 == null goto label03;
+
+        $z7 = 1;
+
+(2)     goto label04;
+
+     label03:
+(3)     $z7_1 = 0;
+
+     label04:
+        $z7_2 = Phi($z7 #2, $z7_1 #3);
+
+        r0.tLeft = $z7_2;
+
+        $r12 = r0.getRightDockingArea();
+
+        $r13 = $r12.getCurrent();
+
+        if $r13 == null goto label05;
+
+        $z8 = 1;
+
+(4)     goto label06;
+
+     label05:
+(5)     $z8_1 = 0;
+
+     label06:
+        $z8_2 = Phi($z8 #4, $z8_1 #5);
+
+        r0.tRight = $z8_2;
+
+        $r14 = r0.getBottomDockingArea();
+
+        $r15 = $r14.getCurrent();
+
+        if $r15 == null goto label07;
+
+        $z9 = 1;
+
+(6)     goto label08;
+
+     label07:
+(7)     $z9_1 = 0;
+
+     label08:
+        $z9_2 = Phi($z9 #6, $z9_1 #7);
+
+        r0.tBottom = $z9_2;
+
+        $r16 = r0.getBottomDockingArea();
+
+        $r16.show(null);
+
+        $r17 = r0.getTopDockingArea();
+
+        $r17.show(null);
+
+        $r18 = r0.getRightDockingArea();
+
+        $r18.show(null);
+
+        $r19 = r0.getLeftDockingArea();
+
+        $r19.show(null);
+
+(8)     goto label13;
+
+     label09:
+        $z1 = r0.tBottom;
+
+        if $z1 == 0 goto label10;
+
+        $r7 = r0.getBottomDockingArea();
+
+        $r7.showMostRecent();
+
+     label10:
+        $z2 = r0.tLeft;
+
+        if $z2 == 0 goto label11;
+
+        $r6 = r0.getLeftDockingArea();
+
+        $r6.showMostRecent();
+
+     label11:
+        $z3 = r0.tRight;
+
+        if $z3 == 0 goto label12;
+
+        $r5 = r0.getRightDockingArea();
+
+        $r5.showMostRecent();
+
+     label12:
+        $z4 = r0.tTop;
+
+(9)     if $z4 == 0 goto label13;
+
+        $r4 = r0.getTopDockingArea();
+
+(10)    $r4.showMostRecent();
+
+     label13:
+        $z6_3 = Phi($z6_2 #8, $z6 #9, $z6 #10);
+
+        $z8_3 = Phi($z8_2 #8, $z8 #9, $z8 #10);
+
+        $z9_3 = Phi($z9_2 #8, $z9 #9, $z9 #10);
+
+        $z7_3 = Phi($z7_2 #8, $z7 #9, $z7 #10);
+
+        $r1 = r0.view;
+
+        $r1.closeAllMenus();
+
+        $z5 = r0.closeToggle;
+
+        if $z5 != 0 goto label14;
+
+        $z10 = 1;
+
+(11)    goto label15;
+
+     label14:
+(12)    $z10_1 = 0;
+
+     label15:
+        $z10_2 = Phi($z10 #11, $z10_1 #12);
+
+        r0.closeToggle = $z10_2;
+
+        $r2 = r0.view;
+
+        $r3 = $r2.getTextArea();
+
+        $r3.requestFocus();
+
+        return;
+    }
+
+    public boolean willToggleHide()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.closeToggle;
+
+        return $z0;
+    }
+
+    public void dockableTitleChanged(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1, r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        return;
+    }
+
+    public java.awt.event.KeyListener closeListener(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.gui.DockableWindowManager$KeyHandler $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new org.gjt.sp.jedit.gui.DockableWindowManager$KeyHandler;
+
+        specialinvoke $r2.<init>(r0, r1);
+
+        return $r2;
+    }
+
+    public org.gjt.sp.jedit.View getView()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        org.gjt.sp.jedit.View $r1;
+
+        r0 := @this;
+
+        $r1 = r0.view;
+
+        return $r1;
+    }
+
+    public javax.swing.JComponent getDockable(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1;
+        java.util.Map $r2;
+        java.lang.Object $r3;
+        javax.swing.JComponent $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.windows;
+
+        $r3 = $r2.get(r1);
+
+        $r4 = (javax.swing.JComponent) $r3;
+
+        return $r4;
+    }
+
+    public java.lang.String getDockableTitle(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1, $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.longTitle(r1);
+
+        return $r2;
+    }
+
+    public void setDockableTitle(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1, r2, r3, r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 = r0.getLongTitlePropertyName(r1);
+
+        r4 = org.gjt.sp.jedit.jEdit.getProperty(r3);
+
+        org.gjt.sp.jedit.jEdit.setProperty(r3, r2);
+
+        r0.firePropertyChange(r3, r4, r2);
+
+        r0.dockableTitleChanged(r1, r2);
+
+        return;
+    }
+
+    public static java.lang.String[] getRegisteredDockableWindows()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory $r0;
+        java.lang.String[] $r1;
+
+        $r0 = org.gjt.sp.jedit.gui.DockableWindowFactory.getInstance();
+
+        $r1 = $r0.getRegisteredDockableWindows();
+
+        return $r1;
+    }
+
+    public static java.lang.String getDockableWindowPluginName(java.lang.String)
+    {
+        java.lang.String r0, r1, $r7, $r8;
+        org.gjt.sp.jedit.gui.DockableWindowFactory $r2;
+        java.lang.StringBuilder $r3, $r4, $r5, $r6;
+
+        r0 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.gui.DockableWindowFactory.getInstance();
+
+        r1 = $r2.getDockableWindowPluginClass(r0);
+
+        if r1 != null goto label1;
+
+        return null;
+
+     label1:
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("plugin.");
+
+        $r5 = $r4.append(r1);
+
+        $r6 = $r5.append(".name");
+
+        $r7 = $r6.toString();
+
+        $r8 = org.gjt.sp.jedit.jEdit.getProperty($r7);
+
+        return $r8;
+    }
+
+    public void setDockingLayout(org.gjt.sp.jedit.gui.DockableWindowManager$DockingLayout)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        org.gjt.sp.jedit.gui.DockableWindowManager$DockingLayout r1;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.applyDockingLayout(r1);
+
+        $z0 = r0.alternateLayout;
+
+        r0.applyAlternateLayout($z0);
+
+        return;
+    }
+
+    private void addPluginDockable(org.gjt.sp.jedit.PluginJAR, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        org.gjt.sp.jedit.PluginJAR r1;
+        java.lang.String r2;
+        java.util.Map $r3, $r6;
+        java.lang.Object $r4;
+        java.util.HashSet $r5;
+        java.util.Set r8, r8_1, r8_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r0.plugins;
+
+        $r4 = $r3.get(r1);
+
+        r8 = (java.util.Set) $r4;
+
+(0)     if r8 != null goto label1;
+
+        $r5 = new java.util.HashSet;
+
+        specialinvoke $r5.<init>();
+
+        r8_1 = $r5;
+
+        $r6 = r0.plugins;
+
+(1)     $r6.put(r1, r8_1);
+
+     label1:
+        r8_2 = Phi(r8 #0, r8_1 #1);
+
+        r8_2.add(r2);
+
+        return;
+    }
+
+    public void handleDockableWindowUpdate(org.gjt.sp.jedit.msg.DockableWindowUpdate)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        org.gjt.sp.jedit.msg.DockableWindowUpdate r1;
+        java.lang.Object $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getWhat();
+
+        $r3 = org.gjt.sp.jedit.msg.DockableWindowUpdate.PROPERTIES_CHANGED;
+
+        if $r2 != $r3 goto label1;
+
+        r0.propertiesChanged();
+
+     label1:
+        return;
+    }
+
+    public void handlePropertiesChanged(org.gjt.sp.jedit.msg.PropertiesChanged)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        org.gjt.sp.jedit.msg.PropertiesChanged r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.propertiesChanged();
+
+        return;
+    }
+
+    public void handlePluginUpdate(org.gjt.sp.jedit.msg.PluginUpdate)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        org.gjt.sp.jedit.msg.PluginUpdate r1;
+        java.lang.Object $r2, $r3, $r4, $r5, $r8, $r9, $r12, $r13, $r15;
+        boolean $z0, $z1, $z2;
+        java.util.Map $r6, $r10, $r20;
+        org.gjt.sp.jedit.PluginJAR $r7, $r16, $r17, $r23;
+        org.gjt.sp.jedit.gui.DockableWindowFactory $r14;
+        java.lang.String $r18, $r19, $r22, $r24, r27, r30;
+        java.util.Iterator r25, r29;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window r26;
+        java.util.Set r28;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getWhat();
+
+        $r3 = org.gjt.sp.jedit.msg.PluginUpdate.LOADED;
+
+        if $r2 != $r3 goto label4;
+
+        $r14 = r0.factory;
+
+        r25 = $r14.getDockableWindowIterator();
+
+     label1:
+        $z2 = r25.hasNext();
+
+        if $z2 == 0 goto label3;
+
+        $r15 = r25.next();
+
+        r26 = (org.gjt.sp.jedit.gui.DockableWindowFactory$Window) $r15;
+
+        $r16 = r26.plugin;
+
+        $r17 = r1.getPluginJAR();
+
+        if $r16 != $r17 goto label2;
+
+        $r18 = r26.name;
+
+        r27 = r0.getDockablePosition($r18);
+
+        $r20 = r0.positions;
+
+        $r19 = r26.name;
+
+        $r20.put($r19, r27);
+
+        $r23 = r26.plugin;
+
+        $r22 = r26.name;
+
+        specialinvoke r0.addPluginDockable($r23, $r22);
+
+        $r24 = r26.name;
+
+        r0.dockableLoaded($r24, r27);
+
+     label2:
+        goto label1;
+
+     label3:
+        r0.propertiesChanged();
+
+        goto label8;
+
+     label4:
+        $z0 = r1.isExiting();
+
+        if $z0 == 0 goto label5;
+
+        goto label8;
+
+     label5:
+        $r4 = r1.getWhat();
+
+        $r5 = org.gjt.sp.jedit.msg.PluginUpdate.DEACTIVATED;
+
+        if $r4 == $r5 goto label6;
+
+        $r12 = r1.getWhat();
+
+        $r13 = org.gjt.sp.jedit.msg.PluginUpdate.UNLOADED;
+
+        if $r12 != $r13 goto label8;
+
+     label6:
+        $r6 = r0.plugins;
+
+        $r7 = r1.getPluginJAR();
+
+        $r8 = $r6.remove($r7);
+
+        r28 = (java.util.Set) $r8;
+
+        if r28 == null goto label8;
+
+        r29 = r28.iterator();
+
+     label7:
+        $z1 = r29.hasNext();
+
+        if $z1 == 0 goto label8;
+
+        $r9 = r29.next();
+
+        r30 = (java.lang.String) $r9;
+
+        r0.disposeDockableWindow(r30);
+
+        $r10 = r0.windows;
+
+        $r10.remove(r30);
+
+        goto label7;
+
+     label8:
+        return;
+    }
+
+    public java.lang.String longTitle(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1, r2, $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.getLongTitlePropertyName(r1);
+
+        r2 = org.gjt.sp.jedit.jEdit.getProperty($r3);
+
+        if r2 != null goto label1;
+
+        $r4 = r0.shortTitle(r1);
+
+        return $r4;
+
+     label1:
+        return r2;
+    }
+
+    public java.lang.String shortTitle(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1, r2, $r6, $r10;
+        java.lang.StringBuilder $r3, $r4, $r5, $r7, $r8, $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append(r1);
+
+        $r5 = $r4.append(".title");
+
+        $r6 = $r5.toString();
+
+        r2 = org.gjt.sp.jedit.jEdit.getProperty($r6);
+
+        if r2 != null goto label1;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("NO TITLE PROPERTY: ");
+
+        $r9 = $r8.append(r1);
+
+        $r10 = $r9.toString();
+
+        return $r10;
+
+     label1:
+        return r2;
+    }
+
+    protected void applyAlternateLayout(boolean)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        boolean z0;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        return;
+    }
+
+    protected void dockableLoaded(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1, r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        return;
+    }
+
+    protected void dockingPositionChanged(java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1, r2, r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        return;
+    }
+
+    protected boolean getAlternateLayoutProp()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.alternateLayout;
+
+        return $z0;
+    }
+
+    protected void propertiesChanged()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        boolean z0, $z1, $z2, $z3;
+        java.lang.String[] r1, r2;
+        int i0, i1;
+        java.lang.String r3, r4, r5;
+        org.gjt.sp.jedit.View $r6;
+        org.gjt.sp.jedit.gui.DockableWindowFactory $r7;
+        java.util.Map $r8, $r10;
+        java.lang.Object $r9;
+
+        r0 := @this;
+
+        $r6 = r0.view;
+
+        $z1 = $r6.isPlainView();
+
+        if $z1 == 0 goto label1;
+
+        return;
+
+     label1:
+        z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.docking.alternateLayout");
+
+        $z2 = r0.alternateLayout;
+
+        if z0 == $z2 goto label2;
+
+        r0.alternateLayout = z0;
+
+        r0.applyAlternateLayout(z0);
+
+     label2:
+        $r7 = r0.factory;
+
+        r1 = $r7.getRegisteredDockableWindows();
+
+        r2 = r1;
+
+        i0 = lengthof r2;
+
+(0)     i1 = 0;
+
+     label3:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label6;
+
+        r3 = r2[i1];
+
+        $r8 = r0.positions;
+
+        $r9 = $r8.get(r3);
+
+        r4 = (java.lang.String) $r9;
+
+        r5 = r0.getDockablePosition(r3);
+
+        if r4 == null goto label4;
+
+        $z3 = r5.equals(r4);
+
+        if $z3 != 0 goto label5;
+
+     label4:
+        $r10 = r0.positions;
+
+        $r10.put(r3, r5);
+
+        r0.dockingPositionChanged(r3, r4, r5);
+
+     label5:
+        i1 = i1 + 1;
+
+(1)     goto label3;
+
+     label6:
+        return;
+    }
+
+    protected javax.swing.JComponent createDockable(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1, r3, $r12;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window r2;
+        javax.swing.JComponent r4;
+        org.gjt.sp.jedit.gui.DockableWindowFactory $r5;
+        org.gjt.sp.jedit.View $r6;
+        java.util.Map $r7;
+        java.lang.StringBuilder $r9, $r10, $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r5 = r0.factory;
+
+        r2 = $r5.getDockableWindowFactory(r1);
+
+        if r2 != null goto label1;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("Unknown dockable window: ");
+
+        $r11 = $r10.append(r1);
+
+        $r12 = $r11.toString();
+
+        org.gjt.sp.util.Log.log(9, r0, $r12);
+
+        return null;
+
+     label1:
+        r3 = r0.getDockablePosition(r1);
+
+        $r6 = r0.view;
+
+        r4 = r2.createDockableWindow($r6, r3);
+
+        if r4 == null goto label2;
+
+        $r7 = r0.windows;
+
+        $r7.put(r1, r4);
+
+     label2:
+        return r4;
+    }
+
+    protected java.lang.String getDockablePosition(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1, $r5, $r6;
+        java.lang.StringBuilder $r2, $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append(r1);
+
+        $r4 = $r3.append(".dock-position");
+
+        $r5 = $r4.toString();
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty($r5, "floating");
+
+        return $r6;
+    }
+
+    protected void focusDockable(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1;
+        javax.swing.JComponent r2;
+        boolean $z0;
+        org.gjt.sp.jedit.gui.DefaultFocusComponent $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r0.getDockable(r1);
+
+        if r2 != null goto label1;
+
+        return;
+
+     label1:
+        $z0 = r2 instanceof org.gjt.sp.jedit.gui.DefaultFocusComponent;
+
+        if $z0 == 0 goto label2;
+
+        $r3 = (org.gjt.sp.jedit.gui.DefaultFocusComponent) r2;
+
+        $r3.focusOnDefaultComponent();
+
+        goto label3;
+
+     label2:
+        r2.requestFocus();
+
+     label3:
+        return;
+    }
+
+    protected java.lang.String getLongTitlePropertyName(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManager r0;
+        java.lang.String r1, $r5;
+        java.lang.StringBuilder $r2, $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append(r1);
+
+        $r4 = $r3.append(".longtitle");
+
+        $r5 = $r4.toString();
+
+        return $r5;
+    }
+}

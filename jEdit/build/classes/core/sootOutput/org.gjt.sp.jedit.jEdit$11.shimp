@@ -1,0 +1,79 @@
+class org.gjt.sp.jedit.jEdit$11 extends java.lang.Object
+{
+    static final int[] $SwitchMap$org$gjt$sp$jedit$bufferset$BufferSet$Scope;
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.bufferset.BufferSet$Scope[] $r0;
+        int $i0, $i1, $i2, $i3;
+        int[] $r1, $r3, $r5, $r7;
+        org.gjt.sp.jedit.bufferset.BufferSet$Scope $r2, $r4, $r6;
+        java.lang.NoSuchFieldError $r8, $r9, $r10, r11, r12, r13;
+
+        $r0 = org.gjt.sp.jedit.bufferset.BufferSet$Scope.values();
+
+        $i0 = lengthof $r0;
+
+        $r1 = newarray (int)[$i0];
+
+        org.gjt.sp.jedit.jEdit$11.$SwitchMap$org$gjt$sp$jedit$bufferset$BufferSet$Scope = $r1;
+
+     label01:
+        $r3 = org.gjt.sp.jedit.jEdit$11.$SwitchMap$org$gjt$sp$jedit$bufferset$BufferSet$Scope;
+
+        $r2 = org.gjt.sp.jedit.bufferset.BufferSet$Scope.global;
+
+        $i1 = $r2.ordinal();
+
+        $r3[$i1] = 1;
+
+     label02:
+        goto label04;
+
+     label03:
+        $r8 := @caughtexception;
+
+        r11 = $r8;
+
+     label04:
+        $r5 = org.gjt.sp.jedit.jEdit$11.$SwitchMap$org$gjt$sp$jedit$bufferset$BufferSet$Scope;
+
+        $r4 = org.gjt.sp.jedit.bufferset.BufferSet$Scope.view;
+
+        $i2 = $r4.ordinal();
+
+        $r5[$i2] = 2;
+
+     label05:
+        goto label07;
+
+     label06:
+        $r10 := @caughtexception;
+
+        r12 = $r10;
+
+     label07:
+        $r7 = org.gjt.sp.jedit.jEdit$11.$SwitchMap$org$gjt$sp$jedit$bufferset$BufferSet$Scope;
+
+        $r6 = org.gjt.sp.jedit.bufferset.BufferSet$Scope.editpane;
+
+        $i3 = $r6.ordinal();
+
+        $r7[$i3] = 3;
+
+     label08:
+        goto label10;
+
+     label09:
+        $r9 := @caughtexception;
+
+        r13 = $r9;
+
+     label10:
+        return;
+
+        catch java.lang.NoSuchFieldError from label01 to label02 with label03;
+        catch java.lang.NoSuchFieldError from label04 to label05 with label06;
+        catch java.lang.NoSuchFieldError from label07 to label08 with label09;
+    }
+}

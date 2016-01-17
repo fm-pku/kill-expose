@@ -1,0 +1,37 @@
+class org.gjt.sp.jedit.browser.VFSBrowser$MenuButton$Action extends javax.swing.AbstractAction
+{
+    final org.gjt.sp.jedit.browser.VFSBrowser$MenuButton this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSBrowser$MenuButton)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$MenuButton$Action r0;
+        org.gjt.sp.jedit.browser.VFSBrowser$MenuButton r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$MenuButton$Action r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.browser.VFSBrowser$MenuButton $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r2.doPopup();
+
+        return;
+    }
+}

@@ -1,0 +1,2832 @@
+public class org.gjt.sp.jedit.bsh.ClassGeneratorUtil extends java.lang.Object implements org.gjt.sp.jedit.bsh.org.objectweb.asm.Constants
+{
+    static final java.lang.String BSHSTATIC;
+    static final java.lang.String BSHTHIS;
+    static final java.lang.String BSHSUPER;
+    static final java.lang.String BSHINIT;
+    static final java.lang.String BSHCONSTRUCTORS;
+    static final int DEFAULTCONSTRUCTOR;
+    static final java.lang.String OBJECT;
+    java.lang.String className;
+    java.lang.String fqClassName;
+    java.lang.Class superClass;
+    java.lang.String superClassName;
+    java.lang.Class[] interfaces;
+    org.gjt.sp.jedit.bsh.Variable[] vars;
+    java.lang.reflect.Constructor[] superConstructors;
+    org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[] constructors;
+    org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[] methods;
+    org.gjt.sp.jedit.bsh.NameSpace classStaticNameSpace;
+    org.gjt.sp.jedit.bsh.Modifiers classModifiers;
+    boolean isInterface;
+
+    public void <init>(org.gjt.sp.jedit.bsh.Modifiers, java.lang.String, java.lang.String, java.lang.Class, java.lang.Class[], org.gjt.sp.jedit.bsh.Variable[], org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[], org.gjt.sp.jedit.bsh.NameSpace, boolean)
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil r0;
+        org.gjt.sp.jedit.bsh.Modifiers r1;
+        java.lang.String r2, r3, r9, $r10, $r24, $r28, $r32;
+        org.gjt.sp.jedit.bsh.Variable[] r4;
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[] r5, $r14, $r16, $r17, $r18, $r20, $r21, $r22;
+        org.gjt.sp.jedit.bsh.NameSpace r6;
+        boolean z0, $z1;
+        java.util.ArrayList r7, r8, $r12, $r13;
+        java.lang.reflect.Constructor[] $r11;
+        int $i0, i1;
+        java.lang.Object[] $r15, $r19;
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod $r23, $r25, $r26;
+        java.lang.StringBuilder $r27, $r29, $r30, $r31;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r33, r37;
+        org.gjt.sp.jedit.bsh.InterpreterError $r34;
+        java.lang.Class r35, r35_1, r35_2;
+        java.lang.Class[] r36, r36_1, r36_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r35 := @parameter3;
+
+        r36 := @parameter4;
+
+        r4 := @parameter5;
+
+        r5 := @parameter6;
+
+        r6 := @parameter7;
+
+        z0 := @parameter8;
+
+        specialinvoke r0.<init>();
+
+        r0.classModifiers = r1;
+
+        r0.className = r2;
+
+        if r3 == null goto label01;
+
+        $r27 = new java.lang.StringBuilder;
+
+        specialinvoke $r27.<init>();
+
+        $r28 = r3.replace(46, 47);
+
+        $r29 = $r27.append($r28);
+
+        $r30 = $r29.append("/");
+
+        $r31 = $r30.append(r2);
+
+        $r32 = $r31.toString();
+
+        r0.fqClassName = $r32;
+
+        goto label02;
+
+     label01:
+        r0.fqClassName = r2;
+
+     label02:
+(0)     if r35 != null goto label03;
+
+(1)     r35_1 = class "java/lang/Object";
+
+     label03:
+        r35_2 = Phi(r35 #0, r35_1 #1);
+
+        r0.superClass = r35_2;
+
+        $r10 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getInternalName(r35_2);
+
+        r0.superClassName = $r10;
+
+(2)     if r36 != null goto label04;
+
+(3)     r36_1 = newarray (java.lang.Class)[0];
+
+     label04:
+        r36_2 = Phi(r36 #2, r36_1 #3);
+
+        r0.interfaces = r36_2;
+
+        r0.vars = r4;
+
+        r0.classStaticNameSpace = r6;
+
+        $r11 = r35_2.getDeclaredConstructors();
+
+        r0.superConstructors = $r11;
+
+        $r12 = new java.util.ArrayList;
+
+        specialinvoke $r12.<init>();
+
+        r7 = $r12;
+
+        $r13 = new java.util.ArrayList;
+
+        specialinvoke $r13.<init>();
+
+        r8 = $r13;
+
+        r9 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getBaseName(r2);
+
+(4)     i1 = 0;
+
+     label05:
+        r35 = Phi(r35_2 #4, r35 #5);
+
+        i1 = Phi(i1 #4, i1 #5);
+
+        r36 = Phi(r36_2 #4, r36 #5);
+
+        $i0 = lengthof r5;
+
+        if i1 >= $i0 goto label08;
+
+        $r23 = r5[i1];
+
+        $r24 = $r23.getName();
+
+        $z1 = $r24.equals(r9);
+
+        if $z1 == 0 goto label06;
+
+        $r26 = r5[i1];
+
+        r7.add($r26);
+
+        goto label07;
+
+     label06:
+        $r25 = r5[i1];
+
+        r8.add($r25);
+
+     label07:
+        i1 = i1 + 1;
+
+(5)     goto label05;
+
+     label08:
+        $r14 = newarray (org.gjt.sp.jedit.bsh.DelayedEvalBshMethod)[0];
+
+        $r15 = r7.toArray($r14);
+
+        $r16 = (org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[]) $r15;
+
+        $r17 = (org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[]) $r16;
+
+        r0.constructors = $r17;
+
+        $r18 = newarray (org.gjt.sp.jedit.bsh.DelayedEvalBshMethod)[0];
+
+        $r19 = r8.toArray($r18);
+
+        $r20 = (org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[]) $r19;
+
+        $r21 = (org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[]) $r20;
+
+        r0.methods = $r21;
+
+     label09:
+        $r22 = r0.constructors;
+
+        r6.setLocalVariable("_bshConstructors", $r22, 0);
+
+     label10:
+        goto label12;
+
+     label11:
+        $r33 := @caughtexception;
+
+        r37 = $r33;
+
+        $r34 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        specialinvoke $r34.<init>("can\'t set cons var");
+
+        throw $r34;
+
+     label12:
+        r0.isInterface = z0;
+
+        return;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label09 to label10 with label11;
+    }
+
+    public byte[] generateClass()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil r0;
+        java.lang.String[] r1, $r27, $r34, $r41, $r42, $r50;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ClassWriter r2, $r6;
+        boolean z0, z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, z10, $z11;
+        org.gjt.sp.jedit.bsh.Modifiers $r3, $r19, $r47, $r57;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, i7, i8, i9, i10, i11, i12, i13, i14, i7_1, i7_2;
+        java.lang.Class[] $r4, $r5, $r71;
+        java.lang.String $r7, $r8, $r22, $r23, $r24, $r31, $r37, $r38, $r60, $r63, $r65, $r68, $r70, $r73, r74, r75, r76;
+        org.gjt.sp.jedit.bsh.Variable[] $r9, $r51, $r53, $r55, $r58;
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[] $r10, $r11, $r13, $r15, $r17, $r20, $r25, $r28, $r32, $r35, $r39, $r43, $r45, $r48;
+        byte[] $r12;
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod $r14, $r16, $r18, $r21, $r26, $r29, $r33, $r36, $r40, $r44, $r46, $r49;
+        java.lang.Class $r30, $r72;
+        org.gjt.sp.jedit.bsh.Variable $r52, $r54, $r56, $r59;
+        java.lang.StringBuilder $r61, $r62, $r64, $r66, $r67, $r69;
+
+        r0 := @this;
+
+        $r3 = r0.classModifiers;
+
+        $i0 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getASMModifiers($r3);
+
+        i7 = $i0 | 1;
+
+        $z2 = r0.isInterface;
+
+(0)     if $z2 == 0 goto label01;
+
+(1)     i7_1 = i7 | 512;
+
+     label01:
+        i7_2 = Phi(i7 #0, i7_1 #1);
+
+        $r4 = r0.interfaces;
+
+        $i1 = lengthof $r4;
+
+        r1 = newarray (java.lang.String)[$i1];
+
+(2)     i8 = 0;
+
+     label02:
+        i8 = Phi(i8 #2, i8 #3);
+
+        i7 = Phi(i7_2 #2, i7 #3);
+
+        $r5 = r0.interfaces;
+
+        $i2 = lengthof $r5;
+
+        if i8 >= $i2 goto label03;
+
+        $r71 = r0.interfaces;
+
+        $r72 = $r71[i8];
+
+        $r73 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getInternalName($r72);
+
+        r1[i8] = $r73;
+
+        i8 = i8 + 1;
+
+(3)     goto label02;
+
+     label03:
+        r74 = "BeanShell Generated via ASM (www.objectweb.org)";
+
+        $r6 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.ClassWriter;
+
+        specialinvoke $r6.<init>(0);
+
+        r2 = $r6;
+
+        $r8 = r0.fqClassName;
+
+        $r7 = r0.superClassName;
+
+        r2.visit(i7, $r8, $r7, r1, r74);
+
+        $z3 = r0.isInterface;
+
+        if $z3 != 0 goto label04;
+
+        $r61 = new java.lang.StringBuilder;
+
+        specialinvoke $r61.<init>();
+
+        $r62 = $r61.append("_bshThis");
+
+        $r63 = r0.className;
+
+        $r64 = $r62.append($r63);
+
+        $r65 = $r64.toString();
+
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil.generateField($r65, "Lorg/gjt/sp/jedit/bsh/This;", 1, r2);
+
+        $r66 = new java.lang.StringBuilder;
+
+        specialinvoke $r66.<init>();
+
+        $r67 = $r66.append("_bshStatic");
+
+        $r68 = r0.className;
+
+        $r69 = $r67.append($r68);
+
+        $r70 = $r69.toString();
+
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil.generateField($r70, "Lorg/gjt/sp/jedit/bsh/This;", 9, r2);
+
+     label04:
+(4)     i9 = 0;
+
+     label05:
+        i8 = Phi(i8 #4, i8 #10);
+
+        i9 = Phi(i9 #4, i9 #10);
+
+        i10 = Phi(i10 #4, i10 #10);
+
+        i7 = Phi(i7 #4, i7 #10);
+
+        $r9 = r0.vars;
+
+        $i3 = lengthof $r9;
+
+        if i9 >= $i3 goto label10;
+
+        $r51 = r0.vars;
+
+        $r52 = $r51[i9];
+
+        r75 = $r52.getTypeDescriptor();
+
+        $r53 = r0.vars;
+
+        $r54 = $r53[i9];
+
+        $z8 = $r54.hasModifier("private");
+
+(5)     if $z8 != 0 goto label09;
+
+        if r75 != null goto label06;
+
+(6)     goto label09;
+
+     label06:
+        $z9 = r0.isInterface;
+
+        if $z9 == 0 goto label07;
+
+        i10 = 25;
+
+(7)     goto label08;
+
+     label07:
+        $r55 = r0.vars;
+
+        $r56 = $r55[i9];
+
+        $r57 = $r56.getModifiers();
+
+(8)     i10 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getASMModifiers($r57);
+
+     label08:
+        i10 = Phi(i10 #7, i10 #8);
+
+        $r58 = r0.vars;
+
+        $r59 = $r58[i9];
+
+        $r60 = $r59.getName();
+
+(9)     org.gjt.sp.jedit.bsh.ClassGeneratorUtil.generateField($r60, r75, i10, r2);
+
+     label09:
+        i10 = Phi(i10 #5, i10 #6, i10 #9);
+
+        i9 = i9 + 1;
+
+(10)    goto label05;
+
+     label10:
+        z10 = 0;
+
+(11)    i11 = 0;
+
+     label11:
+        z10 = Phi(z10 #11, z10 #14);
+
+        i8 = Phi(i8 #11, i8 #14);
+
+        i9 = Phi(i9 #11, i9 #14);
+
+        i11 = Phi(i11 #11, i11 #14);
+
+        i10 = Phi(i10 #11, i10 #14);
+
+        i7 = Phi(i7 #11, i7 #14);
+
+        $r10 = r0.constructors;
+
+        $i4 = lengthof $r10;
+
+        if i11 >= $i4 goto label14;
+
+        $r43 = r0.constructors;
+
+        $r44 = $r43[i11];
+
+        $z7 = $r44.hasModifier("private");
+
+        if $z7 == 0 goto label12;
+
+(12)    goto label13;
+
+     label12:
+        $r45 = r0.constructors;
+
+        $r46 = $r45[i11];
+
+        $r47 = $r46.getModifiers();
+
+        i12 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getASMModifiers($r47);
+
+        $r48 = r0.constructors;
+
+        $r49 = $r48[i11];
+
+        $r50 = $r49.getParamTypeDescriptors();
+
+        r0.generateConstructor(i11, $r50, i12, r2);
+
+(13)    z10 = 1;
+
+     label13:
+        z10 = Phi(z10 #12, z10 #13);
+
+        i11 = i11 + 1;
+
+(14)    goto label11;
+
+     label14:
+        $z4 = r0.isInterface;
+
+        if $z4 != 0 goto label15;
+
+        if z10 != 0 goto label15;
+
+        $r42 = newarray (java.lang.String)[0];
+
+        r0.generateConstructor(-1, $r42, 1, r2);
+
+     label15:
+(15)    i13 = 0;
+
+     label16:
+        $z11 = Phi($z11 #15, $z11 #24);
+
+        i13 = Phi(i13 #15, i13 #24);
+
+        z10 = Phi(z10 #15, z10 #24);
+
+        i8 = Phi(i8 #15, i8 #24);
+
+        i14 = Phi(i14 #15, i14 #24);
+
+        i9 = Phi(i9 #15, i9 #24);
+
+        i11 = Phi(i11 #15, i11 #24);
+
+        i10 = Phi(i10 #15, i10 #24);
+
+        i7 = Phi(i7 #15, i7 #24);
+
+        $r11 = r0.methods;
+
+        $i5 = lengthof $r11;
+
+        if i13 >= $i5 goto label22;
+
+        $r13 = r0.methods;
+
+        $r14 = $r13[i13];
+
+        r76 = $r14.getReturnTypeDescriptor();
+
+        $r15 = r0.methods;
+
+        $r16 = $r15[i13];
+
+        $z5 = $r16.hasModifier("private");
+
+        if $z5 == 0 goto label17;
+
+(16)    goto label21;
+
+     label17:
+        $r17 = r0.methods;
+
+        $r18 = $r17[i13];
+
+        $r19 = $r18.getModifiers();
+
+        i14 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getASMModifiers($r19);
+
+        $z6 = r0.isInterface;
+
+(17)    if $z6 == 0 goto label18;
+
+(18)    i14 = i14 | 1025;
+
+     label18:
+        i14 = Phi(i14 #17, i14 #18);
+
+        $r22 = r0.className;
+
+        $r23 = r0.fqClassName;
+
+        $r20 = r0.methods;
+
+        $r21 = $r20[i13];
+
+        $r24 = $r21.getName();
+
+        $r25 = r0.methods;
+
+        $r26 = $r25[i13];
+
+        $r27 = $r26.getParamTypeDescriptors();
+
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil.generateMethod($r22, $r23, $r24, r76, $r27, i14, r2);
+
+        $i6 = i14 & 8;
+
+        if $i6 <= 0 goto label19;
+
+        $z11 = 1;
+
+(19)    goto label20;
+
+     label19:
+(20)    $z11 = 0;
+
+     label20:
+        $z11 = Phi($z11 #19, $z11 #20);
+
+        z0 = $z11;
+
+        $r30 = r0.superClass;
+
+        $r28 = r0.methods;
+
+        $r29 = $r28[i13];
+
+        $r31 = $r29.getName();
+
+        $r32 = r0.methods;
+
+        $r33 = $r32[i13];
+
+        $r34 = $r33.getParamTypeDescriptors();
+
+        z1 = r0.classContainsMethod($r30, $r31, $r34);
+
+(21)    if z0 != 0 goto label21;
+
+(22)    if z1 == 0 goto label21;
+
+        $r37 = r0.superClassName;
+
+        $r35 = r0.methods;
+
+        $r36 = $r35[i13];
+
+        $r38 = $r36.getName();
+
+        $r39 = r0.methods;
+
+        $r40 = $r39[i13];
+
+        $r41 = $r40.getParamTypeDescriptors();
+
+(23)    org.gjt.sp.jedit.bsh.ClassGeneratorUtil.generateSuperDelegateMethod($r37, $r38, r76, $r41, i14, r2);
+
+     label21:
+        $z11 = Phi($z11 #16, $z11 #21, $z11 #22, $z11 #23);
+
+        i14 = Phi(i14 #16, i14 #21, i14 #22, i14 #23);
+
+        i13 = i13 + 1;
+
+(24)    goto label16;
+
+     label22:
+        $r12 = r2.toByteArray();
+
+        return $r12;
+    }
+
+    static int getASMModifiers(org.gjt.sp.jedit.bsh.Modifiers)
+    {
+        org.gjt.sp.jedit.bsh.Modifiers r0;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        int i0, i0_1, i0_2, i0_3, i0_4, i0_5, i0_6, i0_7, i0_8, i0_9, i0_10;
+
+        r0 := @parameter0;
+
+        i0 = 0;
+
+        if r0 != null goto label1;
+
+        return i0;
+
+     label1:
+        $z0 = r0.hasModifier("public");
+
+(0)     if $z0 == 0 goto label2;
+
+(1)     i0_1 = i0 + 1;
+
+     label2:
+        i0_2 = Phi(i0 #0, i0_1 #1);
+
+        $z1 = r0.hasModifier("protected");
+
+(2)     if $z1 == 0 goto label3;
+
+(3)     i0_3 = i0_2 + 4;
+
+     label3:
+        i0_4 = Phi(i0_2 #2, i0_3 #3);
+
+        $z2 = r0.hasModifier("static");
+
+(4)     if $z2 == 0 goto label4;
+
+(5)     i0_5 = i0_4 + 8;
+
+     label4:
+        i0_6 = Phi(i0_4 #4, i0_5 #5);
+
+        $z3 = r0.hasModifier("synchronized");
+
+(6)     if $z3 == 0 goto label5;
+
+(7)     i0_7 = i0_6 + 32;
+
+     label5:
+        i0_8 = Phi(i0_6 #6, i0_7 #7);
+
+        $z4 = r0.hasModifier("abstract");
+
+(8)     if $z4 == 0 goto label6;
+
+(9)     i0_9 = i0_8 + 1024;
+
+     label6:
+        i0_10 = Phi(i0_8 #8, i0_9 #9);
+
+        return i0_10;
+    }
+
+    static void generateField(java.lang.String, java.lang.String, int, org.gjt.sp.jedit.bsh.org.objectweb.asm.ClassWriter)
+    {
+        java.lang.String r0, r1;
+        int i0;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ClassWriter r2;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        i0 := @parameter2;
+
+        r2 := @parameter3;
+
+        r2.visitField(i0, r0, r1, null);
+
+        return;
+    }
+
+    static void generateMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String[], int, org.gjt.sp.jedit.bsh.org.objectweb.asm.ClassWriter)
+    {
+        java.lang.String r0, r1, r2, r5, $r10, $r20, $r24, r25, r25_1, r25_2;
+        java.lang.String[] r3;
+        int i0, $i1, $i2;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ClassWriter r4;
+        boolean z0, $z1, $z1_1, $z1_2;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.CodeVisitor r6;
+        java.lang.StringBuilder $r7, $r8, $r9, $r21, $r22, $r23;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type $r11, $r13, $r14, $r15, $r16, $r17, $r19;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Type[] $r12;
+        java.lang.Class $r18;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r25 := @parameter3;
+
+        r3 := @parameter4;
+
+        i0 := @parameter5;
+
+        r4 := @parameter6;
+
+        $i1 = i0 & 8;
+
+        if $i1 == 0 goto label1;
+
+        $z1 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z1_1 = 0;
+
+     label2:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        z0 = $z1_2;
+
+(2)     if r25 != null goto label3;
+
+(3)     r25_1 = "Ljava/lang/Object;";
+
+     label3:
+        r25_2 = Phi(r25 #2, r25_1 #3);
+
+        r5 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getMethodDescriptor(r25_2, r3);
+
+        r6 = r4.visitMethod(i0, r2, r5, null);
+
+        $i2 = i0 & 1024;
+
+        if $i2 == 0 goto label4;
+
+        return;
+
+     label4:
+        if z0 == 0 goto label5;
+
+        $r21 = new java.lang.StringBuilder;
+
+        specialinvoke $r21.<init>();
+
+        $r22 = $r21.append("_bshStatic");
+
+        $r23 = $r22.append(r0);
+
+        $r24 = $r23.toString();
+
+        r6.visitFieldInsn(178, r1, $r24, "Lorg/gjt/sp/jedit/bsh/This;");
+
+        goto label6;
+
+     label5:
+        r6.visitVarInsn(25, 0);
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("_bshThis");
+
+        $r9 = $r8.append(r0);
+
+        $r10 = $r9.toString();
+
+        r6.visitFieldInsn(180, r1, $r10, "Lorg/gjt/sp/jedit/bsh/This;");
+
+     label6:
+        r6.visitLdcInsn(r2);
+
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil.generateParameterReifierCode(r3, z0, r6);
+
+        r6.visitInsn(1);
+
+        r6.visitInsn(1);
+
+        r6.visitInsn(1);
+
+        r6.visitInsn(4);
+
+        $r11 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getType(class "java/lang/Object");
+
+        $r12 = newarray (org.gjt.sp.jedit.bsh.org.objectweb.asm.Type)[6];
+
+        $r13 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getType(class "java/lang/String");
+
+        $r12[0] = $r13;
+
+        $r14 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getType(class "[Ljava/lang/Object;");
+
+        $r12[1] = $r14;
+
+        $r15 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getType(class "org/gjt/sp/jedit/bsh/Interpreter");
+
+        $r12[2] = $r15;
+
+        $r16 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getType(class "org/gjt/sp/jedit/bsh/CallStack");
+
+        $r12[3] = $r16;
+
+        $r17 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getType(class "org/gjt/sp/jedit/bsh/SimpleNode");
+
+        $r12[4] = $r17;
+
+        $r18 = java.lang.Boolean.TYPE;
+
+        $r19 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getType($r18);
+
+        $r12[5] = $r19;
+
+        $r20 = org.gjt.sp.jedit.bsh.org.objectweb.asm.Type.getMethodDescriptor($r11, $r12);
+
+        r6.visitMethodInsn(182, "org/gjt/sp/jedit/bsh/This", "invokeMethod", $r20);
+
+        r6.visitMethodInsn(184, "org/gjt/sp/jedit/bsh/Primitive", "unwrap", "(Ljava/lang/Object;)Ljava/lang/Object;");
+
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil.generateReturnCode(r25_2, r6);
+
+        r6.visitMaxs(20, 20);
+
+        return;
+    }
+
+    void generateConstructor(int, java.lang.String[], int, org.gjt.sp.jedit.bsh.org.objectweb.asm.ClassWriter)
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil r0;
+        int i0, i1, i2, i3, $i4, $i5;
+        java.lang.String[] r1;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ClassWriter r2;
+        java.lang.String r3, $r5;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.CodeVisitor r4;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        i1 := @parameter2;
+
+        r2 := @parameter3;
+
+        $i4 = lengthof r1;
+
+        i2 = $i4 + 1;
+
+        $i5 = lengthof r1;
+
+        i3 = $i5 + 2;
+
+        r3 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getMethodDescriptor("V", r1);
+
+        r4 = r2.visitMethod(i1, "<init>", r3, null);
+
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil.generateParameterReifierCode(r1, 0, r4);
+
+        r4.visitVarInsn(58, i2);
+
+        r0.generateConstructorSwitch(i0, i2, i3, r4);
+
+        r4.visitVarInsn(25, 0);
+
+        $r5 = r0.className;
+
+        r4.visitLdcInsn($r5);
+
+        r4.visitVarInsn(25, i2);
+
+        r4.visitMethodInsn(184, "org/gjt/sp/jedit/bsh/ClassGeneratorUtil", "initInstance", "(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)V");
+
+        r4.visitInsn(177);
+
+        r4.visitMaxs(20, 20);
+
+        return;
+    }
+
+    void generateConstructorSwitch(int, int, int, org.gjt.sp.jedit.bsh.org.objectweb.asm.CodeVisitor)
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil r0;
+        int i0, i1, i2, i3, $i4, $i5, $i6, $i7, $i8, i9, i10, i11, i12;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.CodeVisitor r1;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Label r2, r3, $r5, $r6, $r29;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Label[] r4;
+        java.lang.reflect.Constructor[] $r7, $r17, $r24;
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[] $r8, $r18, $r20;
+        java.lang.Class $r9;
+        java.lang.String $r10, $r12, $r14, $r16, $r19, $r22, $r26;
+        java.lang.StringBuilder $r11, $r13, $r15;
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod $r21;
+        java.lang.String[] $r23, $r28;
+        java.lang.reflect.Constructor $r25;
+        java.lang.Class[] $r27;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        i2 := @parameter2;
+
+        r1 := @parameter3;
+
+        $r5 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.Label;
+
+        specialinvoke $r5.<init>();
+
+        r2 = $r5;
+
+        $r6 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.Label;
+
+        specialinvoke $r6.<init>();
+
+        r3 = $r6;
+
+        $r7 = r0.superConstructors;
+
+        $i5 = lengthof $r7;
+
+        $r8 = r0.constructors;
+
+        $i4 = lengthof $r8;
+
+        i3 = $i5 + $i4;
+
+        r4 = newarray (org.gjt.sp.jedit.bsh.org.objectweb.asm.Label)[i3];
+
+(0)     i9 = 0;
+
+     label1:
+        i9 = Phi(i9 #0, i9 #1);
+
+        if i9 >= i3 goto label2;
+
+        $r29 = new org.gjt.sp.jedit.bsh.org.objectweb.asm.Label;
+
+        specialinvoke $r29.<init>();
+
+        r4[i9] = $r29;
+
+        i9 = i9 + 1;
+
+(1)     goto label1;
+
+     label2:
+        $r9 = r0.superClass;
+
+        $r10 = $r9.getName();
+
+        r1.visitLdcInsn($r10);
+
+        $r12 = r0.fqClassName;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r13 = $r11.append("_bshStatic");
+
+        $r14 = r0.className;
+
+        $r15 = $r13.append($r14);
+
+        $r16 = $r15.toString();
+
+        r1.visitFieldInsn(178, $r12, $r16, "Lorg/gjt/sp/jedit/bsh/This;");
+
+        r1.visitVarInsn(25, i1);
+
+        r1.visitIntInsn(16, i0);
+
+        r1.visitMethodInsn(184, "org/gjt/sp/jedit/bsh/ClassGeneratorUtil", "getConstructorArgs", "(Ljava/lang/String;Lorg/gjt/sp/jedit/bsh/This;[Ljava/lang/Object;I)Lorg/gjt/sp/jedit/bsh/ClassGeneratorUtil$ConstructorArgs;");
+
+        r1.visitVarInsn(58, i2);
+
+        r1.visitVarInsn(25, i2);
+
+        r1.visitFieldInsn(180, "org/gjt/sp/jedit/bsh/ClassGeneratorUtil$ConstructorArgs", "selector", "I");
+
+        $i6 = i3 - 1;
+
+        r1.visitTableSwitchInsn(0, $i6, r2, r4);
+
+        i10 = 0;
+
+(2)     i11 = 0;
+
+     label3:
+        i11 = Phi(i11 #2, i11 #3);
+
+        i9 = Phi(i9 #2, i9 #3);
+
+        i10 = Phi(i10 #2, i10 #3);
+
+        $r17 = r0.superConstructors;
+
+        $i7 = lengthof $r17;
+
+        if i11 >= $i7 goto label4;
+
+        $r26 = r0.superClassName;
+
+        $r24 = r0.superConstructors;
+
+        $r25 = $r24[i11];
+
+        $r27 = $r25.getParameterTypes();
+
+        $r28 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getTypeDescriptors($r27);
+
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil.doSwitchBranch(i10, $r26, $r28, r3, r4, i2, r1);
+
+        i11 = i11 + 1;
+
+        i10 = i10 + 1;
+
+(3)     goto label3;
+
+     label4:
+(4)     i12 = 0;
+
+     label5:
+        i11 = Phi(i11 #4, i11 #5);
+
+        i12 = Phi(i12 #4, i12 #5);
+
+        i9 = Phi(i9 #4, i9 #5);
+
+        i10 = Phi(i10 #4, i10 #5);
+
+        $r18 = r0.constructors;
+
+        $i8 = lengthof $r18;
+
+        if i12 >= $i8 goto label6;
+
+        $r22 = r0.fqClassName;
+
+        $r20 = r0.constructors;
+
+        $r21 = $r20[i12];
+
+        $r23 = $r21.getParamTypeDescriptors();
+
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil.doSwitchBranch(i10, $r22, $r23, r3, r4, i2, r1);
+
+        i12 = i12 + 1;
+
+        i10 = i10 + 1;
+
+(5)     goto label5;
+
+     label6:
+        r1.visitLabel(r2);
+
+        r1.visitVarInsn(25, 0);
+
+        $r19 = r0.superClassName;
+
+        r1.visitMethodInsn(183, $r19, "<init>", "()V");
+
+        r1.visitLabel(r3);
+
+        return;
+    }
+
+    static void doSwitchBranch(int, java.lang.String, java.lang.String[], org.gjt.sp.jedit.bsh.org.objectweb.asm.Label, org.gjt.sp.jedit.bsh.org.objectweb.asm.Label[], int, org.gjt.sp.jedit.bsh.org.objectweb.asm.CodeVisitor)
+    {
+        int i0, i1, $i2, i3;
+        java.lang.String r0, r5, $r10, $r11, r12, r13, r14;
+        java.lang.String[] r1;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Label r2, $r6;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Label[] r3;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.CodeVisitor r4;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9;
+        java.lang.StringBuilder $r7, $r8, $r9;
+
+        i0 := @parameter0;
+
+        r0 := @parameter1;
+
+        r1 := @parameter2;
+
+        r2 := @parameter3;
+
+        r3 := @parameter4;
+
+        i1 := @parameter5;
+
+        r4 := @parameter6;
+
+        $r6 = r3[i0];
+
+        r4.visitLabel($r6);
+
+        r4.visitVarInsn(25, 0);
+
+(0)     i3 = 0;
+
+     label01:
+        r13 = Phi(r13 #0, r13 #12);
+
+        r12 = Phi(r12 #0, r12 #12);
+
+        i3 = Phi(i3 #0, i3 #12);
+
+        $i2 = lengthof r1;
+
+        if i3 >= $i2 goto label14;
+
+        r5 = r1[i3];
+
+        $z0 = r5.equals("Z");
+
+        if $z0 == 0 goto label02;
+
+        r12 = "getBoolean";
+
+(1)     goto label10;
+
+     label02:
+        $z1 = r5.equals("B");
+
+        if $z1 == 0 goto label03;
+
+        r12 = "getByte";
+
+(2)     goto label10;
+
+     label03:
+        $z2 = r5.equals("C");
+
+        if $z2 == 0 goto label04;
+
+        r12 = "getChar";
+
+(3)     goto label10;
+
+     label04:
+        $z3 = r5.equals("S");
+
+        if $z3 == 0 goto label05;
+
+        r12 = "getShort";
+
+(4)     goto label10;
+
+     label05:
+        $z4 = r5.equals("I");
+
+        if $z4 == 0 goto label06;
+
+        r12 = "getInt";
+
+(5)     goto label10;
+
+     label06:
+        $z5 = r5.equals("J");
+
+        if $z5 == 0 goto label07;
+
+        r12 = "getLong";
+
+(6)     goto label10;
+
+     label07:
+        $z6 = r5.equals("D");
+
+        if $z6 == 0 goto label08;
+
+        r12 = "getDouble";
+
+(7)     goto label10;
+
+     label08:
+        $z7 = r5.equals("F");
+
+        if $z7 == 0 goto label09;
+
+        r12 = "getFloat";
+
+(8)     goto label10;
+
+     label09:
+(9)     r12 = "getObject";
+
+     label10:
+        r12 = Phi(r12 #1, r12 #2, r12 #3, r12 #4, r12 #5, r12 #6, r12 #7, r12 #8, r12 #9);
+
+        r4.visitVarInsn(25, i1);
+
+        $z8 = r12.equals("getObject");
+
+        if $z8 == 0 goto label11;
+
+        r13 = "Ljava/lang/Object;";
+
+(10)    goto label12;
+
+     label11:
+(11)    r13 = r5;
+
+     label12:
+        r13 = Phi(r13 #10, r13 #11);
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("()");
+
+        $r9 = $r8.append(r13);
+
+        $r10 = $r9.toString();
+
+        r4.visitMethodInsn(182, "org/gjt/sp/jedit/bsh/ClassGeneratorUtil$ConstructorArgs", r12, $r10);
+
+        $z9 = r12.equals("getObject");
+
+        if $z9 == 0 goto label13;
+
+        $r11 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.descriptorToClassName(r5);
+
+        r4.visitTypeInsn(192, $r11);
+
+     label13:
+        i3 = i3 + 1;
+
+(12)    goto label01;
+
+     label14:
+        r14 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getMethodDescriptor("V", r1);
+
+        r4.visitMethodInsn(183, r0, "<init>", r14);
+
+        r4.visitJumpInsn(167, r2);
+
+        return;
+    }
+
+    static java.lang.String getMethodDescriptor(java.lang.String, java.lang.String[])
+    {
+        java.lang.String r0, $r7, $r9, $r10;
+        java.lang.String[] r1;
+        java.lang.StringBuilder r2, $r3, $r4, $r5, $r6;
+        int $i0, i1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>("(");
+
+        r2 = $r3;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $i0 = lengthof r1;
+
+        if i1 >= $i0 goto label2;
+
+        $r10 = r1[i1];
+
+        r2.append($r10);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append(")");
+
+        $r6 = $r5.append(r0);
+
+        $r7 = $r6.toString();
+
+        r2.append($r7);
+
+        $r9 = r2.toString();
+
+        return $r9;
+    }
+
+    static void generateSuperDelegateMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String[], int, org.gjt.sp.jedit.bsh.org.objectweb.asm.ClassWriter)
+    {
+        java.lang.String r0, r1, r4, $r9, $r10, $r11, $r12, r13, r13_1, r13_2;
+        java.lang.String[] r2;
+        int i0, $i1, i2, i3;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.ClassWriter r3;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.CodeVisitor r5;
+        java.lang.StringBuilder $r6, $r7, $r8;
+        boolean $z0, $z1, $z2;
+        byte $b4;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r13 := @parameter2;
+
+        r2 := @parameter3;
+
+        i0 := @parameter4;
+
+        r3 := @parameter5;
+
+(0)     if r13 != null goto label1;
+
+(1)     r13_1 = "Ljava/lang/Object;";
+
+     label1:
+        r13_2 = Phi(r13 #0, r13_1 #1);
+
+        r4 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getMethodDescriptor(r13_2, r2);
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("_bshSuper");
+
+        $r8 = $r7.append(r1);
+
+        $r9 = $r8.toString();
+
+        r5 = r3.visitMethod(i0, $r9, r4, null);
+
+        r5.visitVarInsn(25, 0);
+
+        i2 = 1;
+
+(2)     i3 = 0;
+
+     label2:
+        r13 = Phi(r13_2 #2, r13 #5);
+
+        i2 = Phi(i2 #2, i2 #5);
+
+        $b4 = Phi($b4 #2, $b4 #5);
+
+        i3 = Phi(i3 #2, i3 #5);
+
+        $i1 = lengthof r2;
+
+        if i3 >= $i1 goto label8;
+
+        $r10 = r2[i3];
+
+        $z0 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.isPrimitive($r10);
+
+        if $z0 == 0 goto label3;
+
+        r5.visitVarInsn(21, i2);
+
+        goto label4;
+
+     label3:
+        r5.visitVarInsn(25, i2);
+
+     label4:
+        $r11 = r2[i3];
+
+        $z1 = $r11.equals("D");
+
+        if $z1 != 0 goto label5;
+
+        $r12 = r2[i3];
+
+        $z2 = $r12.equals("J");
+
+        if $z2 == 0 goto label6;
+
+     label5:
+        $b4 = 2;
+
+(3)     goto label7;
+
+     label6:
+(4)     $b4 = 1;
+
+     label7:
+        $b4 = Phi($b4 #3, $b4 #4);
+
+        i2 = i2 + $b4;
+
+        i3 = i3 + 1;
+
+(5)     goto label2;
+
+     label8:
+        r5.visitMethodInsn(183, r0, r1, r4);
+
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil.generatePlainReturnCode(r13, r5);
+
+        r5.visitMaxs(20, 20);
+
+        return;
+    }
+
+    boolean classContainsMethod(java.lang.Class, java.lang.String, java.lang.String[])
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil r0;
+        java.lang.String r1, $r6, $r9, $r10;
+        java.lang.String[] r2, r4;
+        java.lang.reflect.Method[] r3;
+        int $i0, $i1, i2, i3;
+        java.lang.reflect.Method $r5, $r7;
+        boolean $z0, $z1, z2;
+        java.lang.Class[] $r8;
+        java.lang.Class r11;
+
+        r0 := @this;
+
+        r11 := @parameter0;
+
+        r1 := @parameter1;
+
+(0)     r2 := @parameter2;
+
+     label1:
+        z2 = Phi(z2 #0, z2 #9);
+
+        i2 = Phi(i2 #0, i2 #9);
+
+        r11 = Phi(r11 #0, r11 #9);
+
+        i3 = Phi(i3 #0, i3 #9);
+
+        if r11 == null goto label8;
+
+        r3 = r11.getDeclaredMethods();
+
+(1)     i2 = 0;
+
+     label2:
+        z2 = Phi(z2 #1, z2 #8);
+
+        i2 = Phi(i2 #1, i2 #8);
+
+        r11 = Phi(r11 #1, r11 #8);
+
+        i3 = Phi(i3 #1, i3 #8);
+
+        $i0 = lengthof r3;
+
+        if i2 >= $i0 goto label7;
+
+        $r5 = r3[i2];
+
+        $r6 = $r5.getName();
+
+        $z0 = $r6.equals(r1);
+
+(2)     if $z0 == 0 goto label6;
+
+        $r7 = r3[i2];
+
+        $r8 = $r7.getParameterTypes();
+
+        r4 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getTypeDescriptors($r8);
+
+        z2 = 1;
+
+(3)     i3 = 0;
+
+     label3:
+        z2 = Phi(z2 #3, z2 #6);
+
+        i2 = Phi(i2 #3, i2 #6);
+
+        r11 = Phi(r11 #3, r11 #6);
+
+        i3 = Phi(i3 #3, i3 #6);
+
+        $i1 = lengthof r4;
+
+(4)     if i3 >= $i1 goto label5;
+
+        $r10 = r2[i3];
+
+        $r9 = r4[i3];
+
+        $z1 = $r10.equals($r9);
+
+        if $z1 != 0 goto label4;
+
+        z2 = 0;
+
+(5)     goto label5;
+
+     label4:
+        i3 = i3 + 1;
+
+(6)     goto label3;
+
+     label5:
+        z2 = Phi(z2 #4, z2 #5);
+
+(7)     if z2 == 0 goto label6;
+
+        return 1;
+
+     label6:
+        z2 = Phi(z2 #2, z2 #7);
+
+        i2 = Phi(i2 #2, i2 #7);
+
+        r11 = Phi(r11 #2, r11 #7);
+
+        i3 = Phi(i3 #2, i3 #7);
+
+        i2 = i2 + 1;
+
+(8)     goto label2;
+
+     label7:
+        r11 = r11.getSuperclass();
+
+(9)     goto label1;
+
+     label8:
+        return 0;
+    }
+
+    static void generatePlainReturnCode(java.lang.String, org.gjt.sp.jedit.bsh.org.objectweb.asm.CodeVisitor)
+    {
+        java.lang.String r0, $r2;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.CodeVisitor r1;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        short s0, s0_1, s0_2, s0_3, s0_4, s0_5;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $z0 = r0.equals("V");
+
+        if $z0 == 0 goto label1;
+
+        r1.visitInsn(177);
+
+(0)     goto label6;
+
+     label1:
+        $z1 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.isPrimitive(r0);
+
+        if $z1 == 0 goto label5;
+
+        s0 = 172;
+
+        $z2 = r0.equals("D");
+
+        if $z2 == 0 goto label2;
+
+        s0_1 = 175;
+
+(1)     goto label4;
+
+     label2:
+        $z3 = r0.equals("F");
+
+        if $z3 == 0 goto label3;
+
+        s0_2 = 174;
+
+(2)     goto label4;
+
+     label3:
+        $z4 = r0.equals("J");
+
+(3)     if $z4 == 0 goto label4;
+
+(4)     s0_3 = 173;
+
+     label4:
+        s0_4 = Phi(s0_1 #1, s0_2 #2, s0 #3, s0_3 #4);
+
+        r1.visitInsn(s0_4);
+
+(5)     goto label6;
+
+     label5:
+        $r2 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.descriptorToClassName(r0);
+
+        r1.visitTypeInsn(192, $r2);
+
+(6)     r1.visitInsn(176);
+
+     label6:
+        s0_5 = Phi(s0 #0, s0_4 #5, s0 #6);
+
+        return;
+    }
+
+    public static void generateParameterReifierCode(java.lang.String[], boolean, org.gjt.sp.jedit.bsh.org.objectweb.asm.CodeVisitor)
+    {
+        java.lang.String[] r0;
+        boolean z0, $z1, $z2, $z3, $z4, $z5, $z6;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.CodeVisitor r1;
+        java.lang.String r2, r3, r4, $r9;
+        int $i0, $i1, i3, i4;
+        java.lang.StringBuilder $r5, $r6, $r7, $r8;
+        byte $b2, b5, $b6, $b2_1, $b2_2;
+
+        r0 := @parameter0;
+
+        z0 := @parameter1;
+
+        r1 := @parameter2;
+
+        $i0 = lengthof r0;
+
+        r1.visitIntInsn(17, $i0);
+
+        r1.visitTypeInsn(189, "java/lang/Object");
+
+        if z0 == 0 goto label01;
+
+        $b2 = 0;
+
+(0)     goto label02;
+
+     label01:
+(1)     $b2_1 = 1;
+
+     label02:
+        $b2_2 = Phi($b2 #0, $b2_1 #1);
+
+        i3 = $b2_2;
+
+(2)     i4 = 0;
+
+     label03:
+        b5 = Phi(b5 #2, b5 #11);
+
+        i4 = Phi(i4 #2, i4 #11);
+
+        i3 = Phi(i3 #2, i3 #11);
+
+        $b2 = Phi($b2_2 #2, $b2 #11);
+
+        $b6 = Phi($b6 #2, $b6 #11);
+
+        $i1 = lengthof r0;
+
+        if i4 >= $i1 goto label13;
+
+        r2 = r0[i4];
+
+        r1.visitInsn(89);
+
+        r1.visitIntInsn(17, i4);
+
+        $z1 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.isPrimitive(r2);
+
+        if $z1 == 0 goto label08;
+
+        $z4 = r2.equals("F");
+
+        if $z4 == 0 goto label04;
+
+        b5 = 23;
+
+(3)     goto label07;
+
+     label04:
+        $z5 = r2.equals("D");
+
+        if $z5 == 0 goto label05;
+
+        b5 = 24;
+
+(4)     goto label07;
+
+     label05:
+        $z6 = r2.equals("J");
+
+        if $z6 == 0 goto label06;
+
+        b5 = 22;
+
+(5)     goto label07;
+
+     label06:
+(6)     b5 = 21;
+
+     label07:
+        b5 = Phi(b5 #3, b5 #4, b5 #5, b5 #6);
+
+        r3 = "org/gjt/sp/jedit/bsh/Primitive";
+
+        r1.visitTypeInsn(187, r3);
+
+        r1.visitInsn(89);
+
+        r1.visitVarInsn(b5, i3);
+
+        r4 = r2;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append("(");
+
+        $r7 = $r6.append(r4);
+
+        $r8 = $r7.append(")V");
+
+        $r9 = $r8.toString();
+
+        r1.visitMethodInsn(183, r3, "<init>", $r9);
+
+(7)     goto label09;
+
+     label08:
+(8)     r1.visitVarInsn(25, i3);
+
+     label09:
+        b5 = Phi(b5 #7, b5 #8);
+
+        r1.visitInsn(83);
+
+        $z2 = r2.equals("D");
+
+        if $z2 != 0 goto label10;
+
+        $z3 = r2.equals("J");
+
+        if $z3 == 0 goto label11;
+
+     label10:
+        $b6 = 2;
+
+(9)     goto label12;
+
+     label11:
+(10)    $b6 = 1;
+
+     label12:
+        $b6 = Phi($b6 #9, $b6 #10);
+
+        i3 = i3 + $b6;
+
+        i4 = i4 + 1;
+
+(11)    goto label03;
+
+     label13:
+        return;
+    }
+
+    public static void generateReturnCode(java.lang.String, org.gjt.sp.jedit.bsh.org.objectweb.asm.CodeVisitor)
+    {
+        java.lang.String r0, r2, $r3, $r7, r8, r9, r8_1, r9_1, r8_2, r9_2, r8_3, r9_3, r8_4, r9_4, r8_5, r9_5, r8_6, r9_6, r8_7, r9_7, r9_8, r8_8, r9_9, r8_9;
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.CodeVisitor r1;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8;
+        java.lang.StringBuilder $r4, $r5, $r6;
+        short s0, s0_1, s0_2, s0_3, s0_4, s0_5;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $z0 = r0.equals("V");
+
+        if $z0 == 0 goto label01;
+
+        r1.visitInsn(87);
+
+        r1.visitInsn(177);
+
+(0)     goto label11;
+
+     label01:
+        $z1 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.isPrimitive(r0);
+
+        if $z1 == 0 goto label10;
+
+        s0 = 172;
+
+        $z2 = r0.equals("B");
+
+        if $z2 == 0 goto label02;
+
+        r8 = "java/lang/Byte";
+
+        r9 = "byteValue";
+
+(1)     goto label09;
+
+     label02:
+        $z3 = r0.equals("I");
+
+        if $z3 == 0 goto label03;
+
+        r8_1 = "java/lang/Integer";
+
+        r9_1 = "intValue";
+
+(2)     goto label09;
+
+     label03:
+        $z4 = r0.equals("Z");
+
+        if $z4 == 0 goto label04;
+
+        r8_2 = "java/lang/Boolean";
+
+        r9_2 = "booleanValue";
+
+(3)     goto label09;
+
+     label04:
+        $z5 = r0.equals("D");
+
+        if $z5 == 0 goto label05;
+
+        s0_1 = 175;
+
+        r8_3 = "java/lang/Double";
+
+        r9_3 = "doubleValue";
+
+(4)     goto label09;
+
+     label05:
+        $z6 = r0.equals("F");
+
+        if $z6 == 0 goto label06;
+
+        s0_2 = 174;
+
+        r8_4 = "java/lang/Float";
+
+        r9_4 = "floatValue";
+
+(5)     goto label09;
+
+     label06:
+        $z7 = r0.equals("J");
+
+        if $z7 == 0 goto label07;
+
+        s0_3 = 173;
+
+        r8_5 = "java/lang/Long";
+
+        r9_5 = "longValue";
+
+(6)     goto label09;
+
+     label07:
+        $z8 = r0.equals("C");
+
+        if $z8 == 0 goto label08;
+
+        r8_6 = "java/lang/Character";
+
+        r9_6 = "charValue";
+
+(7)     goto label09;
+
+     label08:
+        r8_7 = "java/lang/Short";
+
+(8)     r9_7 = "shortValue";
+
+     label09:
+        s0_4 = Phi(s0 #1, s0 #2, s0 #3, s0_1 #4, s0_2 #5, s0_3 #6, s0 #7, s0 #8);
+
+        r9_8 = Phi(r9 #1, r9_1 #2, r9_2 #3, r9_3 #4, r9_4 #5, r9_5 #6, r9_6 #7, r9_7 #8);
+
+        r8_8 = Phi(r8 #1, r8_1 #2, r8_2 #3, r8_3 #4, r8_4 #5, r8_5 #6, r8_6 #7, r8_7 #8);
+
+        r2 = r0;
+
+        r1.visitTypeInsn(192, r8_8);
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("()");
+
+        $r6 = $r5.append(r2);
+
+        $r7 = $r6.toString();
+
+        r1.visitMethodInsn(182, r8_8, r9_8, $r7);
+
+        r1.visitInsn(s0_4);
+
+(9)     goto label11;
+
+     label10:
+        $r3 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.descriptorToClassName(r0);
+
+        r1.visitTypeInsn(192, $r3);
+
+(10)    r1.visitInsn(176);
+
+     label11:
+        s0_5 = Phi(s0 #0, s0_4 #9, s0 #10);
+
+        r9_9 = Phi(r9 #0, r9_8 #9, r9 #10);
+
+        r8_9 = Phi(r8 #0, r8_8 #9, r8 #10);
+
+        return;
+    }
+
+    public static org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs getConstructorArgs(java.lang.String, org.gjt.sp.jedit.bsh.This, java.lang.Object[], int)
+    {
+        java.lang.String r0, $r29, $r32, $r34, $r35, $r44, $r50, $r56, r59, r59_1, r59_2;
+        org.gjt.sp.jedit.bsh.This r1;
+        java.lang.Object[] r2, r68, r71;
+        int i0, i1, i2, $i3, $i4, $i5, $i6, $i7, $i8, i9, i10, i11, i12;
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[] r3, $r10;
+        java.lang.Class[] r4, $r22, r70;
+        org.gjt.sp.jedit.bsh.Interpreter r5;
+        java.lang.Class r6, $r31;
+        java.lang.reflect.Constructor[] r7;
+        org.gjt.sp.jedit.bsh.NameSpace $r8, $r14, $r15, r64;
+        java.lang.Object $r9, $r30;
+        org.gjt.sp.jedit.bsh.BSHBlock $r11, $r12;
+        org.gjt.sp.jedit.bsh.Node $r13, $r36;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        org.gjt.sp.jedit.bsh.CallStack $r16, r67;
+        org.gjt.sp.jedit.bsh.BshClassManager $r17;
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs $r18, $r23, $r33, $r37, $r38;
+        org.gjt.sp.jedit.bsh.InterpreterError $r19, $r20, $r24, $r25, $r40, $r46, $r52;
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod $r21, r58;
+        java.lang.StringBuilder $r26, $r27, $r28, $r41, $r42, $r43, $r47, $r48, $r49, $r53, $r54, $r55;
+        org.gjt.sp.jedit.bsh.EvalError $r39, r69;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r45, r66;
+        java.lang.Exception $r51, r57;
+        org.gjt.sp.jedit.bsh.BSHArguments r60, r60_1, r60_2;
+        org.gjt.sp.jedit.bsh.SimpleNode r61, r61_1, r61_2;
+        org.gjt.sp.jedit.bsh.BSHMethodInvocation r62;
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName r63;
+        java.lang.String[] r65;
+        java.lang.Class[][] r72;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        i0 := @parameter3;
+
+     label01:
+        $r8 = r1.getNameSpace();
+
+        $r9 = $r8.getVariable("_bshConstructors");
+
+        $r10 = (org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[]) $r9;
+
+        r3 = (org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[]) $r10;
+
+     label02:
+        goto label04;
+
+     label03:
+        $r51 := @caughtexception;
+
+        r57 = $r51;
+
+        $r52 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r53 = new java.lang.StringBuilder;
+
+        specialinvoke $r53.<init>();
+
+        $r54 = $r53.append("unable to get instance initializer: ");
+
+        $r55 = $r54.append(r57);
+
+        $r56 = $r55.toString();
+
+        specialinvoke $r52.<init>($r56);
+
+        throw $r52;
+
+     label04:
+        if i0 != -1 goto label05;
+
+        $r38 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs.DEFAULT;
+
+        return $r38;
+
+     label05:
+        r58 = r3[i0];
+
+        $r11 = r58.methodBody;
+
+        $i3 = $r11.jjtGetNumChildren();
+
+        if $i3 != 0 goto label06;
+
+        $r37 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs.DEFAULT;
+
+        return $r37;
+
+     label06:
+        r59 = null;
+
+        r60 = null;
+
+        $r12 = r58.methodBody;
+
+        $r13 = $r12.jjtGetChild(0);
+
+        r61 = (org.gjt.sp.jedit.bsh.SimpleNode) $r13;
+
+        $z0 = r61 instanceof org.gjt.sp.jedit.bsh.BSHPrimaryExpression;
+
+(0)     if $z0 == 0 goto label07;
+
+        $r36 = r61.jjtGetChild(0);
+
+(1)     r61_1 = (org.gjt.sp.jedit.bsh.SimpleNode) $r36;
+
+     label07:
+        r61_2 = Phi(r61 #0, r61_1 #1);
+
+        $z1 = r61_2 instanceof org.gjt.sp.jedit.bsh.BSHMethodInvocation;
+
+(2)     if $z1 == 0 goto label09;
+
+        r62 = (org.gjt.sp.jedit.bsh.BSHMethodInvocation) r61_2;
+
+        r63 = r62.getNameNode();
+
+        $r34 = r63.text;
+
+        $z3 = $r34.equals("super");
+
+        if $z3 != 0 goto label08;
+
+        $r35 = r63.text;
+
+        $z4 = $r35.equals("this");
+
+(3)     if $z4 == 0 goto label09;
+
+     label08:
+        r59_1 = r63.text;
+
+(4)     r60_1 = r62.getArgsNode();
+
+     label09:
+        r59_2 = Phi(r59 #2, r59 #3, r59_1 #4);
+
+        r60_2 = Phi(r60 #2, r60 #3, r60_1 #4);
+
+        if r59_2 != null goto label10;
+
+        $r33 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs.DEFAULT;
+
+        return $r33;
+
+     label10:
+        $r14 = new org.gjt.sp.jedit.bsh.NameSpace;
+
+        $r15 = r1.getNameSpace();
+
+        specialinvoke $r14.<init>($r15, "consArgs");
+
+        r64 = $r14;
+
+        r65 = r58.getParameterNames();
+
+        r4 = r58.getParameterTypes();
+
+(5)     i9 = 0;
+
+     label11:
+        r59 = Phi(r59_2 #5, r59 #6);
+
+        r61 = Phi(r61_2 #5, r61 #6);
+
+        r60 = Phi(r60_2 #5, r60 #6);
+
+        i9 = Phi(i9 #5, i9 #6);
+
+        $i4 = lengthof r2;
+
+        if i9 >= $i4 goto label16;
+
+     label12:
+        $r32 = r65[i9];
+
+        $r31 = r4[i9];
+
+        $r30 = r2[i9];
+
+        r64.setTypedVariable($r32, $r31, $r30, null);
+
+     label13:
+        goto label15;
+
+     label14:
+        $r45 := @caughtexception;
+
+        r66 = $r45;
+
+        $r46 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r47 = new java.lang.StringBuilder;
+
+        specialinvoke $r47.<init>();
+
+        $r48 = $r47.append("err setting local cons arg:");
+
+        $r49 = $r48.append(r66);
+
+        $r50 = $r49.toString();
+
+        specialinvoke $r46.<init>($r50);
+
+        throw $r46;
+
+     label15:
+        i9 = i9 + 1;
+
+(6)     goto label11;
+
+     label16:
+        $r16 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        specialinvoke $r16.<init>();
+
+        r67 = $r16;
+
+        r67.push(r64);
+
+        r5 = r1.declaringInterpreter;
+
+     label17:
+        r68 = r60.getArguments(r67, r5);
+
+     label18:
+        goto label20;
+
+     label19:
+        $r39 := @caughtexception;
+
+        r69 = $r39;
+
+        $r40 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r41 = new java.lang.StringBuilder;
+
+        specialinvoke $r41.<init>();
+
+        $r42 = $r41.append("Error evaluating constructor args: ");
+
+        $r43 = $r42.append(r69);
+
+        $r44 = $r43.toString();
+
+        specialinvoke $r40.<init>($r44);
+
+        throw $r40;
+
+     label20:
+        r70 = org.gjt.sp.jedit.bsh.Types.getTypes(r68);
+
+        r71 = org.gjt.sp.jedit.bsh.Primitive.unwrap(r68);
+
+        $r17 = r5.getClassManager();
+
+        r6 = $r17.classForName(r0);
+
+        if r6 != null goto label21;
+
+        $r25 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r26 = new java.lang.StringBuilder;
+
+        specialinvoke $r26.<init>();
+
+        $r27 = $r26.append("can\'t find superclass: ");
+
+        $r28 = $r27.append(r0);
+
+        $r29 = $r28.toString();
+
+        specialinvoke $r25.<init>($r29);
+
+        throw $r25;
+
+     label21:
+        r7 = r6.getDeclaredConstructors();
+
+        $z2 = r59.equals("super");
+
+        if $z2 == 0 goto label23;
+
+        i10 = org.gjt.sp.jedit.bsh.Reflect.findMostSpecificConstructorIndex(r70, r7);
+
+        if i10 != -1 goto label22;
+
+        $r24 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        specialinvoke $r24.<init>("can\'t find constructor for args!");
+
+        throw $r24;
+
+     label22:
+        $r23 = new org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs;
+
+        specialinvoke $r23.<init>(i10, r71);
+
+        return $r23;
+
+     label23:
+        $i5 = lengthof r3;
+
+        r72 = newarray (java.lang.Class[])[$i5];
+
+(7)     i11 = 0;
+
+     label24:
+        r59 = Phi(r59 #7, r59 #8);
+
+        i11 = Phi(i11 #7, i11 #8);
+
+        r61 = Phi(r61 #7, r61 #8);
+
+        r60 = Phi(r60 #7, r60 #8);
+
+        i9 = Phi(i9 #7, i9 #8);
+
+        $i6 = lengthof r72;
+
+        if i11 >= $i6 goto label25;
+
+        $r21 = r3[i11];
+
+        $r22 = $r21.getParameterTypes();
+
+        r72[i11] = $r22;
+
+        i11 = i11 + 1;
+
+(8)     goto label24;
+
+     label25:
+        i12 = org.gjt.sp.jedit.bsh.Reflect.findMostSpecificSignature(r70, r72);
+
+        if i12 != -1 goto label26;
+
+        $r20 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        specialinvoke $r20.<init>("can\'t find constructor for args 2!");
+
+        throw $r20;
+
+     label26:
+        $i7 = lengthof r7;
+
+        i1 = i12 + $i7;
+
+        $i8 = lengthof r7;
+
+        i2 = i0 + $i8;
+
+        if i1 != i2 goto label27;
+
+        $r19 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        specialinvoke $r19.<init>("Recusive constructor call.");
+
+        throw $r19;
+
+     label27:
+        $r18 = new org.gjt.sp.jedit.bsh.ClassGeneratorUtil$ConstructorArgs;
+
+        specialinvoke $r18.<init>(i1, r71);
+
+        return $r18;
+
+        catch java.lang.Exception from label01 to label02 with label03;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label12 to label13 with label14;
+        catch org.gjt.sp.jedit.bsh.EvalError from label17 to label18 with label19;
+    }
+
+    public static void initInstance(java.lang.Object, java.lang.String, java.lang.Object[])
+    {
+        java.lang.Object r0, $r14;
+        java.lang.String r1, $r11, $r20, $r30, $r36, $r43, $r53, r64;
+        java.lang.Object[] r2;
+        java.lang.Class[] r3;
+        org.gjt.sp.jedit.bsh.CallStack r4, $r5;
+        int $i0;
+        org.gjt.sp.jedit.bsh.InterpreterError $r7, $r26, $r32, $r39, $r49;
+        java.lang.StringBuilder $r8, $r9, $r10, $r17, $r18, $r19, $r27, $r28, $r29, $r33, $r34, $r35, $r40, $r41, $r42, $r50, $r51, $r52;
+        java.lang.Class $r12;
+        org.gjt.sp.jedit.bsh.NameSpace $r13, $r15, $r16, r59, r59_1, r59_2;
+        org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter $r22;
+        java.lang.Exception $r25, $r31, $r37, $r48, r58, r62, r63, r66, r66_1, r66_2, r66_3, r66_4;
+        boolean $z0, $z1;
+        java.io.PrintStream $r38;
+        java.lang.reflect.InvocationTargetException $r44;
+        java.lang.Throwable $r45, $r47;
+        org.gjt.sp.jedit.bsh.TargetError $r46;
+        org.gjt.sp.jedit.bsh.This r54, r55, r60;
+        org.gjt.sp.jedit.bsh.Interpreter r56, r56_1, r56_2;
+        org.gjt.sp.jedit.bsh.BSHBlock r57;
+        org.gjt.sp.jedit.bsh.LHS r61;
+        org.gjt.sp.jedit.bsh.BshMethod r65;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 = org.gjt.sp.jedit.bsh.Types.getTypes(r2);
+
+        $r5 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        specialinvoke $r5.<init>();
+
+        r4 = $r5;
+
+        r54 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getClassInstanceThis(r0, r1);
+
+        if r54 != null goto label13;
+
+        $r12 = r0.getClass();
+
+        r55 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getClassStaticThis($r12, r1);
+
+        r56 = r55.declaringInterpreter;
+
+     label01:
+        $r13 = r55.getNameSpace();
+
+        $r14 = $r13.getVariable("_bshInstanceInitializer");
+
+        r57 = (org.gjt.sp.jedit.bsh.BSHBlock) $r14;
+
+     label02:
+        goto label04;
+
+     label03:
+        $r31 := @caughtexception;
+
+        r58 = $r31;
+
+        $r32 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r33 = new java.lang.StringBuilder;
+
+        specialinvoke $r33.<init>();
+
+        $r34 = $r33.append("unable to get instance initializer: ");
+
+        $r35 = $r34.append(r58);
+
+        $r36 = $r35.toString();
+
+        specialinvoke $r32.<init>($r36);
+
+        throw $r32;
+
+     label04:
+        $r15 = new org.gjt.sp.jedit.bsh.NameSpace;
+
+        $r16 = r55.getNameSpace();
+
+        specialinvoke $r15.<init>($r16, r1);
+
+        r59 = $r15;
+
+        r59.isClass = 1;
+
+        r60 = r59.getThis(r56);
+
+     label05:
+        $r17 = new java.lang.StringBuilder;
+
+        specialinvoke $r17.<init>();
+
+        $r18 = $r17.append("_bshThis");
+
+        $r19 = $r18.append(r1);
+
+        $r20 = $r19.toString();
+
+        r61 = org.gjt.sp.jedit.bsh.Reflect.getLHSObjectField(r0, $r20);
+
+        r61.assign(r60, 0);
+
+     label06:
+        goto label08;
+
+     label07:
+        $r48 := @caughtexception;
+
+        r62 = $r48;
+
+        $r49 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r50 = new java.lang.StringBuilder;
+
+        specialinvoke $r50.<init>();
+
+        $r51 = $r50.append("Error in class gen setup: ");
+
+        $r52 = $r51.append(r62);
+
+        $r53 = $r52.toString();
+
+        specialinvoke $r49.<init>($r53);
+
+        throw $r49;
+
+     label08:
+        r59.setClassInstance(r0);
+
+        r4.push(r59);
+
+     label09:
+        $r22 = org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter.CLASSINSTANCE;
+
+        r57.evalBlock(r4, r56, 1, $r22);
+
+     label10:
+        goto label12;
+
+     label11:
+        $r25 := @caughtexception;
+
+        r63 = $r25;
+
+        $r26 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r27 = new java.lang.StringBuilder;
+
+        specialinvoke $r27.<init>();
+
+        $r28 = $r27.append("Error in class initialization: ");
+
+        $r29 = $r28.append(r63);
+
+        $r30 = $r29.toString();
+
+        specialinvoke $r26.<init>($r30);
+
+        throw $r26;
+
+     label12:
+        r4.pop();
+
+(0)     goto label14;
+
+     label13:
+        r56_1 = r54.declaringInterpreter;
+
+(1)     r59_1 = r54.getNameSpace();
+
+     label14:
+        r56_2 = Phi(r56 #0, r56_1 #1);
+
+        r59_2 = Phi(r59 #0, r59_1 #1);
+
+        r64 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getBaseName(r1);
+
+     label15:
+        r65 = r59_2.getMethod(r64, r3, 1);
+
+        $i0 = lengthof r2;
+
+        if $i0 <= 0 goto label16;
+
+        if r65 != null goto label16;
+
+        $r7 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("Can\'t find constructor: ");
+
+        $r10 = $r9.append(r1);
+
+        $r11 = $r10.toString();
+
+        specialinvoke $r7.<init>($r11);
+
+        throw $r7;
+
+     label16:
+        if r65 == null goto label17;
+
+        r65.invoke(r2, r56_2, r4, null, 0);
+
+     label17:
+        goto label21;
+
+     label18:
+        $r37 := @caughtexception;
+
+        r66 = $r37;
+
+        $z0 = r66 instanceof org.gjt.sp.jedit.bsh.TargetError;
+
+(2)     if $z0 == 0 goto label19;
+
+        $r46 = (org.gjt.sp.jedit.bsh.TargetError) r66;
+
+        $r47 = $r46.getTarget();
+
+(3)     r66_1 = (java.lang.Exception) $r47;
+
+     label19:
+        r66_2 = Phi(r66 #2, r66_1 #3);
+
+        $z1 = r66_2 instanceof java.lang.reflect.InvocationTargetException;
+
+(4)     if $z1 == 0 goto label20;
+
+        $r44 = (java.lang.reflect.InvocationTargetException) r66_2;
+
+        $r45 = $r44.getTargetException();
+
+(5)     r66_3 = (java.lang.Exception) $r45;
+
+     label20:
+        r66_4 = Phi(r66_2 #4, r66_3 #5);
+
+        $r38 = java.lang.System.err;
+
+        r66_4.printStackTrace($r38);
+
+        $r39 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r40 = new java.lang.StringBuilder;
+
+        specialinvoke $r40.<init>();
+
+        $r41 = $r40.append("Error in class initialization: ");
+
+        $r42 = $r41.append(r66_4);
+
+        $r43 = $r42.toString();
+
+        specialinvoke $r39.<init>($r43);
+
+        throw $r39;
+
+     label21:
+        return;
+
+        catch java.lang.Exception from label01 to label02 with label03;
+        catch java.lang.Exception from label05 to label06 with label07;
+        catch java.lang.Exception from label09 to label10 with label11;
+        catch java.lang.Exception from label15 to label17 with label18;
+    }
+
+    static org.gjt.sp.jedit.bsh.This getClassStaticThis(java.lang.Class, java.lang.String)
+    {
+        java.lang.Class r0;
+        java.lang.String r1, $r6, $r14;
+        java.lang.Exception r2, $r9;
+        java.lang.StringBuilder $r3, $r4, $r5, $r11, $r12, $r13;
+        java.lang.Object $r7;
+        org.gjt.sp.jedit.bsh.This $r8;
+        org.gjt.sp.jedit.bsh.InterpreterError $r10;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+     label1:
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("_bshStatic");
+
+        $r5 = $r4.append(r1);
+
+        $r6 = $r5.toString();
+
+        $r7 = org.gjt.sp.jedit.bsh.Reflect.getStaticFieldValue(r0, $r6);
+
+        $r8 = (org.gjt.sp.jedit.bsh.This) $r7;
+
+     label2:
+        return $r8;
+
+     label3:
+        $r9 := @caughtexception;
+
+        r2 = $r9;
+
+        $r10 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = $r11.append("Unable to get class static space: ");
+
+        $r13 = $r12.append(r2);
+
+        $r14 = $r13.toString();
+
+        specialinvoke $r10.<init>($r14);
+
+        throw $r10;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    static org.gjt.sp.jedit.bsh.This getClassInstanceThis(java.lang.Object, java.lang.String)
+    {
+        java.lang.Object r0, $r6, r14;
+        java.lang.String r1, $r5, $r13;
+        java.lang.StringBuilder $r2, $r3, $r4, $r10, $r11, $r12;
+        org.gjt.sp.jedit.bsh.This $r7;
+        java.lang.Exception $r8, r15;
+        org.gjt.sp.jedit.bsh.InterpreterError $r9;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+     label1:
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append("_bshThis");
+
+        $r4 = $r3.append(r1);
+
+        $r5 = $r4.toString();
+
+        r14 = org.gjt.sp.jedit.bsh.Reflect.getObjectFieldValue(r0, $r5);
+
+        $r6 = org.gjt.sp.jedit.bsh.Primitive.unwrap(r14);
+
+        $r7 = (org.gjt.sp.jedit.bsh.This) $r6;
+
+     label2:
+        return $r7;
+
+     label3:
+        $r8 := @caughtexception;
+
+        r15 = $r8;
+
+        $r9 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("Generated class: Error getting This");
+
+        $r12 = $r11.append(r15);
+
+        $r13 = $r12.toString();
+
+        specialinvoke $r9.<init>($r13);
+
+        throw $r9;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    private static boolean isPrimitive(java.lang.String)
+    {
+        java.lang.String r0;
+        int $i0;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @parameter0;
+
+        $i0 = r0.length();
+
+        if $i0 != 1 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    static java.lang.String[] getTypeDescriptors(java.lang.Class[])
+    {
+        java.lang.Class[] r0;
+        java.lang.String[] r1;
+        int $i0, $i1, i2;
+        java.lang.Class $r2;
+        java.lang.String $r3;
+
+        r0 := @parameter0;
+
+        $i0 = lengthof r0;
+
+        r1 = newarray (java.lang.String)[$i0];
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $i1 = lengthof r1;
+
+        if i2 >= $i1 goto label2;
+
+        $r2 = r0[i2];
+
+        $r3 = org.gjt.sp.jedit.bsh.BSHType.getTypeDescriptor($r2);
+
+        r1[i2] = $r3;
+
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return r1;
+    }
+
+    private static java.lang.String descriptorToClassName(java.lang.String)
+    {
+        java.lang.String r0, $r1;
+        boolean $z0, $z1;
+        int $i0, $i1;
+
+        r0 := @parameter0;
+
+        $z0 = r0.startsWith("[");
+
+        if $z0 != 0 goto label1;
+
+        $z1 = r0.startsWith("L");
+
+        if $z1 != 0 goto label2;
+
+     label1:
+        return r0;
+
+     label2:
+        $i0 = r0.length();
+
+        $i1 = $i0 - 1;
+
+        $r1 = r0.substring(1, $i1);
+
+        return $r1;
+    }
+
+    private static java.lang.String getBaseName(java.lang.String)
+    {
+        java.lang.String r0, $r1;
+        int i0, $i1;
+
+        r0 := @parameter0;
+
+        i0 = r0.indexOf("$");
+
+        if i0 != -1 goto label1;
+
+        return r0;
+
+     label1:
+        $i1 = i0 + 1;
+
+        $r1 = r0.substring($i1);
+
+        return $r1;
+    }
+}

@@ -1,0 +1,66 @@
+class org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$3 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.pluginmgr.PluginManagerProgress this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$3 r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$3 r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress $r1, $r2, $r4, $r6, $r8, $r9;
+        org.gjt.sp.jedit.pluginmgr.Roster $r3;
+        int $i0, $i1, $i2, $i4;
+        org.gjt.sp.jedit.pluginmgr.Roster$Operation $r5;
+        javax.swing.JProgressBar $r7;
+
+        r0 := @this;
+
+        $r2 = r0.this$0;
+
+        $r1 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.pluginmgr.PluginManagerProgress.access$300($r1);
+
+        $r4 = r0.this$0;
+
+        $i0 = org.gjt.sp.jedit.pluginmgr.PluginManagerProgress.access$200($r4);
+
+        $i1 = $i0 - 1;
+
+        $r5 = $r3.getOperation($i1);
+
+        $i2 = $r5.getMaximum();
+
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress.access$012($r2, $i2);
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.pluginmgr.PluginManagerProgress.access$100($r6);
+
+        $r8 = r0.this$0;
+
+        $i4 = org.gjt.sp.jedit.pluginmgr.PluginManagerProgress.access$000($r8);
+
+        $r7.setValue($i4);
+
+        $r9 = r0.this$0;
+
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress.access$208($r9);
+
+        return;
+    }
+}

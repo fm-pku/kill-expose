@@ -1,0 +1,393 @@
+public class org.gjt.sp.jedit.gui.ErrorListDialog extends org.gjt.sp.jedit.gui.EnhancedDialog
+{
+    private javax.swing.JButton ok;
+    private javax.swing.JButton pluginMgr;
+
+    public void <init>(java.awt.Frame, java.lang.String, java.lang.String, java.util.Vector, boolean)
+    {
+        org.gjt.sp.jedit.gui.ErrorListDialog r0;
+        java.awt.Frame r1;
+        java.lang.String r2, r3, r14, $r37, $r46, $r57, $r66, $r69, $r73;
+        java.util.Vector r4;
+        boolean z0, $z1, $z2, $z2_1, $z2_2;
+        javax.swing.JPanel r5, r7, $r15, $r25;
+        javax.swing.Box r6, $r18, $r42, r80;
+        javax.swing.JLabel r8, $r19, $r27, $r35;
+        org.gjt.sp.jedit.gui.ErrorListDialog$JTextPaneSized r9, $r30;
+        javax.swing.text.StyledDocument r10;
+        java.awt.Font r11;
+        javax.swing.text.SimpleAttributeSet r12, r13, $r36;
+        int i0, $i1, $i2, i3;
+        java.awt.BorderLayout $r16, $r26;
+        javax.swing.border.EmptyBorder $r17, $r28;
+        javax.swing.Icon $r20;
+        java.awt.Component $r22, $r43, $r51, $r62;
+        java.awt.Color $r31, $r32, $r33, $r34;
+        java.lang.Object $r38, $r64;
+        javax.swing.JScrollPane $r39, r79;
+        javax.swing.JButton $r45, $r48, $r49, $r55, $r56, $r59, $r60;
+        org.gjt.sp.jedit.gui.ErrorListDialog$ActionHandler $r47, $r58;
+        javax.swing.JRootPane $r54;
+        java.lang.StringBuilder $r65, $r67, $r68, $r70, $r71, $r72;
+        javax.swing.text.BadLocationException $r74, r78;
+        java.util.Iterator r75;
+        org.gjt.sp.jedit.gui.ErrorListDialog$ErrorEntry r76;
+        java.lang.String[] r77;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        z0 := @parameter4;
+
+        if z0 != 0 goto label01;
+
+        $z2 = 1;
+
+(0)     goto label02;
+
+     label01:
+(1)     $z2_1 = 0;
+
+     label02:
+        $z2_2 = Phi($z2 #0, $z2_1 #1);
+
+        specialinvoke r0.<init>(r1, r2, $z2_2);
+
+        $r15 = new javax.swing.JPanel;
+
+        $r16 = new java.awt.BorderLayout;
+
+        specialinvoke $r16.<init>(12, 12);
+
+        specialinvoke $r15.<init>($r16);
+
+        r5 = $r15;
+
+        $r17 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r17.<init>(12, 12, 12, 12);
+
+        r5.setBorder($r17);
+
+        r0.setContentPane(r5);
+
+        $r18 = new javax.swing.Box;
+
+        specialinvoke $r18.<init>(1);
+
+        r6 = $r18;
+
+        $r19 = new javax.swing.JLabel;
+
+        $r20 = javax.swing.UIManager.getIcon("OptionPane.errorIcon");
+
+        specialinvoke $r19.<init>($r20);
+
+        r6.add($r19);
+
+        $r22 = javax.swing.Box.createGlue();
+
+        r6.add($r22);
+
+        r5.add("West", r6);
+
+        $r25 = new javax.swing.JPanel;
+
+        $r26 = new java.awt.BorderLayout;
+
+        specialinvoke $r26.<init>();
+
+        specialinvoke $r25.<init>($r26);
+
+        r7 = $r25;
+
+        $r27 = new javax.swing.JLabel;
+
+        specialinvoke $r27.<init>(r3);
+
+        r8 = $r27;
+
+        $r28 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r28.<init>(0, 0, 6, 0);
+
+        r8.setBorder($r28);
+
+        r7.add("North", r8);
+
+        $r30 = new org.gjt.sp.jedit.gui.ErrorListDialog$JTextPaneSized;
+
+        specialinvoke $r30.<init>(r0);
+
+        r9 = $r30;
+
+        r9.setEditable(0);
+
+        $r31 = org.gjt.sp.jedit.jEdit.getColorProperty("view.fgColor");
+
+        r9.setForeground($r31);
+
+        $r32 = org.gjt.sp.jedit.jEdit.getColorProperty("view.bgColor");
+
+        r9.setBackground($r32);
+
+        $r33 = org.gjt.sp.jedit.jEdit.getColorProperty("view.caretColor");
+
+        r9.setCaretColor($r33);
+
+        $r34 = org.gjt.sp.jedit.jEdit.getColorProperty("view.selectionColor");
+
+        r9.setSelectionColor($r34);
+
+        r10 = r9.getStyledDocument();
+
+        $r35 = new javax.swing.JLabel;
+
+        specialinvoke $r35.<init>();
+
+        r11 = $r35.getFont();
+
+        $r36 = new javax.swing.text.SimpleAttributeSet;
+
+        specialinvoke $r36.<init>();
+
+        r12 = $r36;
+
+        $r37 = r11.getFamily();
+
+        javax.swing.text.StyleConstants.setFontFamily(r12, $r37);
+
+        $r38 = r12.clone();
+
+        r13 = (javax.swing.text.SimpleAttributeSet) $r38;
+
+        javax.swing.text.StyleConstants.setBold(r13, 1);
+
+(2)     r75 = r4.iterator();
+
+     label03:
+        i3 = Phi(i3 #2, i3 #9);
+
+        $z2 = Phi($z2_2 #2, $z2 #9);
+
+        $z1 = r75.hasNext();
+
+        if $z1 == 0 goto label09;
+
+        $r64 = r75.next();
+
+(3)     r76 = (org.gjt.sp.jedit.gui.ErrorListDialog$ErrorEntry) $r64;
+
+     label04:
+        $i1 = r10.getLength();
+
+        $r65 = new java.lang.StringBuilder;
+
+        specialinvoke $r65.<init>();
+
+        $r66 = r76.path;
+
+        $r67 = $r65.append($r66);
+
+        $r68 = $r67.append(":\n");
+
+        $r69 = $r68.toString();
+
+        r10.insertString($i1, $r69, r13);
+
+        r77 = r76.messages;
+
+        i0 = lengthof r77;
+
+(4)     i3 = 0;
+
+     label05:
+        i3 = Phi(i3 #4, i3 #6);
+
+        $z2 = Phi($z2 #4, $z2 #6);
+
+        if i3 >= i0 goto label06;
+
+(5)     r14 = r77[i3];
+
+        $i2 = r10.getLength();
+
+        $r70 = new java.lang.StringBuilder;
+
+        specialinvoke $r70.<init>();
+
+        $r71 = $r70.append(r14);
+
+        $r72 = $r71.append("\n");
+
+        $r73 = $r72.toString();
+
+        r10.insertString($i2, $r73, r12);
+
+        i3 = i3 + 1;
+
+(6)     goto label05;
+
+     label06:
+(7)     goto label08;
+
+     label07:
+        $r74 := @caughtexception;
+
+        i3 = Phi(i3 #3, i3 #5);
+
+        $z2 = Phi($z2 #3, $z2 #5);
+
+(8)     r78 = $r74;
+
+     label08:
+        i3 = Phi(i3 #7, i3 #8);
+
+        $z2 = Phi($z2 #7, $z2 #8);
+
+(9)     goto label03;
+
+     label09:
+        $r39 = new javax.swing.JScrollPane;
+
+        specialinvoke $r39.<init>(r9);
+
+        r79 = $r39;
+
+        r7.add("Center", r79);
+
+        r5.add("Center", r7);
+
+        $r42 = new javax.swing.Box;
+
+        specialinvoke $r42.<init>(0);
+
+        r80 = $r42;
+
+        $r43 = javax.swing.Box.createGlue();
+
+        r80.add($r43);
+
+        $r45 = new javax.swing.JButton;
+
+        $r46 = org.gjt.sp.jedit.jEdit.getProperty("common.ok");
+
+        specialinvoke $r45.<init>($r46);
+
+        r0.ok = $r45;
+
+        $r48 = r0.ok;
+
+        $r47 = new org.gjt.sp.jedit.gui.ErrorListDialog$ActionHandler;
+
+        specialinvoke $r47.<init>(r0);
+
+        $r48.addActionListener($r47);
+
+        if z0 == 0 goto label10;
+
+        $r56 = new javax.swing.JButton;
+
+        $r57 = org.gjt.sp.jedit.jEdit.getProperty("error-list.plugin-manager");
+
+        specialinvoke $r56.<init>($r57);
+
+        r0.pluginMgr = $r56;
+
+        $r59 = r0.pluginMgr;
+
+        $r58 = new org.gjt.sp.jedit.gui.ErrorListDialog$ActionHandler;
+
+        specialinvoke $r58.<init>(r0);
+
+        $r59.addActionListener($r58);
+
+        $r60 = r0.pluginMgr;
+
+        r80.add($r60);
+
+        $r62 = javax.swing.Box.createHorizontalStrut(6);
+
+        r80.add($r62);
+
+     label10:
+        $r49 = r0.ok;
+
+        r80.add($r49);
+
+        $r51 = javax.swing.Box.createGlue();
+
+        r80.add($r51);
+
+        r5.add("South", r80);
+
+        $r54 = r0.getRootPane();
+
+        $r55 = r0.ok;
+
+        $r54.setDefaultButton($r55);
+
+        r0.pack();
+
+        r0.setLocationRelativeTo(r1);
+
+        r0.setVisible(1);
+
+        return;
+
+        catch javax.swing.text.BadLocationException from label04 to label06 with label07;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.gui.ErrorListDialog r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.gui.ErrorListDialog r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    static javax.swing.JButton access$000(org.gjt.sp.jedit.gui.ErrorListDialog)
+    {
+        org.gjt.sp.jedit.gui.ErrorListDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.ok;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$100(org.gjt.sp.jedit.gui.ErrorListDialog)
+    {
+        org.gjt.sp.jedit.gui.ErrorListDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.pluginMgr;
+
+        return $r1;
+    }
+}

@@ -1,0 +1,5 @@
+public interface  org.gjt.sp.jedit.io.EncodingDetector extends java.lang.Object
+{
+
+    public abstract java.lang.String detectEncoding(java.io.InputStream) throws java.io.IOException;
+}

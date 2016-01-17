@@ -1,0 +1,88 @@
+class org.gjt.sp.jedit.gui.FontSelector$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.FontSelector this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.FontSelector)
+    {
+        org.gjt.sp.jedit.gui.FontSelector$ActionHandler r0;
+        org.gjt.sp.jedit.gui.FontSelector r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.FontSelector$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        javax.swing.JDialog r2;
+        org.gjt.sp.jedit.gui.FontSelector $r3, $r5, $r7, $r8, $r9, $r11, $r13, $r15;
+        org.gjt.sp.jedit.gui.FontSelectorDialog $r4, $r10;
+        java.awt.Font $r6, $r14, r16, r16_1, r16_2;
+        java.awt.Frame $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.this$0;
+
+        r2 = org.gjt.sp.jedit.GUIUtilities.getParentDialog($r3);
+
+        if r2 != null goto label1;
+
+        $r10 = new org.gjt.sp.jedit.gui.FontSelectorDialog;
+
+        $r11 = r0.this$0;
+
+        $r12 = javax.swing.JOptionPane.getFrameForComponent($r11);
+
+        $r13 = r0.this$0;
+
+        $r14 = $r13.getFont();
+
+        $r15 = r0.this$0;
+
+        specialinvoke $r10.<init>($r12, $r14, $r15);
+
+        r16 = $r10.getSelectedFont();
+
+(0)     goto label2;
+
+     label1:
+        $r4 = new org.gjt.sp.jedit.gui.FontSelectorDialog;
+
+        $r5 = r0.this$0;
+
+        $r6 = $r5.getFont();
+
+        $r7 = r0.this$0;
+
+        specialinvoke $r4.<init>(r2, $r6, $r7);
+
+(1)     r16_1 = $r4.getSelectedFont();
+
+     label2:
+        r16_2 = Phi(r16 #0, r16_1 #1);
+
+        if r16_2 == null goto label3;
+
+        $r8 = r0.this$0;
+
+        $r8.setFont(r16_2);
+
+        $r9 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.FontSelector.access$000($r9);
+
+     label3:
+        return;
+    }
+}

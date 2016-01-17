@@ -1,0 +1,165 @@
+class org.gjt.sp.jedit.indent.CloseBracketIndentRule$AlignBracket extends java.lang.Object implements org.gjt.sp.jedit.indent.IndentAction
+{
+    private int line;
+    private int offset;
+    private int openBracketLine;
+    private int openBracketColumn;
+    private java.lang.CharSequence openBracketLineText;
+    private int extraIndent;
+
+    public void <init>(org.gjt.sp.jedit.buffer.JEditBuffer, int, int)
+    {
+        org.gjt.sp.jedit.indent.CloseBracketIndentRule$AlignBracket r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+        int i0, i1, i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9;
+        java.lang.CharSequence $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.line = i0;
+
+        r0.offset = i1;
+
+        $i4 = r0.line;
+
+        $i3 = r0.offset;
+
+        i2 = org.gjt.sp.jedit.TextUtilities.findMatchingBracket(r1, $i4, $i3);
+
+        if i2 != -1 goto label1;
+
+        r0.openBracketLine = -1;
+
+        goto label2;
+
+     label1:
+        $i5 = r1.getLineOfOffset(i2);
+
+        r0.openBracketLine = $i5;
+
+        $i6 = r0.openBracketLine;
+
+        $i7 = r1.getLineStartOffset($i6);
+
+        $i8 = i2 - $i7;
+
+        r0.openBracketColumn = $i8;
+
+        $i9 = r0.openBracketLine;
+
+        $r2 = r1.getLineSegment($i9);
+
+        r0.openBracketLineText = $r2;
+
+     label2:
+        return;
+    }
+
+    public int getExtraIndent()
+    {
+        org.gjt.sp.jedit.indent.CloseBracketIndentRule$AlignBracket r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.extraIndent;
+
+        return $i0;
+    }
+
+    public void setExtraIndent(int)
+    {
+        org.gjt.sp.jedit.indent.CloseBracketIndentRule$AlignBracket r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r0.extraIndent = i0;
+
+        return;
+    }
+
+    public int getOpenBracketColumn()
+    {
+        org.gjt.sp.jedit.indent.CloseBracketIndentRule$AlignBracket r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.openBracketColumn;
+
+        return $i0;
+    }
+
+    public int getOpenBracketLine()
+    {
+        org.gjt.sp.jedit.indent.CloseBracketIndentRule$AlignBracket r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.openBracketLine;
+
+        return $i0;
+    }
+
+    public int calculateIndent(org.gjt.sp.jedit.buffer.JEditBuffer, int, int, int)
+    {
+        org.gjt.sp.jedit.indent.CloseBracketIndentRule$AlignBracket r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+        int i0, i1, i2, $i3, $i4, $i5, $i6, $i7, $i8;
+        java.lang.CharSequence $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        $r2 = r0.openBracketLineText;
+
+        if $r2 != null goto label1;
+
+        return i2;
+
+     label1:
+        $r3 = r0.openBracketLineText;
+
+        $i3 = r1.getTabSize();
+
+        $i4 = org.gjt.sp.util.StandardUtilities.getLeadingWhiteSpaceWidth($r3, $i3);
+
+        $i5 = r0.extraIndent;
+
+        $i6 = r1.getIndentSize();
+
+        $i7 = $i5 * $i6;
+
+        $i8 = $i4 + $i7;
+
+        return $i8;
+    }
+
+    public boolean keepChecking()
+    {
+        org.gjt.sp.jedit.indent.CloseBracketIndentRule$AlignBracket r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+}

@@ -1,0 +1,126 @@
+class org.gjt.sp.jedit.help.HelpTOCPanel$2 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.help.HelpTOCPanel this$0;
+
+    void <init>(org.gjt.sp.jedit.help.HelpTOCPanel)
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel$2 r0;
+        org.gjt.sp.jedit.help.HelpTOCPanel r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel$2 r0;
+        javax.swing.tree.DefaultMutableTreeNode r1, $r6, $r14, $r23;
+        org.gjt.sp.jedit.help.HelpTOCPanel $r2, $r3, $r5, $r7, $r9, $r11, $r13, $r15, $r18, $r19, $r22, $r25;
+        javax.swing.tree.DefaultTreeModel $r4, $r10;
+        javax.swing.JTree $r8, $r12, $r26;
+        int $i0, i1;
+        org.gjt.sp.jedit.help.HelpViewerInterface $r16, $r20;
+        java.lang.String $r17, $r21;
+        javax.swing.tree.TreeNode $r24;
+        javax.swing.tree.TreePath $r27;
+        javax.swing.tree.TreeNode[] $r28;
+
+        r0 := @this;
+
+        $r2 = r0.this$0;
+
+        org.gjt.sp.jedit.help.HelpTOCPanel.access$200($r2);
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.help.HelpTOCPanel.access$000($r3);
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.help.HelpTOCPanel.access$300($r5);
+
+        $r4.reload($r6);
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.help.HelpTOCPanel.access$100($r7);
+
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.help.HelpTOCPanel.access$000($r9);
+
+        $r8.setModel($r10);
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.help.HelpTOCPanel.access$100($r11);
+
+        $r12.setRootVisible(0);
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.help.HelpTOCPanel.access$300($r13);
+
+        $i0 = $r14.getChildCount();
+
+        if i1 >= $i0 goto label2;
+
+        $r22 = r0.this$0;
+
+        $r23 = org.gjt.sp.jedit.help.HelpTOCPanel.access$300($r22);
+
+        $r24 = $r23.getChildAt(i1);
+
+        r1 = (javax.swing.tree.DefaultMutableTreeNode) $r24;
+
+        $r25 = r0.this$0;
+
+        $r26 = org.gjt.sp.jedit.help.HelpTOCPanel.access$100($r25);
+
+        $r27 = new javax.swing.tree.TreePath;
+
+        $r28 = r1.getPath();
+
+        specialinvoke $r27.<init>($r28);
+
+        $r26.expandPath($r27);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.help.HelpTOCPanel.access$400($r15);
+
+        $r17 = $r16.getShortURL();
+
+        if $r17 == null goto label3;
+
+        $r19 = r0.this$0;
+
+        $r18 = r0.this$0;
+
+        $r20 = org.gjt.sp.jedit.help.HelpTOCPanel.access$400($r18);
+
+        $r21 = $r20.getShortURL();
+
+        $r19.selectNode($r21);
+
+     label3:
+        return;
+    }
+}

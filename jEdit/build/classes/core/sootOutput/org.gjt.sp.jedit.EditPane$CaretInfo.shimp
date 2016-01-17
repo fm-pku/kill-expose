@@ -1,0 +1,44 @@
+class org.gjt.sp.jedit.EditPane$CaretInfo extends java.lang.Object
+{
+    public int caret;
+    public org.gjt.sp.jedit.textarea.Selection[] selection;
+    public int scrollVert;
+    public int scrollHoriz;
+    public boolean rectangularSelection;
+    public boolean multipleSelection;
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.EditPane$CaretInfo r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.caret = -1;
+
+        r0.scrollVert = -1;
+
+        r0.scrollHoriz = -1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.EditPane$1)
+    {
+        org.gjt.sp.jedit.EditPane$CaretInfo r0;
+        org.gjt.sp.jedit.EditPane$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

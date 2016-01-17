@@ -1,0 +1,144 @@
+public abstract class org.gjt.sp.jedit.buffer.FoldHandler extends java.lang.Object
+{
+    public static org.gjt.sp.jedit.buffer.FoldHandlerProvider foldHandlerProvider;
+    private final java.lang.String name;
+
+    public java.lang.String getName()
+    {
+        org.gjt.sp.jedit.buffer.FoldHandler r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.name;
+
+        return $r1;
+    }
+
+    public abstract int getFoldLevel(org.gjt.sp.jedit.buffer.JEditBuffer, int, javax.swing.text.Segment);
+
+    public java.util.List getPrecedingFoldLevels(org.gjt.sp.jedit.buffer.JEditBuffer, int, javax.swing.text.Segment, int)
+    {
+        org.gjt.sp.jedit.buffer.FoldHandler r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+        int i0, i1;
+        javax.swing.text.Segment r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        r2 := @parameter2;
+
+        i1 := @parameter3;
+
+        return null;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        org.gjt.sp.jedit.buffer.FoldHandler r0;
+        java.lang.Object r1;
+        java.lang.Class $r2, $r3;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 != null goto label1;
+
+        return 0;
+
+     label1:
+        $r2 = r0.getClass();
+
+        $r3 = r1.getClass();
+
+        if $r2 != $r3 goto label2;
+
+        $z0 = 1;
+
+(0)     goto label3;
+
+     label2:
+(1)     $z0_1 = 0;
+
+     label3:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    public int hashCode()
+    {
+        org.gjt.sp.jedit.buffer.FoldHandler r0;
+        java.lang.Class $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.getClass();
+
+        $i0 = $r1.hashCode();
+
+        return $i0;
+    }
+
+    public static org.gjt.sp.jedit.buffer.FoldHandler getFoldHandler(java.lang.String)
+    {
+        java.lang.String r0;
+        org.gjt.sp.jedit.buffer.FoldHandlerProvider $r1;
+        org.gjt.sp.jedit.buffer.FoldHandler $r2;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.buffer.FoldHandler.foldHandlerProvider;
+
+        $r2 = $r1.getFoldHandler(r0);
+
+        return $r2;
+    }
+
+    public static java.lang.String[] getFoldModes()
+    {
+        org.gjt.sp.jedit.buffer.FoldHandlerProvider $r0;
+        java.lang.String[] $r1;
+
+        $r0 = org.gjt.sp.jedit.buffer.FoldHandler.foldHandlerProvider;
+
+        $r1 = $r0.getFoldModes();
+
+        return $r1;
+    }
+
+    protected void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.buffer.FoldHandler r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.name = r1;
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.buffer.FoldHandler r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.name;
+
+        return $r1;
+    }
+}

@@ -1,0 +1,49 @@
+class org.gjt.sp.jedit.browser.VFSBrowser$5 extends java.lang.Object implements java.lang.Runnable
+{
+    final java.lang.String val$path;
+    final org.gjt.sp.jedit.browser.VFSBrowser this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSBrowser, java.lang.String)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$5 r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+        java.lang.String r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$path = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$5 r0;
+        org.gjt.sp.jedit.browser.VFSBrowser $r1;
+        org.gjt.sp.jedit.browser.BrowserView $r2;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r3;
+        java.lang.String $r4;
+
+        r0 := @this;
+
+        $r1 = r0.this$0;
+
+        $r2 = org.gjt.sp.jedit.browser.VFSBrowser.access$400($r1);
+
+        $r3 = $r2.getTable();
+
+        $r4 = r0.val$path;
+
+        $r3.selectFile($r4);
+
+        return;
+    }
+}

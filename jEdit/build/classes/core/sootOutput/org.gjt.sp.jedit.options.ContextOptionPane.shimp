@@ -1,0 +1,84 @@
+public class org.gjt.sp.jedit.options.ContextOptionPane extends org.gjt.sp.jedit.gui.AbstractContextOptionPane
+{
+    private javax.swing.JCheckBox includeOptionsLink;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.ContextOptionPane r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = org.gjt.sp.jedit.jEdit.getProperty("options.context.caption");
+
+        specialinvoke r0.<init>("context", $r1);
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.ContextOptionPane r0;
+        javax.swing.JCheckBox $r1, $r3, $r4;
+        java.lang.String $r2;
+        boolean $z0;
+
+        r0 := @this;
+
+        specialinvoke r0._init();
+
+        $r1 = new javax.swing.JCheckBox;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("options.context.includeOptionsLink.label");
+
+        specialinvoke $r1.<init>($r2);
+
+        r0.includeOptionsLink = $r1;
+
+        $r3 = r0.includeOptionsLink;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("options.context.includeOptionsLink");
+
+        $r3.setSelected($z0);
+
+        $r4 = r0.includeOptionsLink;
+
+        r0.addButton($r4);
+
+        return;
+    }
+
+    protected java.lang.String getContextMenu()
+    {
+        org.gjt.sp.jedit.options.ContextOptionPane r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = org.gjt.sp.jedit.jEdit.getProperty("view.context");
+
+        return $r1;
+    }
+
+    protected void saveContextMenu(java.lang.String)
+    {
+        org.gjt.sp.jedit.options.ContextOptionPane r0;
+        java.lang.String r1;
+        javax.swing.JCheckBox $r2;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        org.gjt.sp.jedit.jEdit.setProperty("view.context", r1);
+
+        $r2 = r0.includeOptionsLink;
+
+        $z0 = $r2.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("options.context.includeOptionsLink", $z0);
+
+        return;
+    }
+}

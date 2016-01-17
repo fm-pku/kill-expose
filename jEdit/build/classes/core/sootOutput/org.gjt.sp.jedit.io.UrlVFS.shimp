@@ -1,0 +1,202 @@
+public class org.gjt.sp.jedit.io.UrlVFS extends org.gjt.sp.jedit.io.VFS
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.io.UrlVFS r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("url", 257);
+
+        return;
+    }
+
+    public java.lang.String constructPath(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.io.UrlVFS r0;
+        java.lang.String r1, r2, $r7, $r11;
+        boolean $z0;
+        java.lang.StringBuilder $r3, $r4, $r5, $r6, $r8, $r9, $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $z0 = r1.endsWith("/");
+
+        if $z0 == 0 goto label1;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append(r1);
+
+        $r10 = $r9.append(r2);
+
+        $r11 = $r10.toString();
+
+        return $r11;
+
+     label1:
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append(r1);
+
+        $r5 = $r4.append(47);
+
+        $r6 = $r5.append(r2);
+
+        $r7 = $r6.toString();
+
+        return $r7;
+    }
+
+    public java.io.InputStream _createInputStream(java.lang.Object, java.lang.String, boolean, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.UrlVFS r0;
+        java.lang.Object r1;
+        java.lang.String r2, $r10;
+        boolean z0;
+        java.awt.Component r3;
+        java.net.MalformedURLException r4, $r8;
+        java.lang.String[] r5, $r9;
+        java.net.URL $r6;
+        java.io.InputStream $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        r3 := @parameter3;
+
+     label1:
+        $r6 = new java.net.URL;
+
+        specialinvoke $r6.<init>(r2);
+
+        $r7 = $r6.openStream();
+
+     label2:
+        return $r7;
+
+     label3:
+        $r8 := @caughtexception;
+
+        r4 = $r8;
+
+        org.gjt.sp.util.Log.log(9, r0, r4);
+
+        $r9 = newarray (java.lang.String)[1];
+
+        $r10 = r4.getMessage();
+
+        $r9[0] = $r10;
+
+        r5 = $r9;
+
+        org.gjt.sp.jedit.io.VFSManager.error(r3, r2, "ioerror.badurl", r5);
+
+        return null;
+
+        catch java.net.MalformedURLException from label1 to label2 with label3;
+    }
+
+    public java.io.OutputStream _createOutputStream(java.lang.Object, java.lang.String, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.UrlVFS r0;
+        java.lang.Object r1;
+        java.lang.String r2, $r11;
+        java.awt.Component r3;
+        java.net.MalformedURLException r4, $r9;
+        java.lang.String[] r5, $r10;
+        java.net.URL $r6;
+        java.net.URLConnection $r7;
+        java.io.OutputStream $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+     label1:
+        $r6 = new java.net.URL;
+
+        specialinvoke $r6.<init>(r2);
+
+        $r7 = $r6.openConnection();
+
+        $r8 = $r7.getOutputStream();
+
+     label2:
+        return $r8;
+
+     label3:
+        $r9 := @caughtexception;
+
+        r4 = $r9;
+
+        org.gjt.sp.util.Log.log(9, r0, r4);
+
+        $r10 = newarray (java.lang.String)[1];
+
+        $r11 = r4.getMessage();
+
+        $r10[0] = $r11;
+
+        r5 = $r10;
+
+        org.gjt.sp.jedit.io.VFSManager.error(r3, r2, "ioerror.badurl", r5);
+
+        return null;
+
+        catch java.net.MalformedURLException from label1 to label2 with label3;
+    }
+
+    public java.lang.String getFilePath(java.lang.String)
+    {
+        org.gjt.sp.jedit.io.UrlVFS r0;
+        java.lang.String r1, $r4, $r6;
+        java.net.MalformedURLException r2, $r5;
+        java.net.URL $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+     label1:
+        $r3 = new java.net.URL;
+
+        specialinvoke $r3.<init>(r1);
+
+        $r4 = $r3.getPath();
+
+     label2:
+        return $r4;
+
+     label3:
+        $r5 := @caughtexception;
+
+        r2 = $r5;
+
+        org.gjt.sp.util.Log.log(9, r0, r2);
+
+        $r6 = specialinvoke r0.getFilePath(r1);
+
+        return $r6;
+
+        catch java.net.MalformedURLException from label1 to label2 with label3;
+    }
+}

@@ -1,0 +1,7 @@
+public interface  org.gjt.sp.jedit.gui.HistoryModelSaver extends java.lang.Object
+{
+
+    public abstract java.util.Map load(java.util.Map);
+
+    public abstract boolean save(java.util.Map);
+}

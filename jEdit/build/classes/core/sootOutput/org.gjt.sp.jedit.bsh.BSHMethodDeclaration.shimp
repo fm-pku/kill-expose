@@ -1,0 +1,416 @@
+class org.gjt.sp.jedit.bsh.BSHMethodDeclaration extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+    public java.lang.String name;
+    org.gjt.sp.jedit.bsh.BSHReturnType returnTypeNode;
+    org.gjt.sp.jedit.bsh.BSHFormalParameters paramsNode;
+    org.gjt.sp.jedit.bsh.BSHBlock blockNode;
+    int firstThrowsClause;
+    public org.gjt.sp.jedit.bsh.Modifiers modifiers;
+    java.lang.Class returnType;
+    int numThrows;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHMethodDeclaration r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        r0.numThrows = 0;
+
+        return;
+    }
+
+    synchronized void insureNodesParsed()
+    {
+        org.gjt.sp.jedit.bsh.BSHMethodDeclaration r0;
+        org.gjt.sp.jedit.bsh.Node r1, $r3, $r5, $r8, $r10;
+        org.gjt.sp.jedit.bsh.BSHFormalParameters $r2, $r4, $r9;
+        boolean $z0;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8;
+        org.gjt.sp.jedit.bsh.BSHBlock $r6, $r11;
+        org.gjt.sp.jedit.bsh.BSHReturnType $r7;
+
+        r0 := @this;
+
+        $r2 = r0.paramsNode;
+
+        if $r2 == null goto label1;
+
+        return;
+
+     label1:
+        r1 = r0.jjtGetChild(0);
+
+        r0.firstThrowsClause = 1;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.bsh.BSHReturnType;
+
+        if $z0 == 0 goto label3;
+
+        $r7 = (org.gjt.sp.jedit.bsh.BSHReturnType) r1;
+
+        r0.returnTypeNode = $r7;
+
+        $r8 = r0.jjtGetChild(1);
+
+        $r9 = (org.gjt.sp.jedit.bsh.BSHFormalParameters) $r8;
+
+        r0.paramsNode = $r9;
+
+        $i2 = r0.jjtGetNumChildren();
+
+        $i3 = r0.numThrows;
+
+        $i4 = 2 + $i3;
+
+        if $i2 <= $i4 goto label2;
+
+        $i7 = r0.numThrows;
+
+        $i8 = 2 + $i7;
+
+        $r10 = r0.jjtGetChild($i8);
+
+        $r11 = (org.gjt.sp.jedit.bsh.BSHBlock) $r10;
+
+        r0.blockNode = $r11;
+
+     label2:
+        $i5 = r0.firstThrowsClause;
+
+        $i6 = $i5 + 1;
+
+        r0.firstThrowsClause = $i6;
+
+        goto label4;
+
+     label3:
+        $r3 = r0.jjtGetChild(0);
+
+        $r4 = (org.gjt.sp.jedit.bsh.BSHFormalParameters) $r3;
+
+        r0.paramsNode = $r4;
+
+        $i0 = r0.numThrows;
+
+        $i1 = 1 + $i0;
+
+        $r5 = r0.jjtGetChild($i1);
+
+        $r6 = (org.gjt.sp.jedit.bsh.BSHBlock) $r5;
+
+        r0.blockNode = $r6;
+
+     label4:
+        return;
+    }
+
+    java.lang.Class evalReturnType(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHMethodDeclaration r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.BSHReturnType $r3, $r4;
+        java.lang.Class $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.insureNodesParsed();
+
+        $r3 = r0.returnTypeNode;
+
+        if $r3 == null goto label1;
+
+        $r4 = r0.returnTypeNode;
+
+        $r5 = $r4.evalReturnType(r1, r2);
+
+        return $r5;
+
+     label1:
+        return null;
+    }
+
+    java.lang.String getReturnTypeDescriptor(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter, java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BSHMethodDeclaration r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        java.lang.String r3, $r6;
+        org.gjt.sp.jedit.bsh.BSHReturnType $r4, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.insureNodesParsed();
+
+        $r4 = r0.returnTypeNode;
+
+        if $r4 != null goto label1;
+
+        return null;
+
+     label1:
+        $r5 = r0.returnTypeNode;
+
+        $r6 = $r5.getTypeDescriptor(r1, r2, r3);
+
+        return $r6;
+    }
+
+    org.gjt.sp.jedit.bsh.BSHReturnType getReturnTypeNode()
+    {
+        org.gjt.sp.jedit.bsh.BSHMethodDeclaration r0;
+        org.gjt.sp.jedit.bsh.BSHReturnType $r1;
+
+        r0 := @this;
+
+        r0.insureNodesParsed();
+
+        $r1 = r0.returnTypeNode;
+
+        return $r1;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHMethodDeclaration r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.NameSpace r3;
+        org.gjt.sp.jedit.bsh.BshMethod r4, $r7;
+        org.gjt.sp.jedit.bsh.UtilEvalError r5, $r11;
+        java.lang.Class $r6;
+        org.gjt.sp.jedit.bsh.Modifiers $r8;
+        java.lang.String $r9;
+        org.gjt.sp.jedit.bsh.Primitive $r10;
+        org.gjt.sp.jedit.bsh.EvalError $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r6 = r0.evalReturnType(r1, r2);
+
+        r0.returnType = $r6;
+
+        specialinvoke r0.evalNodes(r1, r2);
+
+        r3 = r1.top();
+
+        $r7 = new org.gjt.sp.jedit.bsh.BshMethod;
+
+        $r8 = r0.modifiers;
+
+        specialinvoke $r7.<init>(r0, r3, $r8);
+
+        r4 = $r7;
+
+     label1:
+        $r9 = r0.name;
+
+        r3.setMethod($r9, r4);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r11 := @caughtexception;
+
+        r5 = $r11;
+
+        $r12 = r5.toEvalError(r0, r1);
+
+        throw $r12;
+
+     label4:
+        $r10 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        return $r10;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label2 with label3;
+    }
+
+    private void evalNodes(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHMethodDeclaration r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        int $i0, $i1, $i2, $i3, i4, i5;
+        org.gjt.sp.jedit.bsh.BSHFormalParameters $r3, $r5, $r14, $r20;
+        boolean $z0;
+        java.lang.Class[] $r6, $r15;
+        java.lang.Class $r7, $r16;
+        org.gjt.sp.jedit.bsh.EvalError $r8, $r17;
+        java.lang.StringBuilder $r9, $r10, $r12, $r18, $r19, $r23, $r24, $r26;
+        java.lang.String $r11, $r13, $r22, $r25, $r27;
+        java.lang.String[] $r21;
+        org.gjt.sp.jedit.bsh.Node $r28;
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName $r29;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.insureNodesParsed();
+
+(0)     i4 = r0.firstThrowsClause;
+
+     label1:
+        i4 = Phi(i4 #0, i4 #1);
+
+        $i1 = r0.numThrows;
+
+        $i0 = r0.firstThrowsClause;
+
+        $i2 = $i1 + $i0;
+
+        if i4 >= $i2 goto label2;
+
+        $r28 = r0.jjtGetChild(i4);
+
+        $r29 = (org.gjt.sp.jedit.bsh.BSHAmbiguousName) $r28;
+
+        $r29.toClass(r1, r2);
+
+        i4 = i4 + 1;
+
+(1)     goto label1;
+
+     label2:
+        $r3 = r0.paramsNode;
+
+        $r3.eval(r1, r2);
+
+        $z0 = r2.getStrictJava();
+
+(2)     if $z0 == 0 goto label6;
+
+(3)     i5 = 0;
+
+     label3:
+        i4 = Phi(i4 #3, i4 #4);
+
+        i5 = Phi(i5 #3, i5 #4);
+
+        $r5 = r0.paramsNode;
+
+        $r6 = $r5.paramTypes;
+
+        $i3 = lengthof $r6;
+
+        if i5 >= $i3 goto label5;
+
+        $r14 = r0.paramsNode;
+
+        $r15 = $r14.paramTypes;
+
+        $r16 = $r15[i5];
+
+        if $r16 != null goto label4;
+
+        $r17 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<init>();
+
+        $r19 = $r18.append("(Strict Java Mode) Undeclared argument type, parameter: ");
+
+        $r20 = r0.paramsNode;
+
+        $r21 = $r20.getParamNames();
+
+        $r22 = $r21[i5];
+
+        $r23 = $r19.append($r22);
+
+        $r24 = $r23.append(" in method: ");
+
+        $r25 = r0.name;
+
+        $r26 = $r24.append($r25);
+
+        $r27 = $r26.toString();
+
+        specialinvoke $r17.<init>($r27, r0, null);
+
+        throw $r17;
+
+     label4:
+        i5 = i5 + 1;
+
+(4)     goto label3;
+
+     label5:
+        $r7 = r0.returnType;
+
+(5)     if $r7 != null goto label6;
+
+        $r8 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("(Strict Java Mode) Undeclared return type for method: ");
+
+        $r11 = r0.name;
+
+        $r12 = $r10.append($r11);
+
+        $r13 = $r12.toString();
+
+        specialinvoke $r8.<init>($r13, r0, null);
+
+        throw $r8;
+
+     label6:
+        i4 = Phi(i4 #2, i4 #5);
+
+        i5 = Phi(i5 #2, i5 #5);
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.bsh.BSHMethodDeclaration r0;
+        java.lang.StringBuilder $r1, $r2, $r4;
+        java.lang.String $r3, $r5;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("MethodDeclaration: ");
+
+        $r3 = r0.name;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.toString();
+
+        return $r5;
+    }
+}

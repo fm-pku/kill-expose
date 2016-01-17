@@ -1,0 +1,91 @@
+class org.gjt.sp.jedit.search.HyperSearchResults$CollapseChildTreeNodesAction extends javax.swing.AbstractAction
+{
+    final org.gjt.sp.jedit.search.HyperSearchResults this$0;
+
+    void <init>(org.gjt.sp.jedit.search.HyperSearchResults)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$CollapseChildTreeNodesAction r0;
+        org.gjt.sp.jedit.search.HyperSearchResults r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("hypersearch-results.collapse-child-nodes");
+
+        specialinvoke r0.<init>($r2);
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$CollapseChildTreeNodesAction r0;
+        java.awt.event.ActionEvent r1;
+        javax.swing.tree.TreePath r2, $r11, $r16;
+        javax.swing.tree.DefaultMutableTreeNode r3, r5;
+        java.util.Enumeration r4;
+        org.gjt.sp.jedit.search.HyperSearchResults $r6, $r9, $r14;
+        javax.swing.JTree $r7, $r10, $r15;
+        java.lang.Object $r8, $r13;
+        boolean $z0;
+        javax.swing.tree.TreeNode[] $r12, $r17;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r6);
+
+        r2 = $r7.getSelectionPath();
+
+        $r8 = r2.getLastPathComponent();
+
+        r3 = (javax.swing.tree.DefaultMutableTreeNode) $r8;
+
+        r4 = r3.children();
+
+     label1:
+        $z0 = r4.hasMoreElements();
+
+        if $z0 == 0 goto label2;
+
+        $r13 = r4.nextElement();
+
+        r5 = (javax.swing.tree.DefaultMutableTreeNode) $r13;
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r14);
+
+        $r16 = new javax.swing.tree.TreePath;
+
+        $r17 = r5.getPath();
+
+        specialinvoke $r16.<init>($r17);
+
+        $r15.collapsePath($r16);
+
+        goto label1;
+
+     label2:
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r9);
+
+        $r11 = new javax.swing.tree.TreePath;
+
+        $r12 = r3.getPath();
+
+        specialinvoke $r11.<init>($r12);
+
+        $r10.scrollPathToVisible($r11);
+
+        return;
+    }
+}

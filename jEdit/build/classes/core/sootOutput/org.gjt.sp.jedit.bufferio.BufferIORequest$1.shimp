@@ -1,0 +1,26 @@
+final class org.gjt.sp.jedit.bufferio.BufferIORequest$1 extends java.io.OutputStream
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.bufferio.BufferIORequest$1 r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void write(int)
+    {
+        org.gjt.sp.jedit.bufferio.BufferIORequest$1 r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        return;
+    }
+}

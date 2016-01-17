@@ -1,0 +1,130 @@
+class org.gjt.sp.jedit.io.FileRootsVFS$Root extends org.gjt.sp.jedit.io.VFSFile
+{
+
+    void <init>(java.io.File)
+    {
+        org.gjt.sp.jedit.io.FileRootsVFS$Root r0;
+        java.io.File r1;
+        java.lang.String r2, $r6, $r11, $r13;
+        javax.swing.filechooser.FileSystemView $r3, $r4, $r5, $r10;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        java.lang.StringBuilder $r7, $r8, $r9, $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r2 = r1.getPath();
+
+        r0.setPath(r2);
+
+        r0.setDeletePath(r2);
+
+        r0.setSymlinkPath(r2);
+
+        $r3 = org.gjt.sp.jedit.io.FileRootsVFS.access$000();
+
+        $z0 = $r3.isFloppyDrive(r1);
+
+        if $z0 == 0 goto label1;
+
+        r0.setType(2);
+
+        r0.setName(r2);
+
+        goto label7;
+
+     label1:
+        $r4 = org.gjt.sp.jedit.io.FileRootsVFS.access$000();
+
+        $z1 = $r4.isDrive(r1);
+
+        if $z1 == 0 goto label2;
+
+        r0.setType(2);
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append(r2);
+
+        $r9 = $r8.append(32);
+
+        $r10 = org.gjt.sp.jedit.io.FileRootsVFS.access$000();
+
+        $r11 = $r10.getSystemDisplayName(r1);
+
+        $r12 = $r9.append($r11);
+
+        $r13 = $r12.toString();
+
+        r0.setName($r13);
+
+        goto label7;
+
+     label2:
+        $z2 = r1.isDirectory();
+
+        if $z2 == 0 goto label6;
+
+        $r5 = org.gjt.sp.jedit.io.FileRootsVFS.access$000();
+
+        $z3 = $r5.isFileSystemRoot(r1);
+
+        if $z3 == 0 goto label3;
+
+        r0.setType(1);
+
+        goto label4;
+
+     label3:
+        r0.setType(2);
+
+     label4:
+        $z4 = org.gjt.sp.jedit.OperatingSystem.isMacOS();
+
+        if $z4 == 0 goto label5;
+
+        $r6 = org.gjt.sp.jedit.MiscUtilities.getFileName(r2);
+
+        r0.setName($r6);
+
+        goto label7;
+
+     label5:
+        r0.setName(r2);
+
+        goto label7;
+
+     label6:
+        r0.setType(0);
+
+     label7:
+        return;
+    }
+
+    public java.lang.String getExtendedAttribute(java.lang.String)
+    {
+        org.gjt.sp.jedit.io.FileRootsVFS$Root r0;
+        java.lang.String r1, $r2;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1.equals("type");
+
+        if $z0 == 0 goto label1;
+
+        $r2 = specialinvoke r0.getExtendedAttribute(r1);
+
+        return $r2;
+
+     label1:
+        return null;
+    }
+}

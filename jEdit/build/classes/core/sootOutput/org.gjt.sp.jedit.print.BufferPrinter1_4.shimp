@@ -1,0 +1,589 @@
+public class org.gjt.sp.jedit.print.BufferPrinter1_4 extends java.lang.Object
+{
+    private static javax.print.attribute.PrintRequestAttributeSet format;
+    private static java.awt.print.PrinterJob job;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.print.BufferPrinter1_4 r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    private static java.awt.print.PrinterJob getPrintJob(java.lang.String)
+    {
+        java.lang.String r0, r1, r2;
+        java.io.File r3, $r10;
+        java.io.FileInputStream r4, $r11;
+        java.lang.Throwable r5, $r25;
+        java.io.IOException r6, $r21, $r22, $r24, r27, r29;
+        java.awt.print.PrinterJob $r7, $r9;
+        javax.print.attribute.HashPrintRequestAttributeSet $r8, $r14;
+        boolean $z0, $z1;
+        java.io.ObjectInputStream $r12, r26, r26_1, r26_2, r26_3, r26_4;
+        java.lang.Object $r13;
+        javax.print.attribute.standard.Chromaticity $r15, $r19;
+        javax.print.attribute.PrintRequestAttributeSet $r16, $r18, $r20;
+        javax.print.attribute.standard.JobName $r17;
+        java.lang.Exception $r23, r28;
+
+        r0 := @parameter0;
+
+        $r7 = java.awt.print.PrinterJob.getPrinterJob();
+
+        org.gjt.sp.jedit.print.BufferPrinter1_4.job = $r7;
+
+        $r8 = new javax.print.attribute.HashPrintRequestAttributeSet;
+
+        specialinvoke $r8.<init>();
+
+        org.gjt.sp.jedit.print.BufferPrinter1_4.format = $r8;
+
+        r1 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+(0)     if r1 == null goto label17;
+
+        r2 = org.gjt.sp.jedit.MiscUtilities.constructPath(r1, "printspec");
+
+        $r10 = new java.io.File;
+
+        specialinvoke $r10.<init>(r2);
+
+        r3 = $r10;
+
+        $z0 = r3.exists();
+
+(1)     if $z0 == 0 goto label17;
+
+(2)     r26 = null;
+
+     label01:
+(3)     $r11 = new java.io.FileInputStream;
+
+        specialinvoke $r11.<init>(r3);
+
+        r4 = $r11;
+
+        $r12 = new java.io.ObjectInputStream;
+
+        specialinvoke $r12.<init>(r4);
+
+(4)     r26_1 = $r12;
+
+        $r13 = r26_1.readObject();
+
+        $r14 = (javax.print.attribute.HashPrintRequestAttributeSet) $r13;
+
+        org.gjt.sp.jedit.print.BufferPrinter1_4.format = $r14;
+
+     label02:
+        if r26_1 == null goto label03;
+
+        r26_1.close();
+
+     label03:
+(5)     goto label14;
+
+     label04:
+        $r24 := @caughtexception;
+
+        r27 = $r24;
+
+(6)     goto label14;
+
+     label05:
+        $r23 := @caughtexception;
+
+(7)     r26_2 = Phi(r26 #3, r26_1 #4);
+
+        r28 = $r23;
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/print/BufferPrinter1_4", r28);
+
+     label06:
+        if r26_2 == null goto label07;
+
+        r26_2.close();
+
+     label07:
+(8)     goto label14;
+
+     label08:
+        $r21 := @caughtexception;
+
+        r29 = $r21;
+
+(9)     goto label14;
+
+     label09:
+        $r25 := @caughtexception;
+
+(10)    r26 = Phi(r26_1 #4, r26 #2, r26_2 #7, r26 #10);
+
+        r5 = $r25;
+
+     label10:
+        if r26 == null goto label11;
+
+        r26.close();
+
+     label11:
+        goto label13;
+
+     label12:
+        $r22 := @caughtexception;
+
+        r6 = $r22;
+
+     label13:
+        throw r5;
+
+     label14:
+        r26_3 = Phi(r26_1 #5, r26_1 #6, r26_2 #8, r26_2 #9);
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.color");
+
+        if $z1 == 0 goto label15;
+
+        $r20 = org.gjt.sp.jedit.print.BufferPrinter1_4.format;
+
+        $r19 = javax.print.attribute.standard.Chromaticity.COLOR;
+
+        $r20.add($r19);
+
+        goto label16;
+
+     label15:
+        $r16 = org.gjt.sp.jedit.print.BufferPrinter1_4.format;
+
+        $r15 = javax.print.attribute.standard.Chromaticity.MONOCHROME;
+
+        $r16.add($r15);
+
+     label16:
+        $r18 = org.gjt.sp.jedit.print.BufferPrinter1_4.format;
+
+        $r17 = new javax.print.attribute.standard.JobName;
+
+        specialinvoke $r17.<init>(r0, null);
+
+(11)    $r18.add($r17);
+
+     label17:
+        r26_4 = Phi(r26 #0, r26 #1, r26_3 #11);
+
+        $r9 = org.gjt.sp.jedit.print.BufferPrinter1_4.job;
+
+        return $r9;
+
+        catch java.io.IOException from label02 to label03 with label04;
+        catch java.lang.Exception from label01 to label02 with label05;
+        catch java.io.IOException from label06 to label07 with label08;
+        catch java.lang.Throwable from label01 to label02 with label09;
+        catch java.lang.Throwable from label05 to label06 with label09;
+        catch java.io.IOException from label10 to label11 with label12;
+        catch java.lang.Throwable from label09 to label10 with label09;
+    }
+
+    public static void pageSetup(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.View r0;
+        java.awt.print.PrinterJob r1;
+        javax.print.attribute.PrintRequestAttributeSet $r2;
+        java.awt.print.PageFormat $r3;
+
+        r0 := @parameter0;
+
+        r1 = org.gjt.sp.jedit.print.BufferPrinter1_4.getPrintJob("PageSetupOnly");
+
+        $r2 = org.gjt.sp.jedit.print.BufferPrinter1_4.format;
+
+        $r3 = r1.pageDialog($r2);
+
+        if $r3 == null goto label1;
+
+        org.gjt.sp.jedit.print.BufferPrinter1_4.savePrintSpec();
+
+     label1:
+        return;
+    }
+
+    public static void print(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Buffer, boolean)
+    {
+        org.gjt.sp.jedit.View r0;
+        org.gjt.sp.jedit.Buffer r1;
+        boolean z0, z1, z2, z3, z4, $z5;
+        java.awt.Font r2;
+        org.gjt.sp.jedit.print.BufferPrintable r3, $r7;
+        java.lang.String $r4, $r5;
+        java.awt.print.PrinterJob $r6, $r9, $r10, $r12;
+        javax.print.attribute.PrintRequestAttributeSet $r8, $r11;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        z0 := @parameter2;
+
+        $r4 = r1.getPath();
+
+        $r5 = org.gjt.sp.jedit.MiscUtilities.abbreviateView($r4);
+
+        $r6 = org.gjt.sp.jedit.print.BufferPrinter1_4.getPrintJob($r5);
+
+        org.gjt.sp.jedit.print.BufferPrinter1_4.job = $r6;
+
+        z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.header");
+
+        z2 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.footer");
+
+        z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.lineNumbers");
+
+        z4 = org.gjt.sp.jedit.jEdit.getBooleanProperty("print.color");
+
+        r2 = org.gjt.sp.jedit.jEdit.getFontProperty("print.font");
+
+        $r7 = new org.gjt.sp.jedit.print.BufferPrintable;
+
+        $r9 = org.gjt.sp.jedit.print.BufferPrinter1_4.job;
+
+        $r8 = org.gjt.sp.jedit.print.BufferPrinter1_4.format;
+
+        specialinvoke $r7.<init>($r9, $r8, r0, r1, r2, z1, z2, z3, z4);
+
+        r3 = $r7;
+
+        $r10 = org.gjt.sp.jedit.print.BufferPrinter1_4.job;
+
+        $r10.setPrintable(r3);
+
+        $r12 = org.gjt.sp.jedit.print.BufferPrinter1_4.job;
+
+        $r11 = org.gjt.sp.jedit.print.BufferPrinter1_4.format;
+
+        $z5 = $r12.printDialog($r11);
+
+        if $z5 != 0 goto label1;
+
+        return;
+
+     label1:
+        org.gjt.sp.jedit.print.BufferPrinter1_4.savePrintSpec();
+
+        r3.print();
+
+        return;
+    }
+
+    public static java.awt.print.PageFormat getPageFormat()
+    {
+        java.awt.print.PrinterJob r0;
+        java.awt.print.PageFormat r1;
+        java.awt.print.Paper r2;
+        javax.print.attribute.standard.MediaSizeName r3;
+        javax.print.attribute.standard.MediaSize r4;
+        javax.print.attribute.standard.MediaPrintableArea r5;
+        javax.print.attribute.standard.OrientationRequested r6, $r13, $r14, $r15, $r16;
+        javax.print.attribute.PrintRequestAttributeSet $r7, $r9, $r11;
+        javax.print.attribute.Attribute $r8, $r10, $r12;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7;
+        float $f0, $f1, $f2, $f3, $f4, $f5, $f6, $f7, $f8, $f9, $f10, $f11;
+        double $d0, $d1, $d2, $d3, $d4, $d5;
+
+        r0 = org.gjt.sp.jedit.print.BufferPrinter1_4.getPrintJob(" ");
+
+        r1 = r0.defaultPage();
+
+        r2 = r1.getPaper();
+
+        $r7 = org.gjt.sp.jedit.print.BufferPrinter1_4.format;
+
+        $r8 = $r7.get(class "javax/print/attribute/standard/Media");
+
+        r3 = (javax.print.attribute.standard.MediaSizeName) $r8;
+
+        r4 = javax.print.attribute.standard.MediaSize.getMediaSizeForName(r3);
+
+        $r9 = org.gjt.sp.jedit.print.BufferPrinter1_4.format;
+
+        $r10 = $r9.get(class "javax/print/attribute/standard/MediaPrintableArea");
+
+        r5 = (javax.print.attribute.standard.MediaPrintableArea) $r10;
+
+        if r5 == null goto label1;
+
+        $f4 = r5.getX(25400);
+
+        $f5 = $f4 * 72.0F;
+
+        $d2 = (double) $f5;
+
+        $f6 = r5.getY(25400);
+
+        $f7 = $f6 * 72.0F;
+
+        $d3 = (double) $f7;
+
+        $f8 = r5.getWidth(25400);
+
+        $f9 = $f8 * 72.0F;
+
+        $d4 = (double) $f9;
+
+        $f10 = r5.getHeight(25400);
+
+        $f11 = $f10 * 72.0F;
+
+        $d5 = (double) $f11;
+
+        r2.setImageableArea($d2, $d3, $d4, $d5);
+
+     label1:
+        if r4 == null goto label2;
+
+        $f0 = r4.getX(25400);
+
+        $f1 = $f0 * 72.0F;
+
+        $d0 = (double) $f1;
+
+        $f2 = r4.getY(25400);
+
+        $f3 = $f2 * 72.0F;
+
+        $d1 = (double) $f3;
+
+        r2.setSize($d0, $d1);
+
+     label2:
+        r1.setPaper(r2);
+
+        $r11 = org.gjt.sp.jedit.print.BufferPrinter1_4.format;
+
+        $r12 = $r11.get(class "javax/print/attribute/standard/OrientationRequested");
+
+        r6 = (javax.print.attribute.standard.OrientationRequested) $r12;
+
+        if r6 == null goto label6;
+
+        $i0 = r6.getValue();
+
+        $r13 = javax.print.attribute.standard.OrientationRequested.LANDSCAPE;
+
+        $i1 = $r13.getValue();
+
+        if $i0 != $i1 goto label3;
+
+        r1.setOrientation(0);
+
+        goto label6;
+
+     label3:
+        $i2 = r6.getValue();
+
+        $r14 = javax.print.attribute.standard.OrientationRequested.REVERSE_LANDSCAPE;
+
+        $i3 = $r14.getValue();
+
+        if $i2 != $i3 goto label4;
+
+        r1.setOrientation(2);
+
+        goto label6;
+
+     label4:
+        $i4 = r6.getValue();
+
+        $r15 = javax.print.attribute.standard.OrientationRequested.PORTRAIT;
+
+        $i5 = $r15.getValue();
+
+        if $i4 != $i5 goto label5;
+
+        r1.setOrientation(1);
+
+        goto label6;
+
+     label5:
+        $i6 = r6.getValue();
+
+        $r16 = javax.print.attribute.standard.OrientationRequested.REVERSE_PORTRAIT;
+
+        $i7 = $r16.getValue();
+
+        if $i6 != $i7 goto label6;
+
+        r1.setOrientation(1);
+
+     label6:
+        return r1;
+    }
+
+    private static void savePrintSpec()
+    {
+        java.lang.String r0, r1;
+        java.io.File r2, $r6;
+        java.io.FileOutputStream r3, $r7;
+        java.lang.Throwable r4, $r15;
+        java.io.IOException r5, $r16, $r17, $r18, r21, r23;
+        java.io.ObjectOutputStream $r8, r19, r19_1, r19_2, r19_3;
+        javax.print.attribute.PrintRequestAttributeSet $r9, $r10;
+        javax.print.attribute.Attribute $r11;
+        int $i0, $i1;
+        javax.print.attribute.standard.Chromaticity $r13, r20;
+        java.lang.Exception $r14, r22;
+        boolean $z0, $z0_1, $z0_2, $z0_3, $z0_4, $z0_5;
+
+        r0 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        if r0 != null goto label01;
+
+        return;
+
+     label01:
+        r1 = org.gjt.sp.jedit.MiscUtilities.constructPath(r0, "printspec");
+
+        $r6 = new java.io.File;
+
+        specialinvoke $r6.<init>(r1);
+
+        r2 = $r6;
+
+(0)     r19 = null;
+
+     label02:
+(1)     $r7 = new java.io.FileOutputStream;
+
+        specialinvoke $r7.<init>(r2);
+
+        r3 = $r7;
+
+        $r8 = new java.io.ObjectOutputStream;
+
+        specialinvoke $r8.<init>(r3);
+
+(2)     r19_1 = $r8;
+
+(3)     $r9 = org.gjt.sp.jedit.print.BufferPrinter1_4.format;
+
+        r19_1.writeObject($r9);
+
+        $r10 = org.gjt.sp.jedit.print.BufferPrinter1_4.format;
+
+        $r11 = $r10.get(class "javax/print/attribute/standard/Chromaticity");
+
+        r20 = (javax.print.attribute.standard.Chromaticity) $r11;
+
+(4)     if r20 == null goto label05;
+
+        $i0 = r20.getValue();
+
+        $r13 = javax.print.attribute.standard.Chromaticity.COLOR;
+
+        $i1 = $r13.getValue();
+
+        if $i0 != $i1 goto label03;
+
+        $z0 = 1;
+
+(5)     goto label04;
+
+     label03:
+(6)     $z0_1 = 0;
+
+     label04:
+        $z0_2 = Phi($z0 #5, $z0_1 #6);
+
+(7)     org.gjt.sp.jedit.jEdit.setBooleanProperty("print.color", $z0_2);
+
+     label05:
+        $z0_3 = Phi($z0 #4, $z0_2 #7);
+
+(8)     if r19_1 == null goto label20;
+
+     label06:
+        r19_1.close();
+
+     label07:
+(9)     goto label20;
+
+     label08:
+        $r16 := @caughtexception;
+
+        r21 = $r16;
+
+(10)    goto label20;
+
+     label09:
+(11)    $r14 := @caughtexception;
+
+        $z0_4 = Phi($z0 #1, $z0_1 #6, $z0_2 #7);
+
+(12)    r19_2 = Phi(r19 #1, r19_1 #3);
+
+        r22 = $r14;
+
+        r22.printStackTrace();
+
+     label10:
+(13)    if r19_2 == null goto label20;
+
+     label11:
+        r19_2.close();
+
+     label12:
+(14)    goto label20;
+
+     label13:
+        $r18 := @caughtexception;
+
+        r23 = $r18;
+
+(15)    goto label20;
+
+     label14:
+        $r15 := @caughtexception;
+
+        $z0 = Phi($z0_1 #6, $z0_2 #7, $z0 #0, $z0_4 #12, $z0 #16);
+
+(16)    r19 = Phi(r19 #0, r19_1 #2, r19_2 #11, r19 #16);
+
+        r4 = $r15;
+
+     label15:
+        if r19 == null goto label19;
+
+     label16:
+        r19.close();
+
+     label17:
+        goto label19;
+
+     label18:
+        $r17 := @caughtexception;
+
+        r5 = $r17;
+
+     label19:
+        throw r4;
+
+     label20:
+        $z0_5 = Phi($z0_3 #8, $z0_3 #9, $z0_3 #10, $z0_4 #13, $z0_4 #14, $z0_4 #15);
+
+        r19_3 = Phi(r19_1 #8, r19_1 #9, r19_1 #10, r19_2 #13, r19_2 #14, r19_2 #15);
+
+        return;
+
+        catch java.io.IOException from label06 to label07 with label08;
+        catch java.lang.Exception from label02 to label05 with label09;
+        catch java.io.IOException from label11 to label12 with label13;
+        catch java.lang.Throwable from label02 to label05 with label14;
+        catch java.lang.Throwable from label09 to label10 with label14;
+        catch java.io.IOException from label16 to label17 with label18;
+        catch java.lang.Throwable from label14 to label15 with label14;
+    }
+}

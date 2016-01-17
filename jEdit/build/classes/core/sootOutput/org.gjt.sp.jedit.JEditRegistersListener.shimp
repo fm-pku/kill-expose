@@ -1,0 +1,33 @@
+class org.gjt.sp.jedit.JEditRegistersListener extends java.lang.Object implements org.gjt.sp.jedit.RegistersListener
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.JEditRegistersListener r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void registerChanged(char)
+    {
+        org.gjt.sp.jedit.JEditRegistersListener r0;
+        char c0;
+        org.gjt.sp.jedit.msg.RegisterChanged $r1;
+
+        r0 := @this;
+
+        c0 := @parameter0;
+
+        $r1 = new org.gjt.sp.jedit.msg.RegisterChanged;
+
+        specialinvoke $r1.<init>(null, c0);
+
+        org.gjt.sp.jedit.EditBus.send($r1);
+
+        return;
+    }
+}

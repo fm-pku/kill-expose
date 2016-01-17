@@ -1,0 +1,46 @@
+class org.gjt.sp.jedit.options.ShortcutsOptionPane$2 extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.options.ShortcutsOptionPane this$0;
+
+    void <init>(org.gjt.sp.jedit.options.ShortcutsOptionPane)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$2 r0;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.options.ShortcutsOptionPane$2 r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.options.ShortcutsOptionPane $r2, $r4;
+        javax.swing.JTextField $r3, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.options.ShortcutsOptionPane.access$400($r2);
+
+        $r3.setText("");
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.options.ShortcutsOptionPane.access$400($r4);
+
+        $r5.requestFocus();
+
+        return;
+    }
+}

@@ -1,0 +1,11 @@
+public interface  org.gjt.sp.jedit.bsh.classpath.BshClassPath$MappingFeedback extends java.lang.Object
+{
+
+    public abstract void startClassMapping();
+
+    public abstract void classMapping(java.lang.String);
+
+    public abstract void errorWhileMapping(java.lang.String);
+
+    public abstract void endClassMapping();
+}

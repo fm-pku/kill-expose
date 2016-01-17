@@ -1,0 +1,442 @@
+class org.gjt.sp.jedit.browser.RenameBrowserTask extends org.gjt.sp.jedit.browser.AbstractBrowserTask
+{
+    private java.lang.String path2;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSBrowser, java.lang.Object, org.gjt.sp.jedit.io.VFS, java.lang.String, java.lang.String, java.lang.Runnable)
+    {
+        org.gjt.sp.jedit.browser.RenameBrowserTask r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+        java.lang.Object r2;
+        org.gjt.sp.jedit.io.VFS r3;
+        java.lang.String r4, r5;
+        java.lang.Runnable r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        r6 := @parameter5;
+
+        specialinvoke r0.<init>(r1, r2, r3, r4, r6);
+
+        Packer.Unpack(r0);
+
+        r0.path2 = r5;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void _run()
+    {
+        org.gjt.sp.jedit.browser.RenameBrowserTask r0;
+        java.io.IOException r1, r4, $r46, $r51, $r56, $r64, $r73, r80, r82, r84;
+        java.lang.String[] r2, r5, $r6, $r29, $r37, $r47, $r52, $r57, $r65, $r74, r78, r81, r83, r85;
+        java.lang.Throwable r3, $r69;
+        java.lang.String $r7, $r8, $r9, $r11, $r14, $r16, $r19, $r22, $r23, $r30, $r31, $r34, $r38, $r39, $r44, $r45, $r48, $r49, $r53, $r54, $r58, $r59, $r66, $r67, $r75, $r76;
+        org.gjt.sp.jedit.browser.VFSBrowser $r10, $r15, $r21, $r26, $r32, $r33, $r40, $r41, $r50, $r55, $r60, $r61, $r68, $r70, $r77;
+        java.lang.Object $r12, $r17, $r24, $r27, $r35, $r42, $r62, $r71;
+        org.gjt.sp.jedit.io.VFS $r13, $r18, $r20, $r25, $r28, $r36, $r43, $r63, $r72;
+        boolean $z0, $z1, $z2, $z3;
+        org.gjt.sp.jedit.io.VFSFile r79;
+
+        r0 := @this;
+
+     label01:
+        r0.setCancellable(1);
+
+        $r6 = newarray (java.lang.String)[2];
+
+        $r7 = r0.path;
+
+        $r6[0] = $r7;
+
+        $r8 = r0.path2;
+
+        $r6[1] = $r8;
+
+        r78 = $r6;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("vfs.status.renaming", r78);
+
+        r0.setStatus($r9);
+
+        $r13 = r0.vfs;
+
+        $r12 = r0.session;
+
+        $r11 = r0.path;
+
+        $r10 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        $r14 = $r13._canonPath($r12, $r11, $r10);
+
+        r0.path = $r14;
+
+        $r18 = r0.vfs;
+
+        $r17 = r0.session;
+
+        $r16 = r0.path2;
+
+        $r15 = r0.browser;
+
+        $r19 = $r18._canonPath($r17, $r16, $r15);
+
+        r0.path2 = $r19;
+
+        $r20 = r0.vfs;
+
+        $z0 = $r20 instanceof org.gjt.sp.jedit.io.FavoritesVFS;
+
+        if $z0 != 0 goto label07;
+
+        $r36 = r0.vfs;
+
+        $r35 = r0.session;
+
+        $r34 = r0.path2;
+
+        $r33 = r0.browser;
+
+        r79 = $r36._getFile($r35, $r34, $r33);
+
+        if r79 == null goto label07;
+
+        $z2 = org.gjt.sp.jedit.OperatingSystem.isCaseInsensitiveFS();
+
+        if $z2 == 0 goto label02;
+
+        $r45 = r0.path;
+
+        $r44 = r0.path2;
+
+        $z3 = $r45.equalsIgnoreCase($r44);
+
+        if $z3 == 0 goto label02;
+
+        goto label07;
+
+     label02:
+        $r40 = r0.browser;
+
+        $r39 = r0.path;
+
+        $r37 = newarray (java.lang.String)[1];
+
+        $r38 = r0.path2;
+
+        $r37[0] = $r38;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r40, $r39, "ioerror.rename-exists", $r37);
+
+     label03:
+        $r43 = r0.vfs;
+
+        $r42 = r0.session;
+
+        $r41 = r0.browser;
+
+        $r43._endVFSSession($r42, $r41);
+
+     label04:
+        Packer.Pack(r0);
+
+        goto label06;
+
+     label05:
+        $r51 := @caughtexception;
+
+        r1 = $r51;
+
+        r0.setCancellable(0);
+
+        org.gjt.sp.util.Log.log(9, r0, r1);
+
+        $r52 = newarray (java.lang.String)[1];
+
+        $r53 = r1.toString();
+
+        $r52[0] = $r53;
+
+        r2 = $r52;
+
+        $r55 = r0.browser;
+
+        $r54 = r0.path;
+
+        Packer.Unpack(r0);
+
+        org.gjt.sp.jedit.io.VFSManager.error($r55, $r54, "ioerror.directory-error", r2);
+
+     label06:
+        Packer.Pack(r0);
+
+        return;
+
+     label07:
+        $r25 = r0.vfs;
+
+        $r24 = r0.session;
+
+        $r23 = r0.path;
+
+        $r22 = r0.path2;
+
+        $r21 = r0.browser;
+
+        $z1 = $r25._rename($r24, $r23, $r22, $r21);
+
+        if $z1 != 0 goto label08;
+
+        $r32 = r0.browser;
+
+        $r31 = r0.path;
+
+        $r29 = newarray (java.lang.String)[1];
+
+        $r30 = r0.path2;
+
+        $r29[0] = $r30;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r32, $r31, "ioerror.rename-error", $r29);
+
+     label08:
+        $r28 = r0.vfs;
+
+        $r27 = r0.session;
+
+        $r26 = r0.browser;
+
+        $r28._endVFSSession($r27, $r26);
+
+     label09:
+        Packer.Pack(r0);
+
+        goto label20;
+
+     label10:
+        $r64 := @caughtexception;
+
+        r80 = $r64;
+
+        r0.setCancellable(0);
+
+        org.gjt.sp.util.Log.log(9, r0, r80);
+
+        $r65 = newarray (java.lang.String)[1];
+
+        $r66 = r80.toString();
+
+        $r65[0] = $r66;
+
+        r81 = $r65;
+
+        $r68 = r0.browser;
+
+        $r67 = r0.path;
+
+        Packer.Unpack(r0);
+
+        org.gjt.sp.jedit.io.VFSManager.error($r68, $r67, "ioerror.directory-error", r81);
+
+        Packer.Pack(r0);
+
+        goto label20;
+
+     label11:
+        $r56 := @caughtexception;
+
+        r82 = $r56;
+
+        r0.setCancellable(0);
+
+        org.gjt.sp.util.Log.log(9, r0, r82);
+
+        $r57 = newarray (java.lang.String)[1];
+
+        $r58 = r82.toString();
+
+        $r57[0] = $r58;
+
+        r83 = $r57;
+
+        $r60 = r0.browser;
+
+        $r59 = r0.path;
+
+        Packer.Unpack(r0);
+
+        org.gjt.sp.jedit.io.VFSManager.error($r60, $r59, "ioerror.directory-error", r83);
+
+     label12:
+        $r63 = r0.vfs;
+
+        $r62 = r0.session;
+
+        $r61 = r0.browser;
+
+        $r63._endVFSSession($r62, $r61);
+
+     label13:
+        Packer.Pack(r0);
+
+        goto label20;
+
+     label14:
+        $r73 := @caughtexception;
+
+        r84 = $r73;
+
+        r0.setCancellable(0);
+
+        org.gjt.sp.util.Log.log(9, r0, r84);
+
+        $r74 = newarray (java.lang.String)[1];
+
+        $r75 = r84.toString();
+
+        $r74[0] = $r75;
+
+        r85 = $r74;
+
+        $r77 = r0.browser;
+
+        $r76 = r0.path;
+
+        Packer.Unpack(r0);
+
+        org.gjt.sp.jedit.io.VFSManager.error($r77, $r76, "ioerror.directory-error", r85);
+
+        Packer.Pack(r0);
+
+        goto label20;
+
+     label15:
+        $r69 := @caughtexception;
+
+        r3 = $r69;
+
+     label16:
+        $r72 = r0.vfs;
+
+        $r71 = r0.session;
+
+        $r70 = r0.browser;
+
+        Packer.Unpack(r0);
+
+        $r72._endVFSSession($r71, $r70);
+
+     label17:
+        Packer.Pack(r0);
+
+        goto label19;
+
+     label18:
+        $r46 := @caughtexception;
+
+        r4 = $r46;
+
+        r0.setCancellable(0);
+
+        org.gjt.sp.util.Log.log(9, r0, r4);
+
+        $r47 = newarray (java.lang.String)[1];
+
+        $r48 = r4.toString();
+
+        $r47[0] = $r48;
+
+        r5 = $r47;
+
+        $r50 = r0.browser;
+
+        $r49 = r0.path;
+
+        Packer.Unpack(r0);
+
+        org.gjt.sp.jedit.io.VFSManager.error($r50, $r49, "ioerror.directory-error", r5);
+
+     label19:
+        Packer.Pack(r0);
+
+        throw r3;
+
+     label20:
+        return;
+
+        catch java.io.IOException from label03 to label04 with label05;
+        catch java.io.IOException from label08 to label09 with label10;
+        catch java.io.IOException from label01 to label03 with label11;
+        catch java.io.IOException from label07 to label08 with label11;
+        catch java.io.IOException from label12 to label13 with label14;
+        catch java.lang.Throwable from label01 to label03 with label15;
+        catch java.lang.Throwable from label07 to label08 with label15;
+        catch java.lang.Throwable from label11 to label12 with label15;
+        catch java.io.IOException from label16 to label17 with label18;
+        catch java.lang.Throwable from label15 to label16 with label15;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.browser.RenameBrowserTask r0;
+        java.lang.StringBuilder $r1, $r4, $r5, $r6, $r8, $r9, $r11, $r12, $r14, $r15;
+        java.lang.Class $r2;
+        java.lang.String $r3, $r10, $r13, $r16;
+        org.gjt.sp.jedit.io.VFS $r7;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = r0.getClass();
+
+        $r3 = $r2.getName();
+
+        $r4 = $r1.append($r3);
+
+        $r5 = $r4.append("[type=RENAME");
+
+        $r6 = $r5.append(",vfs=");
+
+        $r7 = r0.vfs;
+
+        Packer.Unpack(r0);
+
+        $r8 = $r6.append($r7);
+
+        $r9 = $r8.append(",path=");
+
+        $r10 = r0.path;
+
+        $r11 = $r9.append($r10);
+
+        $r12 = $r11.append(",path2=");
+
+        $r13 = r0.path2;
+
+        $r14 = $r12.append($r13);
+
+        Packer.Pack(r0);
+
+        $r15 = $r14.append(93);
+
+        $r16 = $r15.toString();
+
+        return $r16;
+    }
+}

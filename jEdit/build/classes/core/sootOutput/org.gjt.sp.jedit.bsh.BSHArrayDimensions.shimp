@@ -1,0 +1,324 @@
+class org.gjt.sp.jedit.bsh.BSHArrayDimensions extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+    public java.lang.Class baseType;
+    public int numDefinedDims;
+    public int numUndefinedDims;
+    public int[] definedDimensions;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHArrayDimensions r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public void addDefinedDimension()
+    {
+        org.gjt.sp.jedit.bsh.BSHArrayDimensions r0;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        $i0 = r0.numDefinedDims;
+
+        $i1 = $i0 + 1;
+
+        Packer.Unpack(r0);
+
+        r0.numDefinedDims = $i1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void addUndefinedDimension()
+    {
+        org.gjt.sp.jedit.bsh.BSHArrayDimensions r0;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        $i0 = r0.numUndefinedDims;
+
+        $i1 = $i0 + 1;
+
+        Packer.Unpack(r0);
+
+        r0.numUndefinedDims = $i1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public java.lang.Object eval(java.lang.Class, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHArrayDimensions r0;
+        java.lang.Class r1;
+        org.gjt.sp.jedit.bsh.CallStack r2;
+        org.gjt.sp.jedit.bsh.Interpreter r3;
+        boolean $z0;
+        java.lang.Object $r4;
+        java.lang.StringBuilder $r5, $r6, $r7;
+        java.lang.String $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $z0 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z0 == 0 goto label1;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append("array base type = ");
+
+        Packer.Unpack(r0);
+
+        $r7 = $r6.append(r1);
+
+        $r8 = $r7.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r8);
+
+     label1:
+        Packer.Unpack(r0);
+
+        r0.baseType = r1;
+
+        Packer.Pack(r0);
+
+        $r4 = r0.eval(r2, r3);
+
+        return $r4;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHArrayDimensions r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.SimpleNode r3, $r8;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, i11, i12;
+        org.gjt.sp.jedit.bsh.Node $r4, $r7;
+        boolean $z0;
+        int[] $r5, $r10, $r14, $r15, $r16, $r17, $r18;
+        org.gjt.sp.jedit.bsh.Primitive $r6, $r9;
+        java.lang.Class $r11, $r12, r36;
+        org.gjt.sp.jedit.bsh.BSHArrayInitializer $r13;
+        org.gjt.sp.jedit.bsh.EvalError $r19, $r27, $r29;
+        java.lang.StringBuilder $r20, $r21, $r22, $r23, $r24, $r25, $r30, $r31, $r32, $r33;
+        java.lang.String $r26, $r34;
+        java.lang.Exception $r28, r39;
+        java.lang.Object r35, r37, r38;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = r0.jjtGetChild(0);
+
+        r3 = (org.gjt.sp.jedit.bsh.SimpleNode) $r4;
+
+        $z0 = r3 instanceof org.gjt.sp.jedit.bsh.BSHArrayInitializer;
+
+        if $z0 == 0 goto label06;
+
+        $r11 = r0.baseType;
+
+        if $r11 != null goto label01;
+
+        $r27 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        specialinvoke $r27.<init>("Internal Array Eval err:  unknown base type", r0, r1);
+
+        throw $r27;
+
+     label01:
+        $r13 = (org.gjt.sp.jedit.bsh.BSHArrayInitializer) r3;
+
+        $r12 = r0.baseType;
+
+        $i4 = r0.numUndefinedDims;
+
+        Packer.Unpack(r0);
+
+        r35 = $r13.eval($r12, $i4, r1, r2);
+
+        r36 = r35.getClass();
+
+        i0 = org.gjt.sp.jedit.bsh.Reflect.getArrayDimensions(r36);
+
+        $r14 = newarray (int)[i0];
+
+        r0.definedDimensions = $r14;
+
+        Packer.Pack(r0);
+
+        $r15 = r0.definedDimensions;
+
+        $i6 = lengthof $r15;
+
+        $i5 = r0.numUndefinedDims;
+
+        if $i6 == $i5 goto label02;
+
+        Packer.Unpack(r0);
+
+        $r19 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<init>();
+
+        $r21 = $r20.append("Incompatible initializer. Allocation calls for a ");
+
+        $i10 = r0.numUndefinedDims;
+
+        $r22 = $r21.append($i10);
+
+        Packer.Pack(r0);
+
+        $r23 = $r22.append(" dimensional array, but initializer is a ");
+
+        $r24 = $r23.append(i0);
+
+        $r25 = $r24.append(" dimensional array");
+
+        $r26 = $r25.toString();
+
+        specialinvoke $r19.<init>($r26, r0, r1);
+
+        throw $r19;
+
+     label02:
+        r37 = r35;
+
+(0)     i11 = 0;
+
+     label03:
+        i11 = Phi(i11 #0, i11 #3);
+
+        r37 = Phi(r37 #0, r37 #3);
+
+        $r16 = r0.definedDimensions;
+
+        $i7 = lengthof $r16;
+
+        if i11 >= $i7 goto label05;
+
+        $r17 = r0.definedDimensions;
+
+        $i8 = java.lang.reflect.Array.getLength(r37);
+
+        $r17[i11] = $i8;
+
+        $r18 = r0.definedDimensions;
+
+        $i9 = $r18[i11];
+
+(1)     if $i9 <= 0 goto label04;
+
+(2)     r37 = java.lang.reflect.Array.get(r37, 0);
+
+     label04:
+        r37 = Phi(r37 #1, r37 #2);
+
+        i11 = i11 + 1;
+
+(3)     goto label03;
+
+     label05:
+        return r35;
+
+     label06:
+        $i1 = r0.numDefinedDims;
+
+        $r5 = newarray (int)[$i1];
+
+        Packer.Unpack(r0);
+
+        r0.definedDimensions = $r5;
+
+        Packer.Pack(r0);
+
+(4)     i12 = 0;
+
+     label07:
+        i12 = Phi(i12 #4, i12 #5);
+
+        $i2 = r0.numDefinedDims;
+
+        if i12 >= $i2 goto label12;
+
+     label08:
+        $r7 = r0.jjtGetChild(i12);
+
+        $r8 = (org.gjt.sp.jedit.bsh.SimpleNode) $r7;
+
+        r38 = $r8.eval(r1, r2);
+
+        $r10 = r0.definedDimensions;
+
+        $r9 = (org.gjt.sp.jedit.bsh.Primitive) r38;
+
+        $i3 = $r9.intValue();
+
+        $r10[i12] = $i3;
+
+     label09:
+        goto label11;
+
+     label10:
+        $r28 := @caughtexception;
+
+        r39 = $r28;
+
+        $r29 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r30 = new java.lang.StringBuilder;
+
+        specialinvoke $r30.<init>();
+
+        $r31 = $r30.append("Array index: ");
+
+        $r32 = $r31.append(i12);
+
+        $r33 = $r32.append(" does not evaluate to an integer");
+
+        $r34 = $r33.toString();
+
+        specialinvoke $r29.<init>($r34, r0, r1);
+
+        throw $r29;
+
+     label11:
+        i12 = i12 + 1;
+
+(5)     goto label07;
+
+     label12:
+        $r6 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        return $r6;
+
+        catch java.lang.Exception from label08 to label09 with label10;
+    }
+}

@@ -1,0 +1,1142 @@
+public class org.gjt.sp.jedit.bufferio.BufferSaveRequest extends org.gjt.sp.jedit.bufferio.BufferIORequest
+{
+
+    public void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Buffer, java.lang.Object, org.gjt.sp.jedit.io.VFS, java.lang.String)
+    {
+        org.gjt.sp.jedit.bufferio.BufferSaveRequest r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Buffer r2;
+        java.lang.Object r3;
+        org.gjt.sp.jedit.io.VFS r4;
+        java.lang.String r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        specialinvoke r0.<init>(r1, r2, r3, r4, r5);
+
+        return;
+    }
+
+    public void _run()
+    {
+        org.gjt.sp.jedit.bufferio.BufferSaveRequest r0;
+        boolean z0, z1, z2, $z3, $z4, $z5, $z6, $z7, $z9, $z10, $z12, $z14, $z16, $z18, $z20, $z21, $z20_1, $z20_2, $z21_1, $z21_2;
+        java.lang.String[] r1, r6, $r9, $r94, $r104, $r129, $r135, $r180, $r209, $r215, $r223, $r229, r234, r240, r242, r244, r246, r248, r250, r252;
+        java.lang.Throwable r2, r3, r4, $r159, $r207, $r220;
+        java.lang.Exception r5, $r93, $r128, $r179, $r208, $r214, $r222, $r228, r237, r239, r243, r247, r249, r251;
+        org.gjt.sp.jedit.io.VFS $r7, $r11, $r17, $r22, $r34, $r37, $r39, $r40, $r48, $r50, $r54, $r68, $r71, $r73, $r74, $r82, $r84, $r113, $r116, $r118, $r119, $r127, $r144, $r147, $r149, $r150, $r158, $r164, $r167, $r169, $r170, $r178, $r189, $r192, $r194, $r195, $r203;
+        int $i0, $i1;
+        org.gjt.sp.jedit.Buffer $r8, $r23, $r25, $r27, $r28, $r29, $r32, $r46, $r61, $r62, $r63, $r66, $r80, $r98, $r108, $r111, $r125, $r133, $r139, $r142, $r156, $r162, $r176, $r184, $r187, $r201, $r205, $r213, $r219, $r221, $r227, $r233;
+        java.lang.String $r10, $r12, $r13, $r15, $r18, $r19, $r24, $r26, $r31, $r38, $r42, $r45, $r49, $r52, $r59, $r65, $r72, $r76, $r79, $r83, $r88, $r90, $r91, $r92, $r95, $r96, $r103, $r105, $r106, $r110, $r117, $r121, $r124, $r130, $r131, $r136, $r137, $r141, $r148, $r152, $r155, $r161, $r168, $r172, $r175, $r181, $r182, $r186, $r193, $r197, $r200, $r210, $r211, $r216, $r217, $r224, $r225, $r230, $r231, r235, r235_1, r235_2;
+        org.gjt.sp.jedit.View $r14, $r20, $r30, $r35, $r43, $r44, $r51, $r64, $r69, $r77, $r78, $r97, $r107, $r109, $r114, $r122, $r123, $r132, $r138, $r140, $r145, $r153, $r154, $r160, $r165, $r173, $r174, $r183, $r185, $r190, $r198, $r199, $r212, $r218, $r226, $r232;
+        java.lang.Object $r16, $r21, $r33, $r36, $r41, $r47, $r53, $r67, $r70, $r75, $r81, $r112, $r115, $r120, $r126, $r143, $r146, $r151, $r157, $r163, $r166, $r171, $r177, $r188, $r191, $r196, $r202;
+        java.io.IOException $r55, $r85;
+        java.lang.StringBuilder $r56, $r57, $r58, $r86, $r87, $r89, $r100, $r101, $r102;
+        java.util.zip.GZIPOutputStream $r60;
+        java.io.FileNotFoundException $r99, r241;
+        java.nio.charset.UnsupportedCharsetException $r134, r245;
+        java.lang.InterruptedException $r204, r238;
+        java.lang.Thread $r206;
+        java.io.OutputStream r236, r236_1, r236_2;
+
+        r0 := @this;
+
+        $r7 = r0.vfs;
+
+        $i0 = $r7.getCapabilities();
+
+        $i1 = $i0 & 16;
+
+        if $i1 == 0 goto label01;
+
+        $z20 = 1;
+
+(0)     goto label02;
+
+     label01:
+(1)     $z20_1 = 0;
+
+     label02:
+        $z20_2 = Phi($z20 #0, $z20_1 #1);
+
+        z0 = $z20_2;
+
+        $r8 = r0.buffer;
+
+        z1 = org.gjt.sp.jedit.bufferio.BufferSaveRequest.wantTwoStageSave($r8);
+
+        if z0 == 0 goto label03;
+
+        if z1 == 0 goto label03;
+
+        $z21 = 1;
+
+(2)     goto label04;
+
+     label03:
+(3)     $z21_1 = 0;
+
+     label04:
+        $z21_2 = Phi($z21 #2, $z21_1 #3);
+
+(4)     z2 = $z21_2;
+
+     label05:
+        $r9 = newarray (java.lang.String)[1];
+
+        $r11 = r0.vfs;
+
+(5)     $r10 = r0.path;
+
+        $r12 = $r11.getFileName($r10);
+
+        $r9[0] = $r12;
+
+        r234 = $r9;
+
+        $r13 = org.gjt.sp.jedit.jEdit.getProperty("vfs.status.save", r234);
+
+        r0.setStatus($r13);
+
+        r0.setCancellable(1);
+
+        $r17 = r0.vfs;
+
+        $r16 = r0.session;
+
+        $r15 = r0.path;
+
+        $r14 = r0.view;
+
+        $r18 = $r17._canonPath($r16, $r15, $r14);
+
+        r0.path = $r18;
+
+        $r19 = r0.path;
+
+        $z3 = org.gjt.sp.jedit.MiscUtilities.isURL($r19);
+
+        if $z3 != 0 goto label06;
+
+        $r91 = r0.path;
+
+        $r92 = org.gjt.sp.jedit.MiscUtilities.resolveSymlinks($r91);
+
+        r0.path = $r92;
+
+     label06:
+        if z2 == 0 goto label07;
+
+        $r84 = r0.vfs;
+
+        $r83 = r0.path;
+
+        r235 = $r84.getTwoStageSaveName($r83);
+
+(6)     if r235 != null goto label08;
+
+        $r85 = new java.io.IOException;
+
+        $r86 = new java.lang.StringBuilder;
+
+        specialinvoke $r86.<init>();
+
+        $r87 = $r86.append("Can\'t get a temporary path for two-stage save: ");
+
+        $r88 = r0.path;
+
+        $r89 = $r87.append($r88);
+
+        $r90 = $r89.toString();
+
+        specialinvoke $r85.<init>($r90);
+
+        throw $r85;
+
+     label07:
+        specialinvoke r0.makeBackup();
+
+(7)     r235_1 = r0.path;
+
+     label08:
+        r235_2 = Phi(r235 #6, r235_1 #7);
+
+(8)     $r22 = r0.vfs;
+
+        $r21 = r0.session;
+
+(9)     $r20 = r0.view;
+
+        r236 = $r22._createOutputStream($r21, r235_2, $r20);
+
+(10)    if r236 != null goto label15;
+
+        $r63 = r0.buffer;
+
+        $r63.setBooleanProperty("BufferIORequest__error", 1);
+
+     label09:
+        $r68 = r0.vfs;
+
+        $r67 = r0.session;
+
+        $r66 = r0.buffer;
+
+        $r65 = r0.path;
+
+        $r64 = r0.view;
+
+        $r68._saveComplete($r67, $r66, $r65, $r64);
+
+        if z2 == 0 goto label10;
+
+        $r82 = r0.vfs;
+
+        $r81 = r0.session;
+
+        $r80 = r0.buffer;
+
+        $r79 = r0.path;
+
+        $r78 = r0.view;
+
+        $r82._finishTwoStageSave($r81, $r80, $r79, $r78);
+
+     label10:
+        $z10 = org.gjt.sp.jedit.jEdit.getBooleanProperty("persistentMarkers");
+
+        if $z10 != 0 goto label11;
+
+        $r74 = r0.vfs;
+
+        $r75 = r0.session;
+
+        $r73 = r0.vfs;
+
+        $r72 = r0.path;
+
+        $r76 = org.gjt.sp.jedit.Buffer.getMarkersPath($r73, $r72);
+
+        $r77 = r0.view;
+
+        $r74._delete($r75, $r76, $r77);
+
+     label11:
+        $r71 = r0.vfs;
+
+        $r70 = r0.session;
+
+        $r69 = r0.view;
+
+        $r71._endVFSSession($r70, $r69);
+
+     label12:
+        goto label14;
+
+     label13:
+        $r128 := @caughtexception;
+
+        r237 = $r128;
+
+        org.gjt.sp.util.Log.log(9, r0, r237);
+
+        $r129 = newarray (java.lang.String)[1];
+
+        $r130 = r237.toString();
+
+        $r129[0] = $r130;
+
+        r1 = $r129;
+
+        $r132 = r0.view;
+
+        $r131 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r132, $r131, "ioerror.write-error", r1);
+
+        $r133 = r0.buffer;
+
+        $r133.setBooleanProperty("BufferIORequest__error", 1);
+
+     label14:
+        return;
+
+     label15:
+(11)    $r23 = r0.buffer;
+
+(12)    $r23.readLock();
+
+     label16:
+        $r24 = r0.path;
+
+        $z4 = $r24.endsWith(".gz");
+
+        if $z4 == 0 goto label17;
+
+        $r62 = r0.buffer;
+
+        $r62.setBooleanProperty("gzipped", 1);
+
+        goto label18;
+
+     label17:
+        $r25 = r0.buffer;
+
+        $r26 = $r25.getName();
+
+        $z5 = $r26.endsWith(".gz");
+
+        if $z5 == 0 goto label18;
+
+        $r61 = r0.buffer;
+
+        $r61.setBooleanProperty("gzipped", 0);
+
+     label18:
+        $r27 = r0.buffer;
+
+        $z6 = $r27.getBooleanProperty("gzipped");
+
+(13)    if $z6 == 0 goto label19;
+
+        $r60 = new java.util.zip.GZIPOutputStream;
+
+        specialinvoke $r60.<init>(r236);
+
+(14)    r236_1 = $r60;
+
+     label19:
+        r236_2 = Phi(r236 #13, r236_1 #14);
+
+(15)    $r28 = r0.buffer;
+
+(16)    r0.write($r28, r236_2);
+
+     label20:
+(17)    $r29 = r0.buffer;
+
+        $r29.readUnlock();
+
+(18)    goto label23;
+
+     label21:
+        $r220 := @caughtexception;
+
+        r235 = Phi(r235_2 #12, r235 #19);
+
+        r236 = Phi(r236 #12, r236_1 #14, r236_2 #15, r236 #19);
+
+        $z20 = Phi($z20_2 #12, $z20 #19);
+
+(19)    $z21 = Phi($z21_2 #12, $z21 #19);
+
+(20)    r2 = $r220;
+
+     label22:
+(21)    $r221 = r0.buffer;
+
+        $r221.readUnlock();
+
+        throw r2;
+
+     label23:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r236_2);
+
+(22)    goto label28;
+
+     label24:
+(23)    $r204 := @caughtexception;
+
+        r235 = Phi(r235_2 #11, r235 #21);
+
+        r236 = Phi(r236 #11, r236_2 #17, r236 #21);
+
+        $z20 = Phi($z20_2 #11, $z20 #21);
+
+(24)    $z21 = Phi($z21_2 #11, $z21 #21);
+
+        r238 = $r204;
+
+        $r205 = r0.buffer;
+
+        $r205.setBooleanProperty("BufferIORequest__error", 1);
+
+        $r206 = java.lang.Thread.currentThread();
+
+(25)    $r206.interrupt();
+
+     label25:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r236);
+
+(26)    goto label28;
+
+     label26:
+        $r207 := @caughtexception;
+
+        r235 = Phi(r235_2 #10, r235 #20, r235 #24, r235 #27);
+
+        r236 = Phi(r236 #10, r236_2 #16, r236 #20, r236 #24, r236 #27);
+
+        $z20 = Phi($z20_2 #10, $z20 #20, $z20 #24, $z20 #27);
+
+(27)    $z21 = Phi($z21_2 #10, $z21 #20, $z21 #23, $z21 #27);
+
+(28)    r3 = $r207;
+
+     label27:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r236);
+
+        throw r3;
+
+     label28:
+        r235 = Phi(r235_2 #22, r235 #26);
+
+        r236 = Phi(r236_2 #22, r236 #26);
+
+        $z20 = Phi($z20_2 #22, $z20 #26);
+
+        $z21 = Phi($z21_2 #22, $z21 #26);
+
+(29)    if z2 == 0 goto label29;
+
+        specialinvoke r0.makeBackup();
+
+        $r54 = r0.vfs;
+
+        $r53 = r0.session;
+
+        $r52 = r0.path;
+
+        $r51 = r0.view;
+
+        $z9 = $r54._rename($r53, r235, $r52, $r51);
+
+        if $z9 != 0 goto label29;
+
+        $r55 = new java.io.IOException;
+
+        $r56 = new java.lang.StringBuilder;
+
+        specialinvoke $r56.<init>();
+
+        $r57 = $r56.append("Rename failed: ");
+
+        $r58 = $r57.append(r235);
+
+        $r59 = $r58.toString();
+
+        specialinvoke $r55.<init>($r59);
+
+        throw $r55;
+
+     label29:
+        if z2 != 0 goto label30;
+
+        $r50 = r0.vfs;
+
+        $r49 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.sendVFSUpdate($r50, $r49, 1);
+
+     label30:
+        $r34 = r0.vfs;
+
+        $r33 = r0.session;
+
+        $r32 = r0.buffer;
+
+        $r31 = r0.path;
+
+        $r30 = r0.view;
+
+        $r34._saveComplete($r33, $r32, $r31, $r30);
+
+        if z2 == 0 goto label31;
+
+        $r48 = r0.vfs;
+
+        $r47 = r0.session;
+
+        $r46 = r0.buffer;
+
+        $r45 = r0.path;
+
+        $r44 = r0.view;
+
+        $r48._finishTwoStageSave($r47, $r46, $r45, $r44);
+
+     label31:
+        $z7 = org.gjt.sp.jedit.jEdit.getBooleanProperty("persistentMarkers");
+
+        if $z7 != 0 goto label32;
+
+        $r40 = r0.vfs;
+
+        $r41 = r0.session;
+
+        $r39 = r0.vfs;
+
+        $r38 = r0.path;
+
+        $r42 = org.gjt.sp.jedit.Buffer.getMarkersPath($r39, $r38);
+
+        $r43 = r0.view;
+
+        $r40._delete($r41, $r42, $r43);
+
+     label32:
+        $r37 = r0.vfs;
+
+        $r36 = r0.session;
+
+        $r35 = r0.view;
+
+        $r37._endVFSSession($r36, $r35);
+
+     label33:
+(30)    goto label60;
+
+     label34:
+        $r93 := @caughtexception;
+
+        r239 = $r93;
+
+        org.gjt.sp.util.Log.log(9, r0, r239);
+
+        $r94 = newarray (java.lang.String)[1];
+
+        $r95 = r239.toString();
+
+        $r94[0] = $r95;
+
+        r240 = $r94;
+
+        $r97 = r0.view;
+
+        $r96 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r97, $r96, "ioerror.write-error", r240);
+
+        $r98 = r0.buffer;
+
+        $r98.setBooleanProperty("BufferIORequest__error", 1);
+
+(31)    goto label60;
+
+     label35:
+(32)    $r99 := @caughtexception;
+
+        r235 = Phi(r235 #5, r235_2 #9, r235 #25, r235 #28, r235 #29);
+
+        r236 = Phi(r236 #5, r236_2 #18, r236 #25, r236 #28, r236 #29);
+
+        $z20 = Phi($z20_2 #5, $z20 #25, $z20 #28, $z20 #29);
+
+(33)    $z21 = Phi($z21_2 #5, $z21 #25, $z21 #28, $z21 #29);
+
+        r241 = $r99;
+
+        $r100 = new java.lang.StringBuilder;
+
+        specialinvoke $r100.<init>();
+
+        $r101 = $r100.append("Unable to save buffer ");
+
+        $r102 = $r101.append(r241);
+
+        $r103 = $r102.toString();
+
+        org.gjt.sp.util.Log.log(9, r0, $r103);
+
+        $r104 = newarray (java.lang.String)[1];
+
+        $r105 = r241.getMessage();
+
+        $r104[0] = $r105;
+
+        r242 = $r104;
+
+        $r107 = r0.view;
+
+        $r106 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r107, $r106, "ioerror.write-error", r242);
+
+        $r108 = r0.buffer;
+
+        $r108.setBooleanProperty("BufferIORequest__error", 1);
+
+     label36:
+        $r113 = r0.vfs;
+
+        $r112 = r0.session;
+
+        $r111 = r0.buffer;
+
+        $r110 = r0.path;
+
+        $r109 = r0.view;
+
+        $r113._saveComplete($r112, $r111, $r110, $r109);
+
+        if z2 == 0 goto label37;
+
+        $r127 = r0.vfs;
+
+        $r126 = r0.session;
+
+        $r125 = r0.buffer;
+
+        $r124 = r0.path;
+
+        $r123 = r0.view;
+
+        $r127._finishTwoStageSave($r126, $r125, $r124, $r123);
+
+     label37:
+        $z12 = org.gjt.sp.jedit.jEdit.getBooleanProperty("persistentMarkers");
+
+        if $z12 != 0 goto label38;
+
+        $r119 = r0.vfs;
+
+        $r120 = r0.session;
+
+        $r118 = r0.vfs;
+
+        $r117 = r0.path;
+
+        $r121 = org.gjt.sp.jedit.Buffer.getMarkersPath($r118, $r117);
+
+        $r122 = r0.view;
+
+        $r119._delete($r120, $r121, $r122);
+
+     label38:
+        $r116 = r0.vfs;
+
+        $r115 = r0.session;
+
+        $r114 = r0.view;
+
+        $r116._endVFSSession($r115, $r114);
+
+     label39:
+(34)    goto label60;
+
+     label40:
+        $r208 := @caughtexception;
+
+        r243 = $r208;
+
+        org.gjt.sp.util.Log.log(9, r0, r243);
+
+        $r209 = newarray (java.lang.String)[1];
+
+        $r210 = r243.toString();
+
+        $r209[0] = $r210;
+
+        r244 = $r209;
+
+        $r212 = r0.view;
+
+        $r211 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r212, $r211, "ioerror.write-error", r244);
+
+        $r213 = r0.buffer;
+
+        $r213.setBooleanProperty("BufferIORequest__error", 1);
+
+(35)    goto label60;
+
+     label41:
+(36)    $r134 := @caughtexception;
+
+        r235 = Phi(r235 #5, r235_2 #9, r235 #25, r235 #28, r235 #29);
+
+        r236 = Phi(r236 #5, r236_2 #18, r236 #25, r236 #28, r236 #29);
+
+        $z20 = Phi($z20_2 #5, $z20 #25, $z20 #28, $z20 #29);
+
+(37)    $z21 = Phi($z21_2 #5, $z21 #25, $z21 #28, $z21 #29);
+
+        r245 = $r134;
+
+        org.gjt.sp.util.Log.log(9, r0, r245, r245);
+
+        $r135 = newarray (java.lang.String)[1];
+
+        $r136 = r245.getCharsetName();
+
+        $r135[0] = $r136;
+
+        r246 = $r135;
+
+        $r138 = r0.view;
+
+        $r137 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r138, $r137, "ioerror.unsupported-encoding-error", r246);
+
+        $r139 = r0.buffer;
+
+        $r139.setBooleanProperty("BufferIORequest__error", 1);
+
+     label42:
+        $r144 = r0.vfs;
+
+        $r143 = r0.session;
+
+        $r142 = r0.buffer;
+
+        $r141 = r0.path;
+
+        $r140 = r0.view;
+
+        $r144._saveComplete($r143, $r142, $r141, $r140);
+
+        if z2 == 0 goto label43;
+
+        $r158 = r0.vfs;
+
+        $r157 = r0.session;
+
+        $r156 = r0.buffer;
+
+        $r155 = r0.path;
+
+        $r154 = r0.view;
+
+        $r158._finishTwoStageSave($r157, $r156, $r155, $r154);
+
+     label43:
+        $z14 = org.gjt.sp.jedit.jEdit.getBooleanProperty("persistentMarkers");
+
+        if $z14 != 0 goto label44;
+
+        $r150 = r0.vfs;
+
+        $r151 = r0.session;
+
+        $r149 = r0.vfs;
+
+        $r148 = r0.path;
+
+        $r152 = org.gjt.sp.jedit.Buffer.getMarkersPath($r149, $r148);
+
+        $r153 = r0.view;
+
+        $r150._delete($r151, $r152, $r153);
+
+     label44:
+        $r147 = r0.vfs;
+
+        $r146 = r0.session;
+
+        $r145 = r0.view;
+
+        $r147._endVFSSession($r146, $r145);
+
+     label45:
+(38)    goto label60;
+
+     label46:
+        $r214 := @caughtexception;
+
+        r247 = $r214;
+
+        org.gjt.sp.util.Log.log(9, r0, r247);
+
+        $r215 = newarray (java.lang.String)[1];
+
+        $r216 = r247.toString();
+
+        $r215[0] = $r216;
+
+        r248 = $r215;
+
+        $r218 = r0.view;
+
+        $r217 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r218, $r217, "ioerror.write-error", r248);
+
+        $r219 = r0.buffer;
+
+        $r219.setBooleanProperty("BufferIORequest__error", 1);
+
+(39)    goto label60;
+
+     label47:
+        $r179 := @caughtexception;
+
+        r235 = Phi(r235 #25, r235 #28, r235 #29, r235 #4, r235_1 #7, r235_2 #8);
+
+        r236 = Phi(r236_2 #18, r236 #25, r236 #28, r236 #29, r236 #4);
+
+        $z20 = Phi($z20 #25, $z20 #28, $z20 #29, $z20_2 #4);
+
+(40)    $z21 = Phi($z21 #25, $z21 #28, $z21 #29, $z21_2 #4);
+
+        r249 = $r179;
+
+        org.gjt.sp.util.Log.log(9, r0, r249);
+
+        $r180 = newarray (java.lang.String)[1];
+
+        $r181 = r249.toString();
+
+        $r180[0] = $r181;
+
+        r250 = $r180;
+
+        $r183 = r0.view;
+
+        $r182 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r183, $r182, "ioerror.write-error", r250);
+
+        $r184 = r0.buffer;
+
+        $r184.setBooleanProperty("BufferIORequest__error", 1);
+
+     label48:
+        $r189 = r0.vfs;
+
+        $r188 = r0.session;
+
+        $r187 = r0.buffer;
+
+        $r186 = r0.path;
+
+        $r185 = r0.view;
+
+        $r189._saveComplete($r188, $r187, $r186, $r185);
+
+        if z2 == 0 goto label49;
+
+        $r203 = r0.vfs;
+
+        $r202 = r0.session;
+
+        $r201 = r0.buffer;
+
+        $r200 = r0.path;
+
+        $r199 = r0.view;
+
+        $r203._finishTwoStageSave($r202, $r201, $r200, $r199);
+
+     label49:
+        $z18 = org.gjt.sp.jedit.jEdit.getBooleanProperty("persistentMarkers");
+
+        if $z18 != 0 goto label50;
+
+        $r195 = r0.vfs;
+
+        $r196 = r0.session;
+
+        $r194 = r0.vfs;
+
+        $r193 = r0.path;
+
+        $r197 = org.gjt.sp.jedit.Buffer.getMarkersPath($r194, $r193);
+
+        $r198 = r0.view;
+
+        $r195._delete($r196, $r197, $r198);
+
+     label50:
+        $r192 = r0.vfs;
+
+        $r191 = r0.session;
+
+        $r190 = r0.view;
+
+        $r192._endVFSSession($r191, $r190);
+
+     label51:
+(41)    goto label60;
+
+     label52:
+        $r222 := @caughtexception;
+
+        r251 = $r222;
+
+        org.gjt.sp.util.Log.log(9, r0, r251);
+
+        $r223 = newarray (java.lang.String)[1];
+
+        $r224 = r251.toString();
+
+        $r223[0] = $r224;
+
+        r252 = $r223;
+
+        $r226 = r0.view;
+
+        $r225 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r226, $r225, "ioerror.write-error", r252);
+
+        $r227 = r0.buffer;
+
+        $r227.setBooleanProperty("BufferIORequest__error", 1);
+
+(42)    goto label60;
+
+     label53:
+        $r159 := @caughtexception;
+
+        r235 = Phi(r235 #25, r235 #28, r235 #29, r235 #4, r235_1 #7, r235_2 #8, r235 #33, r235 #37, r235 #40, r235 #43);
+
+        r236 = Phi(r236_2 #18, r236 #25, r236 #28, r236 #29, r236 #4, r236 #33, r236 #37, r236 #40, r236 #43);
+
+        $z20 = Phi($z20 #25, $z20 #28, $z20 #29, $z20_2 #4, $z20 #33, $z20 #37, $z20 #40, $z20 #43);
+
+(43)    $z21 = Phi($z21 #25, $z21 #28, $z21 #29, $z21_2 #4, $z21 #32, $z21 #36, $z21 #40, $z21 #43);
+
+        r4 = $r159;
+
+     label54:
+        $r164 = r0.vfs;
+
+        $r163 = r0.session;
+
+        $r162 = r0.buffer;
+
+        $r161 = r0.path;
+
+        $r160 = r0.view;
+
+        $r164._saveComplete($r163, $r162, $r161, $r160);
+
+        if z2 == 0 goto label55;
+
+        $r178 = r0.vfs;
+
+        $r177 = r0.session;
+
+        $r176 = r0.buffer;
+
+        $r175 = r0.path;
+
+        $r174 = r0.view;
+
+        $r178._finishTwoStageSave($r177, $r176, $r175, $r174);
+
+     label55:
+        $z16 = org.gjt.sp.jedit.jEdit.getBooleanProperty("persistentMarkers");
+
+        if $z16 != 0 goto label56;
+
+        $r170 = r0.vfs;
+
+        $r171 = r0.session;
+
+        $r169 = r0.vfs;
+
+        $r168 = r0.path;
+
+        $r172 = org.gjt.sp.jedit.Buffer.getMarkersPath($r169, $r168);
+
+        $r173 = r0.view;
+
+        $r170._delete($r171, $r172, $r173);
+
+     label56:
+        $r167 = r0.vfs;
+
+        $r166 = r0.session;
+
+        $r165 = r0.view;
+
+        $r167._endVFSSession($r166, $r165);
+
+     label57:
+        goto label59;
+
+     label58:
+        $r228 := @caughtexception;
+
+        r5 = $r228;
+
+        org.gjt.sp.util.Log.log(9, r0, r5);
+
+        $r229 = newarray (java.lang.String)[1];
+
+        $r230 = r5.toString();
+
+        $r229[0] = $r230;
+
+        r6 = $r229;
+
+        $r232 = r0.view;
+
+        $r231 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r232, $r231, "ioerror.write-error", r6);
+
+        $r233 = r0.buffer;
+
+        $r233.setBooleanProperty("BufferIORequest__error", 1);
+
+     label59:
+        throw r4;
+
+     label60:
+        r235 = Phi(r235 #30, r235 #31, r235 #34, r235 #35, r235 #38, r235 #39, r235 #41, r235 #42);
+
+        r236 = Phi(r236 #30, r236 #31, r236 #34, r236 #35, r236 #38, r236 #39, r236 #41, r236 #42);
+
+        $z20 = Phi($z20 #30, $z20 #31, $z20 #34, $z20 #35, $z20 #38, $z20 #39, $z20 #41, $z20 #42);
+
+        $z21 = Phi($z21 #30, $z21 #31, $z21 #34, $z21 #35, $z21 #38, $z21 #39, $z21 #41, $z21 #42);
+
+        return;
+
+        catch java.lang.Exception from label09 to label12 with label13;
+        catch java.lang.Throwable from label16 to label20 with label21;
+        catch java.lang.Throwable from label21 to label22 with label21;
+        catch java.lang.InterruptedException from label15 to label23 with label24;
+        catch java.lang.Throwable from label15 to label23 with label26;
+        catch java.lang.Throwable from label24 to label25 with label26;
+        catch java.lang.Throwable from label26 to label27 with label26;
+        catch java.lang.Exception from label30 to label33 with label34;
+        catch java.io.FileNotFoundException from label05 to label09 with label35;
+        catch java.io.FileNotFoundException from label15 to label30 with label35;
+        catch java.lang.Exception from label36 to label39 with label40;
+        catch java.nio.charset.UnsupportedCharsetException from label05 to label09 with label41;
+        catch java.nio.charset.UnsupportedCharsetException from label15 to label30 with label41;
+        catch java.lang.Exception from label42 to label45 with label46;
+        catch java.lang.Exception from label05 to label09 with label47;
+        catch java.lang.Exception from label15 to label30 with label47;
+        catch java.lang.Exception from label48 to label51 with label52;
+        catch java.lang.Throwable from label05 to label09 with label53;
+        catch java.lang.Throwable from label15 to label30 with label53;
+        catch java.lang.Throwable from label35 to label36 with label53;
+        catch java.lang.Throwable from label41 to label42 with label53;
+        catch java.lang.Throwable from label47 to label48 with label53;
+        catch java.lang.Exception from label54 to label57 with label58;
+        catch java.lang.Throwable from label53 to label54 with label53;
+    }
+
+    private void makeBackup()
+    {
+        org.gjt.sp.jedit.bufferio.BufferSaveRequest r0;
+        java.io.IOException r1, $r10;
+        java.lang.String[] r2, $r11;
+        org.gjt.sp.jedit.Buffer $r3, $r5;
+        java.lang.Object $r4, $r8;
+        int $i0;
+        org.gjt.sp.jedit.View $r6, $r14;
+        java.lang.String $r7, $r12, $r13;
+        org.gjt.sp.jedit.io.VFS $r9;
+        boolean $z0;
+
+        r0 := @this;
+
+     label1:
+        $r3 = r0.buffer;
+
+        $r4 = $r3.getProperty("Buffer__backedUp");
+
+        if $r4 == null goto label2;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("backupEverySave");
+
+        if $z0 == 0 goto label4;
+
+     label2:
+        $i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("backups", 1);
+
+        if $i0 <= 0 goto label3;
+
+        $r9 = r0.vfs;
+
+        $r8 = r0.session;
+
+        $r7 = r0.path;
+
+        $r6 = r0.view;
+
+        $r9._backup($r8, $r7, $r6);
+
+     label3:
+        $r5 = r0.buffer;
+
+        $r5.setBooleanProperty("Buffer__backedUp", 1);
+
+     label4:
+        goto label6;
+
+     label5:
+        $r10 := @caughtexception;
+
+        r1 = $r10;
+
+        $r11 = newarray (java.lang.String)[1];
+
+        $r12 = r1.getMessage();
+
+        $r11[0] = $r12;
+
+        r2 = $r11;
+
+        $r14 = r0.view;
+
+        $r13 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r14, $r13, "ioerror.backup-failed", r2);
+
+     label6:
+        return;
+
+        catch java.io.IOException from label1 to label4 with label5;
+    }
+
+    private static boolean wantTwoStageSave(org.gjt.sp.jedit.Buffer)
+    {
+        org.gjt.sp.jedit.Buffer r0;
+        boolean $z0, $z1, $z2, $z3, $z3_1, $z3_2;
+
+        r0 := @parameter0;
+
+        $z0 = r0.getBooleanProperty("forbidTwoStageSave");
+
+        if $z0 != 0 goto label2;
+
+        $z1 = r0.getBooleanProperty("overwriteReadonly");
+
+        if $z1 != 0 goto label1;
+
+        $z2 = org.gjt.sp.jedit.jEdit.getBooleanProperty("twoStageSave");
+
+        if $z2 == 0 goto label2;
+
+     label1:
+        $z3 = 1;
+
+(0)     goto label3;
+
+     label2:
+(1)     $z3_1 = 0;
+
+     label3:
+        $z3_2 = Phi($z3 #0, $z3_1 #1);
+
+        return $z3_2;
+    }
+}

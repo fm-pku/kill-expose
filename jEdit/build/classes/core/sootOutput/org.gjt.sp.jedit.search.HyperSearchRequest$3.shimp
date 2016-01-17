@@ -1,0 +1,46 @@
+class org.gjt.sp.jedit.search.HyperSearchRequest$3 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.search.HyperSearchRequest this$0;
+
+    void <init>(org.gjt.sp.jedit.search.HyperSearchRequest)
+    {
+        org.gjt.sp.jedit.search.HyperSearchRequest$3 r0;
+        org.gjt.sp.jedit.search.HyperSearchRequest r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.search.HyperSearchRequest$3 r0;
+        org.gjt.sp.jedit.search.HyperSearchRequest $r1, $r3, $r5;
+        org.gjt.sp.jedit.search.HyperSearchResults $r2;
+        javax.swing.tree.DefaultMutableTreeNode $r4, $r6;
+
+        r0 := @this;
+
+        $r1 = r0.this$0;
+
+        $r2 = org.gjt.sp.jedit.search.HyperSearchRequest.access$200($r1);
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.search.HyperSearchRequest.access$100($r3);
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.search.HyperSearchRequest.access$300($r5);
+
+        $r2.searchDone($r4, $r6);
+
+        return;
+    }
+}

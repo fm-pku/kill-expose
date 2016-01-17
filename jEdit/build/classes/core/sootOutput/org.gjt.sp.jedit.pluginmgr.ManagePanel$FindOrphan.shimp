@@ -1,0 +1,455 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$FindOrphan extends javax.swing.JButton implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.pluginmgr.ManagePanel this$0;
+
+    private void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$FindOrphan r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.findOrphan.label");
+
+        specialinvoke r0.<init>($r2);
+
+        r0.addActionListener(r0);
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$FindOrphan r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.PluginJAR[] r2, r69;
+        java.util.HashSet r3, $r6;
+        java.util.HashMap r4, $r7;
+        java.lang.String r5, $r30, $r36, $r39, $r41, $r42, $r43, $r45, $r48, $r51, $r55, $r58, $r62, $r64, $r65, $r66, r74, r79, r84;
+        int $i0, $i1, $i2, $i3, i4, i5, i6, i7;
+        java.util.ArrayList $r8, $r11, r81, r86;
+        boolean $z0, $z1, $z2, $z3, $z4, $z7;
+        java.lang.String[] $r9, r75, r85;
+        java.lang.Object[] $r10;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r12, $r14, $r16, $r18, $r20, $r22, $r24, $r26, $r31;
+        org.gjt.sp.jedit.pluginmgr.Roster $r13, r87;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r15;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel $r17;
+        javax.swing.JTable $r19, $r21, $r25, $r27;
+        javax.swing.JScrollPane $r23;
+        java.lang.Object $r28, $r29, $r32, $r60;
+        java.lang.StringBuilder $r33, $r34, $r35, $r46, $r47, $r49, $r50, $r53, $r54, $r56, $r57;
+        org.gjt.sp.jedit.PluginJAR $r37, $r59, r70, r76;
+        java.io.File $r38, $r40, $r61, $r63;
+        java.util.Collection $r52;
+        java.io.IOException $r68, r80;
+        org.gjt.sp.jedit.EditPlugin r71;
+        java.util.Set r72, r82;
+        java.util.Iterator r73, r83, r88;
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry r77;
+        java.util.Properties r78;
+        javax.swing.JScrollBar r89;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = org.gjt.sp.jedit.jEdit.getPluginJARs();
+
+        $r6 = new java.util.HashSet;
+
+        specialinvoke $r6.<init>();
+
+        r3 = $r6;
+
+        $r7 = new java.util.HashMap;
+
+        specialinvoke $r7.<init>();
+
+        r4 = $r7;
+
+        r69 = r2;
+
+        i4 = lengthof r69;
+
+(0)     i5 = 0;
+
+     label01:
+        i5 = Phi(i5 #0, i5 #5);
+
+        if i5 >= i4 goto label05;
+
+        r70 = r69[i5];
+
+        r71 = r70.getPlugin();
+
+        if r71 != null goto label02;
+
+        $r63 = new java.io.File;
+
+        $r64 = r70.getPath();
+
+        specialinvoke $r63.<init>($r64);
+
+        $r65 = $r63.getName();
+
+        $r66 = r70.getPath();
+
+        r4.put($r65, $r66);
+
+(1)     goto label04;
+
+     label02:
+        $r59 = r71.getPluginJAR();
+
+        r72 = $r59.getRequiredJars();
+
+(2)     r73 = r72.iterator();
+
+     label03:
+        i5 = Phi(i5 #2, i5 #4);
+
+        $z7 = r73.hasNext();
+
+(3)     if $z7 == 0 goto label04;
+
+        $r60 = r73.next();
+
+        r74 = (java.lang.String) $r60;
+
+        $r61 = new java.io.File;
+
+        specialinvoke $r61.<init>(r74);
+
+        $r62 = $r61.getName();
+
+        r3.add($r62);
+
+(4)     goto label03;
+
+     label04:
+        i5 = Phi(i5 #1, i5 #3);
+
+        i5 = i5 + 1;
+
+(5)     goto label01;
+
+     label05:
+        r75 = org.gjt.sp.jedit.jEdit.getNotLoadedPluginJARs();
+
+(6)     i6 = 0;
+
+     label06:
+        i6 = Phi(i6 #6, i6 #12);
+
+        i5 = Phi(i5 #6, i5 #12);
+
+        r77 = Phi(r77 #6, r77 #12);
+
+        $i0 = lengthof r75;
+
+        if i6 >= $i0 goto label16;
+
+        $r37 = new org.gjt.sp.jedit.PluginJAR;
+
+        $r38 = new java.io.File;
+
+        $r39 = r75[i6];
+
+        specialinvoke $r38.<init>($r39);
+
+        specialinvoke $r37.<init>($r38);
+
+        r76 = $r37;
+
+        r77 = org.gjt.sp.jedit.PluginJAR.getPluginCache(r76);
+
+     label07:
+(7)     if r77 != null goto label08;
+
+(8)     r77 = r76.generateCache();
+
+     label08:
+        r77 = Phi(r77 #7, r77 #8);
+
+        if r77 != null goto label09;
+
+        $r53 = new java.lang.StringBuilder;
+
+        specialinvoke $r53.<init>();
+
+        $r54 = $r53.append("couldn\'t load plugin ");
+
+        $r55 = r76.getPath();
+
+        $r56 = $r54.append($r55);
+
+        $r57 = $r56.append(" (most likely other version exists)");
+
+        $r58 = $r57.toString();
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/pluginmgr/ManagePanel", $r58);
+
+     label09:
+        if r77 == null goto label10;
+
+        $r45 = r77.pluginClass;
+
+        if $r45 != null goto label12;
+
+     label10:
+        $r40 = new java.io.File;
+
+        $r41 = r75[i6];
+
+        specialinvoke $r40.<init>($r41);
+
+        $r42 = $r40.getName();
+
+        $r43 = r75[i6];
+
+        r4.put($r42, $r43);
+
+     label11:
+(9)     goto label15;
+
+     label12:
+        r78 = r77.cachedProperties;
+
+        $r46 = new java.lang.StringBuilder;
+
+        specialinvoke $r46.<init>();
+
+        $r47 = $r46.append("plugin.");
+
+        $r48 = r77.pluginClass;
+
+        $r49 = $r47.append($r48);
+
+        $r50 = $r49.append(".jars");
+
+        $r51 = $r50.toString();
+
+        r79 = r78.getProperty($r51);
+
+        if r79 == null goto label13;
+
+        $r52 = org.gjt.sp.jedit.PluginJAR.parseJarsFilesStringNames(r79);
+
+        r3.addAll($r52);
+
+     label13:
+(10)    goto label15;
+
+     label14:
+        $r68 := @caughtexception;
+
+        r77 = Phi(r77 #7);
+
+        r80 = $r68;
+
+(11)    org.gjt.sp.util.Log.log(9, r0, r1);
+
+     label15:
+        r77 = Phi(r77 #9, r77 #10, r77 #11);
+
+        i6 = i6 + 1;
+
+(12)    goto label06;
+
+     label16:
+        $r8 = new java.util.ArrayList;
+
+        specialinvoke $r8.<init>();
+
+        r81 = $r8;
+
+        r82 = r4.keySet();
+
+(13)    r83 = r82.iterator();
+
+     label17:
+        i6 = Phi(i6 #13, i6 #14);
+
+        i5 = Phi(i5 #13, i5 #14);
+
+        r77 = Phi(r77 #13, r77 #14);
+
+        $z0 = r83.hasNext();
+
+        if $z0 == 0 goto label19;
+
+        $r32 = r83.next();
+
+        r84 = (java.lang.String) $r32;
+
+        $z4 = r3.contains(r84);
+
+        if $z4 != 0 goto label18;
+
+        r81.add(r84);
+
+        $r33 = new java.lang.StringBuilder;
+
+        specialinvoke $r33.<init>();
+
+        $r34 = $r33.append("It seems that this jar do not belong to any plugin ");
+
+        $r35 = $r34.append(r84);
+
+        $r36 = $r35.toString();
+
+        org.gjt.sp.util.Log.log(3, r0, $r36);
+
+     label18:
+(14)    goto label17;
+
+     label19:
+        $z1 = r81.isEmpty();
+
+        if $z1 == 0 goto label20;
+
+        $r31 = r0.this$0;
+
+        org.gjt.sp.jedit.GUIUtilities.message($r31, "plugin-manager.noOrphan", null);
+
+        return;
+
+     label20:
+        $i1 = r81.size();
+
+        $r9 = newarray (java.lang.String)[$i1];
+
+        $r10 = r81.toArray($r9);
+
+        r85 = (java.lang.String[]) $r10;
+
+        $r11 = new java.util.ArrayList;
+
+        specialinvoke $r11.<init>();
+
+        r86 = $r11;
+
+        $r12 = r0.this$0;
+
+        i7 = org.gjt.sp.jedit.GUIUtilities.listConfirm($r12, "plugin-manager.findOrphan", null, r85, r86);
+
+        if i7 != 0 goto label21;
+
+        $z2 = r86.isEmpty();
+
+        if $z2 == 0 goto label22;
+
+     label21:
+        return;
+
+     label22:
+        $r13 = new org.gjt.sp.jedit.pluginmgr.Roster;
+
+        specialinvoke $r13.<init>();
+
+        r87 = $r13;
+
+(15)    r88 = r86.iterator();
+
+     label23:
+        i6 = Phi(i6 #15, i6 #16);
+
+        i5 = Phi(i5 #15, i5 #16);
+
+        r77 = Phi(r77 #15, r77 #16);
+
+        $z3 = r88.hasNext();
+
+        if $z3 == 0 goto label24;
+
+        $r28 = r88.next();
+
+        r5 = (java.lang.String) $r28;
+
+        $r29 = r4.get(r5);
+
+        $r30 = (java.lang.String) $r29;
+
+        r87.addRemove($r30);
+
+(16)    goto label23;
+
+     label24:
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1000($r14);
+
+        r87.performOperationsInAWTThread($r15);
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$600($r16);
+
+        $r17.update();
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r18);
+
+        $i2 = $r19.getRowCount();
+
+        if $i2 == 0 goto label25;
+
+        $r26 = r0.this$0;
+
+        $r27 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r26);
+
+        $r27.setRowSelectionInterval(0, 0);
+
+     label25:
+        $r20 = r0.this$0;
+
+        $r21 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r20);
+
+        $r21.setColumnSelectionInterval(0, 0);
+
+        $r22 = r0.this$0;
+
+        $r23 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1100($r22);
+
+        r89 = $r23.getVerticalScrollBar();
+
+        $i3 = r89.getMinimum();
+
+        r89.setValue($i3);
+
+        $r24 = r0.this$0;
+
+        $r25 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r24);
+
+        $r25.repaint();
+
+        return;
+
+        catch java.io.IOException from label07 to label11 with label14;
+        catch java.io.IOException from label12 to label13 with label14;
+    }
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel, org.gjt.sp.jedit.pluginmgr.ManagePanel$1)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$FindOrphan r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

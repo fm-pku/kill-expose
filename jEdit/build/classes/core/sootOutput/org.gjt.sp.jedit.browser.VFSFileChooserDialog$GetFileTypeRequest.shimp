@@ -1,0 +1,206 @@
+class org.gjt.sp.jedit.browser.VFSFileChooserDialog$GetFileTypeRequest extends org.gjt.sp.jedit.bufferio.IoTask
+{
+    org.gjt.sp.jedit.io.VFS vfs;
+    java.lang.Object session;
+    java.lang.String path;
+    int[] type;
+    final org.gjt.sp.jedit.browser.VFSFileChooserDialog this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSFileChooserDialog, org.gjt.sp.jedit.io.VFS, java.lang.Object, java.lang.String, int[])
+    {
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog$GetFileTypeRequest r0;
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog r1;
+        org.gjt.sp.jedit.io.VFS r2;
+        java.lang.Object r3;
+        java.lang.String r4;
+        int[] r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.vfs = r2;
+
+        r0.session = r3;
+
+        r0.path = r4;
+
+        r0.type = r5;
+
+        return;
+    }
+
+    public void _run()
+    {
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog$GetFileTypeRequest r0;
+        java.lang.Throwable r1, $r14;
+        java.io.IOException r2, $r19, $r27, $r31, $r35, r40, r41, r42;
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog $r3, $r9, $r15, $r20, $r23, $r28, $r32, $r36;
+        org.gjt.sp.jedit.io.VFS $r4, $r10, $r16, $r24;
+        java.lang.Object $r5, $r11, $r17, $r25;
+        java.lang.String $r6, $r21, $r29, $r33, $r37;
+        org.gjt.sp.jedit.browser.VFSBrowser $r7, $r12, $r18, $r22, $r26, $r30, $r34, $r38;
+        int[] $r8, $r13;
+        int $i0;
+        org.gjt.sp.jedit.io.VFSFile r39;
+
+        r0 := @this;
+
+     label01:
+        $r4 = r0.vfs;
+
+        $r5 = r0.session;
+
+        $r6 = r0.path;
+
+        $r3 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r3);
+
+        r39 = $r4._getFile($r5, $r6, $r7);
+
+        if r39 != null goto label02;
+
+        $r13 = r0.type;
+
+        $r13[0] = 0;
+
+        goto label03;
+
+     label02:
+        $r8 = r0.type;
+
+        $i0 = r39.getType();
+
+        $r8[0] = $i0;
+
+     label03:
+        $r10 = r0.vfs;
+
+        $r11 = r0.session;
+
+        $r9 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r9);
+
+        $r10._endVFSSession($r11, $r12);
+
+     label04:
+        goto label15;
+
+     label05:
+        $r35 := @caughtexception;
+
+        r40 = $r35;
+
+        $r37 = r0.path;
+
+        $r36 = r0.this$0;
+
+        $r38 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r36);
+
+        org.gjt.sp.jedit.io.VFSManager.error(r40, $r37, $r38);
+
+        goto label15;
+
+     label06:
+        $r19 := @caughtexception;
+
+        r41 = $r19;
+
+        $r21 = r0.path;
+
+        $r20 = r0.this$0;
+
+        $r22 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r20);
+
+        org.gjt.sp.jedit.io.VFSManager.error(r41, $r21, $r22);
+
+     label07:
+        $r24 = r0.vfs;
+
+        $r25 = r0.session;
+
+        $r23 = r0.this$0;
+
+        $r26 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r23);
+
+        $r24._endVFSSession($r25, $r26);
+
+     label08:
+        goto label15;
+
+     label09:
+        $r31 := @caughtexception;
+
+        r42 = $r31;
+
+        $r33 = r0.path;
+
+        $r32 = r0.this$0;
+
+        $r34 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r32);
+
+        org.gjt.sp.jedit.io.VFSManager.error(r42, $r33, $r34);
+
+        goto label15;
+
+     label10:
+        $r14 := @caughtexception;
+
+        r1 = $r14;
+
+     label11:
+        $r16 = r0.vfs;
+
+        $r17 = r0.session;
+
+        $r15 = r0.this$0;
+
+        $r18 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r15);
+
+        $r16._endVFSSession($r17, $r18);
+
+     label12:
+        goto label14;
+
+     label13:
+        $r27 := @caughtexception;
+
+        r2 = $r27;
+
+        $r29 = r0.path;
+
+        $r28 = r0.this$0;
+
+        $r30 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r28);
+
+        org.gjt.sp.jedit.io.VFSManager.error(r2, $r29, $r30);
+
+     label14:
+        throw r1;
+
+     label15:
+        return;
+
+        catch java.io.IOException from label03 to label04 with label05;
+        catch java.io.IOException from label01 to label03 with label06;
+        catch java.io.IOException from label07 to label08 with label09;
+        catch java.lang.Throwable from label01 to label03 with label10;
+        catch java.lang.Throwable from label06 to label07 with label10;
+        catch java.io.IOException from label11 to label12 with label13;
+        catch java.lang.Throwable from label10 to label11 with label10;
+    }
+}

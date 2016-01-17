@@ -1,0 +1,71 @@
+public class org.gjt.sp.jedit.browser.VFSBrowser$DirectoriesOnlyFilter extends java.lang.Object implements org.gjt.sp.jedit.io.VFSFileFilter
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$DirectoriesOnlyFilter r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public boolean accept(org.gjt.sp.jedit.io.VFSFile)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$DirectoriesOnlyFilter r0;
+        org.gjt.sp.jedit.io.VFSFile r1;
+        int $i0, $i1;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r1.getType();
+
+        if $i0 == 1 goto label1;
+
+        $i1 = r1.getType();
+
+        if $i1 != 2 goto label2;
+
+     label1:
+        $z0_1 = 1;
+
+(0)     goto label3;
+
+     label2:
+(1)     $z0 = 0;
+
+     label3:
+        $z0_2 = Phi($z0_1 #0, $z0 #1);
+
+        return $z0_2;
+    }
+
+    public boolean accept(java.lang.String)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$DirectoriesOnlyFilter r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return 0;
+    }
+
+    public java.lang.String getDescription()
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$DirectoriesOnlyFilter r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.file_filter.dir_only");
+
+        return $r1;
+    }
+}

@@ -1,0 +1,40 @@
+class org.gjt.sp.jedit.search.HyperSearchResults$KeyHandler$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.search.HyperSearchResults$KeyHandler this$1;
+
+    void <init>(org.gjt.sp.jedit.search.HyperSearchResults$KeyHandler)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$KeyHandler$1 r0;
+        org.gjt.sp.jedit.search.HyperSearchResults$KeyHandler r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$1 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$KeyHandler$1 r0;
+        org.gjt.sp.jedit.search.HyperSearchResults$KeyHandler $r1;
+        org.gjt.sp.jedit.search.HyperSearchResults $r2;
+        javax.swing.JTree $r3;
+
+        r0 := @this;
+
+        $r1 = r0.this$1;
+
+        $r2 = $r1.this$0;
+
+        $r3 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r2);
+
+        $r3.requestFocus();
+
+        return;
+    }
+}

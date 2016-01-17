@@ -1,0 +1,63 @@
+public class org.gjt.sp.jedit.msg.BufferChanging extends org.gjt.sp.jedit.msg.PositionChanging
+{
+    private org.gjt.sp.jedit.Buffer m_buffer;
+
+    public void <init>(org.gjt.sp.jedit.EditPane, org.gjt.sp.jedit.Buffer)
+    {
+        org.gjt.sp.jedit.msg.BufferChanging r0;
+        org.gjt.sp.jedit.EditPane r1;
+        org.gjt.sp.jedit.Buffer r2;
+        java.lang.String r3, $r10;
+        java.lang.Object $r4;
+        java.lang.Thread $r5;
+        java.lang.StackTraceElement[] $r6;
+        java.lang.StringBuilder $r7, $r8, $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = org.gjt.sp.jedit.msg.EditPaneUpdate.BUFFER_CHANGING;
+
+        specialinvoke r0.<init>(r1, $r4);
+
+        if r2 != null goto label1;
+
+        $r5 = java.lang.Thread.currentThread();
+
+        $r6 = $r5.getStackTrace();
+
+        r3 = java.util.Arrays.toString($r6);
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("BufferChanging to null Buffer? Emit PositionChanging instead.");
+
+        $r9 = $r8.append(r3);
+
+        $r10 = $r9.toString();
+
+        org.gjt.sp.util.Log.log(9, r0, $r10);
+
+     label1:
+        r0.m_buffer = r2;
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.Buffer getBuffer()
+    {
+        org.gjt.sp.jedit.msg.BufferChanging r0;
+        org.gjt.sp.jedit.Buffer $r1;
+
+        r0 := @this;
+
+        $r1 = r0.m_buffer;
+
+        return $r1;
+    }
+}

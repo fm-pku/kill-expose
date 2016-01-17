@@ -1,0 +1,1238 @@
+public class org.gjt.sp.jedit.options.EditingOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private javax.swing.JComboBox defaultMode;
+    private javax.swing.JTextField undoCount;
+    private javax.swing.JCheckBox resetUndoOnSave;
+    private org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties global;
+    private org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties[] modeProps;
+    private org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties current;
+    private javax.swing.Box captionBox;
+    private javax.swing.JComboBox mode;
+    private javax.swing.JCheckBox useDefaults;
+    private javax.swing.JTextField filenameGlob;
+    private javax.swing.JTextField firstlineGlob;
+    private javax.swing.JButton deleteMode;
+    private javax.swing.JButton addMode;
+    private javax.swing.JTextField noWordSep;
+    private javax.swing.JCheckBox camelCasedWords;
+    private javax.swing.JComboBox folding;
+    private javax.swing.JTextField collapseFolds;
+    private javax.swing.JComboBox wrap;
+    private javax.swing.JComboBox maxLineLen;
+    private javax.swing.JComboBox tabSize;
+    private javax.swing.JComboBox indentSize;
+    private javax.swing.JCheckBox noTabs;
+    private javax.swing.JCheckBox elasticTabstops;
+    private javax.swing.JComboBox autoIndent;
+    private javax.swing.JCheckBox deepIndent;
+    private java.lang.String[] modeNames;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("editing");
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+        org.gjt.sp.jedit.Mode[] r1;
+        java.lang.String[] r2, r3, r4, r5, r6, $r8, $r35, $r38, $r45, $r48;
+        javax.swing.JComboBox $r7, $r10, $r14, $r32, $r37, $r39, $r40, $r43, $r44, $r47, $r50, $r51, $r53, $r54, $r70, $r71, $r75;
+        org.gjt.sp.jedit.options.EditingOptionPane$ActionHandler $r9, $r19, $r24, $r86;
+        javax.swing.Box $r11, $r12;
+        java.lang.String $r13, $r16, $r23, $r27, $r30, $r31, $r33, $r36, $r41, $r42, $r46, $r49, $r52, $r56, $r58, $r60, $r62, $r65, $r66, $r68, $r72, $r74, $r77, $r78, $r81, $r85;
+        javax.swing.JButton $r15, $r17, $r18, $r20, $r21, $r84, $r87, $r88;
+        javax.swing.JCheckBox $r22, $r25, $r26, $r29, $r55, $r57, $r59, $r61, $r80, $r82, $r83;
+        javax.swing.JTextField $r28, $r34, $r63, $r64, $r67, $r69, $r76, $r79;
+        org.gjt.sp.jedit.Mode $r73;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 = specialinvoke r0.reloadModes();
+
+        $r7 = new javax.swing.JComboBox;
+
+        $r8 = r0.modeNames;
+
+        specialinvoke $r7.<init>($r8);
+
+        r0.mode = $r7;
+
+        $r10 = r0.mode;
+
+        $r9 = new org.gjt.sp.jedit.options.EditingOptionPane$ActionHandler;
+
+        specialinvoke $r9.<init>(r0, null);
+
+        $r10.addActionListener($r9);
+
+        $r11 = new javax.swing.Box;
+
+        specialinvoke $r11.<init>(0);
+
+        r0.captionBox = $r11;
+
+        $r12 = r0.captionBox;
+
+        r0.addComponent($r12);
+
+        $r13 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.mode");
+
+        $r14 = r0.mode;
+
+        r0.addComponent($r13, $r14);
+
+        $r15 = new javax.swing.JButton;
+
+        $r16 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.deleteMode");
+
+        specialinvoke $r15.<init>($r16);
+
+        r0.deleteMode = $r15;
+
+        $r17 = r0.deleteMode;
+
+        $r17.setEnabled(0);
+
+        $r18 = r0.deleteMode;
+
+        $r18.setVisible(0);
+
+        $r20 = r0.deleteMode;
+
+        $r19 = new org.gjt.sp.jedit.options.EditingOptionPane$ActionHandler;
+
+        specialinvoke $r19.<init>(r0, null);
+
+        $r20.addActionListener($r19);
+
+        $r21 = r0.deleteMode;
+
+        r0.addComponent($r21);
+
+        $r22 = new javax.swing.JCheckBox;
+
+        $r23 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.useDefaults");
+
+        specialinvoke $r22.<init>($r23);
+
+        r0.useDefaults = $r22;
+
+        $r25 = r0.useDefaults;
+
+        $r24 = new org.gjt.sp.jedit.options.EditingOptionPane$ActionHandler;
+
+        specialinvoke $r24.<init>(r0, null);
+
+        $r25.addActionListener($r24);
+
+        $r26 = r0.useDefaults;
+
+        r0.addComponent($r26);
+
+        $r27 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.noWordSep");
+
+        $r28 = new javax.swing.JTextField;
+
+        specialinvoke $r28.<init>();
+
+        r0.noWordSep = $r28;
+
+        r0.addComponent($r27, $r28);
+
+        $r29 = new javax.swing.JCheckBox;
+
+        $r30 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.camelCasedWords");
+
+        specialinvoke $r29.<init>($r30);
+
+        r0.camelCasedWords = $r29;
+
+        r0.addComponent($r29);
+
+        r2 = org.gjt.sp.jedit.buffer.FoldHandler.getFoldModes();
+
+        $r31 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.folding");
+
+        $r32 = new javax.swing.JComboBox;
+
+        specialinvoke $r32.<init>(r2);
+
+        r0.folding = $r32;
+
+        r0.addComponent($r31, $r32);
+
+        $r33 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.collapseFolds");
+
+        $r34 = new javax.swing.JTextField;
+
+        specialinvoke $r34.<init>();
+
+        r0.collapseFolds = $r34;
+
+        r0.addComponent($r33, $r34);
+
+        $r35 = newarray (java.lang.String)[3];
+
+        $r35[0] = "none";
+
+        $r35[1] = "soft";
+
+        $r35[2] = "hard";
+
+        r3 = $r35;
+
+        $r36 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.wrap");
+
+        $r37 = new javax.swing.JComboBox;
+
+        specialinvoke $r37.<init>(r3);
+
+        r0.wrap = $r37;
+
+        r0.addComponent($r36, $r37);
+
+        $r38 = newarray (java.lang.String)[4];
+
+        $r38[0] = "0";
+
+        $r38[1] = "72";
+
+        $r38[2] = "76";
+
+        $r38[3] = "80";
+
+        r4 = $r38;
+
+        $r39 = new javax.swing.JComboBox;
+
+        specialinvoke $r39.<init>(r4);
+
+        r0.maxLineLen = $r39;
+
+        $r40 = r0.maxLineLen;
+
+        $r41 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.maxLineLen.tooltip");
+
+        $r40.setToolTipText($r41);
+
+        $r42 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.maxLineLen");
+
+        $r43 = r0.maxLineLen;
+
+        r0.addComponent($r42, $r43);
+
+        $r44 = r0.maxLineLen;
+
+        $r44.setEditable(1);
+
+        $r45 = newarray (java.lang.String)[3];
+
+        $r45[0] = "none";
+
+        $r45[1] = "simple";
+
+        $r45[2] = "full";
+
+        r5 = $r45;
+
+        $r46 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.autoIndent");
+
+        $r47 = new javax.swing.JComboBox;
+
+        specialinvoke $r47.<init>(r5);
+
+        r0.autoIndent = $r47;
+
+        r0.addComponent($r46, $r47);
+
+        $r48 = newarray (java.lang.String)[3];
+
+        $r48[0] = "2";
+
+        $r48[1] = "4";
+
+        $r48[2] = "8";
+
+        r6 = $r48;
+
+        $r49 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.tabSize");
+
+        $r50 = new javax.swing.JComboBox;
+
+        specialinvoke $r50.<init>(r6);
+
+        r0.tabSize = $r50;
+
+        r0.addComponent($r49, $r50);
+
+        $r51 = r0.tabSize;
+
+        $r51.setEditable(1);
+
+        $r52 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.indentSize");
+
+        $r53 = new javax.swing.JComboBox;
+
+        specialinvoke $r53.<init>(r6);
+
+        r0.indentSize = $r53;
+
+        r0.addComponent($r52, $r53);
+
+        $r54 = r0.indentSize;
+
+        $r54.setEditable(1);
+
+        $r55 = new javax.swing.JCheckBox;
+
+        $r56 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.noTabs");
+
+        specialinvoke $r55.<init>($r56);
+
+        r0.noTabs = $r55;
+
+        r0.addComponent($r55);
+
+        $r57 = new javax.swing.JCheckBox;
+
+        $r58 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.elasticTabstops");
+
+        specialinvoke $r57.<init>($r58);
+
+        r0.elasticTabstops = $r57;
+
+        r0.addComponent($r57);
+
+        $r59 = r0.elasticTabstops;
+
+        $r60 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.elasticTabstops.tooltip");
+
+        $r59.setToolTipText($r60);
+
+        $r61 = new javax.swing.JCheckBox;
+
+        $r62 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.deepIndent");
+
+        specialinvoke $r61.<init>($r62);
+
+        r0.deepIndent = $r61;
+
+        r0.addComponent($r61);
+
+        $r63 = new javax.swing.JTextField;
+
+        specialinvoke $r63.<init>();
+
+        r0.filenameGlob = $r63;
+
+        $r64 = r0.filenameGlob;
+
+        $r65 = org.gjt.sp.jedit.jEdit.getProperty("glob.tooltip");
+
+        $r64.setToolTipText($r65);
+
+        $r66 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.filenameGlob");
+
+        $r67 = r0.filenameGlob;
+
+        r0.addComponent($r66, $r67);
+
+        $r68 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.firstlineGlob");
+
+        $r69 = new javax.swing.JTextField;
+
+        specialinvoke $r69.<init>();
+
+        r0.firstlineGlob = $r69;
+
+        r0.addComponent($r68, $r69);
+
+        specialinvoke r0.selectMode();
+
+        r0.addSeparator();
+
+        $r70 = new javax.swing.JComboBox;
+
+        specialinvoke $r70.<init>(r1);
+
+        r0.defaultMode = $r70;
+
+        $r71 = r0.defaultMode;
+
+        $r72 = org.gjt.sp.jedit.jEdit.getProperty("buffer.defaultMode");
+
+        $r73 = org.gjt.sp.jedit.jEdit.getMode($r72);
+
+        $r71.setSelectedItem($r73);
+
+        $r74 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.defaultMode");
+
+        $r75 = r0.defaultMode;
+
+        r0.addComponent($r74, $r75);
+
+        $r76 = new javax.swing.JTextField;
+
+        $r77 = org.gjt.sp.jedit.jEdit.getProperty("buffer.undoCount");
+
+        specialinvoke $r76.<init>($r77);
+
+        r0.undoCount = $r76;
+
+        $r78 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.undoCount");
+
+        $r79 = r0.undoCount;
+
+        r0.addComponent($r78, $r79);
+
+        $r80 = new javax.swing.JCheckBox;
+
+        $r81 = org.gjt.sp.jedit.jEdit.getProperty("options.general.resetUndo");
+
+        specialinvoke $r80.<init>($r81);
+
+        r0.resetUndoOnSave = $r80;
+
+        $r82 = r0.resetUndoOnSave;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("resetUndoOnSave");
+
+        $r82.setSelected($z0);
+
+        $r83 = r0.resetUndoOnSave;
+
+        r0.addComponent($r83);
+
+        r0.addSeparator();
+
+        $r84 = new javax.swing.JButton;
+
+        $r85 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.addMode");
+
+        specialinvoke $r84.<init>($r85);
+
+        r0.addMode = $r84;
+
+        $r87 = r0.addMode;
+
+        $r86 = new org.gjt.sp.jedit.options.EditingOptionPane$ActionHandler;
+
+        specialinvoke $r86.<init>(r0, null);
+
+        $r87.addActionListener($r86);
+
+        $r88 = r0.addMode;
+
+        r0.addComponent($r88);
+
+        return;
+    }
+
+    private org.gjt.sp.jedit.Mode[] reloadModes()
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+        org.gjt.sp.jedit.Mode[] r1;
+        org.gjt.sp.util.StandardUtilities$StringCompare $r2;
+        org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties $r3, $r8;
+        int $i0, $i1, $i2, $i3, $i4, i5;
+        org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties[] $r4, $r10;
+        java.lang.String[] $r5, $r6, $r12;
+        java.lang.String $r7, $r13;
+        org.gjt.sp.jedit.Mode $r9, $r11;
+
+        r0 := @this;
+
+        r1 = org.gjt.sp.jedit.jEdit.getModes();
+
+        $r2 = new org.gjt.sp.util.StandardUtilities$StringCompare;
+
+        specialinvoke $r2.<init>(1);
+
+        java.util.Arrays.sort(r1, $r2);
+
+        $r3 = new org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties;
+
+        specialinvoke $r3.<init>();
+
+        r0.global = $r3;
+
+        $i0 = lengthof r1;
+
+        $r4 = newarray (org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties)[$i0];
+
+        r0.modeProps = $r4;
+
+        $i1 = lengthof r1;
+
+        $i2 = $i1 + 1;
+
+        $r5 = newarray (java.lang.String)[$i2];
+
+        r0.modeNames = $r5;
+
+        $r6 = r0.modeNames;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.global");
+
+        $r6[0] = $r7;
+
+(0)     i5 = 0;
+
+     label1:
+        i5 = Phi(i5 #0, i5 #1);
+
+        $i3 = lengthof r1;
+
+        if i5 >= $i3 goto label2;
+
+        $r10 = r0.modeProps;
+
+        $r8 = new org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties;
+
+        $r9 = r1[i5];
+
+        specialinvoke $r8.<init>($r9);
+
+        $r10[i5] = $r8;
+
+        $r12 = r0.modeNames;
+
+        $i4 = i5 + 1;
+
+        $r11 = r1[i5];
+
+        $r13 = $r11.getName();
+
+        $r12[$i4] = $r13;
+
+        i5 = i5 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return r1;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+        org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties[] r1;
+        int i0, i1;
+        org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties r2, $r10;
+        javax.swing.JComboBox $r3;
+        java.lang.Object $r4;
+        org.gjt.sp.jedit.Mode $r5;
+        java.lang.String $r6, $r8;
+        javax.swing.JTextField $r7;
+        javax.swing.JCheckBox $r9;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r3 = r0.defaultMode;
+
+        $r4 = $r3.getSelectedItem();
+
+        $r5 = (org.gjt.sp.jedit.Mode) $r4;
+
+        $r6 = $r5.getName();
+
+        org.gjt.sp.jedit.jEdit.setProperty("buffer.defaultMode", $r6);
+
+        $r7 = r0.undoCount;
+
+        $r8 = $r7.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("buffer.undoCount", $r8);
+
+        $r9 = r0.resetUndoOnSave;
+
+        $z0 = $r9.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("resetUndoOnSave", $z0);
+
+        specialinvoke r0.saveMode();
+
+        $r10 = r0.global;
+
+        $r10.save();
+
+        r1 = r0.modeProps;
+
+        i0 = lengthof r1;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label2;
+
+        r2 = r1[i1];
+
+        r2.save();
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return;
+    }
+
+    private void saveMode()
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+        javax.swing.JCheckBox $r1, $r12, $r37, $r39, $r45;
+        org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties $r2, $r4, $r7, $r10, $r13, $r15, $r19, $r22, $r26, $r30, $r34, $r38, $r40, $r42, $r46;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        javax.swing.JTextField $r3, $r6, $r9, $r18;
+        java.lang.String $r5, $r8, $r11, $r17, $r20, $r24, $r28, $r32, $r36, $r44;
+        javax.swing.JComboBox $r14, $r21, $r25, $r29, $r33, $r41;
+        java.lang.Object $r16, $r23, $r27, $r31, $r35, $r43;
+
+        r0 := @this;
+
+        $r2 = r0.current;
+
+        $r1 = r0.useDefaults;
+
+        $z0 = $r1.isSelected();
+
+        $r2.useDefaults = $z0;
+
+        $r4 = r0.current;
+
+        $r3 = r0.filenameGlob;
+
+        $r5 = $r3.getText();
+
+        $r4.filenameGlob = $r5;
+
+        $r7 = r0.current;
+
+        $r6 = r0.firstlineGlob;
+
+        $r8 = $r6.getText();
+
+        $r7.firstlineGlob = $r8;
+
+        $r10 = r0.current;
+
+        $r9 = r0.noWordSep;
+
+        $r11 = $r9.getText();
+
+        $r10.noWordSep = $r11;
+
+        $r13 = r0.current;
+
+        $r12 = r0.camelCasedWords;
+
+        $z1 = $r12.isSelected();
+
+        $r13.camelCasedWords = $z1;
+
+        $r15 = r0.current;
+
+        $r14 = r0.folding;
+
+        $r16 = $r14.getSelectedItem();
+
+        $r17 = (java.lang.String) $r16;
+
+        $r15.folding = $r17;
+
+        $r19 = r0.current;
+
+        $r18 = r0.collapseFolds;
+
+        $r20 = $r18.getText();
+
+        $r19.collapseFolds = $r20;
+
+        $r22 = r0.current;
+
+        $r21 = r0.wrap;
+
+        $r23 = $r21.getSelectedItem();
+
+        $r24 = (java.lang.String) $r23;
+
+        $r22.wrap = $r24;
+
+        $r26 = r0.current;
+
+        $r25 = r0.maxLineLen;
+
+        $r27 = $r25.getSelectedItem();
+
+        $r28 = (java.lang.String) $r27;
+
+        $r26.maxLineLen = $r28;
+
+        $r30 = r0.current;
+
+        $r29 = r0.tabSize;
+
+        $r31 = $r29.getSelectedItem();
+
+        $r32 = (java.lang.String) $r31;
+
+        $r30.tabSize = $r32;
+
+        $r34 = r0.current;
+
+        $r33 = r0.indentSize;
+
+        $r35 = $r33.getSelectedItem();
+
+        $r36 = (java.lang.String) $r35;
+
+        $r34.indentSize = $r36;
+
+        $r38 = r0.current;
+
+        $r37 = r0.noTabs;
+
+        $z2 = $r37.isSelected();
+
+        $r38.noTabs = $z2;
+
+        $r40 = r0.current;
+
+        $r39 = r0.elasticTabstops;
+
+        $z3 = $r39.isSelected();
+
+        $r40.elasticTabstops = $z3;
+
+        $r42 = r0.current;
+
+        $r41 = r0.autoIndent;
+
+        $r43 = $r41.getSelectedItem();
+
+        $r44 = (java.lang.String) $r43;
+
+        $r42.autoIndent = $r44;
+
+        $r46 = r0.current;
+
+        $r45 = r0.deepIndent;
+
+        $z4 = $r45.isSelected();
+
+        $r46.deepIndent = $z4;
+
+        return;
+    }
+
+    private void selectMode()
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+        int i0, $i1, $i2, $i3, $i3_1, $i3_2;
+        javax.swing.JComboBox $r1, $r2, $r30, $r36, $r39, $r42, $r45, $r52;
+        org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties[] $r3;
+        org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties $r4, $r5, $r15, $r17, $r20, $r23, $r26, $r28, $r31, $r34, $r37, $r40, $r43, $r46, $r48, $r50, $r53, $r55, $r57, $r59, $r59_1, $r59_2;
+        javax.swing.Box $r6, $r8;
+        java.lang.StringBuilder $r7, $r9, $r10;
+        java.lang.String $r11, $r12, $r18, $r21, $r24, $r29, $r32, $r35, $r38, $r41, $r44, $r51, $r60, $r60_1, $r60_2;
+        javax.swing.JComponent $r13;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6;
+        javax.swing.JCheckBox $r16, $r27, $r47, $r49, $r54;
+        javax.swing.JTextField $r19, $r22, $r25, $r33;
+        javax.swing.JButton $r56, $r58;
+
+        r0 := @this;
+
+        $r1 = r0.mode;
+
+        $i1 = $r1.getSelectedIndex();
+
+        if $i1 >= 0 goto label1;
+
+        $i3 = 0;
+
+(0)     goto label2;
+
+     label1:
+        $r2 = r0.mode;
+
+(1)     $i3_1 = $r2.getSelectedIndex();
+
+     label2:
+        $i3_2 = Phi($i3 #0, $i3_1 #1);
+
+        i0 = $i3_2;
+
+        if i0 != 0 goto label3;
+
+        $r59 = r0.global;
+
+(2)     goto label4;
+
+     label3:
+        $r3 = r0.modeProps;
+
+        $i2 = i0 - 1;
+
+(3)     $r59_1 = $r3[$i2];
+
+     label4:
+        $r59_2 = Phi($r59 #2, $r59_1 #3);
+
+        r0.current = $r59_2;
+
+        $r4 = r0.current;
+
+        $r4.edited = 1;
+
+        $r5 = r0.current;
+
+        $r5.load();
+
+        $r6 = r0.captionBox;
+
+        $r6.removeAll();
+
+        $r8 = r0.captionBox;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r9 = $r7.append("options.editing.caption-");
+
+        if i0 != 0 goto label5;
+
+        $r60 = "0";
+
+(4)     goto label6;
+
+     label5:
+(5)     $r60_1 = "1";
+
+     label6:
+        $r60_2 = Phi($r60 #4, $r60_1 #5);
+
+        $r10 = $r9.append($r60_2);
+
+        $r11 = $r10.toString();
+
+        $r12 = org.gjt.sp.jedit.jEdit.getProperty($r11);
+
+        $r13 = org.gjt.sp.jedit.GUIUtilities.createMultilineLabel($r12);
+
+        $r8.add($r13);
+
+        $r16 = r0.useDefaults;
+
+        $r15 = r0.current;
+
+        $z0 = $r15.useDefaults;
+
+        $r16.setSelected($z0);
+
+        $r19 = r0.filenameGlob;
+
+        $r17 = r0.current;
+
+        $r18 = $r17.filenameGlob;
+
+        $r19.setText($r18);
+
+        $r22 = r0.firstlineGlob;
+
+        $r20 = r0.current;
+
+        $r21 = $r20.firstlineGlob;
+
+        $r22.setText($r21);
+
+        $r25 = r0.noWordSep;
+
+        $r23 = r0.current;
+
+        $r24 = $r23.noWordSep;
+
+        $r25.setText($r24);
+
+        $r27 = r0.camelCasedWords;
+
+        $r26 = r0.current;
+
+        $z1 = $r26.camelCasedWords;
+
+        $r27.setSelected($z1);
+
+        $r30 = r0.folding;
+
+        $r28 = r0.current;
+
+        $r29 = $r28.folding;
+
+        $r30.setSelectedItem($r29);
+
+        $r33 = r0.collapseFolds;
+
+        $r31 = r0.current;
+
+        $r32 = $r31.collapseFolds;
+
+        $r33.setText($r32);
+
+        $r36 = r0.wrap;
+
+        $r34 = r0.current;
+
+        $r35 = $r34.wrap;
+
+        $r36.setSelectedItem($r35);
+
+        $r39 = r0.maxLineLen;
+
+        $r37 = r0.current;
+
+        $r38 = $r37.maxLineLen;
+
+        $r39.setSelectedItem($r38);
+
+        $r42 = r0.tabSize;
+
+        $r40 = r0.current;
+
+        $r41 = $r40.tabSize;
+
+        $r42.setSelectedItem($r41);
+
+        $r45 = r0.indentSize;
+
+        $r43 = r0.current;
+
+        $r44 = $r43.indentSize;
+
+        $r45.setSelectedItem($r44);
+
+        $r47 = r0.noTabs;
+
+        $r46 = r0.current;
+
+        $z2 = $r46.noTabs;
+
+        $r47.setSelected($z2);
+
+        $r49 = r0.elasticTabstops;
+
+        $r48 = r0.current;
+
+        $z3 = $r48.elasticTabstops;
+
+        $r49.setSelected($z3);
+
+        $r52 = r0.autoIndent;
+
+        $r50 = r0.current;
+
+        $r51 = $r50.autoIndent;
+
+        $r52.setSelectedItem($r51);
+
+        $r54 = r0.deepIndent;
+
+        $r53 = r0.current;
+
+        $z4 = $r53.deepIndent;
+
+        $r54.setSelected($z4);
+
+        $r56 = r0.deleteMode;
+
+        $r55 = r0.current;
+
+        $z5 = $r55.isUserMode;
+
+        $r56.setEnabled($z5);
+
+        $r58 = r0.deleteMode;
+
+        $r57 = r0.current;
+
+        $z6 = $r57.isUserMode;
+
+        $r58.setVisible($z6);
+
+        specialinvoke r0.updateEnabled();
+
+        r0.revalidate();
+
+        return;
+    }
+
+    private void updateEnabled()
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+        org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties $r1, $r2, $r5;
+        javax.swing.JComboBox $r3, $r11, $r13, $r14, $r15, $r16, $r19;
+        org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties[] $r4;
+        int $i0, $i1;
+        boolean $z0, z1, $z2, $z2_1, $z2_2, z1_1, $z2_3, z1_2;
+        javax.swing.JCheckBox $r6, $r10, $r17, $r18, $r20, $r21;
+        javax.swing.JTextField $r7, $r8, $r9, $r12, $r22, $r23;
+
+        r0 := @this;
+
+        $r2 = r0.current;
+
+        $r1 = r0.global;
+
+        if $r2 != $r1 goto label1;
+
+        z1 = 1;
+
+        $r21 = r0.useDefaults;
+
+        $r21.setEnabled(0);
+
+        $r22 = r0.filenameGlob;
+
+        $r22.setEnabled(0);
+
+        $r23 = r0.firstlineGlob;
+
+        $r23.setEnabled(0);
+
+(0)     goto label4;
+
+     label1:
+        $r4 = r0.modeProps;
+
+        $r3 = r0.mode;
+
+        $i0 = $r3.getSelectedIndex();
+
+        $i1 = $i0 - 1;
+
+        $r5 = $r4[$i1];
+
+        $z0 = $r5.useDefaults;
+
+        if $z0 != 0 goto label2;
+
+        $z2 = 1;
+
+(1)     goto label3;
+
+     label2:
+(2)     $z2_1 = 0;
+
+     label3:
+        $z2_2 = Phi($z2 #1, $z2_1 #2);
+
+        z1_1 = $z2_2;
+
+        $r6 = r0.useDefaults;
+
+        $r6.setEnabled(1);
+
+        $r7 = r0.filenameGlob;
+
+        $r7.setEnabled(z1_1);
+
+        $r8 = r0.firstlineGlob;
+
+(3)     $r8.setEnabled(z1_1);
+
+     label4:
+        $z2_3 = Phi($z2 #0, $z2_2 #3);
+
+        z1_2 = Phi(z1 #0, z1_1 #3);
+
+        $r9 = r0.noWordSep;
+
+        $r9.setEnabled(z1_2);
+
+        $r10 = r0.camelCasedWords;
+
+        $r10.setEnabled(z1_2);
+
+        $r11 = r0.folding;
+
+        $r11.setEnabled(z1_2);
+
+        $r12 = r0.collapseFolds;
+
+        $r12.setEnabled(z1_2);
+
+        $r13 = r0.wrap;
+
+        $r13.setEnabled(z1_2);
+
+        $r14 = r0.maxLineLen;
+
+        $r14.setEnabled(z1_2);
+
+        $r15 = r0.tabSize;
+
+        $r15.setEnabled(z1_2);
+
+        $r16 = r0.indentSize;
+
+        $r16.setEnabled(z1_2);
+
+        $r17 = r0.noTabs;
+
+        $r17.setEnabled(z1_2);
+
+        $r18 = r0.elasticTabstops;
+
+        $r18.setEnabled(z1_2);
+
+        $r19 = r0.autoIndent;
+
+        $r19.setEnabled(z1_2);
+
+        $r20 = r0.deepIndent;
+
+        $r20.setEnabled(z1_2);
+
+        return;
+    }
+
+    static javax.swing.JComboBox access$100(org.gjt.sp.jedit.options.EditingOptionPane)
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+        javax.swing.JComboBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.mode;
+
+        return $r1;
+    }
+
+    static void access$200(org.gjt.sp.jedit.options.EditingOptionPane)
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.saveMode();
+
+        return;
+    }
+
+    static void access$300(org.gjt.sp.jedit.options.EditingOptionPane)
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.selectMode();
+
+        return;
+    }
+
+    static javax.swing.JCheckBox access$400(org.gjt.sp.jedit.options.EditingOptionPane)
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.useDefaults;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties[] access$500(org.gjt.sp.jedit.options.EditingOptionPane)
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+        org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties[] $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.modeProps;
+
+        return $r1;
+    }
+
+    static void access$600(org.gjt.sp.jedit.options.EditingOptionPane)
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updateEnabled();
+
+        return;
+    }
+
+    static javax.swing.JButton access$700(org.gjt.sp.jedit.options.EditingOptionPane)
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.deleteMode;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties access$800(org.gjt.sp.jedit.options.EditingOptionPane)
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+        org.gjt.sp.jedit.options.EditingOptionPane$ModeProperties $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.current;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$900(org.gjt.sp.jedit.options.EditingOptionPane)
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.addMode;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.Mode[] access$1000(org.gjt.sp.jedit.options.EditingOptionPane)
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+        org.gjt.sp.jedit.Mode[] $r1;
+
+        r0 := @parameter0;
+
+        $r1 = specialinvoke r0.reloadModes();
+
+        return $r1;
+    }
+
+    static java.lang.String[] access$1100(org.gjt.sp.jedit.options.EditingOptionPane)
+    {
+        org.gjt.sp.jedit.options.EditingOptionPane r0;
+        java.lang.String[] $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.modeNames;
+
+        return $r1;
+    }
+}

@@ -1,0 +1,85 @@
+class org.gjt.sp.jedit.options.BrowserColorsOptionPane$MouseHandler extends java.awt.event.MouseAdapter
+{
+    final org.gjt.sp.jedit.options.BrowserColorsOptionPane this$0;
+
+    void <init>(org.gjt.sp.jedit.options.BrowserColorsOptionPane)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane$MouseHandler r0;
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mouseClicked(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane$MouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        java.awt.Point r2;
+        int i0, i1;
+        java.awt.Color r3, $r13;
+        org.gjt.sp.jedit.options.BrowserColorsOptionPane $r4, $r6, $r8, $r10, $r14;
+        javax.swing.JTable $r5, $r7;
+        java.lang.String $r9;
+        org.gjt.sp.jedit.options.BrowserColorsModel $r11, $r15;
+        java.lang.Object $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getPoint();
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$400($r4);
+
+        i0 = $r5.rowAtPoint(r2);
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$400($r6);
+
+        i1 = $r7.columnAtPoint(r2);
+
+        if i0 == -1 goto label1;
+
+        if i1 == 1 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("colorChooser.title");
+
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$200($r10);
+
+        $r12 = $r11.getValueAt(i0, 1);
+
+        $r13 = (java.awt.Color) $r12;
+
+        r3 = javax.swing.JColorChooser.showDialog($r8, $r9, $r13);
+
+        if r3 == null goto label3;
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.options.BrowserColorsOptionPane.access$200($r14);
+
+        $r15.setValueAt(r3, i0, 1);
+
+     label3:
+        return;
+    }
+}

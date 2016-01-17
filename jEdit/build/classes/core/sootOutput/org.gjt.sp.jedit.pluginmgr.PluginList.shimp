@@ -1,0 +1,1009 @@
+class org.gjt.sp.jedit.pluginmgr.PluginList extends java.lang.Object
+{
+    public static final int GZIP_MAGIC_1;
+    public static final int GZIP_MAGIC_2;
+    public static final long MILLISECONDS_PER_MINUTE;
+    final java.util.List plugins;
+    final java.util.Map pluginHash;
+    final java.util.List pluginSets;
+    private final java.lang.String id;
+    private java.lang.String cachedURL;
+    private final org.gjt.sp.util.Task task;
+    java.lang.String gzipURL;
+
+    void <init>(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList r0;
+        org.gjt.sp.util.Task r1;
+        java.util.ArrayList $r2, $r4;
+        java.util.HashMap $r3;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        $r2 = new java.util.ArrayList;
+
+        specialinvoke $r2.<init>();
+
+        r0.plugins = $r2;
+
+        $r3 = new java.util.HashMap;
+
+        specialinvoke $r3.<init>();
+
+        r0.pluginHash = $r3;
+
+        $r4 = new java.util.ArrayList;
+
+        specialinvoke $r4.<init>();
+
+        r0.pluginSets = $r4;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.mirror.id");
+
+        r0.id = $r5;
+
+        r0.task = r1;
+
+        r0.readPluginList(1);
+
+        return;
+    }
+
+    void readPluginList(boolean)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList r0;
+        boolean z0, $z1, $z2, $z3, $z4, $z6, z7, $z6_1, $z6_2, z7_1, z7_2, z7_3, z7_4, z7_5, z7_6, z7_7;
+        java.lang.String r1, $r3, $r4, $r6, $r10, $r11, $r13, $r15, $r21, $r22, $r23, $r24, $r25, $r27, $r29, $r34, $r35, $r37, $r41, $r43, $r44, r48, r48_1, r48_2;
+        java.lang.Throwable r2, $r38;
+        java.lang.StringBuilder $r5, $r7, $r8, $r9, $r12, $r14, $r16, $r17, $r18, $r19, $r20;
+        java.net.URL $r26;
+        org.gjt.sp.jedit.pluginmgr.PluginListHandler $r28, r54;
+        java.io.BufferedInputStream $r30;
+        org.xml.sax.InputSource $r31, r55;
+        java.io.InputStreamReader $r32;
+        java.util.zip.GZIPInputStream $r33;
+        java.io.File $r36, $r42, r49;
+        long $l0, $l2, l4, l5, l6;
+        int $i1, i7, i8;
+        byte $b3;
+        java.lang.Exception $r39, $r40, r50, r56;
+        java.util.List $r45, $r47;
+        java.util.Map $r46;
+        java.io.FilterInputStream r51, r51_1, r51_2, r51_3, r51_4, r51_5;
+        java.io.InputStream r52, r52_1, r52_2, r52_3;
+        org.xml.sax.XMLReader r53;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        $r3 = r0.id;
+
+        r1 = org.gjt.sp.jedit.pluginmgr.PluginList.buildMirror($r3);
+
+        if r1 != null goto label01;
+
+        return;
+
+     label01:
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.export-url");
+
+        r0.gzipURL = $r4;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = r0.gzipURL;
+
+        $r7 = $r5.append($r6);
+
+        $r8 = $r7.append("?mirror=");
+
+        $r9 = $r8.append(r1);
+
+        $r10 = $r9.toString();
+
+        r0.gzipURL = $r10;
+
+        r48 = null;
+
+        $r11 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        if $r11 != null goto label02;
+
+        $r37 = r0.gzipURL;
+
+        r0.cachedURL = $r37;
+
+(0)     goto label03;
+
+     label02:
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        $r14 = $r12.append($r13);
+
+        $r15 = java.io.File.separator;
+
+        $r16 = $r14.append($r15);
+
+        $r17 = $r16.append("pluginMgr-Cached.xml.gz");
+
+        r48_1 = $r17.toString();
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<init>();
+
+        $r19 = $r18.append("file:///");
+
+        $r20 = $r19.append(r48_1);
+
+        $r21 = $r20.toString();
+
+(1)     r0.cachedURL = $r21;
+
+     label03:
+        r48_2 = Phi(r48 #0, r48_1 #1);
+
+        $r22 = r0.id;
+
+        $r23 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.mirror.cached-id");
+
+        $z1 = $r22.equals($r23);
+
+        if $z1 != 0 goto label04;
+
+        $z6 = 1;
+
+(2)     goto label05;
+
+     label04:
+(3)     $z6_1 = 0;
+
+     label05:
+        $z6_2 = Phi($z6 #2, $z6_1 #3);
+
+        z7 = $z6_2;
+
+(4)     if r48_2 == null goto label10;
+
+     label06:
+(5)     $r36 = new java.io.File;
+
+        specialinvoke $r36.<init>(r48_2);
+
+        r49 = $r36;
+
+        $z3 = r49.canRead();
+
+(6)     if $z3 != 0 goto label07;
+
+(7)     z7_1 = 1;
+
+     label07:
+        z7_2 = Phi(z7 #6, z7_1 #7);
+
+(8)     l4 = java.lang.System.currentTimeMillis();
+
+        $l0 = r49.lastModified();
+
+        l5 = l4 - $l0;
+
+        $i1 = org.gjt.sp.jedit.jEdit.getIntegerProperty("plugin-manager.list-cache.minutes", 5);
+
+        $l2 = (long) $i1;
+
+        l6 = $l2 * 60000L;
+
+        $b3 = l5 cmp l6;
+
+(9)     if $b3 <= 0 goto label08;
+
+        org.gjt.sp.util.Log.log(3, r0, "PluginList cached copy too old. Downloading from mirror. ");
+
+(10)    z7_3 = 1;
+
+     label08:
+        z7_4 = Phi(z7_2 #9, z7_3 #10);
+
+(11)    goto label10;
+
+     label09:
+        $r39 := @caughtexception;
+
+        z7_5 = Phi(z7 #5, z7_1 #7, z7_2 #8);
+
+        r50 = $r39;
+
+        org.gjt.sp.util.Log.log(3, r0, "No cached copy. Downloading from mirror. ");
+
+(12)    z7_6 = 1;
+
+     label10:
+        z7_7 = Phi(z7 #4, z7_4 #11, z7_6 #12);
+
+        if z7_7 == 0 goto label11;
+
+        $r35 = r0.cachedURL;
+
+        $r34 = r0.gzipURL;
+
+        if $r35 == $r34 goto label11;
+
+        r0.downloadPluginList();
+
+     label11:
+        r51 = null;
+
+(13)    r52 = null;
+
+     label12:
+        $r25 = r0.cachedURL;
+
+        $r24 = r0.gzipURL;
+
+        if $r25 == $r24 goto label13;
+
+        org.gjt.sp.util.Log.log(3, r0, "Using cached pluginlist");
+
+     label13:
+        $r26 = new java.net.URL;
+
+        $r27 = r0.cachedURL;
+
+        specialinvoke $r26.<init>($r27);
+
+(14)    r52_1 = $r26.openStream();
+
+        r53 = org.xml.sax.helpers.XMLReaderFactory.createXMLReader();
+
+        $r28 = new org.gjt.sp.jedit.pluginmgr.PluginListHandler;
+
+        $r29 = r0.cachedURL;
+
+        specialinvoke $r28.<init>(r0, $r29);
+
+        r54 = $r28;
+
+        $r30 = new java.io.BufferedInputStream;
+
+        specialinvoke $r30.<init>(r52_1);
+
+(15)    r51_1 = $r30;
+
+        $z2 = r51_1.markSupported();
+
+(16)    if $z2 == 0 goto label14;
+
+        r51_1.mark(2);
+
+        i7 = r51_1.read();
+
+        i8 = r51_1.read();
+
+        r51_1.reset();
+
+(17)    if i7 != 31 goto label14;
+
+(18)    if i8 != 139 goto label14;
+
+        $r33 = new java.util.zip.GZIPInputStream;
+
+        specialinvoke $r33.<init>(r51_1);
+
+(19)    r51_2 = $r33;
+
+     label14:
+        r51_3 = Phi(r51_1 #16, r51_1 #17, r51_1 #18, r51_2 #19);
+
+(20)    $r31 = new org.xml.sax.InputSource;
+
+(21)    $r32 = new java.io.InputStreamReader;
+
+        specialinvoke $r32.<init>(r51_3, "UTF8");
+
+        specialinvoke $r31.<init>($r32);
+
+        r55 = $r31;
+
+        r55.setSystemId("jedit.jar");
+
+        r53.setContentHandler(r54);
+
+        r53.setDTDHandler(r54);
+
+        r53.setEntityResolver(r54);
+
+        r53.setErrorHandler(r54);
+
+        r53.parse(r55);
+
+     label15:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r51_3);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r52_1);
+
+(22)    goto label20;
+
+     label16:
+        $r40 := @caughtexception;
+
+        r51_4 = Phi(r51 #13, r51_1 #15, r51_3 #21);
+
+(23)    r52_2 = Phi(r52 #13, r52_1 #14);
+
+        r56 = $r40;
+
+        org.gjt.sp.util.Log.log(9, r0, "readpluginlist: error", r56);
+
+        $r41 = r0.cachedURL;
+
+        $z4 = $r41.startsWith("file:///");
+
+        if $z4 == 0 goto label17;
+
+        org.gjt.sp.util.Log.log(1, r0, "Unable to read plugin list, deleting cached file and try again");
+
+        $r42 = new java.io.File;
+
+        $r43 = r0.cachedURL;
+
+        $r44 = $r43.substring(8);
+
+        specialinvoke $r42.<init>($r44);
+
+        $r42.delete();
+
+        if z0 == 0 goto label17;
+
+        $r45 = r0.plugins;
+
+        $r45.clear();
+
+        $r46 = r0.pluginHash;
+
+        $r46.clear();
+
+        $r47 = r0.pluginSets;
+
+        $r47.clear();
+
+        r0.readPluginList(0);
+
+     label17:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r51_4);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r52_2);
+
+(24)    goto label20;
+
+     label18:
+        $r38 := @caughtexception;
+
+        r51 = Phi(r51 #13, r51_1 #15, r51_2 #19, r51_3 #20, r51_4 #23, r51 #25);
+
+        z7 = Phi(z7_7 #13, z7 #25);
+
+        r52 = Phi(r52 #13, r52_1 #14, r52_2 #23, r52 #25);
+
+        r48 = Phi(r48_2 #13, r48 #25);
+
+(25)    $z6 = Phi($z6_2 #13, $z6 #25);
+
+        r2 = $r38;
+
+     label19:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r51);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r52);
+
+        throw r2;
+
+     label20:
+        r51_5 = Phi(r51_3 #22, r51_4 #24);
+
+        r52_3 = Phi(r52_1 #22, r52_2 #24);
+
+        return;
+
+        catch java.lang.Exception from label06 to label08 with label09;
+        catch java.lang.Exception from label12 to label15 with label16;
+        catch java.lang.Throwable from label12 to label15 with label18;
+        catch java.lang.Throwable from label16 to label17 with label18;
+        catch java.lang.Throwable from label18 to label19 with label18;
+    }
+
+    void downloadPluginList()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList r0;
+        java.net.HttpURLConnection r1;
+        java.io.InputStream r2;
+        java.lang.String r3, $r6, $r8, $r13, $r17, $r19, $r20, $r24, $r28, $r35;
+        long l0, $l5, $l6;
+        java.lang.Throwable r4, $r31;
+        org.gjt.sp.util.Task $r5;
+        java.net.URL $r7, r39;
+        java.net.URLConnection $r9;
+        int $i1, $i2, $i3, $i4;
+        org.gjt.sp.jedit.View $r10, $r29, $r33;
+        java.lang.Object[] $r11, $r30, $r34;
+        java.lang.Integer $r12;
+        java.lang.StringBuilder $r14, $r15, $r16, $r18, $r25, $r26, $r27;
+        java.io.BufferedOutputStream $r21, r38, r38_1, r38_2, r38_3, r38_4, r38_5;
+        java.io.FileOutputStream $r22;
+        java.io.BufferedInputStream $r23, r37, r37_1, r37_2, r37_3, r37_4, r37_5;
+        java.net.UnknownHostException $r32, r40;
+        java.lang.Exception $r36, r41;
+
+        r0 := @this;
+
+        r37 = null;
+
+(0)     r38 = null;
+
+     label01:
+(1)     $r5 = r0.task;
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.list-download");
+
+        $r5.setStatus($r6);
+
+        $r7 = new java.net.URL;
+
+        $r8 = r0.gzipURL;
+
+        specialinvoke $r7.<init>($r8);
+
+        r39 = $r7;
+
+        $r9 = r39.openConnection();
+
+        r1 = (java.net.HttpURLConnection) $r9;
+
+        $i1 = r1.getResponseCode();
+
+        if $i1 != 407 goto label02;
+
+        $r29 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        $r30 = newarray (java.lang.Object)[0];
+
+        org.gjt.sp.jedit.GUIUtilities.error($r29, "plugin-manager.list-download.need-password", $r30);
+
+        org.gjt.sp.util.Log.log(9, r0, "CacheRemotePluginList: proxy requires authentication");
+
+(2)     goto label04;
+
+     label02:
+        $i2 = r1.getResponseCode();
+
+        if $i2 != 200 goto label03;
+
+        r2 = r1.getInputStream();
+
+        $r20 = r0.cachedURL;
+
+        r3 = $r20.replaceFirst("file:///", "");
+
+        $r21 = new java.io.BufferedOutputStream;
+
+        $r22 = new java.io.FileOutputStream;
+
+        specialinvoke $r22.<init>(r3);
+
+        specialinvoke $r21.<init>($r22);
+
+(3)     r38_1 = $r21;
+
+        l0 = java.lang.System.currentTimeMillis();
+
+        $r23 = new java.io.BufferedInputStream;
+
+        specialinvoke $r23.<init>(r2);
+
+(4)     r37_1 = $r23;
+
+        org.gjt.sp.util.IOUtilities.copyStream(4096, null, r37_1, r38_1, 0);
+
+        $r24 = r0.id;
+
+        org.gjt.sp.jedit.jEdit.setProperty("plugin-manager.mirror.cached-id", $r24);
+
+        $r25 = new java.lang.StringBuilder;
+
+        specialinvoke $r25.<init>();
+
+        $r26 = $r25.append("Updated cached pluginlist ");
+
+        $l5 = java.lang.System.currentTimeMillis();
+
+        $l6 = $l5 - l0;
+
+        $r27 = $r26.append($l6);
+
+        $r28 = $r27.toString();
+
+        org.gjt.sp.util.Log.log(3, r0, $r28);
+
+(5)     goto label04;
+
+     label03:
+        $r10 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        $r11 = newarray (java.lang.Object)[2];
+
+        $i3 = r1.getResponseCode();
+
+        $r12 = java.lang.Integer.valueOf($i3);
+
+        $r11[0] = $r12;
+
+        $r13 = r1.getResponseMessage();
+
+        $r11[1] = $r13;
+
+        org.gjt.sp.jedit.GUIUtilities.error($r10, "plugin-manager.list-download.generic-error", $r11);
+
+        $r14 = new java.lang.StringBuilder;
+
+        specialinvoke $r14.<init>();
+
+        $r15 = $r14.append("CacheRemotePluginList: HTTP error: ");
+
+        $i4 = r1.getResponseCode();
+
+        $r16 = $r15.append($i4);
+
+        $r17 = r1.getResponseMessage();
+
+        $r18 = $r16.append($r17);
+
+        $r19 = $r18.toString();
+
+(6)     org.gjt.sp.util.Log.log(9, r0, $r19);
+
+     label04:
+        r37_2 = Phi(r37 #2, r37_1 #5, r37 #6);
+
+        r38_2 = Phi(r38 #2, r38_1 #5, r38 #6);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r38_2);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r37_2);
+
+(7)     goto label11;
+
+     label05:
+        $r32 := @caughtexception;
+
+        r37_3 = Phi(r37 #1, r37_1 #4);
+
+(8)     r38_3 = Phi(r38 #1, r38_1 #3);
+
+        r40 = $r32;
+
+        $r33 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        $r34 = newarray (java.lang.Object)[1];
+
+        $r35 = r40.getMessage();
+
+        $r34[0] = $r35;
+
+        org.gjt.sp.jedit.GUIUtilities.error($r33, "plugin-manager.list-download.disconnected", $r34);
+
+        org.gjt.sp.util.Log.log(9, r0, "CacheRemotePluginList: error", r40);
+
+     label06:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r38_3);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r37_3);
+
+(9)     goto label11;
+
+     label07:
+        $r36 := @caughtexception;
+
+        r37_4 = Phi(r37_1 #4, r37 #0);
+
+(10)    r38_4 = Phi(r38_1 #3, r38 #0);
+
+        r41 = $r36;
+
+        org.gjt.sp.util.Log.log(9, r0, "CacheRemotePluginList: error", r41);
+
+     label08:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r38_4);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r37_4);
+
+(11)    goto label11;
+
+     label09:
+        $r31 := @caughtexception;
+
+        r37 = Phi(r37_1 #4, r37 #0, r37_3 #8, r37_4 #10, r37 #12);
+
+(12)    r38 = Phi(r38_1 #3, r38 #0, r38_3 #8, r38_4 #10, r38 #12);
+
+        r4 = $r31;
+
+     label10:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r38);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r37);
+
+        throw r4;
+
+     label11:
+        r37_5 = Phi(r37_2 #7, r37_3 #9, r37_4 #11);
+
+        r38_5 = Phi(r38_2 #7, r38_3 #9, r38_4 #11);
+
+        return;
+
+        catch java.net.UnknownHostException from label01 to label04 with label05;
+        catch java.lang.Exception from label01 to label04 with label07;
+        catch java.lang.Throwable from label01 to label04 with label09;
+        catch java.lang.Throwable from label05 to label06 with label09;
+        catch java.lang.Throwable from label07 to label08 with label09;
+        catch java.lang.Throwable from label09 to label10 with label09;
+    }
+
+    void addPlugin(org.gjt.sp.jedit.pluginmgr.PluginList$Plugin)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList r0;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin r1;
+        java.util.List $r2;
+        java.lang.String $r3;
+        java.util.Map $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.plugins;
+
+        $r2.add(r1);
+
+        $r4 = r0.pluginHash;
+
+        $r3 = r1.name;
+
+        $r4.put($r3, r1);
+
+        return;
+    }
+
+    void addPluginSet(org.gjt.sp.jedit.pluginmgr.PluginList$PluginSet)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList r0;
+        org.gjt.sp.jedit.pluginmgr.PluginList$PluginSet r1;
+        java.util.List $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.pluginSets;
+
+        $r2.add(r1);
+
+        return;
+    }
+
+    void finished()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList r0;
+        java.util.Iterator r1;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin r2, $r17;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Branch r3;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Dependency r4;
+        java.util.List $r5, $r7, $r8, $r10, $r11;
+        boolean $z0, $z1;
+        java.lang.Object $r6, $r9, $r12, $r16;
+        int $i0, $i1, i2, i3;
+        java.lang.String $r13, $r14;
+        java.util.Map $r15;
+
+        r0 := @this;
+
+        $r5 = r0.plugins;
+
+(0)     r1 = $r5.iterator();
+
+     label1:
+        i3 = Phi(i3 #0, i3 #5);
+
+        i2 = Phi(i2 #0, i2 #5);
+
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label7;
+
+        $r6 = r1.next();
+
+        r2 = (org.gjt.sp.jedit.pluginmgr.PluginList$Plugin) $r6;
+
+(1)     i2 = 0;
+
+     label2:
+        i3 = Phi(i3 #1, i3 #4);
+
+        i2 = Phi(i2 #1, i2 #4);
+
+        $r7 = r2.branches;
+
+        $i0 = $r7.size();
+
+        if i2 >= $i0 goto label6;
+
+        $r8 = r2.branches;
+
+        $r9 = $r8.get(i2);
+
+        r3 = (org.gjt.sp.jedit.pluginmgr.PluginList$Branch) $r9;
+
+(2)     i3 = 0;
+
+     label3:
+        i3 = Phi(i3 #2, i3 #3);
+
+        i2 = Phi(i2 #2, i2 #3);
+
+        $r10 = r3.deps;
+
+        $i1 = $r10.size();
+
+        if i3 >= $i1 goto label5;
+
+        $r11 = r3.deps;
+
+        $r12 = $r11.get(i3);
+
+        r4 = (org.gjt.sp.jedit.pluginmgr.PluginList$Dependency) $r12;
+
+        $r13 = r4.what;
+
+        $z1 = $r13.equals("plugin");
+
+        if $z1 == 0 goto label4;
+
+        $r15 = r0.pluginHash;
+
+        $r14 = r4.pluginName;
+
+        $r16 = $r15.get($r14);
+
+        $r17 = (org.gjt.sp.jedit.pluginmgr.PluginList$Plugin) $r16;
+
+        r4.plugin = $r17;
+
+     label4:
+        i3 = i3 + 1;
+
+(3)     goto label3;
+
+     label5:
+        i2 = i2 + 1;
+
+(4)     goto label2;
+
+     label6:
+(5)     goto label1;
+
+     label7:
+        return;
+    }
+
+    void dump()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList r0;
+        java.util.Iterator r1;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin r2;
+        java.util.List $r3;
+        boolean $z0;
+        java.lang.Object $r4;
+        java.io.PrintStream $r5, $r6;
+
+        r0 := @this;
+
+        $r3 = r0.plugins;
+
+        r1 = $r3.iterator();
+
+     label1:
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r4 = r1.next();
+
+        r2 = (org.gjt.sp.jedit.pluginmgr.PluginList$Plugin) $r4;
+
+        $r5 = java.lang.System.err;
+
+        $r5.println(r2);
+
+        $r6 = java.lang.System.err;
+
+        $r6.println();
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    java.lang.String getMirrorId()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.id;
+
+        return $r1;
+    }
+
+    private static java.lang.String buildMirror(java.lang.String)
+    {
+        java.lang.String r0, $r2;
+        java.lang.Exception r1, $r3;
+        boolean $z0;
+        org.gjt.sp.jedit.View $r4;
+        java.lang.Object[] $r5;
+
+        r0 := @parameter0;
+
+        if r0 == null goto label1;
+
+        $z0 = r0.equals("NONE");
+
+        if $z0 != 0 goto label1;
+
+        return r0;
+
+     label1:
+        $r2 = org.gjt.sp.jedit.pluginmgr.PluginList.getAutoSelectedMirror();
+
+     label2:
+        return $r2;
+
+     label3:
+        $r3 := @caughtexception;
+
+        r1 = $r3;
+
+        $r4 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        $r5 = newarray (java.lang.Object)[1];
+
+        $r5[0] = r1;
+
+        org.gjt.sp.jedit.GUIUtilities.error($r4, "plugin-manager.list-download.mirror-autoselect-error", $r5);
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/pluginmgr/PluginList", "Getting auto-selected mirror: error", r1);
+
+        return null;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    private static java.lang.String getAutoSelectedMirror() throws java.io.IOException
+    {
+        java.lang.String r0, r2, r3, $r7, $r12, $r20, $r21, $r21_1, $r21_2;
+        java.net.HttpURLConnection r1, $r6;
+        int i0, i1, i2, i3, $i4;
+        java.net.URL $r4;
+        java.net.URLConnection $r5;
+        java.lang.RuntimeException $r8, $r13, $r14;
+        java.lang.StringBuilder $r9, $r10, $r11, $r15, $r16, $r17, $r18, $r19;
+
+        r0 = "http://sourceforge.net/projects/jedit/files/latest/download";
+
+        $r4 = new java.net.URL;
+
+        specialinvoke $r4.<init>("http://sourceforge.net/projects/jedit/files/latest/download");
+
+        $r5 = $r4.openConnection();
+
+        $r6 = (java.net.HttpURLConnection) $r5;
+
+        r1 = (java.net.HttpURLConnection) $r6;
+
+        r1.setInstanceFollowRedirects(0);
+
+        i0 = r1.getResponseCode();
+
+        if i0 == 302 goto label1;
+
+        $r14 = new java.lang.RuntimeException;
+
+        $r15 = new java.lang.StringBuilder;
+
+        specialinvoke $r15.<init>();
+
+        $r16 = $r15.append("Unexpected response: ");
+
+        $r17 = $r16.append(i0);
+
+        $r18 = $r17.append(": from ");
+
+        $r19 = $r18.append("http://sourceforge.net/projects/jedit/files/latest/download");
+
+        $r20 = $r19.toString();
+
+        specialinvoke $r14.<init>($r20);
+
+        throw $r14;
+
+     label1:
+        r2 = r1.getHeaderField("Location");
+
+        if r2 != null goto label2;
+
+        $r13 = new java.lang.RuntimeException;
+
+        specialinvoke $r13.<init>("Missing Location header: http://sourceforge.net/projects/jedit/files/latest/download");
+
+        throw $r13;
+
+     label2:
+        r3 = "use_mirror=";
+
+        i1 = r2.lastIndexOf("use_mirror=");
+
+        if i1 != -1 goto label3;
+
+        $r8 = new java.lang.RuntimeException;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("Mirror prefix \"use_mirror\" was not found in redirected URL: ");
+
+        $r11 = $r10.append(r2);
+
+        $r12 = $r11.toString();
+
+        specialinvoke $r8.<init>($r12);
+
+        throw $r8;
+
+     label3:
+        $r7 = "use_mirror=";
+
+        $i4 = $r7.length();
+
+        i2 = i1 + $i4;
+
+        i3 = r2.indexOf(38, i2);
+
+        if i3 == -1 goto label4;
+
+        $r21 = r2.substring(i2, i3);
+
+(0)     goto label5;
+
+     label4:
+(1)     $r21_1 = r2.substring(i2);
+
+     label5:
+        $r21_2 = Phi($r21 #0, $r21_1 #1);
+
+        return $r21_2;
+    }
+}

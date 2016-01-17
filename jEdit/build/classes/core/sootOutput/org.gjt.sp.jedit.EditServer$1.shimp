@@ -1,0 +1,136 @@
+class org.gjt.sp.jedit.EditServer$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final java.net.Socket val$client;
+    final java.lang.String val$script;
+    final org.gjt.sp.jedit.EditServer this$0;
+
+    void <init>(org.gjt.sp.jedit.EditServer, java.net.Socket, java.lang.String)
+    {
+        org.gjt.sp.jedit.EditServer$1 r0;
+        org.gjt.sp.jedit.EditServer r1;
+        java.net.Socket r2;
+        java.lang.String r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$0 = r1;
+
+        r0.val$client = r2;
+
+        r0.val$script = r3;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.EditServer$1 r0;
+        java.lang.Throwable r1, $r14;
+        org.gjt.sp.jedit.bsh.UtilEvalError r2, $r9, $r10, $r12, $r13, r17, r18, r19;
+        org.gjt.sp.jedit.bsh.NameSpace $r3, $r4, $r8, $r11, $r15, r16;
+        java.net.Socket $r5;
+        java.lang.String $r6;
+
+        r0 := @this;
+
+     label01:
+        $r3 = new org.gjt.sp.jedit.bsh.NameSpace;
+
+        $r4 = org.gjt.sp.jedit.BeanShell.getNameSpace();
+
+        specialinvoke $r3.<init>($r4, "EditServer namespace");
+
+        r16 = $r3;
+
+        $r5 = r0.val$client;
+
+        r16.setVariable("socket", $r5);
+
+        $r6 = r0.val$script;
+
+        org.gjt.sp.jedit.BeanShell.eval(null, r16, $r6);
+
+     label02:
+        $r8 = org.gjt.sp.jedit.BeanShell.getNameSpace();
+
+        $r8.setVariable("socket", null);
+
+     label03:
+        goto label14;
+
+     label04:
+        $r13 := @caughtexception;
+
+        r17 = $r13;
+
+        org.gjt.sp.util.Log.log(9, r0, r17);
+
+        goto label14;
+
+     label05:
+        $r10 := @caughtexception;
+
+        r18 = $r10;
+
+        org.gjt.sp.util.Log.log(9, r0, r18);
+
+     label06:
+        $r11 = org.gjt.sp.jedit.BeanShell.getNameSpace();
+
+        $r11.setVariable("socket", null);
+
+     label07:
+        goto label14;
+
+     label08:
+        $r9 := @caughtexception;
+
+        r19 = $r9;
+
+        org.gjt.sp.util.Log.log(9, r0, r19);
+
+        goto label14;
+
+     label09:
+        $r14 := @caughtexception;
+
+        r1 = $r14;
+
+     label10:
+        $r15 = org.gjt.sp.jedit.BeanShell.getNameSpace();
+
+        $r15.setVariable("socket", null);
+
+     label11:
+        goto label13;
+
+     label12:
+        $r12 := @caughtexception;
+
+        r2 = $r12;
+
+        org.gjt.sp.util.Log.log(9, r0, r2);
+
+     label13:
+        throw r1;
+
+     label14:
+        return;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label02 to label03 with label04;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label01 to label02 with label05;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label06 to label07 with label08;
+        catch java.lang.Throwable from label01 to label02 with label09;
+        catch java.lang.Throwable from label05 to label06 with label09;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label10 to label11 with label12;
+        catch java.lang.Throwable from label09 to label10 with label09;
+    }
+}

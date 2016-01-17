@@ -1,0 +1,207 @@
+public class org.gjt.sp.jedit.gui.ErrorListDialog$ErrorEntry extends java.lang.Object
+{
+    java.lang.String path;
+    java.lang.String[] messages;
+
+    public void <init>(java.lang.String, java.lang.String, java.lang.Object[])
+    {
+        org.gjt.sp.jedit.gui.ErrorListDialog$ErrorEntry r0;
+        java.lang.String r1, r2;
+        java.lang.Object[] r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        specialinvoke r0.<init>(r1, r2, r3, 9);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.lang.String, java.lang.Object[], int)
+    {
+        org.gjt.sp.jedit.gui.ErrorListDialog$ErrorEntry r0;
+        java.lang.String r1, r2, $r8, $r12, $r13, r17, r17_1, r17_2;
+        java.lang.Object[] r3;
+        int i0, $i1, $i2, $i3, $i4, $i6, i7, i8;
+        java.util.Vector r4, $r9;
+        java.lang.StringBuilder $r5, $r6, $r7, $r14, $r15, $r16;
+        java.lang.String[] $r10, $r11;
+        char $c5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        i0 := @parameter3;
+
+        specialinvoke r0.<init>();
+
+        r0.path = r1;
+
+        r17 = org.gjt.sp.jedit.jEdit.getProperty(r2, r3);
+
+(0)     if r17 != null goto label1;
+
+        $r14 = new java.lang.StringBuilder;
+
+        specialinvoke $r14.<init>();
+
+        $r15 = $r14.append("Undefined property: ");
+
+        $r16 = $r15.append(r2);
+
+(1)     r17_1 = $r16.toString();
+
+     label1:
+        r17_2 = Phi(r17 #0, r17_1 #1);
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append(r1);
+
+        $r7 = $r6.append(":");
+
+        $r8 = $r7.toString();
+
+        org.gjt.sp.util.Log.log(i0, r0, $r8);
+
+        org.gjt.sp.util.Log.log(i0, r0, r17_2);
+
+        $r9 = new java.util.Vector;
+
+        specialinvoke $r9.<init>();
+
+        r4 = $r9;
+
+        i7 = -1;
+
+(2)     i8 = 0;
+
+     label2:
+        i7 = Phi(i7 #2, i7 #5);
+
+        i8 = Phi(i8 #2, i8 #5);
+
+        r17 = Phi(r17_2 #2, r17 #5);
+
+        $i1 = r17.length();
+
+        if i8 >= $i1 goto label4;
+
+        $c5 = r17.charAt(i8);
+
+(3)     if $c5 != 10 goto label3;
+
+        $i6 = i7 + 1;
+
+        $r13 = r17.substring($i6, i8);
+
+        r4.addElement($r13);
+
+(4)     i7 = i8;
+
+     label3:
+        i7 = Phi(i7 #3, i7 #4);
+
+        i8 = i8 + 1;
+
+(5)     goto label2;
+
+     label4:
+        $i2 = r17.length();
+
+        if i7 == $i2 goto label5;
+
+        $i4 = i7 + 1;
+
+        $r12 = r17.substring($i4);
+
+        r4.addElement($r12);
+
+     label5:
+        $i3 = r4.size();
+
+        $r10 = newarray (java.lang.String)[$i3];
+
+        r0.messages = $r10;
+
+        $r11 = r0.messages;
+
+        r4.copyInto($r11);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        org.gjt.sp.jedit.gui.ErrorListDialog$ErrorEntry r0, r2;
+        java.lang.Object r1;
+        boolean $z0, $z1;
+        java.lang.String $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.gui.ErrorListDialog$ErrorEntry;
+
+        if $z0 == 0 goto label1;
+
+        r2 = (org.gjt.sp.jedit.gui.ErrorListDialog$ErrorEntry) r1;
+
+        $r4 = r2.path;
+
+        $r3 = r0.path;
+
+        $z1 = $r4.equals($r3);
+
+        return $z1;
+
+     label1:
+        return 0;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.gui.ErrorListDialog$ErrorEntry r0;
+        java.lang.StringBuilder $r1, $r3, $r4, $r8;
+        java.lang.String $r2, $r7, $r9;
+        java.lang.String[] $r5;
+        java.util.List $r6;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = r0.path;
+
+        $r3 = $r1.append($r2);
+
+        $r4 = $r3.append(":\n");
+
+        $r5 = r0.messages;
+
+        $r6 = java.util.Arrays.asList($r5);
+
+        $r7 = org.gjt.sp.jedit.TextUtilities.join($r6, "\n");
+
+        $r8 = $r4.append($r7);
+
+        $r9 = $r8.toString();
+
+        return $r9;
+    }
+}

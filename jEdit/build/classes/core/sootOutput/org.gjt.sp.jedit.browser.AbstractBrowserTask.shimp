@@ -1,0 +1,60 @@
+abstract class org.gjt.sp.jedit.browser.AbstractBrowserTask extends org.gjt.sp.util.Task
+{
+    protected org.gjt.sp.jedit.browser.VFSBrowser browser;
+    protected java.lang.Object session;
+    protected org.gjt.sp.jedit.io.VFS vfs;
+    protected java.lang.String path;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSBrowser, java.lang.Object, org.gjt.sp.jedit.io.VFS, java.lang.String, java.lang.Runnable)
+    {
+        org.gjt.sp.jedit.browser.AbstractBrowserTask r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+        java.lang.Object r2;
+        org.gjt.sp.jedit.io.VFS r3;
+        java.lang.String r4;
+        java.lang.Runnable r5;
+        org.gjt.sp.jedit.browser.AbstractBrowserTask$MyTaskListener r6, $r7;
+        org.gjt.sp.util.TaskManager $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.browser = r1;
+
+        r0.session = r2;
+
+        r0.vfs = r3;
+
+        r0.path = r4;
+
+        Packer.Pack(r0);
+
+        if r5 == null goto label1;
+
+        $r7 = new org.gjt.sp.jedit.browser.AbstractBrowserTask$MyTaskListener;
+
+        specialinvoke $r7.<init>(r0, r5, null);
+
+        r6 = $r7;
+
+        $r8 = org.gjt.sp.util.TaskManager.instance;
+
+        $r8.addTaskListener(r6);
+
+     label1:
+        return;
+    }
+}

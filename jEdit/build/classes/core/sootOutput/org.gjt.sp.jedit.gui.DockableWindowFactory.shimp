@@ -1,0 +1,426 @@
+public class org.gjt.sp.jedit.gui.DockableWindowFactory extends java.lang.Object
+{
+    private static org.gjt.sp.jedit.gui.DockableWindowFactory instance;
+    private final java.util.Map dockableWindowFactories;
+
+    public static synchronized org.gjt.sp.jedit.gui.DockableWindowFactory getInstance()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory $r0, $r1, $r2;
+
+        $r0 = org.gjt.sp.jedit.gui.DockableWindowFactory.instance;
+
+        if $r0 != null goto label1;
+
+        $r2 = new org.gjt.sp.jedit.gui.DockableWindowFactory;
+
+        specialinvoke $r2.<init>();
+
+        org.gjt.sp.jedit.gui.DockableWindowFactory.instance = $r2;
+
+     label1:
+        $r1 = org.gjt.sp.jedit.gui.DockableWindowFactory.instance;
+
+        return $r1;
+    }
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory r0;
+        java.util.HashMap $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.HashMap;
+
+        specialinvoke $r1.<init>();
+
+        r0.dockableWindowFactories = $r1;
+
+        return;
+    }
+
+    public void loadDockableWindows(org.gjt.sp.jedit.PluginJAR, java.net.URL, org.gjt.sp.jedit.PluginJAR$PluginCacheEntry)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory r0;
+        org.gjt.sp.jedit.PluginJAR r1;
+        java.net.URL r2;
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry r3;
+        java.io.InputStream r4;
+        boolean z0;
+        java.lang.StringBuilder $r5, $r6, $r7, $r13, $r14, $r15;
+        java.lang.String $r8, $r16;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler $r9, r18;
+        java.lang.String[] $r10;
+        boolean[] $r11, $r12;
+        java.io.IOException $r17, r19;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+     label1:
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append("Loading dockables from ");
+
+        $r7 = $r6.append(r2);
+
+        $r8 = $r7.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/gui/DockableWindowManager", $r8);
+
+        $r9 = new org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler;
+
+        specialinvoke $r9.<init>(r0, r1, r2);
+
+        r18 = $r9;
+
+        r4 = r2.openStream();
+
+        if r4 != null goto label2;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r14 = $r13.append("Unable to open: ");
+
+        $r15 = $r14.append(r2);
+
+        $r16 = $r15.toString();
+
+        org.gjt.sp.util.Log.log(7, r0, $r16);
+
+        goto label3;
+
+     label2:
+        z0 = org.gjt.sp.util.XMLUtilities.parseXML(r4, r18);
+
+        if z0 != 0 goto label3;
+
+        if r3 == null goto label3;
+
+        $r10 = r18.getCachedDockableNames();
+
+        r3.cachedDockableNames = $r10;
+
+        $r11 = r18.getCachedDockableActionFlags();
+
+        r3.cachedDockableActionFlags = $r11;
+
+        $r12 = r18.getCachedDockableMovableFlags();
+
+        r3.cachedDockableMovableFlags = $r12;
+
+     label3:
+        goto label5;
+
+     label4:
+        $r17 := @caughtexception;
+
+        r19 = $r17;
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/gui/DockableWindowManager", r19);
+
+     label5:
+        return;
+
+        catch java.io.IOException from label1 to label3 with label4;
+    }
+
+    public void unloadDockableWindows(org.gjt.sp.jedit.PluginJAR)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory r0;
+        org.gjt.sp.jedit.PluginJAR r1, $r9;
+        java.util.Iterator r2;
+        java.util.Map$Entry r3;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window r4;
+        java.util.Map $r5;
+        java.util.Set $r6;
+        boolean $z0;
+        java.lang.Object $r7, $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r5 = r0.dockableWindowFactories;
+
+        $r6 = $r5.entrySet();
+
+        r2 = $r6.iterator();
+
+     label1:
+        $z0 = r2.hasNext();
+
+        if $z0 == 0 goto label3;
+
+        $r7 = r2.next();
+
+        r3 = (java.util.Map$Entry) $r7;
+
+        $r8 = r3.getValue();
+
+        r4 = (org.gjt.sp.jedit.gui.DockableWindowFactory$Window) $r8;
+
+        $r9 = r4.plugin;
+
+        if $r9 != r1 goto label2;
+
+        r2.remove();
+
+     label2:
+        goto label1;
+
+     label3:
+        return;
+    }
+
+    public void cacheDockableWindows(org.gjt.sp.jedit.PluginJAR, java.lang.String[], boolean[], boolean[])
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory r0;
+        org.gjt.sp.jedit.PluginJAR r1;
+        java.lang.String[] r2;
+        boolean[] r3, r4;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window r5, $r6;
+        int $i0, i1;
+        boolean $z0, $z1;
+        java.lang.String $r7, $r8;
+        java.util.Map $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $i0 = lengthof r2;
+
+        if i1 >= $i0 goto label2;
+
+        $r6 = new org.gjt.sp.jedit.gui.DockableWindowFactory$Window;
+
+        $r7 = r2[i1];
+
+        $z1 = r3[i1];
+
+        $z0 = r4[i1];
+
+        specialinvoke $r6.<init>(r0, r1, $r7, null, $z1, $z0);
+
+        r5 = $r6;
+
+        $r9 = r0.dockableWindowFactories;
+
+        $r8 = r2[i1];
+
+        $r9.put($r8, r5);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return;
+    }
+
+    public void registerDockableWindow(org.gjt.sp.jedit.PluginJAR, java.lang.String, java.lang.String, boolean, boolean)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory r0;
+        org.gjt.sp.jedit.PluginJAR r1;
+        java.lang.String r2, r3;
+        boolean z0, z1;
+        java.util.Map $r4, $r7;
+        java.lang.Object $r5;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window $r6, r9, r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        $r4 = r0.dockableWindowFactories;
+
+        $r5 = $r4.get(r2);
+
+        r9 = (org.gjt.sp.jedit.gui.DockableWindowFactory$Window) $r5;
+
+        if r9 == null goto label1;
+
+        r9.code = r3;
+
+        r9.loaded = 1;
+
+        goto label2;
+
+     label1:
+        $r6 = new org.gjt.sp.jedit.gui.DockableWindowFactory$Window;
+
+        specialinvoke $r6.<init>(r0, r1, r2, r3, z0, z1);
+
+        r10 = $r6;
+
+        $r7 = r0.dockableWindowFactories;
+
+        $r7.put(r2, r10);
+
+     label2:
+        return;
+    }
+
+    public java.lang.String[] getRegisteredDockableWindows()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory r0;
+        java.lang.String[] r1;
+        java.util.Iterator r2;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window r3;
+        java.util.Map $r4, $r5;
+        int $i0, $i1, i2;
+        java.util.Collection $r6;
+        boolean $z0;
+        java.lang.Object $r7;
+        java.lang.String $r8;
+
+        r0 := @this;
+
+        $r4 = r0.dockableWindowFactories;
+
+        $i0 = $r4.size();
+
+        r1 = newarray (java.lang.String)[$i0];
+
+        $r5 = r0.dockableWindowFactories;
+
+        $r6 = $r5.values();
+
+        r2 = $r6.iterator();
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $z0 = r2.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r7 = r2.next();
+
+        r3 = (org.gjt.sp.jedit.gui.DockableWindowFactory$Window) $r7;
+
+        $i1 = i2;
+
+        i2 = i2 + 1;
+
+        $r8 = r3.name;
+
+        r1[$i1] = $r8;
+
+(1)     goto label1;
+
+     label2:
+        return r1;
+    }
+
+    public org.gjt.sp.jedit.gui.DockableWindowFactory$Window getDockableWindowFactory(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory r0;
+        java.lang.String r1;
+        java.util.Map $r2;
+        java.lang.Object $r3;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.dockableWindowFactories;
+
+        $r3 = $r2.get(r1);
+
+        $r4 = (org.gjt.sp.jedit.gui.DockableWindowFactory$Window) $r3;
+
+        return $r4;
+    }
+
+    public java.lang.String getDockableWindowPluginClass(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory r0;
+        java.lang.String r1, $r8;
+        org.gjt.sp.jedit.gui.DockableWindowFactory$Window r2;
+        org.gjt.sp.jedit.PluginJAR $r3, $r4, $r6;
+        org.gjt.sp.jedit.EditPlugin $r5, $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r0.getDockableWindowFactory(r1);
+
+        if r2 == null goto label1;
+
+        $r3 = r2.plugin;
+
+        if $r3 == null goto label1;
+
+        $r4 = r2.plugin;
+
+        $r5 = $r4.getPlugin();
+
+        if $r5 != null goto label2;
+
+     label1:
+        return null;
+
+     label2:
+        $r6 = r2.plugin;
+
+        $r7 = $r6.getPlugin();
+
+        $r8 = $r7.getClassName();
+
+        return $r8;
+    }
+
+    java.util.Iterator getDockableWindowIterator()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory r0;
+        java.util.Map $r1;
+        java.util.Collection $r2;
+        java.util.Iterator $r3;
+
+        r0 := @this;
+
+        $r1 = r0.dockableWindowFactories;
+
+        $r2 = $r1.values();
+
+        $r3 = $r2.iterator();
+
+        return $r3;
+    }
+}

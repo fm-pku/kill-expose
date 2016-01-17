@@ -1,0 +1,417 @@
+class org.gjt.sp.jedit.bsh.BSHTryStatement extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHTryStatement r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHTryStatement r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.BSHBlock r3, $r18, r47, r55;
+        java.util.Vector r4, r5, $r10, $r11;
+        int i0, i1, $i2, i3, i4, i5, i6;
+        org.gjt.sp.jedit.bsh.NameSpace r6, $r43;
+        org.gjt.sp.jedit.bsh.BlockNameSpace r7, $r19;
+        java.lang.Throwable r8, $r37, r49;
+        org.gjt.sp.jedit.bsh.Node $r9, $r32, $r33, r46;
+        boolean $z0, $z1, $z2;
+        org.gjt.sp.jedit.bsh.Primitive $r12;
+        java.lang.Object $r13, $r17, $r30, r50;
+        java.lang.Class $r15, $r16, $r20, $r21, $r25, $r29;
+        org.gjt.sp.jedit.bsh.Modifiers $r22, $r23, r56;
+        java.lang.String $r24, $r28, r52;
+        org.gjt.sp.jedit.bsh.EvalError $r31;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r34, $r36, r54, r57;
+        org.gjt.sp.jedit.bsh.InterpreterError $r35;
+        org.gjt.sp.jedit.bsh.TargetError $r39, r48, r51;
+        java.lang.StringBuilder $r40, $r41, $r42, $r44, $r45;
+        org.gjt.sp.jedit.bsh.BSHFormalParameter r53;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r9 = r0.jjtGetChild(0);
+
+        r3 = (org.gjt.sp.jedit.bsh.BSHBlock) $r9;
+
+        $r10 = new java.util.Vector;
+
+        specialinvoke $r10.<init>();
+
+        r4 = $r10;
+
+        $r11 = new java.util.Vector;
+
+        specialinvoke $r11.<init>();
+
+        r5 = $r11;
+
+        i0 = r0.jjtGetNumChildren();
+
+        r46 = null;
+
+(0)     i3 = 1;
+
+     label01:
+        r46 = Phi(r46 #0, r46 #3);
+
+        i3 = Phi(i3 #0, i3 #3);
+
+(1)     if i3 >= i0 goto label02;
+
+        i4 = i3 + 1;
+
+        $r32 = r0.jjtGetChild(i3);
+
+        r46 = $r32;
+
+        $z2 = $r32 instanceof org.gjt.sp.jedit.bsh.BSHFormalParameter;
+
+(2)     if $z2 == 0 goto label02;
+
+        r4.addElement(r46);
+
+        i3 = i4 + 1;
+
+        $r33 = r0.jjtGetChild(i4);
+
+        r5.addElement($r33);
+
+        r46 = null;
+
+(3)     goto label01;
+
+     label02:
+        r46 = Phi(r46 #1, r46 #2);
+
+        r47 = null;
+
+(4)     if r46 == null goto label03;
+
+(5)     r47 = (org.gjt.sp.jedit.bsh.BSHBlock) r46;
+
+     label03:
+        r47 = Phi(r47 #4, r47 #5);
+
+        r48 = null;
+
+        r49 = null;
+
+        r50 = null;
+
+(6)     i1 = r1.depth();
+
+     label04:
+        r50 = r3.eval(r1, r2);
+
+     label05:
+(7)     goto label08;
+
+     label06:
+        $r39 := @caughtexception;
+
+        r50 = Phi(r50 #6);
+
+        r51 = $r39;
+
+        r48 = r51;
+
+(8)     r52 = "Bsh Stack: ";
+
+     label07:
+        r46 = Phi(r46 #8, r46 #10);
+
+        i3 = Phi(i3 #8, i3 #10);
+
+        r49 = Phi(r49 #8, r49 #10);
+
+        r48 = Phi(r48 #8, r48 #10);
+
+        r52 = Phi(r52 #8, r52 #10);
+
+        r47 = Phi(r47 #8, r47 #10);
+
+        r50 = Phi(r50 #8, r50 #10);
+
+        $i2 = r1.depth();
+
+(9)     if $i2 <= i1 goto label08;
+
+        $r40 = new java.lang.StringBuilder;
+
+        specialinvoke $r40.<init>();
+
+        $r41 = $r40.append(r52);
+
+        $r42 = $r41.append("\t");
+
+        $r43 = r1.pop();
+
+        $r44 = $r42.append($r43);
+
+        $r45 = $r44.append("\n");
+
+        r52 = $r45.toString();
+
+(10)    goto label07;
+
+     label08:
+        r46 = Phi(r46 #7, r46 #9);
+
+        i3 = Phi(i3 #7, i3 #9);
+
+        r49 = Phi(r49 #7, r49 #9);
+
+        r48 = Phi(r48 #7, r48 #9);
+
+        r52 = Phi(r52 #7, r52 #9);
+
+        r47 = Phi(r47 #7, r47 #9);
+
+        r50 = Phi(r50 #7, r50 #9);
+
+(11)    if r48 == null goto label09;
+
+(12)    r49 = r48.getTarget();
+
+     label09:
+        r49 = Phi(r49 #11, r49 #12);
+
+(13)    if r49 == null goto label27;
+
+        i5 = r4.size();
+
+(14)    i6 = 0;
+
+     label10:
+        r46 = Phi(r46 #14, r46 #21);
+
+        i3 = Phi(i3 #14, i3 #21);
+
+        r49 = Phi(r49 #14, r49 #21);
+
+        i6 = Phi(i6 #14, i6 #21);
+
+        r48 = Phi(r48 #14, r48 #21);
+
+        r52 = Phi(r52 #14, r52 #21);
+
+        r47 = Phi(r47 #14, r47 #21);
+
+        r50 = Phi(r50 #14, r50 #21);
+
+(15)    if i6 >= i5 goto label27;
+
+        $r13 = r4.elementAt(i6);
+
+        r53 = (org.gjt.sp.jedit.bsh.BSHFormalParameter) $r13;
+
+        r53.eval(r1, r2);
+
+        $r15 = r53.type;
+
+        if $r15 != null goto label11;
+
+        $z1 = r2.getStrictJava();
+
+        if $z1 == 0 goto label11;
+
+        $r31 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        specialinvoke $r31.<init>("(Strict Java) Untyped catch block", r0, r1);
+
+        throw $r31;
+
+     label11:
+        $r16 = r53.type;
+
+(16)    if $r16 == null goto label15;
+
+     label12:
+        $r29 = r53.type;
+
+        $r30 = org.gjt.sp.jedit.bsh.Types.castObject(r49, $r29, 1);
+
+        r49 = (java.lang.Throwable) $r30;
+
+     label13:
+(17)    goto label15;
+
+     label14:
+        $r36 := @caughtexception;
+
+        r54 = $r36;
+
+        goto label26;
+
+     label15:
+        r49 = Phi(r49 #16, r49 #17);
+
+        $r17 = r5.elementAt(i6);
+
+        $r18 = (org.gjt.sp.jedit.bsh.BSHBlock) $r17;
+
+        r55 = (org.gjt.sp.jedit.bsh.BSHBlock) $r18;
+
+        r6 = r1.top();
+
+        $r19 = new org.gjt.sp.jedit.bsh.BlockNameSpace;
+
+        specialinvoke $r19.<init>(r6);
+
+        r7 = $r19;
+
+     label16:
+        $r21 = r53.type;
+
+        $r20 = org.gjt.sp.jedit.bsh.BSHFormalParameter.UNTYPED;
+
+        if $r21 != $r20 goto label17;
+
+        $r28 = r53.name;
+
+        r7.setBlockVariable($r28, r49);
+
+        goto label18;
+
+     label17:
+        $r22 = new org.gjt.sp.jedit.bsh.Modifiers;
+
+        specialinvoke $r22.<init>();
+
+        r56 = $r22;
+
+        $r24 = r53.name;
+
+        $r25 = r53.type;
+
+        $r23 = new org.gjt.sp.jedit.bsh.Modifiers;
+
+        specialinvoke $r23.<init>();
+
+        r7.setTypedVariable($r24, $r25, r49, $r23);
+
+     label18:
+        goto label20;
+
+     label19:
+        $r34 := @caughtexception;
+
+        r57 = $r34;
+
+        $r35 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        specialinvoke $r35.<init>("Unable to set var in catch block namespace.");
+
+        throw $r35;
+
+     label20:
+(18)    r1.swap(r7);
+
+     label21:
+        r50 = r55.eval(r1, r2);
+
+     label22:
+        r1.swap(r6);
+
+        goto label25;
+
+     label23:
+        $r37 := @caughtexception;
+
+        r46 = Phi(r46 #18, r46 #19);
+
+        i3 = Phi(i3 #18, i3 #19);
+
+        r49 = Phi(r49 #18, r49 #19);
+
+        i6 = Phi(i6 #18, i6 #19);
+
+        r48 = Phi(r48 #18, r48 #19);
+
+        r52 = Phi(r52 #18, r52 #19);
+
+        r47 = Phi(r47 #18, r47 #19);
+
+(19)    r50 = Phi(r50 #18, r50 #19);
+
+        r8 = $r37;
+
+     label24:
+        r1.swap(r6);
+
+        throw r8;
+
+     label25:
+        r48 = null;
+
+(20)    goto label27;
+
+     label26:
+        i6 = i6 + 1;
+
+(21)    goto label10;
+
+     label27:
+        r46 = Phi(r46 #13, r46 #15, r46 #20);
+
+        i3 = Phi(i3 #13, i3 #15, i3 #20);
+
+        r49 = Phi(r49 #13, r49 #15, r49 #20);
+
+        i6 = Phi(i6 #13, i6 #15, i6 #20);
+
+        r48 = Phi(r48 #13, r48 #15, r48 #20);
+
+        r52 = Phi(r52 #13, r52 #15, r52 #20);
+
+        r47 = Phi(r47 #13, r47 #15, r47 #20);
+
+        r50 = Phi(r50 #13, r50 #15, r50 #20);
+
+(22)    if r47 == null goto label28;
+
+(23)    r50 = r47.eval(r1, r2);
+
+     label28:
+        r50 = Phi(r50 #22, r50 #23);
+
+        if r48 == null goto label29;
+
+        throw r48;
+
+     label29:
+        $z0 = r50 instanceof org.gjt.sp.jedit.bsh.ReturnControl;
+
+        if $z0 == 0 goto label30;
+
+        return r50;
+
+     label30:
+        $r12 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        return $r12;
+
+        catch org.gjt.sp.jedit.bsh.TargetError from label04 to label05 with label06;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label12 to label13 with label14;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label16 to label18 with label19;
+        catch java.lang.Throwable from label21 to label22 with label23;
+        catch java.lang.Throwable from label23 to label24 with label23;
+    }
+}

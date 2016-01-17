@@ -1,0 +1,63 @@
+final class org.gjt.sp.jedit.Macros$4 extends java.lang.Object implements java.lang.Runnable
+{
+    final int[] val$retValue;
+    final java.awt.Component val$comp;
+    final java.lang.String val$prompt;
+    final int val$buttons;
+
+    void <init>(int[], java.awt.Component, java.lang.String, int)
+    {
+        org.gjt.sp.jedit.Macros$4 r0;
+        int[] r1;
+        java.awt.Component r2;
+        java.lang.String r3;
+        int i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        i0 := @parameter3;
+
+        r0.val$retValue = r1;
+
+        r0.val$comp = r2;
+
+        r0.val$prompt = r3;
+
+        r0.val$buttons = i0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.Macros$4 r0;
+        int $i0, $i1;
+        java.lang.String $r1;
+        java.awt.Component $r2;
+        int[] $r3;
+
+        r0 := @this;
+
+        $r3 = r0.val$retValue;
+
+        $r2 = r0.val$comp;
+
+        $r1 = r0.val$prompt;
+
+        $i0 = r0.val$buttons;
+
+        $i1 = org.gjt.sp.jedit.Macros.confirm($r2, $r1, $i0);
+
+        $r3[0] = $i1;
+
+        return;
+    }
+}

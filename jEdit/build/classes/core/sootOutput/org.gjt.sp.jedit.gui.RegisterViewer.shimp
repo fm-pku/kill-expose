@@ -1,0 +1,727 @@
+public class org.gjt.sp.jedit.gui.RegisterViewer extends javax.swing.JPanel implements org.gjt.sp.jedit.gui.DockableWindow, org.gjt.sp.jedit.gui.DefaultFocusComponent
+{
+    private javax.swing.JList registerList;
+    private javax.swing.JTextArea contentTextArea;
+    private org.gjt.sp.jedit.gui.RegisterViewer$DocumentHandler documentHandler;
+    private org.gjt.sp.jedit.View view;
+    private boolean editing;
+    private javax.swing.JSplitPane splitPane;
+    private javax.swing.JPopupMenu popup;
+
+    public void <init>(org.gjt.sp.jedit.View, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        org.gjt.sp.jedit.View r1;
+        java.lang.String r2, $r11, $r18, $r19, $r24, $r25;
+        javax.swing.Box r3, $r9;
+        javax.swing.JLabel r4, $r10;
+        org.gjt.sp.jedit.gui.RolloverButton r5, r6, $r16, $r22;
+        javax.swing.DefaultListModel r7, $r29;
+        java.awt.BorderLayout $r8;
+        javax.swing.border.EmptyBorder $r12;
+        java.awt.Component $r14;
+        javax.swing.Icon $r17, $r23;
+        org.gjt.sp.jedit.gui.RegisterViewer$InsertHandler $r20, $r45, $r48;
+        org.gjt.sp.jedit.gui.RegisterViewer$ClearHandler $r26, $r51;
+        javax.swing.JList $r30, $r31, $r33, $r35, $r37, $r46, $r49, $r52, $r59;
+        org.gjt.sp.jedit.gui.RegisterViewer$Renderer $r32;
+        org.gjt.sp.jedit.gui.RegisterViewer$ListHandler $r34;
+        org.gjt.sp.jedit.gui.RegisterViewer$MouseHandler $r36;
+        javax.swing.JTextArea $r38, $r39, $r42, $r55, $r61;
+        org.gjt.sp.jedit.gui.RegisterViewer$DocumentHandler $r40;
+        org.gjt.sp.jedit.gui.RegisterViewer$FocusHandler $r41;
+        org.gjt.sp.jedit.gui.RegisterViewer$EscapeHandler $r43;
+        javax.swing.KeyStroke $r44, $r47, $r50, $r53, $r56;
+        org.gjt.sp.jedit.gui.RegisterViewer$TabHandler $r54;
+        boolean $z0, $z1;
+        javax.swing.JSplitPane $r57;
+        javax.swing.JScrollPane $r58, $r60;
+        byte b0, b0_1, b0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r8 = new java.awt.BorderLayout;
+
+        specialinvoke $r8.<init>();
+
+        specialinvoke r0.<init>($r8);
+
+        r0.view = r1;
+
+        $r9 = new javax.swing.Box;
+
+        specialinvoke $r9.<init>(0);
+
+        r3 = $r9;
+
+        $r10 = new javax.swing.JLabel;
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty("view-registers.title");
+
+        specialinvoke $r10.<init>($r11);
+
+        r4 = $r10;
+
+        $r12 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r12.<init>(0, 0, 3, 0);
+
+        r4.setBorder($r12);
+
+        r3.add(r4);
+
+        $r14 = javax.swing.Box.createGlue();
+
+        r3.add($r14);
+
+        $r16 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r17 = org.gjt.sp.jedit.GUIUtilities.loadIcon("Paste.png");
+
+        specialinvoke $r16.<init>($r17);
+
+        r5 = $r16;
+
+        $r18 = org.gjt.sp.jedit.jEdit.getProperty("paste-string-register.label");
+
+        $r19 = org.gjt.sp.jedit.GUIUtilities.prettifyMenuLabel($r18);
+
+        r5.setToolTipText($r19);
+
+        $r20 = new org.gjt.sp.jedit.gui.RegisterViewer$InsertHandler;
+
+        specialinvoke $r20.<init>(r0);
+
+        r5.addActionListener($r20);
+
+        r5.setActionCommand("paste-string-register");
+
+        r3.add(r5);
+
+        $r22 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r23 = org.gjt.sp.jedit.GUIUtilities.loadIcon("Clear.png");
+
+        specialinvoke $r22.<init>($r23);
+
+        r6 = $r22;
+
+        $r24 = org.gjt.sp.jedit.jEdit.getProperty("clear-string-register.label");
+
+        $r25 = org.gjt.sp.jedit.GUIUtilities.prettifyMenuLabel($r24);
+
+        r6.setToolTipText($r25);
+
+        $r26 = new org.gjt.sp.jedit.gui.RegisterViewer$ClearHandler;
+
+        specialinvoke $r26.<init>(r0);
+
+        r6.addActionListener($r26);
+
+        r6.setActionCommand("clear-string-register");
+
+        r3.add(r6);
+
+        r0.add("North", r3);
+
+        $r29 = new javax.swing.DefaultListModel;
+
+        specialinvoke $r29.<init>();
+
+        r7 = $r29;
+
+        $r30 = new javax.swing.JList;
+
+        specialinvoke $r30.<init>(r7);
+
+        r0.registerList = $r30;
+
+        $r31 = r0.registerList;
+
+        $r31.setSelectionMode(0);
+
+        $r33 = r0.registerList;
+
+        $r32 = new org.gjt.sp.jedit.gui.RegisterViewer$Renderer;
+
+        specialinvoke $r32.<init>();
+
+        $r33.setCellRenderer($r32);
+
+        $r35 = r0.registerList;
+
+        $r34 = new org.gjt.sp.jedit.gui.RegisterViewer$ListHandler;
+
+        specialinvoke $r34.<init>(r0);
+
+        $r35.addListSelectionListener($r34);
+
+        $r37 = r0.registerList;
+
+        $r36 = new org.gjt.sp.jedit.gui.RegisterViewer$MouseHandler;
+
+        specialinvoke $r36.<init>(r0);
+
+        $r37.addMouseListener($r36);
+
+        $r38 = new javax.swing.JTextArea;
+
+        specialinvoke $r38.<init>(10, 20);
+
+        r0.contentTextArea = $r38;
+
+        $r39 = r0.contentTextArea;
+
+        $r39.setEditable(1);
+
+        $r40 = new org.gjt.sp.jedit.gui.RegisterViewer$DocumentHandler;
+
+        specialinvoke $r40.<init>(r0);
+
+        r0.documentHandler = $r40;
+
+        $r42 = r0.contentTextArea;
+
+        $r41 = new org.gjt.sp.jedit.gui.RegisterViewer$FocusHandler;
+
+        specialinvoke $r41.<init>(r0);
+
+        $r42.addFocusListener($r41);
+
+        $r43 = new org.gjt.sp.jedit.gui.RegisterViewer$EscapeHandler;
+
+        specialinvoke $r43.<init>(r0);
+
+        $r44 = javax.swing.KeyStroke.getKeyStroke(27, 0);
+
+        r0.registerKeyboardAction($r43, $r44, 1);
+
+        $r46 = r0.registerList;
+
+        $r45 = new org.gjt.sp.jedit.gui.RegisterViewer$InsertHandler;
+
+        specialinvoke $r45.<init>(r0);
+
+        $r47 = javax.swing.KeyStroke.getKeyStroke(10, 0);
+
+        $r46.registerKeyboardAction($r45, $r47, 0);
+
+        $r49 = r0.registerList;
+
+        $r48 = new org.gjt.sp.jedit.gui.RegisterViewer$InsertHandler;
+
+        specialinvoke $r48.<init>(r0);
+
+        $r50 = javax.swing.KeyStroke.getKeyStroke(155, 0);
+
+        $r49.registerKeyboardAction($r48, $r50, 0);
+
+        $r52 = r0.registerList;
+
+        $r51 = new org.gjt.sp.jedit.gui.RegisterViewer$ClearHandler;
+
+        specialinvoke $r51.<init>(r0);
+
+        $r53 = javax.swing.KeyStroke.getKeyStroke(127, 0);
+
+        $r52.registerKeyboardAction($r51, $r53, 0);
+
+        $r55 = r0.contentTextArea;
+
+        $r54 = new org.gjt.sp.jedit.gui.RegisterViewer$TabHandler;
+
+        specialinvoke $r54.<init>(r0);
+
+        $r56 = javax.swing.KeyStroke.getKeyStroke(9, 1);
+
+        $r55.registerKeyboardAction($r54, $r56, 0);
+
+        b0 = 1;
+
+        $z0 = r2.equals("left");
+
+        if $z0 != 0 goto label1;
+
+        $z1 = r2.equals("right");
+
+(0)     if $z1 == 0 goto label2;
+
+     label1:
+(1)     b0_1 = 0;
+
+     label2:
+        b0_2 = Phi(b0 #0, b0_1 #1);
+
+        $r57 = new javax.swing.JSplitPane;
+
+        $r58 = new javax.swing.JScrollPane;
+
+        $r59 = r0.registerList;
+
+        specialinvoke $r58.<init>($r59);
+
+        $r60 = new javax.swing.JScrollPane;
+
+        $r61 = r0.contentTextArea;
+
+        specialinvoke $r60.<init>($r61);
+
+        specialinvoke $r57.<init>(b0_2, $r58, $r60);
+
+        r0.splitPane = $r57;
+
+        r0.add("Center", $r57);
+
+        specialinvoke r0.refreshList();
+
+        return;
+    }
+
+    public void focusOnDefaultComponent()
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        javax.swing.JList $r1;
+
+        r0 := @this;
+
+        $r1 = r0.registerList;
+
+        $r1.requestFocusInWindow();
+
+        return;
+    }
+
+    public void handleRegisterChanged(org.gjt.sp.jedit.msg.RegisterChanged)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        org.gjt.sp.jedit.msg.RegisterChanged r1;
+        char $c0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $c0 = r1.getRegisterName();
+
+        if $c0 == 37 goto label1;
+
+        specialinvoke r0.refreshList();
+
+     label1:
+        return;
+    }
+
+    public void addNotify()
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+
+        r0 := @this;
+
+        specialinvoke r0.addNotify();
+
+        org.gjt.sp.jedit.EditBus.addToBus(r0);
+
+        return;
+    }
+
+    public void removeNotify()
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+
+        r0 := @this;
+
+        specialinvoke r0.removeNotify();
+
+        org.gjt.sp.jedit.EditBus.removeFromBus(r0);
+
+        return;
+    }
+
+    public void move(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        java.lang.String r1;
+        boolean $z0, $z1;
+        javax.swing.JSplitPane $r2;
+        byte b0, b0_1, b0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        b0 = 1;
+
+        $z0 = r1.equals("left");
+
+        if $z0 != 0 goto label1;
+
+        $z1 = r1.equals("right");
+
+(0)     if $z1 == 0 goto label2;
+
+     label1:
+(1)     b0_1 = 0;
+
+     label2:
+        b0_2 = Phi(b0 #0, b0_1 #1);
+
+        $r2 = r0.splitPane;
+
+        $r2.setOrientation(b0_2);
+
+        r0.revalidate();
+
+        return;
+    }
+
+    private void refreshList()
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        javax.swing.DefaultListModel r1;
+        java.lang.Object r2;
+        org.gjt.sp.jedit.Registers$Register[] r3;
+        org.gjt.sp.jedit.Registers$Register r4;
+        java.lang.String r5, $r11;
+        javax.swing.JList $r6, $r8, $r9, $r10, $r12;
+        javax.swing.ListModel $r7;
+        int $i0, $i1, i3, i4, i5, i3_1, i3_2;
+        char $c2;
+        java.lang.Character $r13, $r14;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r6 = r0.registerList;
+
+        $r7 = $r6.getModel();
+
+        r1 = (javax.swing.DefaultListModel) $r7;
+
+        $r8 = r0.registerList;
+
+        r2 = $r8.getSelectedValue();
+
+        i3 = -1;
+
+(0)     if r2 == null goto label01;
+
+        $z0 = r2 instanceof java.lang.Character;
+
+(1)     if $z0 == 0 goto label01;
+
+        $r14 = (java.lang.Character) r2;
+
+(2)     i3_1 = $r14.charValue();
+
+     label01:
+        i3_2 = Phi(i3 #0, i3 #1, i3_1 #2);
+
+        r1.removeAllElements();
+
+        r3 = org.gjt.sp.jedit.Registers.getRegisters();
+
+        i4 = 0;
+
+(3)     i5 = 0;
+
+     label02:
+        i4 = Phi(i4 #3, i4 #10);
+
+        i5 = Phi(i5 #3, i5 #10);
+
+        i3 = Phi(i3_2 #3, i3 #10);
+
+        $i0 = lengthof r3;
+
+        if i5 >= $i0 goto label08;
+
+        r4 = r3[i5];
+
+        if r4 != null goto label03;
+
+(4)     goto label07;
+
+     label03:
+        if i5 != 37 goto label04;
+
+(5)     goto label07;
+
+     label04:
+        r5 = r4.toString();
+
+        if r5 != null goto label05;
+
+(6)     goto label07;
+
+     label05:
+(7)     if i5 != i3 goto label06;
+
+(8)     i4 = r1.size();
+
+     label06:
+        i4 = Phi(i4 #7, i4 #8);
+
+        $c2 = (char) i5;
+
+        $r13 = java.lang.Character.valueOf($c2);
+
+(9)     r1.addElement($r13);
+
+     label07:
+        i4 = Phi(i4 #4, i4 #5, i4 #6, i4 #9);
+
+        i5 = i5 + 1;
+
+(10)    goto label02;
+
+     label08:
+        $i1 = r1.getSize();
+
+        if $i1 != 0 goto label09;
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty("view-registers.none");
+
+        r1.addElement($r11);
+
+        $r12 = r0.registerList;
+
+        $r12.setEnabled(0);
+
+        goto label10;
+
+     label09:
+        $r9 = r0.registerList;
+
+        $r9.setEnabled(1);
+
+     label10:
+        $r10 = r0.registerList;
+
+        $r10.setSelectedIndex(i4);
+
+        return;
+    }
+
+    private void insertRegister()
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        java.lang.Object r1;
+        org.gjt.sp.jedit.Registers$Register r2;
+        org.gjt.sp.jedit.gui.DockableWindowManager r3;
+        javax.swing.JList $r4;
+        boolean $z0, $z1;
+        java.lang.Character $r5;
+        char $c0;
+        org.gjt.sp.jedit.View $r6, $r9, $r11;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r7, $r10;
+        java.lang.String $r8;
+
+        r0 := @this;
+
+        $r4 = r0.registerList;
+
+        r1 = $r4.getSelectedValue();
+
+        if r1 == null goto label1;
+
+        $z0 = r1 instanceof java.lang.Character;
+
+        if $z0 != 0 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        $r5 = (java.lang.Character) r1;
+
+        $c0 = $r5.charValue();
+
+        r2 = org.gjt.sp.jedit.Registers.getRegister($c0);
+
+        $r6 = r0.view;
+
+        $r7 = $r6.getTextArea();
+
+        $r8 = r2.toString();
+
+        $r7.setSelectedText($r8);
+
+        $r9 = r0.view;
+
+        $r10 = $r9.getTextArea();
+
+        $r10.requestFocus();
+
+        $r11 = r0.view;
+
+        r3 = $r11.getDockableWindowManager();
+
+        $z1 = r3.isDockableWindowDocked("view-registers");
+
+        if $z1 != 0 goto label3;
+
+        r3.hideDockableWindow("view-registers");
+
+     label3:
+        return;
+    }
+
+    private void clearSelectedIndex()
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        java.lang.Object r1;
+        javax.swing.JList $r2;
+        boolean $z0;
+        java.lang.Character $r3;
+        char $c0;
+
+        r0 := @this;
+
+        $r2 = r0.registerList;
+
+        r1 = $r2.getSelectedValue();
+
+        if r1 == null goto label1;
+
+        $z0 = r1 instanceof java.lang.Character;
+
+        if $z0 == 0 goto label1;
+
+        $r3 = (java.lang.Character) r1;
+
+        $c0 = $r3.charValue();
+
+        org.gjt.sp.jedit.Registers.clearRegister($c0);
+
+        specialinvoke r0.refreshList();
+
+     label1:
+        return;
+    }
+
+    static javax.swing.JList access$000(org.gjt.sp.jedit.gui.RegisterViewer)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        javax.swing.JList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.registerList;
+
+        return $r1;
+    }
+
+    static boolean access$100(org.gjt.sp.jedit.gui.RegisterViewer)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $z0 = r0.editing;
+
+        return $z0;
+    }
+
+    static javax.swing.JTextArea access$200(org.gjt.sp.jedit.gui.RegisterViewer)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        javax.swing.JTextArea $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.contentTextArea;
+
+        return $r1;
+    }
+
+    static javax.swing.JPopupMenu access$300(org.gjt.sp.jedit.gui.RegisterViewer)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        javax.swing.JPopupMenu $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.popup;
+
+        return $r1;
+    }
+
+    static javax.swing.JPopupMenu access$302(org.gjt.sp.jedit.gui.RegisterViewer, javax.swing.JPopupMenu)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        javax.swing.JPopupMenu r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.popup = r1;
+
+        return r1;
+    }
+
+    static void access$400(org.gjt.sp.jedit.gui.RegisterViewer)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.insertRegister();
+
+        return;
+    }
+
+    static boolean access$102(org.gjt.sp.jedit.gui.RegisterViewer, boolean)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        boolean z0;
+
+        r0 := @parameter0;
+
+        z0 := @parameter1;
+
+        r0.editing = z0;
+
+        return z0;
+    }
+
+    static org.gjt.sp.jedit.gui.RegisterViewer$DocumentHandler access$500(org.gjt.sp.jedit.gui.RegisterViewer)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        org.gjt.sp.jedit.gui.RegisterViewer$DocumentHandler $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.documentHandler;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.View access$600(org.gjt.sp.jedit.gui.RegisterViewer)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+        org.gjt.sp.jedit.View $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.view;
+
+        return $r1;
+    }
+
+    static void access$700(org.gjt.sp.jedit.gui.RegisterViewer)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.clearSelectedIndex();
+
+        return;
+    }
+}

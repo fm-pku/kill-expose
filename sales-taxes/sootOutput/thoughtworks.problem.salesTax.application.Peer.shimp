@@ -1,0 +1,3 @@
+public annotation interface  thoughtworks.problem.salesTax.application.Peer extends java.lang.Object implements java.lang.annotation.Annotation
+{
+}

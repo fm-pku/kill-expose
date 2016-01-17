@@ -1,0 +1,37 @@
+class org.gjt.sp.jedit.View$SetCursorVisitor extends org.gjt.sp.jedit.visitors.JEditVisitorAdapter
+{
+    private final java.awt.Cursor cursor;
+
+    void <init>(java.awt.Cursor)
+    {
+        org.gjt.sp.jedit.View$SetCursorVisitor r0;
+        java.awt.Cursor r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.cursor = r1;
+
+        return;
+    }
+
+    public void visit(org.gjt.sp.jedit.EditPane)
+    {
+        org.gjt.sp.jedit.View$SetCursorVisitor r0;
+        org.gjt.sp.jedit.EditPane r1;
+        java.awt.Cursor $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.cursor;
+
+        r1.setCursor($r2);
+
+        return;
+    }
+}

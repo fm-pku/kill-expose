@@ -1,0 +1,156 @@
+public class org.gjt.sp.jedit.datatransfer.TransferHandler extends java.lang.Object
+{
+    private static final org.gjt.sp.jedit.datatransfer.TransferHandler instance;
+    private final java.util.List services;
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.datatransfer.TransferHandler r0;
+        java.util.ArrayList $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.ArrayList;
+
+        specialinvoke $r1.<init>();
+
+        r0.services = $r1;
+
+        return;
+    }
+
+    public static org.gjt.sp.jedit.datatransfer.TransferHandler getInstance()
+    {
+        org.gjt.sp.jedit.datatransfer.TransferHandler $r0;
+
+        $r0 = org.gjt.sp.jedit.datatransfer.TransferHandler.instance;
+
+        return $r0;
+    }
+
+    public void registerTransferableService(org.gjt.sp.jedit.datatransfer.JEditTransferableService)
+    {
+        org.gjt.sp.jedit.datatransfer.TransferHandler r0;
+        org.gjt.sp.jedit.datatransfer.JEditTransferableService r1;
+        java.util.List $r2, $r3;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.services;
+
+        $z0 = $r2.contains(r1);
+
+        if $z0 != 0 goto label1;
+
+        $r3 = r0.services;
+
+        $r3.add(r1);
+
+     label1:
+        return;
+    }
+
+    public java.awt.datatransfer.Transferable getTransferable(org.gjt.sp.jedit.textarea.TextArea, java.lang.String)
+    {
+        org.gjt.sp.jedit.datatransfer.TransferHandler r0;
+        org.gjt.sp.jedit.textarea.TextArea r1;
+        java.lang.String r2;
+        java.util.HashMap r3, $r9;
+        org.gjt.sp.jedit.datatransfer.JEditTransferableService r4;
+        java.awt.datatransfer.Transferable r5;
+        java.awt.datatransfer.DataFlavor[] r6, r7;
+        int i0, i1;
+        java.awt.datatransfer.DataFlavor r8;
+        java.util.List $r10;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.datatransfer.JEditTransferable $r11, r15;
+        java.lang.Object $r12;
+        java.util.Iterator r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r9 = new java.util.HashMap;
+
+        specialinvoke $r9.<init>();
+
+        r3 = $r9;
+
+        $r10 = r0.services;
+
+(0)     r14 = $r10.iterator();
+
+     label1:
+        i1 = Phi(i1 #0, i1 #5);
+
+        $z0 = r14.hasNext();
+
+        if $z0 == 0 goto label4;
+
+        $r12 = r14.next();
+
+        r4 = (org.gjt.sp.jedit.datatransfer.JEditTransferableService) $r12;
+
+        $z1 = r4.accept(r1, r2);
+
+(1)     if $z1 == 0 goto label3;
+
+        r5 = r4.getTransferable(r1, r2);
+
+        r6 = r5.getTransferDataFlavors();
+
+        r7 = r6;
+
+        i0 = lengthof r7;
+
+(2)     i1 = 0;
+
+     label2:
+        i1 = Phi(i1 #2, i1 #4);
+
+(3)     if i1 >= i0 goto label3;
+
+        r8 = r7[i1];
+
+        r3.put(r8, r5);
+
+        i1 = i1 + 1;
+
+(4)     goto label2;
+
+     label3:
+        i1 = Phi(i1 #1, i1 #3);
+
+(5)     goto label1;
+
+     label4:
+        $r11 = new org.gjt.sp.jedit.datatransfer.JEditTransferable;
+
+        specialinvoke $r11.<init>(r3);
+
+        r15 = $r11;
+
+        return r15;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.datatransfer.TransferHandler $r0;
+
+        $r0 = new org.gjt.sp.jedit.datatransfer.TransferHandler;
+
+        specialinvoke $r0.<init>();
+
+        org.gjt.sp.jedit.datatransfer.TransferHandler.instance = $r0;
+
+        return;
+    }
+}

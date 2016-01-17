@@ -1,0 +1,80 @@
+class org.gjt.sp.jedit.search.HyperSearchResults$CopyToClipboardAction extends javax.swing.AbstractAction
+{
+    final org.gjt.sp.jedit.search.HyperSearchResults this$0;
+
+    void <init>(org.gjt.sp.jedit.search.HyperSearchResults)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$CopyToClipboardAction r0;
+        org.gjt.sp.jedit.search.HyperSearchResults r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("hypersearch-results.copy-to-clipboard");
+
+        specialinvoke r0.<init>($r2);
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$CopyToClipboardAction r0;
+        java.awt.event.ActionEvent r1;
+        javax.swing.tree.TreePath r2;
+        javax.swing.tree.DefaultMutableTreeNode r3;
+        org.gjt.sp.jedit.search.HyperSearchResults$ToStringNodes r4, $r10;
+        java.awt.datatransfer.StringSelection r5, $r11;
+        java.awt.datatransfer.Clipboard r6;
+        org.gjt.sp.jedit.search.HyperSearchResults $r7;
+        javax.swing.JTree $r8;
+        java.lang.Object $r9;
+        java.lang.StringBuilder $r12;
+        java.lang.String $r13;
+        java.awt.Toolkit $r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r7);
+
+        r2 = $r8.getSelectionPath();
+
+        $r9 = r2.getLastPathComponent();
+
+        r3 = (javax.swing.tree.DefaultMutableTreeNode) $r9;
+
+        $r10 = new org.gjt.sp.jedit.search.HyperSearchResults$ToStringNodes;
+
+        specialinvoke $r10.<init>();
+
+        r4 = $r10;
+
+        org.gjt.sp.jedit.search.HyperSearchResults.traverseNodes(r3, r4);
+
+        $r11 = new java.awt.datatransfer.StringSelection;
+
+        $r12 = r4.nodesString;
+
+        $r13 = $r12.toString();
+
+        specialinvoke $r11.<init>($r13);
+
+        r5 = $r11;
+
+        $r14 = java.awt.Toolkit.getDefaultToolkit();
+
+        r6 = $r14.getSystemClipboard();
+
+        r6.setContents(r5, null);
+
+        return;
+    }
+}

@@ -1,0 +1,7 @@
+public interface  org.gjt.sp.jedit.bsh.NameSource extends java.lang.Object
+{
+
+    public abstract java.lang.String[] getAllNames();
+
+    public abstract void addNameSourceListener(org.gjt.sp.jedit.bsh.NameSource$Listener);
+}

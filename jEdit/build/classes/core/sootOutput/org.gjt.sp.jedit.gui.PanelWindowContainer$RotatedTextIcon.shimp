@@ -1,0 +1,367 @@
+public class org.gjt.sp.jedit.gui.PanelWindowContainer$RotatedTextIcon extends java.lang.Object implements javax.swing.Icon
+{
+    public static final int NONE;
+    public static final int CW;
+    public static final int CCW;
+    private final int rotate;
+    private final java.awt.Font font;
+    private final java.awt.font.GlyphVector glyphs;
+    private final float width;
+    private final float height;
+    private final float ascent;
+    private final java.awt.RenderingHints renderHints;
+
+    public void <init>(int, java.awt.Font, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$RotatedTextIcon r0;
+        int i0, $i1, $i2, $i3;
+        java.awt.Font r1;
+        java.lang.String r2;
+        java.awt.font.FontRenderContext r3, $r5;
+        java.awt.font.LineMetrics r4;
+        java.awt.font.GlyphVector $r6, $r7;
+        java.awt.geom.Rectangle2D $r8;
+        double $d0;
+        float $f0, $f1, $f2, $f3;
+        java.awt.RenderingHints $r9, $r14, $r18;
+        java.lang.Object $r10, $r12, $r16;
+        java.awt.RenderingHints$Key $r11, $r13, $r17;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.rotate = i0;
+
+        r0.font = r1;
+
+        $r5 = new java.awt.font.FontRenderContext;
+
+        specialinvoke $r5.<init>(null, 1, 0);
+
+        r3 = $r5;
+
+        $r6 = r1.createGlyphVector(r3, r2);
+
+        r0.glyphs = $r6;
+
+        $r7 = r0.glyphs;
+
+        $r8 = $r7.getLogicalBounds();
+
+        $d0 = $r8.getWidth();
+
+        $i1 = (int) $d0;
+
+        $i2 = $i1 + 4;
+
+        $f0 = (float) $i2;
+
+        r0.width = $f0;
+
+        r4 = r1.getLineMetrics(r2, r3);
+
+        $f1 = r4.getAscent();
+
+        r0.ascent = $f1;
+
+        $f2 = r4.getHeight();
+
+        $i3 = (int) $f2;
+
+        $f3 = (float) $i3;
+
+        r0.height = $f3;
+
+        $r9 = new java.awt.RenderingHints;
+
+        $r11 = java.awt.RenderingHints.KEY_ANTIALIASING;
+
+        $r10 = java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
+
+        specialinvoke $r9.<init>($r11, $r10);
+
+        r0.renderHints = $r9;
+
+        $r14 = r0.renderHints;
+
+        $r13 = java.awt.RenderingHints.KEY_FRACTIONALMETRICS;
+
+        $r12 = java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_ON;
+
+        $r14.put($r13, $r12);
+
+        $r18 = r0.renderHints;
+
+        $r17 = java.awt.RenderingHints.KEY_RENDERING;
+
+        $r16 = java.awt.RenderingHints.VALUE_RENDER_QUALITY;
+
+        $r18.put($r17, $r16);
+
+        return;
+    }
+
+    public int getIconWidth()
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$RotatedTextIcon r0;
+        int $i0, $i1, $i2, i3;
+        float $f0, $f1;
+
+        r0 := @this;
+
+        $i0 = r0.rotate;
+
+        if $i0 == 1 goto label1;
+
+        $i2 = r0.rotate;
+
+        if $i2 != 2 goto label2;
+
+     label1:
+        $f0 = r0.height;
+
+        i3 = (int) $f0;
+
+        return i3;
+
+     label2:
+        $f1 = r0.width;
+
+        $i1 = (int) $f1;
+
+        return $i1;
+    }
+
+    public int getIconHeight()
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$RotatedTextIcon r0;
+        int $i0, $i1, $i2, i3;
+        float $f0, $f1;
+
+        r0 := @this;
+
+        $i0 = r0.rotate;
+
+        if $i0 == 1 goto label1;
+
+        $i2 = r0.rotate;
+
+        if $i2 != 2 goto label2;
+
+     label1:
+        $f0 = r0.width;
+
+        i3 = (int) $f0;
+
+        return i3;
+
+     label2:
+        $f1 = r0.height;
+
+        $i1 = (int) $f1;
+
+        return $i1;
+    }
+
+    public void paintIcon(java.awt.Component, java.awt.Graphics, int, int)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$RotatedTextIcon r0;
+        java.awt.Component r1;
+        java.awt.Graphics r2;
+        int i0, i1, $i2, $i3, $i4, $i5, $i6, $i7;
+        java.awt.Graphics2D r3;
+        java.awt.geom.AffineTransform r4, $r9, $r11, r14, r15;
+        java.awt.RenderingHints r5, $r7;
+        java.awt.Font $r6;
+        java.awt.Color $r8;
+        double $d0, $d1, $d2, $d3, $d4, $d5, $d6, $d7;
+        float $f0, $f1, $f2, $f3, $f4, $f5, $f6, $f7, $f8, $f9, $f10, $f11, $f12, $f13, $f14, $f15, $f16, $f17, $f18, $f19, $f20, $f21, $f22, $f23, $f24, $f25, $f26, $f27, $f28, $f29, $f30, $f31;
+        java.awt.font.GlyphVector $r10, $r12, $r13;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        i1 := @parameter3;
+
+        r3 = (java.awt.Graphics2D) r2;
+
+        $r6 = r0.font;
+
+        r3.setFont($r6);
+
+        r4 = r3.getTransform();
+
+        r5 = r3.getRenderingHints();
+
+        $r7 = r0.renderHints;
+
+        r3.setRenderingHints($r7);
+
+        $r8 = r1.getForeground();
+
+        r3.setColor($r8);
+
+        $i2 = r0.rotate;
+
+        if $i2 != 0 goto label1;
+
+        $r13 = r0.glyphs;
+
+        $i7 = i0 + 2;
+
+        $f31 = (float) $i7;
+
+        $f29 = (float) i1;
+
+        $f28 = r0.ascent;
+
+        $f30 = $f29 + $f28;
+
+        r3.drawGlyphVector($r13, $f31, $f30);
+
+        goto label3;
+
+     label1:
+        $i3 = r0.rotate;
+
+        if $i3 != 1 goto label2;
+
+        $r11 = new java.awt.geom.AffineTransform;
+
+        specialinvoke $r11.<init>();
+
+        r14 = $r11;
+
+        r14.concatenate(r4);
+
+        $d5 = (double) i0;
+
+        $i6 = i1 + 2;
+
+        $d4 = (double) $i6;
+
+        r14.translate($d5, $d4);
+
+        $f14 = r0.height;
+
+        $f15 = $f14 / 2.0F;
+
+        $d7 = (double) $f15;
+
+        $f16 = r0.width;
+
+        $f17 = $f16 / 2.0F;
+
+        $d6 = (double) $f17;
+
+        r14.rotate(1.5707963267948966, $d7, $d6);
+
+        r3.setTransform(r14);
+
+        $r12 = r0.glyphs;
+
+        $f19 = r0.height;
+
+        $f18 = r0.width;
+
+        $f20 = $f19 - $f18;
+
+        $f27 = $f20 / 2.0F;
+
+        $f22 = r0.width;
+
+        $f21 = r0.height;
+
+        $f23 = $f22 - $f21;
+
+        $f25 = $f23 / 2.0F;
+
+        $f24 = r0.ascent;
+
+        $f26 = $f25 + $f24;
+
+        r3.drawGlyphVector($r12, $f27, $f26);
+
+        goto label3;
+
+     label2:
+        $i4 = r0.rotate;
+
+        if $i4 != 2 goto label3;
+
+        $r9 = new java.awt.geom.AffineTransform;
+
+        specialinvoke $r9.<init>();
+
+        r15 = $r9;
+
+        r15.concatenate(r4);
+
+        $d1 = (double) i0;
+
+        $i5 = i1 - 2;
+
+        $d0 = (double) $i5;
+
+        r15.translate($d1, $d0);
+
+        $f0 = r0.height;
+
+        $f1 = $f0 / 2.0F;
+
+        $d3 = (double) $f1;
+
+        $f2 = r0.width;
+
+        $f3 = $f2 / 2.0F;
+
+        $d2 = (double) $f3;
+
+        r15.rotate(4.71238898038469, $d3, $d2);
+
+        r3.setTransform(r15);
+
+        $r10 = r0.glyphs;
+
+        $f5 = r0.height;
+
+        $f4 = r0.width;
+
+        $f6 = $f5 - $f4;
+
+        $f13 = $f6 / 2.0F;
+
+        $f8 = r0.width;
+
+        $f7 = r0.height;
+
+        $f9 = $f8 - $f7;
+
+        $f11 = $f9 / 2.0F;
+
+        $f10 = r0.ascent;
+
+        $f12 = $f11 + $f10;
+
+        r3.drawGlyphVector($r10, $f13, $f12);
+
+     label3:
+        r3.setTransform(r4);
+
+        r3.setRenderingHints(r5);
+
+        return;
+    }
+}

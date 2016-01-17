@@ -1,0 +1,199 @@
+public class org.gjt.sp.jedit.options.LargeFilesOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private javax.swing.JRadioButton askLargeFileMode;
+    private javax.swing.JRadioButton noHighlightLargeFileMode;
+    private javax.swing.JRadioButton limitedSyntaxLargeFileMode;
+    private javax.swing.JRadioButton fullSyntaxLargeFileMode;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.LargeFilesOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("large-files");
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.LargeFilesOptionPane r0;
+        java.lang.String r1, $r3, $r5, $r7, $r9, $r11, $r13, $r14, $r15, $r16;
+        javax.swing.ButtonGroup r2, $r18;
+        javax.swing.JLabel $r4;
+        javax.swing.JRadioButton $r6, $r8, $r10, $r12, $r17, $r19, $r20, $r21, $r22, $r23, $r24, $r25;
+        boolean $z0, $z1, $z2;
+
+        r0 := @this;
+
+        $r3 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.largefilemode.title");
+
+        r0.addSeparator($r3);
+
+        $r4 = new javax.swing.JLabel;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.largefilemode");
+
+        specialinvoke $r4.<init>($r5);
+
+        r0.addComponent($r4);
+
+        $r6 = new javax.swing.JRadioButton;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.largefilemode.option.ask");
+
+        specialinvoke $r6.<init>($r7);
+
+        r0.askLargeFileMode = $r6;
+
+        r0.addComponent($r6);
+
+        $r8 = new javax.swing.JRadioButton;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.largefilemode.option.full");
+
+        specialinvoke $r8.<init>($r9);
+
+        r0.fullSyntaxLargeFileMode = $r8;
+
+        r0.addComponent($r8);
+
+        $r10 = new javax.swing.JRadioButton;
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.largefilemode.option.limited");
+
+        specialinvoke $r10.<init>($r11);
+
+        r0.limitedSyntaxLargeFileMode = $r10;
+
+        r0.addComponent($r10);
+
+        $r12 = new javax.swing.JRadioButton;
+
+        $r13 = org.gjt.sp.jedit.jEdit.getProperty("options.editing.largefilemode.option.nohighlight");
+
+        specialinvoke $r12.<init>($r13);
+
+        r0.noHighlightLargeFileMode = $r12;
+
+        r0.addComponent($r12);
+
+        r1 = org.gjt.sp.jedit.jEdit.getProperty("largefilemode", "ask");
+
+        $r14 = "full";
+
+        $z0 = $r14.equals(r1);
+
+        if $z0 == 0 goto label1;
+
+        $r25 = r0.fullSyntaxLargeFileMode;
+
+        $r25.setSelected(1);
+
+        goto label4;
+
+     label1:
+        $r15 = "limited";
+
+        $z1 = $r15.equals(r1);
+
+        if $z1 == 0 goto label2;
+
+        $r24 = r0.limitedSyntaxLargeFileMode;
+
+        $r24.setSelected(1);
+
+        goto label4;
+
+     label2:
+        $r16 = "nohighlight";
+
+        $z2 = $r16.equals(r1);
+
+        if $z2 == 0 goto label3;
+
+        $r23 = r0.noHighlightLargeFileMode;
+
+        $r23.setSelected(1);
+
+        goto label4;
+
+     label3:
+        $r17 = r0.askLargeFileMode;
+
+        $r17.setSelected(1);
+
+     label4:
+        $r18 = new javax.swing.ButtonGroup;
+
+        specialinvoke $r18.<init>();
+
+        r2 = $r18;
+
+        $r19 = r0.askLargeFileMode;
+
+        r2.add($r19);
+
+        $r20 = r0.fullSyntaxLargeFileMode;
+
+        r2.add($r20);
+
+        $r21 = r0.limitedSyntaxLargeFileMode;
+
+        r2.add($r21);
+
+        $r22 = r0.noHighlightLargeFileMode;
+
+        r2.add($r22);
+
+        return;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.options.LargeFilesOptionPane r0;
+        javax.swing.JRadioButton $r1, $r2, $r3;
+        boolean $z0, $z1, $z2;
+
+        r0 := @this;
+
+        $r1 = r0.fullSyntaxLargeFileMode;
+
+        $z0 = $r1.isSelected();
+
+        if $z0 == 0 goto label1;
+
+        org.gjt.sp.jedit.jEdit.setProperty("largefilemode", "full");
+
+        goto label4;
+
+     label1:
+        $r2 = r0.limitedSyntaxLargeFileMode;
+
+        $z1 = $r2.isSelected();
+
+        if $z1 == 0 goto label2;
+
+        org.gjt.sp.jedit.jEdit.setProperty("largefilemode", "limited");
+
+        goto label4;
+
+     label2:
+        $r3 = r0.noHighlightLargeFileMode;
+
+        $z2 = $r3.isSelected();
+
+        if $z2 == 0 goto label3;
+
+        org.gjt.sp.jedit.jEdit.setProperty("largefilemode", "nohighlight");
+
+        goto label4;
+
+     label3:
+        org.gjt.sp.jedit.jEdit.setProperty("largefilemode", "ask");
+
+     label4:
+        return;
+    }
+}

@@ -1,0 +1,96 @@
+class org.gjt.sp.jedit.bsh.BSHArguments extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHArguments r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.Object[] getArguments(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHArguments r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        java.lang.Object[] r3;
+        int $i0, $i1, i2;
+        org.gjt.sp.jedit.bsh.Node $r4, $r12;
+        org.gjt.sp.jedit.bsh.SimpleNode $r5, $r13;
+        java.lang.Object $r6, $r8;
+        org.gjt.sp.jedit.bsh.Primitive $r7;
+        org.gjt.sp.jedit.bsh.EvalError $r9;
+        java.lang.StringBuilder $r10, $r11, $r15;
+        java.lang.String $r14, $r16;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $i0 = r0.jjtGetNumChildren();
+
+        r3 = newarray (java.lang.Object)[$i0];
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $i1 = lengthof r3;
+
+        if i2 >= $i1 goto label3;
+
+        $r4 = r0.jjtGetChild(i2);
+
+        $r5 = (org.gjt.sp.jedit.bsh.SimpleNode) $r4;
+
+        $r6 = $r5.eval(r1, r2);
+
+        r3[i2] = $r6;
+
+        $r8 = r3[i2];
+
+        $r7 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        if $r8 != $r7 goto label2;
+
+        $r9 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("Undefined argument: ");
+
+        $r12 = r0.jjtGetChild(i2);
+
+        $r13 = (org.gjt.sp.jedit.bsh.SimpleNode) $r12;
+
+        $r14 = $r13.getText();
+
+        $r15 = $r11.append($r14);
+
+        $r16 = $r15.toString();
+
+        specialinvoke $r9.<init>($r16, r0, r1);
+
+        throw $r9;
+
+     label2:
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label3:
+        return r3;
+    }
+}

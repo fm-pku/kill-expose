@@ -1,0 +1,284 @@
+public class org.gjt.sp.jedit.help.HistoryButton extends javax.swing.JPanel implements java.awt.event.ActionListener
+{
+    public static final int BACK;
+    public static final int FORWARD;
+    private int type;
+    private org.gjt.sp.jedit.help.HelpHistoryModel history;
+    private org.gjt.sp.jedit.gui.RolloverButton arrow_button;
+    private org.gjt.sp.jedit.gui.RolloverButton drop_button;
+    private javax.swing.JPopupMenu historyList;
+    private java.awt.event.ActionListener arrowActionListener;
+
+    public void <init>(int, org.gjt.sp.jedit.help.HelpHistoryModel)
+    {
+        org.gjt.sp.jedit.help.HistoryButton r0;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6;
+        org.gjt.sp.jedit.help.HelpHistoryModel r1;
+        javax.swing.Box r2, $r8;
+        org.gjt.sp.jedit.gui.RolloverButton $r3, $r6, $r9, $r13, $r14, $r16, $r19, $r21, $r23;
+        java.lang.String $r4, $r7, $r10, $r26, $r27, $r26_1, $r26_2, $r27_1, $r27_2;
+        javax.swing.Icon $r5, $r11;
+        org.gjt.sp.jedit.help.HistoryButton$DropActionHandler $r12;
+        java.awt.Dimension $r18, $r20, $r22, $r24;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        $r3 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        if i0 != 0 goto label1;
+
+        $r26 = "helpviewer.back.icon";
+
+(0)     goto label2;
+
+     label1:
+(1)     $r26_1 = "helpviewer.forward.icon";
+
+     label2:
+        $r26_2 = Phi($r26 #0, $r26_1 #1);
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty($r26_2);
+
+        $r5 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r4);
+
+        specialinvoke $r3.<init>($r5);
+
+        r0.arrow_button = $r3;
+
+        $r6 = r0.arrow_button;
+
+        if i0 != 0 goto label3;
+
+        $r27 = "helpviewer.back.label";
+
+(2)     goto label4;
+
+     label3:
+(3)     $r27_1 = "helpviewer.forward.label";
+
+     label4:
+        $r27_2 = Phi($r27 #2, $r27_1 #3);
+
+        $r7 = org.gjt.sp.jedit.jEdit.getProperty($r27_2);
+
+        $r6.setToolTipText($r7);
+
+        $r8 = new javax.swing.Box;
+
+        specialinvoke $r8.<init>(0);
+
+        r2 = $r8;
+
+        $r9 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty("dropdown-arrow.icon");
+
+        $r11 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r10);
+
+        specialinvoke $r9.<init>($r11);
+
+        r0.drop_button = $r9;
+
+        $r13 = r0.drop_button;
+
+        $r12 = new org.gjt.sp.jedit.help.HistoryButton$DropActionHandler;
+
+        specialinvoke $r12.<init>(r0);
+
+        $r13.addActionListener($r12);
+
+        $r14 = r0.arrow_button;
+
+        r2.add($r14);
+
+        $r16 = r0.drop_button;
+
+        r2.add($r16);
+
+        $r18 = new java.awt.Dimension;
+
+        $r19 = r0.drop_button;
+
+        $r20 = $r19.getPreferredSize();
+
+        $i1 = $r20.width;
+
+        $r21 = r0.arrow_button;
+
+        $r22 = $r21.getPreferredSize();
+
+        $i2 = $r22.width;
+
+        $i3 = $i1 + $i2;
+
+        $i4 = $i3 + 5;
+
+        $r23 = r0.arrow_button;
+
+        $r24 = $r23.getPreferredSize();
+
+        $i5 = $r24.height;
+
+        $i6 = $i5 + 10;
+
+        specialinvoke $r18.<init>($i4, $i6);
+
+        r0.setMaximumSize($r18);
+
+        r0.add(r2);
+
+        r0.type = i0;
+
+        r0.history = r1;
+
+        return;
+    }
+
+    public void setEnabled(boolean)
+    {
+        org.gjt.sp.jedit.help.HistoryButton r0;
+        boolean z0;
+        org.gjt.sp.jedit.gui.RolloverButton $r1, $r2;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        specialinvoke r0.setEnabled(z0);
+
+        $r1 = r0.drop_button;
+
+        $r1.setEnabled(z0);
+
+        $r2 = r0.arrow_button;
+
+        $r2.setEnabled(z0);
+
+        return;
+    }
+
+    public void addActionListener(java.awt.event.ActionListener)
+    {
+        org.gjt.sp.jedit.help.HistoryButton r0;
+        java.awt.event.ActionListener r1;
+        org.gjt.sp.jedit.gui.RolloverButton $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.arrow_button;
+
+        $r2.addActionListener(r0);
+
+        r0.arrowActionListener = r1;
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.help.HistoryButton r0;
+        java.awt.event.ActionEvent r1, $r2;
+        java.awt.event.ActionListener $r3;
+        java.lang.String $r4;
+        long $l0;
+        int $i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.arrowActionListener;
+
+        $r2 = new java.awt.event.ActionEvent;
+
+        $r4 = r1.getActionCommand();
+
+        $l0 = r1.getWhen();
+
+        $i1 = r1.getModifiers();
+
+        specialinvoke $r2.<init>(r0, 1001, $r4, $l0, $i1);
+
+        $r3.actionPerformed($r2);
+
+        return;
+    }
+
+    private org.gjt.sp.jedit.help.HistoryButton getParentHistoryButton()
+    {
+        org.gjt.sp.jedit.help.HistoryButton r0;
+
+        r0 := @this;
+
+        return r0;
+    }
+
+    static javax.swing.JPopupMenu access$002(org.gjt.sp.jedit.help.HistoryButton, javax.swing.JPopupMenu)
+    {
+        org.gjt.sp.jedit.help.HistoryButton r0;
+        javax.swing.JPopupMenu r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.historyList = r1;
+
+        return r1;
+    }
+
+    static int access$100(org.gjt.sp.jedit.help.HistoryButton)
+    {
+        org.gjt.sp.jedit.help.HistoryButton r0;
+        int $i0;
+
+        r0 := @parameter0;
+
+        $i0 = r0.type;
+
+        return $i0;
+    }
+
+    static org.gjt.sp.jedit.help.HelpHistoryModel access$200(org.gjt.sp.jedit.help.HistoryButton)
+    {
+        org.gjt.sp.jedit.help.HistoryButton r0;
+        org.gjt.sp.jedit.help.HelpHistoryModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.history;
+
+        return $r1;
+    }
+
+    static javax.swing.JPopupMenu access$000(org.gjt.sp.jedit.help.HistoryButton)
+    {
+        org.gjt.sp.jedit.help.HistoryButton r0;
+        javax.swing.JPopupMenu $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.historyList;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.help.HistoryButton access$300(org.gjt.sp.jedit.help.HistoryButton)
+    {
+        org.gjt.sp.jedit.help.HistoryButton r0, $r1;
+
+        r0 := @parameter0;
+
+        $r1 = specialinvoke r0.getParentHistoryButton();
+
+        return $r1;
+    }
+}

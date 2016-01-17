@@ -1,0 +1,83 @@
+class org.gjt.sp.jedit.gui.PanelWindowContainer$DockableWindowCompare extends java.lang.Object implements java.util.Comparator
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$DockableWindowCompare r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public int compare(javax.swing.AbstractButton, javax.swing.AbstractButton)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$DockableWindowCompare r0;
+        javax.swing.AbstractButton r1, r2;
+        java.lang.String r3, r4, $r8, $r9, $r13, $r14;
+        java.lang.StringBuilder $r5, $r6, $r7, $r10, $r11, $r12;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 = r1.getActionCommand();
+
+        r4 = r2.getActionCommand();
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append(r3);
+
+        $r7 = $r6.append(".title");
+
+        $r8 = $r7.toString();
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty($r8, "");
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append(r4);
+
+        $r12 = $r11.append(".title");
+
+        $r13 = $r12.toString();
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty($r13, "");
+
+        $i0 = org.gjt.sp.util.StandardUtilities.compareStrings($r9, $r14, 1);
+
+        return $i0;
+    }
+
+    public volatile int compare(java.lang.Object, java.lang.Object)
+    {
+        org.gjt.sp.jedit.gui.PanelWindowContainer$DockableWindowCompare r0;
+        java.lang.Object r1, r2;
+        javax.swing.AbstractButton $r3, $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = (javax.swing.AbstractButton) r1;
+
+        $r3 = (javax.swing.AbstractButton) r2;
+
+        $i0 = r0.compare($r4, $r3);
+
+        return $i0;
+    }
+}

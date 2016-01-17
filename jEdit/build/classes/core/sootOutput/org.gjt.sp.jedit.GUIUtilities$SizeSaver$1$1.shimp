@@ -1,0 +1,52 @@
+class org.gjt.sp.jedit.GUIUtilities$SizeSaver$1$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.GUIUtilities$SizeSaver$1 this$1;
+
+    void <init>(org.gjt.sp.jedit.GUIUtilities$SizeSaver$1)
+    {
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver$1$1 r0;
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$1 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver$1$1 r0;
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver$1 $r1, $r2, $r6;
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver $r3, $r4;
+        java.awt.Frame $r5;
+        int $i0;
+        java.awt.Rectangle $r7;
+
+        r0 := @this;
+
+        $r1 = r0.this$1;
+
+        $r4 = $r1.this$0;
+
+        $r2 = r0.this$1;
+
+        $r3 = $r2.this$0;
+
+        $r5 = org.gjt.sp.jedit.GUIUtilities$SizeSaver.access$400($r3);
+
+        $i0 = $r5.getExtendedState();
+
+        $r6 = r0.this$1;
+
+        $r7 = $r6.val$bounds;
+
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver.access$500($r4, $i0, $r7);
+
+        return;
+    }
+}

@@ -1,0 +1,58 @@
+class org.gjt.sp.jedit.menu.MarkersProvider$1 extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.View val$view;
+    final org.gjt.sp.jedit.Marker val$marker;
+    final org.gjt.sp.jedit.menu.MarkersProvider this$0;
+
+    void <init>(org.gjt.sp.jedit.menu.MarkersProvider, org.gjt.sp.jedit.View, org.gjt.sp.jedit.Marker)
+    {
+        org.gjt.sp.jedit.menu.MarkersProvider$1 r0;
+        org.gjt.sp.jedit.menu.MarkersProvider r1;
+        org.gjt.sp.jedit.View r2;
+        org.gjt.sp.jedit.Marker r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$0 = r1;
+
+        r0.val$view = r2;
+
+        r0.val$marker = r3;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.menu.MarkersProvider$1 r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.View $r2;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r3;
+        org.gjt.sp.jedit.Marker $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.val$view;
+
+        $r3 = $r2.getTextArea();
+
+        $r4 = r0.val$marker;
+
+        $i0 = $r4.getPosition();
+
+        $r3.setCaretPosition($i0);
+
+        return;
+    }
+}

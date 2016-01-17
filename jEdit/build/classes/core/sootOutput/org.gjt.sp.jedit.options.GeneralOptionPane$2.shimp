@@ -1,0 +1,60 @@
+class org.gjt.sp.jedit.options.GeneralOptionPane$2 extends java.lang.Object implements javax.swing.event.ChangeListener
+{
+    final org.gjt.sp.jedit.options.GeneralOptionPane this$0;
+
+    void <init>(org.gjt.sp.jedit.options.GeneralOptionPane)
+    {
+        org.gjt.sp.jedit.options.GeneralOptionPane$2 r0;
+        org.gjt.sp.jedit.options.GeneralOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void stateChanged(javax.swing.event.ChangeEvent)
+    {
+        org.gjt.sp.jedit.options.GeneralOptionPane$2 r0;
+        javax.swing.event.ChangeEvent r1;
+        org.gjt.sp.jedit.options.GeneralOptionPane $r2, $r4;
+        javax.swing.JComboBox $r3;
+        javax.swing.JCheckBox $r5;
+        boolean $z0, $z1, $z1_1, $z1_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.options.GeneralOptionPane.access$400($r2);
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.options.GeneralOptionPane.access$300($r4);
+
+        $z0 = $r5.isSelected();
+
+        if $z0 != 0 goto label1;
+
+        $z1 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z1_1 = 0;
+
+     label2:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        $r3.setEnabled($z1_2);
+
+        return;
+    }
+}

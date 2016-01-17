@@ -1,0 +1,257 @@
+public class org.gjt.sp.jedit.io.AutoDetection extends java.lang.Object
+{
+    static final boolean $assertionsDisabled;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.io.AutoDetection r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static java.io.BufferedInputStream getMarkedStream(java.io.InputStream)
+    {
+        java.io.InputStream r0;
+        int i0;
+        java.io.BufferedInputStream r1, $r2;
+        boolean $z0, $z1;
+        java.lang.AssertionError $r3;
+
+        r0 := @parameter0;
+
+        i0 = org.gjt.sp.jedit.bufferio.BufferIORequest.getByteIOBufferSize();
+
+        $r2 = new java.io.BufferedInputStream;
+
+        specialinvoke $r2.<init>(r0, i0);
+
+        r1 = $r2;
+
+        $z0 = org.gjt.sp.jedit.io.AutoDetection.$assertionsDisabled;
+
+        if $z0 != 0 goto label1;
+
+        $z1 = r1.markSupported();
+
+        if $z1 != 0 goto label1;
+
+        $r3 = new java.lang.AssertionError;
+
+        specialinvoke $r3.<init>();
+
+        throw $r3;
+
+     label1:
+        r1.mark(i0);
+
+        return r1;
+    }
+
+    public static boolean isGzipped(java.io.InputStream) throws java.io.IOException
+    {
+        java.io.InputStream r0;
+        byte b0;
+        short s1;
+        int $i2, $i3;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @parameter0;
+
+        b0 = 31;
+
+        s1 = 139;
+
+        $i2 = r0.read();
+
+        if $i2 != b0 goto label1;
+
+        $i3 = r0.read();
+
+        if $i3 != s1 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    public static java.util.List getEncodingDetectors()
+    {
+        java.util.ArrayList r0, $r6;
+        java.lang.String r1, r2, r4, $r11;
+        java.lang.String[] r3;
+        int i0, $i1, i2;
+        org.gjt.sp.jedit.io.EncodingDetector r5;
+        java.lang.StringBuilder $r7, $r8, $r9, $r10;
+
+        $r6 = new java.util.ArrayList;
+
+        specialinvoke $r6.<init>();
+
+        r0 = $r6;
+
+        r1 = "encodingDetectors";
+
+        r2 = org.gjt.sp.jedit.jEdit.getProperty(r1);
+
+(0)     if r2 == null goto label4;
+
+        $i1 = r2.length();
+
+(1)     if $i1 <= 0 goto label4;
+
+        r3 = r2.split("\\s+");
+
+        i0 = lengthof r3;
+
+(2)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #2, i2 #4);
+
+(3)     if i2 >= i0 goto label4;
+
+        r4 = r3[i2];
+
+        r5 = org.gjt.sp.jedit.io.AutoDetection.getEncodingDetectorService(r4);
+
+        if r5 == null goto label2;
+
+        r0.add(r5);
+
+        goto label3;
+
+     label2:
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("getEncodingDetectors(): No EncodingDetector for the name \"");
+
+        $r9 = $r8.append(r4);
+
+        $r10 = $r9.append("\"");
+
+        $r11 = $r10.toString();
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/io/AutoDetection", $r11);
+
+     label3:
+        i2 = i2 + 1;
+
+(4)     goto label1;
+
+     label4:
+        i2 = Phi(i2 #0, i2 #1, i2 #3);
+
+        return r0;
+    }
+
+    public static java.lang.String getDetectedEncoding(java.io.BufferedInputStream) throws java.io.IOException
+    {
+        java.io.BufferedInputStream r0, $r6;
+        java.util.List r1;
+        java.util.Iterator r2;
+        org.gjt.sp.jedit.io.EncodingDetector r3;
+        java.lang.String r4;
+        boolean $z0;
+        java.lang.Object $r5;
+
+        r0 := @parameter0;
+
+        r1 = org.gjt.sp.jedit.io.AutoDetection.getEncodingDetectors();
+
+        r2 = r1.iterator();
+
+     label1:
+        $z0 = r2.hasNext();
+
+        if $z0 == 0 goto label3;
+
+        $r5 = r2.next();
+
+        r3 = (org.gjt.sp.jedit.io.EncodingDetector) $r5;
+
+        r0.reset();
+
+        $r6 = new java.io.BufferedInputStream;
+
+        specialinvoke $r6.<init>(r0);
+
+        r4 = r3.detectEncoding($r6);
+
+        if r4 == null goto label2;
+
+        return r4;
+
+     label2:
+        goto label1;
+
+     label3:
+        return null;
+    }
+
+    private static org.gjt.sp.jedit.io.EncodingDetector getEncodingDetectorService(java.lang.String)
+    {
+        java.lang.String r0, r1;
+        java.lang.Object r2;
+        boolean $z0;
+        org.gjt.sp.jedit.io.EncodingDetector $r3;
+
+        r0 := @parameter0;
+
+        r1 = "org.gjt.sp.jedit.io.EncodingDetector";
+
+        r2 = org.gjt.sp.jedit.ServiceManager.getService(r1, r0);
+
+        if r2 == null goto label1;
+
+        $z0 = r2 instanceof org.gjt.sp.jedit.io.EncodingDetector;
+
+        if $z0 == 0 goto label1;
+
+        $r3 = (org.gjt.sp.jedit.io.EncodingDetector) r2;
+
+        return $r3;
+
+     label1:
+        return null;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Class $r0;
+        boolean $z0, $z1, $z1_1, $z1_2;
+
+        $r0 = class "org/gjt/sp/jedit/io/AutoDetection";
+
+        $z0 = $r0.desiredAssertionStatus();
+
+        if $z0 != 0 goto label1;
+
+        $z1 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z1_1 = 0;
+
+     label2:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        org.gjt.sp.jedit.io.AutoDetection.$assertionsDisabled = $z1_2;
+
+        return;
+    }
+}

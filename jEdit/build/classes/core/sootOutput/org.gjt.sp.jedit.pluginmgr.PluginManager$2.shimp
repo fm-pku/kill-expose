@@ -1,0 +1,80 @@
+class org.gjt.sp.jedit.pluginmgr.PluginManager$2 extends org.gjt.sp.util.Task
+{
+    final org.gjt.sp.jedit.pluginmgr.PluginManager this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.PluginManager)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManager$2 r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManager r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void _run()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManager$2 r0;
+        java.lang.Throwable r1, $r9;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r2, $r5, $r7, $r10;
+        java.lang.String $r3;
+        org.gjt.sp.jedit.pluginmgr.PluginList $r4;
+        org.gjt.sp.jedit.pluginmgr.PluginManager$2$1 $r8;
+
+        r0 := @this;
+
+     label1:
+        $r2 = r0.this$0;
+
+        org.gjt.sp.jedit.pluginmgr.PluginManager.access$202($r2, 1);
+
+        $r3 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.list-download-connect");
+
+        r0.setStatus($r3);
+
+        $r5 = r0.this$0;
+
+        $r4 = new org.gjt.sp.jedit.pluginmgr.PluginList;
+
+        specialinvoke $r4.<init>(r0);
+
+        org.gjt.sp.jedit.pluginmgr.PluginManager.access$302($r5, $r4);
+
+     label2:
+        $r7 = r0.this$0;
+
+        org.gjt.sp.jedit.pluginmgr.PluginManager.access$202($r7, 0);
+
+        goto label5;
+
+     label3:
+        $r9 := @caughtexception;
+
+        r1 = $r9;
+
+     label4:
+        $r10 = r0.this$0;
+
+        org.gjt.sp.jedit.pluginmgr.PluginManager.access$202($r10, 0);
+
+        throw r1;
+
+     label5:
+        $r8 = new org.gjt.sp.jedit.pluginmgr.PluginManager$2$1;
+
+        specialinvoke $r8.<init>(r0);
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThread($r8);
+
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+}

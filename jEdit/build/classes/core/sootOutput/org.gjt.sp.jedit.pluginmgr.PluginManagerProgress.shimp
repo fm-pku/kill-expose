@@ -1,0 +1,372 @@
+class org.gjt.sp.jedit.pluginmgr.PluginManagerProgress extends javax.swing.JDialog implements org.gjt.sp.util.ProgressObserver
+{
+    private java.lang.Thread thread;
+    private final javax.swing.JProgressBar progress;
+    private final javax.swing.JButton stop;
+    private final int count;
+    private int done;
+    private int valueSoFar;
+    private final org.gjt.sp.jedit.pluginmgr.Roster roster;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.PluginManager, org.gjt.sp.jedit.pluginmgr.Roster)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManager r1;
+        org.gjt.sp.jedit.pluginmgr.Roster r2;
+        javax.swing.JPanel r3, $r5, $r19, r26;
+        java.lang.String $r4, $r11, $r16;
+        java.awt.BorderLayout $r6;
+        javax.swing.border.EmptyBorder $r7;
+        javax.swing.JProgressBar $r8, $r9, $r10, $r12, $r13;
+        int $i0, $i1, $i2, i3, i4;
+        javax.swing.JButton $r15, $r18, $r21;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$ActionHandler $r17;
+        java.awt.FlowLayout $r20;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$WindowHandler $r24;
+        org.gjt.sp.jedit.pluginmgr.Roster$Operation $r25;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.progress.title");
+
+        specialinvoke r0.<init>(r1, $r4, 1);
+
+        r0.done = 1;
+
+        r0.roster = r2;
+
+        $r5 = new javax.swing.JPanel;
+
+        $r6 = new java.awt.BorderLayout;
+
+        specialinvoke $r6.<init>(12, 12);
+
+        specialinvoke $r5.<init>($r6);
+
+        r3 = $r5;
+
+        $r7 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r7.<init>(12, 12, 12, 12);
+
+        r3.setBorder($r7);
+
+        r0.setContentPane(r3);
+
+        $r8 = new javax.swing.JProgressBar;
+
+        specialinvoke $r8.<init>();
+
+        r0.progress = $r8;
+
+        $r9 = r0.progress;
+
+        $r9.setStringPainted(1);
+
+        $r10 = r0.progress;
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.progress");
+
+        $r10.setString($r11);
+
+        $i0 = r2.getOperationCount();
+
+        r0.count = $i0;
+
+        i3 = 0;
+
+(0)     i4 = 0;
+
+     label1:
+        i4 = Phi(i4 #0, i4 #1);
+
+        i3 = Phi(i3 #0, i3 #1);
+
+        $i1 = r0.count;
+
+        if i4 >= $i1 goto label2;
+
+        $r25 = r2.getOperation(i4);
+
+        $i2 = $r25.getMaximum();
+
+        i3 = i3 + $i2;
+
+        i4 = i4 + 1;
+
+(1)     goto label1;
+
+     label2:
+        $r12 = r0.progress;
+
+        $r12.setMaximum(i3);
+
+        $r13 = r0.progress;
+
+        r3.add("North", $r13);
+
+        $r15 = new javax.swing.JButton;
+
+        $r16 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.progress.stop");
+
+        specialinvoke $r15.<init>($r16);
+
+        r0.stop = $r15;
+
+        $r18 = r0.stop;
+
+        $r17 = new org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$ActionHandler;
+
+        specialinvoke $r17.<init>(r0);
+
+        $r18.addActionListener($r17);
+
+        $r19 = new javax.swing.JPanel;
+
+        $r20 = new java.awt.FlowLayout;
+
+        specialinvoke $r20.<init>(1, 0, 0);
+
+        specialinvoke $r19.<init>($r20);
+
+        r26 = $r19;
+
+        $r21 = r0.stop;
+
+        r26.add($r21);
+
+        r3.add("Center", r26);
+
+        $r24 = new org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$WindowHandler;
+
+        specialinvoke $r24.<init>(r0);
+
+        r0.addWindowListener($r24);
+
+        r0.pack();
+
+        r0.setLocationRelativeTo(r1);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    public void setValue(long)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r0;
+        long l0;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$1 $r1;
+
+        r0 := @this;
+
+        l0 := @parameter0;
+
+        $r1 = new org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$1;
+
+        specialinvoke $r1.<init>(r0, l0);
+
+        javax.swing.SwingUtilities.invokeLater($r1);
+
+        return;
+    }
+
+    public void setMaximum(long)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r0;
+        long l0;
+
+        r0 := @this;
+
+        l0 := @parameter0;
+
+        return;
+    }
+
+    public void setStatus(java.lang.String)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r0;
+        java.lang.String r1;
+        javax.swing.JProgressBar $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.progress;
+
+        $r2.setString(r1);
+
+        return;
+    }
+
+    public void done()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r0;
+        java.lang.Exception r1, $r4;
+        int $i0, $i1;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$3 $r2;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$2 $r3;
+
+        r0 := @this;
+
+     label1:
+        $i1 = r0.done;
+
+        $i0 = r0.count;
+
+        if $i1 != $i0 goto label2;
+
+        $r3 = new org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$2;
+
+        specialinvoke $r3.<init>(r0);
+
+        javax.swing.SwingUtilities.invokeAndWait($r3);
+
+        goto label3;
+
+     label2:
+        $r2 = new org.gjt.sp.jedit.pluginmgr.PluginManagerProgress$3;
+
+        specialinvoke $r2.<init>(r0);
+
+        javax.swing.SwingUtilities.invokeAndWait($r2);
+
+     label3:
+        goto label5;
+
+     label4:
+        $r4 := @caughtexception;
+
+        r1 = $r4;
+
+     label5:
+        return;
+
+        catch java.lang.Exception from label1 to label3 with label4;
+    }
+
+    static int access$000(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r0;
+        int $i0;
+
+        r0 := @parameter0;
+
+        $i0 = r0.valueSoFar;
+
+        return $i0;
+    }
+
+    static javax.swing.JProgressBar access$100(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r0;
+        javax.swing.JProgressBar $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.progress;
+
+        return $r1;
+    }
+
+    static int access$012(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress, int)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r0;
+        int i0, $i1, $i2;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        $i1 = r0.valueSoFar;
+
+        $i2 = $i1 + i0;
+
+        r0.valueSoFar = $i2;
+
+        return $i2;
+    }
+
+    static int access$200(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r0;
+        int $i0;
+
+        r0 := @parameter0;
+
+        $i0 = r0.done;
+
+        return $i0;
+    }
+
+    static org.gjt.sp.jedit.pluginmgr.Roster access$300(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r0;
+        org.gjt.sp.jedit.pluginmgr.Roster $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.roster;
+
+        return $r1;
+    }
+
+    static int access$208(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r0;
+        int $i0, $i1;
+
+        r0 := @parameter0;
+
+        $i0 = r0.done;
+
+        $i1 = $i0 + 1;
+
+        r0.done = $i1;
+
+        return $i0;
+    }
+
+    static javax.swing.JButton access$400(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.stop;
+
+        return $r1;
+    }
+
+    static java.lang.Thread access$500(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r0;
+        java.lang.Thread $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.thread;
+
+        return $r1;
+    }
+
+    static java.lang.Thread access$502(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress, java.lang.Thread)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r0;
+        java.lang.Thread r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.thread = r1;
+
+        return r1;
+    }
+}

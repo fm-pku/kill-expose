@@ -1,0 +1,519 @@
+public class org.gjt.sp.jedit.gui.JEditHistoryModelSaver extends java.lang.Object implements org.gjt.sp.jedit.gui.HistoryModelSaver
+{
+    private static final java.lang.String TO_ESCAPE;
+    private static java.io.File history;
+    private static long historyModTime;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.gui.JEditHistoryModelSaver r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.util.Map load(java.util.Map)
+    {
+        org.gjt.sp.jedit.gui.JEditHistoryModelSaver r0;
+        java.lang.String r1, $r4;
+        java.lang.Throwable r2, $r15;
+        java.io.File $r3, $r5, $r6, $r10, $r20;
+        boolean $z0;
+        long $l0;
+        java.io.BufferedReader $r7, $r18, r24, r24_1, r24_2, r24_3, r24_4, r24_5, r24_6, r24_7;
+        java.io.InputStreamReader $r8;
+        java.io.FileInputStream $r9;
+        java.nio.charset.Charset $r11;
+        java.nio.charset.CharsetDecoder $r12;
+        java.util.Map $r13, $r21, r23, r23_1, r23_2;
+        java.util.HashMap $r14;
+        java.io.FileNotFoundException $r16, r26;
+        java.nio.charset.CharacterCodingException $r17, r25;
+        java.io.FileReader $r19;
+        java.io.IOException $r22, r27;
+
+        r0 := @this;
+
+        r23 := @parameter0;
+
+        r1 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        if r1 != null goto label01;
+
+        return r23;
+
+     label01:
+        $r3 = new java.io.File;
+
+        $r4 = org.gjt.sp.jedit.MiscUtilities.constructPath(r1, "history");
+
+        specialinvoke $r3.<init>($r4);
+
+        org.gjt.sp.jedit.gui.JEditHistoryModelSaver.history = $r3;
+
+        $r5 = org.gjt.sp.jedit.gui.JEditHistoryModelSaver.history;
+
+        $z0 = $r5.exists();
+
+        if $z0 != 0 goto label02;
+
+        return r23;
+
+     label02:
+        $r6 = org.gjt.sp.jedit.gui.JEditHistoryModelSaver.history;
+
+        $l0 = $r6.lastModified();
+
+        org.gjt.sp.jedit.gui.JEditHistoryModelSaver.historyModTime = $l0;
+
+        org.gjt.sp.util.Log.log(3, class "org/gjt/sp/jedit/gui/HistoryModel", "Loading history");
+
+(0)     if r23 != null goto label03;
+
+        $r14 = new java.util.HashMap;
+
+        specialinvoke $r14.<init>();
+
+(1)     r23_1 = java.util.Collections.synchronizedMap($r14);
+
+     label03:
+        r23_2 = Phi(r23 #0, r23_1 #1);
+
+(2)     r24 = null;
+
+     label04:
+        $r7 = new java.io.BufferedReader;
+
+        $r8 = new java.io.InputStreamReader;
+
+        $r9 = new java.io.FileInputStream;
+
+(3)     $r10 = org.gjt.sp.jedit.gui.JEditHistoryModelSaver.history;
+
+        specialinvoke $r9.<init>($r10);
+
+        $r11 = java.nio.charset.Charset.forName("UTF-8");
+
+        $r12 = $r11.newDecoder();
+
+        specialinvoke $r8.<init>($r9, $r12);
+
+        specialinvoke $r7.<init>($r8);
+
+(4)     r24_1 = $r7;
+
+        $r13 = org.gjt.sp.jedit.gui.JEditHistoryModelSaver.loadFromReader(r24_1);
+
+        r23_2.putAll($r13);
+
+     label05:
+(5)     goto label07;
+
+     label06:
+(6)     $r17 := @caughtexception;
+
+        r24_2 = Phi(r24 #3, r24_1 #4);
+
+(7)     r25 = $r17;
+
+        r24_2.close();
+
+        org.gjt.sp.util.Log.log(3, class "org/gjt/sp/jedit/gui/HistoryModel", "Failed to load history with UTF-8. Fallbacking to the system default encoding.");
+
+        $r18 = new java.io.BufferedReader;
+
+        $r19 = new java.io.FileReader;
+
+        $r20 = org.gjt.sp.jedit.gui.JEditHistoryModelSaver.history;
+
+        specialinvoke $r19.<init>($r20);
+
+        specialinvoke $r18.<init>($r19);
+
+(8)     r24_3 = $r18;
+
+        $r21 = org.gjt.sp.jedit.gui.JEditHistoryModelSaver.loadFromReader(r24_3);
+
+(9)     r23_2.putAll($r21);
+
+     label07:
+        r24_4 = Phi(r24_1 #5, r24_3 #9);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r24_4);
+
+(10)    goto label14;
+
+     label08:
+        $r16 := @caughtexception;
+
+(11)    r24_5 = Phi(r24 #3, r24_1 #4, r24_2 #7, r24_3 #8);
+
+        r26 = $r16;
+
+     label09:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r24_5);
+
+(12)    goto label14;
+
+     label10:
+        $r22 := @caughtexception;
+
+(13)    r24_6 = Phi(r24 #3, r24_1 #4, r24_2 #7, r24_3 #8);
+
+        r27 = $r22;
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/gui/HistoryModel", r27);
+
+     label11:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r24_6);
+
+(14)    goto label14;
+
+     label12:
+        $r15 := @caughtexception;
+
+        r24 = Phi(r24_1 #4, r24_3 #8, r24 #2, r24_2 #6, r24_5 #11, r24_6 #13, r24 #15);
+
+(15)    r23 = Phi(r23_2 #2, r23 #15);
+
+        r2 = $r15;
+
+     label13:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r24);
+
+        throw r2;
+
+     label14:
+        r24_7 = Phi(r24_4 #10, r24_5 #12, r24_6 #14);
+
+        return r23_2;
+
+        catch java.nio.charset.CharacterCodingException from label04 to label05 with label06;
+        catch java.io.FileNotFoundException from label04 to label07 with label08;
+        catch java.io.IOException from label04 to label07 with label10;
+        catch java.lang.Throwable from label04 to label07 with label12;
+        catch java.lang.Throwable from label08 to label09 with label12;
+        catch java.lang.Throwable from label10 to label11 with label12;
+        catch java.lang.Throwable from label12 to label13 with label12;
+    }
+
+    public boolean save(java.util.Map)
+    {
+        org.gjt.sp.jedit.gui.JEditHistoryModelSaver r0;
+        java.util.Map r1;
+        java.io.File r2, r3, $r8, $r11;
+        java.lang.String r4, $r9, $r10, $r12, $r13, $r18, $r19, $r20, $r21, $r25;
+        java.util.Iterator r5;
+        org.gjt.sp.jedit.gui.HistoryModel r6;
+        java.lang.Throwable r7, $r27;
+        boolean $z0, $z3;
+        java.io.BufferedWriter $r14, r28, r28_1;
+        java.io.OutputStreamWriter $r15;
+        java.io.FileOutputStream $r16;
+        long $l0, $l3, $l4;
+        java.lang.Object $r17;
+        int $i1, $i2, i6;
+        byte $b5;
+        java.lang.StringBuilder $r22, $r23, $r24;
+        java.io.IOException $r26, r30;
+        java.util.Collection r29;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        org.gjt.sp.util.Log.log(3, class "org/gjt/sp/jedit/gui/HistoryModel", "Saving history");
+
+        $r8 = new java.io.File;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        $r10 = org.gjt.sp.jedit.MiscUtilities.constructPath($r9, "#history#save#");
+
+        specialinvoke $r8.<init>($r10);
+
+        r2 = $r8;
+
+        $r11 = new java.io.File;
+
+        $r12 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        $r13 = org.gjt.sp.jedit.MiscUtilities.constructPath($r12, "history");
+
+        specialinvoke $r11.<init>($r13);
+
+        r3 = $r11;
+
+        $z0 = r3.exists();
+
+        if $z0 == 0 goto label01;
+
+        $l3 = r3.lastModified();
+
+        $l4 = org.gjt.sp.jedit.gui.JEditHistoryModelSaver.historyModTime;
+
+        $b5 = $l3 cmp $l4;
+
+        if $b5 == 0 goto label01;
+
+        $r22 = new java.lang.StringBuilder;
+
+        specialinvoke $r22.<init>();
+
+        $r23 = $r22.append(r3);
+
+        $r24 = $r23.append(" changed on disk; will not save history");
+
+        $r25 = $r24.toString();
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/gui/HistoryModel", $r25);
+
+        return 0;
+
+     label01:
+        org.gjt.sp.jedit.jEdit.backupSettingsFile(r3);
+
+        r4 = java.lang.System.getProperty("line.separator");
+
+(0)     r28 = null;
+
+     label02:
+        $r14 = new java.io.BufferedWriter;
+
+        $r15 = new java.io.OutputStreamWriter;
+
+(1)     $r16 = new java.io.FileOutputStream;
+
+        specialinvoke $r16.<init>(r2);
+
+        specialinvoke $r15.<init>($r16, "UTF-8");
+
+        specialinvoke $r14.<init>($r15);
+
+(2)     r28_1 = $r14;
+
+(3)     if r1 == null goto label07;
+
+        r29 = r1.values();
+
+(4)     r5 = r29.iterator();
+
+     label03:
+        r28 = Phi(r28_1 #4, r28 #7, r28 #11);
+
+        i6 = Phi(i6 #4, i6 #7, i6 #11);
+
+(5)     $z3 = r5.hasNext();
+
+(6)     if $z3 == 0 goto label07;
+
+        $r17 = r5.next();
+
+        r6 = (org.gjt.sp.jedit.gui.HistoryModel) $r17;
+
+        $i1 = r6.getSize();
+
+        if $i1 != 0 goto label04;
+
+(7)     goto label03;
+
+     label04:
+        r28.write(91);
+
+        $r18 = r6.getName();
+
+        $r19 = org.gjt.sp.util.StandardUtilities.charsToEscapes($r18, "\r\n\t\\\"\'[]");
+
+        r28.write($r19);
+
+        r28.write(93);
+
+        r28.write(r4);
+
+(8)     i6 = 0;
+
+     label05:
+        r28 = Phi(r28 #8, r28 #10);
+
+        i6 = Phi(i6 #8, i6 #10);
+
+(9)     $i2 = r6.getSize();
+
+        if i6 >= $i2 goto label06;
+
+        $r20 = r6.getItem(i6);
+
+        $r21 = org.gjt.sp.util.StandardUtilities.charsToEscapes($r20, "\r\n\t\\\"\'[]");
+
+        r28.write($r21);
+
+        r28.write(r4);
+
+        i6 = i6 + 1;
+
+(10)    goto label05;
+
+     label06:
+(11)    goto label03;
+
+     label07:
+        r28 = Phi(r28_1 #3, r28 #6);
+
+        i6 = Phi(i6 #3, i6 #6);
+
+(12)    r28.close();
+
+        r3.delete();
+
+        r2.renameTo(r3);
+
+     label08:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r28);
+
+(13)    goto label13;
+
+     label09:
+(14)    $r26 := @caughtexception;
+
+        r28 = Phi(r28 #1, r28_1 #3, r28 #5, r28 #9, r28 #12);
+
+(15)    i6 = Phi(i6 #1, i6 #5, i6 #9, i6 #12);
+
+        r30 = $r26;
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/gui/HistoryModel", r30);
+
+     label10:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r28);
+
+(16)    goto label13;
+
+     label11:
+        $r27 := @caughtexception;
+
+        r28 = Phi(r28 #5, r28 #9, r28 #12, r28 #0, r28_1 #2, r28 #15, r28 #17);
+
+(17)    i6 = Phi(i6 #5, i6 #9, i6 #12, i6 #0, i6 #14, i6 #17);
+
+        r7 = $r27;
+
+     label12:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r28);
+
+        throw r7;
+
+     label13:
+        r28 = Phi(r28 #13, r28 #16);
+
+        i6 = Phi(i6 #13, i6 #16);
+
+        $l0 = r3.lastModified();
+
+        org.gjt.sp.jedit.gui.JEditHistoryModelSaver.historyModTime = $l0;
+
+        return 1;
+
+        catch java.io.IOException from label02 to label08 with label09;
+        catch java.lang.Throwable from label02 to label08 with label11;
+        catch java.lang.Throwable from label09 to label10 with label11;
+        catch java.lang.Throwable from label11 to label12 with label11;
+    }
+
+    private static java.util.Map loadFromReader(java.io.BufferedReader) throws java.io.IOException
+    {
+        java.io.BufferedReader r0;
+        java.util.HashMap r1, $r4;
+        java.lang.String r2, r3, $r5, $r6, $r8, $r10, $r12;
+        int $i0, $i2, $i3, $i5, $i6;
+        java.io.IOException $r9;
+        char $c1, $c4;
+        org.gjt.sp.jedit.gui.HistoryModel $r11, r14;
+
+        r0 := @parameter0;
+
+        $r4 = new java.util.HashMap;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4;
+
+(0)     r14 = null;
+
+     label1:
+        r14 = Phi(r14 #0, r14 #1, r14 #2);
+
+        $r5 = r0.readLine();
+
+        r2 = $r5;
+
+        if $r5 == null goto label5;
+
+        $i0 = r2.length();
+
+        if $i0 <= 0 goto label3;
+
+        $c1 = r2.charAt(0);
+
+        if $c1 != 91 goto label3;
+
+        $i2 = r2.length();
+
+        $i3 = $i2 - 1;
+
+        $c4 = r2.charAt($i3);
+
+        if $c4 != 93 goto label3;
+
+        if r14 == null goto label2;
+
+        $r12 = r14.getName();
+
+        r1.put($r12, r14);
+
+     label2:
+        $i5 = r2.length();
+
+        $i6 = $i5 - 1;
+
+        $r10 = r2.substring(1, $i6);
+
+        r3 = org.gjt.sp.jedit.MiscUtilities.escapesToChars($r10);
+
+        $r11 = new org.gjt.sp.jedit.gui.HistoryModel;
+
+        specialinvoke $r11.<init>(r3);
+
+        r14 = $r11;
+
+(1)     goto label1;
+
+     label3:
+        if r14 != null goto label4;
+
+        $r9 = new java.io.IOException;
+
+        specialinvoke $r9.<init>("History data starts before model name");
+
+        throw $r9;
+
+     label4:
+        $r8 = org.gjt.sp.jedit.MiscUtilities.escapesToChars(r2);
+
+        r14.addElement($r8);
+
+(2)     goto label1;
+
+     label5:
+        if r14 == null goto label6;
+
+        $r6 = r14.getName();
+
+        r1.put($r6, r14);
+
+     label6:
+        return r1;
+    }
+}

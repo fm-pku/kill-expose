@@ -1,0 +1,26 @@
+class org.gjt.sp.jedit.io.VFS$ColorEntry extends java.lang.Object
+{
+    java.util.regex.Pattern re;
+    java.awt.Color color;
+
+    void <init>(java.util.regex.Pattern, java.awt.Color)
+    {
+        org.gjt.sp.jedit.io.VFS$ColorEntry r0;
+        java.util.regex.Pattern r1;
+        java.awt.Color r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.re = r1;
+
+        r0.color = r2;
+
+        return;
+    }
+}

@@ -1,0 +1,198 @@
+public class org.gjt.sp.jedit.bsh.DelayedEvalBshMethod extends org.gjt.sp.jedit.bsh.BshMethod
+{
+    java.lang.String returnTypeDescriptor;
+    org.gjt.sp.jedit.bsh.BSHReturnType returnTypeNode;
+    java.lang.String[] paramTypeDescriptors;
+    org.gjt.sp.jedit.bsh.BSHFormalParameters paramTypesNode;
+    transient org.gjt.sp.jedit.bsh.CallStack callstack;
+    transient org.gjt.sp.jedit.bsh.Interpreter interpreter;
+
+    void <init>(java.lang.String, java.lang.String, org.gjt.sp.jedit.bsh.BSHReturnType, java.lang.String[], java.lang.String[], org.gjt.sp.jedit.bsh.BSHFormalParameters, org.gjt.sp.jedit.bsh.BSHBlock, org.gjt.sp.jedit.bsh.NameSpace, org.gjt.sp.jedit.bsh.Modifiers, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter)
+    {
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod r0;
+        java.lang.String r1, r2;
+        org.gjt.sp.jedit.bsh.BSHReturnType r3;
+        java.lang.String[] r4, r5;
+        org.gjt.sp.jedit.bsh.BSHFormalParameters r6;
+        org.gjt.sp.jedit.bsh.BSHBlock r7;
+        org.gjt.sp.jedit.bsh.NameSpace r8;
+        org.gjt.sp.jedit.bsh.Modifiers r9;
+        org.gjt.sp.jedit.bsh.CallStack r10;
+        org.gjt.sp.jedit.bsh.Interpreter r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        r6 := @parameter5;
+
+        r7 := @parameter6;
+
+        r8 := @parameter7;
+
+        r9 := @parameter8;
+
+        r10 := @parameter9;
+
+        r11 := @parameter10;
+
+        specialinvoke r0.<init>(r1, null, r4, null, r7, r8, r9);
+
+        r0.returnTypeDescriptor = r2;
+
+        r0.returnTypeNode = r3;
+
+        r0.paramTypeDescriptors = r5;
+
+        r0.paramTypesNode = r6;
+
+        r0.callstack = r10;
+
+        r0.interpreter = r11;
+
+        return;
+    }
+
+    public java.lang.String getReturnTypeDescriptor()
+    {
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.returnTypeDescriptor;
+
+        return $r1;
+    }
+
+    public java.lang.Class getReturnType()
+    {
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod r0;
+        org.gjt.sp.jedit.bsh.EvalError r1, $r7;
+        org.gjt.sp.jedit.bsh.BSHReturnType $r2, $r5;
+        org.gjt.sp.jedit.bsh.Interpreter $r3;
+        org.gjt.sp.jedit.bsh.CallStack $r4;
+        java.lang.Class $r6;
+        org.gjt.sp.jedit.bsh.InterpreterError $r8;
+        java.lang.StringBuilder $r9, $r10, $r11;
+        java.lang.String $r12;
+
+        r0 := @this;
+
+        $r2 = r0.returnTypeNode;
+
+        if $r2 != null goto label1;
+
+        return null;
+
+     label1:
+        $r5 = r0.returnTypeNode;
+
+        $r4 = r0.callstack;
+
+        $r3 = r0.interpreter;
+
+        $r6 = $r5.evalReturnType($r4, $r3);
+
+     label2:
+        return $r6;
+
+     label3:
+        $r7 := @caughtexception;
+
+        r1 = $r7;
+
+        $r8 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("can\'t eval return type: ");
+
+        $r11 = $r10.append(r1);
+
+        $r12 = $r11.toString();
+
+        specialinvoke $r8.<init>($r12);
+
+        throw $r8;
+
+        catch org.gjt.sp.jedit.bsh.EvalError from label1 to label2 with label3;
+    }
+
+    public java.lang.String[] getParamTypeDescriptors()
+    {
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod r0;
+        java.lang.String[] $r1;
+
+        r0 := @this;
+
+        $r1 = r0.paramTypeDescriptors;
+
+        return $r1;
+    }
+
+    public java.lang.Class[] getParameterTypes()
+    {
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod r0;
+        org.gjt.sp.jedit.bsh.EvalError r1, $r8;
+        org.gjt.sp.jedit.bsh.Interpreter $r2;
+        org.gjt.sp.jedit.bsh.CallStack $r3;
+        org.gjt.sp.jedit.bsh.BSHFormalParameters $r4;
+        java.lang.Object $r5;
+        java.lang.Class[] $r6, $r7;
+        org.gjt.sp.jedit.bsh.InterpreterError $r9;
+        java.lang.StringBuilder $r10, $r11, $r12;
+        java.lang.String $r13;
+
+        r0 := @this;
+
+     label1:
+        $r4 = r0.paramTypesNode;
+
+        $r3 = r0.callstack;
+
+        $r2 = r0.interpreter;
+
+        $r5 = $r4.eval($r3, $r2);
+
+        $r6 = (java.lang.Class[]) $r5;
+
+        $r7 = (java.lang.Class[]) $r6;
+
+     label2:
+        return $r7;
+
+     label3:
+        $r8 := @caughtexception;
+
+        r1 = $r8;
+
+        $r9 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("can\'t eval param types: ");
+
+        $r12 = $r11.append(r1);
+
+        $r13 = $r12.toString();
+
+        specialinvoke $r9.<init>($r13);
+
+        throw $r9;
+
+        catch org.gjt.sp.jedit.bsh.EvalError from label1 to label2 with label3;
+    }
+}

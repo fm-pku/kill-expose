@@ -1,0 +1,2576 @@
+class org.gjt.sp.jedit.bsh.Reflect extends java.lang.Object
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.bsh.Reflect r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static java.lang.Object invokeObjectMethod(java.lang.Object, java.lang.String, java.lang.Object[], org.gjt.sp.jedit.bsh.Interpreter, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.SimpleNode) throws org.gjt.sp.jedit.bsh.ReflectError, org.gjt.sp.jedit.bsh.EvalError, java.lang.reflect.InvocationTargetException
+    {
+        java.lang.Object r0, $r8, $r10;
+        java.lang.String r1;
+        java.lang.Object[] r2;
+        org.gjt.sp.jedit.bsh.Interpreter r3;
+        org.gjt.sp.jedit.bsh.CallStack r4;
+        org.gjt.sp.jedit.bsh.SimpleNode r5;
+        java.lang.Class r6;
+        java.lang.reflect.Method r7;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.bsh.This $r9;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r11, r15;
+        org.gjt.sp.jedit.bsh.EvalError $r12;
+        org.gjt.sp.jedit.bsh.BshClassManager $r13, r14, $r13_1, $r13_2, $r13_3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        r4 := @parameter4;
+
+        r5 := @parameter5;
+
+        $z0 = r0 instanceof org.gjt.sp.jedit.bsh.This;
+
+        if $z0 == 0 goto label1;
+
+        $z1 = org.gjt.sp.jedit.bsh.This.isExposedThisMethod(r1);
+
+        if $z1 != 0 goto label1;
+
+        $r9 = (org.gjt.sp.jedit.bsh.This) r0;
+
+        $r10 = $r9.invokeMethod(r1, r2, r3, r4, r5, 0);
+
+        return $r10;
+
+     label1:
+(0)     if r3 != null goto label2;
+
+        $r13 = null;
+
+(1)     goto label3;
+
+     label2:
+(2)     $r13_1 = r3.getClassManager();
+
+     label3:
+        $r13_2 = Phi($r13 #1, $r13_1 #2);
+
+(3)     r14 = $r13_2;
+
+        r6 = r0.getClass();
+
+        r7 = org.gjt.sp.jedit.bsh.Reflect.resolveExpectedJavaMethod(r14, r6, r0, r1, r2, 0);
+
+        $r8 = org.gjt.sp.jedit.bsh.Reflect.invokeMethod(r7, r0, r2);
+
+     label4:
+        return $r8;
+
+     label5:
+        $r11 := @caughtexception;
+
+        $r13_3 = Phi($r13 #0, $r13_1 #2, $r13_2 #3);
+
+        r15 = $r11;
+
+        $r12 = r15.toEvalError(r5, r4);
+
+        throw $r12;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label4 with label5;
+    }
+
+    public static java.lang.Object invokeStaticMethod(org.gjt.sp.jedit.bsh.BshClassManager, java.lang.Class, java.lang.String, java.lang.Object[]) throws org.gjt.sp.jedit.bsh.ReflectError, org.gjt.sp.jedit.bsh.UtilEvalError, java.lang.reflect.InvocationTargetException
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.Class r1;
+        java.lang.String r2;
+        java.lang.Object[] r3;
+        java.lang.reflect.Method r4;
+        java.lang.Object $r5;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug("invoke static Method");
+
+        r4 = org.gjt.sp.jedit.bsh.Reflect.resolveExpectedJavaMethod(r0, r1, null, r2, r3, 1);
+
+        $r5 = org.gjt.sp.jedit.bsh.Reflect.invokeMethod(r4, null, r3);
+
+        return $r5;
+    }
+
+    static java.lang.Object invokeMethod(java.lang.reflect.Method, java.lang.Object, java.lang.Object[]) throws org.gjt.sp.jedit.bsh.ReflectError, java.lang.reflect.InvocationTargetException
+    {
+        java.lang.reflect.Method r0;
+        java.lang.Object r1, $r4, $r6, $r7, r32;
+        java.lang.Class[] r2, $r13;
+        java.lang.Class r3, $r5, $r17;
+        int $i0, $i1, i2;
+        java.lang.IllegalAccessException $r8, r33;
+        org.gjt.sp.jedit.bsh.ReflectError $r9;
+        java.lang.StringBuilder $r10, $r11, $r15, $r16, $r18, $r19, $r20, $r24, $r25, $r26;
+        java.lang.String $r12, $r14, $r21, $r27;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r22, r30;
+        org.gjt.sp.jedit.bsh.InterpreterError $r23;
+        java.lang.Object[] r28, r29, r31, r28_1, r28_2;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r28 := @parameter2;
+
+(0)     if r28 != null goto label01;
+
+(1)     r28_1 = newarray (java.lang.Object)[0];
+
+     label01:
+        r28_2 = Phi(r28 #0, r28_1 #1);
+
+        org.gjt.sp.jedit.bsh.Reflect.logInvokeMethod("Invoking method (entry): ", r0, r28_2);
+
+        $i0 = lengthof r28_2;
+
+        r29 = newarray (java.lang.Object)[$i0];
+
+        r2 = r0.getParameterTypes();
+
+     label02:
+(2)     i2 = 0;
+
+     label03:
+        i2 = Phi(i2 #2, i2 #3);
+
+        r28 = Phi(r28_2 #2, r28 #3);
+
+        $i1 = lengthof r28;
+
+        if i2 >= $i1 goto label04;
+
+        $r6 = r28[i2];
+
+        $r5 = r2[i2];
+
+        $r7 = org.gjt.sp.jedit.bsh.Types.castObject($r6, $r5, 1);
+
+        r29[i2] = $r7;
+
+        i2 = i2 + 1;
+
+(3)     goto label03;
+
+     label04:
+        goto label06;
+
+     label05:
+        $r22 := @caughtexception;
+
+        r30 = $r22;
+
+        $r23 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r24 = new java.lang.StringBuilder;
+
+        specialinvoke $r24.<init>();
+
+        $r25 = $r24.append("illegal argument type in method invocation: ");
+
+        $r26 = $r25.append(r30);
+
+        $r27 = $r26.toString();
+
+        specialinvoke $r23.<init>($r27);
+
+        throw $r23;
+
+     label06:
+        r31 = org.gjt.sp.jedit.bsh.Primitive.unwrap(r29);
+
+(4)     org.gjt.sp.jedit.bsh.Reflect.logInvokeMethod("Invoking method (after massaging values): ", r0, r31);
+
+     label07:
+        r32 = r0.invoke(r1, r31);
+
+(5)     if r32 != null goto label08;
+
+(6)     r32 = org.gjt.sp.jedit.bsh.Primitive.NULL;
+
+     label08:
+        r32 = Phi(r32 #5, r32 #6);
+
+        r3 = r0.getReturnType();
+
+        $r4 = org.gjt.sp.jedit.bsh.Primitive.wrap(r32, r3);
+
+     label09:
+        return $r4;
+
+     label10:
+        $r8 := @caughtexception;
+
+        r32 = Phi(r32 #4);
+
+        r33 = $r8;
+
+        $r9 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("Cannot access method ");
+
+        $r12 = r0.getName();
+
+        $r13 = r0.getParameterTypes();
+
+        $r14 = org.gjt.sp.jedit.bsh.StringUtil.methodString($r12, $r13);
+
+        $r15 = $r11.append($r14);
+
+        $r16 = $r15.append(" in \'");
+
+        $r17 = r0.getDeclaringClass();
+
+        $r18 = $r16.append($r17);
+
+        $r19 = $r18.append("\' :");
+
+        $r20 = $r19.append(r33);
+
+        $r21 = $r20.toString();
+
+        specialinvoke $r9.<init>($r21);
+
+        throw $r9;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label02 to label04 with label05;
+        catch java.lang.IllegalAccessException from label07 to label09 with label10;
+    }
+
+    public static java.lang.Object getIndex(java.lang.Object, int) throws org.gjt.sp.jedit.bsh.ReflectError, org.gjt.sp.jedit.bsh.UtilTargetError
+    {
+        java.lang.Object r0, $r3, r18;
+        int i0;
+        boolean $z0;
+        java.lang.Class $r1, $r2;
+        java.lang.StringBuilder $r4, $r5, $r6, $r7, $r8, $r12, $r13, $r14;
+        java.lang.String $r9, $r15;
+        java.lang.Exception $r10, r20;
+        org.gjt.sp.jedit.bsh.ReflectError $r11;
+        java.lang.ArrayIndexOutOfBoundsException $r16, r19;
+        org.gjt.sp.jedit.bsh.UtilTargetError $r17;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        $z0 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z0 == 0 goto label1;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("getIndex: ");
+
+        $r6 = $r5.append(r0);
+
+        $r7 = $r6.append(", index=");
+
+        $r8 = $r7.append(i0);
+
+        $r9 = $r8.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r9);
+
+     label1:
+        r18 = java.lang.reflect.Array.get(r0, i0);
+
+        $r1 = r0.getClass();
+
+        $r2 = $r1.getComponentType();
+
+        $r3 = org.gjt.sp.jedit.bsh.Primitive.wrap(r18, $r2);
+
+     label2:
+        return $r3;
+
+     label3:
+        $r16 := @caughtexception;
+
+        r19 = $r16;
+
+        $r17 = new org.gjt.sp.jedit.bsh.UtilTargetError;
+
+        specialinvoke $r17.<init>(r19);
+
+        throw $r17;
+
+     label4:
+        $r10 := @caughtexception;
+
+        r20 = $r10;
+
+        $r11 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = $r12.append("Array access:");
+
+        $r14 = $r13.append(r20);
+
+        $r15 = $r14.toString();
+
+        specialinvoke $r11.<init>($r15);
+
+        throw $r11;
+
+        catch java.lang.ArrayIndexOutOfBoundsException from label1 to label2 with label3;
+        catch java.lang.Exception from label1 to label2 with label4;
+    }
+
+    public static void setIndex(java.lang.Object, int, java.lang.Object) throws org.gjt.sp.jedit.bsh.ReflectError, org.gjt.sp.jedit.bsh.UtilTargetError
+    {
+        java.lang.Object r0, r13, r14;
+        int i0;
+        java.lang.IllegalArgumentException $r1, r16;
+        org.gjt.sp.jedit.bsh.UtilTargetError $r2, $r12;
+        java.lang.ArrayStoreException $r3, $r11, r15;
+        java.lang.String $r4, $r10;
+        java.lang.Exception $r5, r17;
+        org.gjt.sp.jedit.bsh.ReflectError $r6;
+        java.lang.StringBuilder $r7, $r8, $r9;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r13 := @parameter2;
+
+     label1:
+        r14 = org.gjt.sp.jedit.bsh.Primitive.unwrap(r13);
+
+        java.lang.reflect.Array.set(r0, i0, r14);
+
+     label2:
+        goto label6;
+
+     label3:
+        $r11 := @caughtexception;
+
+        r15 = $r11;
+
+        $r12 = new org.gjt.sp.jedit.bsh.UtilTargetError;
+
+        specialinvoke $r12.<init>(r15);
+
+        throw $r12;
+
+     label4:
+        $r1 := @caughtexception;
+
+        r16 = $r1;
+
+        $r2 = new org.gjt.sp.jedit.bsh.UtilTargetError;
+
+        $r3 = new java.lang.ArrayStoreException;
+
+        $r4 = r16.toString();
+
+        specialinvoke $r3.<init>($r4);
+
+        specialinvoke $r2.<init>($r3);
+
+        throw $r2;
+
+     label5:
+        $r5 := @caughtexception;
+
+        r17 = $r5;
+
+        $r6 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("Array access:");
+
+        $r9 = $r8.append(r17);
+
+        $r10 = $r9.toString();
+
+        specialinvoke $r6.<init>($r10);
+
+        throw $r6;
+
+     label6:
+        return;
+
+        catch java.lang.ArrayStoreException from label1 to label2 with label3;
+        catch java.lang.IllegalArgumentException from label1 to label2 with label4;
+        catch java.lang.Exception from label1 to label2 with label5;
+    }
+
+    public static java.lang.Object getStaticFieldValue(java.lang.Class, java.lang.String) throws org.gjt.sp.jedit.bsh.UtilEvalError, org.gjt.sp.jedit.bsh.ReflectError
+    {
+        java.lang.Class r0;
+        java.lang.String r1;
+        java.lang.Object $r2;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r2 = org.gjt.sp.jedit.bsh.Reflect.getFieldValue(r0, null, r1, 1);
+
+        return $r2;
+    }
+
+    public static java.lang.Object getObjectFieldValue(java.lang.Object, java.lang.String) throws org.gjt.sp.jedit.bsh.UtilEvalError, org.gjt.sp.jedit.bsh.ReflectError
+    {
+        java.lang.Object r0, $r4, $r7, $r10;
+        java.lang.String r1;
+        org.gjt.sp.jedit.bsh.ReflectError r2, $r8;
+        boolean $z0, $z1;
+        java.lang.Class $r3, $r9;
+        org.gjt.sp.jedit.bsh.This $r5;
+        org.gjt.sp.jedit.bsh.NameSpace $r6;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $z0 = r0 instanceof org.gjt.sp.jedit.bsh.This;
+
+        if $z0 == 0 goto label1;
+
+        $r5 = (org.gjt.sp.jedit.bsh.This) r0;
+
+        $r6 = $r5.namespace;
+
+        $r7 = $r6.getVariable(r1);
+
+        return $r7;
+
+     label1:
+        $r3 = r0.getClass();
+
+        $r4 = org.gjt.sp.jedit.bsh.Reflect.getFieldValue($r3, r0, r1, 0);
+
+     label2:
+        return $r4;
+
+     label3:
+        $r8 := @caughtexception;
+
+        r2 = $r8;
+
+        $r9 = r0.getClass();
+
+        $z1 = org.gjt.sp.jedit.bsh.Reflect.hasObjectPropertyGetter($r9, r1);
+
+        if $z1 == 0 goto label4;
+
+        $r10 = org.gjt.sp.jedit.bsh.Reflect.getObjectProperty(r0, r1);
+
+        return $r10;
+
+     label4:
+        throw r2;
+
+        catch org.gjt.sp.jedit.bsh.ReflectError from label1 to label2 with label3;
+    }
+
+    static org.gjt.sp.jedit.bsh.LHS getLHSStaticField(java.lang.Class, java.lang.String) throws org.gjt.sp.jedit.bsh.UtilEvalError, org.gjt.sp.jedit.bsh.ReflectError
+    {
+        java.lang.Class r0;
+        java.lang.String r1;
+        java.lang.reflect.Field r2;
+        org.gjt.sp.jedit.bsh.LHS $r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 = org.gjt.sp.jedit.bsh.Reflect.resolveExpectedJavaField(r0, r1, 1);
+
+        $r3 = new org.gjt.sp.jedit.bsh.LHS;
+
+        specialinvoke $r3.<init>(r2);
+
+        return $r3;
+    }
+
+    static org.gjt.sp.jedit.bsh.LHS getLHSObjectField(java.lang.Object, java.lang.String) throws org.gjt.sp.jedit.bsh.UtilEvalError, org.gjt.sp.jedit.bsh.ReflectError
+    {
+        java.lang.Object r0;
+        java.lang.String r1;
+        boolean $z0, $z1, z2;
+        java.lang.Class $r2, $r8;
+        org.gjt.sp.jedit.bsh.LHS $r3, $r4, $r9;
+        org.gjt.sp.jedit.bsh.This $r5;
+        org.gjt.sp.jedit.bsh.NameSpace $r6;
+        org.gjt.sp.jedit.bsh.ReflectError $r7, r11;
+        java.lang.reflect.Field r10;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $z0 = r0 instanceof org.gjt.sp.jedit.bsh.This;
+
+        if $z0 == 0 goto label1;
+
+        z2 = 0;
+
+        $r4 = new org.gjt.sp.jedit.bsh.LHS;
+
+        $r5 = (org.gjt.sp.jedit.bsh.This) r0;
+
+        $r6 = $r5.namespace;
+
+        specialinvoke $r4.<init>($r6, r1, z2);
+
+        return $r4;
+
+     label1:
+        $r2 = r0.getClass();
+
+        r10 = org.gjt.sp.jedit.bsh.Reflect.resolveExpectedJavaField($r2, r1, 0);
+
+        $r3 = new org.gjt.sp.jedit.bsh.LHS;
+
+        specialinvoke $r3.<init>(r0, r10);
+
+     label2:
+        return $r3;
+
+     label3:
+        $r7 := @caughtexception;
+
+        r11 = $r7;
+
+        $r8 = r0.getClass();
+
+        $z1 = org.gjt.sp.jedit.bsh.Reflect.hasObjectPropertySetter($r8, r1);
+
+        if $z1 == 0 goto label4;
+
+        $r9 = new org.gjt.sp.jedit.bsh.LHS;
+
+        specialinvoke $r9.<init>(r0, r1);
+
+        return $r9;
+
+     label4:
+        throw r11;
+
+        catch org.gjt.sp.jedit.bsh.ReflectError from label1 to label2 with label3;
+    }
+
+    private static java.lang.Object getFieldValue(java.lang.Class, java.lang.Object, java.lang.String, boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError, org.gjt.sp.jedit.bsh.ReflectError
+    {
+        java.lang.Class r0, r4;
+        java.lang.Object r1, r3, $r5;
+        java.lang.String r2, $r11, $r18;
+        boolean z0;
+        java.lang.IllegalAccessException $r6, r21;
+        org.gjt.sp.jedit.bsh.ReflectError $r7, $r13;
+        java.lang.StringBuilder $r8, $r9, $r10, $r14, $r15, $r16, $r17;
+        java.lang.NullPointerException $r12, r20;
+        java.lang.reflect.Field r19;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        z0 := @parameter3;
+
+     label1:
+        r19 = org.gjt.sp.jedit.bsh.Reflect.resolveExpectedJavaField(r0, r2, z0);
+
+        r3 = r19.get(r1);
+
+        r4 = r19.getType();
+
+        $r5 = org.gjt.sp.jedit.bsh.Primitive.wrap(r3, r4);
+
+     label2:
+        return $r5;
+
+     label3:
+        $r12 := @caughtexception;
+
+        r20 = $r12;
+
+        $r13 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        $r14 = new java.lang.StringBuilder;
+
+        specialinvoke $r14.<init>();
+
+        $r15 = $r14.append("???");
+
+        $r16 = $r15.append(r2);
+
+        $r17 = $r16.append(" is not a static field.");
+
+        $r18 = $r17.toString();
+
+        specialinvoke $r13.<init>($r18);
+
+        throw $r13;
+
+     label4:
+        $r6 := @caughtexception;
+
+        r21 = $r6;
+
+        $r7 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("Can\'t access field: ");
+
+        $r10 = $r9.append(r2);
+
+        $r11 = $r10.toString();
+
+        specialinvoke $r7.<init>($r11);
+
+        throw $r7;
+
+        catch java.lang.NullPointerException from label1 to label2 with label3;
+        catch java.lang.IllegalAccessException from label1 to label2 with label4;
+    }
+
+    protected static java.lang.reflect.Field resolveJavaField(java.lang.Class, java.lang.String, boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        java.lang.Class r0;
+        java.lang.String r1;
+        boolean z0;
+        org.gjt.sp.jedit.bsh.ReflectError r2, $r4;
+        java.lang.reflect.Field $r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        z0 := @parameter2;
+
+     label1:
+        $r3 = org.gjt.sp.jedit.bsh.Reflect.resolveExpectedJavaField(r0, r1, z0);
+
+     label2:
+        return $r3;
+
+     label3:
+        $r4 := @caughtexception;
+
+        r2 = $r4;
+
+        return null;
+
+        catch org.gjt.sp.jedit.bsh.ReflectError from label1 to label2 with label3;
+    }
+
+    protected static java.lang.reflect.Field resolveExpectedJavaField(java.lang.Class, java.lang.String, boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError, org.gjt.sp.jedit.bsh.ReflectError
+    {
+        java.lang.Class r0;
+        java.lang.String r1, $r7, $r9, $r15, $r21;
+        boolean z0, $z1, $z2;
+        int $i0;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r2;
+        java.lang.StringBuilder $r3, $r4, $r5, $r6, $r8, $r12, $r13, $r14, $r18, $r19, $r20;
+        java.lang.NoSuchFieldException $r10, r23;
+        org.gjt.sp.jedit.bsh.ReflectError $r11;
+        java.lang.SecurityException $r16, r24;
+        org.gjt.sp.jedit.bsh.UtilTargetError $r17;
+        java.lang.reflect.Field r22, r22_1, r22_2, r22_3, r22_4;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+(0)     z0 := @parameter2;
+
+     label1:
+        $z1 = org.gjt.sp.jedit.bsh.Capabilities.haveAccessibility();
+
+        if $z1 == 0 goto label2;
+
+        r22 = org.gjt.sp.jedit.bsh.Reflect.findAccessibleField(r0, r1);
+
+(1)     goto label3;
+
+     label2:
+(2)     r22_1 = r0.getField(r1);
+
+     label3:
+        r22_2 = Phi(r22 #1, r22_1 #2);
+
+        goto label6;
+
+     label4:
+        $r10 := @caughtexception;
+
+        r22_3 = Phi(r22 #0, r22_1 #2);
+
+        r23 = $r10;
+
+        $r11 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = $r12.append("No such field: ");
+
+        $r14 = $r13.append(r1);
+
+        $r15 = $r14.toString();
+
+        specialinvoke $r11.<init>($r15);
+
+        throw $r11;
+
+     label5:
+        $r16 := @caughtexception;
+
+        r22_4 = Phi(r22 #0, r22_1 #2);
+
+        r24 = $r16;
+
+        $r17 = new org.gjt.sp.jedit.bsh.UtilTargetError;
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<init>();
+
+        $r19 = $r18.append("Security Exception while searching fields of: ");
+
+        $r20 = $r19.append(r0);
+
+        $r21 = $r20.toString();
+
+        specialinvoke $r17.<init>($r21, r24);
+
+        throw $r17;
+
+     label6:
+        if z0 == 0 goto label7;
+
+        $i0 = r22_2.getModifiers();
+
+        $z2 = java.lang.reflect.Modifier.isStatic($i0);
+
+        if $z2 != 0 goto label7;
+
+        $r2 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("Can\'t reach instance field: ");
+
+        $r5 = $r4.append(r1);
+
+        $r6 = $r5.append(" from static context: ");
+
+        $r7 = r0.getName();
+
+        $r8 = $r6.append($r7);
+
+        $r9 = $r8.toString();
+
+        specialinvoke $r2.<init>($r9);
+
+        throw $r2;
+
+     label7:
+        return r22_2;
+
+        catch java.lang.NoSuchFieldException from label1 to label3 with label4;
+        catch java.lang.SecurityException from label1 to label3 with label5;
+    }
+
+    private static java.lang.reflect.Field findAccessibleField(java.lang.Class, java.lang.String) throws org.gjt.sp.jedit.bsh.UtilEvalError, java.lang.NoSuchFieldException
+    {
+        java.lang.String r0;
+        java.lang.NoSuchFieldException $r1, $r2, $r3, r6, r8;
+        java.lang.Class r4;
+        java.lang.reflect.Field r5, r7;
+
+        r4 := @parameter0;
+
+        r0 := @parameter1;
+
+     label1:
+        r5 = r4.getField(r0);
+
+        org.gjt.sp.jedit.bsh.ReflectManager.RMSetAccessible(r5);
+
+     label2:
+        return r5;
+
+     label3:
+        $r1 := @caughtexception;
+
+(0)     r6 = $r1;
+
+     label4:
+        r4 = Phi(r4 #0, r4 #1);
+
+        if r4 == null goto label8;
+
+     label5:
+        r7 = r4.getDeclaredField(r0);
+
+        org.gjt.sp.jedit.bsh.ReflectManager.RMSetAccessible(r7);
+
+     label6:
+        return r7;
+
+     label7:
+        $r3 := @caughtexception;
+
+        r8 = $r3;
+
+        r4 = r4.getSuperclass();
+
+(1)     goto label4;
+
+     label8:
+        $r2 = new java.lang.NoSuchFieldException;
+
+        specialinvoke $r2.<init>(r0);
+
+        throw $r2;
+
+        catch java.lang.NoSuchFieldException from label1 to label2 with label3;
+        catch java.lang.NoSuchFieldException from label5 to label6 with label7;
+    }
+
+    protected static java.lang.reflect.Method resolveExpectedJavaMethod(org.gjt.sp.jedit.bsh.BshClassManager, java.lang.Class, java.lang.Object, java.lang.String, java.lang.Object[], boolean) throws org.gjt.sp.jedit.bsh.ReflectError, org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.Class r1;
+        java.lang.Object r2;
+        java.lang.String r3, $r11, $r14, $r17, $r24, $r25, $r25_1, $r25_2;
+        java.lang.Object[] r4;
+        boolean z0;
+        java.lang.Class[] r5;
+        java.lang.reflect.Method r6;
+        org.gjt.sp.jedit.bsh.Primitive $r7;
+        org.gjt.sp.jedit.bsh.ReflectError $r8;
+        java.lang.StringBuilder $r9, $r10, $r12, $r13, $r15, $r16, $r20, $r21, $r22, $r23;
+        org.gjt.sp.jedit.bsh.UtilTargetError $r18;
+        java.lang.NullPointerException $r19;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        r4 := @parameter4;
+
+        z0 := @parameter5;
+
+        $r7 = org.gjt.sp.jedit.bsh.Primitive.NULL;
+
+        if r2 != $r7 goto label1;
+
+        $r18 = new org.gjt.sp.jedit.bsh.UtilTargetError;
+
+        $r19 = new java.lang.NullPointerException;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<init>();
+
+        $r21 = $r20.append("Attempt to invoke method ");
+
+        $r22 = $r21.append(r3);
+
+        $r23 = $r22.append(" on null value");
+
+        $r24 = $r23.toString();
+
+        specialinvoke $r19.<init>($r24);
+
+        specialinvoke $r18.<init>($r19);
+
+        throw $r18;
+
+     label1:
+        r5 = org.gjt.sp.jedit.bsh.Types.getTypes(r4);
+
+        r6 = org.gjt.sp.jedit.bsh.Reflect.resolveJavaMethod(r0, r1, r3, r5, z0);
+
+        if r6 != null goto label4;
+
+        $r8 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        if z0 == 0 goto label2;
+
+        $r25 = "Static method ";
+
+(0)     goto label3;
+
+     label2:
+(1)     $r25_1 = "Method ";
+
+     label3:
+        $r25_2 = Phi($r25 #0, $r25_1 #1);
+
+        $r10 = $r9.append($r25_2);
+
+        $r11 = org.gjt.sp.jedit.bsh.StringUtil.methodString(r3, r5);
+
+        $r12 = $r10.append($r11);
+
+        $r13 = $r12.append(" not found in class\'");
+
+        $r14 = r1.getName();
+
+        $r15 = $r13.append($r14);
+
+        $r16 = $r15.append("\'");
+
+        $r17 = $r16.toString();
+
+        specialinvoke $r8.<init>($r17);
+
+        throw $r8;
+
+     label4:
+        return r6;
+    }
+
+    protected static java.lang.reflect.Method resolveJavaMethod(org.gjt.sp.jedit.bsh.BshClassManager, java.lang.Class, java.lang.String, java.lang.Class[], boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.Class r1;
+        java.lang.String r2, $r10;
+        java.lang.Class[] r3;
+        boolean z0, z1, $z2, $z4, $z4_1, $z4_2, $z4_3;
+        org.gjt.sp.jedit.bsh.InterpreterError $r4;
+        java.lang.SecurityException $r5, r13;
+        org.gjt.sp.jedit.bsh.UtilTargetError $r6;
+        java.lang.StringBuilder $r7, $r8, $r9;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r11, r14;
+        java.lang.reflect.Method r12, r12_1, r12_2, r12_3, r12_4, r12_5;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        z0 := @parameter4;
+
+        if r1 != null goto label01;
+
+        $r4 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        specialinvoke $r4.<init>("null class");
+
+        throw $r4;
+
+     label01:
+        r12 = null;
+
+        if r0 != null goto label02;
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug("resolveJavaMethod UNOPTIMIZED lookup");
+
+(0)     goto label03;
+
+     label02:
+(1)     r12_1 = r0.getResolvedMethod(r1, r2, r3, z0);
+
+     label03:
+        r12_2 = Phi(r12 #0, r12_1 #1);
+
+(2)     if r12_2 != null goto label14;
+
+        $z2 = org.gjt.sp.jedit.bsh.Capabilities.haveAccessibility();
+
+        if $z2 != 0 goto label04;
+
+        $z4 = 1;
+
+(3)     goto label05;
+
+     label04:
+(4)     $z4_1 = 0;
+
+     label05:
+        $z4_2 = Phi($z4 #3, $z4_1 #4);
+
+(5)     z1 = $z4_2;
+
+     label06:
+(6)     r12_3 = org.gjt.sp.jedit.bsh.Reflect.findOverloadedMethod(r1, r2, r3, z1);
+
+     label07:
+        goto label09;
+
+     label08:
+        $r5 := @caughtexception;
+
+        r12_4 = Phi(r12_2 #5, r12_3 #6);
+
+        r13 = $r5;
+
+        $r6 = new org.gjt.sp.jedit.bsh.UtilTargetError;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("Security Exception while searching methods of: ");
+
+        $r9 = $r8.append(r1);
+
+        $r10 = $r9.toString();
+
+        specialinvoke $r6.<init>($r10, r13);
+
+        throw $r6;
+
+     label09:
+        org.gjt.sp.jedit.bsh.Reflect.checkFoundStaticMethod(r12_3, z0, r1);
+
+        if r12_3 == null goto label13;
+
+        if z1 != 0 goto label13;
+
+     label10:
+        org.gjt.sp.jedit.bsh.ReflectManager.RMSetAccessible(r12_3);
+
+     label11:
+        goto label13;
+
+     label12:
+        $r11 := @caughtexception;
+
+        r14 = $r11;
+
+     label13:
+(7)     if r12_3 == null goto label14;
+
+(8)     if r0 == null goto label14;
+
+(9)     r0.cacheResolvedMethod(r1, r3, r12_3);
+
+     label14:
+        $z4_3 = Phi($z4 #2, $z4_2 #7, $z4_2 #8, $z4_2 #9);
+
+        r12_5 = Phi(r12_2 #2, r12_3 #7, r12_3 #8, r12_3 #9);
+
+        return r12_5;
+
+        catch java.lang.SecurityException from label06 to label07 with label08;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label10 to label11 with label12;
+    }
+
+    private static java.lang.reflect.Method findOverloadedMethod(java.lang.Class, java.lang.String, java.lang.Class[], boolean)
+    {
+        java.lang.Class r0;
+        java.lang.String r1, $r8, $r11, $r14, $r17;
+        java.lang.Class[] r2;
+        boolean z0, $z1, $z2;
+        java.lang.reflect.Method[] r3;
+        java.lang.reflect.Method r4;
+        int $i0;
+        java.lang.StringBuilder $r5, $r6, $r7, $r9, $r10, $r12, $r13, $r15, $r16;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        z0 := @parameter3;
+
+        $z1 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z1 == 0 goto label1;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("Searching for method: ");
+
+        $r11 = org.gjt.sp.jedit.bsh.StringUtil.methodString(r1, r2);
+
+        $r12 = $r10.append($r11);
+
+        $r13 = $r12.append(" in \'");
+
+        $r14 = r0.getName();
+
+        $r15 = $r13.append($r14);
+
+        $r16 = $r15.append("\'");
+
+        $r17 = $r16.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r17);
+
+     label1:
+        $i0 = lengthof r2;
+
+        r3 = org.gjt.sp.jedit.bsh.Reflect.getCandidateMethods(r0, r1, $i0, z0);
+
+        $z2 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z2 == 0 goto label2;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append("Looking for most specific method: ");
+
+        $r7 = $r6.append(r1);
+
+        $r8 = $r7.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r8);
+
+     label2:
+        r4 = org.gjt.sp.jedit.bsh.Reflect.findMostSpecificMethod(r2, r3);
+
+        return r4;
+    }
+
+    static java.lang.reflect.Method[] getCandidateMethods(java.lang.Class, java.lang.String, int, boolean)
+    {
+        java.lang.Class r0;
+        java.lang.String r1;
+        int i0, $i1;
+        boolean z0;
+        java.util.Vector r2;
+        java.lang.reflect.Method[] r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        r2 = org.gjt.sp.jedit.bsh.Reflect.gatherMethodsRecursive(r0, r1, i0, z0, null);
+
+        $i1 = r2.size();
+
+        r3 = newarray (java.lang.reflect.Method)[$i1];
+
+        r2.copyInto(r3);
+
+        return r3;
+    }
+
+    private static java.util.Vector gatherMethodsRecursive(java.lang.Class, java.lang.String, int, boolean, java.util.Vector)
+    {
+        java.lang.Class r0, $r6, r12;
+        java.lang.String r1;
+        int i0, $i1, i2;
+        boolean z0, $z1;
+        java.lang.Class[] r2;
+        java.lang.reflect.Method[] $r3, $r8;
+        java.util.Vector $r10, r11, r11_1, r11_2;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        r11 := @parameter4;
+
+(0)     if r11 != null goto label1;
+
+        $r10 = new java.util.Vector;
+
+        specialinvoke $r10.<init>();
+
+(1)     r11_1 = $r10;
+
+     label1:
+        r11_2 = Phi(r11 #0, r11_1 #1);
+
+        if z0 == 0 goto label2;
+
+        $z1 = org.gjt.sp.jedit.bsh.Reflect.isPublic(r0);
+
+        if $z1 == 0 goto label3;
+
+        $r8 = r0.getMethods();
+
+        org.gjt.sp.jedit.bsh.Reflect.addCandidates($r8, r1, i0, z0, r11_2);
+
+        goto label3;
+
+     label2:
+        $r3 = r0.getDeclaredMethods();
+
+        org.gjt.sp.jedit.bsh.Reflect.addCandidates($r3, r1, i0, z0, r11_2);
+
+     label3:
+        r2 = r0.getInterfaces();
+
+(2)     i2 = 0;
+
+     label4:
+        i2 = Phi(i2 #2, i2 #3);
+
+        r11 = Phi(r11_2 #2, r11 #3);
+
+        $i1 = lengthof r2;
+
+        if i2 >= $i1 goto label5;
+
+        $r6 = r2[i2];
+
+        org.gjt.sp.jedit.bsh.Reflect.gatherMethodsRecursive($r6, r1, i0, z0, r11);
+
+        i2 = i2 + 1;
+
+(3)     goto label4;
+
+     label5:
+        r12 = r0.getSuperclass();
+
+        if r12 == null goto label6;
+
+        org.gjt.sp.jedit.bsh.Reflect.gatherMethodsRecursive(r12, r1, i0, z0, r11);
+
+     label6:
+        return r11;
+    }
+
+    private static java.util.Vector addCandidates(java.lang.reflect.Method[], java.lang.String, int, boolean, java.util.Vector)
+    {
+        java.lang.reflect.Method[] r0;
+        java.lang.String r1, $r4;
+        int i0, $i1, $i2, i3;
+        boolean z0, $z1, $z3;
+        java.util.Vector r2;
+        java.lang.reflect.Method r3;
+        java.lang.Class[] $r5;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        r2 := @parameter4;
+
+(0)     i3 = 0;
+
+     label1:
+        i3 = Phi(i3 #0, i3 #1);
+
+        $i1 = lengthof r0;
+
+        if i3 >= $i1 goto label4;
+
+        r3 = r0[i3];
+
+        $r4 = r3.getName();
+
+        $z1 = $r4.equals(r1);
+
+        if $z1 == 0 goto label3;
+
+        $r5 = r3.getParameterTypes();
+
+        $i2 = lengthof $r5;
+
+        if $i2 != i0 goto label3;
+
+        if z0 == 0 goto label2;
+
+        $z3 = org.gjt.sp.jedit.bsh.Reflect.isPublic(r3);
+
+        if $z3 == 0 goto label3;
+
+     label2:
+        r2.add(r3);
+
+     label3:
+        i3 = i3 + 1;
+
+(1)     goto label1;
+
+     label4:
+        return r2;
+    }
+
+    static java.lang.Object constructObject(java.lang.Class, java.lang.Object[]) throws org.gjt.sp.jedit.bsh.ReflectError, java.lang.reflect.InvocationTargetException
+    {
+        java.lang.Class r0;
+        java.lang.Class[] r1;
+        java.lang.reflect.Constructor[] r2, $r27, $r27_1, $r27_2;
+        boolean $z0, $z1, $z2, $z3;
+        org.gjt.sp.jedit.bsh.ReflectError $r3, $r4, $r9, $r15, $r17, $r20;
+        java.lang.StringBuilder $r5, $r6, $r7, $r10, $r11, $r12, $r21, $r22, $r23, $r24;
+        java.lang.String $r8, $r13, $r25;
+        java.lang.IllegalArgumentException $r14;
+        java.lang.IllegalAccessException $r16;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r18;
+        java.lang.InstantiationException $r19;
+        java.lang.Object[] r26, r29;
+        java.lang.reflect.Constructor r28;
+        java.lang.Object r30;
+
+        r0 := @parameter0;
+
+        r26 := @parameter1;
+
+        $z0 = r0.isInterface();
+
+        if $z0 == 0 goto label01;
+
+        $r9 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("Can\'t create instance of an interface: ");
+
+        $r12 = $r11.append(r0);
+
+        $r13 = $r12.toString();
+
+        specialinvoke $r9.<init>($r13);
+
+        throw $r9;
+
+     label01:
+        r1 = org.gjt.sp.jedit.bsh.Types.getTypes(r26);
+
+        $z1 = org.gjt.sp.jedit.bsh.Capabilities.haveAccessibility();
+
+        if $z1 == 0 goto label02;
+
+        $r27 = r0.getDeclaredConstructors();
+
+(0)     goto label03;
+
+     label02:
+(1)     $r27_1 = r0.getConstructors();
+
+     label03:
+        $r27_2 = Phi($r27 #0, $r27_1 #1);
+
+        r2 = $r27_2;
+
+        $z2 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z2 == 0 goto label04;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append("Looking for most specific constructor: ");
+
+        $r7 = $r6.append(r0);
+
+        $r8 = $r7.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r8);
+
+     label04:
+        r28 = org.gjt.sp.jedit.bsh.Reflect.findMostSpecificConstructor(r1, r2);
+
+        if r28 != null goto label05;
+
+        $r4 = org.gjt.sp.jedit.bsh.Reflect.cantFindConstructor(r0, r1);
+
+        throw $r4;
+
+     label05:
+        $z3 = org.gjt.sp.jedit.bsh.Reflect.isPublic(r28);
+
+        if $z3 != 0 goto label09;
+
+     label06:
+        org.gjt.sp.jedit.bsh.ReflectManager.RMSetAccessible(r28);
+
+     label07:
+        goto label09;
+
+     label08:
+        $r18 := @caughtexception;
+
+     label09:
+        r29 = org.gjt.sp.jedit.bsh.Primitive.unwrap(r26);
+
+     label10:
+        r30 = r28.newInstance(r29);
+
+     label11:
+        goto label15;
+
+     label12:
+        $r19 := @caughtexception;
+
+        $r20 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        $r21 = new java.lang.StringBuilder;
+
+        specialinvoke $r21.<init>();
+
+        $r22 = $r21.append("The class ");
+
+        $r23 = $r22.append(r0);
+
+        $r24 = $r23.append(" is abstract ");
+
+        $r25 = $r24.toString();
+
+        specialinvoke $r20.<init>($r25);
+
+        throw $r20;
+
+     label13:
+        $r16 := @caughtexception;
+
+        $r17 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        specialinvoke $r17.<init>("We don\'t have permission to create an instance.Use setAccessibility(true) to enable access.");
+
+        throw $r17;
+
+     label14:
+        $r14 := @caughtexception;
+
+        $r15 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        specialinvoke $r15.<init>("The number of arguments was wrong");
+
+        throw $r15;
+
+     label15:
+        if r30 != null goto label16;
+
+        $r3 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        specialinvoke $r3.<init>("Couldn\'t construct the object");
+
+        throw $r3;
+
+     label16:
+        return r30;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label06 to label07 with label08;
+        catch java.lang.InstantiationException from label10 to label11 with label12;
+        catch java.lang.IllegalAccessException from label10 to label11 with label13;
+        catch java.lang.IllegalArgumentException from label10 to label11 with label14;
+    }
+
+    static java.lang.reflect.Constructor findMostSpecificConstructor(java.lang.Class[], java.lang.reflect.Constructor[])
+    {
+        java.lang.Class[] r0;
+        java.lang.reflect.Constructor[] r1;
+        int i0;
+        java.lang.reflect.Constructor $r2, $r2_1, $r2_2;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        i0 = org.gjt.sp.jedit.bsh.Reflect.findMostSpecificConstructorIndex(r0, r1);
+
+        if i0 != -1 goto label1;
+
+        $r2 = null;
+
+(0)     goto label2;
+
+     label1:
+(1)     $r2_1 = r1[i0];
+
+     label2:
+        $r2_2 = Phi($r2 #0, $r2_1 #1);
+
+        return $r2_2;
+    }
+
+    static int findMostSpecificConstructorIndex(java.lang.Class[], java.lang.reflect.Constructor[])
+    {
+        java.lang.Class[] r0, $r4;
+        java.lang.reflect.Constructor[] r1;
+        java.lang.Class[][] r2;
+        int $i0, $i1, $i2, i3;
+        java.lang.reflect.Constructor $r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $i0 = lengthof r1;
+
+        r2 = newarray (java.lang.Class[])[$i0];
+
+(0)     i3 = 0;
+
+     label1:
+        i3 = Phi(i3 #0, i3 #1);
+
+        $i1 = lengthof r2;
+
+        if i3 >= $i1 goto label2;
+
+        $r3 = r1[i3];
+
+        $r4 = $r3.getParameterTypes();
+
+        r2[i3] = $r4;
+
+        i3 = i3 + 1;
+
+(1)     goto label1;
+
+     label2:
+        $i2 = org.gjt.sp.jedit.bsh.Reflect.findMostSpecificSignature(r0, r2);
+
+        return $i2;
+    }
+
+    static java.lang.reflect.Method findMostSpecificMethod(java.lang.Class[], java.lang.reflect.Method[])
+    {
+        java.lang.Class[] r0, $r4;
+        java.lang.reflect.Method[] r1;
+        java.lang.Class[][] r2;
+        int $i0, $i1, i2, i3;
+        java.lang.reflect.Method $r3, $r5;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $i0 = lengthof r1;
+
+        r2 = newarray (java.lang.Class[])[$i0];
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $i1 = lengthof r1;
+
+        if i2 >= $i1 goto label2;
+
+        $r3 = r1[i2];
+
+        $r4 = $r3.getParameterTypes();
+
+        r2[i2] = $r4;
+
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label2:
+        i3 = org.gjt.sp.jedit.bsh.Reflect.findMostSpecificSignature(r0, r2);
+
+        if i3 != -1 goto label3;
+
+        $r5 = null;
+
+(2)     goto label4;
+
+     label3:
+(3)     $r5 = r1[i3];
+
+     label4:
+        $r5 = Phi($r5 #2, $r5 #3);
+
+        return $r5;
+    }
+
+    static int findMostSpecificSignature(java.lang.Class[], java.lang.Class[][])
+    {
+        java.lang.Class[] r0, r2, r3;
+        java.lang.Class[][] r1;
+        int $i0, i1, i2, i3;
+        boolean $z0, $z1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+(0)     i1 = 1;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #6);
+
+        i3 = Phi(i3 #0, i3 #6);
+
+        i2 = Phi(i2 #0, i2 #6);
+
+        r3 = Phi(r3 #0, r3 #6);
+
+        if i1 > 4 goto label7;
+
+        r3 = null;
+
+        i2 = -1;
+
+(1)     i3 = 0;
+
+     label2:
+        i1 = Phi(i1 #1, i1 #5);
+
+        i3 = Phi(i3 #1, i3 #5);
+
+        i2 = Phi(i2 #1, i2 #5);
+
+        r3 = Phi(r3 #1, r3 #5);
+
+        $i0 = lengthof r1;
+
+        if i3 >= $i0 goto label5;
+
+        r2 = r1[i3];
+
+        $z0 = org.gjt.sp.jedit.bsh.Types.isSignatureAssignable(r0, r2, i1);
+
+(2)     if $z0 == 0 goto label4;
+
+        if r3 == null goto label3;
+
+        $z1 = org.gjt.sp.jedit.bsh.Types.isSignatureAssignable(r2, r3, 1);
+
+(3)     if $z1 == 0 goto label4;
+
+     label3:
+        r3 = r2;
+
+(4)     i2 = i3;
+
+     label4:
+        i2 = Phi(i2 #2, i2 #3, i2 #4);
+
+        r3 = Phi(r3 #2, r3 #3, r3 #4);
+
+        i3 = i3 + 1;
+
+(5)     goto label2;
+
+     label5:
+        if r3 == null goto label6;
+
+        return i2;
+
+     label6:
+        i1 = i1 + 1;
+
+(6)     goto label1;
+
+     label7:
+        return -1;
+    }
+
+    private static java.lang.String accessorName(java.lang.String, java.lang.String)
+    {
+        java.lang.String r0, r1, $r4, $r6, $r8;
+        java.lang.StringBuilder $r2, $r3, $r5, $r7;
+        char $c0, $c1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append(r0);
+
+        $c0 = r1.charAt(0);
+
+        $c1 = java.lang.Character.toUpperCase($c0);
+
+        $r4 = java.lang.String.valueOf($c1);
+
+        $r5 = $r3.append($r4);
+
+        $r6 = r1.substring(1);
+
+        $r7 = $r5.append($r6);
+
+        $r8 = $r7.toString();
+
+        return $r8;
+    }
+
+    public static boolean hasObjectPropertyGetter(java.lang.Class, java.lang.String)
+    {
+        java.lang.Class r0, $r6, $r7;
+        java.lang.String r1, r9, r11;
+        java.lang.Class[] $r2, $r5;
+        java.lang.NoSuchMethodException $r4, $r8, r10, r13;
+        java.lang.reflect.Method r12;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r9 = org.gjt.sp.jedit.bsh.Reflect.accessorName("get", r1);
+
+     label1:
+        $r2 = newarray (java.lang.Class)[0];
+
+        r0.getMethod(r9, $r2);
+
+     label2:
+        return 1;
+
+     label3:
+        $r4 := @caughtexception;
+
+        r10 = $r4;
+
+        r11 = org.gjt.sp.jedit.bsh.Reflect.accessorName("is", r1);
+
+     label4:
+        $r5 = newarray (java.lang.Class)[0];
+
+        r12 = r0.getMethod(r11, $r5);
+
+        $r6 = r12.getReturnType();
+
+        $r7 = java.lang.Boolean.TYPE;
+
+        if $r6 != $r7 goto label5;
+
+        $z0 = 1;
+
+(0)     goto label6;
+
+     label5:
+(1)     $z0_1 = 0;
+
+     label6:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+
+     label7:
+        $r8 := @caughtexception;
+
+        r13 = $r8;
+
+        return 0;
+
+        catch java.lang.NoSuchMethodException from label1 to label2 with label3;
+        catch java.lang.NoSuchMethodException from label4 to label6 with label7;
+    }
+
+    public static boolean hasObjectPropertySetter(java.lang.Class, java.lang.String)
+    {
+        java.lang.Class r0;
+        java.lang.String r1, r2, $r5;
+        java.lang.reflect.Method[] r3;
+        int $i0, i1;
+        java.lang.reflect.Method $r4;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 = org.gjt.sp.jedit.bsh.Reflect.accessorName("set", r1);
+
+        r3 = r0.getMethods();
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $i0 = lengthof r3;
+
+        if i1 >= $i0 goto label3;
+
+        $r4 = r3[i1];
+
+        $r5 = $r4.getName();
+
+        $z0 = $r5.equals(r2);
+
+        if $z0 == 0 goto label2;
+
+        return 1;
+
+     label2:
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        return 0;
+    }
+
+    public static java.lang.Object getObjectProperty(java.lang.Object, java.lang.String) throws org.gjt.sp.jedit.bsh.UtilEvalError, org.gjt.sp.jedit.bsh.ReflectError
+    {
+        java.lang.Object r0, $r4;
+        java.lang.String r1, $r10, $r24, r29, r31, $r33, $r33_1, $r33_2;
+        java.lang.Object[] r2;
+        java.lang.Class $r3, $r14, $r15, $r16;
+        org.gjt.sp.jedit.bsh.ReflectError $r5;
+        java.lang.StringBuilder $r6, $r7, $r8, $r9, $r11, $r12, $r13, $r20, $r21, $r23;
+        java.lang.Exception $r17, $r25, r27, r28, r30, r32, r27_1, r27_2, r28_1, r28_2;
+        java.lang.reflect.InvocationTargetException $r18, r34;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r19;
+        java.lang.Throwable $r22;
+        java.lang.reflect.Method r26, r26_1, r26_2, r26_3, r26_4, r26_5, r26_6, r26_7, r26_8;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 = newarray (java.lang.Object)[0];
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug("property access: ");
+
+        r26 = null;
+
+        r27 = null;
+
+(0)     r28 = null;
+
+     label01:
+        r29 = org.gjt.sp.jedit.bsh.Reflect.accessorName("get", r1);
+
+        $r3 = r0.getClass();
+
+(1)     r26_1 = org.gjt.sp.jedit.bsh.Reflect.resolveExpectedJavaMethod(null, $r3, r0, r29, r2, 0);
+
+     label02:
+(2)     goto label04;
+
+     label03:
+        $r25 := @caughtexception;
+
+        r26_2 = Phi(r26 #0, r26_1 #1);
+
+        r30 = $r25;
+
+(3)     r27_1 = r30;
+
+     label04:
+        r26_3 = Phi(r26_1 #2, r26_2 #3);
+
+        r27_2 = Phi(r27 #2, r27_1 #3);
+
+(4)     if r26_3 != null goto label08;
+
+     label05:
+        r31 = org.gjt.sp.jedit.bsh.Reflect.accessorName("is", r1);
+
+        $r14 = r0.getClass();
+
+(5)     r26_4 = org.gjt.sp.jedit.bsh.Reflect.resolveExpectedJavaMethod(null, $r14, r0, r31, r2, 0);
+
+        $r15 = r26_4.getReturnType();
+
+        $r16 = java.lang.Boolean.TYPE;
+
+(6)     if $r15 == $r16 goto label06;
+
+(7)     r26_5 = null;
+
+     label06:
+        r26_6 = Phi(r26_4 #6, r26_5 #7);
+
+(8)     goto label08;
+
+     label07:
+        $r17 := @caughtexception;
+
+        r26_7 = Phi(r26_3 #4, r26_4 #5);
+
+        r32 = $r17;
+
+(9)     r28_1 = r32;
+
+     label08:
+        r26_8 = Phi(r26_3 #4, r26_6 #8, r26_7 #9);
+
+        r28_2 = Phi(r28 #4, r28 #8, r28_1 #9);
+
+        if r26_8 != null goto label11;
+
+        $r5 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("Error in property getter: ");
+
+        $r8 = $r7.append(r27_2);
+
+        if r28_2 == null goto label09;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = $r11.append(" : ");
+
+        $r13 = $r12.append(r28_2);
+
+        $r33 = $r13.toString();
+
+(10)    goto label10;
+
+     label09:
+(11)    $r33_1 = "";
+
+     label10:
+        $r33_2 = Phi($r33 #10, $r33_1 #11);
+
+        $r9 = $r8.append($r33_2);
+
+        $r10 = $r9.toString();
+
+        specialinvoke $r5.<init>($r10);
+
+        throw $r5;
+
+     label11:
+        $r4 = org.gjt.sp.jedit.bsh.Reflect.invokeMethod(r26_8, r0, r2);
+
+     label12:
+        return $r4;
+
+     label13:
+        $r18 := @caughtexception;
+
+        r34 = $r18;
+
+        $r19 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<init>();
+
+        $r21 = $r20.append("Property accessor threw exception: ");
+
+        $r22 = r34.getTargetException();
+
+        $r23 = $r21.append($r22);
+
+        $r24 = $r23.toString();
+
+        specialinvoke $r19.<init>($r24);
+
+        throw $r19;
+
+        catch java.lang.Exception from label01 to label02 with label03;
+        catch java.lang.Exception from label05 to label06 with label07;
+        catch java.lang.reflect.InvocationTargetException from label11 to label12 with label13;
+    }
+
+    public static void setObjectProperty(java.lang.Object, java.lang.String, java.lang.Object) throws org.gjt.sp.jedit.bsh.ReflectError, org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        java.lang.Object r0, r2;
+        java.lang.String r1, r3, $r14;
+        java.lang.Object[] r4, $r5;
+        java.lang.Class $r6;
+        java.lang.reflect.InvocationTargetException $r8, r16;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r9;
+        java.lang.StringBuilder $r10, $r11, $r13;
+        java.lang.Throwable $r12;
+        java.lang.reflect.Method r15;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 = org.gjt.sp.jedit.bsh.Reflect.accessorName("set", r1);
+
+        $r5 = newarray (java.lang.Object)[1];
+
+        $r5[0] = r2;
+
+        r4 = $r5;
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug("property access: ");
+
+     label1:
+        $r6 = r0.getClass();
+
+        r15 = org.gjt.sp.jedit.bsh.Reflect.resolveExpectedJavaMethod(null, $r6, r0, r3, r4, 0);
+
+        org.gjt.sp.jedit.bsh.Reflect.invokeMethod(r15, r0, r4);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r8 := @caughtexception;
+
+        r16 = $r8;
+
+        $r9 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("Property accessor threw exception: ");
+
+        $r12 = r16.getTargetException();
+
+        $r13 = $r11.append($r12);
+
+        $r14 = $r13.toString();
+
+        specialinvoke $r9.<init>($r14);
+
+        throw $r9;
+
+     label4:
+        return;
+
+        catch java.lang.reflect.InvocationTargetException from label1 to label2 with label3;
+    }
+
+    public static java.lang.String normalizeClassName(java.lang.Class)
+    {
+        java.lang.Class r0, $r4;
+        java.lang.StringBuilder r1, $r2, $r3, $r6, $r7;
+        boolean $z0;
+        java.lang.String $r5, $r8, $r10, $r12;
+        int $i0, i1;
+        org.gjt.sp.jedit.bsh.ReflectError $r13, r14;
+
+        r0 := @parameter0;
+
+        $z0 = r0.isArray();
+
+        if $z0 != 0 goto label1;
+
+        $r12 = r0.getName();
+
+        return $r12;
+
+     label1:
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+     label2:
+(0)     $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = org.gjt.sp.jedit.bsh.Reflect.getArrayBaseType(r0);
+
+        $r5 = $r4.getName();
+
+        $r6 = $r3.append($r5);
+
+        $r7 = $r6.append(" ");
+
+        $r8 = $r7.toString();
+
+        r1.append($r8);
+
+(1)     i1 = 0;
+
+     label3:
+        i1 = Phi(i1 #1, i1 #3);
+
+(2)     $i0 = org.gjt.sp.jedit.bsh.Reflect.getArrayDimensions(r0);
+
+        if i1 >= $i0 goto label4;
+
+        r1.append("[]");
+
+        i1 = i1 + 1;
+
+(3)     goto label3;
+
+     label4:
+(4)     goto label6;
+
+     label5:
+        $r13 := @caughtexception;
+
+        i1 = Phi(i1 #0, i1 #2);
+
+(5)     r14 = $r13;
+
+     label6:
+        i1 = Phi(i1 #4, i1 #5);
+
+        $r10 = r1.toString();
+
+        return $r10;
+
+        catch org.gjt.sp.jedit.bsh.ReflectError from label2 to label4 with label5;
+    }
+
+    public static int getArrayDimensions(java.lang.Class)
+    {
+        java.lang.Class r0;
+        boolean $z0;
+        java.lang.String $r1;
+        int $i0, $i1;
+
+        r0 := @parameter0;
+
+        $z0 = r0.isArray();
+
+        if $z0 != 0 goto label1;
+
+        return 0;
+
+     label1:
+        $r1 = r0.getName();
+
+        $i0 = $r1.lastIndexOf(91);
+
+        $i1 = $i0 + 1;
+
+        return $i1;
+    }
+
+    public static java.lang.Class getArrayBaseType(java.lang.Class) throws org.gjt.sp.jedit.bsh.ReflectError
+    {
+        java.lang.Class r0, $r1;
+        boolean $z0;
+        org.gjt.sp.jedit.bsh.ReflectError $r2;
+
+        r0 := @parameter0;
+
+        $z0 = r0.isArray();
+
+        if $z0 != 0 goto label1;
+
+        $r2 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        specialinvoke $r2.<init>("The class is not an array.");
+
+        throw $r2;
+
+     label1:
+        $r1 = r0.getComponentType();
+
+        return $r1;
+    }
+
+    public static java.lang.Object invokeCompiledCommand(java.lang.Class, java.lang.Object[], org.gjt.sp.jedit.bsh.Interpreter, org.gjt.sp.jedit.bsh.CallStack) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        java.lang.Class r0;
+        java.lang.Object[] r1, r4;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.CallStack r3;
+        org.gjt.sp.jedit.bsh.BshClassManager r5;
+        int $i0, $i1, $i2;
+        java.lang.Object $r6;
+        java.lang.reflect.InvocationTargetException $r7, r20;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r8, $r15;
+        java.lang.StringBuilder $r9, $r10, $r12, $r16, $r17, $r18;
+        java.lang.Throwable $r11;
+        java.lang.String $r13, $r19;
+        org.gjt.sp.jedit.bsh.ReflectError $r14, r21;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        $i0 = lengthof r1;
+
+        $i1 = $i0 + 2;
+
+        r4 = newarray (java.lang.Object)[$i1];
+
+        r4[0] = r2;
+
+        r4[1] = r3;
+
+        $i2 = lengthof r1;
+
+        java.lang.System.arraycopy(r1, 0, r4, 2, $i2);
+
+        r5 = r2.getClassManager();
+
+     label1:
+        $r6 = org.gjt.sp.jedit.bsh.Reflect.invokeStaticMethod(r5, r0, "invoke", r4);
+
+     label2:
+        return $r6;
+
+     label3:
+        $r7 := @caughtexception;
+
+        r20 = $r7;
+
+        $r8 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("Error in compiled command: ");
+
+        $r11 = r20.getTargetException();
+
+        $r12 = $r10.append($r11);
+
+        $r13 = $r12.toString();
+
+        specialinvoke $r8.<init>($r13);
+
+        throw $r8;
+
+     label4:
+        $r14 := @caughtexception;
+
+        r21 = $r14;
+
+        $r15 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<init>();
+
+        $r17 = $r16.append("Error invoking compiled command: ");
+
+        $r18 = $r17.append(r21);
+
+        $r19 = $r18.toString();
+
+        specialinvoke $r15.<init>($r19);
+
+        throw $r15;
+
+        catch java.lang.reflect.InvocationTargetException from label1 to label2 with label3;
+        catch org.gjt.sp.jedit.bsh.ReflectError from label1 to label2 with label4;
+    }
+
+    private static void logInvokeMethod(java.lang.String, java.lang.reflect.Method, java.lang.Object[])
+    {
+        java.lang.String r0, $r7, $r18;
+        java.lang.reflect.Method r1;
+        java.lang.Object[] r2;
+        boolean $z0;
+        java.lang.StringBuilder $r3, $r4, $r5, $r6, $r8, $r9, $r10, $r11, $r13, $r14, $r17;
+        int $i0, i1;
+        java.lang.Object $r12, $r15;
+        java.lang.Class $r16;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        $z0 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+(0)     if $z0 == 0 goto label2;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append(r0);
+
+        $r5 = $r4.append(r1);
+
+        $r6 = $r5.append(" with args:");
+
+        $r7 = $r6.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r7);
+
+(1)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #1, i1 #3);
+
+        $i0 = lengthof r2;
+
+(2)     if i1 >= $i0 goto label2;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("args[");
+
+        $r10 = $r9.append(i1);
+
+        $r11 = $r10.append("] = ");
+
+        $r12 = r2[i1];
+
+        $r13 = $r11.append($r12);
+
+        $r14 = $r13.append(" type = ");
+
+        $r15 = r2[i1];
+
+        $r16 = $r15.getClass();
+
+        $r17 = $r14.append($r16);
+
+        $r18 = $r17.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r18);
+
+        i1 = i1 + 1;
+
+(3)     goto label1;
+
+     label2:
+        i1 = Phi(i1 #0, i1 #2);
+
+        return;
+    }
+
+    private static void checkFoundStaticMethod(java.lang.reflect.Method, boolean, java.lang.Class) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        java.lang.reflect.Method r0;
+        boolean z0, $z1;
+        java.lang.Class r1;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r2;
+        java.lang.StringBuilder $r3, $r4, $r8, $r9, $r11;
+        java.lang.String $r5, $r7, $r10, $r12;
+        java.lang.Class[] $r6;
+
+        r0 := @parameter0;
+
+        z0 := @parameter1;
+
+        r1 := @parameter2;
+
+        if r0 == null goto label1;
+
+        if z0 == 0 goto label1;
+
+        $z1 = org.gjt.sp.jedit.bsh.Reflect.isStatic(r0);
+
+        if $z1 != 0 goto label1;
+
+        $r2 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("Cannot reach instance method: ");
+
+        $r5 = r0.getName();
+
+        $r6 = r0.getParameterTypes();
+
+        $r7 = org.gjt.sp.jedit.bsh.StringUtil.methodString($r5, $r6);
+
+        $r8 = $r4.append($r7);
+
+        $r9 = $r8.append(" from static context: ");
+
+        $r10 = r1.getName();
+
+        $r11 = $r9.append($r10);
+
+        $r12 = $r11.toString();
+
+        specialinvoke $r2.<init>($r12);
+
+        throw $r2;
+
+     label1:
+        return;
+    }
+
+    private static org.gjt.sp.jedit.bsh.ReflectError cantFindConstructor(java.lang.Class, java.lang.Class[])
+    {
+        java.lang.Class r0;
+        java.lang.Class[] r1;
+        int $i0;
+        org.gjt.sp.jedit.bsh.ReflectError $r2, $r12;
+        java.lang.StringBuilder $r3, $r4, $r7, $r8, $r10, $r13, $r14, $r15;
+        java.lang.String $r5, $r6, $r9, $r11, $r16;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $i0 = lengthof r1;
+
+        if $i0 != 0 goto label1;
+
+        $r12 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r14 = $r13.append("Can\'t find default constructor for: ");
+
+        $r15 = $r14.append(r0);
+
+        $r16 = $r15.toString();
+
+        specialinvoke $r12.<init>($r16);
+
+        return $r12;
+
+     label1:
+        $r2 = new org.gjt.sp.jedit.bsh.ReflectError;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("Can\'t find constructor: ");
+
+        $r5 = r0.getName();
+
+        $r6 = org.gjt.sp.jedit.bsh.StringUtil.methodString($r5, r1);
+
+        $r7 = $r4.append($r6);
+
+        $r8 = $r7.append(" in class: ");
+
+        $r9 = r0.getName();
+
+        $r10 = $r8.append($r9);
+
+        $r11 = $r10.toString();
+
+        specialinvoke $r2.<init>($r11);
+
+        return $r2;
+    }
+
+    private static boolean isPublic(java.lang.Class)
+    {
+        java.lang.Class r0;
+        int $i0;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $i0 = r0.getModifiers();
+
+        $z0 = java.lang.reflect.Modifier.isPublic($i0);
+
+        return $z0;
+    }
+
+    private static boolean isPublic(java.lang.reflect.Method)
+    {
+        java.lang.reflect.Method r0;
+        int $i0;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $i0 = r0.getModifiers();
+
+        $z0 = java.lang.reflect.Modifier.isPublic($i0);
+
+        return $z0;
+    }
+
+    private static boolean isPublic(java.lang.reflect.Constructor)
+    {
+        java.lang.reflect.Constructor r0;
+        int $i0;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $i0 = r0.getModifiers();
+
+        $z0 = java.lang.reflect.Modifier.isPublic($i0);
+
+        return $z0;
+    }
+
+    private static boolean isStatic(java.lang.reflect.Method)
+    {
+        java.lang.reflect.Method r0;
+        int $i0;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $i0 = r0.getModifiers();
+
+        $z0 = java.lang.reflect.Modifier.isStatic($i0);
+
+        return $z0;
+    }
+}

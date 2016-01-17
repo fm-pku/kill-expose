@@ -1,0 +1,961 @@
+public class org.gjt.sp.jedit.gui.FontSelectorDialog extends org.gjt.sp.jedit.gui.EnhancedDialog
+{
+    private org.gjt.sp.jedit.gui.FontSelector fontSelector;
+    private boolean isOK;
+    private javax.swing.JTextField familyField;
+    private javax.swing.JList familyList;
+    private javax.swing.JTextField sizeField;
+    private javax.swing.JList sizeList;
+    private javax.swing.JTextField styleField;
+    private javax.swing.JList styleList;
+    private javax.swing.JLabel preview;
+    private javax.swing.JButton ok;
+    private javax.swing.JButton cancel;
+    private static final java.lang.String[] HIDEFONTS;
+
+    public void <init>(java.awt.Frame, java.awt.Font)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        java.awt.Frame r1;
+        java.awt.Font r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = org.gjt.sp.jedit.jEdit.getProperty("font-selector.title");
+
+        specialinvoke r0.<init>(r1, $r3, 1);
+
+        specialinvoke r0.init(r2);
+
+        return;
+    }
+
+    public void <init>(java.awt.Dialog, java.awt.Font)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        java.awt.Dialog r1;
+        java.awt.Font r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = org.gjt.sp.jedit.jEdit.getProperty("font-selector.title");
+
+        specialinvoke r0.<init>(r1, $r3, 1);
+
+        specialinvoke r0.init(r2);
+
+        return;
+    }
+
+    void <init>(java.awt.Frame, java.awt.Font, org.gjt.sp.jedit.gui.FontSelector)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        java.awt.Frame r1;
+        java.awt.Font r2;
+        org.gjt.sp.jedit.gui.FontSelector r3;
+        java.lang.String $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("font-selector.title");
+
+        specialinvoke r0.<init>(r1, $r4, 1);
+
+        r0.fontSelector = r3;
+
+        specialinvoke r0.init(r2);
+
+        return;
+    }
+
+    void <init>(java.awt.Dialog, java.awt.Font, org.gjt.sp.jedit.gui.FontSelector)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        java.awt.Dialog r1;
+        java.awt.Font r2;
+        org.gjt.sp.jedit.gui.FontSelector r3;
+        java.lang.String $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("font-selector.title");
+
+        specialinvoke r0.<init>(r1, $r4, 1);
+
+        r0.fontSelector = r3;
+
+        specialinvoke r0.init(r2);
+
+        return;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+
+        r0 := @this;
+
+        r0.isOK = 1;
+
+        r0.dispose();
+
+        return;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    public java.awt.Font getSelectedFont()
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        java.lang.Exception r1, $r8;
+        boolean $z0;
+        javax.swing.JTextField $r2, $r5;
+        java.lang.String $r3, $r6;
+        java.awt.Font $r4;
+        javax.swing.JList $r7;
+        int $i0, i1, i1_1, i1_2, i1_3;
+
+        r0 := @this;
+
+        $z0 = r0.isOK;
+
+(0)     if $z0 != 0 goto label1;
+
+        return null;
+
+     label1:
+        $r2 = r0.sizeField;
+
+        $r3 = $r2.getText();
+
+        i1 = java.lang.Integer.parseInt($r3);
+
+     label2:
+(1)     goto label4;
+
+     label3:
+        $r8 := @caughtexception;
+
+        i1_1 = Phi(i1 #0);
+
+        r1 = $r8;
+
+(2)     i1_2 = 12;
+
+     label4:
+        i1_3 = Phi(i1 #1, i1_2 #2);
+
+        $r4 = new java.awt.Font;
+
+        $r5 = r0.familyField;
+
+        $r6 = $r5.getText();
+
+        $r7 = r0.styleList;
+
+        $i0 = $r7.getSelectedIndex();
+
+        specialinvoke $r4.<init>($r6, $i0, i1_3);
+
+        return $r4;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    private void init(java.awt.Font)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        java.awt.Font r1;
+        javax.swing.JPanel r2, r3, r5, r7, r10, $r11, $r14, $r52, r90;
+        java.lang.String[] r4, r6, $r19, $r23, $r87, r88, r88_1, r88_2, r88_3;
+        org.gjt.sp.jedit.gui.FontSelectorDialog$ListHandler r8, $r38;
+        java.awt.Dimension r9;
+        java.awt.BorderLayout $r12;
+        javax.swing.border.EmptyBorder $r13, $r54;
+        java.awt.GridLayout $r15;
+        javax.swing.JTextField $r16, $r20, $r28, $r30, $r35, $r79, $r83;
+        javax.swing.JList $r17, $r21, $r29, $r32, $r33, $r34, $r39, $r40, $r41, $r77, $r81, $r85;
+        java.lang.String $r24, $r25, $r26, $r27, $r37, $r44, $r47, $r58, $r68, $r78, $r80, $r82, $r84;
+        java.lang.Object $r36;
+        org.gjt.sp.jedit.gui.FontSelectorDialog$1 $r43;
+        javax.swing.border.TitledBorder $r45;
+        javax.swing.JLabel $r46, $r48, $r49, $r50;
+        javax.swing.BoxLayout $r53;
+        java.awt.Component $r55, $r65, $r73;
+        javax.swing.JButton $r57, $r60, $r62, $r63, $r67, $r70, $r71;
+        org.gjt.sp.jedit.gui.FontSelectorDialog$ActionHandler $r59, $r69;
+        javax.swing.JRootPane $r61;
+        java.awt.Container $r76;
+        int $i0, $i1, $i2;
+        java.lang.Exception $r86, r89;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r11 = new javax.swing.JPanel;
+
+        $r12 = new java.awt.BorderLayout;
+
+        specialinvoke $r12.<init>();
+
+        specialinvoke $r11.<init>($r12);
+
+        r2 = $r11;
+
+        $r13 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r13.<init>(12, 12, 12, 12);
+
+        r2.setBorder($r13);
+
+        r0.setContentPane(r2);
+
+        $r14 = new javax.swing.JPanel;
+
+        $r15 = new java.awt.GridLayout;
+
+        specialinvoke $r15.<init>(1, 3, 6, 6);
+
+        specialinvoke $r14.<init>($r15);
+
+(0)     r3 = $r14;
+
+     label1:
+        r88 = org.gjt.sp.jedit.gui.FontSelectorDialog.getFontList();
+
+     label2:
+(1)     goto label4;
+
+     label3:
+        $r86 := @caughtexception;
+
+        r88_1 = Phi(r88 #0);
+
+        r89 = $r86;
+
+        org.gjt.sp.util.Log.log(9, r0, "Broken Java implementation!");
+
+        org.gjt.sp.util.Log.log(9, r0, r89);
+
+        $r87 = newarray (java.lang.String)[1];
+
+        $r87[0] = "Broken Java implementation!";
+
+(2)     r88_2 = $r87;
+
+     label4:
+        r88_3 = Phi(r88 #1, r88_2 #2);
+
+        $r16 = new javax.swing.JTextField;
+
+        specialinvoke $r16.<init>();
+
+        r0.familyField = $r16;
+
+        $r17 = new javax.swing.JList;
+
+        specialinvoke $r17.<init>(r88_3);
+
+        r0.familyList = $r17;
+
+        r90 = org.gjt.sp.jedit.gui.FontSelectorDialog.createTextFieldAndListPanel("font-selector.family", $r16, $r17);
+
+        r3.add(r90);
+
+        $r19 = newarray (java.lang.String)[10];
+
+        $r19[0] = "9";
+
+        $r19[1] = "10";
+
+        $r19[2] = "12";
+
+        $r19[3] = "14";
+
+        $r19[4] = "16";
+
+        $r19[5] = "18";
+
+        $r19[6] = "24";
+
+        $r19[7] = "30";
+
+        $r19[8] = "36";
+
+        $r19[9] = "42";
+
+        r4 = $r19;
+
+        $r20 = new javax.swing.JTextField;
+
+        specialinvoke $r20.<init>();
+
+        r0.sizeField = $r20;
+
+        $r21 = new javax.swing.JList;
+
+        specialinvoke $r21.<init>(r4);
+
+        r0.sizeList = $r21;
+
+        r5 = org.gjt.sp.jedit.gui.FontSelectorDialog.createTextFieldAndListPanel("font-selector.size", $r20, $r21);
+
+        r3.add(r5);
+
+        $r23 = newarray (java.lang.String)[4];
+
+        $r24 = org.gjt.sp.jedit.jEdit.getProperty("font-selector.plain");
+
+        $r23[0] = $r24;
+
+        $r25 = org.gjt.sp.jedit.jEdit.getProperty("font-selector.bold");
+
+        $r23[1] = $r25;
+
+        $r26 = org.gjt.sp.jedit.jEdit.getProperty("font-selector.italic");
+
+        $r23[2] = $r26;
+
+        $r27 = org.gjt.sp.jedit.jEdit.getProperty("font-selector.bolditalic");
+
+        $r23[3] = $r27;
+
+        r6 = $r23;
+
+        $r28 = new javax.swing.JTextField;
+
+        specialinvoke $r28.<init>();
+
+        r0.styleField = $r28;
+
+        $r29 = new javax.swing.JList;
+
+        specialinvoke $r29.<init>(r6);
+
+        r0.styleList = $r29;
+
+        r7 = org.gjt.sp.jedit.gui.FontSelectorDialog.createTextFieldAndListPanel("font-selector.style", $r28, $r29);
+
+        $r30 = r0.styleField;
+
+        $r30.setEditable(0);
+
+        r3.add(r7);
+
+        if r1 == null goto label5;
+
+        $r77 = r0.familyList;
+
+        $r78 = r1.getFamily();
+
+        $r77.setSelectedValue($r78, 1);
+
+        $r79 = r0.familyField;
+
+        $r80 = r1.getFamily();
+
+        $r79.setText($r80);
+
+        $r81 = r0.sizeList;
+
+        $i0 = r1.getSize();
+
+        $r82 = java.lang.String.valueOf($i0);
+
+        $r81.setSelectedValue($r82, 1);
+
+        $r83 = r0.sizeField;
+
+        $i1 = r1.getSize();
+
+        $r84 = java.lang.String.valueOf($i1);
+
+        $r83.setText($r84);
+
+        $r85 = r0.styleList;
+
+        $i2 = r1.getStyle();
+
+        $r85.setSelectedIndex($i2);
+
+        goto label6;
+
+     label5:
+        $r32 = r0.sizeList;
+
+        $r32.setSelectedValue("12", 1);
+
+        $r33 = r0.styleList;
+
+        $r33.setSelectedIndex(0);
+
+     label6:
+        $r35 = r0.styleField;
+
+        $r34 = r0.styleList;
+
+        $r36 = $r34.getSelectedValue();
+
+        $r37 = (java.lang.String) $r36;
+
+        $r35.setText($r37);
+
+        $r38 = new org.gjt.sp.jedit.gui.FontSelectorDialog$ListHandler;
+
+        specialinvoke $r38.<init>(r0);
+
+        r8 = $r38;
+
+        $r39 = r0.familyList;
+
+        $r39.addListSelectionListener(r8);
+
+        $r40 = r0.sizeList;
+
+        $r40.addListSelectionListener(r8);
+
+        $r41 = r0.styleList;
+
+        $r41.addListSelectionListener(r8);
+
+        r2.add("North", r3);
+
+        $r43 = new org.gjt.sp.jedit.gui.FontSelectorDialog$1;
+
+        $r44 = org.gjt.sp.jedit.jEdit.getProperty("font-selector.long-text");
+
+        specialinvoke $r43.<init>(r0, $r44);
+
+        r0.preview = $r43;
+
+        $r46 = r0.preview;
+
+        $r45 = new javax.swing.border.TitledBorder;
+
+        $r47 = org.gjt.sp.jedit.jEdit.getProperty("font-selector.preview");
+
+        specialinvoke $r45.<init>($r47);
+
+        $r46.setBorder($r45);
+
+        specialinvoke r0.updatePreview();
+
+        $r48 = r0.preview;
+
+        r9 = $r48.getPreferredSize();
+
+        r9.height = 100;
+
+        $r49 = r0.preview;
+
+        $r49.setPreferredSize(r9);
+
+        $r50 = r0.preview;
+
+        r2.add("Center", $r50);
+
+        $r52 = new javax.swing.JPanel;
+
+        specialinvoke $r52.<init>();
+
+        r10 = $r52;
+
+        $r53 = new javax.swing.BoxLayout;
+
+        specialinvoke $r53.<init>(r10, 0);
+
+        r10.setLayout($r53);
+
+        $r54 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r54.<init>(12, 0, 0, 0);
+
+        r10.setBorder($r54);
+
+        $r55 = javax.swing.Box.createGlue();
+
+        r10.add($r55);
+
+        $r57 = new javax.swing.JButton;
+
+        $r58 = org.gjt.sp.jedit.jEdit.getProperty("common.ok");
+
+        specialinvoke $r57.<init>($r58);
+
+        r0.ok = $r57;
+
+        $r60 = r0.ok;
+
+        $r59 = new org.gjt.sp.jedit.gui.FontSelectorDialog$ActionHandler;
+
+        specialinvoke $r59.<init>(r0);
+
+        $r60.addActionListener($r59);
+
+        $r61 = r0.getRootPane();
+
+        $r62 = r0.ok;
+
+        $r61.setDefaultButton($r62);
+
+        $r63 = r0.ok;
+
+        r10.add($r63);
+
+        $r65 = javax.swing.Box.createHorizontalStrut(6);
+
+        r10.add($r65);
+
+        $r67 = new javax.swing.JButton;
+
+        $r68 = org.gjt.sp.jedit.jEdit.getProperty("common.cancel");
+
+        specialinvoke $r67.<init>($r68);
+
+        r0.cancel = $r67;
+
+        $r70 = r0.cancel;
+
+        $r69 = new org.gjt.sp.jedit.gui.FontSelectorDialog$ActionHandler;
+
+        specialinvoke $r69.<init>(r0);
+
+        $r70.addActionListener($r69);
+
+        $r71 = r0.cancel;
+
+        r10.add($r71);
+
+        $r73 = javax.swing.Box.createGlue();
+
+        r10.add($r73);
+
+        r2.add("South", r10);
+
+        r0.pack();
+
+        $r76 = r0.getParent();
+
+        r0.setLocationRelativeTo($r76);
+
+        r0.setVisible(1);
+
+        return;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    private static java.lang.String[] getFontList()
+    {
+        java.lang.String[] r0, $r5, $r6, $r7, $r9, r12;
+        java.util.ArrayList r1, $r3;
+        java.awt.GraphicsEnvironment $r2;
+        int $i0, $i1, $i2, $i3, $i4, i5, i6;
+        java.lang.Object[] $r4;
+        java.lang.String $r8, $r10, $r11;
+        boolean $z1;
+
+        $r2 = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment();
+
+        r0 = $r2.getAvailableFontFamilyNames();
+
+        $r3 = new java.util.ArrayList;
+
+        $i0 = lengthof r0;
+
+        specialinvoke $r3.<init>($i0);
+
+        r1 = $r3;
+
+(0)     i5 = 0;
+
+     label1:
+        i6 = Phi(i6 #0, i6 #3);
+
+        i5 = Phi(i5 #0, i5 #3);
+
+        $i1 = lengthof r0;
+
+        if i5 >= $i1 goto label6;
+
+(1)     i6 = 0;
+
+     label2:
+        i6 = Phi(i6 #1, i6 #2);
+
+        i5 = Phi(i5 #1, i5 #2);
+
+        $r6 = org.gjt.sp.jedit.gui.FontSelectorDialog.HIDEFONTS;
+
+        $i3 = lengthof $r6;
+
+        if i6 >= $i3 goto label4;
+
+        $r11 = r0[i5];
+
+        $r9 = org.gjt.sp.jedit.gui.FontSelectorDialog.HIDEFONTS;
+
+        $r10 = $r9[i6];
+
+        $z1 = $r11.contains($r10);
+
+        if $z1 == 0 goto label3;
+
+        goto label4;
+
+     label3:
+        i6 = i6 + 1;
+
+(2)     goto label2;
+
+     label4:
+        $r7 = org.gjt.sp.jedit.gui.FontSelectorDialog.HIDEFONTS;
+
+        $i4 = lengthof $r7;
+
+        if i6 != $i4 goto label5;
+
+        $r8 = r0[i5];
+
+        r1.add($r8);
+
+     label5:
+        i5 = i5 + 1;
+
+(3)     goto label1;
+
+     label6:
+        $i2 = r1.size();
+
+        r12 = newarray (java.lang.String)[$i2];
+
+        $r4 = r1.toArray(r12);
+
+        $r5 = (java.lang.String[]) $r4;
+
+        return $r5;
+    }
+
+    private static javax.swing.JPanel createTextFieldAndListPanel(java.lang.String, javax.swing.JTextField, javax.swing.JList)
+    {
+        java.lang.String r0, $r12;
+        javax.swing.JTextField r1;
+        javax.swing.JList r2;
+        java.awt.GridBagLayout r3, $r8;
+        javax.swing.JPanel r4, $r9;
+        java.awt.GridBagConstraints r5, $r10;
+        javax.swing.JLabel r6, $r11;
+        javax.swing.JScrollPane r7, $r17;
+        java.awt.Component r19, r20;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        $r8 = new java.awt.GridBagLayout;
+
+        specialinvoke $r8.<init>();
+
+        r3 = $r8;
+
+        $r9 = new javax.swing.JPanel;
+
+        specialinvoke $r9.<init>(r3);
+
+        r4 = $r9;
+
+        $r10 = new java.awt.GridBagConstraints;
+
+        specialinvoke $r10.<init>();
+
+        r5 = $r10;
+
+        r5.gridy = 0;
+
+        r5.gridx = 0;
+
+        r5.gridheight = 1;
+
+        r5.gridwidth = 1;
+
+        r5.fill = 1;
+
+        r5.weightx = 1.0;
+
+        $r11 = new javax.swing.JLabel;
+
+        $r12 = org.gjt.sp.jedit.jEdit.getProperty(r0);
+
+        specialinvoke $r11.<init>($r12);
+
+        r6 = $r11;
+
+        r3.setConstraints(r6, r5);
+
+        r4.add(r6);
+
+        r5.gridy = 1;
+
+        r19 = javax.swing.Box.createVerticalStrut(6);
+
+        r3.setConstraints(r19, r5);
+
+        r4.add(r19);
+
+        r5.gridy = 2;
+
+        r3.setConstraints(r1, r5);
+
+        r4.add(r1);
+
+        r5.gridy = 3;
+
+        r20 = javax.swing.Box.createVerticalStrut(6);
+
+        r3.setConstraints(r20, r5);
+
+        r4.add(r20);
+
+        r5.gridy = 4;
+
+        r5.gridheight = 0;
+
+        r5.weighty = 1.0;
+
+        $r17 = new javax.swing.JScrollPane;
+
+        specialinvoke $r17.<init>(r2);
+
+        r7 = $r17;
+
+        r3.setConstraints(r7, r5);
+
+        r4.add(r7);
+
+        return r4;
+    }
+
+    private void updatePreview()
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        java.lang.String r1, $r4;
+        javax.swing.JTextField $r2, $r3;
+        javax.swing.JList $r5;
+        java.awt.Font $r6;
+        javax.swing.JLabel $r7;
+        java.lang.Exception $r8, r9;
+        int i0, i1, i0_1, i0_2, i0_3;
+
+        r0 := @this;
+
+        $r2 = r0.familyField;
+
+(0)     r1 = $r2.getText();
+
+     label1:
+        $r3 = r0.sizeField;
+
+        $r4 = $r3.getText();
+
+        i0 = java.lang.Integer.parseInt($r4);
+
+     label2:
+(1)     goto label4;
+
+     label3:
+        $r8 := @caughtexception;
+
+        i0_1 = Phi(i0 #0);
+
+        r9 = $r8;
+
+(2)     i0_2 = 12;
+
+     label4:
+        i0_3 = Phi(i0 #1, i0_2 #2);
+
+        $r5 = r0.styleList;
+
+        i1 = $r5.getSelectedIndex();
+
+        $r7 = r0.preview;
+
+        $r6 = new java.awt.Font;
+
+        specialinvoke $r6.<init>(r1, i1, i0_3);
+
+        $r7.setFont($r6);
+
+        return;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    static org.gjt.sp.jedit.gui.FontSelector access$000(org.gjt.sp.jedit.gui.FontSelectorDialog)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        org.gjt.sp.jedit.gui.FontSelector $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.fontSelector;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$100(org.gjt.sp.jedit.gui.FontSelectorDialog)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.ok;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$200(org.gjt.sp.jedit.gui.FontSelectorDialog)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.cancel;
+
+        return $r1;
+    }
+
+    static javax.swing.JList access$300(org.gjt.sp.jedit.gui.FontSelectorDialog)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        javax.swing.JList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.familyList;
+
+        return $r1;
+    }
+
+    static javax.swing.JTextField access$400(org.gjt.sp.jedit.gui.FontSelectorDialog)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.familyField;
+
+        return $r1;
+    }
+
+    static javax.swing.JList access$500(org.gjt.sp.jedit.gui.FontSelectorDialog)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        javax.swing.JList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.sizeList;
+
+        return $r1;
+    }
+
+    static javax.swing.JTextField access$600(org.gjt.sp.jedit.gui.FontSelectorDialog)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.sizeField;
+
+        return $r1;
+    }
+
+    static javax.swing.JList access$700(org.gjt.sp.jedit.gui.FontSelectorDialog)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        javax.swing.JList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.styleList;
+
+        return $r1;
+    }
+
+    static javax.swing.JTextField access$800(org.gjt.sp.jedit.gui.FontSelectorDialog)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.styleField;
+
+        return $r1;
+    }
+
+    static void access$900(org.gjt.sp.jedit.gui.FontSelectorDialog)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updatePreview();
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String[] $r0;
+
+        $r0 = newarray (java.lang.String)[2];
+
+        $r0[0] = ".bold";
+
+        $r0[1] = ".italic";
+
+        org.gjt.sp.jedit.gui.FontSelectorDialog.HIDEFONTS = $r0;
+
+        return;
+    }
+}

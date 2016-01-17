@@ -1,0 +1,19 @@
+public interface  org.gjt.sp.jedit.buffer.BufferListener extends java.lang.Object
+{
+
+    public abstract void foldLevelChanged(org.gjt.sp.jedit.buffer.JEditBuffer, int, int);
+
+    public abstract void contentInserted(org.gjt.sp.jedit.buffer.JEditBuffer, int, int, int, int);
+
+    public abstract void contentRemoved(org.gjt.sp.jedit.buffer.JEditBuffer, int, int, int, int);
+
+    public abstract void preContentInserted(org.gjt.sp.jedit.buffer.JEditBuffer, int, int, int, int);
+
+    public abstract void preContentRemoved(org.gjt.sp.jedit.buffer.JEditBuffer, int, int, int, int);
+
+    public abstract void transactionComplete(org.gjt.sp.jedit.buffer.JEditBuffer);
+
+    public abstract void foldHandlerChanged(org.gjt.sp.jedit.buffer.JEditBuffer);
+
+    public abstract void bufferLoaded(org.gjt.sp.jedit.buffer.JEditBuffer);
+}

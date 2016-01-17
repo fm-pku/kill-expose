@@ -1,0 +1,14 @@
+public abstract class org.gjt.sp.jedit.bufferio.IoTask extends org.gjt.sp.util.Task
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bufferio.IoTask r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

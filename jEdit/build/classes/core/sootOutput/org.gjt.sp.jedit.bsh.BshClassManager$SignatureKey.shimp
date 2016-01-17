@@ -1,0 +1,248 @@
+class org.gjt.sp.jedit.bsh.BshClassManager$SignatureKey extends java.lang.Object
+{
+    java.lang.Class clas;
+    java.lang.Class[] types;
+    java.lang.String methodName;
+    int hashCode;
+
+    void <init>(java.lang.Class, java.lang.String, java.lang.Class[])
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager$SignatureKey r0;
+        java.lang.Class r1;
+        java.lang.String r2;
+        java.lang.Class[] r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.hashCode = 0;
+
+        r0.clas = r1;
+
+        r0.methodName = r2;
+
+        r0.types = r3;
+
+        return;
+    }
+
+    public int hashCode()
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager$SignatureKey r0;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, i12, $i13;
+        java.lang.Class $r1, $r6, $r8;
+        java.lang.String $r2;
+        java.lang.Class[] $r3, $r4, $r5, $r7;
+
+        r0 := @this;
+
+        $i1 = r0.hashCode;
+
+(0)     if $i1 != 0 goto label5;
+
+        $r1 = r0.clas;
+
+        $i3 = $r1.hashCode();
+
+        $r2 = r0.methodName;
+
+        $i4 = $r2.hashCode();
+
+        $i5 = $i3 * $i4;
+
+        r0.hashCode = $i5;
+
+        $r3 = r0.types;
+
+        if $r3 != null goto label1;
+
+        $i11 = r0.hashCode;
+
+        return $i11;
+
+     label1:
+(1)     i12 = 0;
+
+     label2:
+        i12 = Phi(i12 #1, i12 #5);
+
+        $i13 = Phi($i13 #1, $i13 #5);
+
+        $r4 = r0.types;
+
+        $i6 = lengthof $r4;
+
+(2)     if i12 >= $i6 goto label5;
+
+        $r5 = r0.types;
+
+        $r6 = $r5[i12];
+
+        if $r6 != null goto label3;
+
+        $i13 = 21;
+
+(3)     goto label4;
+
+     label3:
+        $r7 = r0.types;
+
+        $r8 = $r7[i12];
+
+(4)     $i13 = $r8.hashCode();
+
+     label4:
+        $i13 = Phi($i13 #3, $i13 #4);
+
+        i0 = $i13;
+
+        $i8 = r0.hashCode;
+
+        $i7 = i12 + 1;
+
+        $i9 = $i8 * $i7;
+
+        $i10 = $i9 + i0;
+
+        r0.hashCode = $i10;
+
+        i12 = i12 + 1;
+
+(5)     goto label2;
+
+     label5:
+        i12 = Phi(i12 #0, i12 #2);
+
+        $i13 = Phi($i13 #0, $i13 #2);
+
+        $i2 = r0.hashCode;
+
+        return $i2;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager$SignatureKey r0, r2;
+        java.lang.Object r1;
+        java.lang.Class[] $r3, $r8, $r9, $r10, $r11, $r13, $r14, $r17, $r19;
+        java.lang.Class $r4, $r5, $r12, $r15, $r16, $r18;
+        java.lang.String $r6, $r7;
+        boolean $z0, $z1, $z2, $z2_1, $z2_2;
+        int $i0, $i1, $i2, i3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = (org.gjt.sp.jedit.bsh.BshClassManager$SignatureKey) r1;
+
+        $r3 = r0.types;
+
+        if $r3 != null goto label03;
+
+        $r19 = r2.types;
+
+        if $r19 != null goto label01;
+
+        $z2 = 1;
+
+(0)     goto label02;
+
+     label01:
+(1)     $z2_1 = 0;
+
+     label02:
+        $z2_2 = Phi($z2 #0, $z2_1 #1);
+
+        return $z2_2;
+
+     label03:
+        $r5 = r0.clas;
+
+        $r4 = r2.clas;
+
+        if $r5 == $r4 goto label04;
+
+        return 0;
+
+     label04:
+        $r7 = r0.methodName;
+
+        $r6 = r2.methodName;
+
+        $z0 = $r7.equals($r6);
+
+        if $z0 != 0 goto label05;
+
+        return 0;
+
+     label05:
+        $r8 = r0.types;
+
+        $i1 = lengthof $r8;
+
+        $r9 = r2.types;
+
+        $i0 = lengthof $r9;
+
+        if $i1 == $i0 goto label06;
+
+        return 0;
+
+     label06:
+(2)     i3 = 0;
+
+     label07:
+        i3 = Phi(i3 #2, i3 #3);
+
+        $r10 = r0.types;
+
+        $i2 = lengthof $r10;
+
+        if i3 >= $i2 goto label10;
+
+        $r11 = r0.types;
+
+        $r12 = $r11[i3];
+
+        if $r12 != null goto label08;
+
+        $r17 = r2.types;
+
+        $r18 = $r17[i3];
+
+        if $r18 == null goto label09;
+
+        return 0;
+
+     label08:
+        $r13 = r0.types;
+
+        $r16 = $r13[i3];
+
+        $r14 = r2.types;
+
+        $r15 = $r14[i3];
+
+        $z1 = $r16.equals($r15);
+
+        if $z1 != 0 goto label09;
+
+        return 0;
+
+     label09:
+        i3 = i3 + 1;
+
+(3)     goto label07;
+
+     label10:
+        return 1;
+    }
+}

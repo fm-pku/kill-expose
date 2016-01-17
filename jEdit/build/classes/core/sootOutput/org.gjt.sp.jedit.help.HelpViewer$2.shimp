@@ -1,0 +1,240 @@
+class org.gjt.sp.jedit.help.HelpViewer$2 extends javax.swing.SwingWorker
+{
+    private boolean success;
+    final java.net.URL val$_url;
+    final int val$scrollPosition;
+    final boolean val$addToHistory;
+    final java.lang.String val$_shortURL;
+    final org.gjt.sp.jedit.help.HelpViewer this$0;
+
+    void <init>(org.gjt.sp.jedit.help.HelpViewer, java.net.URL, int, boolean, java.lang.String)
+    {
+        org.gjt.sp.jedit.help.HelpViewer$2 r0;
+        org.gjt.sp.jedit.help.HelpViewer r1;
+        java.net.URL r2;
+        int i0;
+        boolean z0;
+        java.lang.String r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        r3 := @parameter4;
+
+        r0.this$0 = r1;
+
+        r0.val$_url = r2;
+
+        r0.val$scrollPosition = i0;
+
+        r0.val$addToHistory = z0;
+
+        r0.val$_shortURL = r3;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    protected java.lang.Void doInBackground() throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.help.HelpViewer$2 r0;
+        java.io.BufferedInputStream r1;
+        java.lang.String r2, $r6, $r11, $r18, $r19;
+        org.gjt.sp.jedit.help.HelpViewer $r3, $r7, $r13, $r20;
+        javax.swing.JEditorPane $r4, $r8, $r14;
+        java.net.URL $r5, $r9, $r10, $r17;
+        boolean $z0;
+        org.gjt.sp.jedit.io.RegexEncodingDetector $r12;
+        java.io.IOException $r15, r23;
+        java.lang.String[] $r16, r24;
+        java.net.URLConnection r21;
+        java.io.InputStream r22;
+
+        r0 := @this;
+
+     label1:
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.help.HelpViewer.access$300($r3);
+
+        $r4.putClientProperty("charset", null);
+
+        $r5 = r0.val$_url;
+
+        $r6 = $r5.getPath();
+
+        $z0 = $r6.matches(".+\\.([tT][xX][tT])");
+
+        if $z0 == 0 goto label3;
+
+        $r10 = r0.val$_url;
+
+        r21 = $r10.openConnection();
+
+        $r11 = r21.getContentEncoding();
+
+        if $r11 != null goto label3;
+
+        r22 = r21.getInputStream();
+
+        r1 = org.gjt.sp.jedit.io.AutoDetection.getMarkedStream(r22);
+
+        $r12 = org.gjt.sp.jedit.help.HelpViewer.access$400();
+
+        r2 = $r12.detectEncoding(r1);
+
+        if r2 == null goto label2;
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.help.HelpViewer.access$300($r13);
+
+        $r14.putClientProperty("charset", r2);
+
+     label2:
+        r1.close();
+
+     label3:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.help.HelpViewer.access$300($r7);
+
+        $r9 = r0.val$_url;
+
+        $r8.setPage($r9);
+
+        r0.success = 1;
+
+     label4:
+        goto label6;
+
+     label5:
+        $r15 := @caughtexception;
+
+        r23 = $r15;
+
+        org.gjt.sp.util.Log.log(9, r0, r23);
+
+        $r16 = newarray (java.lang.String)[2];
+
+        $r17 = r0.val$_url;
+
+        $r18 = $r17.toString();
+
+        $r16[0] = $r18;
+
+        $r19 = r23.toString();
+
+        $r16[1] = $r19;
+
+        r24 = $r16;
+
+        $r20 = r0.this$0;
+
+        org.gjt.sp.jedit.GUIUtilities.error($r20, "read-error", r24);
+
+     label6:
+        return null;
+
+        catch java.io.IOException from label1 to label4 with label5;
+    }
+
+    protected void done()
+    {
+        org.gjt.sp.jedit.help.HelpViewer$2 r0;
+        boolean $z0, $z1;
+        int $i0, $i1;
+        java.lang.String $r1, $r4, $r9, $r13;
+        org.gjt.sp.jedit.help.HelpViewer $r2, $r5, $r7, $r10, $r14;
+        javax.swing.JEditorPane $r6;
+        org.gjt.sp.jedit.help.HelpTOCPanel $r8;
+        org.gjt.sp.jedit.help.HelpHistoryModel $r11;
+        java.net.URL $r12;
+        javax.swing.JScrollPane $r15;
+        javax.swing.JScrollBar $r16;
+
+        r0 := @this;
+
+        $z0 = r0.success;
+
+        if $z0 == 0 goto label4;
+
+        $i0 = r0.val$scrollPosition;
+
+        if $i0 == 0 goto label1;
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.help.HelpViewer.access$500($r14);
+
+        $r16 = $r15.getVerticalScrollBar();
+
+        $i1 = r0.val$scrollPosition;
+
+        $r16.setValue($i1);
+
+     label1:
+        $z1 = r0.val$addToHistory;
+
+        if $z1 == 0 goto label2;
+
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.help.HelpViewer.access$600($r10);
+
+        $r12 = r0.val$_url;
+
+        $r13 = $r12.toString();
+
+        $r11.addToHistory($r13);
+
+     label2:
+        $r2 = r0.this$0;
+
+        $r1 = r0.val$_shortURL;
+
+        org.gjt.sp.jedit.help.HelpViewer.access$702($r2, $r1);
+
+        $r4 = r0.val$_shortURL;
+
+        if $r4 == null goto label3;
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.help.HelpViewer.access$800($r7);
+
+        $r9 = r0.val$_shortURL;
+
+        $r8.selectNode($r9);
+
+     label3:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.help.HelpViewer.access$300($r5);
+
+        $r6.requestFocus();
+
+     label4:
+        return;
+    }
+
+    protected volatile java.lang.Object doInBackground() throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.help.HelpViewer$2 r0;
+        java.lang.Void $r1;
+
+        r0 := @this;
+
+        $r1 = r0.doInBackground();
+
+        return $r1;
+    }
+}

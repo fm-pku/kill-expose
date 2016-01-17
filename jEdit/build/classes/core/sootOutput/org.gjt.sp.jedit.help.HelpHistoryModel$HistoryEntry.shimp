@@ -1,0 +1,159 @@
+class org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry extends java.lang.Object
+{
+    java.lang.String url;
+    java.lang.String title;
+    int scrollPosition;
+
+    void <init>(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry r0;
+        java.lang.String r1, r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1, r2, 0);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry)
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry r0, r1;
+        int $i0;
+        java.lang.String $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r1.url;
+
+        $r2 = r1.title;
+
+        $i0 = r1.scrollPosition;
+
+        specialinvoke r0.<init>($r3, $r2, $i0);
+
+        return;
+    }
+
+    void <init>(java.lang.String, java.lang.String, int)
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry r0;
+        java.lang.String r1, r2;
+        int i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.url = r1;
+
+        r0.title = r2;
+
+        r0.scrollPosition = i0;
+
+        return;
+    }
+
+    public boolean equals(org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry)
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry r0, r1;
+        java.lang.String $r2, $r3, $r4, $r5;
+        boolean $z0, $z1, $z2, $z2_1, $z2_2;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r1.url;
+
+        $r2 = r0.url;
+
+        $z0 = $r3.equals($r2);
+
+        if $z0 == 0 goto label1;
+
+        $r5 = r1.title;
+
+        $r4 = r0.title;
+
+        $z1 = $r5.equals($r4);
+
+        if $z1 == 0 goto label1;
+
+        $i1 = r1.scrollPosition;
+
+        $i0 = r0.scrollPosition;
+
+        if $i1 != $i0 goto label1;
+
+        $z2 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z2_1 = 0;
+
+     label2:
+        $z2_2 = Phi($z2 #0, $z2_1 #1);
+
+        return $z2_2;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.help.HelpHistoryModel$HistoryEntry r0;
+        java.lang.StringBuilder $r1, $r4, $r5, $r7, $r8, $r10, $r11, $r12, $r13;
+        java.lang.Class $r2;
+        java.lang.String $r3, $r6, $r9, $r14;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = r0.getClass();
+
+        $r3 = $r2.getName();
+
+        $r4 = $r1.append($r3);
+
+        $r5 = $r4.append("[url=");
+
+        $r6 = r0.url;
+
+        $r7 = $r5.append($r6);
+
+        $r8 = $r7.append(",title=");
+
+        $r9 = r0.title;
+
+        $r10 = $r8.append($r9);
+
+        $r11 = $r10.append(",scrollPosition=");
+
+        $i0 = r0.scrollPosition;
+
+        $r12 = $r11.append($i0);
+
+        $r13 = $r12.append(93);
+
+        $r14 = $r13.toString();
+
+        return $r14;
+    }
+}

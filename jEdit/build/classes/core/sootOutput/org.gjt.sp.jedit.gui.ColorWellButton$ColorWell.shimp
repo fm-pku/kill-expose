@@ -1,0 +1,136 @@
+class org.gjt.sp.jedit.gui.ColorWellButton$ColorWell extends java.lang.Object implements javax.swing.Icon
+{
+    java.awt.Color color;
+    private java.awt.geom.Rectangle2D bounds;
+
+    void <init>(java.awt.Color)
+    {
+        org.gjt.sp.jedit.gui.ColorWellButton$ColorWell r0;
+        java.awt.Color r1;
+        javax.swing.JLabel $r2;
+        java.awt.Font $r3;
+        java.awt.font.FontRenderContext $r4;
+        java.awt.font.GlyphVector $r5;
+        java.awt.geom.Rectangle2D $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        $r2 = new javax.swing.JLabel;
+
+        specialinvoke $r2.<init>("");
+
+        $r3 = $r2.getFont();
+
+        $r4 = new java.awt.font.FontRenderContext;
+
+        specialinvoke $r4.<init>(null, 1, 0);
+
+        $r5 = $r3.createGlyphVector($r4, "AAAA");
+
+        $r6 = $r5.getVisualBounds();
+
+        r0.bounds = $r6;
+
+        r0.color = r1;
+
+        return;
+    }
+
+    public int getIconWidth()
+    {
+        org.gjt.sp.jedit.gui.ColorWellButton$ColorWell r0;
+        java.awt.geom.Rectangle2D $r1;
+        double $d0, $d1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.bounds;
+
+        $d0 = $r1.getWidth();
+
+        $d1 = java.lang.Math.ceil($d0);
+
+        $i0 = (int) $d1;
+
+        return $i0;
+    }
+
+    public int getIconHeight()
+    {
+        org.gjt.sp.jedit.gui.ColorWellButton$ColorWell r0;
+        java.awt.geom.Rectangle2D $r1;
+        double $d0, $d1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.bounds;
+
+        $d0 = $r1.getHeight();
+
+        $d1 = java.lang.Math.ceil($d0);
+
+        $i0 = (int) $d1;
+
+        return $i0;
+    }
+
+    public void paintIcon(java.awt.Component, java.awt.Graphics, int, int)
+    {
+        org.gjt.sp.jedit.gui.ColorWellButton$ColorWell r0;
+        java.awt.Component r1;
+        java.awt.Graphics r2;
+        int i0, i1, $i2, $i3, $i4, $i5, $i6, $i7;
+        java.awt.Color $r3, $r4, $r5, $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        i1 := @parameter3;
+
+        $r3 = r0.color;
+
+        if $r3 != null goto label1;
+
+        return;
+
+     label1:
+        $r4 = r0.color;
+
+        r2.setColor($r4);
+
+        $i2 = r0.getIconWidth();
+
+        $i3 = r0.getIconHeight();
+
+        r2.fillRect(i0, i1, $i2, $i3);
+
+        $r5 = r0.color;
+
+        $r6 = $r5.darker();
+
+        r2.setColor($r6);
+
+        $i4 = r0.getIconWidth();
+
+        $i5 = $i4 - 1;
+
+        $i6 = r0.getIconHeight();
+
+        $i7 = $i6 - 1;
+
+        r2.drawRect(i0, i1, $i5, $i7);
+
+        return;
+    }
+}

@@ -1,0 +1,33 @@
+public class org.gjt.sp.jedit.gui.statusbar.MultiSelectWidgetFactory extends java.lang.Object implements org.gjt.sp.jedit.gui.statusbar.StatusWidgetFactory
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.gui.statusbar.MultiSelectWidgetFactory r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.gui.statusbar.Widget getWidget(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.statusbar.MultiSelectWidgetFactory r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.gui.statusbar.MultiSelectWidgetFactory$MultiSelectWidget r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new org.gjt.sp.jedit.gui.statusbar.MultiSelectWidgetFactory$MultiSelectWidget;
+
+        specialinvoke $r3.<init>(r1);
+
+        r2 = $r3;
+
+        return r2;
+    }
+}

@@ -1,0 +1,525 @@
+public class org.gjt.sp.jedit.gui.AbbrevEditor extends javax.swing.JPanel
+{
+    private javax.swing.JTextField abbrev;
+    private javax.swing.JTextArea beforeCaret;
+    private javax.swing.JTextArea afterCaret;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.gui.AbbrevEditor r0;
+        java.awt.GridBagLayout r1, $r3;
+        java.awt.GridBagConstraints r2, $r4;
+        javax.swing.JLabel $r5, $r13, $r21, r29, r30, r32;
+        java.lang.String $r6, $r14, $r22;
+        javax.swing.border.EmptyBorder $r7, $r15, $r23;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9;
+        javax.swing.JTextField $r9, $r10, $r11;
+        javax.swing.JTextArea $r17, $r19, $r25, $r27;
+        javax.swing.JScrollPane $r18, $r26, r31, r33;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r3 = new java.awt.GridBagLayout;
+
+        specialinvoke $r3.<init>();
+
+        r1 = $r3;
+
+        r0.setLayout(r1);
+
+        $r4 = new java.awt.GridBagConstraints;
+
+        specialinvoke $r4.<init>();
+
+        r2 = $r4;
+
+        r2.anchor = 17;
+
+        r2.fill = 1;
+
+        r2.weightx = 0.0;
+
+        r2.gridx = 1;
+
+        r2.gridy = 1;
+
+        $r5 = new javax.swing.JLabel;
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("abbrev-editor.abbrev");
+
+        specialinvoke $r5.<init>($r6, 4);
+
+        r29 = $r5;
+
+        $r7 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r7.<init>(0, 0, 0, 12);
+
+        r29.setBorder($r7);
+
+        r1.setConstraints(r29, r2);
+
+        r0.add(r29);
+
+        $i0 = r2.gridx;
+
+        $i1 = $i0 + 1;
+
+        r2.gridx = $i1;
+
+        r2.weightx = 1.0;
+
+        $r9 = new javax.swing.JTextField;
+
+        specialinvoke $r9.<init>();
+
+        r0.abbrev = $r9;
+
+        $r10 = r0.abbrev;
+
+        r1.setConstraints($r10, r2);
+
+        $r11 = r0.abbrev;
+
+        r0.add($r11);
+
+        r2.gridx = 1;
+
+        r2.weightx = 0.0;
+
+        r2.gridwidth = 2;
+
+        $i2 = r2.gridy;
+
+        $i3 = $i2 + 1;
+
+        r2.gridy = $i3;
+
+        $r13 = new javax.swing.JLabel;
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("abbrev-editor.before");
+
+        specialinvoke $r13.<init>($r14);
+
+        r30 = $r13;
+
+        $r15 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r15.<init>(6, 0, 3, 0);
+
+        r30.setBorder($r15);
+
+        r1.setConstraints(r30, r2);
+
+        r0.add(r30);
+
+        $i4 = r2.gridy;
+
+        $i5 = $i4 + 1;
+
+        r2.gridy = $i5;
+
+        r2.weighty = 1.0;
+
+        $r17 = new javax.swing.JTextArea;
+
+        specialinvoke $r17.<init>(4, 40);
+
+        r0.beforeCaret = $r17;
+
+        $r18 = new javax.swing.JScrollPane;
+
+        $r19 = r0.beforeCaret;
+
+        specialinvoke $r18.<init>($r19);
+
+        r31 = $r18;
+
+        r1.setConstraints(r31, r2);
+
+        r0.add(r31);
+
+        $i6 = r2.gridy;
+
+        $i7 = $i6 + 1;
+
+        r2.gridy = $i7;
+
+        r2.weighty = 0.0;
+
+        $r21 = new javax.swing.JLabel;
+
+        $r22 = org.gjt.sp.jedit.jEdit.getProperty("abbrev-editor.after");
+
+        specialinvoke $r21.<init>($r22);
+
+        r32 = $r21;
+
+        $r23 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r23.<init>(6, 0, 3, 0);
+
+        r32.setBorder($r23);
+
+        r1.setConstraints(r32, r2);
+
+        r0.add(r32);
+
+        $i8 = r2.gridy;
+
+        $i9 = $i8 + 1;
+
+        r2.gridy = $i9;
+
+        r2.weighty = 1.0;
+
+        $r25 = new javax.swing.JTextArea;
+
+        specialinvoke $r25.<init>(4, 40);
+
+        r0.afterCaret = $r25;
+
+        $r26 = new javax.swing.JScrollPane;
+
+        $r27 = r0.afterCaret;
+
+        specialinvoke $r26.<init>($r27);
+
+        r33 = $r26;
+
+        r1.setConstraints(r33, r2);
+
+        r0.add(r33);
+
+        return;
+    }
+
+    public java.lang.String getAbbrev()
+    {
+        org.gjt.sp.jedit.gui.AbbrevEditor r0;
+        javax.swing.JTextField $r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        $r1 = r0.abbrev;
+
+        $r2 = $r1.getText();
+
+        return $r2;
+    }
+
+    public void setAbbrev(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.AbbrevEditor r0;
+        java.lang.String r1;
+        javax.swing.JTextField $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.abbrev;
+
+        $r2.setText(r1);
+
+        return;
+    }
+
+    public java.lang.String getExpansion()
+    {
+        org.gjt.sp.jedit.gui.AbbrevEditor r0;
+        java.lang.StringBuilder r1, $r4;
+        java.lang.String r2, r3, $r7;
+        javax.swing.JTextArea $r5, $r6;
+        int $i0, $i1, $i2, i3, i5;
+        char c4, c6;
+
+        r0 := @this;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4;
+
+        $r5 = r0.beforeCaret;
+
+        r2 = $r5.getText();
+
+        $r6 = r0.afterCaret;
+
+        r3 = $r6.getText();
+
+(0)     i3 = 0;
+
+     label01:
+        i3 = Phi(i3 #0, i3 #1);
+
+        $i0 = r2.length();
+
+        if i3 >= $i0 goto label07;
+
+        c4 = r2.charAt(i3);
+
+        lookupswitch(c4)
+        {
+            case 9: goto label03;
+            case 10: goto label02;
+            case 92: goto label04;
+            default: goto label05;
+        };
+
+     label02:
+        r1.append("\\n");
+
+        goto label06;
+
+     label03:
+        r1.append("\\t");
+
+        goto label06;
+
+     label04:
+        r1.append("\\\\");
+
+        goto label06;
+
+     label05:
+        r1.append(c4);
+
+     label06:
+        i3 = i3 + 1;
+
+(1)     goto label01;
+
+     label07:
+        $i1 = r3.length();
+
+(2)     if $i1 == 0 goto label14;
+
+        r1.append("\\|");
+
+(3)     i5 = 0;
+
+     label08:
+        i5 = Phi(i5 #3, i5 #5);
+
+        i3 = Phi(i3 #3, i3 #5);
+
+        $i2 = r3.length();
+
+(4)     if i5 >= $i2 goto label14;
+
+        c6 = r3.charAt(i5);
+
+        lookupswitch(c6)
+        {
+            case 9: goto label10;
+            case 10: goto label09;
+            case 92: goto label11;
+            default: goto label12;
+        };
+
+     label09:
+        r1.append("\\n");
+
+        goto label13;
+
+     label10:
+        r1.append("\\t");
+
+        goto label13;
+
+     label11:
+        r1.append("\\\\");
+
+        goto label13;
+
+     label12:
+        r1.append(c6);
+
+     label13:
+        i5 = i5 + 1;
+
+(5)     goto label08;
+
+     label14:
+        i5 = Phi(i5 #2, i5 #4);
+
+        i3 = Phi(i3 #2, i3 #4);
+
+        $r7 = r1.toString();
+
+        return $r7;
+    }
+
+    public void setExpansion(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.AbbrevEditor r0;
+        java.lang.String r1, r12, r13;
+        java.lang.StringBuilder r2, $r3;
+        int $i0, $i1, $i2, i3;
+        javax.swing.JTextArea $r4, $r5, $r10, $r11;
+        char c4, c5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 != null goto label01;
+
+        $r10 = r0.beforeCaret;
+
+        $r10.setText(null);
+
+        $r11 = r0.afterCaret;
+
+        $r11.setText(null);
+
+        return;
+
+     label01:
+        r12 = null;
+
+        r13 = null;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        r2 = $r3;
+
+(0)     i3 = 0;
+
+     label02:
+        i3 = Phi(i3 #0, i3 #6);
+
+        r12 = Phi(r12 #0, r12 #6);
+
+        r13 = Phi(r13 #0, r13 #6);
+
+        $i0 = r1.length();
+
+        if i3 >= $i0 goto label09;
+
+        c4 = r1.charAt(i3);
+
+        if c4 != 92 goto label07;
+
+        $i1 = r1.length();
+
+        $i2 = $i1 - 1;
+
+        if i3 == $i2 goto label07;
+
+        i3 = i3 + 1;
+
+        c5 = r1.charAt(i3);
+
+        lookupswitch(c5)
+        {
+            case 110: goto label04;
+            case 116: goto label03;
+            case 124: goto label05;
+            default: goto label06;
+        };
+
+     label03:
+        r2.append(9);
+
+(1)     goto label08;
+
+     label04:
+        r2.append(10);
+
+(2)     goto label08;
+
+     label05:
+        r12 = r2.toString();
+
+        r2.setLength(0);
+
+(3)     goto label08;
+
+     label06:
+        r2.append(c5);
+
+(4)     goto label08;
+
+     label07:
+(5)     r2.append(c4);
+
+     label08:
+        i3 = Phi(i3 #1, i3 #2, i3 #3, i3 #4, i3 #5);
+
+        r12 = Phi(r12 #1, r12 #2, r12 #3, r12 #4, r12 #5);
+
+        i3 = i3 + 1;
+
+(6)     goto label02;
+
+     label09:
+        if r12 != null goto label10;
+
+        r12 = r2.toString();
+
+(7)     goto label11;
+
+     label10:
+(8)     r13 = r2.toString();
+
+     label11:
+        r12 = Phi(r12 #7, r12 #8);
+
+        r13 = Phi(r13 #7, r13 #8);
+
+        $r4 = r0.beforeCaret;
+
+        $r4.setText(r12);
+
+        $r5 = r0.afterCaret;
+
+        $r5.setText(r13);
+
+        return;
+    }
+
+    public javax.swing.JTextField getAbbrevField()
+    {
+        org.gjt.sp.jedit.gui.AbbrevEditor r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @this;
+
+        $r1 = r0.abbrev;
+
+        return $r1;
+    }
+
+    public javax.swing.JTextArea getBeforeCaretTextArea()
+    {
+        org.gjt.sp.jedit.gui.AbbrevEditor r0;
+        javax.swing.JTextArea $r1;
+
+        r0 := @this;
+
+        $r1 = r0.beforeCaret;
+
+        return $r1;
+    }
+
+    public javax.swing.JTextArea getAfterCaretTextArea()
+    {
+        org.gjt.sp.jedit.gui.AbbrevEditor r0;
+        javax.swing.JTextArea $r1;
+
+        r0 := @this;
+
+        $r1 = r0.afterCaret;
+
+        return $r1;
+    }
+}

@@ -1,0 +1,462 @@
+class org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog extends org.gjt.sp.jedit.gui.EnhancedDialog
+{
+    private final org.gjt.sp.jedit.textarea.TextArea textArea;
+    private final java.io.ByteArrayOutputStream byteArrayOutputStream;
+    private final java.io.PrintStream printStream;
+    private final javax.swing.JButton removeThisError;
+    private final javax.swing.JButton removeAllErrors;
+    private final java.lang.Object[] throwables;
+    private final javax.swing.JComboBox combo;
+
+    private void <init>(java.awt.Frame)
+    {
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog r0;
+        java.awt.Frame r1;
+        org.gjt.sp.jedit.textarea.StandaloneTextArea$StandaloneActionSet r2, $r15;
+        org.jedit.keymap.Keymap r3;
+        java.lang.String r4, r5, $r24, $r25, $r48, $r53;
+        javax.swing.JPopupMenu r6, $r22;
+        javax.swing.JMenuItem r7, $r23;
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog$MyActionListener r8, $r55;
+        java.io.ByteArrayOutputStream $r9, $r11;
+        java.io.PrintStream $r10;
+        java.util.List $r12;
+        java.lang.Object[] $r13, $r33, $r35, $r61;
+        org.gjt.sp.jedit.textarea.JEditEmbeddedTextArea $r14;
+        org.gjt.sp.jedit.jEdit$JEditPropertyManager $r16;
+        java.lang.Class $r17;
+        org.gjt.sp.jedit.textarea.TextArea $r18, $r20, $r28, $r29, $r30, $r42, $r63, $r65;
+        java.net.URL $r19;
+        org.jedit.keymap.KeymapManager $r21;
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog$1 $r26;
+        org.gjt.sp.jedit.buffer.JEditBuffer $r31;
+        org.gjt.sp.jedit.Mode $r32;
+        int $i0;
+        javax.swing.JComboBox $r34, $r37, $r39;
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog$2 $r36;
+        java.awt.Container $r38, $r40, $r60;
+        javax.swing.JScrollPane $r41;
+        javax.swing.Box $r44, r68;
+        java.awt.Component $r45, $r50, $r58;
+        javax.swing.JButton $r47, $r52, $r56, $r57;
+        java.lang.Object $r62;
+        org.gjt.sp.jedit.input.AbstractInputHandler $r64, $r66;
+        java.lang.Throwable r67;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(r1, "Errors", 0);
+
+        $r9 = new java.io.ByteArrayOutputStream;
+
+        specialinvoke $r9.<init>();
+
+        r0.byteArrayOutputStream = $r9;
+
+        $r10 = new java.io.PrintStream;
+
+        $r11 = r0.byteArrayOutputStream;
+
+        specialinvoke $r10.<init>($r11);
+
+        r0.printStream = $r10;
+
+        $r12 = org.gjt.sp.util.Log.throwables;
+
+        $r13 = $r12.toArray();
+
+        r0.throwables = $r13;
+
+        $r14 = new org.gjt.sp.jedit.textarea.JEditEmbeddedTextArea;
+
+        specialinvoke $r14.<init>();
+
+        r0.textArea = $r14;
+
+        $r15 = new org.gjt.sp.jedit.textarea.StandaloneTextArea$StandaloneActionSet;
+
+        $r16 = org.gjt.sp.jedit.jEdit.getPropertyManager();
+
+        $r18 = r0.textArea;
+
+        $r17 = class "org/gjt/sp/jedit/textarea/TextArea";
+
+        $r19 = $r17.getResource("textarea.actions.xml");
+
+        specialinvoke $r15.<init>($r16, $r18, $r19);
+
+        r2 = $r15;
+
+        $r20 = r0.textArea;
+
+        $r20.addActionSet(r2);
+
+        r2.load();
+
+        r2.initKeyBindings();
+
+        $r21 = org.gjt.sp.jedit.jEdit.getKeymapManager();
+
+        r3 = $r21.getKeymap();
+
+        r4 = r3.getShortcut("copy.shortcut");
+
+        if r4 == null goto label1;
+
+        $r65 = r0.textArea;
+
+        $r66 = $r65.getInputHandler();
+
+        $r66.addKeyBinding(r4, "copy");
+
+     label1:
+        r5 = r3.getShortcut("copy.shortcut2");
+
+        if r5 == null goto label2;
+
+        $r63 = r0.textArea;
+
+        $r64 = $r63.getInputHandler();
+
+        $r64.addKeyBinding(r5, "copy");
+
+     label2:
+        $r22 = new javax.swing.JPopupMenu;
+
+        specialinvoke $r22.<init>();
+
+        r6 = $r22;
+
+        $r23 = new javax.swing.JMenuItem;
+
+        $r24 = org.gjt.sp.jedit.jEdit.getProperty("copy.label");
+
+        $r25 = $r24.replace("$", "");
+
+        specialinvoke $r23.<init>($r25);
+
+        r7 = $r23;
+
+        $r26 = new org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog$1;
+
+        specialinvoke $r26.<init>(r0);
+
+        r7.addActionListener($r26);
+
+        r6.add(r7);
+
+        $r28 = r0.textArea;
+
+        $r28.setRightClickPopup(r6);
+
+        $r29 = r0.textArea;
+
+        $r29.setRightClickPopupEnabled(1);
+
+        $r30 = r0.textArea;
+
+        $r31 = $r30.getBuffer();
+
+        $r32 = org.gjt.sp.jedit.jEdit.getMode("logs");
+
+        $r31.setMode($r32);
+
+        $r33 = r0.throwables;
+
+        $i0 = lengthof $r33;
+
+        if $i0 == 0 goto label3;
+
+        $r61 = r0.throwables;
+
+        $r62 = $r61[0];
+
+        r67 = (java.lang.Throwable) $r62;
+
+        specialinvoke r0.setThrowable(r67);
+
+     label3:
+        $r34 = new javax.swing.JComboBox;
+
+        $r35 = r0.throwables;
+
+        specialinvoke $r34.<init>($r35);
+
+        r0.combo = $r34;
+
+        $r37 = r0.combo;
+
+        $r36 = new org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog$2;
+
+        specialinvoke $r36.<init>(r0);
+
+        $r37.addItemListener($r36);
+
+        $r38 = r0.getContentPane();
+
+        $r39 = r0.combo;
+
+        $r38.add($r39, "North");
+
+        $r40 = r0.getContentPane();
+
+        $r41 = new javax.swing.JScrollPane;
+
+        $r42 = r0.textArea;
+
+        specialinvoke $r41.<init>($r42);
+
+        $r40.add($r41);
+
+        $r44 = new javax.swing.Box;
+
+        specialinvoke $r44.<init>(0);
+
+        r68 = $r44;
+
+        $r45 = javax.swing.Box.createGlue();
+
+        r68.add($r45);
+
+        $r47 = new javax.swing.JButton;
+
+        $r48 = org.gjt.sp.jedit.jEdit.getProperty("common.removeCurrent");
+
+        specialinvoke $r47.<init>($r48);
+
+        r0.removeThisError = $r47;
+
+        r68.add($r47);
+
+        $r50 = javax.swing.Box.createHorizontalStrut(6);
+
+        r68.add($r50);
+
+        $r52 = new javax.swing.JButton;
+
+        $r53 = org.gjt.sp.jedit.jEdit.getProperty("common.clearAll");
+
+        specialinvoke $r52.<init>($r53);
+
+        r0.removeAllErrors = $r52;
+
+        r68.add($r52);
+
+        $r55 = new org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog$MyActionListener;
+
+        specialinvoke $r55.<init>(r0, null);
+
+        r8 = $r55;
+
+        $r56 = r0.removeThisError;
+
+        $r56.addActionListener(r8);
+
+        $r57 = r0.removeAllErrors;
+
+        $r57.addActionListener(r8);
+
+        $r58 = javax.swing.Box.createGlue();
+
+        r68.add($r58);
+
+        $r60 = r0.getContentPane();
+
+        $r60.add(r68, "South");
+
+        r0.pack();
+
+        org.gjt.sp.jedit.GUIUtilities.loadGeometry(r0, "status.errorWidget");
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    private void setThrowable(java.lang.Throwable)
+    {
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog r0;
+        java.lang.Throwable r1;
+        org.gjt.sp.jedit.textarea.TextArea $r2, $r6, $r8, $r10, $r12;
+        org.gjt.sp.jedit.buffer.JEditBuffer $r3, $r11;
+        java.io.PrintStream $r4;
+        java.io.ByteArrayOutputStream $r5, $r9;
+        java.lang.String $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.textArea;
+
+        $r3 = $r2.getBuffer();
+
+        $r3.setReadOnly(0);
+
+        if r1 != null goto label1;
+
+        $r12 = r0.textArea;
+
+        $r12.setText(null);
+
+        goto label2;
+
+     label1:
+        $r4 = r0.printStream;
+
+        r1.printStackTrace($r4);
+
+        $r6 = r0.textArea;
+
+        $r5 = r0.byteArrayOutputStream;
+
+        $r7 = $r5.toString();
+
+        $r6.setText($r7);
+
+        $r8 = r0.textArea;
+
+        $r8.setCaretPosition(0);
+
+        $r9 = r0.byteArrayOutputStream;
+
+        $r9.reset();
+
+     label2:
+        $r10 = r0.textArea;
+
+        $r11 = $r10.getBuffer();
+
+        $r11.setReadOnly(1);
+
+        return;
+    }
+
+    public void dispose()
+    {
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog r0;
+
+        r0 := @this;
+
+        org.gjt.sp.jedit.GUIUtilities.saveGeometry(r0, "status.errorWidget");
+
+        specialinvoke r0.dispose();
+
+        return;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    void <init>(java.awt.Frame, org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$1)
+    {
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog r0;
+        java.awt.Frame r1;
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+
+    static org.gjt.sp.jedit.textarea.TextArea access$200(org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog)
+    {
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog r0;
+        org.gjt.sp.jedit.textarea.TextArea $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.textArea;
+
+        return $r1;
+    }
+
+    static javax.swing.JComboBox access$300(org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog)
+    {
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog r0;
+        javax.swing.JComboBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.combo;
+
+        return $r1;
+    }
+
+    static void access$400(org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog, java.lang.Throwable)
+    {
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog r0;
+        java.lang.Throwable r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        specialinvoke r0.setThrowable(r1);
+
+        return;
+    }
+
+    static javax.swing.JButton access$600(org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog)
+    {
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.removeThisError;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$700(org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog)
+    {
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.removeAllErrors;
+
+        return $r1;
+    }
+
+    static java.lang.Object[] access$800(org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog)
+    {
+        org.gjt.sp.jedit.gui.statusbar.ErrorsWidgetFactory$ErrorDialog r0;
+        java.lang.Object[] $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.throwables;
+
+        return $r1;
+    }
+}

@@ -1,0 +1,67 @@
+class org.gjt.sp.jedit.gui.RolloverButton$MouseOverHandler extends java.awt.event.MouseAdapter
+{
+    final org.gjt.sp.jedit.gui.RolloverButton this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.RolloverButton)
+    {
+        org.gjt.sp.jedit.gui.RolloverButton$MouseOverHandler r0;
+        org.gjt.sp.jedit.gui.RolloverButton r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mouseEntered(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.RolloverButton$MouseOverHandler r0;
+        java.awt.event.MouseEvent r1;
+        org.gjt.sp.jedit.gui.RolloverButton $r2, $r3, $r4;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r2.setContentAreaFilled(1);
+
+        $r4 = r0.this$0;
+
+        $r3 = r0.this$0;
+
+        $z0 = $r3.isEnabled();
+
+        $r4.setBorderPainted($z0);
+
+        return;
+    }
+
+    public void mouseExited(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.RolloverButton$MouseOverHandler r0;
+        java.awt.event.MouseEvent r1;
+        org.gjt.sp.jedit.gui.RolloverButton $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r2.setContentAreaFilled(0);
+
+        $r3 = r0.this$0;
+
+        $r3.setBorderPainted(0);
+
+        return;
+    }
+}

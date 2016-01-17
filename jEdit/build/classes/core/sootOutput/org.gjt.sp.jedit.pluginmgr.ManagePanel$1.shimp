@@ -1,0 +1,97 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$1 extends java.lang.Object
+{
+    static final int[] $SwitchMap$org$gjt$sp$jedit$pluginmgr$KeyboardCommand;
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand[] $r0;
+        int $i0, $i1, $i2, $i3, $i4;
+        int[] $r1, $r3, $r5, $r7, $r9;
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand $r2, $r4, $r6, $r8;
+        java.lang.NoSuchFieldError $r10, $r11, $r12, $r13, r14, r15, r16, r17;
+
+        $r0 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.values();
+
+        $i0 = lengthof $r0;
+
+        $r1 = newarray (int)[$i0];
+
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$1.$SwitchMap$org$gjt$sp$jedit$pluginmgr$KeyboardCommand = $r1;
+
+     label01:
+        $r3 = org.gjt.sp.jedit.pluginmgr.ManagePanel$1.$SwitchMap$org$gjt$sp$jedit$pluginmgr$KeyboardCommand;
+
+        $r2 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.TAB_OUT_FORWARD;
+
+        $i1 = $r2.ordinal();
+
+        $r3[$i1] = 1;
+
+     label02:
+        goto label04;
+
+     label03:
+        $r12 := @caughtexception;
+
+        r14 = $r12;
+
+     label04:
+        $r5 = org.gjt.sp.jedit.pluginmgr.ManagePanel$1.$SwitchMap$org$gjt$sp$jedit$pluginmgr$KeyboardCommand;
+
+        $r4 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.TAB_OUT_BACK;
+
+        $i2 = $r4.ordinal();
+
+        $r5[$i2] = 2;
+
+     label05:
+        goto label07;
+
+     label06:
+        $r13 := @caughtexception;
+
+        r15 = $r13;
+
+     label07:
+        $r7 = org.gjt.sp.jedit.pluginmgr.ManagePanel$1.$SwitchMap$org$gjt$sp$jedit$pluginmgr$KeyboardCommand;
+
+        $r6 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.EDIT_PLUGIN;
+
+        $i3 = $r6.ordinal();
+
+        $r7[$i3] = 3;
+
+     label08:
+        goto label10;
+
+     label09:
+        $r11 := @caughtexception;
+
+        r16 = $r11;
+
+     label10:
+        $r9 = org.gjt.sp.jedit.pluginmgr.ManagePanel$1.$SwitchMap$org$gjt$sp$jedit$pluginmgr$KeyboardCommand;
+
+        $r8 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.CLOSE_PLUGIN_MANAGER;
+
+        $i4 = $r8.ordinal();
+
+        $r9[$i4] = 4;
+
+     label11:
+        goto label13;
+
+     label12:
+        $r10 := @caughtexception;
+
+        r17 = $r10;
+
+     label13:
+        return;
+
+        catch java.lang.NoSuchFieldError from label01 to label02 with label03;
+        catch java.lang.NoSuchFieldError from label04 to label05 with label06;
+        catch java.lang.NoSuchFieldError from label07 to label08 with label09;
+        catch java.lang.NoSuchFieldError from label10 to label11 with label12;
+    }
+}

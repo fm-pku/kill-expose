@@ -1,0 +1,135 @@
+public class org.gjt.sp.jedit.io.RegexEncodingDetector extends java.lang.Object implements org.gjt.sp.jedit.io.EncodingDetector
+{
+    public static final java.lang.String VALID_ENCODING_PATTERN;
+    private final java.util.regex.Pattern pattern;
+    private final java.lang.String replacement;
+
+    public void <init>(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.io.RegexEncodingDetector r0;
+        java.lang.String r1, r2;
+        java.util.regex.Pattern $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        $r3 = java.util.regex.Pattern.compile(r1);
+
+        r0.pattern = $r3;
+
+        r0.replacement = r2;
+
+        return;
+    }
+
+    public java.lang.String detectEncoding(java.io.InputStream) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.RegexEncodingDetector r0;
+        java.io.InputStream r1;
+        java.io.InputStreamReader r2, $r6;
+        short s0;
+        char[] r3;
+        int i1, i2;
+        java.util.regex.Matcher r4;
+        java.lang.String r5, $r9;
+        java.util.regex.Pattern $r7;
+        java.nio.CharBuffer $r8;
+        boolean $z0, $z1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r6 = new java.io.InputStreamReader;
+
+        specialinvoke $r6.<init>(r1);
+
+        r2 = $r6;
+
+        s0 = 1024;
+
+        r3 = newarray (char)[1024];
+
+        i1 = r2.read(r3, 0, 1024);
+
+(0)     if i1 <= 0 goto label3;
+
+        $r7 = r0.pattern;
+
+        $r8 = java.nio.CharBuffer.wrap(r3, 0, i1);
+
+        r4 = $r7.matcher($r8);
+
+(1)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #1, i2 #3);
+
+        $z0 = r4.find();
+
+(2)     if $z0 == 0 goto label3;
+
+        $r9 = r0.replacement;
+
+        r5 = org.gjt.sp.jedit.io.RegexEncodingDetector.extractReplacement(r4, i2, $r9);
+
+        $z1 = org.gjt.sp.jedit.io.EncodingServer.hasEncoding(r5);
+
+        if $z1 == 0 goto label2;
+
+        return r5;
+
+     label2:
+        i2 = r4.end();
+
+(3)     goto label1;
+
+     label3:
+        i2 = Phi(i2 #0, i2 #2);
+
+        return null;
+    }
+
+    private static java.lang.String extractReplacement(java.util.regex.Matcher, int, java.lang.String)
+    {
+        java.util.regex.Matcher r0;
+        int i0, i1, i2, i3, i4, $i5, $i6;
+        java.lang.String r1, $r5;
+        java.lang.StringBuffer r2, $r3;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        i1 = r0.start();
+
+        i2 = r0.end();
+
+        i3 = i2 - i1;
+
+        i4 = i1 - i0;
+
+        $r3 = new java.lang.StringBuffer;
+
+        $i5 = i3 * 2;
+
+        $i6 = i4 + $i5;
+
+        specialinvoke $r3.<init>($i6);
+
+        r2 = $r3;
+
+        r0.appendReplacement(r2, r1);
+
+        $r5 = r2.substring(i4);
+
+        return $r5;
+    }
+}

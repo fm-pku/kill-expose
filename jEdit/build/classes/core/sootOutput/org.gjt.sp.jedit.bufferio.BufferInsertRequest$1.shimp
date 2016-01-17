@@ -1,0 +1,52 @@
+class org.gjt.sp.jedit.bufferio.BufferInsertRequest$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.util.SegmentBuffer val$seg;
+    final org.gjt.sp.jedit.bufferio.BufferInsertRequest this$0;
+
+    void <init>(org.gjt.sp.jedit.bufferio.BufferInsertRequest, org.gjt.sp.util.SegmentBuffer)
+    {
+        org.gjt.sp.jedit.bufferio.BufferInsertRequest$1 r0;
+        org.gjt.sp.jedit.bufferio.BufferInsertRequest r1;
+        org.gjt.sp.util.SegmentBuffer r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$seg = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.bufferio.BufferInsertRequest$1 r0;
+        org.gjt.sp.jedit.bufferio.BufferInsertRequest $r1;
+        org.gjt.sp.jedit.View $r2;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r3;
+        org.gjt.sp.util.SegmentBuffer $r4;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        $r1 = r0.this$0;
+
+        $r2 = $r1.view;
+
+        $r3 = $r2.getTextArea();
+
+        $r4 = r0.val$seg;
+
+        $r5 = $r4.toString();
+
+        $r3.setSelectedText($r5);
+
+        return;
+    }
+}

@@ -1,0 +1,523 @@
+public class org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel extends java.lang.Object implements javax.swing.tree.TreeModel
+{
+    private final org.gjt.sp.jedit.OptionGroup root;
+    private final javax.swing.event.EventListenerList listenerList;
+    final org.gjt.sp.jedit.gui.OptionsDialog this$0;
+
+    public void <init>(org.gjt.sp.jedit.gui.OptionsDialog)
+    {
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r0;
+        org.gjt.sp.jedit.gui.OptionsDialog r1;
+        org.gjt.sp.jedit.OptionGroup $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new org.gjt.sp.jedit.OptionGroup;
+
+        specialinvoke $r2.<init>(null);
+
+        specialinvoke r0.<init>(r1, $r2);
+
+        return;
+    }
+
+    public void <init>(org.gjt.sp.jedit.gui.OptionsDialog, org.gjt.sp.jedit.OptionGroup)
+    {
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r0;
+        org.gjt.sp.jedit.gui.OptionsDialog r1;
+        org.gjt.sp.jedit.OptionGroup r2;
+        javax.swing.event.EventListenerList $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r3 = new javax.swing.event.EventListenerList;
+
+        specialinvoke $r3.<init>();
+
+        r0.listenerList = $r3;
+
+        r0.root = r2;
+
+        return;
+    }
+
+    public void addTreeModelListener(javax.swing.event.TreeModelListener)
+    {
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r0;
+        javax.swing.event.TreeModelListener r1;
+        javax.swing.event.EventListenerList $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.listenerList;
+
+        $r2.add(class "javax/swing/event/TreeModelListener", r1);
+
+        return;
+    }
+
+    public void removeTreeModelListener(javax.swing.event.TreeModelListener)
+    {
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r0;
+        javax.swing.event.TreeModelListener r1;
+        javax.swing.event.EventListenerList $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.listenerList;
+
+        $r2.remove(class "javax/swing/event/TreeModelListener", r1);
+
+        return;
+    }
+
+    public java.lang.Object getChild(java.lang.Object, int)
+    {
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r0;
+        java.lang.Object r1, $r3;
+        int i0;
+        boolean $z0;
+        org.gjt.sp.jedit.OptionGroup $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.OptionGroup;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = (org.gjt.sp.jedit.OptionGroup) r1;
+
+        $r3 = $r2.getMember(i0);
+
+        return $r3;
+
+     label1:
+        return null;
+    }
+
+    public int getChildCount(java.lang.Object)
+    {
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r0;
+        java.lang.Object r1;
+        boolean $z0;
+        org.gjt.sp.jedit.OptionGroup $r2;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.OptionGroup;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = (org.gjt.sp.jedit.OptionGroup) r1;
+
+        $i0 = $r2.getMemberCount();
+
+        return $i0;
+
+     label1:
+        return 0;
+    }
+
+    public int getIndexOfChild(java.lang.Object, java.lang.Object)
+    {
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r0;
+        java.lang.Object r1, r2;
+        boolean $z0;
+        org.gjt.sp.jedit.OptionGroup $r3;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.OptionGroup;
+
+        if $z0 == 0 goto label1;
+
+        $r3 = (org.gjt.sp.jedit.OptionGroup) r1;
+
+        $i0 = $r3.getMemberIndex(r2);
+
+        return $i0;
+
+     label1:
+        return -1;
+    }
+
+    public java.lang.Object getRoot()
+    {
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r0;
+        org.gjt.sp.jedit.OptionGroup $r1;
+
+        r0 := @this;
+
+        $r1 = r0.root;
+
+        return $r1;
+    }
+
+    public boolean isLeaf(java.lang.Object)
+    {
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r0;
+        java.lang.Object r1;
+        boolean $z0, $z1, $z1_1, $z1_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.OptionGroup;
+
+        if $z0 != 0 goto label1;
+
+        $z1 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z1_1 = 0;
+
+     label2:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        return $z1_2;
+    }
+
+    public void valueForPathChanged(javax.swing.tree.TreePath, java.lang.Object)
+    {
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r0;
+        javax.swing.tree.TreePath r1;
+        java.lang.Object r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        return;
+    }
+
+    protected void fireNodesChanged(java.lang.Object, java.lang.Object[], int[], java.lang.Object[])
+    {
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r0;
+        java.lang.Object r1, $r7, $r8;
+        java.lang.Object[] r2, r4, r5;
+        int[] r3;
+        javax.swing.event.EventListenerList $r6;
+        int $i0, $i1, i2;
+        javax.swing.event.TreeModelListener $r9;
+        javax.swing.event.TreeModelEvent $r10, r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        $r6 = r0.listenerList;
+
+        r5 = $r6.getListenerList();
+
+        r11 = null;
+
+        $i0 = lengthof r5;
+
+(0)     i2 = $i0 - 2;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #5);
+
+        r11 = Phi(r11 #0, r11 #5);
+
+        if i2 < 0 goto label5;
+
+        $r7 = r5[i2];
+
+        if $r7 == class "javax/swing/event/TreeModelListener" goto label2;
+
+(1)     goto label4;
+
+     label2:
+(2)     if r11 != null goto label3;
+
+        $r10 = new javax.swing.event.TreeModelEvent;
+
+        specialinvoke $r10.<init>(r1, r2, r3, r4);
+
+(3)     r11 = $r10;
+
+     label3:
+        r11 = Phi(r11 #2, r11 #3);
+
+        $i1 = i2 + 1;
+
+        $r8 = r5[$i1];
+
+        $r9 = (javax.swing.event.TreeModelListener) $r8;
+
+(4)     $r9.treeNodesChanged(r11);
+
+     label4:
+        r11 = Phi(r11 #1, r11 #4);
+
+        i2 = i2 + -2;
+
+(5)     goto label1;
+
+     label5:
+        return;
+    }
+
+    protected void fireNodesInserted(java.lang.Object, java.lang.Object[], int[], java.lang.Object[])
+    {
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r0;
+        java.lang.Object r1, $r7, $r8;
+        java.lang.Object[] r2, r4, r5;
+        int[] r3;
+        javax.swing.event.EventListenerList $r6;
+        int $i0, $i1, i2;
+        javax.swing.event.TreeModelListener $r9;
+        javax.swing.event.TreeModelEvent $r10, r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        $r6 = r0.listenerList;
+
+        r5 = $r6.getListenerList();
+
+        r11 = null;
+
+        $i0 = lengthof r5;
+
+(0)     i2 = $i0 - 2;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #5);
+
+        r11 = Phi(r11 #0, r11 #5);
+
+        if i2 < 0 goto label5;
+
+        $r7 = r5[i2];
+
+        if $r7 == class "javax/swing/event/TreeModelListener" goto label2;
+
+(1)     goto label4;
+
+     label2:
+(2)     if r11 != null goto label3;
+
+        $r10 = new javax.swing.event.TreeModelEvent;
+
+        specialinvoke $r10.<init>(r1, r2, r3, r4);
+
+(3)     r11 = $r10;
+
+     label3:
+        r11 = Phi(r11 #2, r11 #3);
+
+        $i1 = i2 + 1;
+
+        $r8 = r5[$i1];
+
+        $r9 = (javax.swing.event.TreeModelListener) $r8;
+
+(4)     $r9.treeNodesInserted(r11);
+
+     label4:
+        r11 = Phi(r11 #1, r11 #4);
+
+        i2 = i2 + -2;
+
+(5)     goto label1;
+
+     label5:
+        return;
+    }
+
+    protected void fireNodesRemoved(java.lang.Object, java.lang.Object[], int[], java.lang.Object[])
+    {
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r0;
+        java.lang.Object r1, $r7, $r8;
+        java.lang.Object[] r2, r4, r5;
+        int[] r3;
+        javax.swing.event.EventListenerList $r6;
+        int $i0, $i1, i2;
+        javax.swing.event.TreeModelListener $r9;
+        javax.swing.event.TreeModelEvent $r10, r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        $r6 = r0.listenerList;
+
+        r5 = $r6.getListenerList();
+
+        r11 = null;
+
+        $i0 = lengthof r5;
+
+(0)     i2 = $i0 - 2;
+
+     label1:
+        r11 = Phi(r11 #0, r11 #5);
+
+        i2 = Phi(i2 #0, i2 #5);
+
+        if i2 < 0 goto label5;
+
+        $r7 = r5[i2];
+
+        if $r7 == class "javax/swing/event/TreeModelListener" goto label2;
+
+(1)     goto label4;
+
+     label2:
+(2)     if r11 != null goto label3;
+
+        $r10 = new javax.swing.event.TreeModelEvent;
+
+        specialinvoke $r10.<init>(r1, r2, r3, r4);
+
+(3)     r11 = $r10;
+
+     label3:
+        r11 = Phi(r11 #2, r11 #3);
+
+        $i1 = i2 + 1;
+
+        $r8 = r5[$i1];
+
+        $r9 = (javax.swing.event.TreeModelListener) $r8;
+
+(4)     $r9.treeNodesRemoved(r11);
+
+     label4:
+        r11 = Phi(r11 #1, r11 #4);
+
+        i2 = i2 + -2;
+
+(5)     goto label1;
+
+     label5:
+        return;
+    }
+
+    protected void fireTreeStructureChanged(java.lang.Object, java.lang.Object[], int[], java.lang.Object[])
+    {
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r0;
+        java.lang.Object r1, $r7, $r8;
+        java.lang.Object[] r2, r4, r5;
+        int[] r3;
+        javax.swing.event.EventListenerList $r6;
+        int $i0, $i1, i2;
+        javax.swing.event.TreeModelListener $r9;
+        javax.swing.event.TreeModelEvent $r10, r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        $r6 = r0.listenerList;
+
+        r5 = $r6.getListenerList();
+
+        r11 = null;
+
+        $i0 = lengthof r5;
+
+(0)     i2 = $i0 - 2;
+
+     label1:
+        r11 = Phi(r11 #0, r11 #5);
+
+        i2 = Phi(i2 #0, i2 #5);
+
+        if i2 < 0 goto label5;
+
+        $r7 = r5[i2];
+
+        if $r7 == class "javax/swing/event/TreeModelListener" goto label2;
+
+(1)     goto label4;
+
+     label2:
+(2)     if r11 != null goto label3;
+
+        $r10 = new javax.swing.event.TreeModelEvent;
+
+        specialinvoke $r10.<init>(r1, r2, r3, r4);
+
+(3)     r11 = $r10;
+
+     label3:
+        r11 = Phi(r11 #2, r11 #3);
+
+        $i1 = i2 + 1;
+
+        $r8 = r5[$i1];
+
+        $r9 = (javax.swing.event.TreeModelListener) $r8;
+
+(4)     $r9.treeStructureChanged(r11);
+
+     label4:
+        r11 = Phi(r11 #1, r11 #4);
+
+        i2 = i2 + -2;
+
+(5)     goto label1;
+
+     label5:
+        return;
+    }
+}

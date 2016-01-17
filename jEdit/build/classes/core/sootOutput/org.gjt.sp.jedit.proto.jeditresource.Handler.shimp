@@ -1,0 +1,35 @@
+public class org.gjt.sp.jedit.proto.jeditresource.Handler extends java.net.URLStreamHandler
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.proto.jeditresource.Handler r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.net.URLConnection openConnection(java.net.URL) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.proto.jeditresource.Handler r0;
+        java.net.URL r1;
+        org.gjt.sp.jedit.proto.jeditresource.PluginResURLConnection r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new org.gjt.sp.jedit.proto.jeditresource.PluginResURLConnection;
+
+        specialinvoke $r3.<init>(r1);
+
+        r2 = $r3;
+
+        r2.connect();
+
+        return r2;
+    }
+}

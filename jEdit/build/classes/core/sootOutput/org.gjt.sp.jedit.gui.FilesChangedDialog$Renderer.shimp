@@ -1,0 +1,104 @@
+class org.gjt.sp.jedit.gui.FilesChangedDialog$Renderer extends org.gjt.sp.util.EnhancedTreeCellRenderer
+{
+    private java.awt.Font entryFont;
+    private java.awt.Font groupFont;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog$Renderer r0;
+        java.awt.Font $r1, $r2, $r3, $r4, $r5;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = javax.swing.UIManager.getFont("Tree.font");
+
+        r0.entryFont = $r1;
+
+        $r2 = r0.entryFont;
+
+        if $r2 != null goto label1;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getFontProperty("metal.secondary.font");
+
+        r0.entryFont = $r5;
+
+     label1:
+        $r3 = r0.entryFont;
+
+        $r4 = $r3.deriveFont(1);
+
+        r0.groupFont = $r4;
+
+        return;
+    }
+
+    protected javax.swing.tree.TreeCellRenderer newInstance()
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog$Renderer r0, $r1;
+
+        r0 := @this;
+
+        $r1 = new org.gjt.sp.jedit.gui.FilesChangedDialog$Renderer;
+
+        specialinvoke $r1.<init>();
+
+        return $r1;
+    }
+
+    protected void configureTreeCellRendererComponent(javax.swing.JTree, java.lang.Object, boolean, boolean, boolean, int, boolean)
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog$Renderer r0;
+        javax.swing.JTree r1;
+        java.lang.Object r2, $r6;
+        boolean z0, z1, z2, z3;
+        int i0;
+        javax.swing.tree.DefaultMutableTreeNode r3;
+        javax.swing.tree.TreeNode $r4;
+        javax.swing.tree.TreeModel $r5;
+        java.awt.Font $r7, $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        z1 := @parameter3;
+
+        z2 := @parameter4;
+
+        i0 := @parameter5;
+
+        z3 := @parameter6;
+
+        r3 = (javax.swing.tree.DefaultMutableTreeNode) r2;
+
+        $r4 = r3.getParent();
+
+        $r5 = r1.getModel();
+
+        $r6 = $r5.getRoot();
+
+        if $r4 != $r6 goto label1;
+
+        $r8 = r0.groupFont;
+
+        r0.setFont($r8);
+
+        goto label2;
+
+     label1:
+        $r7 = r0.entryFont;
+
+        r0.setFont($r7);
+
+     label2:
+        r0.setIcon(null);
+
+        return;
+    }
+}

@@ -1,0 +1,102 @@
+class org.gjt.sp.jedit.gui.PingPongList$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.PingPongList this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.PingPongList)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$ActionHandler r0;
+        org.gjt.sp.jedit.gui.PingPongList r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2;
+        org.gjt.sp.jedit.gui.PingPongList $r3, $r5, $r7, $r8, $r10, $r12, $r13, $r15;
+        javax.swing.JButton $r4, $r6, $r9, $r11, $r14, $r16;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.PingPongList.access$800($r3);
+
+        if r2 != $r4 goto label1;
+
+        $r12 = r0.this$0;
+
+        $r12.moveAllToRight();
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.gui.PingPongList.access$800($r13);
+
+        $r14.setEnabled(0);
+
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.gui.PingPongList.access$900($r15);
+
+        $r16.setEnabled(1);
+
+        goto label2;
+
+     label1:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.PingPongList.access$900($r5);
+
+        if r2 != $r6 goto label2;
+
+        $r7 = r0.this$0;
+
+        $r7.moveAllToLeft();
+
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.gui.PingPongList.access$800($r8);
+
+        $r9.setEnabled(1);
+
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.gui.PingPongList.access$900($r10);
+
+        $r11.setEnabled(0);
+
+     label2:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.PingPongList, org.gjt.sp.jedit.gui.PingPongList$1)
+    {
+        org.gjt.sp.jedit.gui.PingPongList$ActionHandler r0;
+        org.gjt.sp.jedit.gui.PingPongList r1;
+        org.gjt.sp.jedit.gui.PingPongList$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

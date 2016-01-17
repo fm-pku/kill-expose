@@ -1,0 +1,478 @@
+public class org.gjt.sp.jedit.ActionSet extends org.gjt.sp.jedit.JEditActionSet implements java.lang.Comparable
+{
+    private java.lang.String label;
+    private org.gjt.sp.jedit.PluginJAR plugin;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.label = "<no label set; plugin bug>";
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void <init>(org.gjt.sp.jedit.PluginJAR, java.lang.String[], boolean[], java.net.URL)
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        org.gjt.sp.jedit.PluginJAR r1;
+        java.lang.String[] r2;
+        boolean[] r3;
+        java.net.URL r4;
+        int $i0, i1;
+        java.lang.Object $r5;
+        java.lang.String $r6, $r10, $r13, $r14;
+        java.util.Hashtable $r7;
+        java.lang.StringBuilder $r9, $r11, $r12;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.plugin = r1;
+
+        r0.uri = r4;
+
+        Packer.Pack(r0);
+
+(0)     if r2 == null goto label4;
+
+(1)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #1, i1 #5);
+
+        $r14 = Phi($r14 #1, $r14 #5);
+
+        $i0 = lengthof r2;
+
+(2)     if i1 >= $i0 goto label4;
+
+        Packer.Unpack(r0);
+
+        $r7 = r0.actions;
+
+        $r6 = r2[i1];
+
+        $r5 = org.gjt.sp.jedit.ActionSet.placeholder;
+
+        $r7.put($r6, $r5);
+
+        Packer.Pack(r0);
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = r2[i1];
+
+        $r11 = $r9.append($r10);
+
+        $r12 = $r11.append(".toggle");
+
+        $r13 = $r12.toString();
+
+        $z0 = r3[i1];
+
+        if $z0 == 0 goto label2;
+
+        $r14 = "true";
+
+(3)     goto label3;
+
+     label2:
+(4)     $r14 = "false";
+
+     label3:
+        $r14 = Phi($r14 #3, $r14 #4);
+
+        org.gjt.sp.jedit.jEdit.setTemporaryProperty($r13, $r14);
+
+        i1 = i1 + 1;
+
+(5)     goto label1;
+
+     label4:
+        i1 = Phi(i1 #0, i1 #2);
+
+        $r14 = Phi($r14 #0, $r14 #2);
+
+        r0.loaded = 0;
+
+        return;
+    }
+
+    public void addAction(org.gjt.sp.jedit.EditAction)
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        org.gjt.sp.jedit.EditAction r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.addAction(r1);
+
+        return;
+    }
+
+    protected org.gjt.sp.jedit.EditAction[] getArray(int)
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        int i0;
+        org.gjt.sp.jedit.EditAction[] $r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = newarray (org.gjt.sp.jedit.EditAction)[i0];
+
+        return $r1;
+    }
+
+    public org.gjt.sp.jedit.EditAction[] getActions()
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        org.gjt.sp.jedit.JEditAbstractEditAction[] $r1;
+        org.gjt.sp.jedit.EditAction[] $r2;
+
+        r0 := @this;
+
+        $r1 = specialinvoke r0.getActions();
+
+        $r2 = (org.gjt.sp.jedit.EditAction[]) $r1;
+
+        return $r2;
+    }
+
+    public void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.setLabel(r1);
+
+        return;
+    }
+
+    public java.lang.String getLabel()
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.label;
+
+        return $r1;
+    }
+
+    public void setLabel(java.lang.String)
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        java.lang.String r1;
+        java.lang.NullPointerException $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 != null goto label1;
+
+        $r2 = new java.lang.NullPointerException;
+
+        specialinvoke $r2.<init>();
+
+        throw $r2;
+
+     label1:
+        Packer.Unpack(r0);
+
+        r0.label = r1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.PluginJAR getPluginJAR()
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        org.gjt.sp.jedit.PluginJAR $r1;
+
+        r0 := @this;
+
+        $r1 = r0.plugin;
+
+        return $r1;
+    }
+
+    public java.lang.String[] getCacheableActionNames()
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        java.util.LinkedList r1, $r4;
+        java.util.Enumeration r2;
+        java.lang.Object r3, $r9;
+        java.util.Hashtable $r5;
+        boolean $z0, $z1;
+        int $i0;
+        java.lang.String[] $r6, $r8;
+        java.lang.Object[] $r7;
+        org.gjt.sp.jedit.BeanShellAction $r10;
+        java.lang.String $r11;
+
+        r0 := @this;
+
+        $r4 = new java.util.LinkedList;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4;
+
+        $r5 = r0.actions;
+
+        Packer.Unpack(r0);
+
+        r2 = $r5.elements();
+
+     label1:
+        Packer.Pack(r0);
+
+        $z0 = r2.hasMoreElements();
+
+        if $z0 == 0 goto label4;
+
+        r3 = r2.nextElement();
+
+        $r9 = org.gjt.sp.jedit.ActionSet.placeholder;
+
+        if r3 != $r9 goto label2;
+
+        org.gjt.sp.util.Log.log(7, r0, "Action set not up to date");
+
+        goto label3;
+
+     label2:
+        $z1 = r3 instanceof org.gjt.sp.jedit.BeanShellAction;
+
+        if $z1 == 0 goto label3;
+
+        $r10 = (org.gjt.sp.jedit.BeanShellAction) r3;
+
+        $r11 = $r10.getName();
+
+        r1.add($r11);
+
+     label3:
+        goto label1;
+
+     label4:
+        $i0 = r1.size();
+
+        $r6 = newarray (java.lang.String)[$i0];
+
+        $r7 = r1.toArray($r6);
+
+        $r8 = (java.lang.String[]) $r7;
+
+        return $r8;
+    }
+
+    protected java.lang.String getProperty(java.lang.String)
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        java.lang.String r1, $r4;
+        org.jedit.keymap.Keymap r2;
+        org.jedit.keymap.KeymapManager $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = org.gjt.sp.jedit.jEdit.getKeymapManager();
+
+        r2 = $r3.getKeymap();
+
+        $r4 = r2.getShortcut(r1);
+
+        return $r4;
+    }
+
+    public org.gjt.sp.jedit.input.AbstractInputHandler getInputHandler()
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        org.gjt.sp.jedit.gui.InputHandler $r1;
+
+        r0 := @this;
+
+        $r1 = org.gjt.sp.jedit.jEdit.getInputHandler();
+
+        return $r1;
+    }
+
+    public int compareTo(java.lang.Object)
+    {
+        org.gjt.sp.jedit.ActionSet r0, $r2;
+        java.lang.Object r1;
+        java.lang.String $r3, $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.label;
+
+        $r2 = (org.gjt.sp.jedit.ActionSet) r1;
+
+        $r3 = $r2.label;
+
+        Packer.Unpack(r0);
+
+        Packer.Unpack($r2);
+
+        $i0 = $r4.compareTo($r3);
+
+        Packer.Pack(r0);
+
+        Packer.Pack($r2);
+
+        return $i0;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.label;
+
+        return $r1;
+    }
+
+    protected org.gjt.sp.jedit.EditAction createBeanShellAction(java.lang.String, java.lang.String, java.lang.String, boolean, boolean, boolean)
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        java.lang.String r1, r2, r3;
+        boolean z0, z1, z2;
+        org.gjt.sp.jedit.BeanShellAction $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        z2 := @parameter5;
+
+        $r4 = new org.gjt.sp.jedit.BeanShellAction;
+
+        specialinvoke $r4.<init>(r1, r2, r3, z0, z1, z2);
+
+        return $r4;
+    }
+
+    protected volatile org.gjt.sp.jedit.JEditAbstractEditAction createBeanShellAction(java.lang.String, java.lang.String, java.lang.String, boolean, boolean, boolean)
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        java.lang.String r1, r2, r3;
+        boolean z0, z1, z2;
+        org.gjt.sp.jedit.EditAction $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        z2 := @parameter5;
+
+        $r4 = r0.createBeanShellAction(r1, r2, r3, z0, z1, z2);
+
+        return $r4;
+    }
+
+    public volatile org.gjt.sp.jedit.JEditAbstractEditAction[] getActions()
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        org.gjt.sp.jedit.EditAction[] $r1;
+
+        r0 := @this;
+
+        $r1 = r0.getActions();
+
+        return $r1;
+    }
+
+    protected volatile org.gjt.sp.jedit.JEditAbstractEditAction[] getArray(int)
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        int i0;
+        org.gjt.sp.jedit.EditAction[] $r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.getArray(i0);
+
+        return $r1;
+    }
+
+    public volatile void addAction(org.gjt.sp.jedit.JEditAbstractEditAction)
+    {
+        org.gjt.sp.jedit.ActionSet r0;
+        org.gjt.sp.jedit.JEditAbstractEditAction r1;
+        org.gjt.sp.jedit.EditAction $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = (org.gjt.sp.jedit.EditAction) r1;
+
+        r0.addAction($r2);
+
+        return;
+    }
+}

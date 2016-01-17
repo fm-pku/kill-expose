@@ -1,0 +1,70 @@
+public class org.gjt.sp.jedit.help.HelpSearchPanel$MouseHandler extends java.awt.event.MouseAdapter
+{
+    final org.gjt.sp.jedit.help.HelpSearchPanel this$0;
+
+    public void <init>(org.gjt.sp.jedit.help.HelpSearchPanel)
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel$MouseHandler r0;
+        org.gjt.sp.jedit.help.HelpSearchPanel r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mouseReleased(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.help.HelpSearchPanel$MouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        int i0;
+        org.gjt.sp.jedit.help.HelpSearchPanel$Result r2;
+        org.gjt.sp.jedit.help.HelpSearchPanel $r3, $r6, $r10;
+        javax.swing.JList $r4, $r7;
+        java.awt.Point $r5;
+        javax.swing.ListModel $r8;
+        java.lang.Object $r9;
+        org.gjt.sp.jedit.help.HelpViewerInterface $r11;
+        java.lang.String $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.help.HelpSearchPanel.access$100($r3);
+
+        $r5 = r1.getPoint();
+
+        i0 = $r4.locationToIndex($r5);
+
+        if i0 == -1 goto label1;
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.help.HelpSearchPanel.access$100($r6);
+
+        $r8 = $r7.getModel();
+
+        $r9 = $r8.getElementAt(i0);
+
+        r2 = (org.gjt.sp.jedit.help.HelpSearchPanel$Result) $r9;
+
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.help.HelpSearchPanel.access$300($r10);
+
+        $r12 = r2.file;
+
+        $r11.gotoURL($r12, 1, 0);
+
+     label1:
+        return;
+    }
+}

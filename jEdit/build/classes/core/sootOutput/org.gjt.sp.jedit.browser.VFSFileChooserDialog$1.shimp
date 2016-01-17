@@ -1,0 +1,169 @@
+class org.gjt.sp.jedit.browser.VFSFileChooserDialog$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final int[] val$type;
+    final org.gjt.sp.jedit.io.VFS val$vfs;
+    final java.lang.String val$path;
+    final org.gjt.sp.jedit.browser.VFSFileChooserDialog this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSFileChooserDialog, int[], org.gjt.sp.jedit.io.VFS, java.lang.String)
+    {
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog$1 r0;
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog r1;
+        int[] r2;
+        org.gjt.sp.jedit.io.VFS r3;
+        java.lang.String r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r0.this$0 = r1;
+
+        r0.val$type = r2;
+
+        r0.val$vfs = r3;
+
+        r0.val$path = r4;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog$1 r0;
+        java.util.Hashtable r1, $r10;
+        int[] $r2;
+        int $i0, $i1, $i2;
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog $r3, $r6, $r7, $r9, $r11, $r14, $r17, $r22, $r27, $r28;
+        org.gjt.sp.jedit.browser.VFSBrowser $r4, $r8, $r12, $r15, $r18, $r23, $r29;
+        org.gjt.sp.jedit.io.VFS $r5;
+        boolean $z0, $z2;
+        java.lang.String $r13, $r19, $r20, $r24, $r26, $r30;
+        org.gjt.sp.jedit.View $r16;
+
+        r0 := @this;
+
+        $r2 = r0.val$type;
+
+        $i0 = $r2[0];
+
+        tableswitch($i0)
+        {
+            case 0: goto label1;
+            case 1: goto label6;
+            case 2: goto label6;
+            default: goto label7;
+        };
+
+     label1:
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r3);
+
+        $i1 = $r4.getMode();
+
+        if $i1 != 3 goto label2;
+
+        goto label7;
+
+     label2:
+        $r5 = r0.val$vfs;
+
+        $z0 = $r5 instanceof org.gjt.sp.jedit.io.FileVFS;
+
+        if $z0 == 0 goto label3;
+
+        $r27 = r0.this$0;
+
+        $r26 = r0.val$path;
+
+        $z2 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$100($r27, $r26);
+
+        if $z2 == 0 goto label3;
+
+        goto label7;
+
+     label3:
+        $r6 = r0.this$0;
+
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$202($r6, 1);
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r7);
+
+        $i2 = $r8.getMode();
+
+        if $i2 != 4 goto label5;
+
+        $r10 = new java.util.Hashtable;
+
+        specialinvoke $r10.<init>();
+
+        r1 = $r10;
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r11);
+
+        $r13 = $r12.currentEncoding;
+
+        if $r13 == null goto label4;
+
+        $r22 = r0.this$0;
+
+        $r23 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r22);
+
+        $r24 = $r23.currentEncoding;
+
+        Packer.Unpack($r23);
+
+        r1.put("encoding", $r24);
+
+     label4:
+        Packer.Pack($r23);
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r14);
+
+        $r16 = $r15.getView();
+
+        $r17 = r0.this$0;
+
+        $r18 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r17);
+
+        $r19 = $r18.getDirectory();
+
+        $r20 = r0.val$path;
+
+        org.gjt.sp.jedit.jEdit.openFile($r16, $r19, $r20, 0, r1);
+
+     label5:
+        $r9 = r0.this$0;
+
+        $r9.dispose();
+
+        goto label7;
+
+     label6:
+        $r28 = r0.this$0;
+
+        $r29 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$000($r28);
+
+        $r30 = r0.val$path;
+
+        $r29.setDirectory($r30);
+
+     label7:
+        return;
+    }
+}

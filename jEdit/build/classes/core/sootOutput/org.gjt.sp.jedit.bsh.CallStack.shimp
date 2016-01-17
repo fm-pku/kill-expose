@@ -1,0 +1,308 @@
+public class org.gjt.sp.jedit.bsh.CallStack extends java.lang.Object
+{
+    private java.util.Vector stack;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.CallStack r0;
+        java.util.Vector $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.Vector;
+
+        specialinvoke $r1.<init>(2);
+
+        r0.stack = $r1;
+
+        return;
+    }
+
+    public void <init>(org.gjt.sp.jedit.bsh.NameSpace)
+    {
+        org.gjt.sp.jedit.bsh.CallStack r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+        java.util.Vector $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        $r2 = new java.util.Vector;
+
+        specialinvoke $r2.<init>(2);
+
+        r0.stack = $r2;
+
+        r0.push(r1);
+
+        return;
+    }
+
+    public void clear()
+    {
+        org.gjt.sp.jedit.bsh.CallStack r0;
+        java.util.Vector $r1;
+
+        r0 := @this;
+
+        $r1 = r0.stack;
+
+        $r1.removeAllElements();
+
+        return;
+    }
+
+    public void push(org.gjt.sp.jedit.bsh.NameSpace)
+    {
+        org.gjt.sp.jedit.bsh.CallStack r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+        java.util.Vector $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.stack;
+
+        $r2.insertElementAt(r1, 0);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.NameSpace top()
+    {
+        org.gjt.sp.jedit.bsh.CallStack r0;
+        org.gjt.sp.jedit.bsh.NameSpace $r1;
+
+        r0 := @this;
+
+        $r1 = r0.get(0);
+
+        return $r1;
+    }
+
+    public org.gjt.sp.jedit.bsh.NameSpace get(int)
+    {
+        org.gjt.sp.jedit.bsh.CallStack r0;
+        int i0, $i1;
+        java.util.Vector $r1;
+        java.lang.Object $r2;
+        org.gjt.sp.jedit.bsh.NameSpace $r3, $r4;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $i1 = r0.depth();
+
+        if i0 < $i1 goto label1;
+
+        $r4 = org.gjt.sp.jedit.bsh.NameSpace.JAVACODE;
+
+        return $r4;
+
+     label1:
+        $r1 = r0.stack;
+
+        $r2 = $r1.elementAt(i0);
+
+        $r3 = (org.gjt.sp.jedit.bsh.NameSpace) $r2;
+
+        return $r3;
+    }
+
+    public void set(int, org.gjt.sp.jedit.bsh.NameSpace)
+    {
+        org.gjt.sp.jedit.bsh.CallStack r0;
+        int i0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+        java.util.Vector $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r2 = r0.stack;
+
+        $r2.setElementAt(r1, i0);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.NameSpace pop()
+    {
+        org.gjt.sp.jedit.bsh.CallStack r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+        int $i0;
+        java.util.Vector $r2;
+        org.gjt.sp.jedit.bsh.InterpreterError $r3;
+
+        r0 := @this;
+
+        $i0 = r0.depth();
+
+        if $i0 >= 1 goto label1;
+
+        $r3 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        specialinvoke $r3.<init>("pop on empty CallStack");
+
+        throw $r3;
+
+     label1:
+        r1 = r0.top();
+
+        $r2 = r0.stack;
+
+        $r2.removeElementAt(0);
+
+        return r1;
+    }
+
+    public org.gjt.sp.jedit.bsh.NameSpace swap(org.gjt.sp.jedit.bsh.NameSpace)
+    {
+        org.gjt.sp.jedit.bsh.CallStack r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1, r2;
+        java.util.Vector $r3, $r5;
+        java.lang.Object $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.stack;
+
+        $r4 = $r3.elementAt(0);
+
+        r2 = (org.gjt.sp.jedit.bsh.NameSpace) $r4;
+
+        $r5 = r0.stack;
+
+        $r5.setElementAt(r1, 0);
+
+        return r2;
+    }
+
+    public int depth()
+    {
+        org.gjt.sp.jedit.bsh.CallStack r0;
+        java.util.Vector $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.stack;
+
+        $i0 = $r1.size();
+
+        return $i0;
+    }
+
+    public org.gjt.sp.jedit.bsh.NameSpace[] toArray()
+    {
+        org.gjt.sp.jedit.bsh.CallStack r0;
+        org.gjt.sp.jedit.bsh.NameSpace[] r1;
+        int $i0;
+        java.util.Vector $r2;
+
+        r0 := @this;
+
+        $i0 = r0.depth();
+
+        r1 = newarray (org.gjt.sp.jedit.bsh.NameSpace)[$i0];
+
+        $r2 = r0.stack;
+
+        $r2.copyInto(r1);
+
+        return r1;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.bsh.CallStack r0;
+        java.lang.StringBuilder r1, $r3, $r6, $r7, $r9, $r10;
+        org.gjt.sp.jedit.bsh.NameSpace[] r2;
+        int $i0, i1;
+        java.lang.String $r5, $r11;
+        org.gjt.sp.jedit.bsh.NameSpace $r8;
+
+        r0 := @this;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        r1 = $r3;
+
+        r1.append("CallStack:\n");
+
+        r2 = r0.toArray();
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $i0 = lengthof r2;
+
+        if i1 >= $i0 goto label2;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("\t");
+
+        $r8 = r2[i1];
+
+        $r9 = $r7.append($r8);
+
+        $r10 = $r9.append("\n");
+
+        $r11 = $r10.toString();
+
+        r1.append($r11);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        $r5 = r1.toString();
+
+        return $r5;
+    }
+
+    public org.gjt.sp.jedit.bsh.CallStack copy()
+    {
+        org.gjt.sp.jedit.bsh.CallStack r0, r1, $r2;
+        java.util.Vector $r3, $r5;
+        java.lang.Object $r4;
+
+        r0 := @this;
+
+        $r2 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+        $r3 = r0.stack;
+
+        $r4 = $r3.clone();
+
+        $r5 = (java.util.Vector) $r4;
+
+        r1.stack = $r5;
+
+        return r1;
+    }
+}

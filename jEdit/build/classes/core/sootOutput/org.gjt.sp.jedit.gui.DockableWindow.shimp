@@ -1,0 +1,5 @@
+public interface  org.gjt.sp.jedit.gui.DockableWindow extends java.lang.Object
+{
+
+    public abstract void move(java.lang.String);
+}

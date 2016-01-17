@@ -1,0 +1,55 @@
+class org.gjt.sp.jedit.search.HyperSearchResults$ResultCellRenderer$CountNodes extends java.lang.Object implements org.gjt.sp.jedit.search.HyperSearchTreeNodeCallback
+{
+    int bufferCount;
+    int resultCount;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$ResultCellRenderer$CountNodes r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public boolean processNode(javax.swing.tree.DefaultMutableTreeNode)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$ResultCellRenderer$CountNodes r0;
+        javax.swing.tree.DefaultMutableTreeNode r1;
+        java.lang.Object r2;
+        boolean $z0;
+        org.gjt.sp.jedit.search.HyperSearchFileNode $r3;
+        int $i0, $i1, $i2, $i3, $i4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getUserObject();
+
+        $z0 = r2 instanceof org.gjt.sp.jedit.search.HyperSearchFileNode;
+
+        if $z0 == 0 goto label1;
+
+        $i0 = r0.resultCount;
+
+        $r3 = (org.gjt.sp.jedit.search.HyperSearchFileNode) r2;
+
+        $i1 = $r3.getCount();
+
+        $i2 = $i0 + $i1;
+
+        r0.resultCount = $i2;
+
+        $i3 = r0.bufferCount;
+
+        $i4 = $i3 + 1;
+
+        r0.bufferCount = $i4;
+
+     label1:
+        return 1;
+    }
+}

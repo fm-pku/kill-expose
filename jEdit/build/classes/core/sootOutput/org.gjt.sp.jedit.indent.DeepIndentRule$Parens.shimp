@@ -1,0 +1,334 @@
+class org.gjt.sp.jedit.indent.DeepIndentRule$Parens extends java.lang.Object implements org.gjt.sp.jedit.syntax.TokenHandler
+{
+    int openOffset;
+    int closeOffset;
+    private int searchPos;
+    private java.util.Stack open;
+    private java.util.Stack close;
+    final org.gjt.sp.jedit.indent.DeepIndentRule this$0;
+
+    void <init>(org.gjt.sp.jedit.indent.DeepIndentRule, org.gjt.sp.jedit.buffer.JEditBuffer, int, int)
+    {
+        org.gjt.sp.jedit.indent.DeepIndentRule$Parens r0;
+        org.gjt.sp.jedit.indent.DeepIndentRule r1;
+        org.gjt.sp.jedit.buffer.JEditBuffer r2;
+        int i0, i1, $i2, $i3, $i2_1, $i2_2, $i3_1, $i3_2;
+        java.util.Stack $r3, $r4, $r5, $r6, $r9, $r10;
+        boolean $z0, $z1;
+        java.lang.Object $r7, $r11;
+        java.lang.Integer $r8, $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        i1 := @parameter3;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.searchPos = i1;
+
+        $r3 = new java.util.Stack;
+
+        specialinvoke $r3.<init>();
+
+        r0.open = $r3;
+
+        $r4 = new java.util.Stack;
+
+        specialinvoke $r4.<init>();
+
+        r0.close = $r4;
+
+        r2.markTokens(i0, r0);
+
+        $r5 = r0.open;
+
+        $z0 = $r5.isEmpty();
+
+        if $z0 == 0 goto label1;
+
+        $i2 = -1;
+
+(0)     goto label2;
+
+     label1:
+        $r6 = r0.open;
+
+        $r7 = $r6.pop();
+
+        $r8 = (java.lang.Integer) $r7;
+
+(1)     $i2_1 = $r8.intValue();
+
+     label2:
+        $i2_2 = Phi($i2 #0, $i2_1 #1);
+
+        r0.openOffset = $i2_2;
+
+        $r9 = r0.close;
+
+        $z1 = $r9.isEmpty();
+
+        if $z1 == 0 goto label3;
+
+        $i3 = -1;
+
+(2)     goto label4;
+
+     label3:
+        $r10 = r0.close;
+
+        $r11 = $r10.pop();
+
+        $r12 = (java.lang.Integer) $r11;
+
+(3)     $i3_1 = $r12.intValue();
+
+     label4:
+        $i3_2 = Phi($i3 #2, $i3_1 #3);
+
+        r0.closeOffset = $i3_2;
+
+        return;
+    }
+
+    public void handleToken(javax.swing.text.Segment, byte, int, int, org.gjt.sp.jedit.syntax.TokenMarker$LineContext)
+    {
+        org.gjt.sp.jedit.indent.DeepIndentRule$Parens r0;
+        javax.swing.text.Segment r1;
+        byte b0;
+        int i1, $i2, $i3, $i4, $i5, $i6, $i9, $i10, $i13, $i14, $i15, $i16, $i17, i18, i19, i18_1, i18_2;
+        org.gjt.sp.jedit.syntax.TokenMarker$LineContext r2;
+        char[] $r3, $r5;
+        org.gjt.sp.jedit.indent.DeepIndentRule $r4, $r6;
+        char $c7, $c8, $c11, $c12;
+        java.util.Stack $r7, $r8, $r11, $r12, $r14, $r15, $r18, $r19;
+        boolean $z0, $z1, $z2, $z3;
+        java.lang.Integer $r9, $r16;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        b0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i18 := @parameter3;
+
+        r2 := @parameter4;
+
+        if i18 <= 0 goto label01;
+
+        $i2 = r0.searchPos;
+
+        if $i2 == -1 goto label02;
+
+        $i17 = r0.searchPos;
+
+        if $i17 >= i1 goto label02;
+
+     label01:
+        return;
+
+     label02:
+        $i3 = r0.searchPos;
+
+(0)     if $i3 == -1 goto label03;
+
+        $i14 = i1 + i18;
+
+        $i13 = r0.searchPos;
+
+(1)     if $i14 <= $i13 goto label03;
+
+        $i15 = r0.searchPos;
+
+        $i16 = $i15 - i1;
+
+(2)     i18_1 = $i16 + 1;
+
+     label03:
+        i18_2 = Phi(i18 #0, i18 #1, i18_1 #2);
+
+        tableswitch(b0)
+        {
+            case 1: goto label04;
+            case 2: goto label04;
+            case 3: goto label04;
+            case 4: goto label04;
+            case 5: goto label05;
+            case 6: goto label05;
+            case 7: goto label05;
+            case 8: goto label05;
+            case 9: goto label05;
+            case 10: goto label05;
+            case 11: goto label05;
+            case 12: goto label05;
+            case 13: goto label04;
+            case 14: goto label04;
+            case 15: goto label04;
+            case 16: goto label04;
+            default: goto label05;
+        };
+
+     label04:
+(3)     goto label11;
+
+     label05:
+(4)     i19 = i1;
+
+     label06:
+        i18 = Phi(i18_2 #4, i18 #6);
+
+        i19 = Phi(i19 #4, i19 #6);
+
+        $i4 = i1 + i18;
+
+(5)     if i19 >= $i4 goto label11;
+
+        $r3 = r1.array;
+
+        $i5 = r1.offset;
+
+        $i6 = $i5 + i19;
+
+        $c7 = $r3[$i6];
+
+        $r4 = r0.this$0;
+
+        $c8 = org.gjt.sp.jedit.indent.DeepIndentRule.access$000($r4);
+
+        if $c7 != $c8 goto label08;
+
+        $r14 = r0.open;
+
+        $z2 = $r14.isEmpty();
+
+        if $z2 == 0 goto label07;
+
+        $r18 = r0.close;
+
+        $z3 = $r18.isEmpty();
+
+        if $z3 != 0 goto label07;
+
+        $r19 = r0.close;
+
+        $r19.pop();
+
+        goto label10;
+
+     label07:
+        $r15 = r0.open;
+
+        $r16 = java.lang.Integer.valueOf(i19);
+
+        $r15.push($r16);
+
+        goto label10;
+
+     label08:
+        $r5 = r1.array;
+
+        $i9 = r1.offset;
+
+        $i10 = $i9 + i19;
+
+        $c11 = $r5[$i10];
+
+        $r6 = r0.this$0;
+
+        $c12 = org.gjt.sp.jedit.indent.DeepIndentRule.access$100($r6);
+
+        if $c11 != $c12 goto label10;
+
+        $r7 = r0.close;
+
+        $z0 = $r7.isEmpty();
+
+        if $z0 == 0 goto label09;
+
+        $r11 = r0.open;
+
+        $z1 = $r11.isEmpty();
+
+        if $z1 != 0 goto label09;
+
+        $r12 = r0.open;
+
+        $r12.pop();
+
+        goto label10;
+
+     label09:
+        $r8 = r0.close;
+
+        $r9 = java.lang.Integer.valueOf(i19);
+
+        $r8.push($r9);
+
+     label10:
+        i19 = i19 + 1;
+
+(6)     goto label06;
+
+     label11:
+        i18 = Phi(i18_2 #3, i18 #5);
+
+        i19 = Phi(i19 #3, i19 #5);
+
+        return;
+    }
+
+    public void setLineContext(org.gjt.sp.jedit.syntax.TokenMarker$LineContext)
+    {
+        org.gjt.sp.jedit.indent.DeepIndentRule$Parens r0;
+        org.gjt.sp.jedit.syntax.TokenMarker$LineContext r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.indent.DeepIndentRule$Parens r0;
+        java.lang.StringBuilder $r1, $r2, $r3, $r4, $r5, $r6;
+        int $i0, $i1;
+        java.lang.String $r7;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("Parens(");
+
+        $i0 = r0.openOffset;
+
+        $r3 = $r2.append($i0);
+
+        $r4 = $r3.append(44);
+
+        $i1 = r0.closeOffset;
+
+        $r5 = $r4.append($i1);
+
+        $r6 = $r5.append(41);
+
+        $r7 = $r6.toString();
+
+        return $r7;
+    }
+}

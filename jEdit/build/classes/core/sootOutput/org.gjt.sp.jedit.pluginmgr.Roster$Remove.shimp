@@ -1,0 +1,235 @@
+class org.gjt.sp.jedit.pluginmgr.Roster$Remove extends org.gjt.sp.jedit.pluginmgr.Roster$Operation
+{
+    private final java.lang.String jar;
+    final org.gjt.sp.jedit.pluginmgr.Roster this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.Roster, java.lang.String)
+    {
+        org.gjt.sp.jedit.pluginmgr.Roster$Remove r0;
+        org.gjt.sp.jedit.pluginmgr.Roster r1;
+        java.lang.String r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.jar = r2;
+
+        return;
+    }
+
+    public void runInAWTThread(java.awt.Component)
+    {
+        org.gjt.sp.jedit.pluginmgr.Roster$Remove r0;
+        java.awt.Component r1;
+        org.gjt.sp.jedit.PluginJAR r2;
+        java.io.File r3, r4, $r10, $r12;
+        java.lang.String[] r5, $r20;
+        java.lang.String $r6, $r9, $r11, $r13, $r14, $r15, $r19, $r21;
+        org.gjt.sp.jedit.pluginmgr.Roster $r7;
+        java.util.List $r8;
+        int $i0, $i1;
+        boolean $z1, $z2, $z3, z4, z4_1, z4_2, z4_3;
+        java.lang.StringBuilder $r16, $r17, $r18;
+        org.gjt.sp.jedit.msg.PluginUpdate $r22;
+        java.lang.Object $r23;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r6 = r0.jar;
+
+        r2 = org.gjt.sp.jedit.jEdit.getPluginJAR($r6);
+
+        if r2 == null goto label1;
+
+        specialinvoke r0.unloadPluginJAR(r2);
+
+     label1:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.pluginmgr.Roster.access$000($r7);
+
+        $r9 = r0.jar;
+
+        $r8.remove($r9);
+
+        $r10 = new java.io.File;
+
+        $r11 = r0.jar;
+
+        specialinvoke $r10.<init>($r11);
+
+        r3 = $r10;
+
+        $r12 = new java.io.File;
+
+        $r14 = r0.jar;
+
+        $r13 = r0.jar;
+
+        $i0 = $r13.length();
+
+        $i1 = $i0 - 4;
+
+        $r15 = $r14.substring(0, $i1);
+
+        specialinvoke $r12.<init>($r15);
+
+        r4 = $r12;
+
+        $z1 = r3.exists();
+
+(0)     if $z1 == 0 goto label4;
+
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<init>();
+
+        $r17 = $r16.append("Deleting ");
+
+        $r18 = $r17.append(r3);
+
+        $r19 = $r18.toString();
+
+        org.gjt.sp.util.Log.log(5, r0, $r19);
+
+        z4 = r3.delete();
+
+        if z4 == 0 goto label2;
+
+        $r22 = new org.gjt.sp.jedit.msg.PluginUpdate;
+
+        $r23 = org.gjt.sp.jedit.msg.PluginUpdate.REMOVED;
+
+        specialinvoke $r22.<init>(r3, $r23, 0);
+
+        org.gjt.sp.jedit.EditBus.send($r22);
+
+     label2:
+        $z2 = r4.exists();
+
+(1)     if $z2 == 0 goto label3;
+
+        $z3 = org.gjt.sp.jedit.io.FileVFS.recursiveDelete(r4);
+
+(2)     z4_1 = z4 & $z3;
+
+     label3:
+        z4_2 = Phi(z4 #1, z4_1 #2);
+
+(3)     if z4_2 != 0 goto label4;
+
+        $r20 = newarray (java.lang.String)[1];
+
+        $r21 = r0.jar;
+
+        $r20[0] = $r21;
+
+        r5 = $r20;
+
+(4)     org.gjt.sp.jedit.GUIUtilities.error(r1, "plugin-manager.remove-failed", r5);
+
+     label4:
+        z4_3 = Phi(z4 #0, z4_2 #3, z4_2 #4);
+
+        return;
+    }
+
+    private void unloadPluginJAR(org.gjt.sp.jedit.PluginJAR)
+    {
+        org.gjt.sp.jedit.pluginmgr.Roster$Remove r0;
+        org.gjt.sp.jedit.PluginJAR r1, r5;
+        java.lang.String[] r2, r3;
+        int i0, i1;
+        java.lang.String r4;
+        org.gjt.sp.jedit.pluginmgr.Roster $r6;
+        java.util.List $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getDependentPlugins();
+
+        r3 = r2;
+
+        i0 = lengthof r3;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label3;
+
+        r4 = r3[i1];
+
+        r5 = org.gjt.sp.jedit.jEdit.getPluginJAR(r4);
+
+        if r5 == null goto label2;
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.pluginmgr.Roster.access$000($r6);
+
+        $r7.add(r4);
+
+        specialinvoke r0.unloadPluginJAR(r5);
+
+     label2:
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        org.gjt.sp.jedit.jEdit.removePluginJAR(r1, 0);
+
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        org.gjt.sp.jedit.pluginmgr.Roster$Remove r0, $r2;
+        java.lang.Object r1;
+        boolean $z0, $z1, $z2, $z2_1, $z2_2;
+        java.lang.String $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.pluginmgr.Roster$Remove;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = (org.gjt.sp.jedit.pluginmgr.Roster$Remove) r1;
+
+        $r4 = $r2.jar;
+
+        $r3 = r0.jar;
+
+        $z1 = $r4.equals($r3);
+
+        if $z1 == 0 goto label1;
+
+        $z2 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z2_1 = 0;
+
+     label2:
+        $z2_2 = Phi($z2 #0, $z2_1 #1);
+
+        return $z2_2;
+    }
+}

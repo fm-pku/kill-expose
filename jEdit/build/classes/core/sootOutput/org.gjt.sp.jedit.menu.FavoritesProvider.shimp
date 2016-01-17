@@ -1,0 +1,144 @@
+public class org.gjt.sp.jedit.menu.FavoritesProvider extends java.lang.Object implements org.gjt.sp.jedit.menu.DynamicMenuProvider
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.menu.FavoritesProvider r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public boolean updateEveryTime()
+    {
+        org.gjt.sp.jedit.menu.FavoritesProvider r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+
+    public void update(javax.swing.JMenu)
+    {
+        org.gjt.sp.jedit.menu.FavoritesProvider r0;
+        javax.swing.JMenu r1;
+        org.gjt.sp.jedit.View r2;
+        org.gjt.sp.jedit.menu.FavoritesProvider$1 r3, $r9;
+        org.gjt.sp.jedit.menu.FavoritesProvider$2 r4, $r10;
+        org.gjt.sp.jedit.io.VFSFile[] r5, r21;
+        int i0, $i1, $i2, i3;
+        org.gjt.sp.jedit.io.VFSFile r6;
+        org.gjt.sp.jedit.io.FavoritesVFS$Favorite r7;
+        javax.swing.JMenuItem r8, $r12, $r17, r20;
+        org.gjt.sp.jedit.io.VFS$DirectoryEntryCompare $r11;
+        boolean $z0, $z1;
+        java.lang.String $r13, $r14, $r18;
+        javax.swing.Icon $r15;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = org.gjt.sp.jedit.GUIUtilities.getView(r1);
+
+        $r9 = new org.gjt.sp.jedit.menu.FavoritesProvider$1;
+
+        specialinvoke $r9.<init>(r0, r2);
+
+        r3 = $r9;
+
+        $r10 = new org.gjt.sp.jedit.menu.FavoritesProvider$2;
+
+        specialinvoke $r10.<init>(r0, r2);
+
+        r4 = $r10;
+
+        r5 = org.gjt.sp.jedit.io.FavoritesVFS.getFavorites();
+
+        $i1 = lengthof r5;
+
+        if $i1 != 0 goto label1;
+
+        $r17 = new javax.swing.JMenuItem;
+
+        $r18 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.favorites.no-favorites.label");
+
+        specialinvoke $r17.<init>($r18);
+
+        r20 = $r17;
+
+        r20.setEnabled(0);
+
+        r1.add(r20);
+
+(0)     goto label5;
+
+     label1:
+        $r11 = new org.gjt.sp.jedit.io.VFS$DirectoryEntryCompare;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.sortMixFilesAndDirs");
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.sortIgnoreCase");
+
+        specialinvoke $r11.<init>($z0, $z1);
+
+        java.util.Arrays.sort(r5, $r11);
+
+        r21 = r5;
+
+        i0 = lengthof r21;
+
+(1)     i3 = 0;
+
+     label2:
+        i3 = Phi(i3 #1, i3 #3);
+
+(2)     if i3 >= i0 goto label5;
+
+        r6 = r21[i3];
+
+        r7 = (org.gjt.sp.jedit.io.FavoritesVFS$Favorite) r6;
+
+        $r12 = new javax.swing.JMenuItem;
+
+        $r13 = r7.getLabel();
+
+        specialinvoke $r12.<init>($r13);
+
+        r8 = $r12;
+
+        $r14 = r7.getPath();
+
+        r8.setActionCommand($r14);
+
+        $r15 = org.gjt.sp.jedit.browser.FileCellRenderer.getIconForFile(r7, 0);
+
+        r8.setIcon($r15);
+
+        $i2 = r7.getType();
+
+        if $i2 != 0 goto label3;
+
+        r8.addActionListener(r3);
+
+        goto label4;
+
+     label3:
+        r8.addActionListener(r4);
+
+     label4:
+        r1.add(r8);
+
+        i3 = i3 + 1;
+
+(3)     goto label2;
+
+     label5:
+        i3 = Phi(i3 #0, i3 #2);
+
+        return;
+    }
+}

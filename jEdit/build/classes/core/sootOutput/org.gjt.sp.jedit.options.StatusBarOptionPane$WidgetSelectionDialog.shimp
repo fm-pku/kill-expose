@@ -1,0 +1,621 @@
+class org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog extends org.gjt.sp.jedit.gui.EnhancedDialog
+{
+    private final javax.swing.JButton ok;
+    private final javax.swing.JButton cancel;
+    private final javax.swing.JTextField labelField;
+    private final javax.swing.JLabel labelLabel;
+    private final javax.swing.JRadioButton labelRadio;
+    private final javax.swing.JComboBox widgetCombo;
+    private final javax.swing.JLabel widgetLabel;
+    private final javax.swing.JRadioButton widgetRadio;
+    private java.lang.String value;
+    final org.gjt.sp.jedit.options.StatusBarOptionPane this$0;
+
+    void <init>(org.gjt.sp.jedit.options.StatusBarOptionPane, java.awt.Component, java.lang.String)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog r0;
+        org.gjt.sp.jedit.options.StatusBarOptionPane r1;
+        java.awt.Component r2, $r35, $r44, $r51;
+        java.lang.String r3, $r9, $r12, $r14, $r18, $r21, $r38, $r47, $r91, r93;
+        javax.swing.ButtonGroup r4, $r10;
+        java.lang.String[] r5, r92;
+        boolean z0, $z1, $z2, $z4, $z6, $z6_1, $z6_2;
+        java.util.Vector r6, $r22;
+        java.util.HashSet r7, $r23;
+        javax.swing.JDialog $r8, $r82;
+        javax.swing.JRadioButton $r11, $r13, $r15, $r16, $r30, $r31, $r54, $r60, $r68, $r76, $r83, $r85, $r86;
+        javax.swing.JLabel $r17, $r20, $r64, $r72, $r87;
+        javax.swing.JTextField $r19, $r53, $r65, $r77, $r78;
+        int $i0, $i1, $i2, $i3, i4, i5, i6;
+        javax.swing.DefaultListModel $r24, $r25, $r89;
+        javax.swing.JComboBox $r26, $r28, $r73, $r79, $r84, $r88;
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetListCellRenderer $r27;
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog$ActionHandler $r29, r94;
+        javax.swing.JPanel $r32, $r55, $r58, $r62, $r70, r95, r96, r97, r98, r99;
+        javax.swing.BoxLayout $r33, $r59;
+        javax.swing.border.EmptyBorder $r34, $r57;
+        javax.swing.JButton $r37, $r39, $r41, $r42, $r46, $r48, $r49;
+        javax.swing.JRootPane $r40;
+        java.awt.BorderLayout $r56, $r63, $r71;
+        java.awt.Container $r80, $r81;
+        java.lang.Object $r90;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$0 = r1;
+
+        $r8 = org.gjt.sp.jedit.GUIUtilities.getParentDialog(r2);
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("options.status.edit.title");
+
+        specialinvoke r0.<init>($r8, $r9, 1);
+
+        $r10 = new javax.swing.ButtonGroup;
+
+        specialinvoke $r10.<init>();
+
+        r4 = $r10;
+
+        $r11 = new javax.swing.JRadioButton;
+
+        $r12 = org.gjt.sp.jedit.jEdit.getProperty("options.status.edit.labelRadioButton");
+
+        specialinvoke $r11.<init>($r12);
+
+        r0.labelRadio = $r11;
+
+        $r13 = new javax.swing.JRadioButton;
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("options.status.edit.widgetRadioButton");
+
+        specialinvoke $r13.<init>($r14);
+
+        r0.widgetRadio = $r13;
+
+        $r15 = r0.labelRadio;
+
+        r4.add($r15);
+
+        $r16 = r0.widgetRadio;
+
+        r4.add($r16);
+
+        $r17 = new javax.swing.JLabel;
+
+        $r18 = org.gjt.sp.jedit.jEdit.getProperty("options.status.edit.labelLabel");
+
+        specialinvoke $r17.<init>($r18);
+
+        r0.labelLabel = $r17;
+
+        $r19 = new javax.swing.JTextField;
+
+        specialinvoke $r19.<init>();
+
+        r0.labelField = $r19;
+
+        $r20 = new javax.swing.JLabel;
+
+        $r21 = org.gjt.sp.jedit.jEdit.getProperty("options.status.edit.widgetLabel");
+
+        specialinvoke $r20.<init>($r21);
+
+        r0.widgetLabel = $r20;
+
+        r5 = org.gjt.sp.jedit.ServiceManager.getServiceNames("org.gjt.sp.jedit.gui.statusbar.StatusWidgetFactory");
+
+        java.util.Arrays.sort(r5);
+
+        if r3 == null goto label01;
+
+        $i3 = java.util.Arrays.binarySearch(r5, r3);
+
+        if $i3 < 0 goto label01;
+
+        $z6 = 1;
+
+(0)     goto label02;
+
+     label01:
+(1)     $z6_1 = 0;
+
+     label02:
+        $z6_2 = Phi($z6 #0, $z6_1 #1);
+
+        z0 = $z6_2;
+
+        $r22 = new java.util.Vector;
+
+        $i0 = lengthof r5;
+
+        specialinvoke $r22.<init>($i0);
+
+        r6 = $r22;
+
+        $r23 = new java.util.HashSet;
+
+        $r24 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$500(r1);
+
+        $i1 = $r24.getSize();
+
+        specialinvoke $r23.<init>($i1);
+
+        r7 = $r23;
+
+(2)     i4 = 0;
+
+     label03:
+        $z6 = Phi($z6_2 #2, $z6 #3);
+
+        i4 = Phi(i4 #2, i4 #3);
+
+        $r25 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$500(r1);
+
+        $i2 = $r25.getSize();
+
+        if i4 >= $i2 goto label04;
+
+        $r89 = org.gjt.sp.jedit.options.StatusBarOptionPane.access$500(r1);
+
+        $r90 = $r89.get(i4);
+
+        $r91 = (java.lang.String) $r90;
+
+        r7.add($r91);
+
+        i4 = i4 + 1;
+
+(3)     goto label03;
+
+     label04:
+        r92 = r5;
+
+        i5 = lengthof r92;
+
+(4)     i6 = 0;
+
+     label05:
+        i6 = Phi(i6 #4, i6 #5);
+
+        $z6 = Phi($z6 #4, $z6 #5);
+
+        i4 = Phi(i4 #4, i4 #5);
+
+        if i6 >= i5 goto label08;
+
+        r93 = r92[i6];
+
+        $z2 = r7.contains(r93);
+
+        if $z2 == 0 goto label06;
+
+        if z0 == 0 goto label07;
+
+        $z4 = r93.equals(r3);
+
+        if $z4 == 0 goto label07;
+
+     label06:
+        r6.add(r93);
+
+     label07:
+        i6 = i6 + 1;
+
+(5)     goto label05;
+
+     label08:
+        $r26 = new javax.swing.JComboBox;
+
+        specialinvoke $r26.<init>(r6);
+
+        r0.widgetCombo = $r26;
+
+        $r28 = r0.widgetCombo;
+
+        $r27 = new org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetListCellRenderer;
+
+        specialinvoke $r27.<init>(null);
+
+        $r28.setRenderer($r27);
+
+        $r29 = new org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog$ActionHandler;
+
+        specialinvoke $r29.<init>(r0, null);
+
+        r94 = $r29;
+
+        $r30 = r0.labelRadio;
+
+        $r30.addActionListener(r94);
+
+        $r31 = r0.widgetRadio;
+
+        $r31.addActionListener(r94);
+
+        $r32 = new javax.swing.JPanel;
+
+        specialinvoke $r32.<init>();
+
+        r95 = $r32;
+
+        $r33 = new javax.swing.BoxLayout;
+
+        specialinvoke $r33.<init>(r95, 0);
+
+        r95.setLayout($r33);
+
+        $r34 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r34.<init>(12, 0, 0, 0);
+
+        r95.setBorder($r34);
+
+        $r35 = javax.swing.Box.createGlue();
+
+        r95.add($r35);
+
+        $r37 = new javax.swing.JButton;
+
+        $r38 = org.gjt.sp.jedit.jEdit.getProperty("common.ok");
+
+        specialinvoke $r37.<init>($r38);
+
+        r0.ok = $r37;
+
+        $r39 = r0.ok;
+
+        $r39.addActionListener(r94);
+
+        $r40 = r0.getRootPane();
+
+        $r41 = r0.ok;
+
+        $r40.setDefaultButton($r41);
+
+        $r42 = r0.ok;
+
+        r95.add($r42);
+
+        $r44 = javax.swing.Box.createHorizontalStrut(6);
+
+        r95.add($r44);
+
+        $r46 = new javax.swing.JButton;
+
+        $r47 = org.gjt.sp.jedit.jEdit.getProperty("common.cancel");
+
+        specialinvoke $r46.<init>($r47);
+
+        r0.cancel = $r46;
+
+        $r48 = r0.cancel;
+
+        $r48.addActionListener(r94);
+
+        $r49 = r0.cancel;
+
+        r95.add($r49);
+
+        $r51 = javax.swing.Box.createGlue();
+
+        r95.add($r51);
+
+        $r53 = r0.labelField;
+
+        $r53.setEnabled(0);
+
+        $r54 = r0.widgetRadio;
+
+        $r54.setSelected(1);
+
+        $r55 = new javax.swing.JPanel;
+
+        $r56 = new java.awt.BorderLayout;
+
+        specialinvoke $r56.<init>();
+
+        specialinvoke $r55.<init>($r56);
+
+        r96 = $r55;
+
+        $r57 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r57.<init>(12, 12, 12, 12);
+
+        r96.setBorder($r57);
+
+        r0.setContentPane(r96);
+
+        $r58 = new javax.swing.JPanel;
+
+        specialinvoke $r58.<init>();
+
+        r97 = $r58;
+
+        $r59 = new javax.swing.BoxLayout;
+
+        specialinvoke $r59.<init>(r97, 1);
+
+        r97.setLayout($r59);
+
+        $r60 = r0.labelRadio;
+
+        r97.add($r60);
+
+        $r62 = new javax.swing.JPanel;
+
+        $r63 = new java.awt.BorderLayout;
+
+        specialinvoke $r63.<init>();
+
+        specialinvoke $r62.<init>($r63);
+
+        r98 = $r62;
+
+        $r64 = r0.labelLabel;
+
+        r98.add($r64, "West");
+
+        $r65 = r0.labelField;
+
+        r98.add($r65);
+
+        r97.add(r98);
+
+        $r68 = r0.widgetRadio;
+
+        r97.add($r68);
+
+        $r70 = new javax.swing.JPanel;
+
+        $r71 = new java.awt.BorderLayout;
+
+        specialinvoke $r71.<init>();
+
+        specialinvoke $r70.<init>($r71);
+
+        r99 = $r70;
+
+        $r72 = r0.widgetLabel;
+
+        r99.add($r72, "West");
+
+        $r73 = r0.widgetCombo;
+
+        r99.add($r73);
+
+        $z1 = r6.isEmpty();
+
+        if $z1 == 0 goto label09;
+
+        $r85 = r0.labelRadio;
+
+        $r85.setSelected(1);
+
+        $r86 = r0.widgetRadio;
+
+        $r86.setEnabled(0);
+
+        $r87 = r0.widgetLabel;
+
+        $r87.setEnabled(0);
+
+        $r88 = r0.widgetCombo;
+
+        $r88.setEnabled(0);
+
+     label09:
+        r97.add(r99);
+
+        if z0 == 0 goto label10;
+
+        $r83 = r0.widgetRadio;
+
+        $r83.setSelected(1);
+
+        $r84 = r0.widgetCombo;
+
+        $r84.setSelectedItem(r3);
+
+        goto label11;
+
+     label10:
+        $r76 = r0.labelRadio;
+
+        $r76.setSelected(1);
+
+        $r77 = r0.labelField;
+
+        $r77.setText(r3);
+
+        $r78 = r0.labelField;
+
+        $r78.setEnabled(1);
+
+        $r79 = r0.widgetCombo;
+
+        $r79.setEnabled(0);
+
+     label11:
+        $r80 = r0.getContentPane();
+
+        $r80.add(r97, "Center");
+
+        $r81 = r0.getContentPane();
+
+        $r81.add(r95, "South");
+
+        r0.pack();
+
+        $r82 = org.gjt.sp.jedit.GUIUtilities.getParentDialog(r2);
+
+        r0.setLocationRelativeTo($r82);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.options.StatusBarOptionPane, java.awt.Component)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog r0;
+        org.gjt.sp.jedit.options.StatusBarOptionPane r1;
+        java.awt.Component r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1, r2, null);
+
+        return;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog r0;
+        javax.swing.JRadioButton $r1;
+        boolean $z0;
+        javax.swing.JTextField $r2;
+        java.lang.String $r3, $r4, $r7;
+        javax.swing.JComboBox $r5;
+        java.lang.Object $r6;
+
+        r0 := @this;
+
+        $r1 = r0.widgetRadio;
+
+        $z0 = $r1.isSelected();
+
+        if $z0 == 0 goto label1;
+
+        $r5 = r0.widgetCombo;
+
+        $r6 = $r5.getSelectedItem();
+
+        $r7 = (java.lang.String) $r6;
+
+        r0.value = $r7;
+
+        goto label2;
+
+     label1:
+        $r2 = r0.labelField;
+
+        $r3 = $r2.getText();
+
+        $r4 = $r3.trim();
+
+        r0.value = $r4;
+
+     label2:
+        r0.dispose();
+
+        return;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog r0;
+
+        r0 := @this;
+
+        r0.value = null;
+
+        r0.dispose();
+
+        return;
+    }
+
+    public java.lang.String getValue()
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.value;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$1300(org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.ok;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$1400(org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.cancel;
+
+        return $r1;
+    }
+
+    static javax.swing.JRadioButton access$1500(org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog r0;
+        javax.swing.JRadioButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.labelRadio;
+
+        return $r1;
+    }
+
+    static javax.swing.JTextField access$1600(org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.labelField;
+
+        return $r1;
+    }
+
+    static javax.swing.JComboBox access$1700(org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog r0;
+        javax.swing.JComboBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.widgetCombo;
+
+        return $r1;
+    }
+
+    static javax.swing.JRadioButton access$1800(org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetSelectionDialog r0;
+        javax.swing.JRadioButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.widgetRadio;
+
+        return $r1;
+    }
+}

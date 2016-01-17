@@ -1,0 +1,11 @@
+public interface  org.gjt.sp.jedit.Registers$Register extends java.lang.Object
+{
+
+    public abstract java.lang.String toString();
+
+    public abstract void setValue(java.lang.String);
+
+    public abstract java.awt.datatransfer.Transferable getTransferable();
+
+    public abstract void setTransferable(java.awt.datatransfer.Transferable);
+}

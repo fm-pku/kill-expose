@@ -1,0 +1,89 @@
+class org.gjt.sp.jedit.help.HelpTOCPanel$TOCCellRenderer extends org.gjt.sp.util.EnhancedTreeCellRenderer
+{
+    javax.swing.border.EmptyBorder border;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel$TOCCellRenderer r0;
+        javax.swing.border.EmptyBorder $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r1.<init>(1, 0, 1, 1);
+
+        r0.border = $r1;
+
+        return;
+    }
+
+    protected javax.swing.tree.TreeCellRenderer newInstance()
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel$TOCCellRenderer r0, $r1;
+
+        r0 := @this;
+
+        $r1 = new org.gjt.sp.jedit.help.HelpTOCPanel$TOCCellRenderer;
+
+        specialinvoke $r1.<init>();
+
+        return $r1;
+    }
+
+    protected void configureTreeCellRendererComponent(javax.swing.JTree, java.lang.Object, boolean, boolean, boolean, int, boolean)
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel$TOCCellRenderer r0;
+        javax.swing.JTree r1;
+        java.lang.Object r2;
+        boolean z0, z1, z2, z3;
+        int i0;
+        javax.swing.border.EmptyBorder $r3;
+        javax.swing.Icon $r4, $r4_1, $r4_2, $r4_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        z1 := @parameter3;
+
+        z2 := @parameter4;
+
+        i0 := @parameter5;
+
+        z3 := @parameter6;
+
+        if z2 == 0 goto label1;
+
+        $r4 = org.gjt.sp.jedit.browser.FileCellRenderer.fileIcon;
+
+(0)     goto label3;
+
+     label1:
+        if z1 == 0 goto label2;
+
+        $r4_1 = org.gjt.sp.jedit.browser.FileCellRenderer.openDirIcon;
+
+(1)     goto label3;
+
+     label2:
+(2)     $r4_2 = org.gjt.sp.jedit.browser.FileCellRenderer.dirIcon;
+
+     label3:
+        $r4_3 = Phi($r4 #0, $r4_1 #1, $r4_2 #2);
+
+        r0.setIcon($r4_3);
+
+        $r3 = r0.border;
+
+        r0.setBorder($r3);
+
+        return;
+    }
+}

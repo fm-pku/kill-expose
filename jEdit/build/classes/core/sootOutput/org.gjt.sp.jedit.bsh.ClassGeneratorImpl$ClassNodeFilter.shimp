@@ -1,0 +1,196 @@
+class org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter extends java.lang.Object implements org.gjt.sp.jedit.bsh.BSHBlock$NodeFilter
+{
+    public static final int STATIC;
+    public static final int INSTANCE;
+    public static final int CLASSES;
+    public static org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter CLASSSTATIC;
+    public static org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter CLASSINSTANCE;
+    public static org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter CLASSCLASSES;
+    int context;
+
+    private void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.context = i0;
+
+        return;
+    }
+
+    public boolean isVisible(org.gjt.sp.jedit.bsh.SimpleNode)
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter r0;
+        org.gjt.sp.jedit.bsh.SimpleNode r1;
+        int $i0, $i1, $i2;
+        boolean $z0, $z1, $z2, $z3, $z4, $z4_1, $z4_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r0.context;
+
+        if $i0 != 2 goto label1;
+
+        $z3 = r1 instanceof org.gjt.sp.jedit.bsh.BSHClassDeclaration;
+
+        return $z3;
+
+     label1:
+        $z0 = r1 instanceof org.gjt.sp.jedit.bsh.BSHClassDeclaration;
+
+        if $z0 == 0 goto label2;
+
+        return 0;
+
+     label2:
+        $i1 = r0.context;
+
+        if $i1 != 0 goto label3;
+
+        $z2 = r0.isStatic(r1);
+
+        return $z2;
+
+     label3:
+        $i2 = r0.context;
+
+        if $i2 != 1 goto label6;
+
+        $z1 = r0.isStatic(r1);
+
+        if $z1 != 0 goto label4;
+
+        $z4 = 1;
+
+(0)     goto label5;
+
+     label4:
+(1)     $z4_1 = 0;
+
+     label5:
+        $z4_2 = Phi($z4 #0, $z4_1 #1);
+
+        return $z4_2;
+
+     label6:
+        return 1;
+    }
+
+    boolean isStatic(org.gjt.sp.jedit.bsh.SimpleNode)
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter r0;
+        org.gjt.sp.jedit.bsh.SimpleNode r1;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z5_1, $z5_2, $z6_1, $z6_2;
+        org.gjt.sp.jedit.bsh.BSHMethodDeclaration $r2, $r4;
+        org.gjt.sp.jedit.bsh.Modifiers $r3, $r5, $r7, $r9;
+        org.gjt.sp.jedit.bsh.BSHTypedVariableDeclaration $r6, $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.bsh.BSHTypedVariableDeclaration;
+
+        if $z0 == 0 goto label3;
+
+        $r6 = (org.gjt.sp.jedit.bsh.BSHTypedVariableDeclaration) r1;
+
+        $r7 = $r6.modifiers;
+
+        if $r7 == null goto label1;
+
+        $r8 = (org.gjt.sp.jedit.bsh.BSHTypedVariableDeclaration) r1;
+
+        $r9 = $r8.modifiers;
+
+        $z4 = $r9.hasModifier("static");
+
+        if $z4 == 0 goto label1;
+
+        $z5 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z5_1 = 0;
+
+     label2:
+        $z5_2 = Phi($z5 #0, $z5_1 #1);
+
+        return $z5_2;
+
+     label3:
+        $z1 = r1 instanceof org.gjt.sp.jedit.bsh.BSHMethodDeclaration;
+
+        if $z1 == 0 goto label6;
+
+        $r2 = (org.gjt.sp.jedit.bsh.BSHMethodDeclaration) r1;
+
+        $r3 = $r2.modifiers;
+
+        if $r3 == null goto label4;
+
+        $r4 = (org.gjt.sp.jedit.bsh.BSHMethodDeclaration) r1;
+
+        $r5 = $r4.modifiers;
+
+        $z3 = $r5.hasModifier("static");
+
+        if $z3 == 0 goto label4;
+
+        $z6 = 1;
+
+(2)     goto label5;
+
+     label4:
+(3)     $z6_1 = 0;
+
+     label5:
+        $z6_2 = Phi($z6 #2, $z6_1 #3);
+
+        return $z6_2;
+
+     label6:
+        $z2 = r1 instanceof org.gjt.sp.jedit.bsh.BSHBlock;
+
+        if $z2 == 0 goto label7;
+
+        return 0;
+
+     label7:
+        return 0;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter $r0, $r1, $r2;
+
+        $r0 = new org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter;
+
+        specialinvoke $r0.<init>(0);
+
+        org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter.CLASSSTATIC = $r0;
+
+        $r1 = new org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter;
+
+        specialinvoke $r1.<init>(1);
+
+        org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter.CLASSINSTANCE = $r1;
+
+        $r2 = new org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter;
+
+        specialinvoke $r2.<init>(2);
+
+        org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter.CLASSCLASSES = $r2;
+
+        return;
+    }
+}

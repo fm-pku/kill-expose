@@ -1,0 +1,62 @@
+class org.gjt.sp.jedit.gui.MarkerViewer$MouseHandler extends java.awt.event.MouseAdapter
+{
+    final org.gjt.sp.jedit.gui.MarkerViewer this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.MarkerViewer)
+    {
+        org.gjt.sp.jedit.gui.MarkerViewer$MouseHandler r0;
+        org.gjt.sp.jedit.gui.MarkerViewer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mousePressed(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.MarkerViewer$MouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        int i0;
+        boolean $z0;
+        org.gjt.sp.jedit.gui.MarkerViewer $r2, $r5, $r7;
+        javax.swing.JList $r3, $r6;
+        java.awt.Point $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1.isConsumed();
+
+        if $z0 == 0 goto label1;
+
+        return;
+
+     label1:
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.MarkerViewer.access$100($r2);
+
+        $r4 = r1.getPoint();
+
+        i0 = $r3.locationToIndex($r4);
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.MarkerViewer.access$100($r5);
+
+        $r6.setSelectedIndex(i0);
+
+        $r7 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.MarkerViewer.access$200($r7);
+
+        return;
+    }
+}

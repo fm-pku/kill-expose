@@ -1,0 +1,94 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$TableFocusHandler extends java.awt.event.FocusAdapter
+{
+    final org.gjt.sp.jedit.pluginmgr.ManagePanel this$0;
+
+    private void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$TableFocusHandler r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void focusGained(java.awt.event.FocusEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$TableFocusHandler r0;
+        java.awt.event.FocusEvent r1;
+        javax.swing.JScrollBar r2;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r3, $r5, $r7, $r9, $r11;
+        javax.swing.JTable $r4, $r6, $r8, $r10;
+        int $i0, $i1, $i2;
+        javax.swing.JScrollPane $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r3);
+
+        $i0 = $r4.getSelectedRow();
+
+        if $i0 != -1 goto label1;
+
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r9);
+
+        $r10.setRowSelectionInterval(0, 0);
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1100($r11);
+
+        r2 = $r12.getVerticalScrollBar();
+
+        $i2 = r2.getMinimum();
+
+        r2.setValue($i2);
+
+     label1:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r5);
+
+        $i1 = $r6.getSelectedColumn();
+
+        if $i1 != -1 goto label2;
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r7);
+
+        $r8.setColumnSelectionInterval(0, 0);
+
+     label2:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel, org.gjt.sp.jedit.pluginmgr.ManagePanel$1)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$TableFocusHandler r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

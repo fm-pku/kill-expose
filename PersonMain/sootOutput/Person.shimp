@@ -1,0 +1,29 @@
+public class Person extends java.lang.Object
+{
+    Account account;
+    Person spouse;
+
+    void <init>()
+    {
+        Person r0;
+        Account $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new Account;
+
+        Packer.Unpack(r0);
+
+        specialinvoke $r1.<init>();
+
+        r0.account = $r1;
+
+        Packer.Pack(r0);
+
+        r0.spouse = null;
+
+        return;
+    }
+}

@@ -1,0 +1,35 @@
+public class org.gjt.sp.jedit.datatransfer.JEditDataFlavor extends java.lang.Object
+{
+    public static final java.awt.datatransfer.DataFlavor jEditRichTextDataFlavor;
+    public static final java.awt.datatransfer.DataFlavor html;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.datatransfer.JEditDataFlavor r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.awt.datatransfer.DataFlavor $r0, $r1;
+
+        $r0 = new java.awt.datatransfer.DataFlavor;
+
+        specialinvoke $r0.<init>(class "org/gjt/sp/jedit/datatransfer/JEditRichText", "application/x-java-jvm-local-objectref");
+
+        org.gjt.sp.jedit.datatransfer.JEditDataFlavor.jEditRichTextDataFlavor = $r0;
+
+        $r1 = new java.awt.datatransfer.DataFlavor;
+
+        specialinvoke $r1.<init>("text/html; class=java.lang.String", "text/html");
+
+        org.gjt.sp.jedit.datatransfer.JEditDataFlavor.html = $r1;
+
+        return;
+    }
+}

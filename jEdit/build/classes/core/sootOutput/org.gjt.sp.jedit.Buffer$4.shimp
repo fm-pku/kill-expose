@@ -1,0 +1,49 @@
+class org.gjt.sp.jedit.Buffer$4 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.View val$view;
+    final java.lang.Object[] val$args;
+    final org.gjt.sp.jedit.Buffer this$0;
+
+    void <init>(org.gjt.sp.jedit.Buffer, org.gjt.sp.jedit.View, java.lang.Object[])
+    {
+        org.gjt.sp.jedit.Buffer$4 r0;
+        org.gjt.sp.jedit.Buffer r1;
+        org.gjt.sp.jedit.View r2;
+        java.lang.Object[] r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$0 = r1;
+
+        r0.val$view = r2;
+
+        r0.val$args = r3;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.Buffer$4 r0;
+        java.lang.Object[] $r1;
+        org.gjt.sp.jedit.View $r2;
+
+        r0 := @this;
+
+        $r2 = r0.val$view;
+
+        $r1 = r0.val$args;
+
+        org.gjt.sp.jedit.GUIUtilities.message($r2, "autosave-loaded", $r1);
+
+        return;
+    }
+}

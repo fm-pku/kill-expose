@@ -1,0 +1,56 @@
+class org.gjt.sp.jedit.options.DockingOptionPane$DockPositionCellRenderer extends javax.swing.JComboBox implements javax.swing.table.TableCellRenderer
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.options.DockingOptionPane$DockPositionCellRenderer r0;
+        java.lang.String[] $r1;
+
+        r0 := @this;
+
+        $r1 = newarray (java.lang.String)[5];
+
+        $r1[0] = "floating";
+
+        $r1[1] = "top";
+
+        $r1[2] = "left";
+
+        $r1[3] = "bottom";
+
+        $r1[4] = "right";
+
+        specialinvoke r0.<init>($r1);
+
+        r0.setRequestFocusEnabled(0);
+
+        return;
+    }
+
+    public java.awt.Component getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
+    {
+        org.gjt.sp.jedit.options.DockingOptionPane$DockPositionCellRenderer r0;
+        javax.swing.JTable r1;
+        java.lang.Object r2;
+        boolean z0, z1;
+        int i0, i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        z1 := @parameter3;
+
+        i0 := @parameter4;
+
+        i1 := @parameter5;
+
+        r0.setSelectedItem(r2);
+
+        return r0;
+    }
+}

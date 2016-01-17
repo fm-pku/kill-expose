@@ -1,0 +1,67 @@
+class org.gjt.sp.jedit.browser.VFSFileChooserDialog$IoTaskHandler$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.browser.VFSFileChooserDialog$IoTaskHandler this$1;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSFileChooserDialog$IoTaskHandler)
+    {
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog$IoTaskHandler$1 r0;
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog$IoTaskHandler r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$1 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog$IoTaskHandler$1 r0;
+        int i0;
+        org.gjt.sp.util.TaskManager $r1;
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog$IoTaskHandler $r2, $r6;
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog $r3, $r7;
+        java.awt.Container $r4, $r8;
+        java.awt.Cursor $r5, $r9;
+
+        r0 := @this;
+
+        $r1 = org.gjt.sp.util.TaskManager.instance;
+
+        i0 = $r1.countIoTasks();
+
+        if i0 != 0 goto label1;
+
+        $r6 = r0.this$1;
+
+        $r7 = $r6.this$0;
+
+        $r8 = $r7.getContentPane();
+
+        $r9 = java.awt.Cursor.getDefaultCursor();
+
+        $r8.setCursor($r9);
+
+        goto label2;
+
+     label1:
+        if i0 < 1 goto label2;
+
+        $r2 = r0.this$1;
+
+        $r3 = $r2.this$0;
+
+        $r4 = $r3.getContentPane();
+
+        $r5 = java.awt.Cursor.getPredefinedCursor(3);
+
+        $r4.setCursor($r5);
+
+     label2:
+        return;
+    }
+}

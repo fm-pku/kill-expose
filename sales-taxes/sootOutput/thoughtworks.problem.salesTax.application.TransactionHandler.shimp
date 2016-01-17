@@ -1,0 +1,87 @@
+public class thoughtworks.problem.salesTax.application.TransactionHandler extends java.lang.Object
+{
+    private thoughtworks.problem.salesTax.shoppingCart.ShoppingCart cart;
+
+    public static double getTotal(double, int, double)
+    {
+        double d0, d1, d2, d3, d4, $d5, $d6, $d7;
+        int i0;
+
+        d0 := @parameter0;
+
+        i0 := @parameter1;
+
+        d1 := @parameter2;
+
+        $d5 = (double) i0;
+
+        d2 = d0 * $d5;
+
+        $d6 = d2 * d1;
+
+        d3 = $d6 / 100.0;
+
+        d4 = thoughtworks.problem.salesTax.application.TransactionHandler.roundUp(d3);
+
+        $d7 = d2 + d4;
+
+        return $d7;
+    }
+
+    private static double roundUp(double)
+    {
+        double d0, $d1, $d2, $d3, $d4, $d5;
+        java.math.BigDecimal r0, r1, $r2, $r3;
+        java.math.RoundingMode $r4;
+
+        d0 := @parameter0;
+
+        $r2 = new java.math.BigDecimal;
+
+        specialinvoke $r2.<init>(d0);
+
+        r0 = $r2;
+
+        $r3 = new java.math.BigDecimal;
+
+        $d1 = r0.doubleValue();
+
+        $d2 = $d1 * 20.0;
+
+        $d3 = java.lang.Math.ceil($d2);
+
+        $d4 = $d3 / 20.0;
+
+        specialinvoke $r3.<init>($d4);
+
+        r1 = $r3;
+
+        $r4 = java.math.RoundingMode.HALF_UP;
+
+        r1.setScale(2, $r4);
+
+        $d5 = r1.doubleValue();
+
+        return $d5;
+    }
+
+    public void <init>(thoughtworks.problem.salesTax.shoppingCart.ShoppingCart)
+    {
+        thoughtworks.problem.salesTax.application.TransactionHandler r0;
+        thoughtworks.problem.salesTax.shoppingCart.ShoppingCart r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.cart = r1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+}

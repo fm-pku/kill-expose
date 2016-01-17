@@ -1,0 +1,181 @@
+class org.gjt.sp.jedit.browser.VFSBrowser$HistoryComboBoxEditor extends org.gjt.sp.jedit.gui.HistoryTextField implements javax.swing.ComboBoxEditor
+{
+    private org.gjt.sp.jedit.io.GlobVFSFileFilter current;
+
+    void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$HistoryComboBoxEditor r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+
+    public java.lang.Object getItem()
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$HistoryComboBoxEditor r0;
+        org.gjt.sp.jedit.io.GlobVFSFileFilter $r1, $r2, $r5, $r6, $r8;
+        java.lang.String $r3, $r4, $r7, $r9;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r1 = r0.current;
+
+        if $r1 != null goto label1;
+
+        $r8 = new org.gjt.sp.jedit.io.GlobVFSFileFilter;
+
+        $r9 = r0.getText();
+
+        specialinvoke $r8.<init>($r9);
+
+        r0.current = $r8;
+
+     label1:
+        $r2 = r0.current;
+
+        $r3 = $r2.getGlob();
+
+        $r4 = r0.getText();
+
+        $z0 = $r3.equals($r4);
+
+        if $z0 != 0 goto label2;
+
+        $r6 = r0.current;
+
+        $r7 = r0.getText();
+
+        $r6.setGlob($r7);
+
+     label2:
+        $r5 = r0.current;
+
+        return $r5;
+    }
+
+    public void setItem(java.lang.Object)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$HistoryComboBoxEditor r0;
+        java.lang.Object r1;
+        org.gjt.sp.jedit.io.GlobVFSFileFilter $r2, $r3, $r4, $r7, $r9, r11, r12, r13;
+        boolean $z0;
+        java.lang.String $r5, $r6, $r8, $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.current;
+
+        if r1 != $r2 goto label2;
+
+        if r1 == null goto label1;
+
+        r11 = (org.gjt.sp.jedit.io.GlobVFSFileFilter) r1;
+
+        $r7 = new org.gjt.sp.jedit.io.GlobVFSFileFilter;
+
+        $r8 = r11.getGlob();
+
+        specialinvoke $r7.<init>($r8);
+
+        r0.current = $r7;
+
+        $r9 = r0.current;
+
+        $r10 = $r9.getGlob();
+
+        r0.setText($r10);
+
+     label1:
+        return;
+
+     label2:
+        if r1 == null goto label4;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.io.GlobVFSFileFilter;
+
+        if $z0 != 0 goto label3;
+
+        return;
+
+     label3:
+        r12 = (org.gjt.sp.jedit.io.GlobVFSFileFilter) r1;
+
+        $r4 = new org.gjt.sp.jedit.io.GlobVFSFileFilter;
+
+        $r5 = r12.getGlob();
+
+        specialinvoke $r4.<init>($r5);
+
+        r13 = $r4;
+
+        $r6 = r13.getGlob();
+
+        r0.setText($r6);
+
+        r0.addCurrentToHistory();
+
+        r0.current = r13;
+
+        goto label5;
+
+     label4:
+        r0.setText("*");
+
+        $r3 = new org.gjt.sp.jedit.io.GlobVFSFileFilter;
+
+        specialinvoke $r3.<init>("*");
+
+        r0.current = $r3;
+
+     label5:
+        return;
+    }
+
+    protected void processFocusEvent(java.awt.event.FocusEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$HistoryComboBoxEditor r0;
+        java.awt.event.FocusEvent r1;
+        int $i0;
+        javax.swing.text.Caret $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r1.getID();
+
+        if $i0 == 1005 goto label1;
+
+        specialinvoke r0.processFocusEvent(r1);
+
+        goto label2;
+
+     label1:
+        r0.setCaretPosition(0);
+
+        $r2 = r0.getCaret();
+
+        $r2.setVisible(0);
+
+     label2:
+        return;
+    }
+
+    public java.awt.Component getEditorComponent()
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$HistoryComboBoxEditor r0;
+
+        r0 := @this;
+
+        return r0;
+    }
+}

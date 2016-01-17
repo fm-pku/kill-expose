@@ -1,0 +1,324 @@
+public class org.gjt.sp.jedit.gui.TaskMonitor extends javax.swing.JPanel implements org.gjt.sp.util.TaskListener
+{
+    private final org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel model;
+    private final javax.swing.JTable table;
+    private final javax.swing.JLabel remainingCount;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor r0;
+        javax.swing.JPanel r1, $r4;
+        javax.swing.JScrollPane r2, $r26;
+        java.awt.BorderLayout $r3, $r5;
+        javax.swing.JLabel $r6, $r7;
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel $r8, $r10, $r12;
+        org.gjt.sp.jedit.gui.TaskMonitor$1 $r9;
+        javax.swing.JTable $r11, $r13, $r15, $r16, $r19, $r20, $r23, $r27;
+        int $i0;
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskCellRenderer $r14;
+        javax.swing.table.JTableHeader $r17;
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableEditor $r18;
+        javax.swing.table.TableColumnModel $r21, $r24;
+        javax.swing.table.TableColumn $r22, $r25;
+
+        r0 := @this;
+
+        $r3 = new java.awt.BorderLayout;
+
+        specialinvoke $r3.<init>();
+
+        specialinvoke r0.<init>($r3);
+
+        $r4 = new javax.swing.JPanel;
+
+        $r5 = new java.awt.BorderLayout;
+
+        specialinvoke $r5.<init>();
+
+        specialinvoke $r4.<init>($r5);
+
+        r1 = $r4;
+
+        $r6 = new javax.swing.JLabel;
+
+        specialinvoke $r6.<init>();
+
+        r0.remainingCount = $r6;
+
+        $r7 = r0.remainingCount;
+
+        r1.add($r7, "North");
+
+        $r8 = new org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel;
+
+        specialinvoke $r8.<init>(null);
+
+        r0.model = $r8;
+
+        $r10 = r0.model;
+
+        $r9 = new org.gjt.sp.jedit.gui.TaskMonitor$1;
+
+        specialinvoke $r9.<init>(r0);
+
+        $r10.addTableModelListener($r9);
+
+        $r11 = new javax.swing.JTable;
+
+        $r12 = r0.model;
+
+        specialinvoke $r11.<init>($r12);
+
+        r0.table = $r11;
+
+        $r13 = r0.table;
+
+        $i0 = org.gjt.sp.jedit.GUIUtilities.defaultRowHeight();
+
+        $r13.setRowHeight($i0);
+
+        $r15 = r0.table;
+
+        $r14 = new org.gjt.sp.jedit.gui.TaskMonitor$TaskCellRenderer;
+
+        specialinvoke $r14.<init>(null);
+
+        $r15.setDefaultRenderer(class "java/lang/Object", $r14);
+
+        $r16 = r0.table;
+
+        $r17 = $r16.getTableHeader();
+
+        $r17.setVisible(0);
+
+        $r19 = r0.table;
+
+        $r18 = new org.gjt.sp.jedit.gui.TaskMonitor$TaskTableEditor;
+
+        specialinvoke $r18.<init>(r0, null);
+
+        $r19.setDefaultEditor(class "java/lang/Object", $r18);
+
+        $r20 = r0.table;
+
+        $r21 = $r20.getColumnModel();
+
+        $r22 = $r21.getColumn(1);
+
+        $r22.setMaxWidth(16);
+
+        $r23 = r0.table;
+
+        $r24 = $r23.getColumnModel();
+
+        $r25 = $r24.getColumn(1);
+
+        $r25.setMinWidth(16);
+
+        $r26 = new javax.swing.JScrollPane;
+
+        $r27 = r0.table;
+
+        specialinvoke $r26.<init>($r27);
+
+        r2 = $r26;
+
+        r1.add(r2);
+
+        specialinvoke r0.updateTasksCount();
+
+        r0.add(r1);
+
+        return;
+    }
+
+    public void addNotify()
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor r0;
+        org.gjt.sp.jedit.gui.TaskMonitor$2 $r1;
+        org.gjt.sp.util.TaskManager $r2, $r3;
+
+        r0 := @this;
+
+        $r2 = org.gjt.sp.util.TaskManager.instance;
+
+        $r1 = new org.gjt.sp.jedit.gui.TaskMonitor$2;
+
+        specialinvoke $r1.<init>(r0);
+
+        $r2.visit($r1);
+
+        $r3 = org.gjt.sp.util.TaskManager.instance;
+
+        $r3.addTaskListener(r0);
+
+        specialinvoke r0.addNotify();
+
+        return;
+    }
+
+    public void removeNotify()
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor r0;
+        org.gjt.sp.util.TaskManager $r1;
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel $r2;
+
+        r0 := @this;
+
+        $r1 = org.gjt.sp.util.TaskManager.instance;
+
+        $r1.removeTaskListener(r0);
+
+        specialinvoke r0.removeNotify();
+
+        $r2 = r0.model;
+
+        $r2.removeAll();
+
+        return;
+    }
+
+    public void waiting(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor r0;
+        org.gjt.sp.util.Task r1;
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.model;
+
+        $r2.addTask(r1);
+
+        return;
+    }
+
+    public void running(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor r0;
+        org.gjt.sp.util.Task r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.repaint();
+
+        return;
+    }
+
+    public void done(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor r0;
+        org.gjt.sp.util.Task r1;
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.model;
+
+        $r2.removeTask(r1);
+
+        return;
+    }
+
+    public void statusUpdated(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor r0;
+        org.gjt.sp.util.Task r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.repaint();
+
+        return;
+    }
+
+    public void maximumUpdated(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor r0;
+        org.gjt.sp.util.Task r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.repaint();
+
+        return;
+    }
+
+    public void valueUpdated(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor r0;
+        org.gjt.sp.util.Task r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.repaint();
+
+        return;
+    }
+
+    private void updateTasksCount()
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor r0;
+        java.lang.Object[] $r1;
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel $r2;
+        javax.swing.JLabel $r3;
+        int $i0;
+        java.lang.Integer $r4;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        $r3 = r0.remainingCount;
+
+        $r1 = newarray (java.lang.Object)[1];
+
+        $r2 = r0.model;
+
+        $i0 = $r2.getRowCount();
+
+        $r4 = java.lang.Integer.valueOf($i0);
+
+        $r1[0] = $r4;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("taskmanager.remainingtasks.label", $r1);
+
+        $r3.setText($r5);
+
+        return;
+    }
+
+    static void access$100(org.gjt.sp.jedit.gui.TaskMonitor)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updateTasksCount();
+
+        return;
+    }
+
+    static org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel access$400(org.gjt.sp.jedit.gui.TaskMonitor)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor r0;
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.model;
+
+        return $r1;
+    }
+}

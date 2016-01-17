@@ -1,0 +1,275 @@
+class org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit extends org.gjt.sp.jedit.buffer.UndoManager$Edit
+{
+    org.gjt.sp.jedit.buffer.UndoManager$Edit first;
+    org.gjt.sp.jedit.buffer.UndoManager$Edit last;
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>(null);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.textarea.Selection[] undo(org.gjt.sp.jedit.buffer.UndoManager)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit r0;
+        org.gjt.sp.jedit.buffer.UndoManager r1;
+        org.gjt.sp.jedit.textarea.Selection[] r2;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = null;
+
+(0)     r3 = r0.last;
+
+     label1:
+        r2 = Phi(r2 #0, r2 #1);
+
+        r3 = Phi(r3 #0, r3 #1);
+
+        if r3 == null goto label2;
+
+        r2 = r3.undo(r1);
+
+        r3 = r3.prev;
+
+(1)     goto label1;
+
+     label2:
+        return r2;
+    }
+
+    public org.gjt.sp.jedit.textarea.Selection[] redo(org.gjt.sp.jedit.buffer.UndoManager)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit r0;
+        org.gjt.sp.jedit.buffer.UndoManager r1;
+        org.gjt.sp.jedit.textarea.Selection[] r2;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = null;
+
+(0)     r3 = r0.first;
+
+     label1:
+        r2 = Phi(r2 #0, r2 #1);
+
+        r3 = Phi(r3 #0, r3 #1);
+
+        if r3 == null goto label2;
+
+        r2 = r3.redo(r1);
+
+        r3 = r3.next;
+
+(1)     goto label1;
+
+     label2:
+        return r2;
+    }
+
+    private void _add(org.gjt.sp.jedit.buffer.UndoManager$Edit)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit r0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit r1, $r2, $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.first;
+
+        if $r2 != null goto label1;
+
+        r0.last = r1;
+
+        r0.first = r1;
+
+        goto label2;
+
+     label1:
+        $r3 = r0.last;
+
+        r1.prev = $r3;
+
+        $r4 = r0.last;
+
+        $r4.next = r1;
+
+        r0.last = r1;
+
+     label2:
+        return;
+    }
+
+    public void add(org.gjt.sp.jedit.buffer.UndoManager, org.gjt.sp.jedit.buffer.UndoManager$Edit)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit r0;
+        org.gjt.sp.jedit.buffer.UndoManager r1;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r13, $r14, $r15, $r16, $r17;
+        org.gjt.sp.jedit.buffer.UndoManager$Replace r18;
+        org.gjt.sp.jedit.buffer.UndoManager$CompressedReplace r19, r20;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0._add(r2);
+
+        $r3 = r0.last;
+
+        $r4 = $r3.prev;
+
+        if $r4 == null goto label1;
+
+        $r15 = r0.last;
+
+        $r17 = $r15.prev;
+
+        $r16 = r0.last;
+
+        r18 = org.gjt.sp.jedit.buffer.UndoManager.access$500(r1, $r17, $r16);
+
+        if r18 == null goto label1;
+
+        specialinvoke r0.exchangeLastElement(r18);
+
+     label1:
+        $r5 = r0.last;
+
+        $r6 = $r5.prev;
+
+        if $r6 == null goto label2;
+
+        $r12 = r0.last;
+
+        $r14 = $r12.prev;
+
+        $r13 = r0.last;
+
+        r19 = org.gjt.sp.jedit.buffer.UndoManager.access$600(r1, $r14, $r13);
+
+        if r19 == null goto label2;
+
+        specialinvoke r0.exchangeLastElement(r19);
+
+     label2:
+        $r7 = r0.last;
+
+        $r8 = $r7.prev;
+
+        if $r8 == null goto label3;
+
+        $r9 = r0.last;
+
+        $r11 = $r9.prev;
+
+        $r10 = r0.last;
+
+        r20 = org.gjt.sp.jedit.buffer.UndoManager.access$600(r1, $r11, $r10);
+
+        if r20 == null goto label3;
+
+        specialinvoke r0.exchangeLastElement(r20);
+
+     label3:
+        return;
+    }
+
+    private void exchangeLastElement(org.gjt.sp.jedit.buffer.UndoManager$Edit)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit r0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r13, $r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.first;
+
+        $r2 = r0.last;
+
+        if $r3 != $r2 goto label1;
+
+        r0.last = null;
+
+        r0.first = null;
+
+        goto label2;
+
+     label1:
+        $r4 = r0.last;
+
+        $r5 = $r4.prev;
+
+        $r5.next = null;
+
+        $r6 = r0.last;
+
+        $r7 = $r6.prev;
+
+        r0.last = $r7;
+
+     label2:
+        $r8 = r0.first;
+
+        if $r8 == null goto label3;
+
+        $r10 = r0.first;
+
+        $r9 = r0.last;
+
+        if $r10 != $r9 goto label4;
+
+     label3:
+        r0.last = r1;
+
+        r0.first = r1;
+
+        goto label5;
+
+     label4:
+        $r11 = r0.last;
+
+        $r12 = $r11.prev;
+
+        r1.prev = $r12;
+
+        $r13 = r0.last;
+
+        $r14 = $r13.prev;
+
+        $r14.next = r1;
+
+        r0.last = r1;
+
+     label5:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.buffer.UndoManager$1)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit r0;
+        org.gjt.sp.jedit.buffer.UndoManager$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

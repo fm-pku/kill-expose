@@ -1,0 +1,159 @@
+public class org.gjt.sp.jedit.io.XMLEncodingDetector extends java.lang.Object implements org.gjt.sp.jedit.io.EncodingDetector
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.io.XMLEncodingDetector r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.lang.String detectEncoding(java.io.InputStream) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.XMLEncodingDetector r0;
+        java.io.InputStream r1;
+        byte b0;
+        byte[] r2;
+        int i1, $i2, $i3, i4;
+        java.lang.String $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        b0 = 50;
+
+        r2 = newarray (byte)[50];
+
+(0)     i4 = 0;
+
+     label1:
+        i4 = Phi(i4 #0, i4 #2);
+
+        $i2 = 50 - i4;
+
+        $i3 = r1.read(r2, i4, $i2);
+
+        i1 = $i3;
+
+(1)     if $i3 == -1 goto label2;
+
+        i4 = i4 + i1;
+
+(2)     if i4 != 50 goto label1;
+
+(3)     goto label2;
+
+     label2:
+        i4 = Phi(i4 #1, i4 #3);
+
+        $r3 = new java.lang.String;
+
+        specialinvoke $r3.<init>(r2, 0, i4, "ASCII");
+
+        $r4 = org.gjt.sp.jedit.io.XMLEncodingDetector.getXMLEncoding($r3);
+
+        return $r4;
+    }
+
+    private static java.lang.String getXMLEncoding(java.lang.String)
+    {
+        java.lang.String r0, r1, $r6, $r11;
+        int i0, i2, $i3, $i4, $i5, $i6, $i7;
+        char c1;
+        java.nio.charset.IllegalCharsetNameException r2, $r7;
+        boolean $z0, $z1;
+        java.lang.StringBuilder $r3, $r4, $r5, $r8, $r9, $r10;
+
+        r0 := @parameter0;
+
+        $z0 = r0.startsWith("<?xml");
+
+        if $z0 != 0 goto label01;
+
+        return null;
+
+     label01:
+        i0 = r0.indexOf("encoding=");
+
+        if i0 == -1 goto label02;
+
+        $i3 = i0 + 9;
+
+        $i4 = r0.length();
+
+        if $i3 != $i4 goto label03;
+
+     label02:
+        return null;
+
+     label03:
+        $i5 = i0 + 9;
+
+        c1 = r0.charAt($i5);
+
+        $i6 = i0 + 10;
+
+        i2 = r0.indexOf(c1, $i6);
+
+        if i2 != -1 goto label04;
+
+        return null;
+
+     label04:
+        $i7 = i0 + 10;
+
+        r1 = r0.substring($i7, i2);
+
+     label05:
+        $z1 = java.nio.charset.Charset.isSupported(r1);
+
+        if $z1 == 0 goto label07;
+
+     label06:
+        return r1;
+
+     label07:
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("XML PI specifies unsupported encoding: ");
+
+        $r5 = $r4.append(r1);
+
+        $r6 = $r5.toString();
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/io/XMLEncodingDetector", $r6);
+
+     label08:
+        goto label10;
+
+     label09:
+        $r7 := @caughtexception;
+
+        r2 = $r7;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("XML PI specifies illegal encoding: ");
+
+        $r10 = $r9.append(r1);
+
+        $r11 = $r10.toString();
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/io/XMLEncodingDetector", $r11, r2);
+
+     label10:
+        return null;
+
+        catch java.nio.charset.IllegalCharsetNameException from label05 to label06 with label09;
+        catch java.nio.charset.IllegalCharsetNameException from label07 to label08 with label09;
+    }
+}

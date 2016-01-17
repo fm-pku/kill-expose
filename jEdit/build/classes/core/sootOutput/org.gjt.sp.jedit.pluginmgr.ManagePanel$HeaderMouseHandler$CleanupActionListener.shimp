@@ -1,0 +1,196 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler$CleanupActionListener extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler this$1;
+
+    private void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler$CleanupActionListener r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$1 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler$CleanupActionListener r0;
+        java.awt.event.ActionEvent r1;
+        int[] r2;
+        java.util.ArrayList r3, r4, $r10, $r11;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r5, r33;
+        java.io.File r6;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler $r7, $r14, $r16, $r28;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r8, $r15, $r17, $r29;
+        javax.swing.JTable $r9, $r18;
+        int $i0, $i1, $i2, $i3, $i4, $i5, i6, i7, i8;
+        java.lang.String[] $r12, r34;
+        java.lang.Object[] $r13;
+        java.lang.Object $r19;
+        org.gjt.sp.jedit.EditPlugin $r20, $r31;
+        java.lang.StringBuilder $r21, $r22, $r24, $r25, $r26;
+        java.lang.String $r23, $r27, $r32;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel $r30;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r7 = r0.this$1;
+
+        $r8 = $r7.this$0;
+
+        $r9 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r8);
+
+        r2 = $r9.getSelectedRows();
+
+        $r10 = new java.util.ArrayList;
+
+        $i0 = lengthof r2;
+
+        specialinvoke $r10.<init>($i0);
+
+        r3 = $r10;
+
+        $r11 = new java.util.ArrayList;
+
+        $i1 = lengthof r2;
+
+        specialinvoke $r11.<init>($i1);
+
+        r4 = $r11;
+
+(0)     i6 = 0;
+
+     label1:
+        i6 = Phi(i6 #0, i6 #1);
+
+        $i2 = lengthof r2;
+
+        if i6 >= $i2 goto label3;
+
+        $r28 = r0.this$1;
+
+        $r29 = $r28.this$0;
+
+        $r30 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$600($r29);
+
+        $i5 = r2[i6];
+
+        r33 = $r30.getEntry($i5);
+
+        $r31 = r33.plugin;
+
+        if $r31 == null goto label2;
+
+        $r32 = r33.name;
+
+        r3.add($r32);
+
+        r4.add(r33);
+
+     label2:
+        i6 = i6 + 1;
+
+(1)     goto label1;
+
+     label3:
+        $i3 = r3.size();
+
+        $r12 = newarray (java.lang.String)[$i3];
+
+        $r13 = r3.toArray($r12);
+
+        r34 = (java.lang.String[]) $r13;
+
+        $r14 = r0.this$1;
+
+        $r15 = $r14.this$0;
+
+        i7 = org.gjt.sp.jedit.GUIUtilities.listConfirm($r15, "plugin-manager.cleanup", null, r34);
+
+        if i7 == 0 goto label4;
+
+        return;
+
+     label4:
+(2)     i8 = 0;
+
+     label5:
+        i6 = Phi(i6 #2, i6 #3);
+
+        i8 = Phi(i8 #2, i8 #3);
+
+        $i4 = r4.size();
+
+        if i8 >= $i4 goto label6;
+
+        $r19 = r4.get(i8);
+
+        r5 = (org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry) $r19;
+
+        $r20 = r5.plugin;
+
+        r6 = $r20.getPluginHome();
+
+        $r21 = new java.lang.StringBuilder;
+
+        specialinvoke $r21.<init>();
+
+        $r22 = $r21.append("Removing data of plugin ");
+
+        $r23 = r5.name;
+
+        $r24 = $r22.append($r23);
+
+        $r25 = $r24.append(" home=");
+
+        $r26 = $r25.append(r6);
+
+        $r27 = $r26.toString();
+
+        org.gjt.sp.util.Log.log(5, r0, $r27);
+
+        org.gjt.sp.jedit.io.FileVFS.recursiveDelete(r6);
+
+        r5.dataSize = null;
+
+        i8 = i8 + 1;
+
+(3)     goto label5;
+
+     label6:
+        $r16 = r0.this$1;
+
+        $r17 = $r16.this$0;
+
+        $r18 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r17);
+
+        $r18.repaint();
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler, org.gjt.sp.jedit.pluginmgr.ManagePanel$1)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler$CleanupActionListener r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler r1;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

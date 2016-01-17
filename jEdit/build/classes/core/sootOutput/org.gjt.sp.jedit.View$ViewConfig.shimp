@@ -1,0 +1,176 @@
+public class org.gjt.sp.jedit.View$ViewConfig extends java.lang.Object
+{
+    public int x;
+    public int y;
+    public int width;
+    public int height;
+    public int extState;
+    public boolean plainView;
+    public java.lang.String splitConfig;
+    public org.gjt.sp.jedit.gui.DockableWindowManager$DockingLayout docking;
+    public java.lang.String title;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.View$ViewConfig r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void <init>(boolean)
+    {
+        org.gjt.sp.jedit.View$ViewConfig r0;
+        boolean z0;
+        java.lang.String r1, $r5, $r9, $r13, $r17, $r21, $r22, $r22_1, $r22_2;
+        java.lang.StringBuilder $r2, $r3, $r4, $r6, $r7, $r8, $r10, $r11, $r12, $r14, $r15, $r16, $r18, $r19, $r20;
+        int $i0, $i1, $i2, $i3, $i4;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.plainView = z0;
+
+        if z0 == 0 goto label1;
+
+        $r22 = "plain-view";
+
+(0)     goto label2;
+
+     label1:
+(1)     $r22_1 = "view";
+
+     label2:
+        $r22_2 = Phi($r22 #0, $r22_1 #1);
+
+        r1 = $r22_2;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append(r1);
+
+        $r4 = $r3.append(".x");
+
+        $r5 = $r4.toString();
+
+        $i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r5, 0);
+
+        Packer.Unpack(r0);
+
+        r0.x = $i0;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append(r1);
+
+        $r8 = $r7.append(".y");
+
+        $r9 = $r8.toString();
+
+        $i1 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r9, 0);
+
+        r0.y = $i1;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append(r1);
+
+        $r12 = $r11.append(".width");
+
+        $r13 = $r12.toString();
+
+        $i2 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r13, 0);
+
+        r0.width = $i2;
+
+        $r14 = new java.lang.StringBuilder;
+
+        specialinvoke $r14.<init>();
+
+        $r15 = $r14.append(r1);
+
+        $r16 = $r15.append(".height");
+
+        $r17 = $r16.toString();
+
+        $i3 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r17, 0);
+
+        r0.height = $i3;
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<init>();
+
+        $r19 = $r18.append(r1);
+
+        $r20 = $r19.append(".extendedState");
+
+        $r21 = $r20.toString();
+
+        $i4 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r21, 0);
+
+        r0.extState = $i4;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void <init>(boolean, java.lang.String, int, int, int, int, int)
+    {
+        org.gjt.sp.jedit.View$ViewConfig r0;
+        boolean z0;
+        java.lang.String r1;
+        int i0, i1, i2, i3, i4;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        r1 := @parameter1;
+
+        i0 := @parameter2;
+
+        i1 := @parameter3;
+
+        i2 := @parameter4;
+
+        i3 := @parameter5;
+
+        i4 := @parameter6;
+
+        specialinvoke r0.<init>();
+
+        r0.plainView = z0;
+
+        Packer.Unpack(r0);
+
+        r0.splitConfig = r1;
+
+        r0.x = i0;
+
+        r0.y = i1;
+
+        r0.width = i2;
+
+        r0.height = i3;
+
+        r0.extState = i4;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+}

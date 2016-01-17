@@ -1,0 +1,13 @@
+public interface  org.gjt.sp.jedit.gui.DockableWindowContainer extends java.lang.Object
+{
+
+    public abstract void register(org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry);
+
+    public abstract void remove(org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry);
+
+    public abstract void unregister(org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry);
+
+    public abstract void show(org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry);
+
+    public abstract boolean isVisible(org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry);
+}

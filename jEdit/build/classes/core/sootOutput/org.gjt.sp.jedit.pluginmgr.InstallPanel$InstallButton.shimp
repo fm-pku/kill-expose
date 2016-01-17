@@ -1,0 +1,298 @@
+class org.gjt.sp.jedit.pluginmgr.InstallPanel$InstallButton extends javax.swing.JButton implements java.awt.event.ActionListener, javax.swing.event.TableModelListener
+{
+    final org.gjt.sp.jedit.pluginmgr.InstallPanel this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$InstallButton r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r1;
+        java.lang.String $r2;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("install-plugins.install");
+
+        specialinvoke r0.<init>($r2);
+
+        $r3 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$500(r1);
+
+        $r3.addTableModelListener(r0);
+
+        r0.addActionListener(r0);
+
+        r0.setEnabled(0);
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$InstallButton r0;
+        java.awt.event.ActionEvent r1;
+        boolean z0, z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, z9;
+        org.gjt.sp.jedit.pluginmgr.Roster r2, $r5;
+        int i0, $i1, $i2, i3, i4;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry r3;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r4, $r7, $r10, $r12, $r14, $r16, $r18, $r20, $r25;
+        java.lang.String $r6, $r28, r29, r29_1, r29_2;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel $r8, $r17, $r21;
+        java.util.List $r9, $r22;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress $r11;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r13, $r15, $r19;
+        java.lang.Object $r23;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin $r24, $r26;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Branch $r27;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.this$0;
+
+        $z2 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$1000($r4);
+
+        if $z2 == 0 goto label01;
+
+        return;
+
+     label01:
+        z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("plugin-manager.downloadSource");
+
+        z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("plugin-manager.installUser");
+
+        $r5 = new org.gjt.sp.jedit.pluginmgr.Roster;
+
+        specialinvoke $r5.<init>();
+
+        r2 = $r5;
+
+        if z1 == 0 goto label02;
+
+        $r28 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        r29 = org.gjt.sp.jedit.MiscUtilities.constructPath($r28, "jars");
+
+(0)     goto label03;
+
+     label02:
+        $r6 = org.gjt.sp.jedit.jEdit.getJEditHome();
+
+(1)     r29_1 = org.gjt.sp.jedit.MiscUtilities.constructPath($r6, "jars");
+
+     label03:
+        r29_2 = Phi(r29 #0, r29_1 #1);
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$500($r7);
+
+        $r9 = org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel.access$1500($r8);
+
+        i0 = $r9.size();
+
+        i3 = 0;
+
+(2)     i4 = 0;
+
+     label04:
+        i4 = Phi(i4 #2, i4 #7);
+
+        r29 = Phi(r29_2 #2, r29 #7);
+
+        i3 = Phi(i3 #2, i3 #7);
+
+        $z8 = Phi($z8 #2, $z8 #7);
+
+        if i4 >= i0 goto label09;
+
+        $r20 = r0.this$0;
+
+        $r21 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$500($r20);
+
+        $r22 = org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel.access$1500($r21);
+
+        $r23 = $r22.get(i4);
+
+        r3 = (org.gjt.sp.jedit.pluginmgr.InstallPanel$Entry) $r23;
+
+        $z5 = r3.install;
+
+(3)     if $z5 == 0 goto label08;
+
+        $r24 = r3.plugin;
+
+        $z6 = r3.checked;
+
+        if $z6 != 0 goto label05;
+
+        $z8 = 1;
+
+(4)     goto label06;
+
+     label05:
+(5)     $z8 = 0;
+
+     label06:
+        $z8 = Phi($z8 #4, $z8 #5);
+
+        $r24.install(r2, r29, z0, $z8);
+
+        $r25 = r0.this$0;
+
+        $z7 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$800($r25);
+
+        if $z7 == 0 goto label07;
+
+        $r26 = r3.plugin;
+
+        $r27 = $r26.getCompatibleBranch();
+
+        $r27.satisfyDependencies(r2, r29, z0);
+
+     label07:
+(6)     i3 = i3 + 1;
+
+     label08:
+        i3 = Phi(i3 #3, i3 #6);
+
+        $z8 = Phi($z8 #3, $z8 #6);
+
+        i4 = i4 + 1;
+
+(7)     goto label04;
+
+     label09:
+        $z3 = r2.isEmpty();
+
+        if $z3 == 0 goto label10;
+
+        return;
+
+     label10:
+        z9 = 0;
+
+        $r10 = r0.this$0;
+
+        $z4 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$800($r10);
+
+(8)     if $z4 == 0 goto label11;
+
+        $i1 = r2.getOperationCount();
+
+(9)     if $i1 <= i3 goto label11;
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$1100($r18);
+
+        $i2 = org.gjt.sp.jedit.GUIUtilities.confirm($r19, "install-plugins.depend", null, 2, 2);
+
+(10)    if $i2 != 2 goto label11;
+
+(11)    z9 = 1;
+
+     label11:
+        z9 = Phi(z9 #8, z9 #9, z9 #10, z9 #11);
+
+        if z9 != 0 goto label12;
+
+        $r11 = new org.gjt.sp.jedit.pluginmgr.PluginManagerProgress;
+
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$1100($r12);
+
+        specialinvoke $r11.<init>($r13, r2);
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$1100($r14);
+
+        r2.performOperationsInAWTThread($r15);
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$500($r16);
+
+        $r17.update();
+
+     label12:
+        return;
+    }
+
+    public void tableChanged(javax.swing.event.TableModelEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$InstallButton r0;
+        javax.swing.event.TableModelEvent r1;
+        int i0, $i1, i2;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r2, $r3, $r5;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel $r4, $r6;
+        java.lang.Object $r7;
+        java.lang.Boolean $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $z0 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$1000($r2);
+
+        if $z0 == 0 goto label1;
+
+        return;
+
+     label1:
+        $i1 = r1.getType();
+
+(0)     if $i1 != 0 goto label5;
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$500($r3);
+
+        i0 = $r4.getRowCount();
+
+(1)     i2 = 0;
+
+     label2:
+        i2 = Phi(i2 #1, i2 #2);
+
+        if i2 >= i0 goto label4;
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$500($r5);
+
+        $r7 = $r6.getValueAt(i2, 0);
+
+        $r8 = (java.lang.Boolean) $r7;
+
+        $z1 = $r8.booleanValue();
+
+        if $z1 == 0 goto label3;
+
+        r0.setEnabled(1);
+
+        return;
+
+     label3:
+        i2 = i2 + 1;
+
+(2)     goto label2;
+
+     label4:
+(3)     r0.setEnabled(0);
+
+     label5:
+        i2 = Phi(i2 #0, i2 #3);
+
+        return;
+    }
+}

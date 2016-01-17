@@ -1,0 +1,106 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$RestoreButton extends org.gjt.sp.jedit.gui.RolloverButton implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.pluginmgr.ManagePanel this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$RestoreButton r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+        java.lang.String $r2;
+        javax.swing.Icon $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("manage-plugins.restore.icon");
+
+        $r3 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r2);
+
+        r0.setIcon($r3);
+
+        r0.addActionListener(r0);
+
+        r0.setToolTipText("Choose a PluginSet, select/deselect plugins based on set.");
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$RestoreButton r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.String[] r2;
+        boolean z0;
+        java.lang.StringBuilder $r3, $r5, $r7;
+        java.lang.String $r4, $r6, $r8, r15, r16;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r9, $r12;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r10, $r14;
+        org.gjt.sp.jedit.View $r11;
+        int $i0;
+        org.gjt.sp.jedit.msg.PropertiesChanged $r13;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        $r5 = $r3.append($r4);
+
+        $r6 = java.io.File.separator;
+
+        $r7 = $r5.append($r6);
+
+        $r8 = $r7.toString();
+
+        r15 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.pluginset.path", $r8);
+
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1000($r9);
+
+        $r11 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        r2 = org.gjt.sp.jedit.GUIUtilities.showVFSFileDialog($r10, $r11, r15, 0, 0);
+
+        if r2 == null goto label1;
+
+        $i0 = lengthof r2;
+
+        if $i0 == 1 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        r16 = r2[0];
+
+        $r12 = r0.this$0;
+
+        z0 = $r12.loadPluginSet(r16);
+
+        if z0 == 0 goto label3;
+
+        org.gjt.sp.jedit.jEdit.setProperty("plugin-manager.pluginset.path", r16);
+
+        $r13 = new org.gjt.sp.jedit.msg.PropertiesChanged;
+
+        $r14 = org.gjt.sp.jedit.pluginmgr.PluginManager.getInstance();
+
+        specialinvoke $r13.<init>($r14);
+
+        org.gjt.sp.jedit.EditBus.send($r13);
+
+     label3:
+        return;
+    }
+}

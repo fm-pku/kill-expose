@@ -1,0 +1,56 @@
+class org.gjt.sp.jedit.help.HelpViewer$MouseHandler$1 extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final java.lang.String val$href;
+    final org.gjt.sp.jedit.help.HelpViewer$MouseHandler this$1;
+
+    void <init>(org.gjt.sp.jedit.help.HelpViewer$MouseHandler, java.lang.String)
+    {
+        org.gjt.sp.jedit.help.HelpViewer$MouseHandler$1 r0;
+        org.gjt.sp.jedit.help.HelpViewer$MouseHandler r1;
+        java.lang.String r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$1 = r1;
+
+        r0.val$href = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.help.HelpViewer$MouseHandler$1 r0;
+        java.awt.event.ActionEvent r1;
+        java.awt.datatransfer.StringSelection r2, $r3;
+        java.lang.String $r4;
+        java.awt.Toolkit $r5;
+        java.awt.datatransfer.Clipboard $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new java.awt.datatransfer.StringSelection;
+
+        $r4 = r0.val$href;
+
+        specialinvoke $r3.<init>($r4);
+
+        r2 = $r3;
+
+        $r5 = java.awt.Toolkit.getDefaultToolkit();
+
+        $r6 = $r5.getSystemClipboard();
+
+        $r6.setContents(r2, r2);
+
+        return;
+    }
+}

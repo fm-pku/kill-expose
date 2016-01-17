@@ -1,0 +1,46 @@
+class org.gjt.sp.jedit.menu.DirectoryProvider$2 extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.View val$view;
+    final org.gjt.sp.jedit.menu.DirectoryProvider this$0;
+
+    void <init>(org.gjt.sp.jedit.menu.DirectoryProvider, org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.menu.DirectoryProvider$2 r0;
+        org.gjt.sp.jedit.menu.DirectoryProvider r1;
+        org.gjt.sp.jedit.View r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$view = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.menu.DirectoryProvider$2 r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.View $r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.val$view;
+
+        $r3 = r1.getActionCommand();
+
+        org.gjt.sp.jedit.browser.VFSBrowser.browseDirectory($r2, $r3);
+
+        return;
+    }
+}

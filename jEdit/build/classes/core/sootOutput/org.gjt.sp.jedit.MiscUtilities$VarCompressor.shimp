@@ -1,0 +1,434 @@
+class org.gjt.sp.jedit.MiscUtilities$VarCompressor extends java.lang.Object
+{
+    final java.util.Map prefixMap;
+    final java.util.Map previous;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.MiscUtilities$VarCompressor r0;
+        java.lang.ProcessBuilder r1, $r8;
+        java.util.Map r2, $r15, $r16, $r18, $r20;
+        java.util.Iterator r3;
+        java.util.Map$Entry r4;
+        java.lang.String r5, $r14, $r21, r23, r24;
+        java.util.HashMap $r6, $r7;
+        java.lang.String[] $r9;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9;
+        java.util.Set $r10;
+        java.lang.Object $r11, $r12, $r13, $r19;
+        char $c0;
+        int $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r6 = new java.util.HashMap;
+
+        specialinvoke $r6.<init>();
+
+        r0.prefixMap = $r6;
+
+        $r7 = new java.util.HashMap;
+
+        specialinvoke $r7.<init>();
+
+        r0.previous = $r7;
+
+        $r8 = new java.lang.ProcessBuilder;
+
+        $r9 = newarray (java.lang.String)[0];
+
+        specialinvoke $r8.<init>($r9);
+
+        r1 = $r8;
+
+        r2 = r1.environment();
+
+        $z0 = org.gjt.sp.jedit.OperatingSystem.isUnix();
+
+        if $z0 == 0 goto label01;
+
+        $r20 = r0.prefixMap;
+
+        $r21 = java.lang.System.getProperty("user.home");
+
+        $r20.put($r21, "~");
+
+     label01:
+        $r10 = r2.entrySet();
+
+(0)     r3 = $r10.iterator();
+
+     label02:
+        r24 = Phi(r24 #0, r24 #1, r24 #2, r24 #3, r24 #4, r24 #7, r24 #8, r24 #11, r24 #12);
+
+        r23 = Phi(r23 #0, r23 #1, r23 #2, r23 #3, r23 #4, r23 #7, r23 #8, r23 #11, r23 #12);
+
+        $z1 = r3.hasNext();
+
+        if $z1 == 0 goto label11;
+
+        $r11 = r3.next();
+
+        r4 = (java.util.Map$Entry) $r11;
+
+        $r12 = r4.getKey();
+
+        r23 = (java.lang.String) $r12;
+
+        $z2 = r23.equalsIgnoreCase("pwd");
+
+(1)     if $z2 != 0 goto label02;
+
+        $z3 = r23.equalsIgnoreCase("oldpwd");
+
+        if $z3 == 0 goto label03;
+
+(2)     goto label02;
+
+     label03:
+        $c0 = r23.charAt(0);
+
+        $z4 = java.lang.Character.isLetter($c0);
+
+        if $z4 != 0 goto label04;
+
+(3)     goto label02;
+
+     label04:
+        $r13 = r4.getValue();
+
+        r24 = (java.lang.String) $r13;
+
+        $z5 = specialinvoke r0.canBePathPrefix(r24);
+
+        if $z5 != 0 goto label05;
+
+(4)     goto label02;
+
+     label05:
+        $r14 = java.io.File.separator;
+
+        $z6 = r24.endsWith($r14);
+
+(5)     if $z6 == 0 goto label06;
+
+        $i9 = r24.length();
+
+        $i10 = $i9 - 1;
+
+(6)     r24 = r24.substring(0, $i10);
+
+     label06:
+        r24 = Phi(r24 #5, r24 #6);
+
+        $z7 = org.gjt.sp.jedit.OperatingSystem.isWindows();
+
+        if $z7 == 0 goto label08;
+
+        $i3 = r23.length();
+
+        $i4 = $i3 + 2;
+
+        $i5 = r24.length();
+
+        if $i4 <= $i5 goto label07;
+
+(7)     goto label02;
+
+     label07:
+        $i6 = r23.length();
+
+        $i7 = $i6 + 1;
+
+        $i8 = r24.length();
+
+        if $i7 <= $i8 goto label08;
+
+(8)     goto label02;
+
+     label08:
+        $z8 = org.gjt.sp.jedit.OperatingSystem.isWindows();
+
+(9)     if $z8 == 0 goto label09;
+
+        r24 = r24.toLowerCase();
+
+(10)    r23 = r23.toLowerCase();
+
+     label09:
+        r24 = Phi(r24 #9, r24 #10);
+
+        r23 = Phi(r23 #9, r23 #10);
+
+        $r15 = r0.prefixMap;
+
+        $z9 = $r15.containsKey(r24);
+
+        if $z9 == 0 goto label10;
+
+        $r18 = r0.prefixMap;
+
+        $r19 = $r18.get(r24);
+
+        r5 = (java.lang.String) $r19;
+
+        $i1 = r5.length();
+
+        $i2 = r23.length();
+
+        if $i1 >= $i2 goto label10;
+
+(11)    goto label02;
+
+     label10:
+        $r16 = r0.prefixMap;
+
+        $r16.put(r24, r23);
+
+(12)    goto label02;
+
+     label11:
+        return;
+    }
+
+    java.lang.String compress(java.lang.String)
+    {
+        org.gjt.sp.jedit.MiscUtilities$VarCompressor r0;
+        java.lang.String r1, r2, $r16, $r24, $r25, $r28, r29, r30, r31, r33, r34, r35;
+        java.util.Map $r3, $r4, $r6, $r8, $r26;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8;
+        java.util.Set $r5;
+        int $i0, $i1, $i2, $i3, $i4, $i5;
+        java.lang.Object $r9, $r23, $r27;
+        java.lang.StringBuilder $r10, $r11, $r12, $r13, $r14, $r15, $r17, $r18, $r19, $r20, $r21, $r22;
+        java.util.Iterator r32;
+
+        r0 := @this;
+
+        r29 := @parameter0;
+
+        r1 = r29;
+
+        $r3 = r0.previous;
+
+        $z0 = $r3.containsKey(r29);
+
+        if $z0 == 0 goto label01;
+
+        $r26 = r0.previous;
+
+        $r27 = $r26.get(r29);
+
+        $r28 = (java.lang.String) $r27;
+
+        return $r28;
+
+     label01:
+        r30 = "/";
+
+        r31 = r30;
+
+        $r4 = r0.prefixMap;
+
+        $r5 = $r4.keySet();
+
+(0)     r32 = $r5.iterator();
+
+     label02:
+        r31 = Phi(r31 #0, r31 #1, r31 #8);
+
+        r29 = Phi(r29 #0, r29 #1, r29 #8);
+
+        r30 = Phi(r30 #0, r30 #1, r30 #8);
+
+        $z1 = r32.hasNext();
+
+        if $z1 == 0 goto label09;
+
+        $r23 = r32.next();
+
+        r33 = (java.lang.String) $r23;
+
+        $i2 = r33.length();
+
+        $i3 = r30.length();
+
+        if $i2 >= $i3 goto label03;
+
+(1)     goto label02;
+
+     label03:
+        $z4 = org.gjt.sp.jedit.OperatingSystem.isWindows();
+
+        if $z4 == 0 goto label04;
+
+        $r25 = r29.toLowerCase();
+
+        $z8 = $r25.startsWith(r33);
+
+        if $z8 == 0 goto label04;
+
+        r30 = r33;
+
+(2)     goto label05;
+
+     label04:
+        $z5 = r29.startsWith(r33);
+
+(3)     if $z5 == 0 goto label05;
+
+(4)     r30 = r33;
+
+     label05:
+        r30 = Phi(r30 #2, r30 #3, r30 #4);
+
+        $z6 = r30.equals(r31);
+
+(5)     if $z6 != 0 goto label08;
+
+        $i4 = r30.length();
+
+        r2 = r1.substring($i4);
+
+        $i5 = r2.length();
+
+        if $i5 < 1 goto label06;
+
+        $r24 = java.io.File.separator;
+
+        $z7 = r2.startsWith($r24);
+
+        if $z7 == 0 goto label07;
+
+     label06:
+        r31 = r30;
+
+(6)     goto label08;
+
+     label07:
+(7)     r30 = r31;
+
+     label08:
+        r31 = Phi(r31 #5, r31 #6, r31 #7);
+
+        r30 = Phi(r30 #5, r30 #6, r30 #7);
+
+(8)     goto label02;
+
+     label09:
+        $i0 = r30.length();
+
+(9)     if $i0 <= 1 goto label12;
+
+        $i1 = r30.length();
+
+        r34 = r1.substring($i1);
+
+        $r8 = r0.prefixMap;
+
+        $r9 = $r8.get(r30);
+
+        r35 = (java.lang.String) $r9;
+
+        $z2 = r35.equals("~");
+
+        if $z2 == 0 goto label10;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<init>();
+
+        $r21 = $r20.append(r35);
+
+        $r22 = $r21.append(r34);
+
+        r29 = $r22.toString();
+
+(10)    goto label12;
+
+     label10:
+        $z3 = org.gjt.sp.jedit.OperatingSystem.isWindows();
+
+        if $z3 == 0 goto label11;
+
+        $r14 = new java.lang.StringBuilder;
+
+        specialinvoke $r14.<init>();
+
+        $r15 = $r14.append(37);
+
+        $r16 = r35.toUpperCase();
+
+        $r17 = $r15.append($r16);
+
+        $r18 = $r17.append(37);
+
+        $r19 = $r18.append(r34);
+
+        r29 = $r19.toString();
+
+(11)    goto label12;
+
+     label11:
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append(36);
+
+        $r12 = $r11.append(r35);
+
+        $r13 = $r12.append(r34);
+
+(12)    r29 = $r13.toString();
+
+     label12:
+        r29 = Phi(r29 #9, r29 #10, r29 #11, r29 #12);
+
+        $r6 = r0.previous;
+
+        $r6.put(r1, r29);
+
+        return r29;
+    }
+
+    private boolean canBePathPrefix(java.lang.String)
+    {
+        org.gjt.sp.jedit.MiscUtilities$VarCompressor r0;
+        java.lang.String r1, $r2;
+        boolean $z0, $z1, $z2, $z2_1, $z2_2;
+        java.io.File $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = java.io.File.pathSeparator;
+
+        $z0 = r1.contains($r2);
+
+        if $z0 != 0 goto label1;
+
+        $r3 = new java.io.File;
+
+        specialinvoke $r3.<init>(r1);
+
+        $z1 = $r3.isAbsolute();
+
+        if $z1 == 0 goto label1;
+
+        $z2 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z2_1 = 0;
+
+     label2:
+        $z2_2 = Phi($z2 #0, $z2_1 #1);
+
+        return $z2_2;
+    }
+}

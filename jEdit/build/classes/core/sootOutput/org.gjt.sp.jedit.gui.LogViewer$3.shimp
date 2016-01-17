@@ -1,0 +1,34 @@
+class org.gjt.sp.jedit.gui.LogViewer$3 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.gui.LogViewer this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.LogViewer)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$3 r0;
+        org.gjt.sp.jedit.gui.LogViewer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.gui.LogViewer$3 r0;
+        org.gjt.sp.jedit.gui.LogViewer $r1;
+
+        r0 := @this;
+
+        $r1 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.LogViewer.access$400($r1);
+
+        return;
+    }
+}

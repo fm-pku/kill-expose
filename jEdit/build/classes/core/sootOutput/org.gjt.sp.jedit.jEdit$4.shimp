@@ -1,0 +1,69 @@
+final class org.gjt.sp.jedit.jEdit$4 extends org.gjt.sp.jedit.syntax.ModeProvider
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.jEdit$4 r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    protected void error(java.lang.String, java.lang.Throwable)
+    {
+        org.gjt.sp.jedit.jEdit$4 r0;
+        java.lang.String r1, r3;
+        java.lang.Throwable r2;
+        int i0, i1;
+        java.lang.Object[] r4, $r7;
+        boolean $z0;
+        org.xml.sax.SAXParseException $r5, $r6;
+        java.lang.Integer $r8, $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        org.gjt.sp.util.Log.log(9, r0, r2);
+
+        $z0 = r2 instanceof org.xml.sax.SAXParseException;
+
+        if $z0 == 0 goto label1;
+
+        r3 = r2.getMessage();
+
+        $r5 = (org.xml.sax.SAXParseException) r2;
+
+        i0 = $r5.getLineNumber();
+
+        $r6 = (org.xml.sax.SAXParseException) r2;
+
+        i1 = $r6.getColumnNumber();
+
+        $r7 = newarray (java.lang.Object)[4];
+
+        $r7[0] = r1;
+
+        $r8 = java.lang.Integer.valueOf(i0);
+
+        $r7[1] = $r8;
+
+        $r9 = java.lang.Integer.valueOf(i1);
+
+        $r7[2] = $r9;
+
+        $r7[3] = r3;
+
+        r4 = $r7;
+
+        org.gjt.sp.jedit.GUIUtilities.error(null, "xmode-error", r4);
+
+     label1:
+        return;
+    }
+}

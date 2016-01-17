@@ -1,0 +1,170 @@
+public class org.gjt.sp.jedit.SettingsXML$Saver extends java.io.BufferedWriter
+{
+    private java.io.File twoStageSaveFile;
+    private static final java.lang.String encoding;
+    final org.gjt.sp.jedit.SettingsXML this$0;
+
+    public void writeXMLDeclaration() throws java.io.IOException
+    {
+        org.gjt.sp.jedit.SettingsXML$Saver r0;
+
+        r0 := @this;
+
+        r0.writeXMLDeclaration("1.0");
+
+        return;
+    }
+
+    public void writeXMLDeclaration(java.lang.String) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.SettingsXML$Saver r0;
+        java.lang.String r1, $r10;
+        java.lang.StringBuilder $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append("<?xml version=\"");
+
+        $r4 = $r3.append(r1);
+
+        $r5 = $r4.append("\"");
+
+        $r6 = $r5.append(" encoding=\"");
+
+        $r7 = $r6.append("UTF-8");
+
+        $r8 = $r7.append("\"");
+
+        $r9 = $r8.append(" ?>");
+
+        $r10 = $r9.toString();
+
+        r0.write($r10);
+
+        r0.newLine();
+
+        return;
+    }
+
+    public void finish() throws java.io.IOException
+    {
+        org.gjt.sp.jedit.SettingsXML$Saver r0;
+        org.gjt.sp.jedit.SettingsXML $r1, $r3, $r5, $r8, $r9;
+        java.io.File $r2, $r4, $r6, $r7, $r10;
+        long $l0;
+
+        r0 := @this;
+
+        r0.close();
+
+        $r1 = r0.this$0;
+
+        $r2 = org.gjt.sp.jedit.SettingsXML.access$000($r1);
+
+        org.gjt.sp.jedit.jEdit.backupSettingsFile($r2);
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.SettingsXML.access$000($r3);
+
+        $r4.delete();
+
+        $r6 = r0.twoStageSaveFile;
+
+        $r5 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.SettingsXML.access$000($r5);
+
+        $r6.renameTo($r7);
+
+        $r9 = r0.this$0;
+
+        $r8 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.SettingsXML.access$000($r8);
+
+        $l0 = $r10.lastModified();
+
+        org.gjt.sp.jedit.SettingsXML.access$102($r9, $l0);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.SettingsXML) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.SettingsXML$Saver r0;
+        org.gjt.sp.jedit.SettingsXML r1;
+        java.io.File $r2, $r3, $r4, $r7;
+        java.lang.StringBuilder $r5, $r6, $r9, $r10;
+        java.lang.String $r8, $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.io.File;
+
+        $r3 = org.gjt.sp.jedit.SettingsXML.access$000(r1);
+
+        $r4 = $r3.getParentFile();
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append("#");
+
+        $r7 = org.gjt.sp.jedit.SettingsXML.access$000(r1);
+
+        $r8 = $r7.getName();
+
+        $r9 = $r6.append($r8);
+
+        $r10 = $r9.append("#save#");
+
+        $r11 = $r10.toString();
+
+        specialinvoke $r2.<init>($r4, $r11);
+
+        specialinvoke r0.<init>(r1, $r2);
+
+        return;
+    }
+
+    private void <init>(org.gjt.sp.jedit.SettingsXML, java.io.File) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.SettingsXML$Saver r0;
+        org.gjt.sp.jedit.SettingsXML r1;
+        java.io.File r2;
+        java.io.OutputStreamWriter $r3;
+        java.io.FileOutputStream $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        $r3 = new java.io.OutputStreamWriter;
+
+        $r4 = new java.io.FileOutputStream;
+
+        specialinvoke $r4.<init>(r2);
+
+        specialinvoke $r3.<init>($r4, "UTF-8");
+
+        specialinvoke r0.<init>($r3);
+
+        r0.twoStageSaveFile = r2;
+
+        return;
+    }
+}

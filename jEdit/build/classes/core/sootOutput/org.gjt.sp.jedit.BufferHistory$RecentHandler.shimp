@@ -1,0 +1,281 @@
+class org.gjt.sp.jedit.BufferHistory$RecentHandler extends org.xml.sax.helpers.DefaultHandler
+{
+    public java.util.LinkedList result;
+    private java.lang.String path;
+    private int caret;
+    private java.lang.String selection;
+    private java.lang.String encoding;
+    private java.lang.String mode;
+    private final java.lang.StringBuilder charData;
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.BufferHistory$RecentHandler r0;
+        java.util.LinkedList $r1;
+        java.lang.StringBuilder $r2;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.LinkedList;
+
+        specialinvoke $r1.<init>();
+
+        r0.result = $r1;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r0.charData = $r2;
+
+        return;
+    }
+
+    public org.xml.sax.InputSource resolveEntity(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.BufferHistory$RecentHandler r0;
+        java.lang.String r1, r2;
+        java.lang.Class $r3;
+        org.xml.sax.InputSource $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r0.getClass();
+
+        $r4 = org.gjt.sp.util.XMLUtilities.findEntity(r2, "recent.dtd", $r3);
+
+        return $r4;
+    }
+
+    public void endElement(java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.BufferHistory$RecentHandler r0;
+        java.lang.String r1, r2, r3, $r4, $r5, $r6, $r7, $r8, $r9, $r12, $r14, $r16, $r18, $r25, $r27, $r29, $r30, $r31, $r32, $r39, r40;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        java.lang.StringBuilder $r10, $r11, $r13, $r15, $r17, $r19, $r20, $r21, $r22, $r23, $r24, $r26, $r35, $r36, $r37, $r38;
+        int $i0, $i1, $i2, $i3;
+        org.gjt.sp.jedit.BufferHistory$Entry $r28;
+        java.util.LinkedList $r33;
+        java.lang.NumberFormatException $r34, r41;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = "ENTRY";
+
+        $z0 = $r4.equals(r3);
+
+        if $z0 == 0 goto label01;
+
+        $r33 = r0.result;
+
+        $r28 = new org.gjt.sp.jedit.BufferHistory$Entry;
+
+        $r32 = r0.path;
+
+        $i3 = r0.caret;
+
+        $r31 = r0.selection;
+
+        $r30 = r0.encoding;
+
+        $r29 = r0.mode;
+
+        specialinvoke $r28.<init>($r32, $i3, $r31, $r30, $r29);
+
+        $r33.addLast($r28);
+
+        r0.path = null;
+
+        r0.caret = 0;
+
+        r0.selection = null;
+
+        r0.encoding = null;
+
+        r0.mode = null;
+
+        goto label10;
+
+     label01:
+        $r5 = "PATH";
+
+        $z1 = $r5.equals(r3);
+
+        if $z1 == 0 goto label02;
+
+        $r26 = r0.charData;
+
+        $r27 = $r26.toString();
+
+        r0.path = $r27;
+
+        goto label10;
+
+     label02:
+        $r6 = "CARET";
+
+        $z2 = $r6.equals(r3);
+
+        if $z2 == 0 goto label07;
+
+     label03:
+        $r17 = r0.charData;
+
+        $r18 = $r17.toString();
+
+        r40 = $r18.trim();
+
+        $i0 = r40.length();
+
+        $r19 = r0.charData;
+
+        $i1 = $r19.length();
+
+        if $i0 == $i1 goto label04;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<init>();
+
+        $r21 = $r20.append("The caret position in recent.xml was wrong: \'");
+
+        $r22 = r0.charData;
+
+        $r23 = $r21.append($r22);
+
+        $r24 = $r23.append("\', fixing it");
+
+        $r25 = $r24.toString();
+
+        org.gjt.sp.util.Log.log(7, r0, $r25);
+
+     label04:
+        $i2 = java.lang.Integer.parseInt(r40);
+
+        r0.caret = $i2;
+
+     label05:
+        goto label10;
+
+     label06:
+        $r34 := @caughtexception;
+
+        r41 = $r34;
+
+        $r35 = new java.lang.StringBuilder;
+
+        specialinvoke $r35.<init>();
+
+        $r36 = $r35.append("Unable to parse caret position ");
+
+        $r37 = r0.charData;
+
+        $r38 = $r36.append($r37);
+
+        $r39 = $r38.toString();
+
+        org.gjt.sp.util.Log.log(9, r0, $r39);
+
+        goto label10;
+
+     label07:
+        $r7 = "SELECTION";
+
+        $z3 = $r7.equals(r3);
+
+        if $z3 == 0 goto label08;
+
+        $r15 = r0.charData;
+
+        $r16 = $r15.toString();
+
+        r0.selection = $r16;
+
+        goto label10;
+
+     label08:
+        $r8 = "ENCODING";
+
+        $z4 = $r8.equals(r3);
+
+        if $z4 == 0 goto label09;
+
+        $r13 = r0.charData;
+
+        $r14 = $r13.toString();
+
+        r0.encoding = $r14;
+
+        goto label10;
+
+     label09:
+        $r9 = "MODE";
+
+        $z5 = $r9.equals(r3);
+
+        if $z5 == 0 goto label10;
+
+        $r11 = r0.charData;
+
+        $r12 = $r11.toString();
+
+        r0.mode = $r12;
+
+     label10:
+        $r10 = r0.charData;
+
+        $r10.setLength(0);
+
+        return;
+
+        catch java.lang.NumberFormatException from label03 to label05 with label06;
+    }
+
+    public void characters(char[], int, int)
+    {
+        org.gjt.sp.jedit.BufferHistory$RecentHandler r0;
+        char[] r1;
+        int i0, i1;
+        java.lang.StringBuilder $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        $r2 = r0.charData;
+
+        $r2.append(r1, i0, i1);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.BufferHistory$1)
+    {
+        org.gjt.sp.jedit.BufferHistory$RecentHandler r0;
+        org.gjt.sp.jedit.BufferHistory$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

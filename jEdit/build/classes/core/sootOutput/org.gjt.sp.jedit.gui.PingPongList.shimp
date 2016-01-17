@@ -1,0 +1,602 @@
+public class org.gjt.sp.jedit.gui.PingPongList extends javax.swing.JPanel
+{
+    private final org.gjt.sp.jedit.gui.PingPongList$MyListModel leftModel;
+    private final org.gjt.sp.jedit.gui.PingPongList$MyListModel rightModel;
+    private javax.swing.JList left;
+    private javax.swing.JList right;
+    private javax.swing.JLabel leftLabel;
+    private javax.swing.JLabel rightLabel;
+    private javax.swing.JPanel leftPanel;
+    private javax.swing.JPanel rightPanel;
+    private javax.swing.JButton selectAllButton;
+    private javax.swing.JButton selectNoneButton;
+
+    public void <init>(java.util.List, java.util.List)
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        java.util.List r1, r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(1, r1, r2);
+
+        return;
+    }
+
+    public void <init>(int, java.util.List, java.util.List)
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        int i0, $i1, $i2;
+        java.util.List r1, r2;
+        javax.swing.JSplitPane r3, $r11;
+        javax.swing.JScrollPane r4, r5, $r22, $r24;
+        org.gjt.sp.jedit.gui.PingPongList$MyTransferHandler r6, $r34;
+        javax.swing.Box r7;
+        org.gjt.sp.jedit.gui.PingPongList$ActionHandler r8, $r39;
+        org.gjt.sp.jedit.gui.PingPongList$MyListDataListener r9, $r56;
+        java.awt.BorderLayout $r10, $r19, $r21;
+        org.gjt.sp.jedit.gui.PingPongList$MyListModel $r12, $r14, $r15, $r17, $r57, $r58;
+        javax.swing.JList $r13, $r16, $r23, $r25, $r32, $r33, $r35, $r36;
+        javax.swing.JPanel $r18, $r20, $r26, $r28, $r30, $r31;
+        java.awt.Component $r37, $r46, $r54;
+        javax.swing.JButton $r40, $r42, $r43, $r44, $r48, $r50, $r51, $r52;
+        java.lang.String $r41, $r49;
+        boolean $z0, $z1, $z0_1, $z0_2, $z1_1, $z1_2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        $r10 = new java.awt.BorderLayout;
+
+        specialinvoke $r10.<init>();
+
+        specialinvoke r0.<init>($r10);
+
+        $r11 = new javax.swing.JSplitPane;
+
+        specialinvoke $r11.<init>(i0);
+
+        r3 = $r11;
+
+        $r12 = new org.gjt.sp.jedit.gui.PingPongList$MyListModel;
+
+        specialinvoke $r12.<init>(r1, null);
+
+        r0.leftModel = $r12;
+
+        $r13 = new javax.swing.JList;
+
+        $r14 = r0.leftModel;
+
+        specialinvoke $r13.<init>($r14);
+
+        r0.left = $r13;
+
+        $r15 = new org.gjt.sp.jedit.gui.PingPongList$MyListModel;
+
+        specialinvoke $r15.<init>(r2, null);
+
+        r0.rightModel = $r15;
+
+        $r16 = new javax.swing.JList;
+
+        $r17 = r0.rightModel;
+
+        specialinvoke $r16.<init>($r17);
+
+        r0.right = $r16;
+
+        $r18 = new javax.swing.JPanel;
+
+        $r19 = new java.awt.BorderLayout;
+
+        specialinvoke $r19.<init>();
+
+        specialinvoke $r18.<init>($r19);
+
+        r0.leftPanel = $r18;
+
+        $r20 = new javax.swing.JPanel;
+
+        $r21 = new java.awt.BorderLayout;
+
+        specialinvoke $r21.<init>();
+
+        specialinvoke $r20.<init>($r21);
+
+        r0.rightPanel = $r20;
+
+        $r22 = new javax.swing.JScrollPane;
+
+        $r23 = r0.left;
+
+        specialinvoke $r22.<init>($r23);
+
+        r4 = $r22;
+
+        $r24 = new javax.swing.JScrollPane;
+
+        $r25 = r0.right;
+
+        specialinvoke $r24.<init>($r25);
+
+        r5 = $r24;
+
+        $r26 = r0.leftPanel;
+
+        $r26.add(r4);
+
+        $r28 = r0.rightPanel;
+
+        $r28.add(r5);
+
+        $r30 = r0.leftPanel;
+
+        r3.setLeftComponent($r30);
+
+        $r31 = r0.rightPanel;
+
+        r3.setRightComponent($r31);
+
+        $r32 = r0.left;
+
+        $r32.setDragEnabled(1);
+
+        $r33 = r0.right;
+
+        $r33.setDragEnabled(1);
+
+        $r34 = new org.gjt.sp.jedit.gui.PingPongList$MyTransferHandler;
+
+        specialinvoke $r34.<init>(r0, null);
+
+        r6 = $r34;
+
+        $r35 = r0.left;
+
+        $r35.setTransferHandler(r6);
+
+        $r36 = r0.right;
+
+        $r36.setTransferHandler(r6);
+
+        r3.setDividerLocation(0.5);
+
+        r7 = javax.swing.Box.createHorizontalBox();
+
+        $r37 = javax.swing.Box.createHorizontalStrut(12);
+
+        r7.add($r37);
+
+        $r39 = new org.gjt.sp.jedit.gui.PingPongList$ActionHandler;
+
+        specialinvoke $r39.<init>(r0, null);
+
+        r8 = $r39;
+
+        $r40 = new javax.swing.JButton;
+
+        $r41 = org.gjt.sp.jedit.jEdit.getProperty("common.selectAll");
+
+        specialinvoke $r40.<init>($r41);
+
+        r0.selectAllButton = $r40;
+
+        $r42 = r0.selectAllButton;
+
+        $r42.addActionListener(r8);
+
+        $r43 = r0.selectAllButton;
+
+        $i1 = r0.getLeftSize();
+
+        if $i1 == 0 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        $r43.setEnabled($z0_2);
+
+        $r44 = r0.selectAllButton;
+
+        r7.add($r44);
+
+        $r46 = javax.swing.Box.createHorizontalStrut(12);
+
+        r7.add($r46);
+
+        $r48 = new javax.swing.JButton;
+
+        $r49 = org.gjt.sp.jedit.jEdit.getProperty("common.selectNone");
+
+        specialinvoke $r48.<init>($r49);
+
+        r0.selectNoneButton = $r48;
+
+        $r50 = r0.selectNoneButton;
+
+        $r50.addActionListener(r8);
+
+        $r51 = r0.selectNoneButton;
+
+        $i2 = r0.getRightSize();
+
+        if $i2 == 0 goto label3;
+
+        $z1 = 1;
+
+(2)     goto label4;
+
+     label3:
+(3)     $z1_1 = 0;
+
+     label4:
+        $z1_2 = Phi($z1 #2, $z1_1 #3);
+
+        $r51.setEnabled($z1_2);
+
+        $r52 = r0.selectNoneButton;
+
+        r7.add($r52);
+
+        $r54 = javax.swing.Box.createHorizontalStrut(12);
+
+        r7.add($r54);
+
+        r0.add(r3, "Center");
+
+        r0.add(r7, "South");
+
+        $r56 = new org.gjt.sp.jedit.gui.PingPongList$MyListDataListener;
+
+        specialinvoke $r56.<init>(r0, null);
+
+        r9 = $r56;
+
+        $r57 = r0.leftModel;
+
+        $r57.addListDataListener(r9);
+
+        $r58 = r0.rightModel;
+
+        $r58.addListDataListener(r9);
+
+        return;
+    }
+
+    public void setLeftTooltip(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        java.lang.String r1;
+        javax.swing.JList $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.left;
+
+        $r2.setToolTipText(r1);
+
+        return;
+    }
+
+    public void setRightTooltip(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        java.lang.String r1;
+        javax.swing.JList $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.right;
+
+        $r2.setToolTipText(r1);
+
+        return;
+    }
+
+    public void setLeftTitle(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        java.lang.String r1;
+        javax.swing.JLabel $r2, $r3, $r4, $r6;
+        javax.swing.JPanel $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 != null goto label1;
+
+        r0.removeLeftTitle();
+
+        return;
+
+     label1:
+        $r2 = r0.leftLabel;
+
+        if $r2 != null goto label2;
+
+        $r6 = new javax.swing.JLabel;
+
+        specialinvoke $r6.<init>();
+
+        r0.leftLabel = $r6;
+
+     label2:
+        $r3 = r0.leftLabel;
+
+        $r3.setText(r1);
+
+        $r5 = r0.leftPanel;
+
+        $r4 = r0.leftLabel;
+
+        $r5.add($r4, "North");
+
+        return;
+    }
+
+    public void setRightTitle(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        java.lang.String r1;
+        javax.swing.JLabel $r2, $r3, $r4, $r6;
+        javax.swing.JPanel $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 != null goto label1;
+
+        r0.removeRightTitle();
+
+        return;
+
+     label1:
+        $r2 = r0.rightLabel;
+
+        if $r2 != null goto label2;
+
+        $r6 = new javax.swing.JLabel;
+
+        specialinvoke $r6.<init>();
+
+        r0.rightLabel = $r6;
+
+     label2:
+        $r3 = r0.rightLabel;
+
+        $r3.setText(r1);
+
+        $r5 = r0.rightPanel;
+
+        $r4 = r0.rightLabel;
+
+        $r5.add($r4, "North");
+
+        return;
+    }
+
+    public void removeLeftTitle()
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        javax.swing.JLabel $r1, $r2;
+        javax.swing.JPanel $r3;
+
+        r0 := @this;
+
+        $r1 = r0.leftLabel;
+
+        if $r1 == null goto label1;
+
+        $r3 = r0.leftPanel;
+
+        $r2 = r0.leftLabel;
+
+        $r3.remove($r2);
+
+        r0.leftLabel = null;
+
+     label1:
+        return;
+    }
+
+    public void removeRightTitle()
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        javax.swing.JLabel $r1, $r2;
+        javax.swing.JPanel $r3;
+
+        r0 := @this;
+
+        $r1 = r0.rightLabel;
+
+        if $r1 == null goto label1;
+
+        $r3 = r0.rightPanel;
+
+        $r2 = r0.rightLabel;
+
+        $r3.remove($r2);
+
+        r0.rightLabel = null;
+
+     label1:
+        return;
+    }
+
+    public int getLeftSize()
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        org.gjt.sp.jedit.gui.PingPongList$MyListModel $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.leftModel;
+
+        $i0 = $r1.getSize();
+
+        return $i0;
+    }
+
+    public int getRightSize()
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        org.gjt.sp.jedit.gui.PingPongList$MyListModel $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.rightModel;
+
+        $i0 = $r1.getSize();
+
+        return $i0;
+    }
+
+    public java.util.Iterator getLeftDataIterator()
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        org.gjt.sp.jedit.gui.PingPongList$MyListModel $r1;
+        java.util.Iterator $r2;
+
+        r0 := @this;
+
+        $r1 = r0.leftModel;
+
+        $r2 = $r1.iterator();
+
+        return $r2;
+    }
+
+    public java.util.Iterator getRightDataIterator()
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        org.gjt.sp.jedit.gui.PingPongList$MyListModel $r1;
+        java.util.Iterator $r2;
+
+        r0 := @this;
+
+        $r1 = r0.rightModel;
+
+        $r2 = $r1.iterator();
+
+        return $r2;
+    }
+
+    public void moveAllToLeft()
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        org.gjt.sp.jedit.gui.PingPongList$MyListModel $r1, $r2, $r4;
+        java.util.List $r3;
+
+        r0 := @this;
+
+        $r2 = r0.leftModel;
+
+        $r1 = r0.rightModel;
+
+        $r3 = org.gjt.sp.jedit.gui.PingPongList$MyListModel.access$400($r1);
+
+        $r2.addAll($r3);
+
+        $r4 = r0.rightModel;
+
+        $r4.clear();
+
+        return;
+    }
+
+    public void moveAllToRight()
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        org.gjt.sp.jedit.gui.PingPongList$MyListModel $r1, $r2, $r4;
+        java.util.List $r3;
+
+        r0 := @this;
+
+        $r2 = r0.rightModel;
+
+        $r1 = r0.leftModel;
+
+        $r3 = org.gjt.sp.jedit.gui.PingPongList$MyListModel.access$400($r1);
+
+        $r2.addAll($r3);
+
+        $r4 = r0.leftModel;
+
+        $r4.clear();
+
+        return;
+    }
+
+    static javax.swing.JList access$600(org.gjt.sp.jedit.gui.PingPongList)
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        javax.swing.JList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.left;
+
+        return $r1;
+    }
+
+    static javax.swing.JList access$700(org.gjt.sp.jedit.gui.PingPongList)
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        javax.swing.JList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.right;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$800(org.gjt.sp.jedit.gui.PingPongList)
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.selectAllButton;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$900(org.gjt.sp.jedit.gui.PingPongList)
+    {
+        org.gjt.sp.jedit.gui.PingPongList r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.selectNoneButton;
+
+        return $r1;
+    }
+}

@@ -1,0 +1,192 @@
+class org.gjt.sp.jedit.search.HyperSearchResults$2 extends java.lang.Object implements java.lang.Runnable
+{
+    final javax.swing.tree.DefaultMutableTreeNode val$searchNode;
+    final int val$nodeCount;
+    final javax.swing.tree.DefaultMutableTreeNode val$selectNode;
+    final org.gjt.sp.jedit.search.HyperSearchResults this$0;
+
+    void <init>(org.gjt.sp.jedit.search.HyperSearchResults, javax.swing.tree.DefaultMutableTreeNode, int, javax.swing.tree.DefaultMutableTreeNode)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$2 r0;
+        org.gjt.sp.jedit.search.HyperSearchResults r1;
+        javax.swing.tree.DefaultMutableTreeNode r2, r3;
+        int i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        r3 := @parameter3;
+
+        r0.this$0 = r1;
+
+        r0.val$searchNode = r2;
+
+        r0.val$nodeCount = i0;
+
+        r0.val$selectNode = r3;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$2 r0;
+        javax.swing.tree.TreePath r1, $r11, $r18, $r23, r34;
+        org.gjt.sp.jedit.search.HyperSearchResults $r2, $r3, $r6, $r8, $r14, $r16, $r20, $r28, $r30, $r32;
+        boolean $z0;
+        javax.swing.tree.DefaultMutableTreeNode $r4, $r5, $r9, $r10, $r12, $r21, $r22, $r24, $r26, $r31, $r33;
+        javax.swing.tree.DefaultTreeModel $r7;
+        int $i0, $i1, i2, i3;
+        javax.swing.tree.TreeNode[] $r13, $r27;
+        javax.swing.JTree $r15, $r17, $r29;
+        java.lang.Object[] $r19;
+        javax.swing.tree.TreeNode $r25;
+
+        r0 := @this;
+
+        $r2 = r0.this$0;
+
+        $z0 = org.gjt.sp.jedit.search.HyperSearchResults.access$000($r2);
+
+(0)     if $z0 != 0 goto label2;
+
+(1)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #1, i2 #3);
+
+        $r30 = r0.this$0;
+
+        $r31 = org.gjt.sp.jedit.search.HyperSearchResults.access$100($r30);
+
+        $i1 = $r31.getChildCount();
+
+(2)     if i2 >= $i1 goto label2;
+
+        $r32 = r0.this$0;
+
+        $r33 = org.gjt.sp.jedit.search.HyperSearchResults.access$100($r32);
+
+        $r33.remove(0);
+
+        i2 = i2 + 1;
+
+(3)     goto label1;
+
+     label2:
+        i2 = Phi(i2 #0, i2 #2);
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.search.HyperSearchResults.access$100($r3);
+
+        $r5 = r0.val$searchNode;
+
+        $r4.add($r5);
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.search.HyperSearchResults.access$200($r6);
+
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.search.HyperSearchResults.access$100($r8);
+
+        $r7.reload($r9);
+
+(4)     i3 = 0;
+
+     label3:
+        i2 = Phi(i2 #4, i2 #5);
+
+        i3 = Phi(i3 #4, i3 #5);
+
+        $i0 = r0.val$nodeCount;
+
+        if i3 >= $i0 goto label4;
+
+        $r23 = new javax.swing.tree.TreePath;
+
+        $r24 = r0.val$searchNode;
+
+        $r25 = $r24.getChildAt(i3);
+
+        $r26 = (javax.swing.tree.DefaultMutableTreeNode) $r25;
+
+        $r27 = $r26.getPath();
+
+        specialinvoke $r23.<init>($r27);
+
+        r1 = $r23;
+
+        $r28 = r0.this$0;
+
+        $r29 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r28);
+
+        $r29.expandPath(r1);
+
+        i3 = i3 + 1;
+
+(5)     goto label3;
+
+     label4:
+        $r10 = r0.val$selectNode;
+
+        if $r10 != null goto label5;
+
+        $r18 = new javax.swing.tree.TreePath;
+
+        $r19 = newarray (java.lang.Object)[2];
+
+        $r20 = r0.this$0;
+
+        $r21 = org.gjt.sp.jedit.search.HyperSearchResults.access$100($r20);
+
+        $r19[0] = $r21;
+
+        $r22 = r0.val$searchNode;
+
+        $r19[1] = $r22;
+
+        specialinvoke $r18.<init>($r19);
+
+        r34 = $r18;
+
+(6)     goto label6;
+
+     label5:
+        $r11 = new javax.swing.tree.TreePath;
+
+        $r12 = r0.val$selectNode;
+
+        $r13 = $r12.getPath();
+
+        specialinvoke $r11.<init>($r13);
+
+(7)     r34 = $r11;
+
+     label6:
+        r34 = Phi(r34 #6, r34 #7);
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r14);
+
+        $r15.setSelectionPath(r34);
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r16);
+
+        $r17.scrollPathToVisible(r34);
+
+        return;
+    }
+}

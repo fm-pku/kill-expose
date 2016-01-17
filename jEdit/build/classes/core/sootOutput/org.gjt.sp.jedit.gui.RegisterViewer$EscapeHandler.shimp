@@ -1,0 +1,49 @@
+class org.gjt.sp.jedit.gui.RegisterViewer$EscapeHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.RegisterViewer this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.RegisterViewer)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer$EscapeHandler r0;
+        org.gjt.sp.jedit.gui.RegisterViewer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer$EscapeHandler r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.gui.RegisterViewer $r2, $r5;
+        org.gjt.sp.jedit.View $r3, $r6;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.RegisterViewer.access$600($r2);
+
+        $r4 = $r3.getTextArea();
+
+        $r4.requestFocus();
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.RegisterViewer.access$600($r5);
+
+        $r6.toFront();
+
+        return;
+    }
+}

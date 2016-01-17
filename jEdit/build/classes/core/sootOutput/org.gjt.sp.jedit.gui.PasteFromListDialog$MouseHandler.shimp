@@ -1,0 +1,43 @@
+class org.gjt.sp.jedit.gui.PasteFromListDialog$MouseHandler extends java.awt.event.MouseAdapter
+{
+    final org.gjt.sp.jedit.gui.PasteFromListDialog this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.PasteFromListDialog)
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog$MouseHandler r0;
+        org.gjt.sp.jedit.gui.PasteFromListDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mouseClicked(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog$MouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        int $i0;
+        org.gjt.sp.jedit.gui.PasteFromListDialog $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r1.getClickCount();
+
+        if $i0 != 2 goto label1;
+
+        $r2 = r0.this$0;
+
+        $r2.ok();
+
+     label1:
+        return;
+    }
+}

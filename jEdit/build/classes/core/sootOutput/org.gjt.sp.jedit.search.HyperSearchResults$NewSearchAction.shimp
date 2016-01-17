@@ -1,0 +1,92 @@
+class org.gjt.sp.jedit.search.HyperSearchResults$NewSearchAction extends javax.swing.AbstractAction
+{
+    final org.gjt.sp.jedit.search.HyperSearchResults this$0;
+
+    void <init>(org.gjt.sp.jedit.search.HyperSearchResults)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$NewSearchAction r0;
+        org.gjt.sp.jedit.search.HyperSearchResults r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("hypersearch-results.new-search");
+
+        specialinvoke r0.<init>($r2);
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$NewSearchAction r0;
+        java.awt.event.ActionEvent r1;
+        javax.swing.tree.TreePath r2;
+        javax.swing.tree.DefaultMutableTreeNode r3;
+        org.gjt.sp.jedit.search.HyperSearchFolderNode r4;
+        org.gjt.sp.jedit.search.SearchFileSet r5;
+        org.gjt.sp.jedit.search.HyperSearchResults $r6, $r13;
+        javax.swing.JTree $r7;
+        java.lang.Object $r8, $r9;
+        boolean $z0;
+        org.gjt.sp.jedit.search.DirectoryListSet $r10, $r15;
+        java.io.File $r11;
+        java.lang.String $r12, r16, r16_1, r16_2;
+        org.gjt.sp.jedit.View $r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.search.HyperSearchResults.access$300($r6);
+
+        r2 = $r7.getSelectionPath();
+
+        $r8 = r2.getLastPathComponent();
+
+        r3 = (javax.swing.tree.DefaultMutableTreeNode) $r8;
+
+        $r9 = r3.getUserObject();
+
+        r4 = (org.gjt.sp.jedit.search.HyperSearchFolderNode) $r9;
+
+        r16 = "*";
+
+        r5 = org.gjt.sp.jedit.search.SearchAndReplace.getSearchFileSet();
+
+        $z0 = r5 instanceof org.gjt.sp.jedit.search.DirectoryListSet;
+
+(0)     if $z0 == 0 goto label1;
+
+        $r15 = (org.gjt.sp.jedit.search.DirectoryListSet) r5;
+
+(1)     r16_1 = $r15.getFileFilter();
+
+     label1:
+        r16_2 = Phi(r16 #0, r16_1 #1);
+
+        $r10 = new org.gjt.sp.jedit.search.DirectoryListSet;
+
+        $r11 = r4.getNodeFile();
+
+        $r12 = $r11.getAbsolutePath();
+
+        specialinvoke $r10.<init>($r12, r16_2, 1);
+
+        org.gjt.sp.jedit.search.SearchAndReplace.setSearchFileSet($r10);
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.search.HyperSearchResults.access$1300($r13);
+
+        org.gjt.sp.jedit.search.SearchDialog.showSearchDialog($r14, null, 2);
+
+        return;
+    }
+}

@@ -1,0 +1,113 @@
+class org.gjt.sp.jedit.gui.BufferSwitcher$1 extends java.lang.Object implements javax.swing.event.PopupMenuListener
+{
+    final org.gjt.sp.jedit.EditPane val$editPane;
+    final org.gjt.sp.jedit.gui.BufferSwitcher this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.BufferSwitcher, org.gjt.sp.jedit.EditPane)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$1 r0;
+        org.gjt.sp.jedit.gui.BufferSwitcher r1;
+        org.gjt.sp.jedit.EditPane r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$editPane = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$1 r0;
+        javax.swing.event.PopupMenuEvent r1;
+        org.gjt.sp.jedit.gui.BufferSwitcher $r2, $r3;
+        java.lang.Object $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.this$0;
+
+        $r2 = r0.this$0;
+
+        $r4 = $r2.getSelectedItem();
+
+        org.gjt.sp.jedit.gui.BufferSwitcher.access$002($r3, $r4);
+
+        return;
+    }
+
+    public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$1 r0;
+        javax.swing.event.PopupMenuEvent r1;
+        org.gjt.sp.jedit.Buffer r2;
+        org.gjt.sp.jedit.gui.BufferSwitcher $r3, $r6;
+        boolean $z0;
+        org.gjt.sp.jedit.EditPane $r4, $r8;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r5;
+        java.lang.Object $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.this$0;
+
+        $z0 = org.gjt.sp.jedit.gui.BufferSwitcher.access$100($r3);
+
+        if $z0 != 0 goto label1;
+
+        $r6 = r0.this$0;
+
+        $r7 = $r6.getSelectedItem();
+
+        r2 = (org.gjt.sp.jedit.Buffer) $r7;
+
+        if r2 == null goto label1;
+
+        $r8 = r0.val$editPane;
+
+        $r8.setBuffer(r2);
+
+     label1:
+        $r4 = r0.val$editPane;
+
+        $r5 = $r4.getTextArea();
+
+        $r5.requestFocus();
+
+        return;
+    }
+
+    public void popupMenuCanceled(javax.swing.event.PopupMenuEvent)
+    {
+        org.gjt.sp.jedit.gui.BufferSwitcher$1 r0;
+        javax.swing.event.PopupMenuEvent r1;
+        org.gjt.sp.jedit.gui.BufferSwitcher $r2, $r3;
+        java.lang.Object $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.this$0;
+
+        $r2 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.BufferSwitcher.access$000($r2);
+
+        $r3.setSelectedItem($r4);
+
+        return;
+    }
+}

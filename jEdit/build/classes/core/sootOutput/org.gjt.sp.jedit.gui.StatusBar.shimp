@@ -1,0 +1,1075 @@
+public class org.gjt.sp.jedit.gui.StatusBar extends javax.swing.JPanel
+{
+    private java.lang.String currentBar;
+    private final org.gjt.sp.jedit.gui.StatusBar$TaskHandler taskHandler;
+    private final org.gjt.sp.jedit.View view;
+    private final javax.swing.JPanel panel;
+    private final javax.swing.Box box;
+    private final org.gjt.sp.jedit.gui.statusbar.ToolTipLabel caretStatus;
+    private java.awt.Component messageComp;
+    private final javax.swing.JLabel message;
+    private final org.gjt.sp.jedit.gui.statusbar.Widget modeWidget;
+    private final org.gjt.sp.jedit.gui.statusbar.Widget foldWidget;
+    private final org.gjt.sp.jedit.gui.statusbar.Widget encodingWidget;
+    private final org.gjt.sp.jedit.gui.statusbar.Widget wrapWidget;
+    private final org.gjt.sp.jedit.gui.statusbar.Widget indentWidget;
+    private final org.gjt.sp.jedit.gui.statusbar.Widget multiSelectWidget;
+    private final org.gjt.sp.jedit.gui.statusbar.Widget rectSelectWidget;
+    private final org.gjt.sp.jedit.gui.statusbar.Widget overwriteWidget;
+    private final org.gjt.sp.jedit.gui.statusbar.Widget lineSepWidget;
+    java.lang.StringBuilder buf;
+    private javax.swing.Timer tempTimer;
+    private boolean currentMessageIsIO;
+    private final javax.swing.text.Segment seg;
+    private boolean showCaretStatus;
+    static final java.lang.String caretTestStr;
+
+    public void <init>(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.gui.StatusBar$MouseHandler r2, $r17;
+        java.awt.BorderLayout $r3, $r10;
+        java.lang.StringBuilder $r4;
+        javax.swing.text.Segment $r5;
+        javax.swing.border.CompoundBorder $r6;
+        javax.swing.border.EmptyBorder $r7;
+        boolean $z0;
+        javax.swing.border.Border $r8;
+        javax.swing.JPanel $r9, $r13, $r15;
+        javax.swing.Box $r11, $r12;
+        org.gjt.sp.jedit.gui.statusbar.ToolTipLabel $r18, $r19, $r20, $r22;
+        java.lang.String $r21;
+        javax.swing.JLabel $r23, $r24;
+        org.gjt.sp.jedit.gui.statusbar.Widget $r25, $r26, $r27, $r28, $r29, $r30, $r31, $r32, $r33;
+        org.gjt.sp.jedit.gui.StatusBar$TaskHandler $r34;
+        byte $b3, $b3_1, $b3_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new java.awt.BorderLayout;
+
+        specialinvoke $r3.<init>();
+
+        specialinvoke r0.<init>($r3);
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        r0.buf = $r4;
+
+        $r5 = new javax.swing.text.Segment;
+
+        specialinvoke $r5.<init>();
+
+        r0.seg = $r5;
+
+        r0.setName("StatusBar");
+
+        $r6 = new javax.swing.border.CompoundBorder;
+
+        $r7 = new javax.swing.border.EmptyBorder;
+
+        $z0 = org.gjt.sp.jedit.OperatingSystem.isMacOS();
+
+        if $z0 == 0 goto label1;
+
+        $b3 = 18;
+
+(0)     goto label2;
+
+     label1:
+(1)     $b3_1 = 0;
+
+     label2:
+        $b3_2 = Phi($b3 #0, $b3_1 #1);
+
+        specialinvoke $r7.<init>(4, 0, 0, $b3_2);
+
+        $r8 = javax.swing.UIManager.getBorder("TextField.border");
+
+        specialinvoke $r6.<init>($r7, $r8);
+
+        r0.setBorder($r6);
+
+        r0.view = r1;
+
+        $r9 = new javax.swing.JPanel;
+
+        $r10 = new java.awt.BorderLayout;
+
+        specialinvoke $r10.<init>();
+
+        specialinvoke $r9.<init>($r10);
+
+        r0.panel = $r9;
+
+        $r11 = new javax.swing.Box;
+
+        specialinvoke $r11.<init>(0);
+
+        r0.box = $r11;
+
+        $r13 = r0.panel;
+
+        $r12 = r0.box;
+
+        $r13.add("East", $r12);
+
+        $r15 = r0.panel;
+
+        r0.add("Center", $r15);
+
+        $r17 = new org.gjt.sp.jedit.gui.StatusBar$MouseHandler;
+
+        specialinvoke $r17.<init>(r0, null);
+
+        r2 = $r17;
+
+        $r18 = new org.gjt.sp.jedit.gui.statusbar.ToolTipLabel;
+
+        specialinvoke $r18.<init>();
+
+        r0.caretStatus = $r18;
+
+        $r19 = r0.caretStatus;
+
+        $r19.setName("caretStatus");
+
+        $r20 = r0.caretStatus;
+
+        $r21 = org.gjt.sp.jedit.jEdit.getProperty("view.status.caret-tooltip");
+
+        $r20.setToolTipText($r21);
+
+        $r22 = r0.caretStatus;
+
+        $r22.addMouseListener(r2);
+
+        $r23 = new javax.swing.JLabel;
+
+        specialinvoke $r23.<init>(" ");
+
+        r0.message = $r23;
+
+        $r24 = r0.message;
+
+        r0.setMessageComponent($r24);
+
+        $r25 = specialinvoke r0._getWidget("mode");
+
+        r0.modeWidget = $r25;
+
+        $r26 = specialinvoke r0._getWidget("fold");
+
+        r0.foldWidget = $r26;
+
+        $r27 = specialinvoke r0._getWidget("encoding");
+
+        r0.encodingWidget = $r27;
+
+        $r28 = specialinvoke r0._getWidget("wrap");
+
+        r0.wrapWidget = $r28;
+
+        $r29 = specialinvoke r0._getWidget("indent");
+
+        r0.indentWidget = $r29;
+
+        $r30 = specialinvoke r0._getWidget("multiSelect");
+
+        r0.multiSelectWidget = $r30;
+
+        $r31 = specialinvoke r0._getWidget("rectSelect");
+
+        r0.rectSelectWidget = $r31;
+
+        $r32 = specialinvoke r0._getWidget("overwrite");
+
+        r0.overwriteWidget = $r32;
+
+        $r33 = specialinvoke r0._getWidget("lineSep");
+
+        r0.lineSepWidget = $r33;
+
+        $r34 = new org.gjt.sp.jedit.gui.StatusBar$TaskHandler;
+
+        specialinvoke $r34.<init>(r0, null);
+
+        r0.taskHandler = $r34;
+
+        return;
+    }
+
+    public void propertiesChanged()
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        java.awt.Color r1, r2;
+        java.awt.Font r3;
+        java.awt.FontMetrics r4;
+        java.util.StringTokenizer r5, $r18;
+        java.lang.String r6, $r16, r34;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        javax.swing.JPanel $r7, $r8, $r15, $r28;
+        org.gjt.sp.jedit.gui.statusbar.ToolTipLabel $r9, $r10, $r14, $r27, $r30, $r32;
+        javax.swing.JLabel $r11, $r12, $r13, $r19, $r24, r36, r38;
+        javax.swing.Box $r17, $r20, $r22, $r25;
+        char $c0;
+        java.awt.Dimension $r31, r33;
+        int $i1, $i2;
+        org.gjt.sp.jedit.gui.statusbar.Widget r35;
+        javax.swing.JComponent r37;
+
+        r0 := @this;
+
+        r1 = org.gjt.sp.jedit.jEdit.getColorProperty("view.status.foreground");
+
+        r2 = org.gjt.sp.jedit.jEdit.getColorProperty("view.status.background");
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.show-caret-status");
+
+        r0.showCaretStatus = $z0;
+
+        $r7 = r0.panel;
+
+        $r7.setBackground(r2);
+
+        $r8 = r0.panel;
+
+        $r8.setForeground(r1);
+
+        $r9 = r0.caretStatus;
+
+        $r9.setBackground(r2);
+
+        $r10 = r0.caretStatus;
+
+        $r10.setForeground(r1);
+
+        $r11 = r0.message;
+
+        $r11.setBackground(r2);
+
+        $r12 = r0.message;
+
+        $r12.setForeground(r1);
+
+        $r13 = new javax.swing.JLabel;
+
+        specialinvoke $r13.<init>();
+
+        r3 = $r13.getFont();
+
+        r4 = r0.getFontMetrics(r3);
+
+        $z1 = r0.showCaretStatus;
+
+        if $z1 == 0 goto label1;
+
+        $r28 = r0.panel;
+
+        $r27 = r0.caretStatus;
+
+        $r28.add("West", $r27);
+
+        $r30 = r0.caretStatus;
+
+        $r30.setFont(r3);
+
+        $r31 = new java.awt.Dimension;
+
+        $i1 = r4.stringWidth("9999,999-999 (99999999/99999999)");
+
+        $i2 = r4.getHeight();
+
+        specialinvoke $r31.<init>($i1, $i2);
+
+        r33 = $r31;
+
+        $r32 = r0.caretStatus;
+
+        $r32.setPreferredSize(r33);
+
+        r0.updateCaretStatus();
+
+        goto label2;
+
+     label1:
+        $r15 = r0.panel;
+
+        $r14 = r0.caretStatus;
+
+        $r15.remove($r14);
+
+     label2:
+        r34 = org.gjt.sp.jedit.jEdit.getProperty("view.status");
+
+        $r16 = r0.currentBar;
+
+        $z2 = java.util.Objects.equals($r16, r34);
+
+        if $z2 != 0 goto label8;
+
+        $r17 = r0.box;
+
+        $r17.removeAll();
+
+        $r18 = new java.util.StringTokenizer;
+
+        specialinvoke $r18.<init>(r34);
+
+        r5 = $r18;
+
+     label3:
+        $z3 = r5.hasMoreTokens();
+
+        if $z3 == 0 goto label7;
+
+        r6 = r5.nextToken();
+
+        $c0 = r6.charAt(0);
+
+        $z4 = java.lang.Character.isLetter($c0);
+
+        if $z4 == 0 goto label5;
+
+        r35 = specialinvoke r0.getWidget(r6);
+
+        if r35 != null goto label4;
+
+        $r24 = new javax.swing.JLabel;
+
+        specialinvoke $r24.<init>(r6);
+
+        r36 = $r24;
+
+        r36.setBackground(r2);
+
+        r36.setForeground(r1);
+
+        $r25 = r0.box;
+
+        $r25.add(r36);
+
+        goto label3;
+
+     label4:
+        r37 = r35.getComponent();
+
+        r37.setBackground(r2);
+
+        r37.setForeground(r1);
+
+        $r22 = r0.box;
+
+        $r22.add(r37);
+
+        r35.update();
+
+        r35.propertiesChanged();
+
+        goto label6;
+
+     label5:
+        $r19 = new javax.swing.JLabel;
+
+        specialinvoke $r19.<init>(r6);
+
+        r38 = $r19;
+
+        r38.setBackground(r2);
+
+        r38.setForeground(r1);
+
+        $r20 = r0.box;
+
+        $r20.add(r38);
+
+     label6:
+        goto label3;
+
+     label7:
+        r0.currentBar = r34;
+
+     label8:
+        r0.updateBufferStatus();
+
+        r0.updateMiscStatus();
+
+        return;
+    }
+
+    public void addNotify()
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        org.gjt.sp.jedit.gui.StatusBar$TaskHandler $r1;
+        org.gjt.sp.util.TaskManager $r2;
+
+        r0 := @this;
+
+        specialinvoke r0.addNotify();
+
+        $r2 = org.gjt.sp.util.TaskManager.instance;
+
+        $r1 = r0.taskHandler;
+
+        $r2.addTaskListener($r1);
+
+        return;
+    }
+
+    public void removeNotify()
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        org.gjt.sp.jedit.gui.StatusBar$TaskHandler $r1;
+        org.gjt.sp.util.TaskManager $r2;
+
+        r0 := @this;
+
+        specialinvoke r0.removeNotify();
+
+        $r2 = org.gjt.sp.util.TaskManager.instance;
+
+        $r1 = r0.taskHandler;
+
+        $r2.removeTaskListener($r1);
+
+        return;
+    }
+
+    public java.lang.String getMessage()
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        javax.swing.JLabel $r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        $r1 = r0.message;
+
+        $r2 = $r1.getText();
+
+        return $r2;
+    }
+
+    public void setMessageAndClear(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        java.lang.String r1;
+        javax.swing.Timer $r2, $r4, $r5, $r6;
+        org.gjt.sp.jedit.gui.StatusBar$1 $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.setMessage(r1);
+
+        $r2 = new javax.swing.Timer;
+
+        $r3 = new org.gjt.sp.jedit.gui.StatusBar$1;
+
+        specialinvoke $r3.<init>(r0);
+
+        specialinvoke $r2.<init>(0, $r3);
+
+        r0.tempTimer = $r2;
+
+        $r4 = r0.tempTimer;
+
+        $r4.setInitialDelay(10000);
+
+        $r5 = r0.tempTimer;
+
+        $r5.setRepeats(0);
+
+        $r6 = r0.tempTimer;
+
+        $r6.start();
+
+        return;
+    }
+
+    public void setMessage(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        java.lang.String r1, $r9;
+        javax.swing.Timer $r2, $r10;
+        javax.swing.JLabel $r3, $r4, $r7, $r8;
+        org.gjt.sp.jedit.View $r5;
+        org.gjt.sp.jedit.Macros$Recorder $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.tempTimer;
+
+        if $r2 == null goto label1;
+
+        $r10 = r0.tempTimer;
+
+        $r10.stop();
+
+        r0.tempTimer = null;
+
+     label1:
+        $r3 = r0.message;
+
+        r0.setMessageComponent($r3);
+
+        if r1 != null goto label3;
+
+        $r5 = r0.view;
+
+        $r6 = $r5.getMacroRecorder();
+
+        if $r6 == null goto label2;
+
+        $r8 = r0.message;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("view.status.recording");
+
+        $r8.setText($r9);
+
+        goto label4;
+
+     label2:
+        $r7 = r0.message;
+
+        $r7.setText(" ");
+
+        goto label4;
+
+     label3:
+        $r4 = r0.message;
+
+        $r4.setText(r1);
+
+     label4:
+        return;
+    }
+
+    public void setMessageComponent(java.awt.Component)
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        java.awt.Component r1, $r2, $r3;
+        javax.swing.JPanel $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.currentMessageIsIO = 0;
+
+        if r1 == null goto label1;
+
+        $r2 = r0.messageComp;
+
+        if $r2 != r1 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        r0.messageComp = r1;
+
+        $r4 = r0.panel;
+
+        $r3 = r0.messageComp;
+
+        $r4.add("Center", $r3);
+
+        return;
+    }
+
+    public void updateCaretStatus()
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        org.gjt.sp.jedit.Buffer r1;
+        org.gjt.sp.jedit.textarea.JEditTextArea r2, $r6;
+        int i0, i1, i2, i3, i4, i5, $i6, $i7, $i8, $i9, $i10, $i11;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8;
+        org.gjt.sp.jedit.View $r3, $r5, $r8;
+        org.gjt.sp.jedit.gui.statusbar.ToolTipLabel $r4, $r15;
+        org.gjt.sp.jedit.buffer.JEditBuffer $r7;
+        javax.swing.text.Segment $r9, $r10, $r11, $r12;
+        java.lang.StringBuilder $r13, $r14, $r17, $r18, $r20, $r22, $r24, $r26, $r28, $r30, $r32, $r34, $r36, $r38, $r40, $r42, $r44, $r46, $r48, $r50;
+        java.lang.String $r16;
+
+        r0 := @this;
+
+        $z0 = r0.showCaretStatus;
+
+        if $z0 == 0 goto label12;
+
+        $r3 = r0.view;
+
+        r1 = $r3.getBuffer();
+
+        $z1 = r1.isLoaded();
+
+        if $z1 == 0 goto label01;
+
+        $r5 = r0.view;
+
+        $r6 = $r5.getTextArea();
+
+        $r7 = $r6.getBuffer();
+
+        if r1 == $r7 goto label02;
+
+     label01:
+        $r4 = r0.caretStatus;
+
+        $r4.setText(" ");
+
+        return;
+
+     label02:
+        $r8 = r0.view;
+
+        r2 = $r8.getTextArea();
+
+        i0 = r2.getCaretPosition();
+
+        i1 = r2.getCaretLine();
+
+        $i6 = r1.getLineCount();
+
+        if i1 < $i6 goto label03;
+
+        return;
+
+     label03:
+        i2 = r2.getLineStartOffset(i1);
+
+        i3 = i0 - i2;
+
+        if i3 >= 0 goto label04;
+
+        return;
+
+     label04:
+        i4 = r1.getLength();
+
+        $r9 = r0.seg;
+
+        r1.getText(i2, i3, $r9);
+
+        $r10 = r0.seg;
+
+        $i7 = r1.getTabSize();
+
+        i5 = org.gjt.sp.util.StandardUtilities.getVirtualWidth($r10, $i7);
+
+        $r11 = r0.seg;
+
+        $r11.array = null;
+
+        $r12 = r0.seg;
+
+        $r12.count = 0;
+
+        $z2 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.show-caret-linenumber", 1);
+
+        if $z2 == 0 goto label05;
+
+        $r48 = r0.buf;
+
+        $i11 = i1 + 1;
+
+        $r48.append($i11);
+
+        $r50 = r0.buf;
+
+        $r50.append(44);
+
+     label05:
+        $z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.show-caret-dot", 1);
+
+        if $z3 == 0 goto label06;
+
+        $r46 = r0.buf;
+
+        $i10 = i3 + 1;
+
+        $r46.append($i10);
+
+     label06:
+        $z4 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.show-caret-virtual", 1);
+
+        if $z4 == 0 goto label07;
+
+        if i5 == i3 goto label07;
+
+        $r42 = r0.buf;
+
+        $r42.append(45);
+
+        $r44 = r0.buf;
+
+        $i9 = i5 + 1;
+
+        $r44.append($i9);
+
+     label07:
+        $r13 = r0.buf;
+
+        $i8 = $r13.length();
+
+        if $i8 <= 0 goto label08;
+
+        $r40 = r0.buf;
+
+        $r40.append(32);
+
+     label08:
+        $z5 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.show-caret-offset", 1);
+
+        if $z5 == 0 goto label09;
+
+        $z8 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.show-caret-bufferlength", 1);
+
+        if $z8 == 0 goto label09;
+
+        $r30 = r0.buf;
+
+        $r30.append(40);
+
+        $r32 = r0.buf;
+
+        $r32.append(i0);
+
+        $r34 = r0.buf;
+
+        $r34.append(47);
+
+        $r36 = r0.buf;
+
+        $r36.append(i4);
+
+        $r38 = r0.buf;
+
+        $r38.append(41);
+
+        goto label11;
+
+     label09:
+        $z6 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.show-caret-offset", 1);
+
+        if $z6 == 0 goto label10;
+
+        $r24 = r0.buf;
+
+        $r24.append(40);
+
+        $r26 = r0.buf;
+
+        $r26.append(i0);
+
+        $r28 = r0.buf;
+
+        $r28.append(41);
+
+        goto label11;
+
+     label10:
+        $z7 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.show-caret-bufferlength", 1);
+
+        if $z7 == 0 goto label11;
+
+        $r18 = r0.buf;
+
+        $r18.append(40);
+
+        $r20 = r0.buf;
+
+        $r20.append(i4);
+
+        $r22 = r0.buf;
+
+        $r22.append(41);
+
+     label11:
+        $r15 = r0.caretStatus;
+
+        $r14 = r0.buf;
+
+        $r16 = $r14.toString();
+
+        $r15.setText($r16);
+
+        $r17 = r0.buf;
+
+        $r17.setLength(0);
+
+     label12:
+        return;
+    }
+
+    public void updateBufferStatus()
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        org.gjt.sp.jedit.gui.statusbar.Widget $r1, $r2, $r3, $r4, $r5, $r6;
+
+        r0 := @this;
+
+        $r1 = r0.wrapWidget;
+
+        $r1.update();
+
+        $r2 = r0.indentWidget;
+
+        $r2.update();
+
+        $r3 = r0.lineSepWidget;
+
+        $r3.update();
+
+        $r4 = r0.modeWidget;
+
+        $r4.update();
+
+        $r5 = r0.foldWidget;
+
+        $r5.update();
+
+        $r6 = r0.encodingWidget;
+
+        $r6.update();
+
+        return;
+    }
+
+    public void updateMiscStatus()
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        org.gjt.sp.jedit.gui.statusbar.Widget $r1, $r2, $r3;
+
+        r0 := @this;
+
+        $r1 = r0.multiSelectWidget;
+
+        $r1.update();
+
+        $r2 = r0.rectSelectWidget;
+
+        $r2.update();
+
+        $r3 = r0.overwriteWidget;
+
+        $r3.update();
+
+        return;
+    }
+
+    private org.gjt.sp.jedit.gui.statusbar.Widget getWidget(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        java.lang.String r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8;
+        org.gjt.sp.jedit.gui.statusbar.Widget $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18, $r19, $r20;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = "mode";
+
+        $z0 = $r2.equals(r1);
+
+        if $z0 == 0 goto label1;
+
+        $r20 = r0.modeWidget;
+
+        return $r20;
+
+     label1:
+        $r3 = "fold";
+
+        $z1 = $r3.equals(r1);
+
+        if $z1 == 0 goto label2;
+
+        $r19 = r0.foldWidget;
+
+        return $r19;
+
+     label2:
+        $r4 = "encoding";
+
+        $z2 = $r4.equals(r1);
+
+        if $z2 == 0 goto label3;
+
+        $r18 = r0.encodingWidget;
+
+        return $r18;
+
+     label3:
+        $r5 = "wrap";
+
+        $z3 = $r5.equals(r1);
+
+        if $z3 == 0 goto label4;
+
+        $r17 = r0.wrapWidget;
+
+        return $r17;
+
+     label4:
+        $r6 = "indent";
+
+        $z4 = $r6.equals(r1);
+
+        if $z4 == 0 goto label5;
+
+        $r16 = r0.indentWidget;
+
+        return $r16;
+
+     label5:
+        $r7 = "multiSelect";
+
+        $z5 = $r7.equals(r1);
+
+        if $z5 == 0 goto label6;
+
+        $r15 = r0.multiSelectWidget;
+
+        return $r15;
+
+     label6:
+        $r8 = "rectSelect";
+
+        $z6 = $r8.equals(r1);
+
+        if $z6 == 0 goto label7;
+
+        $r14 = r0.rectSelectWidget;
+
+        return $r14;
+
+     label7:
+        $r9 = "overwrite";
+
+        $z7 = $r9.equals(r1);
+
+        if $z7 == 0 goto label8;
+
+        $r13 = r0.overwriteWidget;
+
+        return $r13;
+
+     label8:
+        $r10 = "lineSep";
+
+        $z8 = $r10.equals(r1);
+
+        if $z8 == 0 goto label9;
+
+        $r12 = r0.lineSepWidget;
+
+        return $r12;
+
+     label9:
+        $r11 = specialinvoke r0._getWidget(r1);
+
+        return $r11;
+    }
+
+    private org.gjt.sp.jedit.gui.statusbar.Widget _getWidget(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.gui.statusbar.StatusWidgetFactory r2;
+        java.lang.Object $r3;
+        org.gjt.sp.jedit.View $r4;
+        org.gjt.sp.jedit.gui.statusbar.Widget $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = org.gjt.sp.jedit.ServiceManager.getService("org.gjt.sp.jedit.gui.statusbar.StatusWidgetFactory", r1);
+
+        r2 = (org.gjt.sp.jedit.gui.statusbar.StatusWidgetFactory) $r3;
+
+        if r2 != null goto label1;
+
+        return null;
+
+     label1:
+        $r4 = r0.view;
+
+        $r5 = r2.getWidget($r4);
+
+        return $r5;
+    }
+
+    static boolean access$200(org.gjt.sp.jedit.gui.StatusBar)
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $z0 = r0.currentMessageIsIO;
+
+        return $z0;
+    }
+
+    static javax.swing.JLabel access$300(org.gjt.sp.jedit.gui.StatusBar)
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        javax.swing.JLabel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.message;
+
+        return $r1;
+    }
+
+    static boolean access$202(org.gjt.sp.jedit.gui.StatusBar, boolean)
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        boolean z0;
+
+        r0 := @parameter0;
+
+        z0 := @parameter1;
+
+        r0.currentMessageIsIO = z0;
+
+        return z0;
+    }
+
+    static org.gjt.sp.jedit.gui.statusbar.ToolTipLabel access$400(org.gjt.sp.jedit.gui.StatusBar)
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        org.gjt.sp.jedit.gui.statusbar.ToolTipLabel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.caretStatus;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.View access$500(org.gjt.sp.jedit.gui.StatusBar)
+    {
+        org.gjt.sp.jedit.gui.StatusBar r0;
+        org.gjt.sp.jedit.View $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.view;
+
+        return $r1;
+    }
+}

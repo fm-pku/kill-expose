@@ -1,0 +1,43 @@
+class org.gjt.sp.jedit.gui.AddAbbrevDialog$KeyHandler extends java.awt.event.KeyAdapter
+{
+    final org.gjt.sp.jedit.gui.AddAbbrevDialog this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.AddAbbrevDialog)
+    {
+        org.gjt.sp.jedit.gui.AddAbbrevDialog$KeyHandler r0;
+        org.gjt.sp.jedit.gui.AddAbbrevDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void keyPressed(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.gui.AddAbbrevDialog$KeyHandler r0;
+        java.awt.event.KeyEvent r1;
+        int $i0;
+        org.gjt.sp.jedit.gui.AddAbbrevDialog $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r1.getKeyCode();
+
+        if $i0 != 27 goto label1;
+
+        $r2 = r0.this$0;
+
+        $r2.dispose();
+
+     label1:
+        return;
+    }
+}

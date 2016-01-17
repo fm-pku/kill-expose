@@ -1,0 +1,68 @@
+class org.gjt.sp.jedit.View$CaretHandler extends java.lang.Object implements javax.swing.event.CaretListener
+{
+    final org.gjt.sp.jedit.View this$0;
+
+    private void <init>(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.View$CaretHandler r0;
+        org.gjt.sp.jedit.View r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void caretUpdate(javax.swing.event.CaretEvent)
+    {
+        org.gjt.sp.jedit.View$CaretHandler r0;
+        javax.swing.event.CaretEvent r1;
+        java.lang.Object $r2;
+        org.gjt.sp.jedit.View $r3, $r5;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r4;
+        org.gjt.sp.jedit.gui.StatusBar $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getSource();
+
+        $r3 = r0.this$0;
+
+        $r4 = $r3.getTextArea();
+
+        if $r2 != $r4 goto label1;
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.View.access$500($r5);
+
+        $r6.updateCaretStatus();
+
+     label1:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.View$1)
+    {
+        org.gjt.sp.jedit.View$CaretHandler r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.View$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

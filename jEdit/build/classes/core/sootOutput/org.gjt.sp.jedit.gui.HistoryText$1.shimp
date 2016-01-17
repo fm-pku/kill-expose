@@ -1,0 +1,42 @@
+class org.gjt.sp.jedit.gui.HistoryText$1 extends javax.swing.JPopupMenu
+{
+    final org.gjt.sp.jedit.gui.HistoryText this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.HistoryText)
+    {
+        org.gjt.sp.jedit.gui.HistoryText$1 r0;
+        org.gjt.sp.jedit.gui.HistoryText r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void setVisible(boolean)
+    {
+        org.gjt.sp.jedit.gui.HistoryText$1 r0;
+        boolean z0;
+        org.gjt.sp.jedit.gui.HistoryText $r1;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        if z0 != 0 goto label1;
+
+        $r1 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.HistoryText.access$002($r1, null);
+
+     label1:
+        specialinvoke r0.setVisible(z0);
+
+        return;
+    }
+}

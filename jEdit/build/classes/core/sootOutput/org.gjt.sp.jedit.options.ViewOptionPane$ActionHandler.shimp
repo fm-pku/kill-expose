@@ -1,0 +1,294 @@
+class org.gjt.sp.jedit.options.ViewOptionPane$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.options.ViewOptionPane this$0;
+
+    private void <init>(org.gjt.sp.jedit.options.ViewOptionPane)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane$ActionHandler r0;
+        org.gjt.sp.jedit.options.ViewOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object $r2, $r5, $r8;
+        org.gjt.sp.jedit.options.ViewOptionPane $r3, $r6, $r9, $r11, $r13, $r15, $r18, $r20, $r23, $r25, $r28, $r30, $r33, $r35, $r37, $r39, $r41, $r43, $r45, $r47, $r49, $r51, $r54, $r56, $r59, $r61, $r64, $r66, $r69, $r71, $r73, $r75, $r77, $r79, $r81, $r83, $r85;
+        javax.swing.JButton $r4, $r7;
+        javax.swing.JCheckBox $r10, $r14;
+        javax.swing.JTextField $r12;
+        boolean $z0;
+        javax.swing.JLabel $r16, $r21, $r26, $r31, $r36, $r40, $r44, $r48, $r52, $r57, $r62, $r67, $r72, $r76, $r80, $r84;
+        javax.swing.Icon $r17, $r19, $r22, $r24, $r27, $r29, $r32, $r34, $r38, $r42, $r46, $r50, $r53, $r55, $r58, $r60, $r63, $r65, $r68, $r70, $r74, $r78, $r82, $r86;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getSource();
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.options.ViewOptionPane.access$500($r3);
+
+        if $r2 != $r4 goto label4;
+
+        $r51 = r0.this$0;
+
+        $r52 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r51);
+
+        $r53 = $r52.getIcon();
+
+        $r54 = r0.this$0;
+
+        $r55 = org.gjt.sp.jedit.options.ViewOptionPane.access$700($r54);
+
+        if $r53 != $r55 goto label1;
+
+        $r83 = r0.this$0;
+
+        $r84 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r83);
+
+        $r85 = r0.this$0;
+
+        $r86 = org.gjt.sp.jedit.options.ViewOptionPane.access$800($r85);
+
+        $r84.setIcon($r86);
+
+        goto label9;
+
+     label1:
+        $r56 = r0.this$0;
+
+        $r57 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r56);
+
+        $r58 = $r57.getIcon();
+
+        $r59 = r0.this$0;
+
+        $r60 = org.gjt.sp.jedit.options.ViewOptionPane.access$800($r59);
+
+        if $r58 != $r60 goto label2;
+
+        $r79 = r0.this$0;
+
+        $r80 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r79);
+
+        $r81 = r0.this$0;
+
+        $r82 = org.gjt.sp.jedit.options.ViewOptionPane.access$700($r81);
+
+        $r80.setIcon($r82);
+
+        goto label9;
+
+     label2:
+        $r61 = r0.this$0;
+
+        $r62 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r61);
+
+        $r63 = $r62.getIcon();
+
+        $r64 = r0.this$0;
+
+        $r65 = org.gjt.sp.jedit.options.ViewOptionPane.access$900($r64);
+
+        if $r63 != $r65 goto label3;
+
+        $r75 = r0.this$0;
+
+        $r76 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r75);
+
+        $r77 = r0.this$0;
+
+        $r78 = org.gjt.sp.jedit.options.ViewOptionPane.access$1000($r77);
+
+        $r76.setIcon($r78);
+
+        goto label9;
+
+     label3:
+        $r66 = r0.this$0;
+
+        $r67 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r66);
+
+        $r68 = $r67.getIcon();
+
+        $r69 = r0.this$0;
+
+        $r70 = org.gjt.sp.jedit.options.ViewOptionPane.access$1000($r69);
+
+        if $r68 != $r70 goto label9;
+
+        $r71 = r0.this$0;
+
+        $r72 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r71);
+
+        $r73 = r0.this$0;
+
+        $r74 = org.gjt.sp.jedit.options.ViewOptionPane.access$900($r73);
+
+        $r72.setIcon($r74);
+
+        goto label9;
+
+     label4:
+        $r5 = r1.getSource();
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.options.ViewOptionPane.access$1100($r6);
+
+        if $r5 != $r7 goto label8;
+
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r15);
+
+        $r17 = $r16.getIcon();
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.options.ViewOptionPane.access$700($r18);
+
+        if $r17 != $r19 goto label5;
+
+        $r47 = r0.this$0;
+
+        $r48 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r47);
+
+        $r49 = r0.this$0;
+
+        $r50 = org.gjt.sp.jedit.options.ViewOptionPane.access$900($r49);
+
+        $r48.setIcon($r50);
+
+        goto label9;
+
+     label5:
+        $r20 = r0.this$0;
+
+        $r21 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r20);
+
+        $r22 = $r21.getIcon();
+
+        $r23 = r0.this$0;
+
+        $r24 = org.gjt.sp.jedit.options.ViewOptionPane.access$900($r23);
+
+        if $r22 != $r24 goto label6;
+
+        $r43 = r0.this$0;
+
+        $r44 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r43);
+
+        $r45 = r0.this$0;
+
+        $r46 = org.gjt.sp.jedit.options.ViewOptionPane.access$700($r45);
+
+        $r44.setIcon($r46);
+
+        goto label9;
+
+     label6:
+        $r25 = r0.this$0;
+
+        $r26 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r25);
+
+        $r27 = $r26.getIcon();
+
+        $r28 = r0.this$0;
+
+        $r29 = org.gjt.sp.jedit.options.ViewOptionPane.access$800($r28);
+
+        if $r27 != $r29 goto label7;
+
+        $r39 = r0.this$0;
+
+        $r40 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r39);
+
+        $r41 = r0.this$0;
+
+        $r42 = org.gjt.sp.jedit.options.ViewOptionPane.access$1000($r41);
+
+        $r40.setIcon($r42);
+
+        goto label9;
+
+     label7:
+        $r30 = r0.this$0;
+
+        $r31 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r30);
+
+        $r32 = $r31.getIcon();
+
+        $r33 = r0.this$0;
+
+        $r34 = org.gjt.sp.jedit.options.ViewOptionPane.access$1000($r33);
+
+        if $r32 != $r34 goto label9;
+
+        $r35 = r0.this$0;
+
+        $r36 = org.gjt.sp.jedit.options.ViewOptionPane.access$600($r35);
+
+        $r37 = r0.this$0;
+
+        $r38 = org.gjt.sp.jedit.options.ViewOptionPane.access$800($r37);
+
+        $r36.setIcon($r38);
+
+        goto label9;
+
+     label8:
+        $r8 = r1.getSource();
+
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.options.ViewOptionPane.access$1200($r9);
+
+        if $r8 != $r10 goto label9;
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.options.ViewOptionPane.access$1300($r11);
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.options.ViewOptionPane.access$1200($r13);
+
+        $z0 = $r14.isSelected();
+
+        $r12.setEditable($z0);
+
+     label9:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.options.ViewOptionPane, org.gjt.sp.jedit.options.ViewOptionPane$1)
+    {
+        org.gjt.sp.jedit.options.ViewOptionPane$ActionHandler r0;
+        org.gjt.sp.jedit.options.ViewOptionPane r1;
+        org.gjt.sp.jedit.options.ViewOptionPane$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

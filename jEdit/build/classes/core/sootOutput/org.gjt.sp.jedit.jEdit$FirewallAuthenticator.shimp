@@ -1,0 +1,36 @@
+class org.gjt.sp.jedit.jEdit$FirewallAuthenticator extends java.net.Authenticator
+{
+    java.net.PasswordAuthentication pw;
+
+    void <init>(java.net.PasswordAuthentication)
+    {
+        org.gjt.sp.jedit.jEdit$FirewallAuthenticator r0;
+        java.net.PasswordAuthentication r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.pw = r1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    protected java.net.PasswordAuthentication getPasswordAuthentication()
+    {
+        org.gjt.sp.jedit.jEdit$FirewallAuthenticator r0;
+        java.net.PasswordAuthentication $r1;
+
+        r0 := @this;
+
+        $r1 = r0.pw;
+
+        return $r1;
+    }
+}

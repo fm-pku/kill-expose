@@ -1,0 +1,170 @@
+class org.gjt.sp.jedit.gui.statusbar.LineSepWidgetFactory$LineSepWidget extends java.lang.Object implements org.gjt.sp.jedit.gui.statusbar.Widget
+{
+    private final javax.swing.JLabel lineSep;
+    private final org.gjt.sp.jedit.View view;
+
+    void <init>(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.statusbar.LineSepWidgetFactory$LineSepWidget r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.gui.statusbar.ToolTipLabel $r2;
+        javax.swing.JLabel $r3, $r4, $r7;
+        java.lang.String $r5;
+        org.gjt.sp.jedit.gui.statusbar.LineSepWidgetFactory$LineSepWidget$1 $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        $r2 = new org.gjt.sp.jedit.gui.statusbar.ToolTipLabel;
+
+        specialinvoke $r2.<init>();
+
+        r0.lineSep = $r2;
+
+        $r3 = r0.lineSep;
+
+        $r3.setHorizontalAlignment(0);
+
+        $r4 = r0.lineSep;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("view.status.linesep-tooltip");
+
+        $r4.setToolTipText($r5);
+
+        r0.view = r1;
+
+        $r7 = r0.lineSep;
+
+        $r6 = new org.gjt.sp.jedit.gui.statusbar.LineSepWidgetFactory$LineSepWidget$1;
+
+        specialinvoke $r6.<init>(r0, r1);
+
+        $r7.addMouseListener($r6);
+
+        return;
+    }
+
+    public javax.swing.JComponent getComponent()
+    {
+        org.gjt.sp.jedit.gui.statusbar.LineSepWidgetFactory$LineSepWidget r0;
+        javax.swing.JLabel $r1;
+
+        r0 := @this;
+
+        $r1 = r0.lineSep;
+
+        return $r1;
+    }
+
+    public void update()
+    {
+        org.gjt.sp.jedit.gui.statusbar.LineSepWidgetFactory$LineSepWidget r0;
+        org.gjt.sp.jedit.Buffer r1;
+        java.lang.String r2, $r4, $r5, $r6;
+        org.gjt.sp.jedit.View $r3;
+        boolean $z0, $z1, $z2;
+        javax.swing.JLabel $r7, $r8, $r9;
+
+        r0 := @this;
+
+        $r3 = r0.view;
+
+        r1 = $r3.getBuffer();
+
+        r2 = r1.getStringProperty("lineSeparator");
+
+        $r4 = "\n";
+
+        $z0 = $r4.equals(r2);
+
+        if $z0 == 0 goto label1;
+
+        $r9 = r0.lineSep;
+
+        $r9.setText("U");
+
+        goto label3;
+
+     label1:
+        $r5 = "\r\n";
+
+        $z1 = $r5.equals(r2);
+
+        if $z1 == 0 goto label2;
+
+        $r8 = r0.lineSep;
+
+        $r8.setText("W");
+
+        goto label3;
+
+     label2:
+        $r6 = "\r";
+
+        $z2 = $r6.equals(r2);
+
+        if $z2 == 0 goto label3;
+
+        $r7 = r0.lineSep;
+
+        $r7.setText("M");
+
+     label3:
+        return;
+    }
+
+    public void propertiesChanged()
+    {
+        org.gjt.sp.jedit.gui.statusbar.LineSepWidgetFactory$LineSepWidget r0;
+        java.awt.Font r1;
+        java.awt.FontMetrics r2;
+        java.awt.Dimension r3, $r6;
+        javax.swing.JLabel $r4, $r5, $r7, $r8;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6;
+
+        r0 := @this;
+
+        $r4 = new javax.swing.JLabel;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4.getFont();
+
+        $r5 = r0.lineSep;
+
+        r2 = $r5.getFontMetrics(r1);
+
+        $r6 = new java.awt.Dimension;
+
+        $i0 = r2.charWidth(85);
+
+        $i1 = r2.charWidth(87);
+
+        $i2 = java.lang.Math.max($i0, $i1);
+
+        $i3 = r2.charWidth(77);
+
+        $i4 = java.lang.Math.max($i2, $i3);
+
+        $i5 = $i4 + 1;
+
+        $i6 = r2.getHeight();
+
+        specialinvoke $r6.<init>($i5, $i6);
+
+        r3 = $r6;
+
+        $r7 = r0.lineSep;
+
+        $r7.setPreferredSize(r3);
+
+        $r8 = r0.lineSep;
+
+        $r8.setMaximumSize(r3);
+
+        return;
+    }
+}

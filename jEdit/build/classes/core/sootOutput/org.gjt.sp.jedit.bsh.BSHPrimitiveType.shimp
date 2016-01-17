@@ -1,0 +1,30 @@
+class org.gjt.sp.jedit.bsh.BSHPrimitiveType extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+    public java.lang.Class type;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHPrimitiveType r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.Class getType()
+    {
+        org.gjt.sp.jedit.bsh.BSHPrimitiveType r0;
+        java.lang.Class $r1;
+
+        r0 := @this;
+
+        $r1 = r0.type;
+
+        return $r1;
+    }
+}

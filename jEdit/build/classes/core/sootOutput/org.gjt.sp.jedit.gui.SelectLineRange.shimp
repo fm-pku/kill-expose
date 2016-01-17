@@ -1,0 +1,426 @@
+public class org.gjt.sp.jedit.gui.SelectLineRange extends org.gjt.sp.jedit.gui.EnhancedDialog implements java.awt.event.ActionListener
+{
+    private org.gjt.sp.jedit.View view;
+    private javax.swing.JTextField startField;
+    private javax.swing.JTextField endField;
+    private javax.swing.JButton ok;
+    private javax.swing.JButton cancel;
+
+    public void <init>(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.SelectLineRange r0;
+        org.gjt.sp.jedit.View r1;
+        javax.swing.JPanel r2, $r5, $r13, r37, r38;
+        javax.swing.JLabel r3, $r8;
+        java.lang.String $r4, $r9, $r21, $r30;
+        java.awt.BorderLayout $r6;
+        javax.swing.border.EmptyBorder $r7, $r10, $r15;
+        javax.swing.BoxLayout $r14;
+        java.awt.Component $r16, $r18, $r27, $r34;
+        javax.swing.JButton $r20, $r22, $r24, $r25, $r29, $r31, $r32;
+        javax.swing.JRootPane $r23;
+        javax.swing.JTextField $r36;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("selectlinerange.title");
+
+        specialinvoke r0.<init>(r1, $r4, 1);
+
+        r0.view = r1;
+
+        $r5 = new javax.swing.JPanel;
+
+        $r6 = new java.awt.BorderLayout;
+
+        specialinvoke $r6.<init>();
+
+        specialinvoke $r5.<init>($r6);
+
+        r2 = $r5;
+
+        $r7 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r7.<init>(12, 12, 12, 0);
+
+        r2.setBorder($r7);
+
+        r0.setContentPane(r2);
+
+        $r8 = new javax.swing.JLabel;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("selectlinerange.caption");
+
+        specialinvoke $r8.<init>($r9);
+
+        r3 = $r8;
+
+        $r10 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r10.<init>(0, 0, 6, 12);
+
+        r3.setBorder($r10);
+
+        r2.add("North", r3);
+
+        r37 = specialinvoke r0.createFieldPanel();
+
+        r2.add("Center", r37);
+
+        $r13 = new javax.swing.JPanel;
+
+        specialinvoke $r13.<init>();
+
+        r38 = $r13;
+
+        $r14 = new javax.swing.BoxLayout;
+
+        specialinvoke $r14.<init>(r38, 0);
+
+        r38.setLayout($r14);
+
+        $r15 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r15.<init>(6, 0, 0, 12);
+
+        r38.setBorder($r15);
+
+        $r16 = javax.swing.Box.createGlue();
+
+        r38.add($r16);
+
+        $r18 = javax.swing.Box.createGlue();
+
+        r38.add($r18);
+
+        $r20 = new javax.swing.JButton;
+
+        $r21 = org.gjt.sp.jedit.jEdit.getProperty("common.ok");
+
+        specialinvoke $r20.<init>($r21);
+
+        r0.ok = $r20;
+
+        $r22 = r0.ok;
+
+        $r22.addActionListener(r0);
+
+        $r23 = r0.getRootPane();
+
+        $r24 = r0.ok;
+
+        $r23.setDefaultButton($r24);
+
+        $r25 = r0.ok;
+
+        r38.add($r25);
+
+        $r27 = javax.swing.Box.createHorizontalStrut(6);
+
+        r38.add($r27);
+
+        $r29 = new javax.swing.JButton;
+
+        $r30 = org.gjt.sp.jedit.jEdit.getProperty("common.cancel");
+
+        specialinvoke $r29.<init>($r30);
+
+        r0.cancel = $r29;
+
+        $r31 = r0.cancel;
+
+        $r31.addActionListener(r0);
+
+        $r32 = r0.cancel;
+
+        r38.add($r32);
+
+        $r34 = javax.swing.Box.createGlue();
+
+        r38.add($r34);
+
+        r2.add(r38, "South");
+
+        $r36 = r0.startField;
+
+        org.gjt.sp.jedit.GUIUtilities.requestFocus(r0, $r36);
+
+        r0.pack();
+
+        r0.setLocationRelativeTo(r1);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.gui.SelectLineRange r0;
+        int i0, i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9;
+        org.gjt.sp.jedit.textarea.JEditTextArea r1;
+        org.gjt.sp.jedit.textarea.Selection$Range r2, $r10;
+        javax.swing.JTextField $r3, $r5;
+        java.lang.String $r4, $r6;
+        org.gjt.sp.jedit.View $r7, $r9;
+        java.awt.Toolkit $r8, $r12;
+        boolean $z0;
+        java.lang.NumberFormatException $r11, r13;
+        org.gjt.sp.jedit.Buffer r14;
+
+        r0 := @this;
+
+     label1:
+        $r3 = r0.startField;
+
+        $r4 = $r3.getText();
+
+        $i2 = java.lang.Integer.parseInt($r4);
+
+        i0 = $i2 - 1;
+
+        $r5 = r0.endField;
+
+        $r6 = $r5.getText();
+
+        $i3 = java.lang.Integer.parseInt($r6);
+
+        i1 = $i3 - 1;
+
+     label2:
+        goto label4;
+
+     label3:
+        $r11 := @caughtexception;
+
+        r13 = $r11;
+
+        $r12 = r0.getToolkit();
+
+        $r12.beep();
+
+        return;
+
+     label4:
+        $r7 = r0.view;
+
+        r14 = $r7.getBuffer();
+
+        if i0 < 0 goto label5;
+
+        $i4 = r14.getLineCount();
+
+        if i1 >= $i4 goto label5;
+
+        if i0 <= i1 goto label6;
+
+     label5:
+        $r8 = r0.getToolkit();
+
+        $r8.beep();
+
+        return;
+
+     label6:
+        $r9 = r0.view;
+
+        r1 = $r9.getTextArea();
+
+        $r10 = new org.gjt.sp.jedit.textarea.Selection$Range;
+
+        $i5 = r14.getLineStartOffset(i0);
+
+        $i6 = r14.getLineEndOffset(i1);
+
+        $i7 = $i6 - 1;
+
+        specialinvoke $r10.<init>($i5, $i7);
+
+        r2 = $r10;
+
+        $z0 = r1.isMultipleSelectionEnabled();
+
+        if $z0 == 0 goto label7;
+
+        r1.addToSelection(r2);
+
+        goto label8;
+
+     label7:
+        r1.setSelection(r2);
+
+     label8:
+        $i8 = r14.getLineEndOffset(i1);
+
+        $i9 = $i8 - 1;
+
+        r1.moveCaretPosition($i9);
+
+        r0.dispose();
+
+        return;
+
+        catch java.lang.NumberFormatException from label1 to label2 with label3;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.gui.SelectLineRange r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.SelectLineRange r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2;
+        javax.swing.JButton $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $r3 = r0.ok;
+
+        if r2 != $r3 goto label1;
+
+        r0.ok();
+
+        goto label2;
+
+     label1:
+        $r4 = r0.cancel;
+
+        if r2 != $r4 goto label2;
+
+        r0.cancel();
+
+     label2:
+        return;
+    }
+
+    private javax.swing.JPanel createFieldPanel()
+    {
+        org.gjt.sp.jedit.gui.SelectLineRange r0;
+        java.awt.GridBagLayout r1, $r4;
+        javax.swing.JPanel r2, $r5;
+        java.awt.GridBagConstraints r3, $r6;
+        java.awt.Insets $r7;
+        javax.swing.JLabel $r8, $r15, r22, r23;
+        java.lang.String $r9, $r16;
+        javax.swing.JTextField $r11, $r12, $r13, $r18, $r19, $r20;
+
+        r0 := @this;
+
+        $r4 = new java.awt.GridBagLayout;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4;
+
+        $r5 = new javax.swing.JPanel;
+
+        specialinvoke $r5.<init>(r1);
+
+        r2 = $r5;
+
+        $r6 = new java.awt.GridBagConstraints;
+
+        specialinvoke $r6.<init>();
+
+        r3 = $r6;
+
+        $r7 = new java.awt.Insets;
+
+        specialinvoke $r7.<init>(0, 0, 6, 12);
+
+        r3.insets = $r7;
+
+        r3.gridheight = 1;
+
+        r3.gridwidth = 1;
+
+        r3.gridy = 0;
+
+        r3.gridx = 0;
+
+        r3.fill = 1;
+
+        $r8 = new javax.swing.JLabel;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("selectlinerange.start");
+
+        specialinvoke $r8.<init>($r9, 4);
+
+        r22 = $r8;
+
+        r1.setConstraints(r22, r3);
+
+        r2.add(r22);
+
+        $r11 = new javax.swing.JTextField;
+
+        specialinvoke $r11.<init>(10);
+
+        r0.startField = $r11;
+
+        r3.gridx = 1;
+
+        r3.weightx = 1.0;
+
+        $r12 = r0.startField;
+
+        r1.setConstraints($r12, r3);
+
+        $r13 = r0.startField;
+
+        r2.add($r13);
+
+        $r15 = new javax.swing.JLabel;
+
+        $r16 = org.gjt.sp.jedit.jEdit.getProperty("selectlinerange.end");
+
+        specialinvoke $r15.<init>($r16, 4);
+
+        r23 = $r15;
+
+        r3.gridx = 0;
+
+        r3.weightx = 0.0;
+
+        r3.gridy = 1;
+
+        r1.setConstraints(r23, r3);
+
+        r2.add(r23);
+
+        $r18 = new javax.swing.JTextField;
+
+        specialinvoke $r18.<init>(10);
+
+        r0.endField = $r18;
+
+        r3.gridx = 1;
+
+        r3.weightx = 1.0;
+
+        $r19 = r0.endField;
+
+        r1.setConstraints($r19, r3);
+
+        $r20 = r0.endField;
+
+        r2.add($r20);
+
+        return r2;
+    }
+}

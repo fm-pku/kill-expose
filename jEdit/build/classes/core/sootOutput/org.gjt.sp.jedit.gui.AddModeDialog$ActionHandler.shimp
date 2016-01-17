@@ -1,0 +1,131 @@
+class org.gjt.sp.jedit.gui.AddModeDialog$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.AddModeDialog this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.AddModeDialog)
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog$ActionHandler r0;
+        org.gjt.sp.jedit.gui.AddModeDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2;
+        org.gjt.sp.jedit.View r3;
+        java.lang.String r4, $r20;
+        byte b0;
+        boolean z0;
+        java.lang.String[] r5;
+        org.gjt.sp.jedit.gui.AddModeDialog $r6, $r8, $r10, $r12, $r13, $r14, $r16, $r18;
+        javax.swing.JButton $r7, $r9, $r11;
+        java.awt.Container $r15;
+        int $i1;
+        javax.swing.JTextField $r17, $r19;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.gui.AddModeDialog.access$100($r6);
+
+        if r2 != $r7 goto label3;
+
+        $r14 = r0.this$0;
+
+        $r15 = $r14.getParent();
+
+        r3 = (org.gjt.sp.jedit.View) $r15;
+
+        r4 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        b0 = 0;
+
+        z0 = 0;
+
+        r5 = org.gjt.sp.jedit.GUIUtilities.showVFSFileDialog(r3, r4, b0, z0);
+
+        $i1 = lengthof r5;
+
+        if $i1 <= 0 goto label1;
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.gui.AddModeDialog.access$200($r18);
+
+        $r20 = r5[0];
+
+        $r19.setText($r20);
+
+        goto label2;
+
+     label1:
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.gui.AddModeDialog.access$200($r16);
+
+        $r17.setText("");
+
+     label2:
+        goto label5;
+
+     label3:
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.gui.AddModeDialog.access$300($r8);
+
+        if r2 != $r9 goto label4;
+
+        $r13 = r0.this$0;
+
+        $r13.ok();
+
+        goto label5;
+
+     label4:
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.gui.AddModeDialog.access$400($r10);
+
+        if r2 != $r11 goto label5;
+
+        $r12 = r0.this$0;
+
+        $r12.cancel();
+
+     label5:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.AddModeDialog, org.gjt.sp.jedit.gui.AddModeDialog$1)
+    {
+        org.gjt.sp.jedit.gui.AddModeDialog$ActionHandler r0;
+        org.gjt.sp.jedit.gui.AddModeDialog r1;
+        org.gjt.sp.jedit.gui.AddModeDialog$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

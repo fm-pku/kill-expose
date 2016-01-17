@@ -1,0 +1,238 @@
+class org.gjt.sp.jedit.gui.ListModelEditor$1 extends java.awt.event.KeyAdapter
+{
+    final javax.swing.JTable val$table;
+    final javax.swing.table.DefaultTableModel val$tableModel;
+    final org.gjt.sp.jedit.gui.ListModelEditor this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.ListModelEditor, javax.swing.JTable, javax.swing.table.DefaultTableModel)
+    {
+        org.gjt.sp.jedit.gui.ListModelEditor$1 r0;
+        org.gjt.sp.jedit.gui.ListModelEditor r1;
+        javax.swing.JTable r2;
+        javax.swing.table.DefaultTableModel r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$0 = r1;
+
+        r0.val$table = r2;
+
+        r0.val$tableModel = r3;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void keyPressed(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.gui.ListModelEditor$1 r0;
+        java.awt.event.KeyEvent r1;
+        int[] r2;
+        int i0, i1, i3, i4, i5, i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, i18, i20, $i21;
+        javax.swing.ListSelectionModel r3;
+        byte b2, $b19, $b19_1, $b19_2;
+        javax.swing.JTable $r4, $r5;
+        java.lang.String[] $r6;
+        javax.swing.table.DefaultTableModel $r7, $r8, $r9, $r10, $r11;
+        boolean $z0, z1, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.val$table;
+
+        r2 = $r4.getSelectedRows();
+
+        $i7 = lengthof r2;
+
+        if $i7 != 0 goto label01;
+
+        return;
+
+     label01:
+        i0 = r2[0];
+
+        i1 = r1.getKeyCode();
+
+        $r5 = r0.val$table;
+
+        r3 = $r5.getSelectionModel();
+
+(0)     lookupswitch(i1)
+        {
+            case 33: goto label07;
+            case 34: goto label07;
+            case 127: goto label02;
+            case 155: goto label06;
+            default: goto label17;
+        };
+
+     label02:
+        $i9 = lengthof r2;
+
+(1)     i18 = $i9 - 1;
+
+     label03:
+        i18 = Phi(i18 #1, i18 #2);
+
+        if i18 < 0 goto label04;
+
+        $r9 = r0.val$tableModel;
+
+        $i11 = r2[i18];
+
+        $r9.removeRow($i11);
+
+        i18 = i18 + -1;
+
+(2)     goto label03;
+
+     label04:
+        if i0 < 0 goto label05;
+
+        $r8 = r0.val$tableModel;
+
+        $i10 = $r8.getRowCount();
+
+        if i0 >= $i10 goto label05;
+
+        r3.addSelectionInterval(i0, i0);
+
+     label05:
+        r1.consume();
+
+(3)     goto label17;
+
+     label06:
+        $r7 = r0.val$tableModel;
+
+        $i8 = i0 + 1;
+
+        $r6 = newarray (java.lang.String)[1];
+
+        $r6[0] = "";
+
+        $r7.insertRow($i8, $r6);
+
+        r1.consume();
+
+(4)     goto label17;
+
+     label07:
+        if i1 != 33 goto label08;
+
+        $z0 = 1;
+
+(5)     goto label09;
+
+     label08:
+(6)     $z0_1 = 0;
+
+     label09:
+        $z0_2 = Phi($z0 #5, $z0_1 #6);
+
+        z1 = $z0_2;
+
+        if z1 == 0 goto label10;
+
+        $b19 = -1;
+
+(7)     goto label11;
+
+     label10:
+(8)     $b19_1 = 1;
+
+     label11:
+        $b19_2 = Phi($b19 #7, $b19_1 #8);
+
+        b2 = $b19_2;
+
+        $i12 = r3.getMinSelectionIndex();
+
+        i3 = $i12 + b2;
+
+        $i13 = r3.getMaxSelectionIndex();
+
+        i4 = $i13 + b2;
+
+        if i3 < 0 goto label12;
+
+        $r10 = r0.val$tableModel;
+
+        $i14 = $r10.getRowCount();
+
+        if i4 < $i14 goto label13;
+
+     label12:
+        return;
+
+     label13:
+(9)     i20 = 0;
+
+     label14:
+        $z0 = Phi($z0_2 #9, $z0 #13);
+
+        $i21 = Phi($i21 #9, $i21 #13);
+
+        $b19 = Phi($b19_2 #9, $b19 #13);
+
+        i20 = Phi(i20 #9, i20 #13);
+
+        $i15 = lengthof r2;
+
+(10)    if i20 >= $i15 goto label17;
+
+        if z1 == 0 goto label15;
+
+        $i21 = i20;
+
+(11)    goto label16;
+
+     label15:
+        $i16 = lengthof r2;
+
+        $i17 = $i16 - 1;
+
+(12)    $i21 = $i17 - i20;
+
+     label16:
+        $i21 = Phi($i21 #11, $i21 #12);
+
+        i5 = r2[$i21];
+
+        i6 = i5 + b2;
+
+        r3.removeSelectionInterval(i5, i5);
+
+        r3.addSelectionInterval(i6, i6);
+
+        $r11 = r0.val$tableModel;
+
+        $r11.moveRow(i5, i5, i6);
+
+        i20 = i20 + 1;
+
+(13)    goto label14;
+
+     label17:
+        $z0 = Phi($z0 #0, $z0 #3, $z0 #4, $z0 #10);
+
+        $i21 = Phi($i21 #0, $i21 #3, $i21 #4, $i21 #10);
+
+        $b19 = Phi($b19 #0, $b19 #3, $b19 #4, $b19 #10);
+
+        i18 = Phi(i18 #0, i18 #3, i18 #4, i18 #10);
+
+        i20 = Phi(i20 #0, i20 #3, i20 #4, i20 #10);
+
+        return;
+    }
+}

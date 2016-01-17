@@ -1,0 +1,113 @@
+class org.gjt.sp.jedit.gui.TaskMonitor$TaskTableEditor extends javax.swing.AbstractCellEditor implements javax.swing.table.TableCellEditor
+{
+    private final javax.swing.JButton button;
+    private org.gjt.sp.util.Task task;
+    final org.gjt.sp.jedit.gui.TaskMonitor this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.TaskMonitor)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableEditor r0;
+        org.gjt.sp.jedit.gui.TaskMonitor r1;
+        javax.swing.JButton $r2, $r6;
+        java.lang.String $r3;
+        javax.swing.Icon $r4;
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableEditor$1 $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r2 = new javax.swing.JButton;
+
+        $r3 = org.gjt.sp.jedit.jEdit.getProperty("close-buffer.icon");
+
+        $r4 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r3);
+
+        specialinvoke $r2.<init>($r4);
+
+        r0.button = $r2;
+
+        $r6 = r0.button;
+
+        $r5 = new org.gjt.sp.jedit.gui.TaskMonitor$TaskTableEditor$1;
+
+        specialinvoke $r5.<init>(r0, r1);
+
+        $r6.addActionListener($r5);
+
+        return;
+    }
+
+    public java.lang.Object getCellEditorValue()
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableEditor r0;
+
+        r0 := @this;
+
+        return null;
+    }
+
+    public java.awt.Component getTableCellEditorComponent(javax.swing.JTable, java.lang.Object, boolean, int, int)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableEditor r0;
+        javax.swing.JTable r1;
+        java.lang.Object r2;
+        boolean z0;
+        int i0, i1;
+        org.gjt.sp.util.Task $r3;
+        javax.swing.JButton $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        i0 := @parameter3;
+
+        i1 := @parameter4;
+
+        $r3 = (org.gjt.sp.util.Task) r2;
+
+        r0.task = $r3;
+
+        $r4 = r0.button;
+
+        return $r4;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.TaskMonitor, org.gjt.sp.jedit.gui.TaskMonitor$1)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableEditor r0;
+        org.gjt.sp.jedit.gui.TaskMonitor r1;
+        org.gjt.sp.jedit.gui.TaskMonitor$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+
+    static org.gjt.sp.util.Task access$500(org.gjt.sp.jedit.gui.TaskMonitor$TaskTableEditor)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableEditor r0;
+        org.gjt.sp.util.Task $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.task;
+
+        return $r1;
+    }
+}

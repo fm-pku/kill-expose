@@ -1,0 +1,23 @@
+class org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$ExtendedAttribute extends java.lang.Object
+{
+    int ref;
+    java.lang.String name;
+
+    void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$ExtendedAttribute r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.name = r1;
+
+        r0.ref = 1;
+
+        return;
+    }
+}

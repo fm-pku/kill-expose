@@ -1,0 +1,219 @@
+class org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder extends java.lang.Object implements javax.swing.border.Border
+{
+    static final javax.swing.Icon COLLAPSE_ICON;
+    static final javax.swing.Icon EXPAND_ICON;
+    static final int ICON_WIDTH;
+    static final int LEVEL_WIDTH;
+    static final int STATE_NONE;
+    static final int STATE_COLLAPSED;
+    static final int STATE_EXPANDED;
+    private int state;
+    private int level;
+
+    void <init>(int, int)
+    {
+        org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder r0;
+        int i0, i1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.state = i0;
+
+        r0.level = i1;
+
+        return;
+    }
+
+    public void paintBorder(java.awt.Component, java.awt.Graphics, int, int, int, int)
+    {
+        org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder r0;
+        java.awt.Component r1;
+        java.awt.Graphics r2;
+        int i0, i1, i2, i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i20;
+        javax.swing.Icon $r3, $r4, $r5, $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        i1 := @parameter3;
+
+        i2 := @parameter4;
+
+        i3 := @parameter5;
+
+        $i4 = r0.state;
+
+        lookupswitch($i4)
+        {
+            case 1: goto label1;
+            case 2: goto label2;
+            default: goto label3;
+        };
+
+     label1:
+        $r6 = org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder.EXPAND_ICON;
+
+        $i13 = r0.level;
+
+        $i14 = $i13 * 10;
+
+        $i15 = i0 + $i14;
+
+        $i16 = $i15 + 2;
+
+        $r5 = org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder.EXPAND_ICON;
+
+        $i17 = $r5.getIconHeight();
+
+        $i18 = i3 - $i17;
+
+        $i19 = $i18 / 2;
+
+        $i20 = i1 + $i19;
+
+        $r6.paintIcon(r1, r2, $i16, $i20);
+
+        goto label3;
+
+     label2:
+        $r4 = org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder.COLLAPSE_ICON;
+
+        $i5 = r0.level;
+
+        $i6 = $i5 * 10;
+
+        $i7 = i0 + $i6;
+
+        $i8 = $i7 + 2;
+
+        $r3 = org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder.COLLAPSE_ICON;
+
+        $i9 = $r3.getIconHeight();
+
+        $i10 = i3 - $i9;
+
+        $i11 = $i10 / 2;
+
+        $i12 = i1 + $i11;
+
+        $r4.paintIcon(r1, r2, $i8, $i12);
+
+     label3:
+        return;
+    }
+
+    public java.awt.Insets getBorderInsets(java.awt.Component)
+    {
+        org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder r0;
+        java.awt.Component r1;
+        java.awt.Insets $r2;
+        int $i0, $i1, $i2, $i3, $i4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.awt.Insets;
+
+        $i0 = r0.level;
+
+        $i2 = $i0 * 10;
+
+        $i1 = org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder.ICON_WIDTH;
+
+        $i3 = $i2 + $i1;
+
+        $i4 = $i3 + 4;
+
+        specialinvoke $r2.<init>(1, $i4, 1, 1);
+
+        return $r2;
+    }
+
+    public boolean isBorderOpaque()
+    {
+        org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+
+    public static boolean isExpansionToggle(int, int)
+    {
+        int i0, i1, $i2, $i3, $i4, $i5;
+        boolean $z0, $z0_1, $z0_2;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $i2 = i0 * 10;
+
+        if i1 < $i2 goto label1;
+
+        $i4 = i0 * 10;
+
+        $i3 = org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder.ICON_WIDTH;
+
+        $i5 = $i4 + $i3;
+
+        if i1 > $i5 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String $r0, $r2;
+        javax.swing.Icon $r1, $r3, $r4, $r5;
+        int $i0, $i1, $i2;
+
+        $r0 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.collapse.icon");
+
+        $r1 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r0);
+
+        org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder.COLLAPSE_ICON = $r1;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.expand.icon");
+
+        $r3 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r2);
+
+        org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder.EXPAND_ICON = $r3;
+
+        $r4 = org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder.COLLAPSE_ICON;
+
+        $i0 = $r4.getIconWidth();
+
+        $r5 = org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder.EXPAND_ICON;
+
+        $i1 = $r5.getIconWidth();
+
+        $i2 = java.lang.Math.max($i0, $i1);
+
+        org.gjt.sp.jedit.browser.FileCellRenderer$ExpansionToggleBorder.ICON_WIDTH = $i2;
+
+        return;
+    }
+}

@@ -1,0 +1,26 @@
+class org.gjt.sp.jedit.bsh.NameSpace$CommandPathEntry extends java.lang.Object
+{
+    final java.lang.String path;
+    final java.lang.Class clas;
+
+    void <init>(java.lang.String, java.lang.Class)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace$CommandPathEntry r0;
+        java.lang.String r1;
+        java.lang.Class r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.path = r1;
+
+        r0.clas = r2;
+
+        return;
+    }
+}

@@ -1,0 +1,68 @@
+class org.gjt.sp.jedit.io.VFS$SessionGetter extends java.lang.Object implements java.lang.Runnable
+{
+    private java.lang.Object session;
+    private java.lang.String path;
+    private java.awt.Component comp;
+    final org.gjt.sp.jedit.io.VFS this$0;
+
+    public void <init>(org.gjt.sp.jedit.io.VFS, java.lang.String, java.awt.Component)
+    {
+        org.gjt.sp.jedit.io.VFS$SessionGetter r0;
+        org.gjt.sp.jedit.io.VFS r1;
+        java.lang.String r2;
+        java.awt.Component r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.path = r2;
+
+        r0.comp = r3;
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.io.VFS$SessionGetter r0;
+        java.awt.Component $r1;
+        java.lang.String $r2;
+        org.gjt.sp.jedit.io.VFS $r3;
+        java.lang.Object $r4;
+
+        r0 := @this;
+
+        $r3 = r0.this$0;
+
+        $r2 = r0.path;
+
+        $r1 = r0.comp;
+
+        $r4 = $r3.createVFSSession($r2, $r1);
+
+        r0.session = $r4;
+
+        return;
+    }
+
+    public java.lang.Object get()
+    {
+        org.gjt.sp.jedit.io.VFS$SessionGetter r0;
+        java.lang.Object $r1;
+
+        r0 := @this;
+
+        $r1 = r0.session;
+
+        return $r1;
+    }
+}

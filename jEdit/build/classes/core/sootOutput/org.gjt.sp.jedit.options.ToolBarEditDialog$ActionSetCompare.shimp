@@ -1,0 +1,64 @@
+class org.gjt.sp.jedit.options.ToolBarEditDialog$ActionSetCompare extends java.lang.Object implements java.util.Comparator
+{
+    final org.gjt.sp.jedit.options.ToolBarEditDialog this$0;
+
+    void <init>(org.gjt.sp.jedit.options.ToolBarEditDialog)
+    {
+        org.gjt.sp.jedit.options.ToolBarEditDialog$ActionSetCompare r0;
+        org.gjt.sp.jedit.options.ToolBarEditDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public int compare(org.gjt.sp.jedit.ActionSet, org.gjt.sp.jedit.ActionSet)
+    {
+        org.gjt.sp.jedit.options.ToolBarEditDialog$ActionSetCompare r0;
+        org.gjt.sp.jedit.ActionSet r1, r2;
+        java.lang.String $r3, $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r1.getLabel();
+
+        $r4 = r2.getLabel();
+
+        $i0 = org.gjt.sp.util.StandardUtilities.compareStrings($r3, $r4, 0);
+
+        return $i0;
+    }
+
+    public volatile int compare(java.lang.Object, java.lang.Object)
+    {
+        org.gjt.sp.jedit.options.ToolBarEditDialog$ActionSetCompare r0;
+        java.lang.Object r1, r2;
+        org.gjt.sp.jedit.ActionSet $r3, $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = (org.gjt.sp.jedit.ActionSet) r1;
+
+        $r3 = (org.gjt.sp.jedit.ActionSet) r2;
+
+        $i0 = r0.compare($r4, $r3);
+
+        return $i0;
+    }
+}

@@ -1,0 +1,767 @@
+public class org.gjt.sp.jedit.bsh.ParseException extends org.gjt.sp.jedit.bsh.EvalError
+{
+    java.lang.String sourceFile;
+    protected boolean specialConstructor;
+    public org.gjt.sp.jedit.bsh.Token currentToken;
+    public int[][] expectedTokenSequences;
+    public java.lang.String[] tokenImage;
+    protected java.lang.String eol;
+
+    public void setErrorSourceFile(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.ParseException r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.sourceFile = r1;
+
+        return;
+    }
+
+    public java.lang.String getErrorSourceFile()
+    {
+        org.gjt.sp.jedit.bsh.ParseException r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.sourceFile;
+
+        return $r1;
+    }
+
+    public void <init>(org.gjt.sp.jedit.bsh.Token, int[][], java.lang.String[])
+    {
+        org.gjt.sp.jedit.bsh.ParseException r0;
+        org.gjt.sp.jedit.bsh.Token r1;
+        int[][] r2;
+        java.lang.String[] r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.specialConstructor = 1;
+
+        r0.currentToken = r1;
+
+        r0.expectedTokenSequences = r2;
+
+        r0.tokenImage = r3;
+
+        return;
+    }
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.ParseException r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("");
+
+        r0.specialConstructor = 0;
+
+        return;
+    }
+
+    public void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.ParseException r0;
+        java.lang.String r1, $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(r1, null, null);
+
+        r0.sourceFile = "<unknown>";
+
+        $r2 = java.lang.System.getProperty("line.separator", "\n");
+
+        r0.eol = $r2;
+
+        r0.specialConstructor = 0;
+
+        return;
+    }
+
+    public java.lang.String getMessage()
+    {
+        org.gjt.sp.jedit.bsh.ParseException r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.getMessage(0);
+
+        return $r1;
+    }
+
+    public java.lang.String getMessage(boolean)
+    {
+        org.gjt.sp.jedit.bsh.ParseException r0;
+        boolean z0, $z1;
+        int[][] $r1, $r21, $r50, $r52, $r54, $r55, $r68, $r74;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, i11, i12, i13, i14;
+        java.lang.StringBuilder $r2, $r3, $r5, $r6, $r8, $r9, $r10, $r13, $r14, $r17, $r18, $r20, $r22, $r23, $r24, $r26, $r27, $r28, $r29, $r30, $r31, $r32, $r33, $r35, $r36, $r37, $r38, $r41, $r42, $r43, $r46, $r47, $r48, $r49, $r58, $r59, $r61, $r62, $r63, $r64, $r65, $r66, $r67, $r72, $r73;
+        java.lang.String $r4, $r19, $r25, $r34, $r39, $r40, $r45, $r60, $r71, $r76, r77, r78, r80, r81;
+        org.gjt.sp.jedit.bsh.Token $r7, $r11, $r12, $r15, $r16, r79;
+        java.lang.String[] $r44, $r70;
+        int[] $r51, $r53, $r56, $r57, $r69, $r75;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        $z1 = r0.specialConstructor;
+
+        if $z1 != 0 goto label01;
+
+        $r76 = specialinvoke r0.getMessage();
+
+        return $r76;
+
+     label01:
+        r77 = "";
+
+        i11 = 0;
+
+(0)     i12 = 0;
+
+     label02:
+        r77 = Phi(r77 #0, r77 #7);
+
+        i13 = Phi(i13 #0, i13 #7);
+
+        i12 = Phi(i12 #0, i12 #7);
+
+        i11 = Phi(i11 #0, i11 #7);
+
+        $r1 = r0.expectedTokenSequences;
+
+        $i0 = lengthof $r1;
+
+        if i12 >= $i0 goto label07;
+
+        $r50 = r0.expectedTokenSequences;
+
+        $r51 = $r50[i12];
+
+        $i5 = lengthof $r51;
+
+(1)     if i11 >= $i5 goto label03;
+
+        $r74 = r0.expectedTokenSequences;
+
+        $r75 = $r74[i12];
+
+(2)     i11 = lengthof $r75;
+
+     label03:
+        i11 = Phi(i11 #1, i11 #2);
+
+(3)     i13 = 0;
+
+     label04:
+        r77 = Phi(r77 #3, r77 #4);
+
+        i13 = Phi(i13 #3, i13 #4);
+
+        i12 = Phi(i12 #3, i12 #4);
+
+        i11 = Phi(i11 #3, i11 #4);
+
+        $r52 = r0.expectedTokenSequences;
+
+        $r53 = $r52[i12];
+
+        $i6 = lengthof $r53;
+
+        if i13 >= $i6 goto label05;
+
+        $r66 = new java.lang.StringBuilder;
+
+        specialinvoke $r66.<init>();
+
+        $r67 = $r66.append(r77);
+
+        $r70 = r0.tokenImage;
+
+        $r68 = r0.expectedTokenSequences;
+
+        $r69 = $r68[i12];
+
+        $i10 = $r69[i13];
+
+        $r71 = $r70[$i10];
+
+        $r72 = $r67.append($r71);
+
+        $r73 = $r72.append(" ");
+
+        r77 = $r73.toString();
+
+        i13 = i13 + 1;
+
+(4)     goto label04;
+
+     label05:
+        $r54 = r0.expectedTokenSequences;
+
+        $r57 = $r54[i12];
+
+        $r55 = r0.expectedTokenSequences;
+
+        $r56 = $r55[i12];
+
+        $i7 = lengthof $r56;
+
+        $i8 = $i7 - 1;
+
+        $i9 = $r57[$i8];
+
+(5)     if $i9 == 0 goto label06;
+
+        $r63 = new java.lang.StringBuilder;
+
+        specialinvoke $r63.<init>();
+
+        $r64 = $r63.append(r77);
+
+        $r65 = $r64.append("...");
+
+(6)     r77 = $r65.toString();
+
+     label06:
+        r77 = Phi(r77 #5, r77 #6);
+
+        $r58 = new java.lang.StringBuilder;
+
+        specialinvoke $r58.<init>();
+
+        $r59 = $r58.append(r77);
+
+        $r60 = r0.eol;
+
+        $r61 = $r59.append($r60);
+
+        $r62 = $r61.append("    ");
+
+        r77 = $r62.toString();
+
+        i12 = i12 + 1;
+
+(7)     goto label02;
+
+     label07:
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append("In file: ");
+
+        $r4 = r0.sourceFile;
+
+        $r5 = $r3.append($r4);
+
+        $r6 = $r5.append(" Encountered \"");
+
+        r78 = $r6.toString();
+
+        $r7 = r0.currentToken;
+
+        r79 = $r7.next;
+
+(8)     i14 = 0;
+
+     label08:
+        r77 = Phi(r77 #8, r77 #13);
+
+        i13 = Phi(i13 #8, i13 #13);
+
+        i14 = Phi(i14 #8, i14 #13);
+
+        r78 = Phi(r78 #8, r78 #13);
+
+        i12 = Phi(i12 #8, i12 #13);
+
+        i11 = Phi(i11 #8, i11 #13);
+
+        r79 = Phi(r79 #8, r79 #13);
+
+(9)     if i14 >= i11 goto label11;
+
+(10)    if i14 == 0 goto label09;
+
+        $r47 = new java.lang.StringBuilder;
+
+        specialinvoke $r47.<init>();
+
+        $r48 = $r47.append(r78);
+
+        $r49 = $r48.append(" ");
+
+(11)    r78 = $r49.toString();
+
+     label09:
+        r78 = Phi(r78 #10, r78 #11);
+
+        $i4 = r79.kind;
+
+        if $i4 != 0 goto label10;
+
+        $r42 = new java.lang.StringBuilder;
+
+        specialinvoke $r42.<init>();
+
+        $r43 = $r42.append(r78);
+
+        $r44 = r0.tokenImage;
+
+        $r45 = $r44[0];
+
+        $r46 = $r43.append($r45);
+
+        r78 = $r46.toString();
+
+(12)    goto label11;
+
+     label10:
+        $r37 = new java.lang.StringBuilder;
+
+        specialinvoke $r37.<init>();
+
+        $r38 = $r37.append(r78);
+
+        $r39 = r79.image;
+
+        $r40 = r0.add_escapes($r39);
+
+        $r41 = $r38.append($r40);
+
+        r78 = $r41.toString();
+
+        r79 = r79.next;
+
+        i14 = i14 + 1;
+
+(13)    goto label08;
+
+     label11:
+        r78 = Phi(r78 #9, r78 #12);
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append(r78);
+
+        $r10 = $r9.append("\" at line ");
+
+        $r11 = r0.currentToken;
+
+        $r12 = $r11.next;
+
+        $i1 = $r12.beginLine;
+
+        $r13 = $r10.append($i1);
+
+        $r14 = $r13.append(", column ");
+
+        $r15 = r0.currentToken;
+
+        $r16 = $r15.next;
+
+        $i2 = $r16.beginColumn;
+
+        $r17 = $r14.append($i2);
+
+        $r18 = $r17.append(".");
+
+        $r19 = r0.eol;
+
+        $r20 = $r18.append($r19);
+
+        r80 = $r20.toString();
+
+(14)    if z0 == 0 goto label14;
+
+        $r21 = r0.expectedTokenSequences;
+
+        $i3 = lengthof $r21;
+
+        if $i3 != 1 goto label12;
+
+        $r31 = new java.lang.StringBuilder;
+
+        specialinvoke $r31.<init>();
+
+        $r32 = $r31.append(r80);
+
+        $r33 = $r32.append("Was expecting:");
+
+        $r34 = r0.eol;
+
+        $r35 = $r33.append($r34);
+
+        $r36 = $r35.append("    ");
+
+        r81 = $r36.toString();
+
+(15)    goto label13;
+
+     label12:
+        $r22 = new java.lang.StringBuilder;
+
+        specialinvoke $r22.<init>();
+
+        $r23 = $r22.append(r80);
+
+        $r24 = $r23.append("Was expecting one of:");
+
+        $r25 = r0.eol;
+
+        $r26 = $r24.append($r25);
+
+        $r27 = $r26.append("    ");
+
+(16)    r81 = $r27.toString();
+
+     label13:
+        r81 = Phi(r81 #15, r81 #16);
+
+        $r28 = new java.lang.StringBuilder;
+
+        specialinvoke $r28.<init>();
+
+        $r29 = $r28.append(r81);
+
+        $r30 = $r29.append(r77);
+
+(17)    r80 = $r30.toString();
+
+     label14:
+        r81 = Phi(r81 #14, r81 #17);
+
+        r80 = Phi(r80 #14, r80 #17);
+
+        return r80;
+    }
+
+    protected java.lang.String add_escapes(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.ParseException r0;
+        java.lang.String r1, r3, $r5, $r16, $r20, $r22;
+        java.lang.StringBuilder r2, $r4, $r14, $r15, $r17, $r18, $r19, $r21;
+        char c0, $c2, $c3;
+        int $i1, $i4, $i5, $i6, i7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        r2 = $r4;
+
+(0)     i7 = 0;
+
+     label01:
+        i7 = Phi(i7 #0, i7 #1);
+
+        $i1 = r1.length();
+
+        if i7 >= $i1 goto label15;
+
+        $c2 = r1.charAt(i7);
+
+        lookupswitch($c2)
+        {
+            case 0: goto label02;
+            case 8: goto label03;
+            case 9: goto label04;
+            case 10: goto label05;
+            case 12: goto label06;
+            case 13: goto label07;
+            case 34: goto label08;
+            case 39: goto label09;
+            case 92: goto label10;
+            default: goto label11;
+        };
+
+     label02:
+        goto label14;
+
+     label03:
+        r2.append("\\b");
+
+        goto label14;
+
+     label04:
+        r2.append("\\t");
+
+        goto label14;
+
+     label05:
+        r2.append("\\n");
+
+        goto label14;
+
+     label06:
+        r2.append("\\f");
+
+        goto label14;
+
+     label07:
+        r2.append("\\r");
+
+        goto label14;
+
+     label08:
+        r2.append("\\\"");
+
+        goto label14;
+
+     label09:
+        r2.append("\\\'");
+
+        goto label14;
+
+     label10:
+        r2.append("\\\\");
+
+        goto label14;
+
+     label11:
+        $c3 = r1.charAt(i7);
+
+        c0 = $c3;
+
+        if $c3 < 32 goto label12;
+
+        if c0 <= 126 goto label13;
+
+     label12:
+        $r14 = new java.lang.StringBuilder;
+
+        specialinvoke $r14.<init>();
+
+        $r15 = $r14.append("0000");
+
+        $r16 = java.lang.Integer.toString(c0, 16);
+
+        $r17 = $r15.append($r16);
+
+        r3 = $r17.toString();
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<init>();
+
+        $r19 = $r18.append("\\u");
+
+        $i4 = r3.length();
+
+        $i5 = $i4 - 4;
+
+        $i6 = r3.length();
+
+        $r20 = r3.substring($i5, $i6);
+
+        $r21 = $r19.append($r20);
+
+        $r22 = $r21.toString();
+
+        r2.append($r22);
+
+        goto label14;
+
+     label13:
+        r2.append(c0);
+
+     label14:
+        i7 = i7 + 1;
+
+(1)     goto label01;
+
+     label15:
+        $r5 = r2.toString();
+
+        return $r5;
+    }
+
+    public int getErrorLineNumber()
+    {
+        org.gjt.sp.jedit.bsh.ParseException r0;
+        org.gjt.sp.jedit.bsh.Token $r1, $r2;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.currentToken;
+
+        $r2 = $r1.next;
+
+        $i0 = $r2.beginLine;
+
+        return $i0;
+    }
+
+    public java.lang.String getErrorText()
+    {
+        org.gjt.sp.jedit.bsh.ParseException r0;
+        int[][] $r1, $r16, $r18;
+        int $i0, $i1, $i2, i3, i4, i5;
+        org.gjt.sp.jedit.bsh.Token $r2, r21;
+        java.lang.StringBuilder $r3, $r4, $r7, $r8, $r9, $r12, $r13, $r14, $r15;
+        java.lang.String $r5, $r6, $r11, r20;
+        java.lang.String[] $r10;
+        int[] $r17, $r19;
+
+        r0 := @this;
+
+        i3 = 0;
+
+(0)     i4 = 0;
+
+     label1:
+        i4 = Phi(i4 #0, i4 #3);
+
+        i3 = Phi(i3 #0, i3 #3);
+
+        $r1 = r0.expectedTokenSequences;
+
+        $i0 = lengthof $r1;
+
+        if i4 >= $i0 goto label3;
+
+        $r16 = r0.expectedTokenSequences;
+
+        $r17 = $r16[i4];
+
+        $i2 = lengthof $r17;
+
+(1)     if i3 >= $i2 goto label2;
+
+        $r18 = r0.expectedTokenSequences;
+
+        $r19 = $r18[i4];
+
+(2)     i3 = lengthof $r19;
+
+     label2:
+        i3 = Phi(i3 #1, i3 #2);
+
+        i4 = i4 + 1;
+
+(3)     goto label1;
+
+     label3:
+        r20 = "";
+
+        $r2 = r0.currentToken;
+
+        r21 = $r2.next;
+
+(4)     i5 = 0;
+
+     label4:
+        i4 = Phi(i4 #4, i4 #9);
+
+        i3 = Phi(i3 #4, i3 #9);
+
+        r21 = Phi(r21 #4, r21 #9);
+
+        i5 = Phi(i5 #4, i5 #9);
+
+        r20 = Phi(r20 #4, r20 #9);
+
+(5)     if i5 >= i3 goto label7;
+
+(6)     if i5 == 0 goto label5;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r14 = $r13.append(r20);
+
+        $r15 = $r14.append(" ");
+
+(7)     r20 = $r15.toString();
+
+     label5:
+        r20 = Phi(r20 #6, r20 #7);
+
+        $i1 = r21.kind;
+
+        if $i1 != 0 goto label6;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append(r20);
+
+        $r10 = r0.tokenImage;
+
+        $r11 = $r10[0];
+
+        $r12 = $r9.append($r11);
+
+        r20 = $r12.toString();
+
+(8)     goto label7;
+
+     label6:
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append(r20);
+
+        $r5 = r21.image;
+
+        $r6 = r0.add_escapes($r5);
+
+        $r7 = $r4.append($r6);
+
+        r20 = $r7.toString();
+
+        r21 = r21.next;
+
+        i5 = i5 + 1;
+
+(9)     goto label4;
+
+     label7:
+        r20 = Phi(r20 #5, r20 #8);
+
+        return r20;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.bsh.ParseException r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.getMessage();
+
+        return $r1;
+    }
+}

@@ -1,0 +1,232 @@
+class org.gjt.sp.jedit.JEditKillRing$KillRingHandler extends org.xml.sax.helpers.DefaultHandler
+{
+    public java.util.List list;
+    private final java.lang.StringBuilder charData;
+    private boolean inEntry;
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.JEditKillRing$KillRingHandler r0;
+        java.util.LinkedList $r1;
+        java.lang.StringBuilder $r2;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.LinkedList;
+
+        specialinvoke $r1.<init>();
+
+        r0.list = $r1;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r0.charData = $r2;
+
+        return;
+    }
+
+    public org.xml.sax.InputSource resolveEntity(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.JEditKillRing$KillRingHandler r0;
+        java.lang.String r1, r2;
+        java.lang.Class $r3;
+        org.xml.sax.InputSource $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r0.getClass();
+
+        $r4 = org.gjt.sp.util.XMLUtilities.findEntity(r2, "killring.dtd", $r3);
+
+        return $r4;
+    }
+
+    public void startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes)
+    {
+        org.gjt.sp.jedit.JEditKillRing$KillRingHandler r0;
+        java.lang.String r1, r2, r3;
+        org.xml.sax.Attributes r4;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        $z0 = r3.equals("ENTRY");
+
+        r0.inEntry = $z0;
+
+        return;
+    }
+
+    public void endElement(java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.JEditKillRing$KillRingHandler r0;
+        java.lang.String r1, r2, r3, $r6;
+        boolean $z0;
+        java.lang.StringBuilder $r4, $r7;
+        java.util.List $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $z0 = r3.equals("ENTRY");
+
+        if $z0 == 0 goto label1;
+
+        $r5 = r0.list;
+
+        $r4 = r0.charData;
+
+        $r6 = $r4.toString();
+
+        $r5.add($r6);
+
+        r0.inEntry = 0;
+
+        $r7 = r0.charData;
+
+        $r7.setLength(0);
+
+     label1:
+        return;
+    }
+
+    public void characters(char[], int, int)
+    {
+        org.gjt.sp.jedit.JEditKillRing$KillRingHandler r0;
+        char[] r1;
+        int i0, i1;
+        boolean $z0;
+        java.lang.StringBuilder $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        $z0 = r0.inEntry;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = r0.charData;
+
+        $r2.append(r1, i0, i1);
+
+     label1:
+        return;
+    }
+
+    public void processingInstruction(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.JEditKillRing$KillRingHandler r0;
+        java.lang.String r1, r2, $r4, $r5, $r17;
+        char c0;
+        java.lang.Exception r3, $r7;
+        boolean $z0;
+        int $i1;
+        char[] $r6;
+        java.lang.StringBuilder $r8, $r9, $r10, $r11, $r12, $r13, $r14, $r15, $r16;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = "illegal-xml-character";
+
+        $z0 = $r4.equals(r1);
+
+        if $z0 == 0 goto label5;
+
+     label1:
+        $r5 = r2.trim();
+
+        $i1 = java.lang.Integer.parseInt($r5);
+
+        c0 = (char) $i1;
+
+     label2:
+        goto label4;
+
+     label3:
+        $r7 := @caughtexception;
+
+        r3 = $r7;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("Failed to get character from PI\"");
+
+        $r10 = $r9.append(r1);
+
+        $r11 = $r10.append("\"");
+
+        $r12 = $r11.append(" with \"");
+
+        $r13 = $r12.append(r2);
+
+        $r14 = $r13.append("\"");
+
+        $r15 = $r14.append(": ");
+
+        $r16 = $r15.append(r3);
+
+        $r17 = $r16.toString();
+
+        org.gjt.sp.util.Log.log(9, r0, $r17);
+
+        return;
+
+     label4:
+        $r6 = newarray (char)[1];
+
+        $r6[0] = c0;
+
+        r0.characters($r6, 0, 1);
+
+     label5:
+        return;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    void <init>(org.gjt.sp.jedit.JEditKillRing$1)
+    {
+        org.gjt.sp.jedit.JEditKillRing$KillRingHandler r0;
+        org.gjt.sp.jedit.JEditKillRing$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

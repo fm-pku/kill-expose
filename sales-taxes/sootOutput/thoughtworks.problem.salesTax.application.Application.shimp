@@ -1,0 +1,162 @@
+public class thoughtworks.problem.salesTax.application.Application extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        thoughtworks.problem.salesTax.application.Application r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static void main(java.lang.String[])
+    {
+        java.lang.String[] r0;
+        java.util.ArrayList r1;
+        thoughtworks.problem.salesTax.products.ProductFactory r2;
+        thoughtworks.problem.salesTax.shoppingCart.CustomerCart r3, $r7;
+        thoughtworks.problem.salesTax.products.Product r4, r36, r37;
+        thoughtworks.problem.salesTax.application.Receipt r5, $r10;
+        thoughtworks.problem.salesTax.application.FileParser $r6;
+        java.util.Date $r8;
+        java.lang.String $r9, $r17, $r21, $r23, $r28, $r33;
+        boolean $z0, $z1;
+        thoughtworks.problem.salesTax.application.Printer $r11;
+        java.lang.Object $r12;
+        java.lang.StringBuilder $r13, $r15, $r16, $r18, $r20, $r22, $r24, $r26, $r27, $r29, $r31, $r32;
+        java.io.PrintStream $r14, $r19, $r25, $r30;
+        int $i0;
+        double $d0;
+        java.util.Iterator r34;
+        thoughtworks.problem.salesTax.application.InputData r35;
+
+        r0 := @parameter0;
+
+        $r6 = new thoughtworks.problem.salesTax.application.FileParser;
+
+        specialinvoke $r6.<init>("Inputs/Input.txt");
+
+        r1 = $r6.getInputData();
+
+        r2 = thoughtworks.problem.salesTax.products.ProductFactory.getInstance();
+
+        $r7 = new thoughtworks.problem.salesTax.shoppingCart.CustomerCart;
+
+        $r8 = new java.util.Date;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.toString();
+
+        specialinvoke $r7.<init>("Customer A", "Cashier B", $r9);
+
+        r3 = $r7;
+
+        r34 = r1.iterator();
+
+     label1:
+        $z0 = r34.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r12 = r34.next();
+
+        r35 = (thoughtworks.problem.salesTax.application.InputData) $r12;
+
+        $r14 = java.lang.System.out;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r15 = $r13.append("Quantity=");
+
+        $i0 = r35.getQuantity();
+
+        $r16 = $r15.append($i0);
+
+        $r17 = $r16.toString();
+
+        $r14.print($r17);
+
+        $r19 = java.lang.System.out;
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<init>();
+
+        $r20 = $r18.append(";Product=");
+
+        $r21 = r35.getProduct();
+
+        $r22 = $r20.append($r21);
+
+        $r23 = $r22.toString();
+
+        $r19.print($r23);
+
+        $r25 = java.lang.System.out;
+
+        $r24 = new java.lang.StringBuilder;
+
+        specialinvoke $r24.<init>();
+
+        $r26 = $r24.append(";Cost=");
+
+        $d0 = r35.getCost();
+
+        $r27 = $r26.append($d0);
+
+        $r28 = $r27.toString();
+
+        $r25.print($r28);
+
+        $r30 = java.lang.System.out;
+
+        $r29 = new java.lang.StringBuilder;
+
+        specialinvoke $r29.<init>();
+
+        $r31 = $r29.append(";Imported=");
+
+        $z1 = r35.isImported();
+
+        $r32 = $r31.append($z1);
+
+        $r33 = $r32.toString();
+
+        $r30.println($r33);
+
+        goto label1;
+
+     label2:
+        r36 = r2.createProduct("Book", "The Fountainhead", 12.49, 1, 0);
+
+        r37 = r2.createProduct("Other", "Beetles", 14.99, 1, 0);
+
+        r4 = r2.createProduct("Food", "Ferrero Rochers", 0.85, 1, 0);
+
+        r3.addProduct(r36);
+
+        r3.addProduct(r37);
+
+        r3.addProduct(r4);
+
+        $r10 = new thoughtworks.problem.salesTax.application.Receipt;
+
+        specialinvoke $r10.<init>(r3);
+
+        r5 = $r10;
+
+        $r11 = new thoughtworks.problem.salesTax.application.Printer;
+
+        specialinvoke $r11.<init>(r5);
+
+        $r11.print();
+
+        return;
+    }
+}

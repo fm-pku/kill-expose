@@ -1,0 +1,427 @@
+public class org.gjt.sp.jedit.ServiceManager extends java.lang.Object
+{
+    private static final java.util.Map serviceMap;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.ServiceManager r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static void loadServices(org.gjt.sp.jedit.PluginJAR, java.net.URL, org.gjt.sp.jedit.PluginJAR$PluginCacheEntry)
+    {
+        org.gjt.sp.jedit.PluginJAR r0;
+        java.net.URL r1;
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry r2;
+        org.gjt.sp.jedit.ServiceListHandler r3, $r5;
+        java.io.FileNotFoundException r4, $r9;
+        java.io.InputStream $r6, r14, r14_1, r14_2, r14_3, r14_4, r14_5;
+        boolean $z0;
+        org.gjt.sp.jedit.ServiceManager$Descriptor[] $r7;
+        java.io.IOException $r8, r15;
+        java.lang.StringBuilder $r10, $r11, $r12;
+        java.lang.String $r13;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        $r5 = new org.gjt.sp.jedit.ServiceListHandler;
+
+        specialinvoke $r5.<init>(r0, r1);
+
+(0)     r3 = $r5;
+
+     label1:
+        r14 = r1.openStream();
+
+     label2:
+(1)     goto label4;
+
+     label3:
+        $r9 := @caughtexception;
+
+        r14_1 = Phi(r14 #0);
+
+        r4 = $r9;
+
+        r14_2 = null;
+
+(2)     $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("Unable to open: ");
+
+        $r12 = $r11.append(r1);
+
+        $r13 = $r12.toString();
+
+(3)     org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/ServiceManager", $r13);
+
+     label4:
+        r14_3 = Phi(r14 #1, r14_2 #3);
+
+(4)     if r14_3 == null goto label5;
+
+        $r6 = r1.openStream();
+
+        $z0 = org.gjt.sp.util.XMLUtilities.parseXML($r6, r3);
+
+        if $z0 != 0 goto label5;
+
+        if r2 == null goto label5;
+
+        $r7 = r3.getCachedServices();
+
+        r2.cachedServices = $r7;
+
+     label5:
+(5)     goto label7;
+
+     label6:
+        $r8 := @caughtexception;
+
+        r14_4 = Phi(r14 #0, r14_2 #2, r14_3 #4);
+
+        r15 = $r8;
+
+(6)     org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/ServiceManager", r15);
+
+     label7:
+        r14_5 = Phi(r14_3 #5, r14_4 #6);
+
+        return;
+
+        catch java.io.FileNotFoundException from label1 to label2 with label3;
+        catch java.io.IOException from label1 to label5 with label6;
+    }
+
+    public static void unloadServices(org.gjt.sp.jedit.PluginJAR)
+    {
+        org.gjt.sp.jedit.PluginJAR r0, $r6;
+        java.util.Iterator r1;
+        org.gjt.sp.jedit.ServiceManager$Descriptor r2;
+        java.util.Map $r3;
+        java.util.Set $r4;
+        boolean $z0;
+        java.lang.Object $r5;
+
+        r0 := @parameter0;
+
+        $r3 = org.gjt.sp.jedit.ServiceManager.serviceMap;
+
+        $r4 = $r3.keySet();
+
+        r1 = $r4.iterator();
+
+     label1:
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label3;
+
+        $r5 = r1.next();
+
+        r2 = (org.gjt.sp.jedit.ServiceManager$Descriptor) $r5;
+
+        $r6 = r2.plugin;
+
+        if $r6 != r0 goto label2;
+
+        r1.remove();
+
+     label2:
+        goto label1;
+
+     label3:
+        return;
+    }
+
+    public static void registerService(java.lang.String, java.lang.String, java.lang.String, org.gjt.sp.jedit.PluginJAR)
+    {
+        java.lang.String r0, r1, r2;
+        org.gjt.sp.jedit.PluginJAR r3;
+        org.gjt.sp.jedit.ServiceManager$Descriptor r4, $r5;
+        java.util.Map $r6;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        $r5 = new org.gjt.sp.jedit.ServiceManager$Descriptor;
+
+        specialinvoke $r5.<init>(r0, r1, r2, r3);
+
+        r4 = $r5;
+
+        $r6 = org.gjt.sp.jedit.ServiceManager.serviceMap;
+
+        $r6.put(r4, r4);
+
+        return;
+    }
+
+    public static void unregisterService(java.lang.String, java.lang.String)
+    {
+        java.lang.String r0, r1;
+        org.gjt.sp.jedit.ServiceManager$Descriptor r2, $r3;
+        java.util.Map $r4;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r3 = new org.gjt.sp.jedit.ServiceManager$Descriptor;
+
+        specialinvoke $r3.<init>(r0, r1);
+
+        r2 = $r3;
+
+        $r4 = org.gjt.sp.jedit.ServiceManager.serviceMap;
+
+        $r4.remove(r2);
+
+        return;
+    }
+
+    public static java.lang.String[] getServiceTypes()
+    {
+        java.util.HashSet r0, $r4;
+        java.util.Set r1;
+        java.util.Iterator r2;
+        org.gjt.sp.jedit.ServiceManager$Descriptor r3;
+        java.util.Map $r5;
+        boolean $z0;
+        int $i0;
+        java.lang.String[] $r6, $r8;
+        java.lang.Object[] $r7;
+        java.lang.Object $r9;
+        java.lang.String $r10;
+
+        $r4 = new java.util.HashSet;
+
+        specialinvoke $r4.<init>();
+
+        r0 = $r4;
+
+        $r5 = org.gjt.sp.jedit.ServiceManager.serviceMap;
+
+        r1 = $r5.keySet();
+
+        r2 = r1.iterator();
+
+     label1:
+        $z0 = r2.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r9 = r2.next();
+
+        r3 = (org.gjt.sp.jedit.ServiceManager$Descriptor) $r9;
+
+        $r10 = r3.clazz;
+
+        r0.add($r10);
+
+        goto label1;
+
+     label2:
+        $i0 = r0.size();
+
+        $r6 = newarray (java.lang.String)[$i0];
+
+        $r7 = r0.toArray($r6);
+
+        $r8 = (java.lang.String[]) $r7;
+
+        return $r8;
+    }
+
+    public static java.lang.String[] getServiceNames(java.lang.String)
+    {
+        java.lang.String r0, $r11, $r12;
+        java.util.ArrayList r1, $r5;
+        java.util.Set r2;
+        java.util.Iterator r3;
+        org.gjt.sp.jedit.ServiceManager$Descriptor r4;
+        java.util.Map $r6;
+        boolean $z0, $z1;
+        int $i0;
+        java.lang.String[] $r7, $r9;
+        java.lang.Object[] $r8;
+        java.lang.Object $r10;
+
+        r0 := @parameter0;
+
+        $r5 = new java.util.ArrayList;
+
+        specialinvoke $r5.<init>();
+
+        r1 = $r5;
+
+        $r6 = org.gjt.sp.jedit.ServiceManager.serviceMap;
+
+        r2 = $r6.keySet();
+
+        r3 = r2.iterator();
+
+     label1:
+        $z0 = r3.hasNext();
+
+        if $z0 == 0 goto label3;
+
+        $r10 = r3.next();
+
+        r4 = (org.gjt.sp.jedit.ServiceManager$Descriptor) $r10;
+
+        $r11 = r4.clazz;
+
+        $z1 = $r11.equals(r0);
+
+        if $z1 == 0 goto label2;
+
+        $r12 = r4.name;
+
+        r1.add($r12);
+
+     label2:
+        goto label1;
+
+     label3:
+        $i0 = r1.size();
+
+        $r7 = newarray (java.lang.String)[$i0];
+
+        $r8 = r1.toArray($r7);
+
+        $r9 = (java.lang.String[]) $r8;
+
+        return $r9;
+    }
+
+    public static java.lang.String[] getServiceNames(java.lang.Class)
+    {
+        java.lang.Class r0;
+        java.lang.String $r1;
+        java.lang.String[] $r2;
+
+        r0 := @parameter0;
+
+        $r1 = r0.getName();
+
+        $r2 = org.gjt.sp.jedit.ServiceManager.getServiceNames($r1);
+
+        return $r2;
+    }
+
+    public static java.lang.Object getService(java.lang.String, java.lang.String)
+    {
+        java.lang.String r0, r1, $r6;
+        org.gjt.sp.jedit.ServiceManager$Descriptor r2, $r3, r13, r13_1, r13_2;
+        java.util.Map $r4, $r11;
+        java.lang.Object $r5, $r7, $r12;
+        org.gjt.sp.jedit.PluginJAR $r8, $r9;
+        java.net.URL $r10;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r3 = new org.gjt.sp.jedit.ServiceManager$Descriptor;
+
+        specialinvoke $r3.<init>(r0, r1);
+
+        r2 = $r3;
+
+        $r4 = org.gjt.sp.jedit.ServiceManager.serviceMap;
+
+        $r5 = $r4.get(r2);
+
+        r13 = (org.gjt.sp.jedit.ServiceManager$Descriptor) $r5;
+
+        if r13 != null goto label1;
+
+        return null;
+
+     label1:
+        $r6 = r13.code;
+
+(0)     if $r6 != null goto label2;
+
+        $r9 = r13.plugin;
+
+        $r8 = r13.plugin;
+
+        $r10 = $r8.getServicesURI();
+
+        org.gjt.sp.jedit.ServiceManager.loadServices($r9, $r10, null);
+
+        $r11 = org.gjt.sp.jedit.ServiceManager.serviceMap;
+
+        $r12 = $r11.get(r2);
+
+(1)     r13_1 = (org.gjt.sp.jedit.ServiceManager$Descriptor) $r12;
+
+     label2:
+        r13_2 = Phi(r13 #0, r13_1 #1);
+
+        $r7 = r13_2.getInstance();
+
+        return $r7;
+    }
+
+    public static java.lang.Object getService(java.lang.Class, java.lang.String)
+    {
+        java.lang.Class r0;
+        java.lang.String r1, $r2;
+        java.lang.Object $r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r2 = r0.getName();
+
+        $r3 = org.gjt.sp.jedit.ServiceManager.getService($r2, r1);
+
+        return $r3;
+    }
+
+    static void registerService(org.gjt.sp.jedit.ServiceManager$Descriptor)
+    {
+        org.gjt.sp.jedit.ServiceManager$Descriptor r0;
+        java.util.Map $r1;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.ServiceManager.serviceMap;
+
+        $r1.put(r0, r0);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.util.HashMap $r0;
+
+        $r0 = new java.util.HashMap;
+
+        specialinvoke $r0.<init>();
+
+        org.gjt.sp.jedit.ServiceManager.serviceMap = $r0;
+
+        return;
+    }
+}

@@ -1,0 +1,416 @@
+public class org.gjt.sp.jedit.gui.TipOfTheDay extends org.gjt.sp.jedit.gui.EnhancedDialog
+{
+    private javax.swing.JCheckBox showNextTime;
+    private javax.swing.JButton nextTip;
+    private javax.swing.JButton close;
+    private javax.swing.JEditorPane tipText;
+    private int currentTip;
+
+    public void <init>(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.TipOfTheDay r0;
+        org.gjt.sp.jedit.View r1;
+        javax.swing.JPanel r2, $r9;
+        javax.swing.JLabel r3, $r12;
+        javax.swing.JScrollPane r4, $r26;
+        org.gjt.sp.jedit.gui.TipOfTheDay$ActionHandler r5, $r30;
+        javax.swing.Box r6, $r31;
+        java.awt.Dimension r7, $r28, $r57;
+        java.lang.String $r8, $r13, $r33, $r42, $r49;
+        java.awt.BorderLayout $r10;
+        javax.swing.border.EmptyBorder $r11;
+        java.awt.Font $r14, $r15, $r16, $r25;
+        float $f0, $f1;
+        java.awt.Color $r17;
+        javax.swing.JEditorPane $r19, $r20, $r21, $r22, $r24, $r27;
+        java.lang.Boolean $r23;
+        javax.swing.JCheckBox $r32, $r34, $r35;
+        boolean $z0;
+        java.awt.Component $r37, $r39, $r46;
+        javax.swing.JButton $r41, $r43, $r44, $r48, $r50, $r51, $r54, $r55, $r56, $r58, $r59;
+        javax.swing.JRootPane $r53;
+        int $i0, $i1, $i2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r8 = org.gjt.sp.jedit.jEdit.getProperty("tip.title");
+
+        specialinvoke r0.<init>(r1, $r8, 0);
+
+        r0.currentTip = -1;
+
+        $r9 = new javax.swing.JPanel;
+
+        $r10 = new java.awt.BorderLayout;
+
+        specialinvoke $r10.<init>(12, 12);
+
+        specialinvoke $r9.<init>($r10);
+
+        r2 = $r9;
+
+        $r11 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r11.<init>(12, 12, 12, 12);
+
+        r2.setBorder($r11);
+
+        r0.setContentPane(r2);
+
+        $r12 = new javax.swing.JLabel;
+
+        $r13 = org.gjt.sp.jedit.jEdit.getProperty("tip.caption");
+
+        specialinvoke $r12.<init>($r13);
+
+        r3 = $r12;
+
+        $r14 = r3.getFont();
+
+        $r15 = r3.getFont();
+
+        $f0 = $r15.getSize2D();
+
+        $f1 = $f0 * 2.0F;
+
+        $r16 = $r14.deriveFont($f1);
+
+        r3.setFont($r16);
+
+        $r17 = javax.swing.UIManager.getColor("Button.foreground");
+
+        r3.setForeground($r17);
+
+        r2.add("North", r3);
+
+        $r19 = new javax.swing.JEditorPane;
+
+        specialinvoke $r19.<init>();
+
+        r0.tipText = $r19;
+
+        $r20 = r0.tipText;
+
+        $r20.setEditable(0);
+
+        $r21 = r0.tipText;
+
+        $r21.setContentType("text/html");
+
+        $r22 = r0.tipText;
+
+        $r23 = java.lang.Boolean.valueOf(1);
+
+        $r22.putClientProperty("JEditorPane.honorDisplayProperties", $r23);
+
+        $r24 = r0.tipText;
+
+        $r25 = org.gjt.sp.jedit.jEdit.getFontProperty("helpviewer.font");
+
+        $r24.setFont($r25);
+
+        specialinvoke r0.nextTip();
+
+        $r26 = new javax.swing.JScrollPane;
+
+        $r27 = r0.tipText;
+
+        specialinvoke $r26.<init>($r27);
+
+        r4 = $r26;
+
+        $r28 = new java.awt.Dimension;
+
+        specialinvoke $r28.<init>(250, 250);
+
+        r4.setPreferredSize($r28);
+
+        r2.add("Center", r4);
+
+        $r30 = new org.gjt.sp.jedit.gui.TipOfTheDay$ActionHandler;
+
+        specialinvoke $r30.<init>(r0);
+
+        r5 = $r30;
+
+        $r31 = new javax.swing.Box;
+
+        specialinvoke $r31.<init>(0);
+
+        r6 = $r31;
+
+        $r32 = new javax.swing.JCheckBox;
+
+        $r33 = org.gjt.sp.jedit.jEdit.getProperty("tip.show-next-time");
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("tip.show");
+
+        specialinvoke $r32.<init>($r33, $z0);
+
+        r0.showNextTime = $r32;
+
+        $r34 = r0.showNextTime;
+
+        $r34.addActionListener(r5);
+
+        $r35 = r0.showNextTime;
+
+        r6.add($r35);
+
+        $r37 = javax.swing.Box.createHorizontalStrut(6);
+
+        r6.add($r37);
+
+        $r39 = javax.swing.Box.createGlue();
+
+        r6.add($r39);
+
+        $r41 = new javax.swing.JButton;
+
+        $r42 = org.gjt.sp.jedit.jEdit.getProperty("tip.next-tip");
+
+        specialinvoke $r41.<init>($r42);
+
+        r0.nextTip = $r41;
+
+        $r43 = r0.nextTip;
+
+        $r43.addActionListener(r5);
+
+        $r44 = r0.nextTip;
+
+        r6.add($r44);
+
+        $r46 = javax.swing.Box.createHorizontalStrut(6);
+
+        r6.add($r46);
+
+        $r48 = new javax.swing.JButton;
+
+        $r49 = org.gjt.sp.jedit.jEdit.getProperty("common.close");
+
+        specialinvoke $r48.<init>($r49);
+
+        r0.close = $r48;
+
+        $r50 = r0.close;
+
+        $r50.addActionListener(r5);
+
+        $r51 = r0.close;
+
+        r6.add($r51);
+
+        $r53 = r2.getRootPane();
+
+        $r54 = r0.close;
+
+        $r53.setDefaultButton($r54);
+
+        $r55 = r0.nextTip;
+
+        r7 = $r55.getPreferredSize();
+
+        $i0 = r7.width;
+
+        $r56 = r0.close;
+
+        $r57 = $r56.getPreferredSize();
+
+        $i1 = $r57.width;
+
+        $i2 = java.lang.Math.max($i0, $i1);
+
+        r7.width = $i2;
+
+        $r58 = r0.nextTip;
+
+        $r58.setPreferredSize(r7);
+
+        $r59 = r0.close;
+
+        $r59.setPreferredSize(r7);
+
+        r2.add("South", r6);
+
+        r0.setDefaultCloseOperation(2);
+
+        r0.pack();
+
+        r0.setLocationRelativeTo(r1);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.gui.TipOfTheDay r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.gui.TipOfTheDay r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    private void nextTip()
+    {
+        org.gjt.sp.jedit.gui.TipOfTheDay r0;
+        java.io.File[] r1;
+        int i0, $i1, $i2, $i3, i4;
+        java.lang.Exception r2, $r15;
+        java.io.File $r3, $r9, $r11;
+        java.lang.String $r4, $r5, $r7, $r10;
+        javax.swing.JEditorPane $r6, $r12;
+        java.util.Random $r8;
+        boolean $z0;
+        java.net.URI $r13;
+        java.net.URL $r14;
+
+        r0 := @this;
+
+        $r3 = new java.io.File;
+
+        $r4 = org.gjt.sp.jedit.jEdit.getJEditHome();
+
+        $r5 = org.gjt.sp.jedit.MiscUtilities.constructPath($r4, "doc", "tips");
+
+        specialinvoke $r3.<init>($r5);
+
+        r1 = $r3.listFiles();
+
+        if r1 == null goto label1;
+
+        $i1 = lengthof r1;
+
+        if $i1 != 0 goto label2;
+
+     label1:
+        $r6 = r0.tipText;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getProperty("tip.not-found");
+
+        $r6.setText($r7);
+
+        return;
+
+     label2:
+        i0 = lengthof r1;
+
+(0)     i4 = r0.currentTip;
+
+     label3:
+        i4 = Phi(i4 #0, i4 #1);
+
+        $i2 = r0.currentTip;
+
+        if i4 == $i2 goto label4;
+
+        $r9 = r1[i4];
+
+        $r10 = $r9.getName();
+
+        $z0 = $r10.endsWith(".html");
+
+        if $z0 != 0 goto label5;
+
+     label4:
+        $r8 = new java.util.Random;
+
+        specialinvoke $r8.<init>();
+
+        $i3 = $r8.nextInt(2147483647);
+
+        i4 = $i3 % i0;
+
+(1)     goto label3;
+
+     label5:
+        $r12 = r0.tipText;
+
+        $r11 = r1[i4];
+
+        $r13 = $r11.toURI();
+
+        $r14 = $r13.toURL();
+
+        $r12.setPage($r14);
+
+     label6:
+        goto label8;
+
+     label7:
+        $r15 := @caughtexception;
+
+        r2 = $r15;
+
+        org.gjt.sp.util.Log.log(9, r0, r2);
+
+     label8:
+        return;
+
+        catch java.lang.Exception from label5 to label6 with label7;
+    }
+
+    static javax.swing.JCheckBox access$000(org.gjt.sp.jedit.gui.TipOfTheDay)
+    {
+        org.gjt.sp.jedit.gui.TipOfTheDay r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.showNextTime;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$100(org.gjt.sp.jedit.gui.TipOfTheDay)
+    {
+        org.gjt.sp.jedit.gui.TipOfTheDay r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.nextTip;
+
+        return $r1;
+    }
+
+    static void access$200(org.gjt.sp.jedit.gui.TipOfTheDay)
+    {
+        org.gjt.sp.jedit.gui.TipOfTheDay r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.nextTip();
+
+        return;
+    }
+
+    static javax.swing.JButton access$300(org.gjt.sp.jedit.gui.TipOfTheDay)
+    {
+        org.gjt.sp.jedit.gui.TipOfTheDay r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.close;
+
+        return $r1;
+    }
+}

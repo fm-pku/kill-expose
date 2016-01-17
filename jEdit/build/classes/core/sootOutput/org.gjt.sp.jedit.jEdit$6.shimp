@@ -1,0 +1,33 @@
+final class org.gjt.sp.jedit.jEdit$6 extends java.lang.Object implements java.lang.Runnable
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.jEdit$6 r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.jEdit$6 r0;
+        java.lang.Thread $r1;
+        org.gjt.sp.jedit.JARClassLoader $r2;
+
+        r0 := @this;
+
+        $r1 = java.lang.Thread.currentThread();
+
+        $r2 = new org.gjt.sp.jedit.JARClassLoader;
+
+        specialinvoke $r2.<init>();
+
+        $r1.setContextClassLoader($r2);
+
+        return;
+    }
+}

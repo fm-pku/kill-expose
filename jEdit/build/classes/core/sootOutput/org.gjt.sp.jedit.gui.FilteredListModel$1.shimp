@@ -1,0 +1,160 @@
+class org.gjt.sp.jedit.gui.FilteredListModel$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final java.lang.String val$filter;
+    final org.gjt.sp.jedit.gui.FilteredListModel this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.FilteredListModel, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.FilteredListModel$1 r0;
+        org.gjt.sp.jedit.gui.FilteredListModel r1;
+        java.lang.String r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$filter = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.gui.FilteredListModel$1 r0;
+        java.util.Set r1;
+        int i0, $i1, $i2, $i3, $i4, i5;
+        java.lang.String r2, $r9, $r12, $r18, $r21;
+        java.util.Vector r3, $r23;
+        java.util.HashMap r4, $r24;
+        java.lang.Integer r5, $r30;
+        org.gjt.sp.jedit.gui.FilteredListModel $r6, $r7, $r10, $r13, $r14, $r15, $r16, $r17, $r19, $r22, $r25, $r27, $r29;
+        javax.swing.JList $r8;
+        boolean $z0, $z1;
+        javax.swing.ListModel $r20;
+
+        r0 := @this;
+
+        $r6 = r0.this$0;
+
+        r1 = $r6.saveSelection();
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.FilteredListModel.access$000($r7);
+
+        $r8.clearSelection();
+
+        $r10 = r0.this$0;
+
+        $r9 = r0.val$filter;
+
+        org.gjt.sp.jedit.gui.FilteredListModel.access$102($r10, $r9);
+
+        $r12 = r0.val$filter;
+
+        if $r12 == null goto label4;
+
+        $r18 = r0.val$filter;
+
+        $z0 = $r18.isEmpty();
+
+        if $z0 != 0 goto label4;
+
+        $r19 = r0.this$0;
+
+        $r20 = $r19.delegated;
+
+        i0 = $r20.getSize();
+
+        $r22 = r0.this$0;
+
+        $r21 = r0.val$filter;
+
+        r2 = $r22.prepareFilter($r21);
+
+        $r23 = new java.util.Vector;
+
+        specialinvoke $r23.<init>(i0);
+
+        r3 = $r23;
+
+        $r24 = new java.util.HashMap;
+
+        specialinvoke $r24.<init>();
+
+        r4 = $r24;
+
+(0)     i5 = 0;
+
+     label1:
+        i5 = Phi(i5 #0, i5 #1);
+
+        if i5 >= i0 goto label3;
+
+        $r29 = r0.this$0;
+
+        $z1 = $r29.passFilter(i5, r2);
+
+        if $z1 == 0 goto label2;
+
+        r5 = java.lang.Integer.valueOf(i5);
+
+        r3.add(r5);
+
+        $i3 = r3.size();
+
+        $i4 = $i3 - 1;
+
+        $r30 = java.lang.Integer.valueOf($i4);
+
+        r4.put(r5, $r30);
+
+     label2:
+        i5 = i5 + 1;
+
+(1)     goto label1;
+
+     label3:
+        $r25 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.FilteredListModel.access$202($r25, r4);
+
+        $r27 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.FilteredListModel.access$302($r27, r3);
+
+(2)     goto label5;
+
+     label4:
+        $r13 = r0.this$0;
+
+(3)     org.gjt.sp.jedit.gui.FilteredListModel.access$400($r13);
+
+     label5:
+        i5 = Phi(i5 #2, i5 #3);
+
+        $r15 = r0.this$0;
+
+        $r16 = r0.this$0;
+
+        $r14 = r0.this$0;
+
+        $i1 = $r14.getSize();
+
+        $i2 = $i1 - 1;
+
+        org.gjt.sp.jedit.gui.FilteredListModel.access$500($r15, $r16, 0, $i2);
+
+        $r17 = r0.this$0;
+
+        $r17.restoreSelection(r1);
+
+        return;
+    }
+}

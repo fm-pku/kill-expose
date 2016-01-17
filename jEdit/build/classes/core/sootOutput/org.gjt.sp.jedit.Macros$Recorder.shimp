@@ -1,0 +1,412 @@
+public class org.gjt.sp.jedit.Macros$Recorder extends java.lang.Object
+{
+    org.gjt.sp.jedit.View view;
+    org.gjt.sp.jedit.Buffer buffer;
+    boolean temporary;
+    boolean lastWasInput;
+    boolean lastWasOverwrite;
+    int overwriteCount;
+
+    public void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Buffer, boolean)
+    {
+        org.gjt.sp.jedit.Macros$Recorder r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Buffer r2;
+        boolean z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.view = r1;
+
+        r0.buffer = r2;
+
+        r0.temporary = z0;
+
+        org.gjt.sp.jedit.EditBus.addToBus(r0);
+
+        return;
+    }
+
+    public void record(java.lang.String)
+    {
+        org.gjt.sp.jedit.Macros$Recorder r0;
+        java.lang.String r1;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = org.gjt.sp.jedit.BeanShell.isScriptRunning();
+
+        if $z0 == 0 goto label1;
+
+        return;
+
+     label1:
+        specialinvoke r0.flushInput();
+
+        specialinvoke r0.append("\n");
+
+        specialinvoke r0.append(r1);
+
+        return;
+    }
+
+    public void record(int, java.lang.String)
+    {
+        org.gjt.sp.jedit.Macros$Recorder r0;
+        int i0;
+        java.lang.String r1, $r10;
+        java.lang.StringBuilder $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        if i0 != 1 goto label1;
+
+        r0.record(r1);
+
+        goto label2;
+
+     label1:
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append("for(int i = 1; i <= ");
+
+        $r4 = $r3.append(i0);
+
+        $r5 = $r4.append("; i++)\n");
+
+        $r6 = $r5.append("{\n");
+
+        $r7 = $r6.append(r1);
+
+        $r8 = $r7.append(10);
+
+        $r9 = $r8.append(125);
+
+        $r10 = $r9.toString();
+
+        r0.record($r10);
+
+     label2:
+        return;
+    }
+
+    public void recordInput(int, char, boolean)
+    {
+        org.gjt.sp.jedit.Macros$Recorder r0;
+        int i0, i2;
+        char c1;
+        boolean z0;
+        java.lang.StringBuilder r1, $r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        c1 := @parameter1;
+
+        z0 := @parameter2;
+
+        if c1 != 10 goto label1;
+
+        r0.record(i0, "textArea.userInput(\'\\n\');");
+
+(0)     goto label5;
+
+     label1:
+        if c1 != 9 goto label2;
+
+        r0.record(i0, "textArea.userInput(\'\\t\');");
+
+(1)     goto label5;
+
+     label2:
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>(i0);
+
+        r1 = $r2;
+
+(2)     i2 = 0;
+
+     label3:
+        i2 = Phi(i2 #2, i2 #3);
+
+        if i2 >= i0 goto label4;
+
+        r1.append(c1);
+
+        i2 = i2 + 1;
+
+(3)     goto label3;
+
+     label4:
+        $r3 = r1.toString();
+
+(4)     r0.recordInput($r3, z0);
+
+     label5:
+        i2 = Phi(i2 #0, i2 #1, i2 #4);
+
+        return;
+    }
+
+    public void recordInput(java.lang.String, boolean)
+    {
+        org.gjt.sp.jedit.Macros$Recorder r0;
+        java.lang.String r1, r2, $r6, $r10;
+        boolean z0, $z1, $z2;
+        java.lang.StringBuilder $r3, $r4, $r5, $r7, $r8, $r9;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        r2 = org.gjt.sp.util.StandardUtilities.charsToEscapes(r1);
+
+        if z0 == 0 goto label2;
+
+        $z2 = r0.lastWasOverwrite;
+
+        if $z2 == 0 goto label1;
+
+        $i0 = r0.overwriteCount;
+
+        $i1 = $i0 + 1;
+
+        r0.overwriteCount = $i1;
+
+        specialinvoke r0.append(r2);
+
+        goto label4;
+
+     label1:
+        specialinvoke r0.flushInput();
+
+        r0.overwriteCount = 1;
+
+        r0.lastWasOverwrite = 1;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("\ntextArea.setSelectedText(\"");
+
+        $r9 = $r8.append(r2);
+
+        $r10 = $r9.toString();
+
+        specialinvoke r0.append($r10);
+
+        goto label4;
+
+     label2:
+        $z1 = r0.lastWasInput;
+
+        if $z1 == 0 goto label3;
+
+        specialinvoke r0.append(r2);
+
+        goto label4;
+
+     label3:
+        specialinvoke r0.flushInput();
+
+        r0.lastWasInput = 1;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("\ntextArea.setSelectedText(\"");
+
+        $r5 = $r4.append(r2);
+
+        $r6 = $r5.toString();
+
+        specialinvoke r0.append($r6);
+
+     label4:
+        return;
+    }
+
+    public void handleBufferUpdate(org.gjt.sp.jedit.msg.BufferUpdate)
+    {
+        org.gjt.sp.jedit.Macros$Recorder r0;
+        org.gjt.sp.jedit.msg.BufferUpdate r1;
+        java.lang.Object $r2, $r3;
+        org.gjt.sp.jedit.Buffer $r4, $r5;
+        org.gjt.sp.jedit.View $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getWhat();
+
+        $r3 = org.gjt.sp.jedit.msg.BufferUpdate.CLOSED;
+
+        if $r2 != $r3 goto label1;
+
+        $r4 = r1.getBuffer();
+
+        $r5 = r0.buffer;
+
+        if $r4 != $r5 goto label1;
+
+        $r6 = r0.view;
+
+        org.gjt.sp.jedit.Macros.stopRecording($r6);
+
+     label1:
+        return;
+    }
+
+    private void append(java.lang.String)
+    {
+        org.gjt.sp.jedit.Macros$Recorder r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.Buffer $r2, $r3;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.buffer;
+
+        $r2 = r0.buffer;
+
+        $i0 = $r2.getLength();
+
+        $r3.insert($i0, r1);
+
+        return;
+    }
+
+    private void dispose()
+    {
+        org.gjt.sp.jedit.Macros$Recorder r0;
+        org.gjt.sp.jedit.Buffer $r1, $r4;
+        int $i0, i1;
+        org.gjt.sp.jedit.View $r2;
+        org.gjt.sp.jedit.gui.StatusBar $r3;
+
+        r0 := @this;
+
+        specialinvoke r0.flushInput();
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $r1 = r0.buffer;
+
+        $i0 = $r1.getLineCount();
+
+        if i1 >= $i0 goto label2;
+
+        $r4 = r0.buffer;
+
+        $r4.indentLine(i1, 1);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        org.gjt.sp.jedit.EditBus.removeFromBus(r0);
+
+        $r2 = r0.view;
+
+        $r3 = $r2.getStatus();
+
+        $r3.setMessage(null);
+
+        return;
+    }
+
+    private void flushInput()
+    {
+        org.gjt.sp.jedit.Macros$Recorder r0;
+        boolean $z0, $z1;
+        java.lang.StringBuilder $r1, $r2, $r3, $r4, $r5;
+        int $i0;
+        java.lang.String $r6;
+
+        r0 := @this;
+
+        $z0 = r0.lastWasInput;
+
+        if $z0 == 0 goto label1;
+
+        r0.lastWasInput = 0;
+
+        specialinvoke r0.append("\");");
+
+     label1:
+        $z1 = r0.lastWasOverwrite;
+
+        if $z1 == 0 goto label2;
+
+        r0.lastWasOverwrite = 0;
+
+        specialinvoke r0.append("\");\n");
+
+        specialinvoke r0.append("offset = buffer.getLineEndOffset(textArea.getCaretLine()) - 1;\n");
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("buffer.remove(textArea.getCaretPosition(),Math.min(");
+
+        $i0 = r0.overwriteCount;
+
+        $r3 = $r2.append($i0);
+
+        $r4 = $r3.append(",offset - ");
+
+        $r5 = $r4.append("textArea.getCaretPosition()));");
+
+        $r6 = $r5.toString();
+
+        specialinvoke r0.append($r6);
+
+     label2:
+        return;
+    }
+
+    static void access$000(org.gjt.sp.jedit.Macros$Recorder)
+    {
+        org.gjt.sp.jedit.Macros$Recorder r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.dispose();
+
+        return;
+    }
+}

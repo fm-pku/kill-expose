@@ -1,0 +1,172 @@
+public class org.gjt.sp.jedit.gui.AboutDialog extends javax.swing.JDialog implements java.awt.event.ActionListener
+{
+
+    public void <init>(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.AboutDialog r0;
+        org.gjt.sp.jedit.View r1, $r32;
+        javax.swing.JButton r2, $r8;
+        javax.swing.JPanel r3, r5, $r11, $r14;
+        org.gjt.sp.jedit.gui.AboutDialog$AboutPanel r4, $r13;
+        java.awt.Dimension r6, $r17, $r20, $r25;
+        java.lang.String $r7, $r9, $r30;
+        javax.swing.JRootPane $r10;
+        java.awt.BorderLayout $r12;
+        java.awt.FlowLayout $r15;
+        java.awt.Component $r18, $r21, $r23, $r26;
+        org.gjt.sp.jedit.gui.AboutDialog$1 $r31;
+        org.gjt.sp.jedit.gui.AboutDialog$2 $r33;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getProperty("about.title");
+
+        specialinvoke r0.<init>(r1, $r7, 1);
+
+        r0.setResizable(0);
+
+        $r8 = new javax.swing.JButton;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("common.close");
+
+        specialinvoke $r8.<init>($r9);
+
+        r2 = $r8;
+
+        r2.addActionListener(r0);
+
+        $r10 = r0.getRootPane();
+
+        $r10.setDefaultButton(r2);
+
+        $r11 = new javax.swing.JPanel;
+
+        $r12 = new java.awt.BorderLayout;
+
+        specialinvoke $r12.<init>();
+
+        specialinvoke $r11.<init>($r12);
+
+        r3 = $r11;
+
+        $r13 = new org.gjt.sp.jedit.gui.AboutDialog$AboutPanel;
+
+        specialinvoke $r13.<init>();
+
+        r4 = $r13;
+
+        $r14 = new javax.swing.JPanel;
+
+        $r15 = new java.awt.FlowLayout;
+
+        specialinvoke $r15.<init>();
+
+        specialinvoke $r14.<init>($r15);
+
+        r5 = $r14;
+
+        r5.add(r2);
+
+        $r17 = new java.awt.Dimension;
+
+        specialinvoke $r17.<init>(40, 40);
+
+        $r18 = javax.swing.Box.createRigidArea($r17);
+
+        r5.add($r18);
+
+        $r20 = new java.awt.Dimension;
+
+        specialinvoke $r20.<init>(10, 0);
+
+        r6 = $r20;
+
+        $r21 = javax.swing.Box.createRigidArea(r6);
+
+        r3.add("West", $r21);
+
+        $r23 = javax.swing.Box.createRigidArea(r6);
+
+        r3.add("East", $r23);
+
+        $r25 = new java.awt.Dimension;
+
+        specialinvoke $r25.<init>(10, 10);
+
+        $r26 = javax.swing.Box.createRigidArea($r25);
+
+        r3.add("North", $r26);
+
+        r3.add("South", r5);
+
+        r3.add("Center", r4);
+
+        $r30 = org.gjt.sp.jedit.jEdit.getProperty("about.navigate");
+
+        r2.setToolTipText($r30);
+
+        $r31 = new org.gjt.sp.jedit.gui.AboutDialog$1;
+
+        specialinvoke $r31.<init>(r0, r4);
+
+        r2.addKeyListener($r31);
+
+        r0.setContentPane(r3);
+
+        r0.pack();
+
+        $r32 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        r0.setLocationRelativeTo($r32);
+
+        $r33 = new org.gjt.sp.jedit.gui.AboutDialog$2;
+
+        specialinvoke $r33.<init>(r0);
+
+        r0.addWindowListener($r33);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.AboutDialog r0;
+        java.awt.event.ActionEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.closeDialog();
+
+        return;
+    }
+
+    private void closeDialog()
+    {
+        org.gjt.sp.jedit.gui.AboutDialog r0;
+
+        r0 := @this;
+
+        org.gjt.sp.jedit.gui.AboutDialog$AboutPanel.stopThread();
+
+        r0.dispose();
+
+        return;
+    }
+
+    static void access$100(org.gjt.sp.jedit.gui.AboutDialog)
+    {
+        org.gjt.sp.jedit.gui.AboutDialog r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.closeDialog();
+
+        return;
+    }
+}

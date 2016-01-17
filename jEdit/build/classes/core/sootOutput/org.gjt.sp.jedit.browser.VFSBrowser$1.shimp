@@ -1,0 +1,51 @@
+class org.gjt.sp.jedit.browser.VFSBrowser$1 extends java.awt.event.KeyAdapter
+{
+    final org.gjt.sp.jedit.browser.VFSBrowser this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSBrowser)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$1 r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void keyReleased(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$1 r0;
+        java.awt.event.KeyEvent r1;
+        int $i0;
+        org.gjt.sp.jedit.browser.VFSBrowser $r2, $r4;
+        org.gjt.sp.jedit.gui.HistoryTextField $r3;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r1.getKeyCode();
+
+        if $i0 != 27 goto label1;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.browser.VFSBrowser.access$100($r2);
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.browser.VFSBrowser.access$000($r4);
+
+        $r3.setText($r5);
+
+     label1:
+        return;
+    }
+}

@@ -1,0 +1,135 @@
+class org.gjt.sp.jedit.gui.RegisterViewer$MouseHandler extends java.awt.event.MouseAdapter
+{
+    final org.gjt.sp.jedit.gui.RegisterViewer this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.RegisterViewer)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer$MouseHandler r0;
+        org.gjt.sp.jedit.gui.RegisterViewer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mouseClicked(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer$MouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        int i0, $i1, $i2, $i3, $i4;
+        org.gjt.sp.jedit.gui.RegisterViewer $r2, $r5, $r6, $r8, $r10, $r13, $r15, $r21, $r22, $r25;
+        javax.swing.JList $r3, $r11, $r26;
+        java.awt.Point $r4;
+        boolean $z0;
+        javax.swing.JPopupMenu $r7, $r9, $r12, $r16, $r23;
+        javax.swing.JMenuItem $r18, r27, r28;
+        java.lang.String $r19;
+        org.gjt.sp.jedit.gui.RegisterViewer$ClearHandler $r20;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.RegisterViewer.access$000($r2);
+
+        $r4 = r1.getPoint();
+
+        i0 = $r3.locationToIndex($r4);
+
+        if i0 == -1 goto label1;
+
+        $r25 = r0.this$0;
+
+        $r26 = org.gjt.sp.jedit.gui.RegisterViewer.access$000($r25);
+
+        $r26.setSelectedIndex(i0);
+
+     label1:
+        $z0 = org.gjt.sp.jedit.GUIUtilities.isPopupTrigger(r1);
+
+        if $z0 == 0 goto label3;
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.gui.RegisterViewer.access$300($r6);
+
+        if $r7 != null goto label2;
+
+        $r13 = r0.this$0;
+
+        $r12 = new javax.swing.JPopupMenu;
+
+        specialinvoke $r12.<init>();
+
+        org.gjt.sp.jedit.gui.RegisterViewer.access$302($r13, $r12);
+
+        r27 = org.gjt.sp.jedit.GUIUtilities.loadMenuItem("paste");
+
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.gui.RegisterViewer.access$300($r15);
+
+        $r16.add(r27);
+
+        $r18 = new javax.swing.JMenuItem;
+
+        $r19 = org.gjt.sp.jedit.jEdit.getProperty("clear-string-register.label");
+
+        specialinvoke $r18.<init>($r19);
+
+        r28 = $r18;
+
+        $r20 = new org.gjt.sp.jedit.gui.RegisterViewer$ClearHandler;
+
+        $r21 = r0.this$0;
+
+        specialinvoke $r20.<init>($r21);
+
+        r28.addActionListener($r20);
+
+        $r22 = r0.this$0;
+
+        $r23 = org.gjt.sp.jedit.gui.RegisterViewer.access$300($r22);
+
+        $r23.add(r28);
+
+     label2:
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.gui.RegisterViewer.access$300($r8);
+
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.gui.RegisterViewer.access$000($r10);
+
+        $i3 = r1.getX();
+
+        $i4 = r1.getY();
+
+        org.gjt.sp.jedit.GUIUtilities.showPopupMenu($r9, $r11, $i3, $i4, 0);
+
+        goto label4;
+
+     label3:
+        $i1 = r1.getClickCount();
+
+        $i2 = $i1 % 2;
+
+        if $i2 != 0 goto label4;
+
+        $r5 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.RegisterViewer.access$400($r5);
+
+     label4:
+        return;
+    }
+}

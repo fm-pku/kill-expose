@@ -1,0 +1,85 @@
+class org.gjt.sp.jedit.Macros$BeanShellHandler extends org.gjt.sp.jedit.Macros$Handler
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.Macros$BeanShellHandler r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("beanshell");
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.Macros$Macro createMacro(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.Macros$BeanShellHandler r0;
+        java.lang.String r1, $r3, r4, r5;
+        int $i0, $i1;
+        org.gjt.sp.jedit.Macros$Macro $r2;
+
+        r0 := @this;
+
+        r4 := @parameter0;
+
+        r1 := @parameter1;
+
+        $i0 = r4.length();
+
+        $i1 = $i0 - 4;
+
+        r5 = r4.substring(0, $i1);
+
+        $r2 = new org.gjt.sp.jedit.Macros$Macro;
+
+        $r3 = org.gjt.sp.jedit.Macros$Macro.macroNameToLabel(r5);
+
+        specialinvoke $r2.<init>(r0, r5, $r3, r1);
+
+        return $r2;
+    }
+
+    public void runMacro(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Macros$Macro)
+    {
+        org.gjt.sp.jedit.Macros$BeanShellHandler r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Macros$Macro r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r2.getPath();
+
+        org.gjt.sp.jedit.BeanShell.runScript(r1, $r3, null, 1);
+
+        return;
+    }
+
+    public void runMacro(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Macros$Macro, boolean)
+    {
+        org.gjt.sp.jedit.Macros$BeanShellHandler r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Macros$Macro r2;
+        boolean z0;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        $r3 = r2.getPath();
+
+        org.gjt.sp.jedit.BeanShell.runScript(r1, $r3, null, z0);
+
+        return;
+    }
+}

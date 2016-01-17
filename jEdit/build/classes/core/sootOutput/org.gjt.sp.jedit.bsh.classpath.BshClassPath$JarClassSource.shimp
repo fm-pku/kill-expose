@@ -1,0 +1,75 @@
+public class org.gjt.sp.jedit.bsh.classpath.BshClassPath$JarClassSource extends org.gjt.sp.jedit.bsh.classpath.BshClassPath$ClassSource
+{
+
+    void <init>(java.net.URL)
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath$JarClassSource r0;
+        java.net.URL r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.source = r1;
+
+        return;
+    }
+
+    public java.net.URL getURL()
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath$JarClassSource r0;
+        java.lang.Object $r1;
+        java.net.URL $r2;
+
+        r0 := @this;
+
+        $r1 = r0.source;
+
+        $r2 = (java.net.URL) $r1;
+
+        return $r2;
+    }
+
+    public byte[] getCode(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath$JarClassSource r0;
+        java.lang.String r1;
+        java.lang.Error $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.lang.Error;
+
+        specialinvoke $r2.<init>("Unimplemented");
+
+        throw $r2;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath$JarClassSource r0;
+        java.lang.StringBuilder $r1, $r2, $r4;
+        java.lang.Object $r3;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("Jar: ");
+
+        $r3 = r0.source;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.toString();
+
+        return $r5;
+    }
+}

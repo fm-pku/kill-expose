@@ -1,0 +1,1933 @@
+public class org.gjt.sp.jedit.TextUtilities extends java.lang.Object
+{
+    public static final int BRACKET_MATCH_LIMIT;
+    public static final int WHITESPACE;
+    public static final int WORD_CHAR;
+    public static final int SYMBOL;
+    public static final int MIXED;
+    public static final int LOWER_CASE;
+    public static final int UPPER_CASE;
+    public static final int TITLE_CASE;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.TextUtilities r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static org.gjt.sp.jedit.syntax.Token getTokenAtOffset(org.gjt.sp.jedit.syntax.Token, int)
+    {
+        int i0, $i2, $i3, $i4;
+        byte $b1, $b5;
+        java.lang.ArrayIndexOutOfBoundsException $r0;
+        org.gjt.sp.jedit.syntax.Token r1;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+(0)     if i0 != 0 goto label1;
+
+        $b5 = r1.id;
+
+(1)     if $b5 != 127 goto label1;
+
+        return r1;
+
+     label1:
+        r1 = Phi(r1 #0, r1 #1, r1 #2);
+
+        $b1 = r1.id;
+
+        if $b1 != 127 goto label2;
+
+        $r0 = new java.lang.ArrayIndexOutOfBoundsException;
+
+        specialinvoke $r0.<init>("offset > line length");
+
+        throw $r0;
+
+     label2:
+        $i3 = r1.offset;
+
+        $i2 = r1.length;
+
+        $i4 = $i3 + $i2;
+
+        if $i4 <= i0 goto label3;
+
+        return r1;
+
+     label3:
+        r1 = r1.next;
+
+(2)     goto label1;
+    }
+
+    public static char getComplementaryBracket(char, boolean[])
+    {
+        char c0;
+        boolean[] r0;
+
+        c0 := @parameter0;
+
+        r0 := @parameter1;
+
+        lookupswitch(c0)
+        {
+            case 40: goto label01;
+            case 41: goto label03;
+            case 60: goto label13;
+            case 62: goto label15;
+            case 91: goto label05;
+            case 93: goto label07;
+            case 123: goto label09;
+            case 125: goto label11;
+            default: goto label17;
+        };
+
+     label01:
+        if r0 == null goto label02;
+
+        r0[0] = 1;
+
+     label02:
+        return 41;
+
+     label03:
+        if r0 == null goto label04;
+
+        r0[0] = 0;
+
+     label04:
+        return 40;
+
+     label05:
+        if r0 == null goto label06;
+
+        r0[0] = 1;
+
+     label06:
+        return 93;
+
+     label07:
+        if r0 == null goto label08;
+
+        r0[0] = 0;
+
+     label08:
+        return 91;
+
+     label09:
+        if r0 == null goto label10;
+
+        r0[0] = 1;
+
+     label10:
+        return 125;
+
+     label11:
+        if r0 == null goto label12;
+
+        r0[0] = 0;
+
+     label12:
+        return 123;
+
+     label13:
+        if r0 == null goto label14;
+
+        r0[0] = 1;
+
+     label14:
+        return 62;
+
+     label15:
+        if r0 == null goto label16;
+
+        r0[0] = 0;
+
+     label16:
+        return 60;
+
+     label17:
+        return 0;
+    }
+
+    public static int findMatchingBracket(org.gjt.sp.jedit.buffer.JEditBuffer, int, int)
+    {
+        org.gjt.sp.jedit.buffer.JEditBuffer r0;
+        javax.swing.text.Segment r1, $r10;
+        char c0, c1, c30, c33;
+        boolean[] r2;
+        org.gjt.sp.jedit.syntax.DefaultTokenHandler r3, $r12;
+        byte b2, $b12, $b15, $b21, $b24;
+        int i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i13, $i14, $i16, $i17, $i18, $i19, $i20, $i22, $i23, i25, i26, i27, i28, i29, i31, i32;
+        java.lang.ArrayIndexOutOfBoundsException $r4;
+        java.lang.StringBuilder $r5, $r6, $r7, $r8;
+        java.lang.String $r9;
+        char[] $r11, $r15, $r20;
+        org.gjt.sp.jedit.syntax.Token $r13, $r14, $r16, $r17, $r18, $r19, $r21, $r22, $r23, $r24;
+        boolean $z0, z1;
+
+        r0 := @parameter0;
+
+        i25 := @parameter1;
+
+        i26 := @parameter2;
+
+        if i26 < 0 goto label01;
+
+        $i5 = r0.getLineLength(i25);
+
+        if i26 < $i5 goto label02;
+
+     label01:
+        $r4 = new java.lang.ArrayIndexOutOfBoundsException;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append(i26);
+
+        $r7 = $r6.append(":");
+
+        $i4 = r0.getLineLength(i25);
+
+        $r8 = $r7.append($i4);
+
+        $r9 = $r8.toString();
+
+        specialinvoke $r4.<init>($r9);
+
+        throw $r4;
+
+     label02:
+        $r10 = new javax.swing.text.Segment;
+
+        specialinvoke $r10.<init>();
+
+        r1 = $r10;
+
+        r0.getLineText(i25, r1);
+
+        $r11 = r1.array;
+
+        $i6 = r1.offset;
+
+        $i7 = $i6 + i26;
+
+        c0 = $r11[$i7];
+
+        r2 = newarray (boolean)[1];
+
+        c1 = org.gjt.sp.jedit.TextUtilities.getComplementaryBracket(c0, r2);
+
+        if c1 != 0 goto label03;
+
+        return -1;
+
+     label03:
+        i27 = 1;
+
+        $r12 = new org.gjt.sp.jedit.syntax.DefaultTokenHandler;
+
+        specialinvoke $r12.<init>();
+
+        r3 = $r12;
+
+        r0.markTokens(i25, r3);
+
+        $r13 = r3.getTokens();
+
+        $r14 = org.gjt.sp.jedit.TextUtilities.getTokenAtOffset($r13, i26);
+
+        b2 = $r14.id;
+
+        z1 = 1;
+
+        i3 = i25;
+
+        $z0 = r2[0];
+
+        if $z0 == 0 goto label12;
+
+(0)     i28 = i26 + 1;
+
+     label04:
+        i28 = Phi(i28 #0, i28 #14);
+
+        i27 = Phi(i27 #0, i27 #14);
+
+        i25 = Phi(i25 #0, i25 #14);
+
+        z1 = Phi(z1 #0, z1 #14);
+
+        i29 = Phi(i29 #0, i29 #14);
+
+(1)     i29 = i28;
+
+     label05:
+        i28 = Phi(i28 #1, i28 #11);
+
+        i27 = Phi(i27 #1, i27 #11);
+
+        i25 = Phi(i25 #1, i25 #11);
+
+        z1 = Phi(z1 #1, z1 #11);
+
+        i29 = Phi(i29 #1, i29 #11);
+
+        $i16 = r1.count;
+
+        if i29 >= $i16 goto label10;
+
+        $r20 = r1.array;
+
+        $i19 = r1.offset;
+
+        $i20 = $i19 + i29;
+
+        c30 = $r20[$i20];
+
+        if c30 != c0 goto label07;
+
+(2)     if z1 != 0 goto label06;
+
+        r3.init();
+
+        r0.markTokens(i25, r3);
+
+(3)     z1 = 1;
+
+     label06:
+        z1 = Phi(z1 #2, z1 #3);
+
+        $r23 = r3.getTokens();
+
+        $r24 = org.gjt.sp.jedit.TextUtilities.getTokenAtOffset($r23, i29);
+
+        $b24 = $r24.id;
+
+(4)     if $b24 != b2 goto label09;
+
+        i27 = i27 + 1;
+
+(5)     goto label09;
+
+     label07:
+(6)     if c30 != c1 goto label09;
+
+(7)     if z1 != 0 goto label08;
+
+        r3.init();
+
+        r0.markTokens(i25, r3);
+
+(8)     z1 = 1;
+
+     label08:
+        z1 = Phi(z1 #7, z1 #8);
+
+        $r21 = r3.getTokens();
+
+        $r22 = org.gjt.sp.jedit.TextUtilities.getTokenAtOffset($r21, i29);
+
+        $b21 = $r22.id;
+
+(9)     if $b21 != b2 goto label09;
+
+        i27 = i27 + -1;
+
+(10)    if i27 != 0 goto label09;
+
+        $i22 = r0.getLineStartOffset(i25);
+
+        $i23 = $i22 + i29;
+
+        return $i23;
+
+     label09:
+        i27 = Phi(i27 #4, i27 #5, i27 #6, i27 #9, i27 #10);
+
+        z1 = Phi(z1 #4, z1 #5, z1 #6, z1 #9, z1 #10);
+
+        i29 = i29 + 1;
+
+(11)    goto label05;
+
+     label10:
+        i25 = i25 + 1;
+
+        $i17 = r0.getLineCount();
+
+(12)    if i25 >= $i17 goto label21;
+
+        $i18 = i25 - i3;
+
+        if $i18 <= 10000 goto label11;
+
+(13)    goto label21;
+
+     label11:
+        r0.getLineText(i25, r1);
+
+        i28 = 0;
+
+        z1 = 0;
+
+(14)    goto label04;
+
+     label12:
+(15)    i31 = i26 + -1;
+
+     label13:
+        i27 = Phi(i27 #15, i27 #29);
+
+        i25 = Phi(i25 #15, i25 #29);
+
+        z1 = Phi(z1 #15, z1 #29);
+
+        i31 = Phi(i31 #15, i31 #29);
+
+        i32 = Phi(i32 #15, i32 #29);
+
+(16)    i32 = i31;
+
+     label14:
+        i27 = Phi(i27 #16, i27 #26);
+
+        i25 = Phi(i25 #16, i25 #26);
+
+        z1 = Phi(z1 #16, z1 #26);
+
+        i31 = Phi(i31 #16, i31 #26);
+
+        i32 = Phi(i32 #16, i32 #26);
+
+        if i32 < 0 goto label19;
+
+        $r15 = r1.array;
+
+        $i10 = r1.offset;
+
+        $i11 = $i10 + i32;
+
+        c33 = $r15[$i11];
+
+        if c33 != c0 goto label16;
+
+(17)    if z1 != 0 goto label15;
+
+        r3.init();
+
+        r0.markTokens(i25, r3);
+
+(18)    z1 = 1;
+
+     label15:
+        z1 = Phi(z1 #17, z1 #18);
+
+        $r18 = r3.getTokens();
+
+        $r19 = org.gjt.sp.jedit.TextUtilities.getTokenAtOffset($r18, i32);
+
+        $b15 = $r19.id;
+
+(19)    if $b15 != b2 goto label18;
+
+        i27 = i27 + 1;
+
+(20)    goto label18;
+
+     label16:
+(21)    if c33 != c1 goto label18;
+
+(22)    if z1 != 0 goto label17;
+
+        r3.init();
+
+        r0.markTokens(i25, r3);
+
+(23)    z1 = 1;
+
+     label17:
+        z1 = Phi(z1 #22, z1 #23);
+
+        $r16 = r3.getTokens();
+
+        $r17 = org.gjt.sp.jedit.TextUtilities.getTokenAtOffset($r16, i32);
+
+        $b12 = $r17.id;
+
+(24)    if $b12 != b2 goto label18;
+
+        i27 = i27 + -1;
+
+(25)    if i27 != 0 goto label18;
+
+        $i13 = r0.getLineStartOffset(i25);
+
+        $i14 = $i13 + i32;
+
+        return $i14;
+
+     label18:
+        i27 = Phi(i27 #19, i27 #20, i27 #21, i27 #24, i27 #25);
+
+        z1 = Phi(z1 #19, z1 #20, z1 #21, z1 #24, z1 #25);
+
+        i32 = i32 + -1;
+
+(26)    goto label14;
+
+     label19:
+        i25 = i25 + -1;
+
+(27)    if i25 < 0 goto label21;
+
+        $i8 = i3 - i25;
+
+        if $i8 <= 10000 goto label20;
+
+(28)    goto label21;
+
+     label20:
+        r0.getLineText(i25, r1);
+
+        $i9 = r1.count;
+
+        i31 = $i9 - 1;
+
+        z1 = 0;
+
+(29)    goto label13;
+
+     label21:
+        i28 = Phi(i28 #12, i28 #13, i28 #27, i28 #28);
+
+        i27 = Phi(i27 #12, i27 #13, i27 #27, i27 #28);
+
+        i25 = Phi(i25 #12, i25 #13, i25 #27, i25 #28);
+
+        z1 = Phi(z1 #12, z1 #13, z1 #27, z1 #28);
+
+        i29 = Phi(i29 #12, i29 #13, i29 #27, i29 #28);
+
+        i31 = Phi(i31 #12, i31 #13, i31 #27, i31 #28);
+
+        i32 = Phi(i32 #12, i32 #13, i32 #27, i32 #28);
+
+        return -1;
+    }
+
+    public static java.lang.String join(java.util.Collection, java.lang.String)
+    {
+        java.util.Collection r0;
+        java.lang.String r1, $r7;
+        java.lang.StringBuilder r2, $r4;
+        java.util.Iterator r3;
+        boolean $z0, $z1;
+        java.lang.Object $r5, $r9;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        r2 = $r4;
+
+        r3 = r0.iterator();
+
+        $z0 = r3.hasNext();
+
+        if $z0 == 0 goto label1;
+
+        $r5 = r3.next();
+
+        r2.append($r5);
+
+        goto label2;
+
+     label1:
+        return "";
+
+     label2:
+        $z1 = r3.hasNext();
+
+        if $z1 == 0 goto label3;
+
+        r2.append(r1);
+
+        $r9 = r3.next();
+
+        r2.append($r9);
+
+        goto label2;
+
+     label3:
+        $r7 = r2.toString();
+
+        return $r7;
+    }
+
+    public static int findWordStart(java.lang.String, int, java.lang.String)
+    {
+        java.lang.String r0, r1;
+        int i0, $i1;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        $i1 = org.gjt.sp.jedit.TextUtilities.findWordStart(r0, i0, r1, 1, 0);
+
+        return $i1;
+    }
+
+    public static int findWordStart(java.lang.CharSequence, int, java.lang.String)
+    {
+        java.lang.CharSequence r0;
+        int i0, $i1;
+        java.lang.String r1;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        $i1 = org.gjt.sp.jedit.TextUtilities.findWordStart(r0, i0, r1, 1, 0, 0);
+
+        return $i1;
+    }
+
+    public static int findWordStart(java.lang.String, int, java.lang.String, boolean)
+    {
+        java.lang.String r0, r1;
+        int i0, $i1;
+        boolean z0;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        z0 := @parameter3;
+
+        $i1 = org.gjt.sp.jedit.TextUtilities.findWordStart(r0, i0, r1, z0, 0);
+
+        return $i1;
+    }
+
+    public static int findWordStart(java.lang.String, int, java.lang.String, boolean, boolean)
+    {
+        java.lang.String r0, r1;
+        int i0, $i1;
+        boolean z0, z1;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        $i1 = org.gjt.sp.jedit.TextUtilities.findWordStart(r0, i0, r1, z0, 0, z1);
+
+        return $i1;
+    }
+
+    public static int findWordStart(java.lang.String, int, java.lang.String, boolean, boolean, boolean)
+    {
+        java.lang.String r0, r1;
+        int i0, $i1;
+        boolean z0, z1, z2;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        z2 := @parameter5;
+
+        $i1 = org.gjt.sp.jedit.TextUtilities.findWordStart(r0, i0, r1, z0, z1, z2);
+
+        return $i1;
+    }
+
+    public static int findWordStart(java.lang.CharSequence, int, java.lang.String, boolean, boolean, boolean)
+    {
+        java.lang.CharSequence r0;
+        int i0, $i1;
+        java.lang.String r1;
+        boolean z0, z1, z2;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        z2 := @parameter5;
+
+        $i1 = org.gjt.sp.jedit.TextUtilities.findWordStart(r0, i0, r1, z0, z1, z2, 0);
+
+        return $i1;
+    }
+
+    public static int findWordStart(java.lang.CharSequence, int, java.lang.String, boolean, boolean, boolean, boolean)
+    {
+        java.lang.CharSequence r0;
+        int i0, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, i12, i13;
+        boolean z0, z1, z2, z3, $z4, $z5, $z6, $z7, $z8, $z9, $z10, $z11, $z12, $z13, $z14;
+        char c1, c11;
+        java.lang.String r1, r1_1, r1_2;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        z2 := @parameter5;
+
+        z3 := @parameter6;
+
+        c11 = r0.charAt(i0);
+
+(0)     if r1 != null goto label01;
+
+(1)     r1_1 = "";
+
+     label01:
+        r1_2 = Phi(r1 #0, r1_1 #1);
+
+        i12 = org.gjt.sp.jedit.TextUtilities.getCharType(c11, r1_2);
+
+(2)     i13 = i0;
+
+     label02:
+        i12 = Phi(i12 #2, i12 #12);
+
+        r1 = Phi(r1_2 #2, r1 #12);
+
+        c11 = Phi(c11 #2, c11 #12);
+
+        i13 = Phi(i13 #2, i13 #12);
+
+        if i13 < 0 goto label19;
+
+        c1 = c11;
+
+        c11 = r0.charAt(i13);
+
+(3)     tableswitch(i12)
+        {
+            case 0: goto label03;
+            case 1: goto label08;
+            case 2: goto label13;
+            default: goto label18;
+        };
+
+     label03:
+        $z4 = java.lang.Character.isWhitespace(c11);
+
+        if $z4 == 0 goto label04;
+
+(4)     goto label18;
+
+     label04:
+        if z3 != 0 goto label05;
+
+        $i3 = i13 + 1;
+
+        return $i3;
+
+     label05:
+        $z5 = java.lang.Character.isLetterOrDigit(c11);
+
+        if $z5 != 0 goto label06;
+
+        $i2 = r1.indexOf(c11);
+
+        if $i2 == -1 goto label07;
+
+     label06:
+        i12 = 1;
+
+(5)     goto label18;
+
+     label07:
+        i12 = 2;
+
+(6)     goto label18;
+
+     label08:
+        if z1 == 0 goto label09;
+
+        $z12 = java.lang.Character.isUpperCase(c11);
+
+        if $z12 == 0 goto label09;
+
+        $z13 = java.lang.Character.isUpperCase(c1);
+
+        if $z13 != 0 goto label09;
+
+        $z14 = java.lang.Character.isLetterOrDigit(c1);
+
+        if $z14 == 0 goto label09;
+
+        return i13;
+
+     label09:
+        if z1 == 0 goto label10;
+
+        $z10 = java.lang.Character.isUpperCase(c11);
+
+        if $z10 != 0 goto label10;
+
+        $z11 = java.lang.Character.isUpperCase(c1);
+
+        if $z11 == 0 goto label10;
+
+        $i10 = i13 + 1;
+
+        return $i10;
+
+     label10:
+        $z8 = java.lang.Character.isLetterOrDigit(c11);
+
+(7)     if $z8 != 0 goto label18;
+
+        $i8 = r1.indexOf(c11);
+
+        if $i8 == -1 goto label11;
+
+(8)     goto label18;
+
+     label11:
+        $z9 = java.lang.Character.isWhitespace(c11);
+
+        if $z9 == 0 goto label12;
+
+        if z2 == 0 goto label12;
+
+        if z3 != 0 goto label12;
+
+        i12 = 0;
+
+(9)     goto label18;
+
+     label12:
+        $i9 = i13 + 1;
+
+        return $i9;
+
+     label13:
+        if z0 != 0 goto label14;
+
+        if i0 == i13 goto label14;
+
+        $i7 = i13 + 1;
+
+        return $i7;
+
+     label14:
+        $z6 = java.lang.Character.isWhitespace(c11);
+
+        if $z6 == 0 goto label16;
+
+        if z2 == 0 goto label15;
+
+        if z3 != 0 goto label15;
+
+        i12 = 0;
+
+(10)    goto label18;
+
+     label15:
+        $i6 = i13 + 1;
+
+        return $i6;
+
+     label16:
+        $z7 = java.lang.Character.isLetterOrDigit(c11);
+
+        if $z7 != 0 goto label17;
+
+        $i5 = r1.indexOf(c11);
+
+(11)    if $i5 == -1 goto label18;
+
+     label17:
+        $i4 = i13 + 1;
+
+        return $i4;
+
+     label18:
+        i12 = Phi(i12 #3, i12 #4, i12 #5, i12 #6, i12 #7, i12 #8, i12 #9, i12 #10, i12 #11);
+
+        i13 = i13 + -1;
+
+(12)    goto label02;
+
+     label19:
+        return 0;
+    }
+
+    public static int findWordEnd(java.lang.String, int, java.lang.String)
+    {
+        java.lang.String r0, r1;
+        int i0, $i1;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        $i1 = org.gjt.sp.jedit.TextUtilities.findWordEnd(r0, i0, r1, 1);
+
+        return $i1;
+    }
+
+    public static int findWordEnd(java.lang.CharSequence, int, java.lang.String)
+    {
+        java.lang.CharSequence r0;
+        int i0, $i1;
+        java.lang.String r1;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        $i1 = org.gjt.sp.jedit.TextUtilities.findWordEnd(r0, i0, r1, 1, 0, 0);
+
+        return $i1;
+    }
+
+    public static int findWordEnd(java.lang.String, int, java.lang.String, boolean)
+    {
+        java.lang.String r0, r1;
+        int i0, $i1;
+        boolean z0;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        z0 := @parameter3;
+
+        $i1 = org.gjt.sp.jedit.TextUtilities.findWordEnd(r0, i0, r1, z0, 0);
+
+        return $i1;
+    }
+
+    public static int findWordEnd(java.lang.String, int, java.lang.String, boolean, boolean)
+    {
+        java.lang.String r0, r1;
+        int i0, $i1;
+        boolean z0, z1;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        $i1 = org.gjt.sp.jedit.TextUtilities.findWordEnd(r0, i0, r1, z0, 0, z1);
+
+        return $i1;
+    }
+
+    public static int findWordEnd(java.lang.String, int, java.lang.String, boolean, boolean, boolean)
+    {
+        java.lang.String r0, r1;
+        int i0, $i1;
+        boolean z0, z1, z2;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        z2 := @parameter5;
+
+        $i1 = org.gjt.sp.jedit.TextUtilities.findWordEnd(r0, i0, r1, z0, z1, z2);
+
+        return $i1;
+    }
+
+    public static int findWordEnd(java.lang.CharSequence, int, java.lang.String, boolean, boolean, boolean)
+    {
+        java.lang.CharSequence r0;
+        boolean z0, z1, z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z10, $z11, $z12;
+        char c0, c8;
+        int $i1, $i2, $i3, $i4, $i5, $i6, i7, i9, i10, i7_1, i7_2;
+        java.lang.String r1, r1_1, r1_2;
+
+        r0 := @parameter0;
+
+        i7 := @parameter1;
+
+        r1 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        z2 := @parameter5;
+
+(0)     if i7 == 0 goto label01;
+
+(1)     i7_1 = i7 + -1;
+
+     label01:
+        i7_2 = Phi(i7 #0, i7_1 #1);
+
+        c8 = r0.charAt(i7_2);
+
+(2)     if r1 != null goto label02;
+
+(3)     r1_1 = "";
+
+     label02:
+        r1_2 = Phi(r1 #2, r1_1 #3);
+
+        i9 = org.gjt.sp.jedit.TextUtilities.getCharType(c8, r1_2);
+
+(4)     i10 = i7_2;
+
+     label03:
+        r1 = Phi(r1_2 #4, r1 #12);
+
+        i10 = Phi(i10 #4, i10 #12);
+
+        c8 = Phi(c8 #4, c8 #12);
+
+        i7 = Phi(i7_2 #4, i7 #12);
+
+        i9 = Phi(i9 #4, i9 #12);
+
+        $i1 = r0.length();
+
+        if i10 >= $i1 goto label17;
+
+        c0 = c8;
+
+        c8 = r0.charAt(i10);
+
+(5)     tableswitch(i9)
+        {
+            case 0: goto label04;
+            case 1: goto label06;
+            case 2: goto label11;
+            default: goto label16;
+        };
+
+     label04:
+        $z3 = java.lang.Character.isWhitespace(c8);
+
+        if $z3 == 0 goto label05;
+
+(6)     goto label16;
+
+     label05:
+        return i10;
+
+     label06:
+        if z1 == 0 goto label07;
+
+        $i5 = i7 + 1;
+
+        if i10 <= $i5 goto label07;
+
+        $z10 = java.lang.Character.isUpperCase(c8);
+
+        if $z10 != 0 goto label07;
+
+        $z11 = java.lang.Character.isLetterOrDigit(c8);
+
+        if $z11 == 0 goto label07;
+
+        $z12 = java.lang.Character.isUpperCase(c0);
+
+        if $z12 == 0 goto label07;
+
+        $i6 = i10 - 1;
+
+        return $i6;
+
+     label07:
+        if z1 == 0 goto label08;
+
+        $z8 = java.lang.Character.isUpperCase(c8);
+
+        if $z8 == 0 goto label08;
+
+        $z9 = java.lang.Character.isUpperCase(c0);
+
+        if $z9 != 0 goto label08;
+
+        return i10;
+
+     label08:
+        $z6 = java.lang.Character.isLetterOrDigit(c8);
+
+(7)     if $z6 != 0 goto label16;
+
+        $i4 = r1.indexOf(c8);
+
+        if $i4 == -1 goto label09;
+
+(8)     goto label16;
+
+     label09:
+        $z7 = java.lang.Character.isWhitespace(c8);
+
+        if $z7 == 0 goto label10;
+
+        if z2 == 0 goto label10;
+
+        i9 = 0;
+
+(9)     goto label16;
+
+     label10:
+        return i10;
+
+     label11:
+        if z0 != 0 goto label12;
+
+        if i10 == i7 goto label12;
+
+        return i10;
+
+     label12:
+        $z4 = java.lang.Character.isWhitespace(c8);
+
+        if $z4 == 0 goto label14;
+
+        if z2 == 0 goto label13;
+
+        i9 = 0;
+
+(10)    goto label16;
+
+     label13:
+        return i10;
+
+     label14:
+        $z5 = java.lang.Character.isLetterOrDigit(c8);
+
+        if $z5 != 0 goto label15;
+
+        $i3 = r1.indexOf(c8);
+
+(11)    if $i3 == -1 goto label16;
+
+     label15:
+        return i10;
+
+     label16:
+        i9 = Phi(i9 #5, i9 #6, i9 #7, i9 #8, i9 #9, i9 #10, i9 #11);
+
+        i10 = i10 + 1;
+
+(12)    goto label03;
+
+     label17:
+        $i2 = r0.length();
+
+        return $i2;
+    }
+
+    public static int getCharType(char, java.lang.String)
+    {
+        char c0;
+        java.lang.String r0;
+        boolean $z0, $z1;
+        int $i1;
+        byte b2, b2_1, b2_2, b2_3;
+
+        c0 := @parameter0;
+
+        r0 := @parameter1;
+
+        $z0 = java.lang.Character.isWhitespace(c0);
+
+        if $z0 == 0 goto label1;
+
+        b2 = 0;
+
+(0)     goto label4;
+
+     label1:
+        $z1 = java.lang.Character.isLetterOrDigit(c0);
+
+        if $z1 != 0 goto label2;
+
+        $i1 = r0.indexOf(c0);
+
+        if $i1 == -1 goto label3;
+
+     label2:
+        b2_2 = 1;
+
+(1)     goto label4;
+
+     label3:
+(2)     b2_1 = 2;
+
+     label4:
+        b2_3 = Phi(b2 #0, b2_2 #1, b2_1 #2);
+
+        return b2_3;
+    }
+
+    public static java.lang.String spacesToTabs(java.lang.String, int)
+    {
+        java.lang.String r0, $r3, $r4, $r7, $r10;
+        int i0, i1, $i2, $i3, $i5, $i6, $i8, i9, i10, i11;
+        java.lang.StringBuilder r1, $r2;
+        char $c4, $c7;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+        i9 = 0;
+
+        i10 = 0;
+
+(0)     i11 = 0;
+
+     label01:
+        i11 = Phi(i11 #0, i11 #7);
+
+        i10 = Phi(i10 #0, i10 #7);
+
+        i9 = Phi(i9 #0, i9 #7);
+
+        $i2 = r0.length();
+
+        if i11 >= $i2 goto label09;
+
+        $c4 = r0.charAt(i11);
+
+        lookupswitch($c4)
+        {
+            case 9: goto label03;
+            case 10: goto label04;
+            case 32: goto label02;
+            default: goto label06;
+        };
+
+     label02:
+        i10 = i10 + 1;
+
+        i9 = i9 + 1;
+
+(1)     goto label08;
+
+     label03:
+        $i6 = i9 % i0;
+
+        i1 = i0 - $i6;
+
+        i9 = i9 + i1;
+
+        i10 = i10 + i1;
+
+(2)     goto label08;
+
+     label04:
+        if i10 == 0 goto label05;
+
+        $i5 = i9 - i10;
+
+        $r7 = org.gjt.sp.util.StandardUtilities.createWhiteSpace(i10, i0, $i5);
+
+        r1.append($r7);
+
+     label05:
+        i10 = 0;
+
+        i9 = 0;
+
+        r1.append(10);
+
+(3)     goto label08;
+
+     label06:
+(4)     if i10 == 0 goto label07;
+
+        $i8 = i9 - i10;
+
+        $r10 = org.gjt.sp.util.StandardUtilities.createWhiteSpace(i10, i0, $i8);
+
+        r1.append($r10);
+
+(5)     i10 = 0;
+
+     label07:
+        i10 = Phi(i10 #4, i10 #5);
+
+        $c7 = r0.charAt(i11);
+
+        r1.append($c7);
+
+(6)     i9 = i9 + 1;
+
+     label08:
+        i10 = Phi(i10 #1, i10 #2, i10 #3, i10 #6);
+
+        i9 = Phi(i9 #1, i9 #2, i9 #3, i9 #6);
+
+        i11 = i11 + 1;
+
+(7)     goto label01;
+
+     label09:
+        if i10 == 0 goto label10;
+
+        $i3 = i9 - i10;
+
+        $r4 = org.gjt.sp.util.StandardUtilities.createWhiteSpace(i10, i0, $i3);
+
+        r1.append($r4);
+
+     label10:
+        $r3 = r1.toString();
+
+        return $r3;
+    }
+
+    public static java.lang.String tabsToSpaces(java.lang.String, int)
+    {
+        java.lang.String r0, $r3;
+        int i0, $i1, $i4, i6, i7, i8;
+        java.lang.StringBuilder r1, $r2;
+        char $c2, $c3, $c5;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+        i6 = 0;
+
+(0)     i7 = 0;
+
+     label1:
+        i7 = Phi(i7 #0, i7 #6);
+
+        i6 = Phi(i6 #0, i6 #6);
+
+        i8 = Phi(i8 #0, i8 #6);
+
+        $i1 = r0.length();
+
+        if i7 >= $i1 goto label7;
+
+        $c2 = r0.charAt(i7);
+
+        lookupswitch($c2)
+        {
+            case 9: goto label2;
+            case 10: goto label4;
+            default: goto label5;
+        };
+
+     label2:
+        $i4 = i6 % i0;
+
+        i8 = i0 - $i4;
+
+(1)     i6 = i6 + i8;
+
+     label3:
+        i7 = Phi(i7 #1, i7 #3);
+
+        i6 = Phi(i6 #1, i6 #3);
+
+        i8 = Phi(i8 #1, i8 #3);
+
+        i8 = i8 + -1;
+
+(2)     if i8 < 0 goto label6;
+
+        r1.append(32);
+
+(3)     goto label3;
+
+     label4:
+        i6 = 0;
+
+        $c3 = r0.charAt(i7);
+
+        r1.append($c3);
+
+(4)     goto label6;
+
+     label5:
+        i6 = i6 + 1;
+
+        $c5 = r0.charAt(i7);
+
+(5)     r1.append($c5);
+
+     label6:
+        i7 = Phi(i7 #2, i7 #4, i7 #5);
+
+        i6 = Phi(i6 #2, i6 #4, i6 #5);
+
+        i8 = Phi(i8 #2, i8 #4, i8 #5);
+
+        i7 = i7 + 1;
+
+(6)     goto label1;
+
+     label7:
+        $r3 = r1.toString();
+
+        return $r3;
+    }
+
+    public static java.lang.String format(java.lang.String, int, int)
+    {
+        java.lang.String r0, $r3, $r5, $r6;
+        int i0, i1, i2, $i3, i4;
+        java.lang.StringBuilder r1, $r2;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+(0)     i4 = 0;
+
+     label1:
+        i4 = Phi(i4 #0, i4 #1);
+
+        i2 = r0.indexOf("\n\n", i4);
+
+        if i2 != -1 goto label2;
+
+        goto label3;
+
+     label2:
+        $r3 = r0.substring(i4, i2);
+
+        org.gjt.sp.jedit.TextUtilities.formatParagraph($r3, i0, i1, r1);
+
+        r1.append("\n\n");
+
+        i4 = i2 + 2;
+
+(1)     goto label1;
+
+     label3:
+        $i3 = r0.length();
+
+        if i4 == $i3 goto label4;
+
+        $r6 = r0.substring(i4);
+
+        org.gjt.sp.jedit.TextUtilities.formatParagraph($r6, i0, i1, r1);
+
+     label4:
+        $r5 = r1.toString();
+
+        return $r5;
+    }
+
+    public static int indexIgnoringWhitespace(java.lang.String, int)
+    {
+        java.lang.String r0;
+        int i0, i2, i3;
+        char $c1;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        i2 = 0;
+
+(0)     i3 = 0;
+
+     label1:
+        i3 = Phi(i3 #0, i3 #3);
+
+        i2 = Phi(i2 #0, i2 #3);
+
+        if i3 >= i0 goto label3;
+
+        $c1 = r0.charAt(i3);
+
+        $z0 = java.lang.Character.isWhitespace($c1);
+
+(1)     if $z0 != 0 goto label2;
+
+(2)     i2 = i2 + 1;
+
+     label2:
+        i2 = Phi(i2 #1, i2 #2);
+
+        i3 = i3 + 1;
+
+(3)     goto label1;
+
+     label3:
+        return i2;
+    }
+
+    public static int ignoringWhitespaceIndex(java.lang.String, int)
+    {
+        java.lang.String r0;
+        int i0, $i2, $i3, $i4, i5, i6;
+        char $c1;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        i5 = 0;
+
+(0)     i6 = 0;
+
+     label1:
+        i6 = Phi(i6 #0, i6 #3);
+
+        i5 = Phi(i5 #0, i5 #3);
+
+        $c1 = r0.charAt(i6);
+
+        $z0 = java.lang.Character.isWhitespace($c1);
+
+(1)     if $z0 != 0 goto label2;
+
+(2)     i5 = i5 + 1;
+
+     label2:
+        i5 = Phi(i5 #1, i5 #2);
+
+        if i5 <= i0 goto label3;
+
+        return i6;
+
+     label3:
+        $i2 = r0.length();
+
+        $i3 = $i2 - 1;
+
+        if i6 != $i3 goto label4;
+
+        $i4 = i6 + 1;
+
+        return $i4;
+
+     label4:
+        i6 = i6 + 1;
+
+(3)     goto label1;
+    }
+
+    public static int getStringCase(java.lang.CharSequence)
+    {
+        java.lang.CharSequence r0;
+        int $i0, $i1, i4;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        byte b2, b2_1, b2_2, b2_3;
+        char c3, c5;
+
+        r0 := @parameter0;
+
+        $i0 = r0.length();
+
+        if $i0 != 0 goto label01;
+
+        return 0;
+
+     label01:
+        b2 = -1;
+
+        c3 = r0.charAt(0);
+
+        $z0 = java.lang.Character.isLetter(c3);
+
+(0)     if $z0 == 0 goto label03;
+
+        $z4 = java.lang.Character.isUpperCase(c3);
+
+        if $z4 == 0 goto label02;
+
+        b2_1 = 2;
+
+(1)     goto label03;
+
+     label02:
+(2)     b2_2 = 1;
+
+     label03:
+        b2_3 = Phi(b2 #0, b2_1 #1, b2_2 #2);
+
+(3)     i4 = 1;
+
+     label04:
+        i4 = Phi(i4 #3, i4 #9);
+
+        b2 = Phi(b2_3 #3, b2 #9);
+
+        $i1 = r0.length();
+
+        if i4 >= $i1 goto label10;
+
+        c5 = r0.charAt(i4);
+
+        $z1 = java.lang.Character.isLetter(c5);
+
+        if $z1 != 0 goto label05;
+
+(4)     goto label09;
+
+     label05:
+(5)     tableswitch(b2)
+        {
+            case 1: goto label08;
+            case 2: goto label06;
+            case 3: goto label08;
+            default: goto label09;
+        };
+
+     label06:
+        $z2 = java.lang.Character.isLowerCase(c5);
+
+(6)     if $z2 == 0 goto label09;
+
+        if i4 != 1 goto label07;
+
+        b2 = 3;
+
+(7)     goto label09;
+
+     label07:
+        return 0;
+
+     label08:
+        $z3 = java.lang.Character.isUpperCase(c5);
+
+(8)     if $z3 == 0 goto label09;
+
+        return 0;
+
+     label09:
+        b2 = Phi(b2 #4, b2 #5, b2 #6, b2 #7, b2 #8);
+
+        i4 = i4 + 1;
+
+(9)     goto label04;
+
+     label10:
+        return b2;
+    }
+
+    public static int getStringCase(java.lang.String)
+    {
+        java.lang.String r0;
+        int $i0;
+
+        r0 := @parameter0;
+
+        $i0 = org.gjt.sp.jedit.TextUtilities.getStringCase(r0);
+
+        return $i0;
+    }
+
+    public static java.lang.String toTitleCase(java.lang.String)
+    {
+        java.lang.String r0, $r3, $r4, $r6;
+        int $i0;
+        java.lang.StringBuilder $r1, $r2, $r5;
+        char $c1, $c2;
+
+        r0 := @parameter0;
+
+        $i0 = r0.length();
+
+        if $i0 != 0 goto label1;
+
+        return r0;
+
+     label1:
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $c1 = r0.charAt(0);
+
+        $c2 = java.lang.Character.toUpperCase($c1);
+
+        $r2 = $r1.append($c2);
+
+        $r3 = r0.substring(1);
+
+        $r4 = $r3.toLowerCase();
+
+        $r5 = $r2.append($r4);
+
+        $r6 = $r5.toString();
+
+        return $r6;
+    }
+
+    public static java.lang.String escapeText(java.lang.String)
+    {
+        java.lang.String r0, r1, $r6;
+        java.lang.StringBuilder $r2, $r3, $r4, $r5;
+
+        r0 := @parameter0;
+
+        r1 = r0.replace("\\E", "\\\\E");
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append("\\Q");
+
+        $r4 = $r3.append(r1);
+
+        $r5 = $r4.append("\\E");
+
+        $r6 = $r5.toString();
+
+        return $r6;
+    }
+
+    private static void formatParagraph(java.lang.String, int, int, java.lang.StringBuilder)
+    {
+        java.lang.String r0, r2, r4;
+        int i0, i1, i2, i3, $i4, $i5, $i6, $i7, i8;
+        java.lang.StringBuilder r1;
+        java.util.StringTokenizer r3, $r6;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        r1 := @parameter3;
+
+        i2 = org.gjt.sp.util.StandardUtilities.getLeadingWhiteSpace(r0);
+
+        r2 = r0.substring(0, i2);
+
+        i3 = org.gjt.sp.util.StandardUtilities.getLeadingWhiteSpaceWidth(r0, i1);
+
+        r1.append(r2);
+
+        i8 = i3;
+
+        $r6 = new java.util.StringTokenizer;
+
+        specialinvoke $r6.<init>(r0);
+
+(0)     r3 = $r6;
+
+     label1:
+        i8 = Phi(i8 #0, i8 #4);
+
+        $z0 = r3.hasMoreTokens();
+
+        if $z0 == 0 goto label5;
+
+        r4 = r3.nextToken();
+
+        if i8 != i3 goto label2;
+
+(1)     goto label4;
+
+     label2:
+        $i4 = r4.length();
+
+        $i5 = i8 + $i4;
+
+        $i6 = $i5 + 1;
+
+        if $i6 <= i0 goto label3;
+
+        r1.append(10);
+
+        r1.append(r2);
+
+        i8 = i3;
+
+(2)     goto label4;
+
+     label3:
+        r1.append(32);
+
+(3)     i8 = i8 + 1;
+
+     label4:
+        i8 = Phi(i8 #1, i8 #2, i8 #3);
+
+        r1.append(r4);
+
+        $i7 = r4.length();
+
+        i8 = i8 + $i7;
+
+(4)     goto label1;
+
+     label5:
+        return;
+    }
+
+    public static void indexIgnoringWhitespace(java.lang.String, int, int, java.lang.StringBuffer)
+    {
+        java.lang.String r0, r2, r4;
+        int i0, i1, i2, i3, $i4, $i5, $i6, $i7, i8;
+        java.lang.StringBuffer r1;
+        java.util.StringTokenizer r3, $r6;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        r1 := @parameter3;
+
+        i2 = org.gjt.sp.util.StandardUtilities.getLeadingWhiteSpace(r0);
+
+        r2 = r0.substring(0, i2);
+
+        i3 = org.gjt.sp.util.StandardUtilities.getLeadingWhiteSpaceWidth(r0, i1);
+
+        r1.append(r2);
+
+        i8 = i3;
+
+        $r6 = new java.util.StringTokenizer;
+
+        specialinvoke $r6.<init>(r0);
+
+(0)     r3 = $r6;
+
+     label1:
+        i8 = Phi(i8 #0, i8 #4);
+
+        $z0 = r3.hasMoreTokens();
+
+        if $z0 == 0 goto label5;
+
+        r4 = r3.nextToken();
+
+        if i8 != i3 goto label2;
+
+(1)     goto label4;
+
+     label2:
+        $i4 = r4.length();
+
+        $i5 = i8 + $i4;
+
+        $i6 = $i5 + 1;
+
+        if $i6 <= i0 goto label3;
+
+        r1.append(10);
+
+        r1.append(r2);
+
+        i8 = i3;
+
+(2)     goto label4;
+
+     label3:
+        r1.append(32);
+
+(3)     i8 = i8 + 1;
+
+     label4:
+        i8 = Phi(i8 #1, i8 #2, i8 #3);
+
+        r1.append(r4);
+
+        $i7 = r4.length();
+
+        i8 = i8 + $i7;
+
+(4)     goto label1;
+
+     label5:
+        return;
+    }
+}

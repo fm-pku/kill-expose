@@ -1,0 +1,11 @@
+public interface  org.gjt.sp.jedit.buffer.BufferUndoListener extends java.lang.Object
+{
+
+    public abstract void beginUndo(org.gjt.sp.jedit.buffer.JEditBuffer);
+
+    public abstract void endUndo(org.gjt.sp.jedit.buffer.JEditBuffer);
+
+    public abstract void beginRedo(org.gjt.sp.jedit.buffer.JEditBuffer);
+
+    public abstract void endRedo(org.gjt.sp.jedit.buffer.JEditBuffer);
+}

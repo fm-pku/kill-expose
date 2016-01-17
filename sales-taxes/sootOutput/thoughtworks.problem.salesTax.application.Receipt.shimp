@@ -1,0 +1,320 @@
+public class thoughtworks.problem.salesTax.application.Receipt extends java.lang.Object
+{
+    private java.util.ArrayList receiptItemsList;
+    private double salesTaxes;
+    private double total;
+    private thoughtworks.problem.salesTax.shoppingCart.ShoppingCart cart;
+
+    public void <init>(thoughtworks.problem.salesTax.shoppingCart.ShoppingCart)
+    {
+        thoughtworks.problem.salesTax.application.Receipt r0;
+        thoughtworks.problem.salesTax.shoppingCart.ShoppingCart r1;
+        java.util.ArrayList $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.cart = r1;
+
+        $r2 = new java.util.ArrayList;
+
+        specialinvoke $r2.<init>();
+
+        r0.receiptItemsList = $r2;
+
+        Packer.Pack(r0);
+
+        specialinvoke r0.generateReceipt();
+
+        return;
+    }
+
+    private void generateReceipt()
+    {
+        thoughtworks.problem.salesTax.application.Receipt r0;
+        java.util.Iterator r1;
+        thoughtworks.problem.salesTax.products.Product r2;
+        int i0;
+        java.lang.String r3;
+        double d0, d1, $d2, $d3;
+        thoughtworks.problem.salesTax.shoppingCart.ShoppingCart $r4;
+        boolean $z0;
+        java.lang.Object $r5;
+        thoughtworks.problem.salesTax.application.Receipt$ReceiptItems $r6;
+        java.util.ArrayList $r7;
+
+        r0 := @this;
+
+        $r4 = r0.cart;
+
+        Packer.Unpack(r0);
+
+        r1 = $r4.iterator();
+
+     label1:
+        Packer.Pack(r0);
+
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        Packer.Unpack(r0);
+
+        $r5 = r1.next();
+
+        r2 = (thoughtworks.problem.salesTax.products.Product) $r5;
+
+        i0 = r2.getQuantity();
+
+        r3 = r2.getName();
+
+        d0 = r2.getCost();
+
+        d1 = r2.getSalesTax();
+
+        $r7 = r0.receiptItemsList;
+
+        $r6 = new thoughtworks.problem.salesTax.application.Receipt$ReceiptItems;
+
+        specialinvoke $r6.<init>(i0, r3, d0, d1);
+
+        $r7.add($r6);
+
+        Packer.Pack(r0);
+
+        goto label1;
+
+     label2:
+        $d2 = specialinvoke r0.getSalesTaxes();
+
+        Packer.Unpack(r0);
+
+        r0.salesTaxes = $d2;
+
+        Packer.Pack(r0);
+
+        $d3 = specialinvoke r0.getTotal();
+
+        Packer.Unpack(r0);
+
+        r0.total = $d3;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    private double getSalesTaxes()
+    {
+        thoughtworks.problem.salesTax.application.Receipt r0;
+        java.util.Iterator r1;
+        java.util.ArrayList $r2;
+        boolean $z0;
+        java.lang.Object $r3;
+        thoughtworks.problem.salesTax.application.Receipt$ReceiptItems $r4;
+        double $d0, d1;
+
+        r0 := @this;
+
+        d1 = 0.0;
+
+        $r2 = r0.receiptItemsList;
+
+        Packer.Unpack(r0);
+
+(0)     r1 = $r2.iterator();
+
+     label1:
+        Packer.Pack(r0);
+
+        d1 = Phi(d1 #0, d1 #1);
+
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r3 = r1.next();
+
+        $r4 = (thoughtworks.problem.salesTax.application.Receipt$ReceiptItems) $r3;
+
+        $d0 = $r4.getSalesTax();
+
+        d1 = d1 + $d0;
+
+(1)     goto label1;
+
+     label2:
+        return d1;
+    }
+
+    private double getTotal()
+    {
+        thoughtworks.problem.salesTax.application.Receipt r0;
+        java.util.Iterator r1;
+        java.util.ArrayList $r2;
+        boolean $z0;
+        double $d0, $d1, $d2, d3;
+        java.lang.Object $r3;
+        thoughtworks.problem.salesTax.application.Receipt$ReceiptItems $r4;
+
+        r0 := @this;
+
+        d3 = 0.0;
+
+        $r2 = r0.receiptItemsList;
+
+        Packer.Unpack(r0);
+
+(0)     r1 = $r2.iterator();
+
+     label1:
+        Packer.Pack(r0);
+
+        d3 = Phi(d3 #0, d3 #1);
+
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r3 = r1.next();
+
+        $r4 = (thoughtworks.problem.salesTax.application.Receipt$ReceiptItems) $r3;
+
+        $d2 = $r4.getCost();
+
+        d3 = d3 + $d2;
+
+(1)     goto label1;
+
+     label2:
+        $d0 = r0.salesTaxes;
+
+        $d1 = d3 + $d0;
+
+        return $d1;
+    }
+
+    public void print()
+    {
+        thoughtworks.problem.salesTax.application.Receipt r0;
+        java.util.Iterator r1;
+        thoughtworks.problem.salesTax.application.Receipt$ReceiptItems r2;
+        java.util.ArrayList $r3;
+        boolean $z0;
+        java.lang.StringBuilder $r4, $r6, $r7, $r9, $r11, $r15, $r19, $r21, $r22, $r24, $r25, $r26;
+        java.io.PrintStream $r5, $r10, $r20;
+        double $d0, $d1, $d2;
+        java.lang.String $r8, $r13, $r16, $r23, $r27;
+        java.math.BigDecimal $r12, $r14;
+        thoughtworks.problem.salesTax.shoppingCart.ShoppingCart $r17;
+        java.lang.Object $r18;
+        int $i0;
+
+        r0 := @this;
+
+        $r3 = r0.receiptItemsList;
+
+        Packer.Unpack(r0);
+
+        r1 = $r3.iterator();
+
+     label1:
+        Packer.Pack(r0);
+
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        Packer.Unpack(r2);
+
+        $r18 = r1.next();
+
+        r2 = (thoughtworks.problem.salesTax.application.Receipt$ReceiptItems) $r18;
+
+        $r20 = java.lang.System.out;
+
+        $r19 = new java.lang.StringBuilder;
+
+        specialinvoke $r19.<init>();
+
+        $i0 = r2.quantity;
+
+        $r21 = $r19.append($i0);
+
+        $r22 = $r21.append(" ");
+
+        $r23 = r2.name;
+
+        $r24 = $r22.append($r23);
+
+        $r25 = $r24.append(" :");
+
+        $d2 = r2.cost;
+
+        $r26 = $r25.append($d2);
+
+        Packer.Pack(r2);
+
+        $r27 = $r26.toString();
+
+        $r20.println($r27);
+
+        goto label1;
+
+     label2:
+        Packer.Unpack(r0);
+
+        $r5 = java.lang.System.out;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r6 = $r4.append("\nSales Taxes:\t");
+
+        $d0 = r0.salesTaxes;
+
+        $r7 = $r6.append($d0);
+
+        $r8 = $r7.toString();
+
+        $r5.println($r8);
+
+        $r10 = java.lang.System.out;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r11 = $r9.append("Total:\t");
+
+        $r12 = new java.math.BigDecimal;
+
+        $d1 = r0.total;
+
+        $r13 = java.lang.Double.toString($d1);
+
+        specialinvoke $r12.<init>($r13);
+
+        $r14 = $r12.setScale(2, 6);
+
+        $r15 = $r11.append($r14);
+
+        $r16 = $r15.toString();
+
+        $r10.println($r16);
+
+        $r17 = r0.cart;
+
+        $r17.empty();
+
+        Packer.Pack(r0);
+
+        return;
+    }
+}

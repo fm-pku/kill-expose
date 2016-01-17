@@ -1,0 +1,66 @@
+class org.gjt.sp.jedit.gui.CompletionPopup$WindowFocusHandler extends java.lang.Object implements java.awt.event.WindowFocusListener
+{
+    final org.gjt.sp.jedit.gui.CompletionPopup this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.CompletionPopup)
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$WindowFocusHandler r0;
+        org.gjt.sp.jedit.gui.CompletionPopup r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void windowGainedFocus(java.awt.event.WindowEvent)
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$WindowFocusHandler r0;
+        java.awt.event.WindowEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void windowLostFocus(java.awt.event.WindowEvent)
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$WindowFocusHandler r0;
+        java.awt.event.WindowEvent r1;
+        org.gjt.sp.jedit.gui.CompletionPopup $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r2.dispose();
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.CompletionPopup, org.gjt.sp.jedit.gui.CompletionPopup$1)
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$WindowFocusHandler r0;
+        org.gjt.sp.jedit.gui.CompletionPopup r1;
+        org.gjt.sp.jedit.gui.CompletionPopup$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

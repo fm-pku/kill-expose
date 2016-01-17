@@ -1,0 +1,39 @@
+class org.gjt.sp.jedit.help.HelpIndex$Word$Occurrence extends java.lang.Object
+{
+    int file;
+    int count;
+
+    void <init>(int, boolean)
+    {
+        org.gjt.sp.jedit.help.HelpIndex$Word$Occurrence r0;
+        int i0;
+        boolean z0;
+        byte $b1, $b1_1, $b1_2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        z0 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.file = i0;
+
+        if z0 == 0 goto label1;
+
+        $b1 = 10;
+
+(0)     goto label2;
+
+     label1:
+(1)     $b1_1 = 1;
+
+     label2:
+        $b1_2 = Phi($b1 #0, $b1_1 #1);
+
+        r0.count = $b1_2;
+
+        return;
+    }
+}

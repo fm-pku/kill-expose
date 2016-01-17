@@ -1,0 +1,273 @@
+class org.gjt.sp.jedit.gui.DockablePanel extends javax.swing.JPanel
+{
+    private org.gjt.sp.jedit.gui.PanelWindowContainer panel;
+    private org.gjt.sp.jedit.gui.DockableWindowManagerImpl wm;
+    static java.awt.Point dragStart;
+
+    void <init>(org.gjt.sp.jedit.gui.PanelWindowContainer)
+    {
+        org.gjt.sp.jedit.gui.DockablePanel r0;
+        org.gjt.sp.jedit.gui.PanelWindowContainer r1;
+        org.gjt.sp.jedit.gui.DockablePanel$ResizeMouseHandler r2, $r5;
+        java.awt.CardLayout $r3;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new java.awt.CardLayout;
+
+        specialinvoke $r3.<init>();
+
+        specialinvoke r0.<init>($r3);
+
+        r0.panel = r1;
+
+        $r4 = r1.getDockableWindowManager();
+
+        r0.wm = $r4;
+
+        $r5 = new org.gjt.sp.jedit.gui.DockablePanel$ResizeMouseHandler;
+
+        specialinvoke $r5.<init>(r0);
+
+        r2 = $r5;
+
+        r0.addMouseListener(r2);
+
+        r0.addMouseMotionListener(r2);
+
+        return;
+    }
+
+    org.gjt.sp.jedit.gui.PanelWindowContainer getWindowContainer()
+    {
+        org.gjt.sp.jedit.gui.DockablePanel r0;
+        org.gjt.sp.jedit.gui.PanelWindowContainer $r1;
+
+        r0 := @this;
+
+        $r1 = r0.panel;
+
+        return $r1;
+    }
+
+    void showDockable(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockablePanel r0;
+        java.lang.String r1;
+        java.awt.LayoutManager $r2;
+        java.awt.CardLayout $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.getLayout();
+
+        $r3 = (java.awt.CardLayout) $r2;
+
+        $r3.show(r0, r1);
+
+        return;
+    }
+
+    public java.awt.Dimension getMinimumSize()
+    {
+        org.gjt.sp.jedit.gui.DockablePanel r0;
+        java.awt.Dimension $r1;
+
+        r0 := @this;
+
+        $r1 = new java.awt.Dimension;
+
+        specialinvoke $r1.<init>(0, 0);
+
+        return $r1;
+    }
+
+    public java.awt.Dimension getPreferredSize()
+    {
+        org.gjt.sp.jedit.gui.DockablePanel r0;
+        java.lang.String r1, $r5;
+        int i0, $i1, $i2, i3, i4;
+        org.gjt.sp.jedit.gui.PanelWindowContainer $r2, $r3, $r4, $r8, $r11;
+        boolean $z0, $z1;
+        java.awt.Dimension $r6, $r7, $r9, $r10, $r12;
+
+        r0 := @this;
+
+        $r2 = r0.panel;
+
+        r1 = $r2.getPosition();
+
+        $r3 = r0.panel;
+
+        i0 = $r3.getDimension();
+
+        $r4 = r0.panel;
+
+        $r5 = $r4.getCurrent();
+
+        if $r5 != null goto label1;
+
+        $r12 = new java.awt.Dimension;
+
+        specialinvoke $r12.<init>(0, 0);
+
+        return $r12;
+
+     label1:
+        $z0 = r1.equals("top");
+
+        if $z0 != 0 goto label2;
+
+        $z1 = r1.equals("bottom");
+
+        if $z1 == 0 goto label4;
+
+     label2:
+        if i0 > 0 goto label3;
+
+        $r7 = specialinvoke r0.getPreferredSize();
+
+        i3 = $r7.height;
+
+        $r8 = r0.panel;
+
+        $r8.setDimension(i3);
+
+     label3:
+        $r6 = new java.awt.Dimension;
+
+        $i1 = i0 + 10;
+
+        specialinvoke $r6.<init>(0, $i1);
+
+        return $r6;
+
+     label4:
+        if i0 > 0 goto label5;
+
+        $r10 = specialinvoke r0.getPreferredSize();
+
+        i4 = $r10.width;
+
+        $r11 = r0.panel;
+
+        $r11.setDimension(i4);
+
+     label5:
+        $r9 = new java.awt.Dimension;
+
+        $i2 = i0 + 10;
+
+        specialinvoke $r9.<init>($i2, 0);
+
+        return $r9;
+    }
+
+    public void setBounds(int, int, int, int)
+    {
+        org.gjt.sp.jedit.gui.DockablePanel r0;
+        int i0, i1, i2, i3, i4;
+        java.lang.String r1;
+        org.gjt.sp.jedit.gui.PanelWindowContainer $r2, $r3, $r4, $r6, $r7, $r9;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry $r5, $r8;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        i2 := @parameter2;
+
+        i3 := @parameter3;
+
+        $r2 = r0.panel;
+
+        r1 = $r2.getPosition();
+
+        $r3 = r0.panel;
+
+        i4 = $r3.getDimension();
+
+        $z0 = r1.equals("top");
+
+        if $z0 != 0 goto label1;
+
+        $z1 = r1.equals("bottom");
+
+        if $z1 == 0 goto label3;
+
+     label1:
+        if i4 == 0 goto label2;
+
+        if i3 > 10 goto label2;
+
+        $r6 = r0.panel;
+
+        $r5 = (org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry) null;
+
+        $r6.show($r5);
+
+        goto label5;
+
+     label2:
+        $r4 = r0.panel;
+
+        $r4.setDimension(i3);
+
+        goto label5;
+
+     label3:
+        if i4 == 0 goto label4;
+
+        if i2 > 10 goto label4;
+
+        $r9 = r0.panel;
+
+        $r8 = (org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry) null;
+
+        $r9.show($r8);
+
+        goto label5;
+
+     label4:
+        $r7 = r0.panel;
+
+        $r7.setDimension(i2);
+
+     label5:
+        specialinvoke r0.setBounds(i0, i1, i2, i3);
+
+        return;
+    }
+
+    static org.gjt.sp.jedit.gui.PanelWindowContainer access$000(org.gjt.sp.jedit.gui.DockablePanel)
+    {
+        org.gjt.sp.jedit.gui.DockablePanel r0;
+        org.gjt.sp.jedit.gui.PanelWindowContainer $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.panel;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.DockableWindowManagerImpl access$100(org.gjt.sp.jedit.gui.DockablePanel)
+    {
+        org.gjt.sp.jedit.gui.DockablePanel r0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.wm;
+
+        return $r1;
+    }
+}

@@ -1,0 +1,71 @@
+class org.gjt.sp.jedit.EditBus$SendMessage extends java.lang.Object implements java.lang.Runnable
+{
+    private org.gjt.sp.jedit.EBMessage message;
+
+    public void <init>(org.gjt.sp.jedit.EBMessage)
+    {
+        org.gjt.sp.jedit.EditBus$SendMessage r0;
+        org.gjt.sp.jedit.EBMessage r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.message = r1;
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.EditBus$SendMessage r0;
+        java.lang.Throwable r1, $r7;
+        org.gjt.sp.jedit.EBMessage $r2, $r5;
+        java.lang.String $r3;
+        org.gjt.sp.jedit.EditBus$HandlerList $r4, $r6, $r8;
+
+        r0 := @this;
+
+        $r2 = r0.message;
+
+        $r3 = $r2.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/EditBus", $r3);
+
+        $r4 = org.gjt.sp.jedit.EditBus.access$100();
+
+        $r4.lock();
+
+     label1:
+        $r5 = r0.message;
+
+        org.gjt.sp.jedit.EditBus.access$200($r5);
+
+     label2:
+        $r6 = org.gjt.sp.jedit.EditBus.access$100();
+
+        $r6.unlock();
+
+        goto label5;
+
+     label3:
+        $r7 := @caughtexception;
+
+        r1 = $r7;
+
+     label4:
+        $r8 = org.gjt.sp.jedit.EditBus.access$100();
+
+        $r8.unlock();
+
+        throw r1;
+
+     label5:
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+}

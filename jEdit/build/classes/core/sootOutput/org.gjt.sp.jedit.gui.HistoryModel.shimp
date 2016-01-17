@@ -1,0 +1,472 @@
+public class org.gjt.sp.jedit.gui.HistoryModel extends javax.swing.DefaultListModel implements org.gjt.sp.jedit.gui.MutableListModel
+{
+    private int max;
+    private static int defaultMax;
+    private int maxSize;
+    private static int defaultMaxSize;
+    private final java.lang.String name;
+    private static java.util.Map models;
+    private static boolean modified;
+    private static org.gjt.sp.jedit.gui.HistoryModelSaver saver;
+
+    public void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.HistoryModel r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.name = r1;
+
+        r0.max = -1;
+
+        r0.maxSize = -1;
+
+        return;
+    }
+
+    public void addItem(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.HistoryModel r0;
+        java.lang.String r1, $r2;
+        int i0, i1, i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, i18, $i19, $i17_1, $i17_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 == null goto label01;
+
+        $i3 = r1.length();
+
+        if $i3 != 0 goto label02;
+
+     label01:
+        return;
+
+     label02:
+        i0 = r0.indexOf(r1);
+
+        if i0 != 0 goto label03;
+
+        return;
+
+     label03:
+        if i0 == -1 goto label04;
+
+        r0.removeElementAt(i0);
+
+     label04:
+        $i4 = r0.maxSize;
+
+        if $i4 != -1 goto label05;
+
+        $i17 = org.gjt.sp.jedit.gui.HistoryModel.defaultMaxSize;
+
+(0)     goto label06;
+
+     label05:
+(1)     $i17_1 = r0.maxSize;
+
+     label06:
+        $i17_2 = Phi($i17 #0, $i17_1 #1);
+
+        i1 = $i17_2;
+
+        $i5 = r1.length();
+
+        if $i5 <= i1 goto label07;
+
+        return;
+
+     label07:
+(2)     i18 = specialinvoke r0.getCurrentSize();
+
+     label08:
+        i18 = Phi(i18 #2, i18 #3);
+
+        $i17 = Phi($i17_2 #2, $i17 #3);
+
+        $i6 = r1.length();
+
+        $i7 = i18 + $i6;
+
+        if $i7 <= i1 goto label09;
+
+        $i12 = r0.getSize();
+
+        $i13 = $i12 - 1;
+
+        $r2 = r0.getItem($i13);
+
+        $i14 = $r2.length();
+
+        i18 = i18 - $i14;
+
+        $i15 = r0.getSize();
+
+        $i16 = $i15 - 1;
+
+        r0.removeElementAt($i16);
+
+(3)     goto label08;
+
+     label09:
+        r0.insertElementAt(r1, 0);
+
+        $i8 = r0.max;
+
+        if $i8 < 0 goto label10;
+
+        $i19 = r0.max;
+
+(4)     goto label11;
+
+     label10:
+(5)     $i19 = org.gjt.sp.jedit.gui.HistoryModel.defaultMax;
+
+     label11:
+        $i19 = Phi($i19 #4, $i19 #5);
+
+(6)     i2 = $i19;
+
+     label12:
+        $i19 = Phi($i19 #6, $i19 #7);
+
+        i18 = Phi(i18 #6, i18 #7);
+
+        $i17 = Phi($i17 #6, $i17 #7);
+
+        $i9 = r0.getSize();
+
+        if $i9 <= i2 goto label13;
+
+        $i10 = r0.getSize();
+
+        $i11 = $i10 - 1;
+
+        r0.removeElementAt($i11);
+
+(7)     goto label12;
+
+     label13:
+        return;
+    }
+
+    public void insertElementAt(java.lang.Object, int)
+    {
+        org.gjt.sp.jedit.gui.HistoryModel r0;
+        java.lang.Object r1;
+        int i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        org.gjt.sp.jedit.gui.HistoryModel.modified = 1;
+
+        specialinvoke r0.insertElementAt(r1, i0);
+
+        return;
+    }
+
+    public java.lang.String getItem(int)
+    {
+        org.gjt.sp.jedit.gui.HistoryModel r0;
+        int i0;
+        java.lang.Object $r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.elementAt(i0);
+
+        $r2 = (java.lang.String) $r1;
+
+        return $r2;
+    }
+
+    public boolean removeElement(java.lang.Object)
+    {
+        org.gjt.sp.jedit.gui.HistoryModel r0;
+        java.lang.Object r1;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        org.gjt.sp.jedit.gui.HistoryModel.modified = 1;
+
+        $z0 = specialinvoke r0.removeElement(r1);
+
+        return $z0;
+    }
+
+    public void removeAllElements()
+    {
+        org.gjt.sp.jedit.gui.HistoryModel r0;
+
+        r0 := @this;
+
+        org.gjt.sp.jedit.gui.HistoryModel.modified = 1;
+
+        specialinvoke r0.removeAllElements();
+
+        return;
+    }
+
+    public java.lang.String getName()
+    {
+        org.gjt.sp.jedit.gui.HistoryModel r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.name;
+
+        return $r1;
+    }
+
+    public static org.gjt.sp.jedit.gui.HistoryModel getModel(java.lang.String)
+    {
+        java.lang.String r0;
+        java.util.Map $r1, $r2, $r5, $r8;
+        java.lang.Object $r3;
+        org.gjt.sp.jedit.gui.HistoryModel $r4, r9, r9_1, r9_2;
+        java.util.HashMap $r7;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.gui.HistoryModel.models;
+
+        if $r1 != null goto label1;
+
+        $r7 = new java.util.HashMap;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = java.util.Collections.synchronizedMap($r7);
+
+        org.gjt.sp.jedit.gui.HistoryModel.models = $r8;
+
+     label1:
+        $r2 = org.gjt.sp.jedit.gui.HistoryModel.models;
+
+        $r3 = $r2.get(r0);
+
+        r9 = (org.gjt.sp.jedit.gui.HistoryModel) $r3;
+
+(0)     if r9 != null goto label2;
+
+        $r4 = new org.gjt.sp.jedit.gui.HistoryModel;
+
+        specialinvoke $r4.<init>(r0);
+
+        r9_1 = $r4;
+
+        $r5 = org.gjt.sp.jedit.gui.HistoryModel.models;
+
+(1)     $r5.put(r0, r9_1);
+
+     label2:
+        r9_2 = Phi(r9 #0, r9_1 #1);
+
+        return r9_2;
+    }
+
+    public static void loadHistory()
+    {
+        org.gjt.sp.jedit.gui.HistoryModelSaver $r0, $r2;
+        java.util.Map $r1, $r3;
+
+        $r0 = org.gjt.sp.jedit.gui.HistoryModel.saver;
+
+        if $r0 == null goto label1;
+
+        $r2 = org.gjt.sp.jedit.gui.HistoryModel.saver;
+
+        $r1 = org.gjt.sp.jedit.gui.HistoryModel.models;
+
+        $r3 = $r2.load($r1);
+
+        org.gjt.sp.jedit.gui.HistoryModel.models = $r3;
+
+     label1:
+        return;
+    }
+
+    public static void saveHistory()
+    {
+        org.gjt.sp.jedit.gui.HistoryModelSaver $r0, $r2;
+        boolean $z0, $z1;
+        java.util.Map $r1;
+
+        $r0 = org.gjt.sp.jedit.gui.HistoryModel.saver;
+
+        if $r0 == null goto label1;
+
+        $z0 = org.gjt.sp.jedit.gui.HistoryModel.modified;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = org.gjt.sp.jedit.gui.HistoryModel.saver;
+
+        $r1 = org.gjt.sp.jedit.gui.HistoryModel.models;
+
+        $z1 = $r2.save($r1);
+
+        if $z1 == 0 goto label1;
+
+        org.gjt.sp.jedit.gui.HistoryModel.modified = 0;
+
+     label1:
+        return;
+    }
+
+    public void setMax(int)
+    {
+        org.gjt.sp.jedit.gui.HistoryModel r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r0.max = i0;
+
+        return;
+    }
+
+    public int getMax()
+    {
+        org.gjt.sp.jedit.gui.HistoryModel r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.max;
+
+        return $i0;
+    }
+
+    public void setMaxSize(int)
+    {
+        org.gjt.sp.jedit.gui.HistoryModel r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r0.maxSize = i0;
+
+        return;
+    }
+
+    public int getMaxSize()
+    {
+        org.gjt.sp.jedit.gui.HistoryModel r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.maxSize;
+
+        return $i0;
+    }
+
+    public static void setDefaultMax(int)
+    {
+        int i0;
+
+        i0 := @parameter0;
+
+        org.gjt.sp.jedit.gui.HistoryModel.defaultMax = i0;
+
+        return;
+    }
+
+    public static int getDefaultMax()
+    {
+        int $i0;
+
+        $i0 = org.gjt.sp.jedit.gui.HistoryModel.defaultMax;
+
+        return $i0;
+    }
+
+    public static void setDefaultMaxSize(int)
+    {
+        int i0;
+
+        i0 := @parameter0;
+
+        org.gjt.sp.jedit.gui.HistoryModel.defaultMaxSize = i0;
+
+        return;
+    }
+
+    public static int getDefaultMaxSize()
+    {
+        int $i0;
+
+        $i0 = org.gjt.sp.jedit.gui.HistoryModel.defaultMaxSize;
+
+        return $i0;
+    }
+
+    public static void setSaver(org.gjt.sp.jedit.gui.HistoryModelSaver)
+    {
+        org.gjt.sp.jedit.gui.HistoryModelSaver r0;
+
+        r0 := @parameter0;
+
+        org.gjt.sp.jedit.gui.HistoryModel.saver = r0;
+
+        return;
+    }
+
+    private int getCurrentSize()
+    {
+        org.gjt.sp.jedit.gui.HistoryModel r0;
+        int $i0, $i1, i2, i3;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        i2 = 0;
+
+(0)     i3 = 0;
+
+     label1:
+        i3 = Phi(i3 #0, i3 #1);
+
+        i2 = Phi(i2 #0, i2 #1);
+
+        $i0 = r0.getSize();
+
+        if i3 >= $i0 goto label2;
+
+        $r1 = r0.getItem(i3);
+
+        $i1 = $r1.length();
+
+        i2 = i2 + $i1;
+
+        i3 = i3 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return i2;
+    }
+}

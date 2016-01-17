@@ -1,0 +1,121 @@
+class org.gjt.sp.jedit.options.FirewallOptionPane$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.options.FirewallOptionPane this$0;
+
+    void <init>(org.gjt.sp.jedit.options.FirewallOptionPane)
+    {
+        org.gjt.sp.jedit.options.FirewallOptionPane$ActionHandler r0;
+        org.gjt.sp.jedit.options.FirewallOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.options.FirewallOptionPane$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.options.FirewallOptionPane $r2, $r4, $r6, $r8, $r10, $r12, $r14, $r16, $r18, $r20, $r22, $r24, $r26, $r28;
+        javax.swing.JTextField $r3, $r7, $r11, $r19, $r23, $r27;
+        javax.swing.JCheckBox $r5, $r9, $r13, $r17, $r21, $r25, $r29;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6;
+        javax.swing.JPasswordField $r15;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.options.FirewallOptionPane.access$100($r2);
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.options.FirewallOptionPane.access$000($r4);
+
+        $z0 = $r5.isSelected();
+
+        $r3.setEnabled($z0);
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.options.FirewallOptionPane.access$200($r6);
+
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.options.FirewallOptionPane.access$000($r8);
+
+        $z1 = $r9.isSelected();
+
+        $r7.setEnabled($z1);
+
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.options.FirewallOptionPane.access$300($r10);
+
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.options.FirewallOptionPane.access$000($r12);
+
+        $z2 = $r13.isSelected();
+
+        $r11.setEnabled($z2);
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.options.FirewallOptionPane.access$400($r14);
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.options.FirewallOptionPane.access$000($r16);
+
+        $z3 = $r17.isSelected();
+
+        $r15.setEnabled($z3);
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.options.FirewallOptionPane.access$500($r18);
+
+        $r20 = r0.this$0;
+
+        $r21 = org.gjt.sp.jedit.options.FirewallOptionPane.access$000($r20);
+
+        $z4 = $r21.isSelected();
+
+        $r19.setEnabled($z4);
+
+        $r22 = r0.this$0;
+
+        $r23 = org.gjt.sp.jedit.options.FirewallOptionPane.access$700($r22);
+
+        $r24 = r0.this$0;
+
+        $r25 = org.gjt.sp.jedit.options.FirewallOptionPane.access$600($r24);
+
+        $z5 = $r25.isSelected();
+
+        $r23.setEnabled($z5);
+
+        $r26 = r0.this$0;
+
+        $r27 = org.gjt.sp.jedit.options.FirewallOptionPane.access$800($r26);
+
+        $r28 = r0.this$0;
+
+        $r29 = org.gjt.sp.jedit.options.FirewallOptionPane.access$600($r28);
+
+        $z6 = $r29.isSelected();
+
+        $r27.setEnabled($z6);
+
+        return;
+    }
+}

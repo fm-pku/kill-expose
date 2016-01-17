@@ -1,0 +1,525 @@
+public class org.gjt.sp.jedit.gui.CloseDialog extends org.gjt.sp.jedit.gui.EnhancedDialog
+{
+    private final org.gjt.sp.jedit.View view;
+    private final javax.swing.JList bufferList;
+    private final javax.swing.DefaultListModel bufferModel;
+    private final javax.swing.JButton selectAll;
+    private final javax.swing.JButton save;
+    private final javax.swing.JButton discard;
+    private final javax.swing.JButton cancel;
+    private boolean ok;
+    boolean selectAllFlag;
+
+    public void <init>(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Buffer[] $r2;
+        java.util.List $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getBuffers();
+
+        $r3 = java.util.Arrays.asList($r2);
+
+        specialinvoke r0.<init>(r1, $r3);
+
+        return;
+    }
+
+    public void <init>(org.gjt.sp.jedit.View, java.util.Collection)
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+        org.gjt.sp.jedit.View r1;
+        java.util.Collection r2;
+        javax.swing.JPanel r3, r5, $r8, $r18;
+        javax.swing.Box r4, $r11, $r34, r78;
+        javax.swing.JLabel r6, $r12, $r20;
+        java.lang.String $r7, $r21, $r38, $r41, $r46, $r49, $r54, $r57, $r62, $r74;
+        java.awt.BorderLayout $r9, $r19;
+        javax.swing.border.EmptyBorder $r10, $r22;
+        javax.swing.Icon $r13;
+        java.awt.Component $r15, $r35, $r43, $r51, $r59, $r65;
+        javax.swing.JList $r24, $r26, $r28, $r30, $r67, $r71;
+        javax.swing.DefaultListModel $r25, $r73;
+        org.gjt.sp.jedit.gui.CloseDialog$ListHandler $r27;
+        boolean $z0, $z1;
+        javax.swing.JScrollPane $r29;
+        org.gjt.sp.jedit.gui.CloseDialog$ActionHandler $r33, r77;
+        javax.swing.JButton $r37, $r40, $r42, $r45, $r48, $r50, $r53, $r56, $r58, $r61, $r64, $r70;
+        char $c0, $c1, $c2;
+        javax.swing.JRootPane $r69;
+        java.lang.Object $r72;
+        java.util.Iterator r75;
+        org.gjt.sp.jedit.Buffer r76;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getProperty("close.title");
+
+        specialinvoke r0.<init>(r1, $r7, 1);
+
+        r0.view = r1;
+
+        $r8 = new javax.swing.JPanel;
+
+        $r9 = new java.awt.BorderLayout;
+
+        specialinvoke $r9.<init>(12, 12);
+
+        specialinvoke $r8.<init>($r9);
+
+        r3 = $r8;
+
+        $r10 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r10.<init>(12, 12, 12, 12);
+
+        r3.setBorder($r10);
+
+        r0.setContentPane(r3);
+
+        $r11 = new javax.swing.Box;
+
+        specialinvoke $r11.<init>(1);
+
+        r4 = $r11;
+
+        $r12 = new javax.swing.JLabel;
+
+        $r13 = javax.swing.UIManager.getIcon("OptionPane.warningIcon");
+
+        specialinvoke $r12.<init>($r13);
+
+        r4.add($r12);
+
+        $r15 = javax.swing.Box.createGlue();
+
+        r4.add($r15);
+
+        r3.add("West", r4);
+
+        $r18 = new javax.swing.JPanel;
+
+        $r19 = new java.awt.BorderLayout;
+
+        specialinvoke $r19.<init>();
+
+        specialinvoke $r18.<init>($r19);
+
+        r5 = $r18;
+
+        $r20 = new javax.swing.JLabel;
+
+        $r21 = org.gjt.sp.jedit.jEdit.getProperty("close.caption");
+
+        specialinvoke $r20.<init>($r21);
+
+        r6 = $r20;
+
+        $r22 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r22.<init>(0, 0, 6, 0);
+
+        r6.setBorder($r22);
+
+        r5.add("North", r6);
+
+        $r24 = new javax.swing.JList;
+
+        $r25 = new javax.swing.DefaultListModel;
+
+        specialinvoke $r25.<init>();
+
+        r0.bufferModel = $r25;
+
+        specialinvoke $r24.<init>($r25);
+
+        r0.bufferList = $r24;
+
+        $r26 = r0.bufferList;
+
+        $r26.setVisibleRowCount(10);
+
+        $r28 = r0.bufferList;
+
+        $r27 = new org.gjt.sp.jedit.gui.CloseDialog$ListHandler;
+
+        specialinvoke $r27.<init>(r0, null);
+
+        $r28.addListSelectionListener($r27);
+
+        r75 = r2.iterator();
+
+     label1:
+        $z0 = r75.hasNext();
+
+        if $z0 == 0 goto label3;
+
+        $r72 = r75.next();
+
+        r76 = (org.gjt.sp.jedit.Buffer) $r72;
+
+        $z1 = r76.isDirty();
+
+        if $z1 == 0 goto label2;
+
+        $r73 = r0.bufferModel;
+
+        $r74 = r76.getPath();
+
+        $r73.addElement($r74);
+
+     label2:
+        goto label1;
+
+     label3:
+        $r29 = new javax.swing.JScrollPane;
+
+        $r30 = r0.bufferList;
+
+        specialinvoke $r29.<init>($r30);
+
+        r5.add("Center", $r29);
+
+        r3.add("Center", r5);
+
+        $r33 = new org.gjt.sp.jedit.gui.CloseDialog$ActionHandler;
+
+        specialinvoke $r33.<init>(r0, null);
+
+        r77 = $r33;
+
+        $r34 = new javax.swing.Box;
+
+        specialinvoke $r34.<init>(0);
+
+        r78 = $r34;
+
+        $r35 = javax.swing.Box.createGlue();
+
+        r78.add($r35);
+
+        $r37 = new javax.swing.JButton;
+
+        $r38 = org.gjt.sp.jedit.jEdit.getProperty("close.selectAll");
+
+        specialinvoke $r37.<init>($r38);
+
+        r0.selectAll = $r37;
+
+        r78.add($r37);
+
+        $r40 = r0.selectAll;
+
+        $r41 = org.gjt.sp.jedit.jEdit.getProperty("close.selectAll.mnemonic");
+
+        $c0 = $r41.charAt(0);
+
+        $r40.setMnemonic($c0);
+
+        $r42 = r0.selectAll;
+
+        $r42.addActionListener(r77);
+
+        $r43 = javax.swing.Box.createHorizontalStrut(6);
+
+        r78.add($r43);
+
+        $r45 = new javax.swing.JButton;
+
+        $r46 = org.gjt.sp.jedit.jEdit.getProperty("close.save");
+
+        specialinvoke $r45.<init>($r46);
+
+        r0.save = $r45;
+
+        r78.add($r45);
+
+        $r48 = r0.save;
+
+        $r49 = org.gjt.sp.jedit.jEdit.getProperty("close.save.mnemonic");
+
+        $c1 = $r49.charAt(0);
+
+        $r48.setMnemonic($c1);
+
+        $r50 = r0.save;
+
+        $r50.addActionListener(r77);
+
+        $r51 = javax.swing.Box.createHorizontalStrut(6);
+
+        r78.add($r51);
+
+        $r53 = new javax.swing.JButton;
+
+        $r54 = org.gjt.sp.jedit.jEdit.getProperty("close.discard");
+
+        specialinvoke $r53.<init>($r54);
+
+        r0.discard = $r53;
+
+        r78.add($r53);
+
+        $r56 = r0.discard;
+
+        $r57 = org.gjt.sp.jedit.jEdit.getProperty("close.discard.mnemonic");
+
+        $c2 = $r57.charAt(0);
+
+        $r56.setMnemonic($c2);
+
+        $r58 = r0.discard;
+
+        $r58.addActionListener(r77);
+
+        $r59 = javax.swing.Box.createHorizontalStrut(6);
+
+        r78.add($r59);
+
+        $r61 = new javax.swing.JButton;
+
+        $r62 = org.gjt.sp.jedit.jEdit.getProperty("common.cancel");
+
+        specialinvoke $r61.<init>($r62);
+
+        r0.cancel = $r61;
+
+        r78.add($r61);
+
+        $r64 = r0.cancel;
+
+        $r64.addActionListener(r77);
+
+        $r65 = javax.swing.Box.createGlue();
+
+        r78.add($r65);
+
+        $r67 = r0.bufferList;
+
+        $r67.setSelectedIndex(0);
+
+        r3.add("South", r78);
+
+        $r69 = r3.getRootPane();
+
+        $r70 = r0.cancel;
+
+        $r69.setDefaultButton($r70);
+
+        $r71 = r0.bufferList;
+
+        org.gjt.sp.jedit.GUIUtilities.requestFocus(r0, $r71);
+
+        r0.pack();
+
+        r0.setLocationRelativeTo(r1);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    public boolean isOK()
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.ok;
+
+        return $z0;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+
+        r0 := @this;
+
+        return;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    private void updateButtons()
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+        int i0;
+        javax.swing.JList $r1;
+        javax.swing.JButton $r2, $r4;
+        javax.swing.ButtonModel $r3, $r5;
+        boolean $z0, $z1, $z0_1, $z0_2, $z1_1, $z1_2;
+
+        r0 := @this;
+
+        $r1 = r0.bufferList;
+
+        i0 = $r1.getSelectedIndex();
+
+        $r2 = r0.save;
+
+        $r3 = $r2.getModel();
+
+        if i0 == -1 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        $r3.setEnabled($z0_2);
+
+        $r4 = r0.discard;
+
+        $r5 = $r4.getModel();
+
+        if i0 == -1 goto label3;
+
+        $z1 = 1;
+
+(2)     goto label4;
+
+     label3:
+(3)     $z1_1 = 0;
+
+     label4:
+        $z1_2 = Phi($z1 #2, $z1_1 #3);
+
+        $r5.setEnabled($z1_2);
+
+        return;
+    }
+
+    static javax.swing.JButton access$200(org.gjt.sp.jedit.gui.CloseDialog)
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.selectAll;
+
+        return $r1;
+    }
+
+    static javax.swing.DefaultListModel access$300(org.gjt.sp.jedit.gui.CloseDialog)
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+        javax.swing.DefaultListModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.bufferModel;
+
+        return $r1;
+    }
+
+    static javax.swing.JList access$400(org.gjt.sp.jedit.gui.CloseDialog)
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+        javax.swing.JList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.bufferList;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$500(org.gjt.sp.jedit.gui.CloseDialog)
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.save;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.View access$600(org.gjt.sp.jedit.gui.CloseDialog)
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+        org.gjt.sp.jedit.View $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.view;
+
+        return $r1;
+    }
+
+    static boolean access$702(org.gjt.sp.jedit.gui.CloseDialog, boolean)
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+        boolean z0;
+
+        r0 := @parameter0;
+
+        z0 := @parameter1;
+
+        r0.ok = z0;
+
+        return z0;
+    }
+
+    static javax.swing.JButton access$800(org.gjt.sp.jedit.gui.CloseDialog)
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.discard;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$900(org.gjt.sp.jedit.gui.CloseDialog)
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.cancel;
+
+        return $r1;
+    }
+
+    static void access$1000(org.gjt.sp.jedit.gui.CloseDialog)
+    {
+        org.gjt.sp.jedit.gui.CloseDialog r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updateButtons();
+
+        return;
+    }
+}

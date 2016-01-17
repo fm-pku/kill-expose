@@ -1,0 +1,638 @@
+public abstract class org.gjt.sp.jedit.BeanShellFacade extends java.lang.Object
+{
+    protected org.gjt.sp.jedit.bsh.NameSpace global;
+    protected org.gjt.sp.jedit.bsh.BshClassManager classManager;
+    private static org.gjt.sp.jedit.bsh.Interpreter interpForMethods;
+    private static final java.lang.Object[] NO_ARGS;
+
+    protected void <init>()
+    {
+        org.gjt.sp.jedit.BeanShellFacade r0;
+        org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl $r1;
+        org.gjt.sp.jedit.bsh.NameSpace $r2, $r4;
+        org.gjt.sp.jedit.bsh.BshClassManager $r3;
+        org.gjt.sp.jedit.bsh.Interpreter $r5;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new org.gjt.sp.jedit.bsh.classpath.ClassManagerImpl;
+
+        specialinvoke $r1.<init>();
+
+        r0.classManager = $r1;
+
+        $r2 = new org.gjt.sp.jedit.bsh.NameSpace;
+
+        $r3 = r0.classManager;
+
+        specialinvoke $r2.<init>($r3, "jEdit embedded BeanShell interpreter");
+
+        r0.global = $r2;
+
+        $r4 = r0.global;
+
+        $r5 = org.gjt.sp.jedit.BeanShellFacade.createInterpreter($r4);
+
+        org.gjt.sp.jedit.BeanShellFacade.interpForMethods = $r5;
+
+        r0.init();
+
+        return;
+    }
+
+    protected void init()
+    {
+        org.gjt.sp.jedit.BeanShellFacade r0;
+        org.gjt.sp.jedit.bsh.NameSpace $r1, $r2, $r3, $r4, $r5;
+
+        r0 := @this;
+
+        $r1 = r0.global;
+
+        $r1.importPackage("org.gjt.sp.jedit");
+
+        $r2 = r0.global;
+
+        $r2.importPackage("org.gjt.sp.jedit.buffer");
+
+        $r3 = r0.global;
+
+        $r3.importPackage("org.gjt.sp.jedit.syntax");
+
+        $r4 = r0.global;
+
+        $r4.importPackage("org.gjt.sp.jedit.textarea");
+
+        $r5 = r0.global;
+
+        $r5.importPackage("org.gjt.sp.util");
+
+        return;
+    }
+
+    public void evalSelection(java.lang.Object, org.gjt.sp.jedit.textarea.TextArea)
+    {
+        org.gjt.sp.jedit.BeanShellFacade r0;
+        java.lang.Object r1, r4;
+        org.gjt.sp.jedit.textarea.TextArea r2;
+        java.lang.String r3, $r6;
+        org.gjt.sp.jedit.bsh.NameSpace $r5;
+        java.awt.Toolkit $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 = r2.getSelectedText();
+
+        if r3 != null goto label1;
+
+        $r7 = r2.getToolkit();
+
+        $r7.beep();
+
+        return;
+
+     label1:
+        $r5 = r0.global;
+
+        r4 = r0.eval(r1, $r5, r3);
+
+        if r4 == null goto label2;
+
+        $r6 = r4.toString();
+
+        r2.setSelectedText($r6);
+
+     label2:
+        return;
+    }
+
+    public java.lang.Object eval(java.lang.Object, java.lang.String)
+    {
+        org.gjt.sp.jedit.BeanShellFacade r0;
+        java.lang.Object r1, $r4;
+        java.lang.String r2;
+        org.gjt.sp.jedit.bsh.NameSpace $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r0.global;
+
+        $r4 = r0.eval(r1, $r3, r2);
+
+        return $r4;
+    }
+
+    public java.lang.Object eval(java.lang.Object, org.gjt.sp.jedit.bsh.NameSpace, java.lang.String)
+    {
+        org.gjt.sp.jedit.BeanShellFacade r0;
+        java.lang.Object r1, $r5;
+        org.gjt.sp.jedit.bsh.NameSpace r2;
+        java.lang.String r3;
+        java.lang.Throwable r4, $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+     label1:
+        $r5 = r0._eval(r1, r2, r3);
+
+     label2:
+        return $r5;
+
+     label3:
+        $r6 := @caughtexception;
+
+        r4 = $r6;
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/BeanShellFacade", r4);
+
+        r0.handleException(r1, null, r4);
+
+        return null;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+    }
+
+    public java.lang.Object _eval(java.lang.Object, org.gjt.sp.jedit.bsh.NameSpace, java.lang.String) throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.BeanShellFacade r0;
+        java.lang.Object r1, r11;
+        org.gjt.sp.jedit.bsh.NameSpace r2;
+        java.lang.String r3;
+        org.gjt.sp.jedit.bsh.Interpreter r4;
+        java.lang.Throwable r5, $r6;
+        boolean $z0;
+        java.lang.Exception $r7, r12;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r8, $r9, $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 = org.gjt.sp.jedit.BeanShellFacade.createInterpreter(r2);
+
+     label01:
+        r0.setupDefaultVariables(r2, r1);
+
+        $z0 = org.gjt.sp.jedit.Debug.BEANSHELL_DEBUG;
+
+        if $z0 == 0 goto label02;
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/BeanShellFacade", r3);
+
+     label02:
+        r11 = r4.eval(r3);
+
+     label03:
+        r0.resetDefaultVariables(r2);
+
+     label04:
+        goto label06;
+
+     label05:
+        $r10 := @caughtexception;
+
+     label06:
+        return r11;
+
+     label07:
+        $r7 := @caughtexception;
+
+        r12 = $r7;
+
+        org.gjt.sp.jedit.BeanShellFacade.unwrapException(r12);
+
+     label08:
+        r0.resetDefaultVariables(r2);
+
+     label09:
+        goto label11;
+
+     label10:
+        $r9 := @caughtexception;
+
+     label11:
+        return null;
+
+     label12:
+        $r6 := @caughtexception;
+
+        r5 = $r6;
+
+     label13:
+        r0.resetDefaultVariables(r2);
+
+     label14:
+        goto label16;
+
+     label15:
+        $r8 := @caughtexception;
+
+     label16:
+        throw r5;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label03 to label04 with label05;
+        catch java.lang.Exception from label01 to label03 with label07;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label08 to label09 with label10;
+        catch java.lang.Throwable from label01 to label03 with label12;
+        catch java.lang.Throwable from label07 to label08 with label12;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label13 to label14 with label15;
+        catch java.lang.Throwable from label12 to label13 with label12;
+    }
+
+    public org.gjt.sp.jedit.bsh.BshMethod cacheBlock(java.lang.String, java.lang.String, boolean) throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.BeanShellFacade r0;
+        java.lang.String r1, r2, r4, $r10, $r16, $r25;
+        boolean z0;
+        org.gjt.sp.jedit.bsh.NameSpace r3, $r5, $r7;
+        java.lang.StringBuilder $r6, $r8, $r9, $r11, $r12, $r13, $r14, $r15, $r20, $r21, $r22, $r23, $r24;
+        java.lang.Class[] $r18, $r27;
+        org.gjt.sp.jedit.bsh.BshMethod $r19, $r28;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        $r5 = new org.gjt.sp.jedit.bsh.NameSpace;
+
+        $r7 = r0.global;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r8 = $r6.append("__internal_");
+
+        $r9 = $r8.append(r1);
+
+        $r10 = $r9.toString();
+
+        specialinvoke $r5.<init>($r7, $r10);
+
+        r3 = $r5;
+
+        r4 = "__runCachedMethod";
+
+        if z0 == 0 goto label1;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<init>();
+
+        $r21 = $r20.append(r4);
+
+        $r22 = $r21.append("(ns) {\nthis.callstack.set(0,ns);\n");
+
+        $r23 = $r22.append(r2);
+
+        $r24 = $r23.append("\n}");
+
+        $r25 = $r24.toString();
+
+        r0._eval(null, r3, $r25);
+
+        $r27 = newarray (java.lang.Class)[1];
+
+        $r27[0] = class "org/gjt/sp/jedit/bsh/NameSpace";
+
+        $r28 = r3.getMethod(r4, $r27);
+
+        return $r28;
+
+     label1:
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = $r11.append(r4);
+
+        $r13 = $r12.append("() {\n");
+
+        $r14 = $r13.append(r2);
+
+        $r15 = $r14.append("\n}");
+
+        $r16 = $r15.toString();
+
+        r0._eval(null, r3, $r16);
+
+        $r18 = newarray (java.lang.Class)[0];
+
+        $r19 = r3.getMethod(r4, $r18);
+
+        return $r19;
+    }
+
+    public java.lang.Object runCachedBlock(org.gjt.sp.jedit.bsh.BshMethod, java.lang.Object, org.gjt.sp.jedit.bsh.NameSpace) throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.BeanShellFacade r0;
+        org.gjt.sp.jedit.bsh.BshMethod r1;
+        java.lang.Object r2, r12, r13, r14;
+        java.lang.Throwable r3, $r9;
+        org.gjt.sp.jedit.bsh.CallStack $r4;
+        org.gjt.sp.jedit.bsh.Interpreter $r5;
+        boolean $z0, z1, z1_1, z1_2, z1_3;
+        org.gjt.sp.jedit.bsh.Primitive $r6, $r7;
+        java.lang.Exception $r8;
+        org.gjt.sp.jedit.bsh.NameSpace r10, r10_1, r10_2, r10_3;
+        java.lang.Object[] $r11, $r11_1, $r11_2, $r11_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r10 := @parameter2;
+
+        if r10 != null goto label01;
+
+        z1 = 0;
+
+        r10_1 = r0.global;
+
+(0)     goto label02;
+
+     label01:
+(1)     z1_1 = 1;
+
+     label02:
+        r10_2 = Phi(r10_1 #0, r10 #1);
+
+        z1_2 = Phi(z1 #0, z1_1 #1);
+
+(2)     r0.setupDefaultVariables(r10_2, r2);
+
+        if z1_2 == 0 goto label03;
+
+        $r11 = newarray (java.lang.Object)[1];
+
+        $r11[0] = r10_2;
+
+(3)     goto label04;
+
+     label03:
+(4)     $r11_1 = org.gjt.sp.jedit.BeanShellFacade.NO_ARGS;
+
+     label04:
+        $r11_2 = Phi($r11 #3, $r11_1 #4);
+
+(5)     $r5 = org.gjt.sp.jedit.BeanShellFacade.interpForMethods;
+
+(6)     $r4 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        specialinvoke $r4.<init>();
+
+        r12 = r1.invoke($r11_2, $r5, $r4, null);
+
+        $z0 = r12 instanceof org.gjt.sp.jedit.bsh.Primitive;
+
+        if $z0 == 0 goto label08;
+
+        $r6 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        if r12 != $r6 goto label06;
+
+     label05:
+        r0.resetDefaultVariables(r10_2);
+
+        return null;
+
+     label06:
+        $r7 = (org.gjt.sp.jedit.bsh.Primitive) r12;
+
+        r13 = $r7.getValue();
+
+     label07:
+        r0.resetDefaultVariables(r10_2);
+
+        return r13;
+
+     label08:
+        r14 = r12;
+
+     label09:
+        r0.resetDefaultVariables(r10_2);
+
+        return r14;
+
+     label10:
+(7)     $r8 := @caughtexception;
+
+        r10_3 = Phi(r10_1 #0, r10 #1, r10_2 #2);
+
+        z1_3 = Phi(z1 #0, z1_1 #1, z1_2 #2);
+
+(8)     $r11_3 = Phi($r11 #0, $r11 #1, $r11 #2, $r11_2 #6);
+
+     label11:
+        r0.resetDefaultVariables(r10_3);
+
+        return null;
+
+     label12:
+        $r9 := @caughtexception;
+
+        r10 = Phi(r10_1 #0, r10 #1, r10_2 #2, r10_3 #8, r10 #9);
+
+        z1 = Phi(z1 #0, z1_1 #1, z1_2 #2, z1_3 #8, z1 #9);
+
+(9)     $r11 = Phi($r11 #0, $r11 #1, $r11 #2, $r11_1 #4, $r11_2 #5, $r11_3 #7, $r11 #9);
+
+        r3 = $r9;
+
+     label13:
+        r0.resetDefaultVariables(r10);
+
+        throw r3;
+
+        catch java.lang.Exception from label02 to label05 with label10;
+        catch java.lang.Exception from label06 to label07 with label10;
+        catch java.lang.Exception from label08 to label09 with label10;
+        catch java.lang.Throwable from label02 to label05 with label12;
+        catch java.lang.Throwable from label06 to label07 with label12;
+        catch java.lang.Throwable from label08 to label09 with label12;
+        catch java.lang.Throwable from label10 to label11 with label12;
+        catch java.lang.Throwable from label12 to label13 with label12;
+    }
+
+    public org.gjt.sp.jedit.bsh.NameSpace getNameSpace()
+    {
+        org.gjt.sp.jedit.BeanShellFacade r0;
+        org.gjt.sp.jedit.bsh.NameSpace $r1;
+
+        r0 := @this;
+
+        $r1 = r0.global;
+
+        return $r1;
+    }
+
+    void resetClassManager()
+    {
+        org.gjt.sp.jedit.BeanShellFacade r0;
+        org.gjt.sp.jedit.bsh.BshClassManager $r1;
+
+        r0 := @this;
+
+        $r1 = r0.classManager;
+
+        $r1.reset();
+
+        return;
+    }
+
+    protected void setVariable(org.gjt.sp.jedit.bsh.NameSpace, java.lang.String, java.lang.Object) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.BeanShellFacade r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+        java.lang.String r2;
+        java.lang.Object r3, $r4;
+        org.gjt.sp.jedit.bsh.Primitive $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = r1.getVariable(r2);
+
+        $r5 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        if $r4 != $r5 goto label1;
+
+        r1.setVariable(r2, r3, 0);
+
+     label1:
+        return;
+    }
+
+    protected abstract void setupDefaultVariables(org.gjt.sp.jedit.bsh.NameSpace, java.lang.Object) throws org.gjt.sp.jedit.bsh.UtilEvalError;
+
+    protected abstract void resetDefaultVariables(org.gjt.sp.jedit.bsh.NameSpace) throws org.gjt.sp.jedit.bsh.UtilEvalError;
+
+    protected abstract void handleException(java.lang.Object, java.lang.String, java.lang.Throwable);
+
+    protected static org.gjt.sp.jedit.bsh.Interpreter createInterpreter(org.gjt.sp.jedit.bsh.NameSpace)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        org.gjt.sp.jedit.bsh.Interpreter $r1;
+        java.io.PrintStream $r2, $r3;
+
+        r0 := @parameter0;
+
+        $r1 = new org.gjt.sp.jedit.bsh.Interpreter;
+
+        $r3 = java.lang.System.out;
+
+        $r2 = java.lang.System.err;
+
+        specialinvoke $r1.<init>(null, $r3, $r2, 0, r0);
+
+        return $r1;
+    }
+
+    protected static void unwrapException(java.lang.Exception) throws java.lang.Exception
+    {
+        java.lang.Exception r0, $r3, $r6;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        java.lang.reflect.InvocationTargetException $r1;
+        java.lang.Error $r2, $r5;
+        org.gjt.sp.jedit.bsh.TargetError $r4;
+        java.lang.Throwable r7, r8;
+
+        r0 := @parameter0;
+
+        $z0 = r0 instanceof org.gjt.sp.jedit.bsh.TargetError;
+
+        if $z0 == 0 goto label2;
+
+        $r4 = (org.gjt.sp.jedit.bsh.TargetError) r0;
+
+        r7 = $r4.getTarget();
+
+        $z4 = r7 instanceof java.lang.Exception;
+
+        if $z4 == 0 goto label1;
+
+        $r6 = (java.lang.Exception) r7;
+
+        throw $r6;
+
+     label1:
+        $z5 = r7 instanceof java.lang.Error;
+
+        if $z5 == 0 goto label2;
+
+        $r5 = (java.lang.Error) r7;
+
+        throw $r5;
+
+     label2:
+        $z1 = r0 instanceof java.lang.reflect.InvocationTargetException;
+
+        if $z1 == 0 goto label4;
+
+        $r1 = (java.lang.reflect.InvocationTargetException) r0;
+
+        r8 = $r1.getTargetException();
+
+        $z2 = r8 instanceof java.lang.Exception;
+
+        if $z2 == 0 goto label3;
+
+        $r3 = (java.lang.Exception) r8;
+
+        throw $r3;
+
+     label3:
+        $z3 = r8 instanceof java.lang.Error;
+
+        if $z3 == 0 goto label4;
+
+        $r2 = (java.lang.Error) r8;
+
+        throw $r2;
+
+     label4:
+        throw r0;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Object[] $r0;
+
+        $r0 = newarray (java.lang.Object)[0];
+
+        org.gjt.sp.jedit.BeanShellFacade.NO_ARGS = $r0;
+
+        return;
+    }
+}

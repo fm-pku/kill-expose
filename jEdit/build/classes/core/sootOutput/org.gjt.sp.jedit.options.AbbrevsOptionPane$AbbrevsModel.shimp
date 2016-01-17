@@ -1,0 +1,349 @@
+class org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel extends javax.swing.table.AbstractTableModel
+{
+    java.util.List abbrevs;
+    int lastSort;
+
+    void <init>(java.util.Map)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel r0;
+        java.util.Map r1;
+        java.util.Set r2;
+        java.util.Iterator r3;
+        java.util.Map$Entry r4;
+        java.util.Vector $r5;
+        boolean $z0;
+        java.lang.Object $r6, $r9, $r11;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel$Abbrev $r7;
+        java.util.List $r8;
+        java.lang.String $r10, $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        $r5 = new java.util.Vector;
+
+        specialinvoke $r5.<init>();
+
+        r0.abbrevs = $r5;
+
+        if r1 == null goto label3;
+
+        r2 = r1.entrySet();
+
+        r3 = r2.iterator();
+
+     label1:
+        $z0 = r3.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r6 = r3.next();
+
+        r4 = (java.util.Map$Entry) $r6;
+
+        $r8 = r0.abbrevs;
+
+        $r7 = new org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel$Abbrev;
+
+        $r9 = r4.getKey();
+
+        $r10 = (java.lang.String) $r9;
+
+        $r11 = r4.getValue();
+
+        $r12 = (java.lang.String) $r11;
+
+        specialinvoke $r7.<init>($r10, $r12);
+
+        $r8.add($r7);
+
+        goto label1;
+
+     label2:
+        r0.sort(0);
+
+     label3:
+        return;
+    }
+
+    void sort(int)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel r0;
+        int i0;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel$AbbrevCompare $r1;
+        java.util.List $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r0.lastSort = i0;
+
+        $r2 = r0.abbrevs;
+
+        $r1 = new org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel$AbbrevCompare;
+
+        specialinvoke $r1.<init>(i0);
+
+        java.util.Collections.sort($r2, $r1);
+
+        r0.fireTableDataChanged();
+
+        return;
+    }
+
+    void add(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel r0;
+        java.lang.String r1, r2;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel$Abbrev $r3;
+        java.util.List $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = r0.abbrevs;
+
+        $r3 = new org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel$Abbrev;
+
+        specialinvoke $r3.<init>(r1, r2);
+
+        $r4.add($r3);
+
+        $i0 = r0.lastSort;
+
+        r0.sort($i0);
+
+        return;
+    }
+
+    void remove(int)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel r0;
+        int i0;
+        java.util.List $r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.abbrevs;
+
+        $r1.remove(i0);
+
+        r0.fireTableStructureChanged();
+
+        return;
+    }
+
+    public java.util.Hashtable toHashtable()
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel r0;
+        java.util.Hashtable r1, $r4;
+        java.util.Iterator r2;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel$Abbrev r3;
+        java.util.List $r5;
+        boolean $z0;
+        java.lang.Object $r6;
+        java.lang.String $r7, $r8, $r9, $r10;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        $r4 = new java.util.Hashtable;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4;
+
+        $r5 = r0.abbrevs;
+
+        r2 = $r5.iterator();
+
+     label1:
+        $z0 = r2.hasNext();
+
+        if $z0 == 0 goto label3;
+
+        $r6 = r2.next();
+
+        r3 = (org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel$Abbrev) $r6;
+
+        $r7 = r3.abbrev;
+
+        $i0 = $r7.length();
+
+        if $i0 <= 0 goto label2;
+
+        $r8 = r3.expand;
+
+        $i1 = $r8.length();
+
+        if $i1 <= 0 goto label2;
+
+        $r10 = r3.abbrev;
+
+        $r9 = r3.expand;
+
+        r1.put($r10, $r9);
+
+     label2:
+        goto label1;
+
+     label3:
+        return r1;
+    }
+
+    public int getColumnCount()
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel r0;
+
+        r0 := @this;
+
+        return 2;
+    }
+
+    public int getRowCount()
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel r0;
+        java.util.List $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.abbrevs;
+
+        $i0 = $r1.size();
+
+        return $i0;
+    }
+
+    public java.lang.Object getValueAt(int, int)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel r0;
+        int i0, i1;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel$Abbrev r1;
+        java.util.List $r2;
+        java.lang.Object $r3;
+        java.lang.String $r4, $r5;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $r2 = r0.abbrevs;
+
+        $r3 = $r2.get(i0);
+
+        r1 = (org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel$Abbrev) $r3;
+
+        lookupswitch(i1)
+        {
+            case 0: goto label1;
+            case 1: goto label2;
+            default: goto label3;
+        };
+
+     label1:
+        $r5 = r1.abbrev;
+
+        return $r5;
+
+     label2:
+        $r4 = r1.expand;
+
+        return $r4;
+
+     label3:
+        return null;
+    }
+
+    public void setValueAt(java.lang.Object, int, int)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel r0;
+        int i0, i1;
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel$Abbrev r1;
+        java.util.List $r2;
+        java.lang.Object $r3, r6, r6_1, r6_2;
+        java.lang.String $r4, $r5;
+
+        r0 := @this;
+
+        r6 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+(0)     if r6 != null goto label1;
+
+(1)     r6_1 = "";
+
+     label1:
+        r6_2 = Phi(r6 #0, r6_1 #1);
+
+        $r2 = r0.abbrevs;
+
+        $r3 = $r2.get(i0);
+
+        r1 = (org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel$Abbrev) $r3;
+
+        if i1 != 0 goto label2;
+
+        $r5 = (java.lang.String) r6_2;
+
+        r1.abbrev = $r5;
+
+        goto label3;
+
+     label2:
+        $r4 = (java.lang.String) r6_2;
+
+        r1.expand = $r4;
+
+     label3:
+        r0.fireTableRowsUpdated(i0, i0);
+
+        return;
+    }
+
+    public java.lang.String getColumnName(int)
+    {
+        org.gjt.sp.jedit.options.AbbrevsOptionPane$AbbrevsModel r0;
+        int i0;
+        java.lang.String $r1, $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        lookupswitch(i0)
+        {
+            case 0: goto label1;
+            case 1: goto label2;
+            default: goto label3;
+        };
+
+     label1:
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("options.abbrevs.abbrev");
+
+        return $r2;
+
+     label2:
+        $r1 = org.gjt.sp.jedit.jEdit.getProperty("options.abbrevs.expand");
+
+        return $r1;
+
+     label3:
+        return null;
+    }
+}

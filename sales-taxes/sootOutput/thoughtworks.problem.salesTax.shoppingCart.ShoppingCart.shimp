@@ -1,0 +1,15 @@
+public interface  thoughtworks.problem.salesTax.shoppingCart.ShoppingCart extends java.lang.Object
+{
+
+    public abstract void addProduct(thoughtworks.problem.salesTax.products.Product);
+
+    public abstract int getItemCount();
+
+    public abstract java.util.Iterator iterator();
+
+    public abstract void getProduct(thoughtworks.problem.salesTax.products.Product);
+
+    public abstract void empty();
+
+    public abstract void removeProduct(thoughtworks.problem.salesTax.products.Product);
+}

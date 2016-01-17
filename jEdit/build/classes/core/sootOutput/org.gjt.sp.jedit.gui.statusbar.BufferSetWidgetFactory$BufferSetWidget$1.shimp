@@ -1,0 +1,56 @@
+class org.gjt.sp.jedit.gui.statusbar.BufferSetWidgetFactory$BufferSetWidget$1 extends org.gjt.sp.jedit.gui.statusbar.ToolTipLabel
+{
+    final org.gjt.sp.jedit.gui.statusbar.BufferSetWidgetFactory$BufferSetWidget this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.statusbar.BufferSetWidgetFactory$BufferSetWidget)
+    {
+        org.gjt.sp.jedit.gui.statusbar.BufferSetWidgetFactory$BufferSetWidget$1 r0;
+        org.gjt.sp.jedit.gui.statusbar.BufferSetWidgetFactory$BufferSetWidget r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void addNotify()
+    {
+        org.gjt.sp.jedit.gui.statusbar.BufferSetWidgetFactory$BufferSetWidget$1 r0;
+        org.gjt.sp.jedit.gui.statusbar.BufferSetWidgetFactory$BufferSetWidget $r1, $r2;
+
+        r0 := @this;
+
+        specialinvoke r0.addNotify();
+
+        $r1 = r0.this$0;
+
+        $r1.update();
+
+        $r2 = r0.this$0;
+
+        org.gjt.sp.jedit.EditBus.addToBus($r2);
+
+        return;
+    }
+
+    public void removeNotify()
+    {
+        org.gjt.sp.jedit.gui.statusbar.BufferSetWidgetFactory$BufferSetWidget$1 r0;
+        org.gjt.sp.jedit.gui.statusbar.BufferSetWidgetFactory$BufferSetWidget $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.removeNotify();
+
+        $r1 = r0.this$0;
+
+        org.gjt.sp.jedit.EditBus.removeFromBus($r1);
+
+        return;
+    }
+}

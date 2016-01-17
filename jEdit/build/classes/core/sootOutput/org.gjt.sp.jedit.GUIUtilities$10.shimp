@@ -1,0 +1,30 @@
+final class org.gjt.sp.jedit.GUIUtilities$10 extends java.lang.Object implements java.lang.Runnable
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.GUIUtilities$10 r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.GUIUtilities$10 r0;
+        org.gjt.sp.jedit.gui.SplashScreen $r1;
+
+        r0 := @this;
+
+        $r1 = new org.gjt.sp.jedit.gui.SplashScreen;
+
+        specialinvoke $r1.<init>();
+
+        org.gjt.sp.jedit.GUIUtilities.access$202($r1);
+
+        return;
+    }
+}

@@ -1,0 +1,53 @@
+class org.gjt.sp.jedit.menu.RecentFilesProvider$1 extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.View val$view;
+    final org.gjt.sp.jedit.menu.RecentFilesProvider this$0;
+
+    void <init>(org.gjt.sp.jedit.menu.RecentFilesProvider, org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.menu.RecentFilesProvider$1 r0;
+        org.gjt.sp.jedit.menu.RecentFilesProvider r1;
+        org.gjt.sp.jedit.View r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$view = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.menu.RecentFilesProvider$1 r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.View $r2, $r5;
+        java.lang.String $r3;
+        org.gjt.sp.jedit.gui.StatusBar $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.val$view;
+
+        $r3 = r1.getActionCommand();
+
+        org.gjt.sp.jedit.jEdit.openFile($r2, $r3);
+
+        $r5 = r0.val$view;
+
+        $r6 = $r5.getStatus();
+
+        $r6.setMessage(null);
+
+        return;
+    }
+}

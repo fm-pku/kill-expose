@@ -1,0 +1,190 @@
+class org.gjt.sp.jedit.buffer.UndoManager$Replace extends org.gjt.sp.jedit.buffer.UndoManager$Edit
+{
+    int offset;
+    java.lang.String strRemove;
+    java.lang.String strInsert;
+    static final boolean $assertionsDisabled;
+
+    void <init>(int, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$Replace r0;
+        int i0;
+        java.lang.String r1, r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        specialinvoke r0.<init>(null);
+
+        r0.offset = i0;
+
+        r0.strRemove = r1;
+
+        r0.strInsert = r2;
+
+        return;
+    }
+
+    org.gjt.sp.jedit.textarea.Selection[] undo(org.gjt.sp.jedit.buffer.UndoManager)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$Replace r0;
+        org.gjt.sp.jedit.buffer.UndoManager r1;
+        org.gjt.sp.jedit.buffer.JEditBuffer $r2, $r4;
+        java.lang.String $r3, $r5, $r8;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6;
+        boolean $z0;
+        org.gjt.sp.jedit.textarea.Selection[] $r6;
+        org.gjt.sp.jedit.textarea.Selection$Range $r7;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit $r9;
+        java.lang.AssertionError $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.buffer.UndoManager.access$200(r1);
+
+        $i0 = r0.offset;
+
+        $r3 = r0.strInsert;
+
+        $i1 = $r3.length();
+
+        $r2.remove($i0, $i1);
+
+        $r4 = org.gjt.sp.jedit.buffer.UndoManager.access$200(r1);
+
+        $i2 = r0.offset;
+
+        $r5 = r0.strRemove;
+
+        $r4.insert($i2, $r5);
+
+        $z0 = org.gjt.sp.jedit.buffer.UndoManager$Replace.$assertionsDisabled;
+
+        if $z0 != 0 goto label1;
+
+        $r9 = org.gjt.sp.jedit.buffer.UndoManager.access$300(r1);
+
+        if $r9 != r0 goto label1;
+
+        $r10 = new java.lang.AssertionError;
+
+        specialinvoke $r10.<init>();
+
+        throw $r10;
+
+     label1:
+        $r6 = newarray (org.gjt.sp.jedit.textarea.Selection)[1];
+
+        $r7 = new org.gjt.sp.jedit.textarea.Selection$Range;
+
+        $i3 = r0.offset;
+
+        $i4 = r0.offset;
+
+        $r8 = r0.strRemove;
+
+        $i5 = $r8.length();
+
+        $i6 = $i4 + $i5;
+
+        specialinvoke $r7.<init>($i3, $i6);
+
+        $r6[0] = $r7;
+
+        return $r6;
+    }
+
+    org.gjt.sp.jedit.textarea.Selection[] redo(org.gjt.sp.jedit.buffer.UndoManager)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$Replace r0;
+        org.gjt.sp.jedit.buffer.UndoManager r1;
+        int i0, $i1, $i2, $i3, $i4, $i5;
+        org.gjt.sp.jedit.buffer.JEditBuffer $r2, $r4, $r10;
+        java.lang.String $r3, $r5, $r7;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit $r6;
+        org.gjt.sp.jedit.textarea.Selection[] $r8;
+        org.gjt.sp.jedit.textarea.Selection$Range $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.buffer.UndoManager.access$200(r1);
+
+        $i1 = r0.offset;
+
+        $r3 = r0.strRemove;
+
+        $i2 = $r3.length();
+
+        $r2.remove($i1, $i2);
+
+        $r4 = org.gjt.sp.jedit.buffer.UndoManager.access$200(r1);
+
+        $i3 = r0.offset;
+
+        $r5 = r0.strInsert;
+
+        $r4.insert($i3, $r5);
+
+        $r6 = org.gjt.sp.jedit.buffer.UndoManager.access$400(r1);
+
+        if $r6 != r0 goto label1;
+
+        $r10 = org.gjt.sp.jedit.buffer.UndoManager.access$200(r1);
+
+        $r10.setDirty(0);
+
+     label1:
+        $i4 = r0.offset;
+
+        $r7 = r0.strInsert;
+
+        $i5 = $r7.length();
+
+        i0 = $i4 + $i5;
+
+        $r8 = newarray (org.gjt.sp.jedit.textarea.Selection)[1];
+
+        $r9 = new org.gjt.sp.jedit.textarea.Selection$Range;
+
+        specialinvoke $r9.<init>(i0, i0);
+
+        $r8[0] = $r9;
+
+        return $r8;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Class $r0;
+        boolean $z0, $z1, $z1_1, $z1_2;
+
+        $r0 = class "org/gjt/sp/jedit/buffer/UndoManager";
+
+        $z0 = $r0.desiredAssertionStatus();
+
+        if $z0 != 0 goto label1;
+
+        $z1 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z1_1 = 0;
+
+     label2:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        org.gjt.sp.jedit.buffer.UndoManager$Replace.$assertionsDisabled = $z1_2;
+
+        return;
+    }
+}

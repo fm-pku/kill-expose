@@ -1,0 +1,7 @@
+public interface  org.gjt.sp.jedit.RegisterSaver extends java.lang.Object
+{
+
+    public abstract void loadRegisters();
+
+    public abstract void saveRegisters();
+}

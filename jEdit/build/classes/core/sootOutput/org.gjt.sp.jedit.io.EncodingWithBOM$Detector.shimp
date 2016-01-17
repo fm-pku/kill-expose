@@ -1,0 +1,145 @@
+public class org.gjt.sp.jedit.io.EncodingWithBOM$Detector extends java.lang.Object implements org.gjt.sp.jedit.io.EncodingDetector
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.io.EncodingWithBOM$Detector r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.lang.String detectEncoding(java.io.InputStream) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.EncodingWithBOM$Detector r0;
+        java.io.InputStream r1;
+        byte[] r2, $r3, $r4, $r5, $r6;
+        int i0, $i3, $i4, $i5, i20;
+        byte b1, b2, $b6, $b7, $b8, $b9, $b10, $b11, $b12, $b13, $b14, $b15, $b16, $b17, $b18, $b19;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = newarray (byte)[4];
+
+        i0 = r1.read(r2);
+
+        b1 = -1;
+
+        b2 = -2;
+
+        if i0 < 4 goto label2;
+
+        $b12 = r2[0];
+
+        if $b12 != b1 goto label1;
+
+        $b17 = r2[1];
+
+        if $b17 != b2 goto label1;
+
+        $b18 = r2[2];
+
+        if $b18 != 0 goto label1;
+
+        $b19 = r2[3];
+
+        if $b19 != 0 goto label1;
+
+        return "X-UTF-32LE-BOM";
+
+     label1:
+        $b13 = r2[0];
+
+        if $b13 != 0 goto label2;
+
+        $b14 = r2[1];
+
+        if $b14 != 0 goto label2;
+
+        $b15 = r2[2];
+
+        if $b15 != b2 goto label2;
+
+        $b16 = r2[3];
+
+        if $b16 != b1 goto label2;
+
+        return "X-UTF-32BE-BOM";
+
+     label2:
+        if i0 < 2 goto label4;
+
+        $b8 = r2[0];
+
+        if $b8 != b1 goto label3;
+
+        $b11 = r2[1];
+
+        if $b11 != b2 goto label3;
+
+        return "x-UTF-16LE-BOM";
+
+     label3:
+        $b9 = r2[0];
+
+        if $b9 != b2 goto label4;
+
+        $b10 = r2[1];
+
+        if $b10 != b1 goto label4;
+
+        return "UTF-16";
+
+     label4:
+        $r3 = org.gjt.sp.jedit.io.EncodingWithBOM.access$000();
+
+        $i3 = lengthof $r3;
+
+(0)     if i0 < $i3 goto label8;
+
+(1)     i20 = 0;
+
+     label5:
+        i20 = Phi(i20 #1, i20 #2);
+
+        $r4 = org.gjt.sp.jedit.io.EncodingWithBOM.access$000();
+
+        $i4 = lengthof $r4;
+
+        if i20 >= $i4 goto label7;
+
+        $b6 = r2[i20];
+
+        $r6 = org.gjt.sp.jedit.io.EncodingWithBOM.access$000();
+
+        $b7 = $r6[i20];
+
+        if $b6 == $b7 goto label6;
+
+        goto label7;
+
+     label6:
+        i20 = i20 + 1;
+
+(2)     goto label5;
+
+     label7:
+        $r5 = org.gjt.sp.jedit.io.EncodingWithBOM.access$000();
+
+        $i5 = lengthof $r5;
+
+(3)     if i20 != $i5 goto label8;
+
+        return "UTF-8Y";
+
+     label8:
+        i20 = Phi(i20 #0, i20 #3);
+
+        return null;
+    }
+}

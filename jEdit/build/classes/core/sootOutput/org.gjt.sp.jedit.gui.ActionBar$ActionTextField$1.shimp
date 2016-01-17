@@ -1,0 +1,80 @@
+class org.gjt.sp.jedit.gui.ActionBar$ActionTextField$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final java.awt.event.KeyEvent val$evt;
+    final org.gjt.sp.jedit.gui.ActionBar$ActionTextField this$1;
+
+    void <init>(org.gjt.sp.jedit.gui.ActionBar$ActionTextField, java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.gui.ActionBar$ActionTextField$1 r0;
+        org.gjt.sp.jedit.gui.ActionBar$ActionTextField r1;
+        java.awt.event.KeyEvent r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$1 = r1;
+
+        r0.val$evt = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.gui.ActionBar$ActionTextField$1 r0;
+        org.gjt.sp.jedit.gui.ActionBar$ActionTextField $r1, $r5, $r9, $r11;
+        org.gjt.sp.jedit.gui.ActionBar $r2, $r6, $r10, $r12;
+        org.gjt.sp.jedit.View $r3, $r7, $r13;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r4;
+        org.gjt.sp.jedit.gui.InputHandler $r8, $r14;
+        int $i0;
+        java.awt.event.KeyEvent $r15;
+
+        r0 := @this;
+
+        $r1 = r0.this$1;
+
+        $r2 = $r1.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.ActionBar.access$200($r2);
+
+        $r4 = $r3.getTextArea();
+
+        $r4.requestFocus();
+
+        $r5 = r0.this$1;
+
+        $r6 = $r5.this$0;
+
+        $r7 = org.gjt.sp.jedit.gui.ActionBar.access$200($r6);
+
+        $r8 = $r7.getInputHandler();
+
+        $r9 = r0.this$1;
+
+        $r10 = $r9.this$0;
+
+        $i0 = org.gjt.sp.jedit.gui.ActionBar.access$300($r10);
+
+        $r8.setRepeatCount($i0);
+
+        $r11 = r0.this$1;
+
+        $r12 = $r11.this$0;
+
+        $r13 = org.gjt.sp.jedit.gui.ActionBar.access$200($r12);
+
+        $r14 = $r13.getInputHandler();
+
+        $r15 = r0.val$evt;
+
+        $r14.processKeyEvent($r15, 2, 0);
+
+        return;
+    }
+}

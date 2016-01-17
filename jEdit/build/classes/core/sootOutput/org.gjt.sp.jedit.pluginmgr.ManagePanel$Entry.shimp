@@ -1,0 +1,473 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry extends java.lang.Object
+{
+    static final java.lang.String LOADED;
+    static final java.lang.String NOT_LOADED;
+    static final java.lang.String ERROR;
+    static final java.lang.String DISABLED;
+    final java.lang.String status;
+    final java.lang.String jar;
+    java.lang.String clazz;
+    java.lang.String name;
+    java.lang.String version;
+    java.lang.String author;
+    java.lang.String docs;
+    java.lang.String description;
+    java.util.Set depends;
+    org.gjt.sp.jedit.EditPlugin plugin;
+    final java.util.List jars;
+    java.lang.String dataSize;
+    final org.gjt.sp.jedit.pluginmgr.ManagePanel this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel, java.lang.String)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+        java.lang.String r2, $r5, $r9, $r12, $r13, $r16, $r19, $r20, $r23, $r26, $r27, $r30, $r33, $r34, $r37, $r40, $r41, $r44, $r47, $r48, $r53;
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry r3;
+        java.util.LinkedList $r4;
+        java.util.List $r6;
+        java.lang.StringBuilder $r7, $r8, $r10, $r11, $r14, $r15, $r17, $r18, $r21, $r22, $r24, $r25, $r28, $r29, $r31, $r32, $r35, $r36, $r38, $r39, $r42, $r43, $r45, $r46, $r50, $r51, $r52;
+        boolean $z1;
+        java.io.IOException $r49, r55;
+        java.util.Properties r54;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r4 = new java.util.LinkedList;
+
+        specialinvoke $r4.<init>();
+
+        r0.jars = $r4;
+
+        r0.jar = r2;
+
+        $r6 = r0.jars;
+
+        $r5 = r0.jar;
+
+        $r6.add($r5);
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("plugin.");
+
+        $r9 = org.gjt.sp.jedit.MiscUtilities.getFileName(r2);
+
+        $r10 = $r8.append($r9);
+
+        $r11 = $r10.append(".disabled");
+
+        $r12 = $r11.toString();
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty($r12);
+
+        if $z1 == 0 goto label1;
+
+        r0.status = "disabled";
+
+        goto label2;
+
+     label1:
+        r0.status = "not-loaded";
+
+     label2:
+        r3 = org.gjt.sp.jedit.PluginJAR.getPluginCacheEntry(r2);
+
+        if r3 == null goto label3;
+
+        $r13 = r3.pluginClass;
+
+        r0.clazz = $r13;
+
+        r54 = r3.cachedProperties;
+
+        $r14 = new java.lang.StringBuilder;
+
+        specialinvoke $r14.<init>();
+
+        $r15 = $r14.append("plugin.");
+
+        $r16 = r0.clazz;
+
+        $r17 = $r15.append($r16);
+
+        $r18 = $r17.append(".name");
+
+        $r19 = $r18.toString();
+
+        $r20 = r54.getProperty($r19);
+
+        r0.name = $r20;
+
+        $r21 = new java.lang.StringBuilder;
+
+        specialinvoke $r21.<init>();
+
+        $r22 = $r21.append("plugin.");
+
+        $r23 = r0.clazz;
+
+        $r24 = $r22.append($r23);
+
+        $r25 = $r24.append(".version");
+
+        $r26 = $r25.toString();
+
+        $r27 = r54.getProperty($r26);
+
+        r0.version = $r27;
+
+        $r28 = new java.lang.StringBuilder;
+
+        specialinvoke $r28.<init>();
+
+        $r29 = $r28.append("plugin.");
+
+        $r30 = r0.clazz;
+
+        $r31 = $r29.append($r30);
+
+        $r32 = $r31.append(".author");
+
+        $r33 = $r32.toString();
+
+        $r34 = r54.getProperty($r33);
+
+        r0.author = $r34;
+
+        $r35 = new java.lang.StringBuilder;
+
+        specialinvoke $r35.<init>();
+
+        $r36 = $r35.append("plugin.");
+
+        $r37 = r0.clazz;
+
+        $r38 = $r36.append($r37);
+
+        $r39 = $r38.append(".docs");
+
+        $r40 = $r39.toString();
+
+        $r41 = r54.getProperty($r40);
+
+        r0.docs = $r41;
+
+        $r42 = new java.lang.StringBuilder;
+
+        specialinvoke $r42.<init>();
+
+        $r43 = $r42.append("plugin.");
+
+        $r44 = r0.clazz;
+
+        $r45 = $r43.append($r44);
+
+        $r46 = $r45.append(".description");
+
+        $r47 = $r46.toString();
+
+        $r48 = r54.getProperty($r47);
+
+        r0.description = $r48;
+
+     label3:
+        goto label5;
+
+     label4:
+        $r49 := @caughtexception;
+
+        r55 = $r49;
+
+        $r50 = new java.lang.StringBuilder;
+
+        specialinvoke $r50.<init>();
+
+        $r51 = $r50.append("Unable to load cache for ");
+
+        $r52 = $r51.append(r2);
+
+        $r53 = $r52.toString();
+
+        org.gjt.sp.util.Log.log(7, $r53, r55);
+
+     label5:
+        return;
+
+        catch java.io.IOException from label2 to label3 with label4;
+    }
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel, org.gjt.sp.jedit.PluginJAR)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+        org.gjt.sp.jedit.PluginJAR r2;
+        java.util.LinkedList $r3;
+        java.lang.String $r4, $r5, $r11, $r14, $r17, $r18, $r21, $r24, $r25, $r28, $r31, $r32, $r35, $r38, $r39, $r42, $r45, $r46, $r51, $r51_1, $r51_2, $r51_3;
+        java.util.List $r6, $r47, $r49;
+        org.gjt.sp.jedit.EditPlugin $r7, $r8, $r9, $r10;
+        boolean $z1;
+        java.lang.StringBuilder $r12, $r13, $r15, $r16, $r19, $r20, $r22, $r23, $r26, $r27, $r29, $r30, $r33, $r34, $r36, $r37, $r40, $r41, $r43, $r44;
+        java.util.Collection $r48, $r50;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r3 = new java.util.LinkedList;
+
+        specialinvoke $r3.<init>();
+
+        r0.jars = $r3;
+
+        $r4 = r2.getPath();
+
+        r0.jar = $r4;
+
+        $r6 = r0.jars;
+
+        $r5 = r0.jar;
+
+        $r6.add($r5);
+
+        $r7 = r2.getPlugin();
+
+        r0.plugin = $r7;
+
+        $r8 = r0.plugin;
+
+        if $r8 == null goto label3;
+
+        $r9 = r0.plugin;
+
+        $z1 = $r9 instanceof org.gjt.sp.jedit.EditPlugin$Broken;
+
+        if $z1 == 0 goto label1;
+
+        $r51 = "error";
+
+(0)     goto label2;
+
+     label1:
+(1)     $r51_1 = "loaded";
+
+     label2:
+        $r51_2 = Phi($r51 #0, $r51_1 #1);
+
+        r0.status = $r51_2;
+
+        $r10 = r0.plugin;
+
+        $r11 = $r10.getClassName();
+
+        r0.clazz = $r11;
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = $r12.append("plugin.");
+
+        $r14 = r0.clazz;
+
+        $r15 = $r13.append($r14);
+
+        $r16 = $r15.append(".name");
+
+        $r17 = $r16.toString();
+
+        $r18 = org.gjt.sp.jedit.jEdit.getProperty($r17);
+
+        r0.name = $r18;
+
+        $r19 = new java.lang.StringBuilder;
+
+        specialinvoke $r19.<init>();
+
+        $r20 = $r19.append("plugin.");
+
+        $r21 = r0.clazz;
+
+        $r22 = $r20.append($r21);
+
+        $r23 = $r22.append(".version");
+
+        $r24 = $r23.toString();
+
+        $r25 = org.gjt.sp.jedit.jEdit.getProperty($r24);
+
+        r0.version = $r25;
+
+        $r26 = new java.lang.StringBuilder;
+
+        specialinvoke $r26.<init>();
+
+        $r27 = $r26.append("plugin.");
+
+        $r28 = r0.clazz;
+
+        $r29 = $r27.append($r28);
+
+        $r30 = $r29.append(".author");
+
+        $r31 = $r30.toString();
+
+        $r32 = org.gjt.sp.jedit.jEdit.getProperty($r31);
+
+        r0.author = $r32;
+
+        $r33 = new java.lang.StringBuilder;
+
+        specialinvoke $r33.<init>();
+
+        $r34 = $r33.append("plugin.");
+
+        $r35 = r0.clazz;
+
+        $r36 = $r34.append($r35);
+
+        $r37 = $r36.append(".docs");
+
+        $r38 = $r37.toString();
+
+        $r39 = org.gjt.sp.jedit.jEdit.getProperty($r38);
+
+        r0.docs = $r39;
+
+        $r40 = new java.lang.StringBuilder;
+
+        specialinvoke $r40.<init>();
+
+        $r41 = $r40.append("plugin.");
+
+        $r42 = r0.clazz;
+
+        $r43 = $r41.append($r42);
+
+        $r44 = $r43.append(".description");
+
+        $r45 = $r44.toString();
+
+        $r46 = org.gjt.sp.jedit.jEdit.getProperty($r45);
+
+        r0.description = $r46;
+
+        $r47 = r0.jars;
+
+        $r48 = r2.getJars();
+
+        $r47.addAll($r48);
+
+        $r49 = r0.jars;
+
+        $r50 = r2.getFiles();
+
+        $r49.addAll($r50);
+
+(2)     goto label4;
+
+     label3:
+(3)     r0.status = "loaded";
+
+     label4:
+        $r51_3 = Phi($r51_2 #2, $r51 #3);
+
+        return;
+    }
+
+    public java.util.Set getDependencies()
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r0, r6;
+        java.lang.String r2, r5, $r14;
+        java.util.Set r3;
+        java.util.Iterator r4;
+        org.gjt.sp.jedit.EditPlugin $r7, $r8, $r9;
+        boolean $z0, $z1;
+        java.util.HashSet $r10, r15, r15_1;
+        java.lang.Object $r11;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r12;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel $r13;
+
+        r0 := @this;
+
+        $r7 = r0.plugin;
+
+        if $r7 != null goto label1;
+
+        return null;
+
+     label1:
+        r15 = null;
+
+        $r8 = r0.plugin;
+
+        $r8.getPluginJAR();
+
+        $r9 = r0.plugin;
+
+        r2 = $r9.getClassName();
+
+        r3 = org.gjt.sp.jedit.PluginJAR.getDependencies(r2);
+
+(0)     if r3 == null goto label4;
+
+        $z0 = r3.isEmpty();
+
+(1)     if $z0 != 0 goto label4;
+
+        $r10 = new java.util.HashSet;
+
+        specialinvoke $r10.<init>();
+
+        r15_1 = $r10;
+
+(2)     r4 = r3.iterator();
+
+     label2:
+        r15 = Phi(r15_1 #2, r15 #4);
+
+        $z1 = r4.hasNext();
+
+(3)     if $z1 == 0 goto label4;
+
+        $r11 = r4.next();
+
+        r5 = (java.lang.String) $r11;
+
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$600($r12);
+
+        r6 = $r13.getEntry(r5);
+
+        if r6 == null goto label3;
+
+        $r14 = r6.name;
+
+        r15.add($r14);
+
+     label3:
+(4)     goto label2;
+
+     label4:
+        r15 = Phi(r15 #0, r15 #1, r15 #3);
+
+        return r15;
+    }
+}

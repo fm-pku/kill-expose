@@ -1,0 +1,115 @@
+class org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$MainMouseHandler extends javax.swing.event.MouseInputAdapter
+{
+    final org.gjt.sp.jedit.browser.VFSDirectoryEntryTable this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSDirectoryEntryTable)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$MainMouseHandler r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mouseClicked(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$MainMouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        int i0, $i1, $i2;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry r2;
+        boolean z0, $z1, $z1_1, $z1_2;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r3, $r6, $r8, $r13;
+        org.gjt.sp.jedit.browser.BrowserView $r4, $r14;
+        org.gjt.sp.jedit.browser.VFSBrowser $r5, $r15;
+        javax.swing.ListSelectionModel $r7;
+        javax.swing.table.TableModel $r9;
+        java.lang.Object $r10;
+        org.gjt.sp.jedit.io.VFSFile $r11, $r17;
+        org.gjt.sp.jedit.msg.VFSPathSelected $r12;
+        org.gjt.sp.jedit.View $r16;
+        java.lang.String $r18;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.mouseClicked(r1);
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.browser.VFSDirectoryEntryTable.access$200($r3);
+
+        $r5 = $r4.getBrowser();
+
+        $i1 = $r5.getMode();
+
+        if $i1 == 2 goto label1;
+
+        return;
+
+     label1:
+        $r6 = r0.this$0;
+
+        $r7 = $r6.getSelectionModel();
+
+        i0 = $r7.getMinSelectionIndex();
+
+        if i0 != -1 goto label2;
+
+        return;
+
+     label2:
+        $r8 = r0.this$0;
+
+        $r9 = $r8.getModel();
+
+        $r10 = $r9.getValueAt(i0, 0);
+
+        r2 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry) $r10;
+
+        $r11 = r2.dirEntry;
+
+        $i2 = $r11.getType();
+
+        if $i2 != 1 goto label3;
+
+        $z1 = 1;
+
+(0)     goto label4;
+
+     label3:
+(1)     $z1_1 = 0;
+
+     label4:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        z0 = $z1_2;
+
+        $r12 = new org.gjt.sp.jedit.msg.VFSPathSelected;
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.browser.VFSDirectoryEntryTable.access$200($r13);
+
+        $r15 = $r14.getBrowser();
+
+        $r16 = $r15.getView();
+
+        $r17 = r2.dirEntry;
+
+        $r18 = $r17.getPath();
+
+        specialinvoke $r12.<init>($r16, $r18, z0);
+
+        org.gjt.sp.jedit.EditBus.send($r12);
+
+        return;
+    }
+}

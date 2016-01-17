@@ -1,0 +1,266 @@
+class org.gjt.sp.jedit.browser.VFSFileChooserDialog$BrowserHandler extends java.lang.Object implements org.gjt.sp.jedit.browser.BrowserListener
+{
+    final org.gjt.sp.jedit.browser.VFSFileChooserDialog this$0;
+
+    private void <init>(org.gjt.sp.jedit.browser.VFSFileChooserDialog)
+    {
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog$BrowserHandler r0;
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void filesSelected(org.gjt.sp.jedit.browser.VFSBrowser, org.gjt.sp.jedit.io.VFSFile[])
+    {
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog$BrowserHandler r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+        org.gjt.sp.jedit.io.VFSFile[] r2;
+        boolean z0, $z1, $z2, $z2_1, $z2_2;
+        org.gjt.sp.jedit.io.VFSFile r3;
+        java.lang.String r4, r5, $r10, $r17, $r20, r21, r21_1, r21_2, r21_3, r21_4;
+        int $i0, $i1, $i2, $i3;
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog $r6, $r8, $r11, $r13, $r15, $r18;
+        org.gjt.sp.jedit.browser.VFSFileNameField $r7, $r12, $r14;
+        javax.swing.JButton $r9, $r16, $r19;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $i0 = r1.getMode();
+
+        if $i0 != 3 goto label1;
+
+        $z2 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z2_1 = 0;
+
+     label2:
+        $z2_2 = Phi($z2 #0, $z2_1 #1);
+
+        z0 = $z2_2;
+
+        $i1 = lengthof r2;
+
+        if $i1 != 0 goto label3;
+
+(2)     if z0 == 0 goto label9;
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$600($r18);
+
+        $r20 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.dialog.choose-dir");
+
+        $r19.setText($r20);
+
+(3)     goto label9;
+
+     label3:
+        $i2 = lengthof r2;
+
+        if $i2 != 1 goto label7;
+
+        if z0 == 0 goto label4;
+
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$600($r15);
+
+        $r17 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.dialog.choose-dir");
+
+        $r16.setText($r17);
+
+     label4:
+        r3 = r2[0];
+
+        $i3 = r3.getType();
+
+(4)     if $i3 != 0 goto label6;
+
+        r21 = r3.getPath();
+
+        r4 = r1.getDirectory();
+
+        r5 = org.gjt.sp.jedit.MiscUtilities.getParentOfPath(r21);
+
+        $z1 = org.gjt.sp.jedit.MiscUtilities.pathsEqual(r5, r4);
+
+(5)     if $z1 == 0 goto label5;
+
+(6)     r21_1 = r3.getName();
+
+     label5:
+        r21_2 = Phi(r21 #5, r21_1 #6);
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$800($r11);
+
+        $r12.setText(r21_2);
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$800($r13);
+
+(7)     $r14.selectAll();
+
+     label6:
+        r21_3 = Phi(r21 #4, r21_2 #7);
+
+(8)     goto label9;
+
+     label7:
+        if z0 == 0 goto label8;
+
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$600($r8);
+
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.dialog.choose-dir");
+
+        $r9.setText($r10);
+
+     label8:
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$800($r6);
+
+(9)     $r7.setText(null);
+
+     label9:
+        r21_4 = Phi(r21 #2, r21 #3, r21_3 #8, r21 #9);
+
+        return;
+    }
+
+    public void filesActivated(org.gjt.sp.jedit.browser.VFSBrowser, org.gjt.sp.jedit.io.VFSFile[])
+    {
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog$BrowserHandler r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+        org.gjt.sp.jedit.io.VFSFile[] r2;
+        byte b0;
+        int i1, $i2, $i3, $i4, $i5;
+        java.lang.String r3;
+        org.gjt.sp.jedit.io.VFS r4;
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog $r5, $r9, $r10, $r12, $r13, $r14;
+        org.gjt.sp.jedit.browser.VFSFileNameField $r6, $r11;
+        org.gjt.sp.jedit.io.VFSFile $r7, $r8;
+        boolean $z1, $z2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$800($r5);
+
+        $r6.selectAll();
+
+        $i2 = lengthof r2;
+
+        if $i2 != 0 goto label1;
+
+        $r14 = r0.this$0;
+
+        $r14.ok();
+
+        return;
+
+     label1:
+        b0 = 0;
+
+        i1 = lengthof r2;
+
+        if b0 >= i1 goto label5;
+
+        $r7 = r2[b0];
+
+        $i3 = $r7.getType();
+
+        if $i3 != 0 goto label4;
+
+        $r8 = r2[b0];
+
+        r3 = $r8.getPath();
+
+        r4 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r3);
+
+        $i4 = r1.getMode();
+
+        if $i4 != 1 goto label2;
+
+        $z1 = r4 instanceof org.gjt.sp.jedit.io.FileVFS;
+
+        if $z1 == 0 goto label2;
+
+        $r13 = r0.this$0;
+
+        $z2 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$100($r13, r3);
+
+        if $z2 == 0 goto label2;
+
+        return;
+
+     label2:
+        $r9 = r0.this$0;
+
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$202($r9, 1);
+
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.browser.VFSFileChooserDialog.access$800($r10);
+
+        $r11.setText(null);
+
+        $i5 = r1.getMode();
+
+        if $i5 == 3 goto label3;
+
+        $r12 = r0.this$0;
+
+        $r12.dispose();
+
+     label3:
+        return;
+
+     label4:
+        return;
+
+     label5:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.browser.VFSFileChooserDialog, org.gjt.sp.jedit.browser.VFSFileChooserDialog$1)
+    {
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog$BrowserHandler r0;
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog r1;
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

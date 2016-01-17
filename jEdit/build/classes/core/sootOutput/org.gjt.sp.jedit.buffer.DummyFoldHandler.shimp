@@ -1,0 +1,32 @@
+public class org.gjt.sp.jedit.buffer.DummyFoldHandler extends org.gjt.sp.jedit.buffer.FoldHandler
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.buffer.DummyFoldHandler r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("none");
+
+        return;
+    }
+
+    public int getFoldLevel(org.gjt.sp.jedit.buffer.JEditBuffer, int, javax.swing.text.Segment)
+    {
+        org.gjt.sp.jedit.buffer.DummyFoldHandler r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+        int i0;
+        javax.swing.text.Segment r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        r2 := @parameter2;
+
+        return 0;
+    }
+}

@@ -1,0 +1,232 @@
+public class org.gjt.sp.jedit.io.EncodingServer extends java.lang.Object
+{
+    private static final java.lang.String serviceClass;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.io.EncodingServer r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static org.gjt.sp.jedit.io.Encoding getEncoding(java.lang.String)
+    {
+        java.lang.String r0, $r8;
+        org.gjt.sp.jedit.io.CharsetEncoding $r1;
+        java.nio.charset.UnsupportedCharsetException $r2, $r3, r12;
+        java.lang.StringBuilder $r4, $r5, $r6, $r7;
+        boolean $z0;
+        org.gjt.sp.jedit.io.Encoding $r9;
+        java.nio.charset.IllegalCharsetNameException $r10, r11;
+        java.lang.Object r13;
+
+        r0 := @parameter0;
+
+     label1:
+        $r1 = new org.gjt.sp.jedit.io.CharsetEncoding;
+
+        specialinvoke $r1.<init>(r0);
+
+     label2:
+        return $r1;
+
+     label3:
+        $r10 := @caughtexception;
+
+        r11 = $r10;
+
+        goto label5;
+
+     label4:
+        $r2 := @caughtexception;
+
+        r12 = $r2;
+
+     label5:
+        r13 = org.gjt.sp.jedit.ServiceManager.getService("org.gjt.sp.jedit.io.Encoding", r0);
+
+        if r13 == null goto label6;
+
+        $z0 = r13 instanceof org.gjt.sp.jedit.io.Encoding;
+
+        if $z0 == 0 goto label6;
+
+        $r9 = (org.gjt.sp.jedit.io.Encoding) r13;
+
+        return $r9;
+
+     label6:
+        $r3 = new java.nio.charset.UnsupportedCharsetException;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("No such encoding: \"");
+
+        $r6 = $r5.append(r0);
+
+        $r7 = $r6.append("\"");
+
+        $r8 = $r7.toString();
+
+        specialinvoke $r3.<init>($r8);
+
+        throw $r3;
+
+        catch java.nio.charset.IllegalCharsetNameException from label1 to label2 with label3;
+        catch java.nio.charset.UnsupportedCharsetException from label1 to label2 with label4;
+    }
+
+    public static java.util.Set getAvailableNames()
+    {
+        java.util.HashSet r0, $r1;
+        java.util.SortedMap $r2;
+        java.util.Set $r3;
+        java.lang.String[] $r4;
+        java.util.List $r5;
+
+        $r1 = new java.util.HashSet;
+
+        specialinvoke $r1.<init>();
+
+        r0 = $r1;
+
+        $r2 = java.nio.charset.Charset.availableCharsets();
+
+        $r3 = $r2.keySet();
+
+        r0.addAll($r3);
+
+        $r4 = org.gjt.sp.jedit.ServiceManager.getServiceNames("org.gjt.sp.jedit.io.Encoding");
+
+        $r5 = java.util.Arrays.asList($r4);
+
+        r0.addAll($r5);
+
+        return r0;
+    }
+
+    public static java.util.Set getSelectedNames()
+    {
+        java.util.Set r0;
+        java.util.Iterator r1;
+        java.lang.String r2, $r7;
+        boolean $z0, $z1;
+        java.lang.Object $r3;
+        java.lang.StringBuilder $r4, $r5, $r6;
+
+        r0 = org.gjt.sp.jedit.io.EncodingServer.getAvailableNames();
+
+        r1 = r0.iterator();
+
+     label1:
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label3;
+
+        $r3 = r1.next();
+
+        r2 = (java.lang.String) $r3;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("encoding.opt-out.");
+
+        $r6 = $r5.append(r2);
+
+        $r7 = $r6.toString();
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty($r7, 0);
+
+        if $z1 == 0 goto label2;
+
+        r1.remove();
+
+     label2:
+        goto label1;
+
+     label3:
+        return r0;
+    }
+
+    public static java.io.Reader getTextReader(java.io.InputStream, java.lang.String) throws java.io.IOException
+    {
+        java.io.InputStream r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.io.Encoding $r2;
+        java.io.Reader $r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r2 = org.gjt.sp.jedit.io.EncodingServer.getEncoding(r1);
+
+        $r3 = $r2.getTextReader(r0);
+
+        return $r3;
+    }
+
+    public static java.io.Writer getTextWriter(java.io.OutputStream, java.lang.String) throws java.io.IOException
+    {
+        java.io.OutputStream r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.io.Encoding $r2;
+        java.io.Writer $r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r2 = org.gjt.sp.jedit.io.EncodingServer.getEncoding(r1);
+
+        $r3 = $r2.getTextWriter(r0);
+
+        return $r3;
+    }
+
+    public static boolean hasEncoding(java.lang.String)
+    {
+        java.lang.String r0;
+        java.nio.charset.IllegalCharsetNameException r1, $r4;
+        boolean $z0, $z1;
+        java.lang.String[] $r2;
+        java.util.List $r3;
+
+        r0 := @parameter0;
+
+     label1:
+        $z0 = java.nio.charset.Charset.isSupported(r0);
+
+        if $z0 == 0 goto label3;
+
+     label2:
+        return 1;
+
+     label3:
+        goto label5;
+
+     label4:
+        $r4 := @caughtexception;
+
+        r1 = $r4;
+
+     label5:
+        $r2 = org.gjt.sp.jedit.ServiceManager.getServiceNames("org.gjt.sp.jedit.io.Encoding");
+
+        $r3 = java.util.Arrays.asList($r2);
+
+        $z1 = $r3.contains(r0);
+
+        return $z1;
+
+        catch java.nio.charset.IllegalCharsetNameException from label1 to label2 with label4;
+    }
+}

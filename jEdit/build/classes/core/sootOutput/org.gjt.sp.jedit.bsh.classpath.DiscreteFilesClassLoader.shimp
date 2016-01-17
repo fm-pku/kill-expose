@@ -1,0 +1,85 @@
+public class org.gjt.sp.jedit.bsh.classpath.DiscreteFilesClassLoader extends org.gjt.sp.jedit.bsh.classpath.BshClassLoader
+{
+    org.gjt.sp.jedit.bsh.classpath.DiscreteFilesClassLoader$ClassSourceMap map;
+
+    public void <init>(org.gjt.sp.jedit.bsh.BshClassManager, org.gjt.sp.jedit.bsh.classpath.DiscreteFilesClassLoader$ClassSourceMap)
+    {
+        org.gjt.sp.jedit.bsh.classpath.DiscreteFilesClassLoader r0;
+        org.gjt.sp.jedit.bsh.BshClassManager r1;
+        org.gjt.sp.jedit.bsh.classpath.DiscreteFilesClassLoader$ClassSourceMap r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        r0.map = r2;
+
+        return;
+    }
+
+    public java.lang.Class findClass(java.lang.String) throws java.lang.ClassNotFoundException
+    {
+        org.gjt.sp.jedit.bsh.classpath.DiscreteFilesClassLoader r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath$ClassSource r2;
+        byte[] r3;
+        org.gjt.sp.jedit.bsh.classpath.DiscreteFilesClassLoader$ClassSourceMap $r4;
+        java.lang.Class $r5, $r6;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.map;
+
+        r2 = $r4.get(r1);
+
+        if r2 == null goto label1;
+
+        r3 = r2.getCode(r1);
+
+        $i0 = lengthof r3;
+
+        $r6 = r0.defineClass(r1, r3, 0, $i0);
+
+        return $r6;
+
+     label1:
+        $r5 = specialinvoke r0.findClass(r1);
+
+        return $r5;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.bsh.classpath.DiscreteFilesClassLoader r0;
+        java.lang.StringBuilder $r1, $r3, $r4, $r6;
+        java.lang.String $r2, $r7;
+        org.gjt.sp.jedit.bsh.classpath.DiscreteFilesClassLoader$ClassSourceMap $r5;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = specialinvoke r0.toString();
+
+        $r3 = $r1.append($r2);
+
+        $r4 = $r3.append("for files: ");
+
+        $r5 = r0.map;
+
+        $r6 = $r4.append($r5);
+
+        $r7 = $r6.toString();
+
+        return $r7;
+    }
+}

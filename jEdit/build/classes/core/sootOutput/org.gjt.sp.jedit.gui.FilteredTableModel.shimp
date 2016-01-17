@@ -1,0 +1,588 @@
+public abstract class org.gjt.sp.jedit.gui.FilteredTableModel extends javax.swing.table.AbstractTableModel implements javax.swing.event.TableModelListener
+{
+    protected javax.swing.table.TableModel delegated;
+    private java.util.Vector filteredIndices;
+    private java.util.Map invertedIndices;
+    private java.lang.String filter;
+    private javax.swing.JTable table;
+
+    protected void <init>(javax.swing.table.TableModel)
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        javax.swing.table.TableModel r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.delegated = r1;
+
+        r1.addTableModelListener(r0);
+
+        specialinvoke r0.resetFilter();
+
+        return;
+    }
+
+    protected void <init>()
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void setTable(javax.swing.JTable)
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        javax.swing.JTable r1;
+        javax.swing.table.TableModel $r2;
+        java.lang.IllegalArgumentException $r3;
+        java.lang.StringBuilder $r4, $r5, $r6, $r7, $r8;
+        java.lang.String $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getModel();
+
+        if $r2 == r0 goto label1;
+
+        $r3 = new java.lang.IllegalArgumentException;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("The given table ");
+
+        $r6 = $r5.append(r1);
+
+        $r7 = $r6.append(" doesn\'t use this model ");
+
+        $r8 = $r7.append(r0);
+
+        $r9 = $r8.toString();
+
+        specialinvoke $r3.<init>($r9);
+
+        throw $r3;
+
+     label1:
+        r0.table = r1;
+
+        return;
+    }
+
+    public javax.swing.table.TableModel getDelegated()
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        javax.swing.table.TableModel $r1;
+
+        r0 := @this;
+
+        $r1 = r0.delegated;
+
+        return $r1;
+    }
+
+    public void setDelegated(javax.swing.table.TableModel)
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        javax.swing.table.TableModel r1, $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.delegated;
+
+        if $r2 == null goto label1;
+
+        $r3 = r0.delegated;
+
+        $r3.removeTableModelListener(r0);
+
+     label1:
+        r1.addTableModelListener(r0);
+
+        r0.delegated = r1;
+
+        r0.fireTableStructureChanged();
+
+        return;
+    }
+
+    private void resetFilter()
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+
+        r0 := @this;
+
+        r0.filteredIndices = null;
+
+        return;
+    }
+
+    public void setFilter(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        java.util.Set r1;
+        int i0, $i1, $i2, i3;
+        java.util.Vector r2, $r6;
+        java.util.HashMap r3, $r7;
+        java.lang.Integer r4, $r8;
+        boolean $z0, $z1;
+        javax.swing.table.TableModel $r5;
+        java.lang.String r10, r11;
+
+        r0 := @this;
+
+        r10 := @parameter0;
+
+        r1 = specialinvoke r0.saveSelection();
+
+        r0.filter = r10;
+
+        if r10 == null goto label4;
+
+        $z0 = r10.isEmpty();
+
+        if $z0 != 0 goto label4;
+
+        $r5 = r0.delegated;
+
+        i0 = $r5.getRowCount();
+
+        r11 = r0.prepareFilter(r10);
+
+        $r6 = new java.util.Vector;
+
+        specialinvoke $r6.<init>(i0);
+
+        r2 = $r6;
+
+        $r7 = new java.util.HashMap;
+
+        specialinvoke $r7.<init>();
+
+        r3 = $r7;
+
+(0)     i3 = 0;
+
+     label1:
+        i3 = Phi(i3 #0, i3 #1);
+
+        if i3 >= i0 goto label3;
+
+        $z1 = r0.passFilter(i3, r11);
+
+        if $z1 == 0 goto label2;
+
+        r4 = java.lang.Integer.valueOf(i3);
+
+        r2.add(r4);
+
+        $i1 = r2.size();
+
+        $i2 = $i1 - 1;
+
+        $r8 = java.lang.Integer.valueOf($i2);
+
+        r3.put(r4, $r8);
+
+     label2:
+        i3 = i3 + 1;
+
+(1)     goto label1;
+
+     label3:
+        r0.invertedIndices = r3;
+
+        r0.filteredIndices = r2;
+
+(2)     goto label5;
+
+     label4:
+(3)     specialinvoke r0.resetFilter();
+
+     label5:
+        i3 = Phi(i3 #2, i3 #3);
+
+        r0.fireTableDataChanged();
+
+        specialinvoke r0.restoreSelection(r1);
+
+        return;
+    }
+
+    public java.lang.String prepareFilter(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return r1;
+    }
+
+    public abstract boolean passFilter(int, java.lang.String);
+
+    private java.util.Set saveSelection()
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        int[] r1, r3;
+        java.util.HashSet r2, $r6;
+        int i0, i1, $i2, $i3, $i4, i5;
+        javax.swing.JTable $r4, $r5;
+        java.lang.Integer $r7;
+
+        r0 := @this;
+
+        $r4 = r0.table;
+
+        if $r4 != null goto label1;
+
+        return null;
+
+     label1:
+        $r5 = r0.table;
+
+        r1 = $r5.getSelectedRows();
+
+        $i2 = lengthof r1;
+
+        if $i2 != 0 goto label2;
+
+        return null;
+
+     label2:
+        $r6 = new java.util.HashSet;
+
+        $i3 = lengthof r1;
+
+        specialinvoke $r6.<init>($i3);
+
+        r2 = $r6;
+
+        r3 = r1;
+
+        i0 = lengthof r3;
+
+(0)     i5 = 0;
+
+     label3:
+        i5 = Phi(i5 #0, i5 #1);
+
+        if i5 >= i0 goto label4;
+
+        i1 = r3[i5];
+
+        $i4 = r0.getTrueRow(i1);
+
+        $r7 = java.lang.Integer.valueOf($i4);
+
+        r2.add($r7);
+
+        i5 = i5 + 1;
+
+(1)     goto label3;
+
+     label4:
+        return r2;
+    }
+
+    private void restoreSelection(java.util.Set)
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        java.util.Set r1;
+        java.util.Iterator r2;
+        java.lang.Integer r3;
+        int i0, $i1, $i2;
+        boolean $z0;
+        java.lang.Object $r4;
+        javax.swing.JTable $r5;
+        javax.swing.ListSelectionModel $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 == null goto label1;
+
+        $i1 = r0.getRowCount();
+
+        if $i1 != 0 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        r2 = r1.iterator();
+
+     label3:
+        $z0 = r2.hasNext();
+
+        if $z0 == 0 goto label5;
+
+        $r4 = r2.next();
+
+        r3 = (java.lang.Integer) $r4;
+
+        $i2 = r3.intValue();
+
+        i0 = r0.getInternal2ExternalRow($i2);
+
+        if i0 == -1 goto label4;
+
+        $r5 = r0.table;
+
+        $r6 = $r5.getSelectionModel();
+
+        $r6.setSelectionInterval(i0, i0);
+
+     label4:
+        goto label3;
+
+     label5:
+        return;
+    }
+
+    public int getRowCount()
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        java.util.Vector $r1, $r2;
+        int $i0, $i1;
+        javax.swing.table.TableModel $r3;
+
+        r0 := @this;
+
+        $r1 = r0.filteredIndices;
+
+        if $r1 != null goto label1;
+
+        $r3 = r0.delegated;
+
+        $i1 = $r3.getRowCount();
+
+        return $i1;
+
+     label1:
+        $r2 = r0.filteredIndices;
+
+        $i0 = $r2.size();
+
+        return $i0;
+    }
+
+    public int getColumnCount()
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        javax.swing.table.TableModel $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.delegated;
+
+        $i0 = $r1.getColumnCount();
+
+        return $i0;
+    }
+
+    public java.lang.String getColumnName(int)
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        int i0;
+        javax.swing.table.TableModel $r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.delegated;
+
+        $r2 = $r1.getColumnName(i0);
+
+        return $r2;
+    }
+
+    public java.lang.Class getColumnClass(int)
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        int i0;
+        javax.swing.table.TableModel $r1;
+        java.lang.Class $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.delegated;
+
+        $r2 = $r1.getColumnClass(i0);
+
+        return $r2;
+    }
+
+    public boolean isCellEditable(int, int)
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        int i0, i1, i2;
+        javax.swing.table.TableModel $r1;
+        boolean $z0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        i2 = r0.getTrueRow(i0);
+
+        $r1 = r0.delegated;
+
+        $z0 = $r1.isCellEditable(i2, i1);
+
+        return $z0;
+    }
+
+    public java.lang.Object getValueAt(int, int)
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        int i0, i1, i2;
+        javax.swing.table.TableModel $r1;
+        java.lang.Object $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        i2 = r0.getTrueRow(i0);
+
+        $r1 = r0.delegated;
+
+        $r2 = $r1.getValueAt(i2, i1);
+
+        return $r2;
+    }
+
+    public void setValueAt(java.lang.Object, int, int)
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        java.lang.Object r1;
+        int i0, i1, i2;
+        javax.swing.table.TableModel $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 = r0.getTrueRow(i0);
+
+        $r2 = r0.delegated;
+
+        $r2.setValueAt(r1, i2, i1);
+
+        return;
+    }
+
+    public int getTrueRow(int)
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        int i0, $i1;
+        java.util.Vector $r1, $r2;
+        java.lang.Object $r3;
+        java.lang.Integer $r4;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.filteredIndices;
+
+        if $r1 != null goto label1;
+
+        return i0;
+
+     label1:
+        $r2 = r0.filteredIndices;
+
+        $r3 = $r2.get(i0);
+
+        $r4 = (java.lang.Integer) $r3;
+
+        $i1 = $r4.intValue();
+
+        return $i1;
+    }
+
+    public int getInternal2ExternalRow(int)
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        int i0, $i1;
+        java.lang.Integer r1, $r4;
+        java.util.Map $r2, $r3;
+        java.lang.Object $r5;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r2 = r0.invertedIndices;
+
+        if $r2 != null goto label1;
+
+        return i0;
+
+     label1:
+        $r3 = r0.invertedIndices;
+
+        $r4 = java.lang.Integer.valueOf(i0);
+
+        $r5 = $r3.get($r4);
+
+        r1 = (java.lang.Integer) $r5;
+
+        if r1 != null goto label2;
+
+        return -1;
+
+     label2:
+        $i1 = r1.intValue();
+
+        return $i1;
+    }
+
+    public void tableChanged(javax.swing.event.TableModelEvent)
+    {
+        org.gjt.sp.jedit.gui.FilteredTableModel r0;
+        javax.swing.event.TableModelEvent r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.filter;
+
+        r0.setFilter($r2);
+
+        return;
+    }
+}

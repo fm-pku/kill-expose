@@ -1,0 +1,5 @@
+public interface  org.gjt.sp.jedit.gui.DefaultFocusComponent extends java.lang.Object
+{
+
+    public abstract void focusOnDefaultComponent();
+}

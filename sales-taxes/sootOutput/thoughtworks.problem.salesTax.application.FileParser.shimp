@@ -1,0 +1,233 @@
+public class thoughtworks.problem.salesTax.application.FileParser extends java.lang.Object
+{
+    private java.io.FileReader fileReader;
+    private java.io.BufferedReader bufferedReader;
+    private java.lang.String filePath;
+    private java.util.ArrayList inputDataArray;
+
+    public void <init>(java.lang.String)
+    {
+        thoughtworks.problem.salesTax.application.FileParser r0;
+        java.lang.String r1, r4, $r10, $r12, $r14, $r21, $r22, r26, r27, r28;
+        java.lang.String[] r2, r3;
+        int i0, $i1, $i2, $i3, $i4, $i5, i6;
+        double d0;
+        java.util.ArrayList $r5, $r17;
+        java.io.FileReader $r6, $r8;
+        java.io.BufferedReader $r7, $r9;
+        java.lang.Integer $r11;
+        java.lang.Double $r13;
+        java.lang.Object[] $r15;
+        boolean $z0, $z1, $z2, z3;
+        thoughtworks.problem.salesTax.application.InputData $r16;
+        java.lang.StringBuilder $r18, $r19, $r20, $r23;
+        java.io.FileNotFoundException $r24, r29;
+        java.io.IOException $r25, r30;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.filePath = r1;
+
+        $r5 = new java.util.ArrayList;
+
+        specialinvoke $r5.<init>();
+
+        r0.inputDataArray = $r5;
+
+     label01:
+(0)     $r6 = new java.io.FileReader;
+
+        specialinvoke $r6.<init>(r1);
+
+        r0.fileReader = $r6;
+
+        $r7 = new java.io.BufferedReader;
+
+        $r8 = r0.fileReader;
+
+        specialinvoke $r7.<init>($r8);
+
+(1)     r0.bufferedReader = $r7;
+
+     label02:
+        i6 = Phi(i6 #1, i6 #8);
+
+        $z2 = Phi($z2 #1, $z2 #8);
+
+        r28 = Phi(r28 #1, r28 #8);
+
+(2)     $r9 = r0.bufferedReader;
+
+        $r10 = $r9.readLine();
+
+        Packer.Pack(r0);
+
+        r26 = $r10;
+
+        if $r10 == null goto label08;
+
+        r27 = r26.replaceAll("\\s+$", "");
+
+        r2 = r27.split(" ");
+
+        $r11 = new java.lang.Integer;
+
+        $r12 = r2[0];
+
+        specialinvoke $r11.<init>($r12);
+
+        i0 = $r11.intValue();
+
+        $r13 = new java.lang.Double;
+
+        $i1 = lengthof r2;
+
+        $i2 = $i1 - 1;
+
+        $r14 = r2[$i2];
+
+        specialinvoke $r13.<init>($r14);
+
+        d0 = $r13.doubleValue();
+
+        $i3 = lengthof r2;
+
+        $i4 = $i3 - 2;
+
+        $r15 = java.util.Arrays.copyOfRange(r2, 1, $i4);
+
+        r3 = (java.lang.String[]) $r15;
+
+        r28 = "";
+
+(3)     i6 = 0;
+
+     label03:
+        i6 = Phi(i6 #3, i6 #5);
+
+        $z2 = Phi($z2 #3, $z2 #5);
+
+        r28 = Phi(r28 #3, r28 #5);
+
+        $i5 = lengthof r3;
+
+(4)     if i6 >= $i5 goto label04;
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<init>();
+
+        $r19 = $r18.append(r28);
+
+        $r20 = $r19.append(" ");
+
+        $r21 = r3[i6];
+
+        $r22 = $r21.toLowerCase();
+
+        $r23 = $r20.append($r22);
+
+        r28 = $r23.toString();
+
+        i6 = i6 + 1;
+
+(5)     goto label03;
+
+     label04:
+        Packer.Unpack(r0);
+
+        $z0 = r28.contains("imported");
+
+        if $z0 != 0 goto label05;
+
+        $z1 = r28.contains("Imported");
+
+        if $z1 == 0 goto label06;
+
+     label05:
+        $z2 = 1;
+
+(6)     goto label07;
+
+     label06:
+(7)     $z2 = 0;
+
+     label07:
+        $z2 = Phi($z2 #6, $z2 #7);
+
+        z3 = $z2;
+
+        r4 = r28.replaceAll("[i,I]mported", "");
+
+        $r17 = r0.inputDataArray;
+
+        $r16 = new thoughtworks.problem.salesTax.application.InputData;
+
+        specialinvoke $r16.<init>(i0, r4, z3, d0);
+
+        $r17.add($r16);
+
+(8)     goto label02;
+
+     label08:
+(9)     goto label11;
+
+     label09:
+        $r24 := @caughtexception;
+
+        i6 = Phi(i6 #0, i6 #2, i6 #4);
+
+        $z2 = Phi($z2 #0, $z2 #2, $z2 #4);
+
+        r28 = Phi(r28 #0, r28 #2, r28 #4);
+
+        r29 = $r24;
+
+        r29.printStackTrace();
+
+(10)    goto label11;
+
+     label10:
+        $r25 := @caughtexception;
+
+        i6 = Phi(i6 #0, i6 #2, i6 #4);
+
+        $z2 = Phi($z2 #0, $z2 #2, $z2 #4);
+
+        r28 = Phi(r28 #0, r28 #2, r28 #4);
+
+        r30 = $r25;
+
+(11)    r30.printStackTrace();
+
+     label11:
+        i6 = Phi(i6 #9, i6 #10, i6 #11);
+
+        $z2 = Phi($z2 #9, $z2 #10, $z2 #11);
+
+        r28 = Phi(r28 #9, r28 #10, r28 #11);
+
+        return;
+
+        catch java.io.FileNotFoundException from label01 to label08 with label09;
+        catch java.io.IOException from label01 to label08 with label10;
+    }
+
+    public java.util.ArrayList getInputData()
+    {
+        thoughtworks.problem.salesTax.application.FileParser r0;
+        java.util.ArrayList $r1;
+
+        r0 := @this;
+
+        $r1 = r0.inputDataArray;
+
+        return $r1;
+    }
+}

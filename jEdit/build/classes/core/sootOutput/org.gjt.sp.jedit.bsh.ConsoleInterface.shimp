@@ -1,0 +1,15 @@
+public interface  org.gjt.sp.jedit.bsh.ConsoleInterface extends java.lang.Object
+{
+
+    public abstract java.io.Reader getIn();
+
+    public abstract java.io.PrintStream getOut();
+
+    public abstract java.io.PrintStream getErr();
+
+    public abstract void println(java.lang.Object);
+
+    public abstract void print(java.lang.Object);
+
+    public abstract void error(java.lang.Object);
+}

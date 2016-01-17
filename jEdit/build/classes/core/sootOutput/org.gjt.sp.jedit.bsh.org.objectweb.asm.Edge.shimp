@@ -1,0 +1,18 @@
+class org.gjt.sp.jedit.bsh.org.objectweb.asm.Edge extends java.lang.Object
+{
+    int stackSize;
+    org.gjt.sp.jedit.bsh.org.objectweb.asm.Label successor;
+    org.gjt.sp.jedit.bsh.org.objectweb.asm.Edge next;
+    org.gjt.sp.jedit.bsh.org.objectweb.asm.Edge poolNext;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.bsh.org.objectweb.asm.Edge r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

@@ -1,0 +1,1114 @@
+public class org.gjt.sp.jedit.gui.FilesChangedDialog extends org.gjt.sp.jedit.gui.EnhancedDialog
+{
+    private org.gjt.sp.jedit.View view;
+    private javax.swing.JTree bufferTree;
+    private javax.swing.tree.DefaultTreeModel bufferTreeModel;
+    private javax.swing.tree.DefaultMutableTreeNode root;
+    private javax.swing.JButton selectAll;
+    private boolean selectAllInProgress;
+    private javax.swing.JButton reload;
+    private javax.swing.JButton ignore;
+    private javax.swing.JButton close;
+
+    public void <init>(org.gjt.sp.jedit.View, int[], boolean)
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+        org.gjt.sp.jedit.View r1;
+        int[] r2;
+        boolean z0, $z1;
+        javax.swing.JPanel r3, r5, $r13, $r23;
+        javax.swing.Box r4, $r16, $r62, r128;
+        javax.swing.JLabel r6, $r17, $r25;
+        javax.swing.tree.DefaultMutableTreeNode r7, r8, r9, $r29, $r31, $r37, $r43, $r45, $r78, $r82, $r86, $r119, $r120, $r121, $r122, r126, $r127;
+        org.gjt.sp.jedit.Buffer[] r10;
+        org.gjt.sp.jedit.Buffer r11;
+        java.lang.String $r12, $r26, $r30, $r35, $r36, $r41, $r42, $r66, $r90, $r92, $r100, $r102, $r110, $r112, $r123, $r124, $r125, $r124_1, $r124_2, $r125_1, $r125_2;
+        java.awt.BorderLayout $r14, $r24;
+        javax.swing.border.EmptyBorder $r15, $r27;
+        javax.swing.Icon $r18;
+        java.awt.Component $r20, $r63, $r73, $r97, $r107, $r117;
+        java.lang.StringBuilder $r32, $r33, $r34, $r38, $r39, $r40;
+        int $i0, $i1, $i2, $i3, $i7, i8;
+        javax.swing.tree.DefaultTreeModel $r44, $r47;
+        javax.swing.JTree $r46, $r48, $r49, $r50, $r52, $r53, $r56, $r59, $r79, $r83, $r87, $r88;
+        org.gjt.sp.jedit.gui.FilesChangedDialog$Renderer $r51;
+        javax.swing.tree.TreeSelectionModel $r54, $r57;
+        org.gjt.sp.jedit.gui.FilesChangedDialog$TreeHandler $r55;
+        javax.swing.JScrollPane $r58;
+        javax.swing.JButton $r65, $r68, $r69, $r72, $r89, $r91, $r93, $r96, $r99, $r101, $r103, $r106, $r109, $r111, $r113, $r116;
+        javax.swing.JRootPane $r67;
+        org.gjt.sp.jedit.gui.FilesChangedDialog$ActionHandler $r71, $r95, $r105, $r115;
+        javax.swing.tree.TreePath $r76, $r80, $r84;
+        java.lang.Object[] $r77, $r81, $r85;
+        char $c4, $c5, $c6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        $r12 = org.gjt.sp.jedit.jEdit.getProperty("files-changed.title");
+
+        specialinvoke r0.<init>(r1, $r12, 0);
+
+        r0.view = r1;
+
+        $r13 = new javax.swing.JPanel;
+
+        $r14 = new java.awt.BorderLayout;
+
+        specialinvoke $r14.<init>(12, 12);
+
+        specialinvoke $r13.<init>($r14);
+
+        r3 = $r13;
+
+        $r15 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r15.<init>(12, 12, 12, 12);
+
+        r3.setBorder($r15);
+
+        r0.setContentPane(r3);
+
+        $r16 = new javax.swing.Box;
+
+        specialinvoke $r16.<init>(1);
+
+        r4 = $r16;
+
+        $r17 = new javax.swing.JLabel;
+
+        $r18 = javax.swing.UIManager.getIcon("OptionPane.warningIcon");
+
+        specialinvoke $r17.<init>($r18);
+
+        r4.add($r17);
+
+        $r20 = javax.swing.Box.createGlue();
+
+        r4.add($r20);
+
+        r3.add("West", r4);
+
+        $r23 = new javax.swing.JPanel;
+
+        $r24 = new java.awt.BorderLayout;
+
+        specialinvoke $r24.<init>();
+
+        specialinvoke $r23.<init>($r24);
+
+        r5 = $r23;
+
+        $r25 = new javax.swing.JLabel;
+
+        $r26 = org.gjt.sp.jedit.jEdit.getProperty("files-changed.caption");
+
+        specialinvoke $r25.<init>($r26);
+
+        r6 = $r25;
+
+        $r27 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r27.<init>(0, 0, 6, 0);
+
+        r6.setBorder($r27);
+
+        r5.add("North", r6);
+
+        $r29 = new javax.swing.tree.DefaultMutableTreeNode;
+
+        $r30 = org.gjt.sp.jedit.jEdit.getProperty("files-changed.deleted");
+
+        specialinvoke $r29.<init>($r30, 1);
+
+        r7 = $r29;
+
+        $r31 = new javax.swing.tree.DefaultMutableTreeNode;
+
+        $r32 = new java.lang.StringBuilder;
+
+        specialinvoke $r32.<init>();
+
+        $r33 = $r32.append("files-changed.changed");
+
+        if z0 == 0 goto label01;
+
+        $r124 = "-auto";
+
+(0)     goto label02;
+
+     label01:
+(1)     $r124_1 = "";
+
+     label02:
+        $r124_2 = Phi($r124 #0, $r124_1 #1);
+
+        $r34 = $r33.append($r124_2);
+
+        $r35 = $r34.toString();
+
+        $r36 = org.gjt.sp.jedit.jEdit.getProperty($r35);
+
+        specialinvoke $r31.<init>($r36, 1);
+
+        r8 = $r31;
+
+        $r37 = new javax.swing.tree.DefaultMutableTreeNode;
+
+        $r38 = new java.lang.StringBuilder;
+
+        specialinvoke $r38.<init>();
+
+        $r39 = $r38.append("files-changed.changed-dirty");
+
+        if z0 == 0 goto label03;
+
+        $r125 = "-auto";
+
+(2)     goto label04;
+
+     label03:
+(3)     $r125_1 = "";
+
+     label04:
+        $r125_2 = Phi($r125 #2, $r125_1 #3);
+
+        $r40 = $r39.append($r125_2);
+
+        $r41 = $r40.toString();
+
+        $r42 = org.gjt.sp.jedit.jEdit.getProperty($r41);
+
+        specialinvoke $r37.<init>($r42, 1);
+
+        r9 = $r37;
+
+        r10 = org.gjt.sp.jedit.jEdit.getBuffers();
+
+(4)     i8 = 0;
+
+     label05:
+        i8 = Phi(i8 #4, i8 #10);
+
+        $r125 = Phi($r125_2 #4, $r125 #10);
+
+        $r127 = Phi($r127 #4, $r127 #10);
+
+        r126 = Phi(r126 #4, r126 #10);
+
+        $r124 = Phi($r124_2 #4, $r124 #10);
+
+        $i0 = lengthof r2;
+
+        if i8 >= $i0 goto label13;
+
+        r11 = r10[i8];
+
+        $i7 = r2[i8];
+
+        lookupswitch($i7)
+        {
+            case 1: goto label07;
+            case 2: goto label06;
+            default: goto label10;
+        };
+
+     label06:
+        r126 = r7;
+
+(5)     goto label11;
+
+     label07:
+        $z1 = r11.isDirty();
+
+        if $z1 == 0 goto label08;
+
+        $r127 = r9;
+
+(6)     goto label09;
+
+     label08:
+(7)     $r127 = r8;
+
+     label09:
+        $r127 = Phi($r127 #6, $r127 #7);
+
+        r126 = $r127;
+
+(8)     goto label11;
+
+     label10:
+(9)     r126 = null;
+
+     label11:
+        $r127 = Phi($r127 #5, $r127 #8, $r127 #9);
+
+        r126 = Phi(r126 #5, r126 #8, r126 #9);
+
+        if r126 == null goto label12;
+
+        $r122 = new javax.swing.tree.DefaultMutableTreeNode;
+
+        $r123 = r11.getPath();
+
+        specialinvoke $r122.<init>($r123);
+
+        r126.add($r122);
+
+     label12:
+        i8 = i8 + 1;
+
+(10)    goto label05;
+
+     label13:
+        $r43 = new javax.swing.tree.DefaultMutableTreeNode;
+
+        specialinvoke $r43.<init>("", 1);
+
+        r0.root = $r43;
+
+        $i1 = r7.getChildCount();
+
+        if $i1 == 0 goto label14;
+
+        $r121 = r0.root;
+
+        $r121.add(r7);
+
+     label14:
+        $i2 = r8.getChildCount();
+
+        if $i2 == 0 goto label15;
+
+        $r120 = r0.root;
+
+        $r120.add(r8);
+
+     label15:
+        $i3 = r9.getChildCount();
+
+        if $i3 == 0 goto label16;
+
+        $r119 = r0.root;
+
+        $r119.add(r9);
+
+     label16:
+        $r44 = new javax.swing.tree.DefaultTreeModel;
+
+        $r45 = r0.root;
+
+        specialinvoke $r44.<init>($r45);
+
+        r0.bufferTreeModel = $r44;
+
+        $r46 = new javax.swing.JTree;
+
+        $r47 = r0.bufferTreeModel;
+
+        specialinvoke $r46.<init>($r47);
+
+        r0.bufferTree = $r46;
+
+        $r48 = r0.bufferTree;
+
+        $r48.setRowHeight(0);
+
+        $r49 = r0.bufferTree;
+
+        $r49.setRootVisible(0);
+
+        $r50 = r0.bufferTree;
+
+        $r50.setVisibleRowCount(10);
+
+        $r52 = r0.bufferTree;
+
+        $r51 = new org.gjt.sp.jedit.gui.FilesChangedDialog$Renderer;
+
+        specialinvoke $r51.<init>();
+
+        $r52.setCellRenderer($r51);
+
+        $r53 = r0.bufferTree;
+
+        $r54 = $r53.getSelectionModel();
+
+        $r55 = new org.gjt.sp.jedit.gui.FilesChangedDialog$TreeHandler;
+
+        specialinvoke $r55.<init>(r0);
+
+        $r54.addTreeSelectionListener($r55);
+
+        $r56 = r0.bufferTree;
+
+        $r57 = $r56.getSelectionModel();
+
+        $r57.setSelectionMode(4);
+
+        $r58 = new javax.swing.JScrollPane;
+
+        $r59 = r0.bufferTree;
+
+        specialinvoke $r58.<init>($r59);
+
+        r5.add("Center", $r58);
+
+        r3.add("Center", r5);
+
+        $r62 = new javax.swing.Box;
+
+        specialinvoke $r62.<init>(0);
+
+        r128 = $r62;
+
+        $r63 = javax.swing.Box.createGlue();
+
+        r128.add($r63);
+
+        if z0 != 0 goto label17;
+
+        $r89 = new javax.swing.JButton;
+
+        $r90 = org.gjt.sp.jedit.jEdit.getProperty("files-changed.select-all");
+
+        specialinvoke $r89.<init>($r90);
+
+        r0.selectAll = $r89;
+
+        $r91 = r0.selectAll;
+
+        $r92 = org.gjt.sp.jedit.jEdit.getProperty("files-changed.select-all.mnemonic");
+
+        $c4 = $r92.charAt(0);
+
+        $r91.setMnemonic($c4);
+
+        $r93 = r0.selectAll;
+
+        r128.add($r93);
+
+        $r96 = r0.selectAll;
+
+        $r95 = new org.gjt.sp.jedit.gui.FilesChangedDialog$ActionHandler;
+
+        specialinvoke $r95.<init>(r0);
+
+        $r96.addActionListener($r95);
+
+        $r97 = javax.swing.Box.createHorizontalStrut(12);
+
+        r128.add($r97);
+
+        $r99 = new javax.swing.JButton;
+
+        $r100 = org.gjt.sp.jedit.jEdit.getProperty("files-changed.reload");
+
+        specialinvoke $r99.<init>($r100);
+
+        r0.reload = $r99;
+
+        $r101 = r0.reload;
+
+        $r102 = org.gjt.sp.jedit.jEdit.getProperty("files-changed.reload.mnemonic");
+
+        $c5 = $r102.charAt(0);
+
+        $r101.setMnemonic($c5);
+
+        $r103 = r0.reload;
+
+        r128.add($r103);
+
+        $r106 = r0.reload;
+
+        $r105 = new org.gjt.sp.jedit.gui.FilesChangedDialog$ActionHandler;
+
+        specialinvoke $r105.<init>(r0);
+
+        $r106.addActionListener($r105);
+
+        $r107 = javax.swing.Box.createHorizontalStrut(12);
+
+        r128.add($r107);
+
+        $r109 = new javax.swing.JButton;
+
+        $r110 = org.gjt.sp.jedit.jEdit.getProperty("files-changed.ignore");
+
+        specialinvoke $r109.<init>($r110);
+
+        r0.ignore = $r109;
+
+        $r111 = r0.ignore;
+
+        $r112 = org.gjt.sp.jedit.jEdit.getProperty("files-changed.ignore.mnemonic");
+
+        $c6 = $r112.charAt(0);
+
+        $r111.setMnemonic($c6);
+
+        $r113 = r0.ignore;
+
+        r128.add($r113);
+
+        $r116 = r0.ignore;
+
+        $r115 = new org.gjt.sp.jedit.gui.FilesChangedDialog$ActionHandler;
+
+        specialinvoke $r115.<init>(r0);
+
+        $r116.addActionListener($r115);
+
+        $r117 = javax.swing.Box.createHorizontalStrut(12);
+
+        r128.add($r117);
+
+     label17:
+        $r65 = new javax.swing.JButton;
+
+        $r66 = org.gjt.sp.jedit.jEdit.getProperty("common.close");
+
+        specialinvoke $r65.<init>($r66);
+
+        r0.close = $r65;
+
+        $r67 = r0.getRootPane();
+
+        $r68 = r0.close;
+
+        $r67.setDefaultButton($r68);
+
+        $r69 = r0.close;
+
+        r128.add($r69);
+
+        $r72 = r0.close;
+
+        $r71 = new org.gjt.sp.jedit.gui.FilesChangedDialog$ActionHandler;
+
+        specialinvoke $r71.<init>(r0);
+
+        $r72.addActionListener($r71);
+
+        $r73 = javax.swing.Box.createGlue();
+
+        r128.add($r73);
+
+        r3.add("South", r128);
+
+        $r79 = r0.bufferTree;
+
+        $r76 = new javax.swing.tree.TreePath;
+
+        $r77 = newarray (java.lang.Object)[2];
+
+        $r78 = r0.root;
+
+        $r77[0] = $r78;
+
+        $r77[1] = r7;
+
+        specialinvoke $r76.<init>($r77);
+
+        $r79.expandPath($r76);
+
+        $r83 = r0.bufferTree;
+
+        $r80 = new javax.swing.tree.TreePath;
+
+        $r81 = newarray (java.lang.Object)[2];
+
+        $r82 = r0.root;
+
+        $r81[0] = $r82;
+
+        $r81[1] = r8;
+
+        specialinvoke $r80.<init>($r81);
+
+        $r83.expandPath($r80);
+
+        $r87 = r0.bufferTree;
+
+        $r84 = new javax.swing.tree.TreePath;
+
+        $r85 = newarray (java.lang.Object)[2];
+
+        $r86 = r0.root;
+
+        $r85[0] = $r86;
+
+        $r85[1] = r9;
+
+        specialinvoke $r84.<init>($r85);
+
+        $r87.expandPath($r84);
+
+        $r88 = r0.bufferTree;
+
+        org.gjt.sp.jedit.GUIUtilities.requestFocus(r0, $r88);
+
+        specialinvoke r0.updateEnabled();
+
+        r0.pack();
+
+        r0.setLocationRelativeTo(r1);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    private void updateEnabled()
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+        javax.swing.tree.TreePath[] r1, r2;
+        int i0, $i1, i2;
+        javax.swing.tree.TreePath r3;
+        java.lang.Object[] r4;
+        javax.swing.JTree $r5;
+        javax.swing.JButton $r6, $r7, $r8, $r9;
+        boolean z0;
+
+        r0 := @this;
+
+        $r5 = r0.bufferTree;
+
+        r1 = $r5.getSelectionPaths();
+
+        z0 = 0;
+
+(0)     if r1 == null goto label3;
+
+        r2 = r1;
+
+        i0 = lengthof r2;
+
+(1)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #1, i2 #5);
+
+        z0 = Phi(z0 #1, z0 #5);
+
+(2)     if i2 >= i0 goto label3;
+
+        r3 = r2[i2];
+
+        r4 = r3.getPath();
+
+        $i1 = lengthof r4;
+
+(3)     if $i1 != 3 goto label2;
+
+(4)     z0 = 1;
+
+     label2:
+        z0 = Phi(z0 #3, z0 #4);
+
+        i2 = i2 + 1;
+
+(5)     goto label1;
+
+     label3:
+        i2 = Phi(i2 #0, i2 #2);
+
+        z0 = Phi(z0 #0, z0 #2);
+
+        $r6 = r0.reload;
+
+        if $r6 == null goto label4;
+
+        $r9 = r0.reload;
+
+        $r9.setEnabled(z0);
+
+     label4:
+        $r7 = r0.ignore;
+
+        if $r7 == null goto label5;
+
+        $r8 = r0.ignore;
+
+        $r8.setEnabled(z0);
+
+     label5:
+        return;
+    }
+
+    private void selectAll()
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+        javax.swing.tree.TreeNode[] r1;
+        javax.swing.tree.DefaultMutableTreeNode r2, r3, $r4, $r5, $r6;
+        int $i0, $i1, i2, i3;
+        javax.swing.tree.TreeNode $r7, $r8;
+        javax.swing.JTree $r9;
+        javax.swing.tree.TreeSelectionModel $r10;
+        javax.swing.tree.TreePath $r11;
+
+        r0 := @this;
+
+        r0.selectAllInProgress = 1;
+
+        r1 = newarray (javax.swing.tree.TreeNode)[3];
+
+        $r4 = r0.root;
+
+        r1[0] = $r4;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #3);
+
+        i3 = Phi(i3 #0, i3 #3);
+
+        $r5 = r0.root;
+
+        $i0 = $r5.getChildCount();
+
+        if i2 >= $i0 goto label4;
+
+        $r6 = r0.root;
+
+        $r7 = $r6.getChildAt(i2);
+
+        r2 = (javax.swing.tree.DefaultMutableTreeNode) $r7;
+
+        r1[1] = r2;
+
+(1)     i3 = 0;
+
+     label2:
+        i2 = Phi(i2 #1, i2 #2);
+
+        i3 = Phi(i3 #1, i3 #2);
+
+        $i1 = r2.getChildCount();
+
+        if i3 >= $i1 goto label3;
+
+        $r8 = r2.getChildAt(i3);
+
+        r3 = (javax.swing.tree.DefaultMutableTreeNode) $r8;
+
+        r1[2] = r3;
+
+        $r9 = r0.bufferTree;
+
+        $r10 = $r9.getSelectionModel();
+
+        $r11 = new javax.swing.tree.TreePath;
+
+        specialinvoke $r11.<init>(r1);
+
+        $r10.addSelectionPath($r11);
+
+        i3 = i3 + 1;
+
+(2)     goto label2;
+
+     label3:
+        i2 = i2 + 1;
+
+(3)     goto label1;
+
+     label4:
+        r0.selectAllInProgress = 0;
+
+        specialinvoke r0.updateEnabled();
+
+        return;
+    }
+
+    private void action(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+        java.lang.String r1, $r31, $r32;
+        javax.swing.tree.TreePath[] r2, r35;
+        javax.swing.tree.TreePath r3, $r8, $r25, r38;
+        javax.swing.tree.DefaultMutableTreeNode r4, r6, $r10, $r13, $r14, $r15, $r21, $r23, $r27, r37;
+        org.gjt.sp.jedit.Buffer r5;
+        javax.swing.JTree $r7, $r9, $r16, $r17, $r18, $r19, $r20, $r26;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, i9, i10, i11, i12;
+        javax.swing.tree.DefaultTreeModel $r11;
+        javax.swing.tree.TreeNode[] $r12, r36;
+        javax.swing.tree.TreeNode $r22, $r24, $r33;
+        java.lang.Object $r28, $r29, $r30;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.View $r34;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r7 = r0.bufferTree;
+
+        r2 = $r7.getSelectionPaths();
+
+        if r2 == null goto label01;
+
+        $i0 = lengthof r2;
+
+        if $i0 != 0 goto label02;
+
+     label01:
+        return;
+
+     label02:
+        $r9 = r0.bufferTree;
+
+        $r8 = r2[0];
+
+        i9 = $r9.getRowForPath($r8);
+
+        r35 = r2;
+
+        i10 = lengthof r35;
+
+(0)     i11 = 0;
+
+     label03:
+        i9 = Phi(i9 #0, i9 #1);
+
+        i11 = Phi(i11 #0, i11 #1);
+
+        if i11 >= i10 goto label10;
+
+        r3 = r35[i11];
+
+        $i8 = r3.getPathCount();
+
+        if $i8 != 2 goto label04;
+
+        goto label09;
+
+     label04:
+        $r28 = r3.getLastPathComponent();
+
+        r4 = (javax.swing.tree.DefaultMutableTreeNode) $r28;
+
+        $r29 = r4.getUserObject();
+
+        $z0 = $r29 instanceof java.lang.String;
+
+        if $z0 != 0 goto label05;
+
+        return;
+
+     label05:
+        $r30 = r4.getUserObject();
+
+        $r31 = (java.lang.String) $r30;
+
+        r5 = org.gjt.sp.jedit.jEdit.getBuffer($r31);
+
+        if r5 != null goto label06;
+
+        return;
+
+     label06:
+        $r32 = "RELOAD";
+
+        $z1 = $r32.equals(r1);
+
+        if $z1 == 0 goto label07;
+
+        $r34 = r0.view;
+
+        r5.reload($r34);
+
+        goto label08;
+
+     label07:
+        r5.setAutoReload(0);
+
+        r5.setAutoReloadDialog(0);
+
+     label08:
+        $r33 = r4.getParent();
+
+        r6 = (javax.swing.tree.DefaultMutableTreeNode) $r33;
+
+        r6.remove(r4);
+
+     label09:
+        i11 = i11 + 1;
+
+(1)     goto label03;
+
+     label10:
+        $r11 = r0.bufferTreeModel;
+
+        $r10 = r0.root;
+
+        $r11.reload($r10);
+
+        $r12 = newarray (javax.swing.tree.TreeNode)[2];
+
+        $r13 = r0.root;
+
+        $r12[0] = $r13;
+
+        $r12[1] = null;
+
+        r36 = $r12;
+
+(2)     i12 = 0;
+
+     label11:
+        i9 = Phi(i9 #2, i9 #5);
+
+        i11 = Phi(i11 #2, i11 #5);
+
+        i12 = Phi(i12 #2, i12 #5);
+
+        $r14 = r0.root;
+
+        $i1 = $r14.getChildCount();
+
+        if i12 >= $i1 goto label14;
+
+        $r21 = r0.root;
+
+        $r22 = $r21.getChildAt(i12);
+
+        r37 = (javax.swing.tree.DefaultMutableTreeNode) $r22;
+
+        $r23 = r0.root;
+
+        $r24 = $r23.getChildAt(i12);
+
+        $i7 = $r24.getChildCount();
+
+        if $i7 != 0 goto label12;
+
+        $r27 = r0.root;
+
+        $r27.remove(i12);
+
+        i12 = i12 + -1;
+
+(3)     goto label13;
+
+     label12:
+        r36[1] = r37;
+
+        $r26 = r0.bufferTree;
+
+        $r25 = new javax.swing.tree.TreePath;
+
+        specialinvoke $r25.<init>(r36);
+
+(4)     $r26.expandPath($r25);
+
+     label13:
+        i12 = Phi(i12 #3, i12 #4);
+
+        i12 = i12 + 1;
+
+(5)     goto label11;
+
+     label14:
+        $r15 = r0.root;
+
+        $i2 = $r15.getChildCount();
+
+        if $i2 != 0 goto label15;
+
+        r0.dispose();
+
+(6)     goto label18;
+
+     label15:
+        $r16 = r0.bufferTree;
+
+        $i3 = $r16.getRowCount();
+
+(7)     if i9 < $i3 goto label16;
+
+        $r20 = r0.bufferTree;
+
+        $i6 = $r20.getRowCount();
+
+(8)     i9 = $i6 - 1;
+
+     label16:
+        i9 = Phi(i9 #7, i9 #8);
+
+        $r17 = r0.bufferTree;
+
+        r38 = $r17.getPathForRow(i9);
+
+        $i4 = r38.getPathCount();
+
+        if $i4 != 2 goto label17;
+
+        $r19 = r0.bufferTree;
+
+        $i5 = i9 + 1;
+
+        $r19.setSelectionRow($i5);
+
+(9)     goto label18;
+
+     label17:
+        $r18 = r0.bufferTree;
+
+(10)    $r18.setSelectionPath(r38);
+
+     label18:
+        i9 = Phi(i9 #6, i9 #9, i9 #10);
+
+        return;
+    }
+
+    static javax.swing.JButton access$000(org.gjt.sp.jedit.gui.FilesChangedDialog)
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.selectAll;
+
+        return $r1;
+    }
+
+    static void access$100(org.gjt.sp.jedit.gui.FilesChangedDialog)
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.selectAll();
+
+        return;
+    }
+
+    static javax.swing.JButton access$200(org.gjt.sp.jedit.gui.FilesChangedDialog)
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.reload;
+
+        return $r1;
+    }
+
+    static void access$300(org.gjt.sp.jedit.gui.FilesChangedDialog, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+        java.lang.String r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        specialinvoke r0.action(r1);
+
+        return;
+    }
+
+    static javax.swing.JButton access$400(org.gjt.sp.jedit.gui.FilesChangedDialog)
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.close;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$500(org.gjt.sp.jedit.gui.FilesChangedDialog)
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.ignore;
+
+        return $r1;
+    }
+
+    static boolean access$600(org.gjt.sp.jedit.gui.FilesChangedDialog)
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $z0 = r0.selectAllInProgress;
+
+        return $z0;
+    }
+
+    static void access$700(org.gjt.sp.jedit.gui.FilesChangedDialog)
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updateEnabled();
+
+        return;
+    }
+
+    static javax.swing.JTree access$800(org.gjt.sp.jedit.gui.FilesChangedDialog)
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+        javax.swing.JTree $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.bufferTree;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.View access$900(org.gjt.sp.jedit.gui.FilesChangedDialog)
+    {
+        org.gjt.sp.jedit.gui.FilesChangedDialog r0;
+        org.gjt.sp.jedit.View $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.view;
+
+        return $r1;
+    }
+}

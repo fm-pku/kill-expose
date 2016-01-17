@@ -1,0 +1,77 @@
+class org.gjt.sp.jedit.gui.PasteSpecialDialog$1 extends javax.swing.DefaultListCellRenderer
+{
+    final org.gjt.sp.jedit.gui.PasteSpecialDialog this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.PasteSpecialDialog)
+    {
+        org.gjt.sp.jedit.gui.PasteSpecialDialog$1 r0;
+        org.gjt.sp.jedit.gui.PasteSpecialDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.awt.Component getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+    {
+        org.gjt.sp.jedit.gui.PasteSpecialDialog$1 r0;
+        javax.swing.JList r1;
+        java.lang.Object r2;
+        int i0;
+        boolean z0, z1, $z2, $z3, $z4;
+        java.awt.datatransfer.DataFlavor $r4, $r5, $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        specialinvoke r0.getListCellRendererComponent(r1, r2, i0, z0, z1);
+
+        $r4 = java.awt.datatransfer.DataFlavor.stringFlavor;
+
+        $z2 = r2.equals($r4);
+
+        if $z2 == 0 goto label1;
+
+        r0.setText("Plain text");
+
+        goto label3;
+
+     label1:
+        $r5 = org.gjt.sp.jedit.datatransfer.JEditDataFlavor.jEditRichTextDataFlavor;
+
+        $z3 = r2.equals($r5);
+
+        if $z3 == 0 goto label2;
+
+        r0.setText("jEdit rich text");
+
+        goto label3;
+
+     label2:
+        $r6 = org.gjt.sp.jedit.datatransfer.JEditDataFlavor.html;
+
+        $z4 = r2.equals($r6);
+
+        if $z4 == 0 goto label3;
+
+        r0.setText("html");
+
+     label3:
+        return r0;
+    }
+}

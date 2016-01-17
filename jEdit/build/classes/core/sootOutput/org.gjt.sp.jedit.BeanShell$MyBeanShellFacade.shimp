@@ -1,0 +1,256 @@
+class org.gjt.sp.jedit.BeanShell$MyBeanShellFacade extends org.gjt.sp.jedit.BeanShellFacade
+{
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.BeanShell$MyBeanShellFacade r0;
+        org.gjt.sp.jedit.JARClassLoader $r1;
+        org.gjt.sp.jedit.bsh.BshClassManager $r2;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r2 = r0.classManager;
+
+        $r1 = new org.gjt.sp.jedit.JARClassLoader;
+
+        specialinvoke $r1.<init>();
+
+        Packer.Unpack(r0);
+
+        $r2.setClassLoader($r1);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    protected void init()
+    {
+        org.gjt.sp.jedit.BeanShell$MyBeanShellFacade r0;
+        org.gjt.sp.jedit.bsh.NameSpace $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r13;
+
+        r0 := @this;
+
+        specialinvoke r0.init();
+
+        $r1 = r0.global;
+
+        Packer.Unpack(r0);
+
+        $r1.importPackage("org.gjt.sp.jedit.browser");
+
+        $r2 = r0.global;
+
+        $r2.importPackage("org.gjt.sp.jedit.bufferset");
+
+        $r3 = r0.global;
+
+        $r3.importPackage("org.gjt.sp.jedit.statusbar");
+
+        $r4 = r0.global;
+
+        $r4.importPackage("org.gjt.sp.jedit.gui");
+
+        $r5 = r0.global;
+
+        $r5.importPackage("org.gjt.sp.jedit.help");
+
+        $r6 = r0.global;
+
+        $r6.importPackage("org.gjt.sp.jedit.io");
+
+        $r7 = r0.global;
+
+        $r7.importPackage("org.gjt.sp.jedit.menu");
+
+        $r8 = r0.global;
+
+        $r8.importPackage("org.gjt.sp.jedit.msg");
+
+        $r9 = r0.global;
+
+        $r9.importPackage("org.gjt.sp.jedit.options");
+
+        $r10 = r0.global;
+
+        $r10.importPackage("org.gjt.sp.jedit.pluginmgr");
+
+        $r11 = r0.global;
+
+        $r11.importPackage("org.gjt.sp.jedit.print");
+
+        $r12 = r0.global;
+
+        $r12.importPackage("org.gjt.sp.jedit.search");
+
+        $r13 = r0.global;
+
+        $r13.importPackage("org.jedit.io");
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    protected void setupDefaultVariables(org.gjt.sp.jedit.bsh.NameSpace, org.gjt.sp.jedit.View) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.BeanShell$MyBeanShellFacade r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+        org.gjt.sp.jedit.View r2;
+        org.gjt.sp.jedit.EditPane r3;
+        org.gjt.sp.jedit.Buffer $r4;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r5;
+        org.gjt.sp.jedit.gui.DockableWindowManager $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        if r2 == null goto label1;
+
+        r3 = r2.getEditPane();
+
+        r0.setVariable(r1, "view", r2);
+
+        r0.setVariable(r1, "editPane", r3);
+
+        $r4 = r3.getBuffer();
+
+        r0.setVariable(r1, "buffer", $r4);
+
+        $r5 = r3.getTextArea();
+
+        r0.setVariable(r1, "textArea", $r5);
+
+        $r6 = r2.getDockableWindowManager();
+
+        r0.setVariable(r1, "wm", $r6);
+
+     label1:
+        return;
+    }
+
+    protected void resetDefaultVariables(org.gjt.sp.jedit.bsh.NameSpace) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.BeanShell$MyBeanShellFacade r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r1.setVariable("view", null, 0);
+
+        r1.setVariable("editPane", null, 0);
+
+        r1.setVariable("buffer", null, 0);
+
+        r1.setVariable("textArea", null, 0);
+
+        r1.setVariable("wm", null, 0);
+
+        return;
+    }
+
+    protected void handleException(org.gjt.sp.jedit.View, java.lang.String, java.lang.Throwable)
+    {
+        org.gjt.sp.jedit.BeanShell$MyBeanShellFacade r0;
+        org.gjt.sp.jedit.View r1;
+        java.lang.String r2, $r6;
+        java.lang.Throwable r3;
+        boolean $z0;
+        org.gjt.sp.jedit.gui.BeanShellErrorDialog $r4;
+        java.lang.String[] $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $z0 = r3 instanceof java.io.IOException;
+
+        if $z0 == 0 goto label1;
+
+        $r5 = newarray (java.lang.String)[1];
+
+        $r6 = r3.toString();
+
+        $r5[0] = $r6;
+
+        org.gjt.sp.jedit.io.VFSManager.error(r1, r2, "ioerror.read-error", $r5);
+
+        goto label2;
+
+     label1:
+        $r4 = new org.gjt.sp.jedit.gui.BeanShellErrorDialog;
+
+        specialinvoke $r4.<init>(r1, r3);
+
+     label2:
+        return;
+    }
+
+    protected volatile void handleException(java.lang.Object, java.lang.String, java.lang.Throwable)
+    {
+        org.gjt.sp.jedit.BeanShell$MyBeanShellFacade r0;
+        java.lang.Object r1;
+        java.lang.String r2;
+        java.lang.Throwable r3;
+        org.gjt.sp.jedit.View $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = (org.gjt.sp.jedit.View) r1;
+
+        r0.handleException($r4, r2, r3);
+
+        return;
+    }
+
+    protected volatile void setupDefaultVariables(org.gjt.sp.jedit.bsh.NameSpace, java.lang.Object) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.BeanShell$MyBeanShellFacade r0;
+        org.gjt.sp.jedit.bsh.NameSpace r1;
+        java.lang.Object r2;
+        org.gjt.sp.jedit.View $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = (org.gjt.sp.jedit.View) r2;
+
+        r0.setupDefaultVariables(r1, $r3);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.BeanShell$1)
+    {
+        org.gjt.sp.jedit.BeanShell$MyBeanShellFacade r0;
+        org.gjt.sp.jedit.BeanShell$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

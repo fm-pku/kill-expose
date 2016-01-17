@@ -1,0 +1,66 @@
+class org.gjt.sp.jedit.gui.ErrorListDialog$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.ErrorListDialog this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.ErrorListDialog)
+    {
+        org.gjt.sp.jedit.gui.ErrorListDialog$ActionHandler r0;
+        org.gjt.sp.jedit.gui.ErrorListDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.ErrorListDialog$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object $r2, $r5;
+        org.gjt.sp.jedit.gui.ErrorListDialog $r3, $r6, $r8, $r10;
+        javax.swing.JButton $r4, $r7;
+        java.awt.Frame $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getSource();
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.ErrorListDialog.access$000($r3);
+
+        if $r2 != $r4 goto label1;
+
+        $r10 = r0.this$0;
+
+        $r10.dispose();
+
+        goto label2;
+
+     label1:
+        $r5 = r1.getSource();
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.gui.ErrorListDialog.access$100($r6);
+
+        if $r5 != $r7 goto label2;
+
+        $r8 = r0.this$0;
+
+        $r9 = javax.swing.JOptionPane.getFrameForComponent($r8);
+
+        org.gjt.sp.jedit.pluginmgr.PluginManager.showPluginManager($r9);
+
+     label2:
+        return;
+    }
+}

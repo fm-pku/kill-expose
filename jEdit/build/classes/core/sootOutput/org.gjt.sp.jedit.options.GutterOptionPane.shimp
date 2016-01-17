@@ -1,0 +1,829 @@
+public class org.gjt.sp.jedit.options.GutterOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private static final java.lang.String GUTTER_ENABLED_PROPERTY;
+    private static final java.lang.String SELECTION_AREA_ENABLED_PROPERTY;
+    private static final java.lang.String SELECTION_AREA_BGCOLOR_PROPERTY;
+    private static final int DEFAULT_SELECTION_GUTTER_WIDTH;
+    private org.gjt.sp.jedit.gui.FontSelector gutterFont;
+    private org.gjt.sp.jedit.gui.ColorWellButton gutterForeground;
+    private org.gjt.sp.jedit.gui.ColorWellButton gutterBackground;
+    private javax.swing.JTextField gutterHighlightInterval;
+    private org.gjt.sp.jedit.gui.ColorWellButton gutterHighlightColor;
+    private javax.swing.JCheckBox lineNumbersEnabled;
+    private javax.swing.JCheckBox gutterCurrentLineHighlightEnabled;
+    private org.gjt.sp.jedit.gui.ColorWellButton gutterCurrentLineHighlight;
+    private javax.swing.JCheckBox gutterStructureHighlightEnabled;
+    private org.gjt.sp.jedit.gui.ColorWellButton gutterStructureHighlight;
+    private javax.swing.JCheckBox gutterMarkerHighlightEnabled;
+    private org.gjt.sp.jedit.gui.ColorWellButton gutterMarkerHighlight;
+    private org.gjt.sp.jedit.gui.ColorWellButton gutterFoldMarkers;
+    private javax.swing.JComboBox foldPainter;
+    private org.gjt.sp.jedit.gui.ColorWellButton gutterFocusBorder;
+    private org.gjt.sp.jedit.gui.ColorWellButton gutterNoFocusBorder;
+    private java.lang.String[] painters;
+    private javax.swing.JCheckBox gutterEnabled;
+    private javax.swing.JPanel gutterComponents;
+    private javax.swing.JTextField minLineNumberDigits;
+    private javax.swing.JCheckBox selectionAreaEnabled;
+    private org.gjt.sp.jedit.gui.ColorWellButton selectionAreaBgColor;
+    private javax.swing.JTextField selectionAreaWidth;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.GutterOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("gutter");
+
+        return;
+    }
+
+    public void _init()
+    {
+        org.gjt.sp.jedit.options.GutterOptionPane r0;
+        java.awt.GridBagConstraints r1, $r9;
+        org.gjt.sp.jedit.options.IntegerInputVerifier r2, $r16;
+        javax.swing.JPanel r3, $r11, $r13, $r21, $r25, $r31, $r36, $r37;
+        javax.swing.Box r4, $r67;
+        javax.swing.JCheckBox $r5, $r7, $r8, $r17, $r19, $r20, $r32, $r34, $r35, $r39, $r59, $r61, $r63, $r84, $r86, $r88, $r90, $r92, $r94;
+        java.lang.String $r6, $r14, $r18, $r23, $r27, $r33, $r40, $r44, $r46, $r51, $r53, $r56, $r60, $r66, $r69, $r78, $r85, $r91, $r96, $r99, $r102;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        java.awt.Insets $r10;
+        java.awt.GridBagLayout $r12;
+        javax.swing.border.TitledBorder $r15;
+        javax.swing.JTextField $r22, $r24, $r29, $r43, $r45, $r47, $r65, $r73;
+        int $i0, $i1;
+        javax.swing.JLabel $r26, $r68, $r77;
+        org.gjt.sp.jedit.options.GutterOptionPane$1 $r38;
+        org.gjt.sp.jedit.gui.ColorWellButton $r41, $r54, $r57, $r62, $r82, $r87, $r93, $r97, $r100, $r103;
+        java.awt.Color $r42, $r55, $r58, $r64, $r83, $r89, $r95, $r98, $r101, $r104;
+        org.gjt.sp.jedit.gui.FontSelector $r48, $r52;
+        java.awt.Font $r49, $r50;
+        java.awt.Component $r71, $r75, $r80;
+
+        r0 := @this;
+
+        $r5 = new javax.swing.JCheckBox;
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.enabled");
+
+        specialinvoke $r5.<init>($r6);
+
+        r0.gutterEnabled = $r5;
+
+        $r7 = r0.gutterEnabled;
+
+        $z0 = org.gjt.sp.jedit.options.GutterOptionPane.isGutterEnabled();
+
+        $r7.setSelected($z0);
+
+        $r8 = r0.gutterEnabled;
+
+        r0.addComponent($r8);
+
+        $r9 = new java.awt.GridBagConstraints;
+
+        specialinvoke $r9.<init>();
+
+        r1 = $r9;
+
+        r1.gridheight = 1;
+
+        r1.gridwidth = 0;
+
+        r1.fill = 2;
+
+        r1.anchor = 17;
+
+        r1.weightx = 1.0;
+
+        r1.ipadx = 0;
+
+        r1.ipady = 0;
+
+        $r10 = new java.awt.Insets;
+
+        specialinvoke $r10.<init>(0, 0, 0, 0);
+
+        r1.insets = $r10;
+
+        $r11 = new javax.swing.JPanel;
+
+        $r12 = new java.awt.GridBagLayout;
+
+        specialinvoke $r12.<init>();
+
+        specialinvoke $r11.<init>($r12);
+
+        r0.gutterComponents = $r11;
+
+        $r13 = r0.gutterComponents;
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.optionalComponents");
+
+        $r15 = javax.swing.BorderFactory.createTitledBorder($r14);
+
+        $r13.setBorder($r15);
+
+        $r16 = new org.gjt.sp.jedit.options.IntegerInputVerifier;
+
+        specialinvoke $r16.<init>();
+
+        r2 = $r16;
+
+        $r17 = new javax.swing.JCheckBox;
+
+        $r18 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.lineNumbers");
+
+        specialinvoke $r17.<init>($r18);
+
+        r0.lineNumbersEnabled = $r17;
+
+        $r19 = r0.lineNumbersEnabled;
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.gutter.lineNumbers");
+
+        $r19.setSelected($z1);
+
+        $r21 = r0.gutterComponents;
+
+        $r20 = r0.lineNumbersEnabled;
+
+        $r21.add($r20, r1);
+
+        $r22 = new javax.swing.JTextField;
+
+        $i0 = org.gjt.sp.jedit.options.GutterOptionPane.getMinLineNumberDigits();
+
+        $r23 = java.lang.String.valueOf($i0);
+
+        specialinvoke $r22.<init>($r23, 1);
+
+        r0.minLineNumberDigits = $r22;
+
+        $r24 = r0.minLineNumberDigits;
+
+        $r24.setInputVerifier(r2);
+
+        $r25 = new javax.swing.JPanel;
+
+        specialinvoke $r25.<init>();
+
+        r3 = $r25;
+
+        $r26 = new javax.swing.JLabel;
+
+        $r27 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.minLineNumberDigits");
+
+        specialinvoke $r26.<init>($r27);
+
+        r3.add($r26);
+
+        $r29 = r0.minLineNumberDigits;
+
+        r3.add($r29);
+
+        r1.gridy = 1;
+
+        $r31 = r0.gutterComponents;
+
+        $r31.add(r3, r1);
+
+        $r32 = new javax.swing.JCheckBox;
+
+        $r33 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.selectionAreaEnabled");
+
+        specialinvoke $r32.<init>($r33);
+
+        r0.selectionAreaEnabled = $r32;
+
+        $r34 = r0.selectionAreaEnabled;
+
+        $z2 = org.gjt.sp.jedit.options.GutterOptionPane.isSelectionAreaEnabled();
+
+        $r34.setSelected($z2);
+
+        r1.gridy = 2;
+
+        $r36 = r0.gutterComponents;
+
+        $r35 = r0.selectionAreaEnabled;
+
+        $r36.add($r35, r1);
+
+        $r37 = r0.gutterComponents;
+
+        r0.addComponent($r37);
+
+        specialinvoke r0.setGutterComponentsEnabledState();
+
+        $r39 = r0.gutterEnabled;
+
+        $r38 = new org.gjt.sp.jedit.options.GutterOptionPane$1;
+
+        specialinvoke $r38.<init>(r0);
+
+        $r39.addChangeListener($r38);
+
+        $r40 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.selectionAreaBgColor");
+
+        $r41 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r42 = org.gjt.sp.jedit.options.GutterOptionPane.getSelectionAreaBackground();
+
+        specialinvoke $r41.<init>($r42);
+
+        r0.selectionAreaBgColor = $r41;
+
+        r0.addComponent($r40, $r41, 3);
+
+        $r43 = new javax.swing.JTextField;
+
+        $i1 = org.gjt.sp.jedit.options.GutterOptionPane.getSelectionAreaWidth();
+
+        $r44 = java.lang.String.valueOf($i1);
+
+        specialinvoke $r43.<init>($r44, 12);
+
+        r0.selectionAreaWidth = $r43;
+
+        $r45 = r0.selectionAreaWidth;
+
+        $r45.setInputVerifier(r2);
+
+        $r46 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.selectionAreaWidth");
+
+        $r47 = r0.selectionAreaWidth;
+
+        r0.addComponent($r46, $r47);
+
+        $r48 = new org.gjt.sp.jedit.gui.FontSelector;
+
+        $r49 = new java.awt.Font;
+
+        specialinvoke $r49.<init>("Monospaced", 0, 10);
+
+        $r50 = org.gjt.sp.jedit.jEdit.getFontProperty("view.gutter.font", $r49);
+
+        specialinvoke $r48.<init>($r50);
+
+        r0.gutterFont = $r48;
+
+        $r51 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.font");
+
+        $r52 = r0.gutterFont;
+
+        r0.addComponent($r51, $r52);
+
+        $r53 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.foreground");
+
+        $r54 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r55 = org.gjt.sp.jedit.jEdit.getColorProperty("view.gutter.fgColor");
+
+        specialinvoke $r54.<init>($r55);
+
+        r0.gutterForeground = $r54;
+
+        r0.addComponent($r53, $r54, 3);
+
+        $r56 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.background");
+
+        $r57 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r58 = org.gjt.sp.jedit.jEdit.getColorProperty("view.gutter.bgColor");
+
+        specialinvoke $r57.<init>($r58);
+
+        r0.gutterBackground = $r57;
+
+        r0.addComponent($r56, $r57, 3);
+
+        $r59 = new javax.swing.JCheckBox;
+
+        $r60 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.currentLineHighlight");
+
+        specialinvoke $r59.<init>($r60);
+
+        r0.gutterCurrentLineHighlightEnabled = $r59;
+
+        $r61 = r0.gutterCurrentLineHighlightEnabled;
+
+        $z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.gutter.highlightCurrentLine");
+
+        $r61.setSelected($z3);
+
+        $r63 = r0.gutterCurrentLineHighlightEnabled;
+
+        $r62 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r64 = org.gjt.sp.jedit.jEdit.getColorProperty("view.gutter.currentLineColor");
+
+        specialinvoke $r62.<init>($r64);
+
+        r0.gutterCurrentLineHighlight = $r62;
+
+        r0.addComponent($r63, $r62, 3);
+
+        $r65 = new javax.swing.JTextField;
+
+        $r66 = org.gjt.sp.jedit.jEdit.getProperty("view.gutter.highlightInterval");
+
+        specialinvoke $r65.<init>($r66, 3);
+
+        r0.gutterHighlightInterval = $r65;
+
+        $r67 = new javax.swing.Box;
+
+        specialinvoke $r67.<init>(0);
+
+        r4 = $r67;
+
+        $r68 = new javax.swing.JLabel;
+
+        $r69 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.interval-1");
+
+        specialinvoke $r68.<init>($r69);
+
+        r4.add($r68);
+
+        $r71 = javax.swing.Box.createHorizontalStrut(3);
+
+        r4.add($r71);
+
+        $r73 = r0.gutterHighlightInterval;
+
+        r4.add($r73);
+
+        $r75 = javax.swing.Box.createHorizontalStrut(3);
+
+        r4.add($r75);
+
+        $r77 = new javax.swing.JLabel;
+
+        $r78 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.interval-2");
+
+        specialinvoke $r77.<init>($r78);
+
+        r4.add($r77);
+
+        $r80 = javax.swing.Box.createHorizontalStrut(12);
+
+        r4.add($r80);
+
+        $r82 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r83 = org.gjt.sp.jedit.jEdit.getColorProperty("view.gutter.highlightColor");
+
+        specialinvoke $r82.<init>($r83);
+
+        r0.gutterHighlightColor = $r82;
+
+        r0.addComponent(r4, $r82, 3);
+
+        $r84 = new javax.swing.JCheckBox;
+
+        $r85 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.structureHighlight");
+
+        specialinvoke $r84.<init>($r85);
+
+        r0.gutterStructureHighlightEnabled = $r84;
+
+        $r86 = r0.gutterStructureHighlightEnabled;
+
+        $z4 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.gutter.structureHighlight");
+
+        $r86.setSelected($z4);
+
+        $r88 = r0.gutterStructureHighlightEnabled;
+
+        $r87 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r89 = org.gjt.sp.jedit.jEdit.getColorProperty("view.gutter.structureHighlightColor");
+
+        specialinvoke $r87.<init>($r89);
+
+        r0.gutterStructureHighlight = $r87;
+
+        r0.addComponent($r88, $r87, 3);
+
+        $r90 = new javax.swing.JCheckBox;
+
+        $r91 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.markerHighlight");
+
+        specialinvoke $r90.<init>($r91);
+
+        r0.gutterMarkerHighlightEnabled = $r90;
+
+        $r92 = r0.gutterMarkerHighlightEnabled;
+
+        $z5 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.gutter.markerHighlight");
+
+        $r92.setSelected($z5);
+
+        $r94 = r0.gutterMarkerHighlightEnabled;
+
+        $r93 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r95 = org.gjt.sp.jedit.jEdit.getColorProperty("view.gutter.markerColor");
+
+        specialinvoke $r93.<init>($r95);
+
+        r0.gutterMarkerHighlight = $r93;
+
+        r0.addComponent($r94, $r93, 3);
+
+        $r96 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.foldColor");
+
+        $r97 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r98 = org.gjt.sp.jedit.jEdit.getColorProperty("view.gutter.foldColor");
+
+        specialinvoke $r97.<init>($r98);
+
+        r0.gutterFoldMarkers = $r97;
+
+        r0.addComponent($r96, $r97, 3);
+
+        $r99 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.focusBorderColor");
+
+        $r100 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r101 = org.gjt.sp.jedit.jEdit.getColorProperty("view.gutter.focusBorderColor");
+
+        specialinvoke $r100.<init>($r101);
+
+        r0.gutterFocusBorder = $r100;
+
+        r0.addComponent($r99, $r100, 3);
+
+        $r102 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.noFocusBorderColor");
+
+        $r103 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r104 = org.gjt.sp.jedit.jEdit.getColorProperty("view.gutter.noFocusBorderColor");
+
+        specialinvoke $r103.<init>($r104);
+
+        r0.gutterNoFocusBorder = $r103;
+
+        r0.addComponent($r102, $r103, 3);
+
+        specialinvoke r0.addFoldStyleChooser();
+
+        return;
+    }
+
+    public void _save()
+    {
+        org.gjt.sp.jedit.options.GutterOptionPane r0;
+        javax.swing.JCheckBox $r1, $r11, $r18, $r21, $r33, $r34;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        javax.swing.JTextField $r2, $r14, $r37;
+        java.lang.String $r3, $r15, $r28, $r38;
+        java.lang.Integer $r4, $r39;
+        int $i0, $i1, $i2;
+        org.gjt.sp.jedit.gui.FontSelector $r5;
+        java.awt.Font $r6;
+        org.gjt.sp.jedit.gui.ColorWellButton $r7, $r9, $r12, $r16, $r19, $r22, $r24, $r29, $r31, $r35;
+        java.awt.Color $r8, $r10, $r13, $r17, $r20, $r23, $r25, $r30, $r32, $r36;
+        javax.swing.JComboBox $r26;
+        java.lang.String[] $r27;
+
+        r0 := @this;
+
+        $r1 = r0.lineNumbersEnabled;
+
+        $z0 = $r1.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.gutter.lineNumbers", $z0);
+
+        $r2 = r0.minLineNumberDigits;
+
+        $r3 = $r2.getText();
+
+        $r4 = java.lang.Integer.valueOf($r3);
+
+        $i0 = $r4.intValue();
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty("view.gutter.minDigitCount", $i0);
+
+        $r5 = r0.gutterFont;
+
+        $r6 = $r5.getFont();
+
+        org.gjt.sp.jedit.jEdit.setFontProperty("view.gutter.font", $r6);
+
+        $r7 = r0.gutterForeground;
+
+        $r8 = $r7.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("view.gutter.fgColor", $r8);
+
+        $r9 = r0.gutterBackground;
+
+        $r10 = $r9.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("view.gutter.bgColor", $r10);
+
+        $r11 = r0.gutterCurrentLineHighlightEnabled;
+
+        $z1 = $r11.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.gutter.highlightCurrentLine", $z1);
+
+        $r12 = r0.gutterCurrentLineHighlight;
+
+        $r13 = $r12.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("view.gutter.currentLineColor", $r13);
+
+        $r14 = r0.gutterHighlightInterval;
+
+        $r15 = $r14.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("view.gutter.highlightInterval", $r15);
+
+        $r16 = r0.gutterHighlightColor;
+
+        $r17 = $r16.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("view.gutter.highlightColor", $r17);
+
+        $r18 = r0.gutterStructureHighlightEnabled;
+
+        $z2 = $r18.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.gutter.structureHighlight", $z2);
+
+        $r19 = r0.gutterStructureHighlight;
+
+        $r20 = $r19.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("view.gutter.structureHighlightColor", $r20);
+
+        $r21 = r0.gutterMarkerHighlightEnabled;
+
+        $z3 = $r21.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.gutter.markerHighlight", $z3);
+
+        $r22 = r0.gutterMarkerHighlight;
+
+        $r23 = $r22.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("view.gutter.markerColor", $r23);
+
+        $r24 = r0.gutterFoldMarkers;
+
+        $r25 = $r24.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("view.gutter.foldColor", $r25);
+
+        $r27 = r0.painters;
+
+        $r26 = r0.foldPainter;
+
+        $i1 = $r26.getSelectedIndex();
+
+        $r28 = $r27[$i1];
+
+        org.gjt.sp.jedit.jEdit.setProperty("foldPainter", $r28);
+
+        $r29 = r0.gutterFocusBorder;
+
+        $r30 = $r29.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("view.gutter.focusBorderColor", $r30);
+
+        $r31 = r0.gutterNoFocusBorder;
+
+        $r32 = $r31.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("view.gutter.noFocusBorderColor", $r32);
+
+        $r33 = r0.gutterEnabled;
+
+        $z4 = $r33.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.gutter.enabled", $z4);
+
+        $r34 = r0.selectionAreaEnabled;
+
+        $z5 = $r34.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.gutter.selectionAreaEnabled", $z5);
+
+        $r35 = r0.selectionAreaBgColor;
+
+        $r36 = $r35.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("view.gutter.selectionAreaBgColor", $r36);
+
+        $r37 = r0.selectionAreaWidth;
+
+        $r38 = $r37.getText();
+
+        $r39 = java.lang.Integer.valueOf($r38);
+
+        $i2 = $r39.intValue();
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty("view.gutter.selectionAreaWidth", $i2);
+
+        return;
+    }
+
+    private void setGutterComponentsEnabledState()
+    {
+        org.gjt.sp.jedit.options.GutterOptionPane r0;
+        javax.swing.JCheckBox $r1;
+        javax.swing.JPanel $r2;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r2 = r0.gutterComponents;
+
+        $r1 = r0.gutterEnabled;
+
+        $z0 = $r1.isSelected();
+
+        org.gjt.sp.jedit.GUIUtilities.setEnabledRecursively($r2, $z0);
+
+        return;
+    }
+
+    private void addFoldStyleChooser()
+    {
+        org.gjt.sp.jedit.options.GutterOptionPane r0;
+        java.lang.String r1, r2, $r8, $r15, $r16;
+        java.lang.String[] $r3, $r5, $r10;
+        javax.swing.JComboBox $r4, $r6, $r9, $r12;
+        int $i0, i1, i2;
+        javax.swing.JLabel $r7;
+        java.lang.StringBuilder $r11, $r13, $r14;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r3 = org.gjt.sp.jedit.ServiceManager.getServiceNames("org.gjt.sp.jedit.textarea.FoldPainter");
+
+        r0.painters = $r3;
+
+        $r4 = new javax.swing.JComboBox;
+
+        specialinvoke $r4.<init>();
+
+        r0.foldPainter = $r4;
+
+        r1 = org.gjt.sp.jedit.textarea.JEditTextArea.getFoldPainterName();
+
+        i1 = 0;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #3);
+
+        i1 = Phi(i1 #0, i1 #3);
+
+        $r5 = r0.painters;
+
+        $i0 = lengthof $r5;
+
+        if i2 >= $i0 goto label3;
+
+        $r10 = r0.painters;
+
+        r2 = $r10[i2];
+
+        $r12 = r0.foldPainter;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r13 = $r11.append("options.gutter.foldStyleNames.");
+
+        $r14 = $r13.append(r2);
+
+        $r15 = $r14.toString();
+
+        $r16 = org.gjt.sp.jedit.jEdit.getProperty($r15, r2);
+
+        $r12.addItem($r16);
+
+        $z0 = r2.equals(r1);
+
+(1)     if $z0 == 0 goto label2;
+
+(2)     i1 = i2;
+
+     label2:
+        i1 = Phi(i1 #1, i1 #2);
+
+        i2 = i2 + 1;
+
+(3)     goto label1;
+
+     label3:
+        $r6 = r0.foldPainter;
+
+        $r6.setSelectedIndex(i1);
+
+        $r7 = new javax.swing.JLabel;
+
+        $r8 = org.gjt.sp.jedit.jEdit.getProperty("options.gutter.foldStyle.label");
+
+        specialinvoke $r7.<init>($r8);
+
+        $r9 = r0.foldPainter;
+
+        r0.addComponent($r7, $r9);
+
+        return;
+    }
+
+    public static boolean isGutterEnabled()
+    {
+        boolean $z0;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.gutter.enabled");
+
+        return $z0;
+    }
+
+    public static int getMinLineNumberDigits()
+    {
+        int i0, i0_1, i0_2;
+
+        i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("view.gutter.minDigitCount", 2);
+
+(0)     if i0 >= 0 goto label1;
+
+(1)     i0_1 = 2;
+
+     label1:
+        i0_2 = Phi(i0 #0, i0_1 #1);
+
+        return i0_2;
+    }
+
+    public static boolean isSelectionAreaEnabled()
+    {
+        boolean $z0;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.gutter.selectionAreaEnabled");
+
+        return $z0;
+    }
+
+    public static java.awt.Color getSelectionAreaBackground()
+    {
+        java.lang.String r0;
+        java.awt.Color $r1, $r2, $r3;
+
+        r0 = org.gjt.sp.jedit.jEdit.getProperty("view.gutter.selectionAreaBgColor");
+
+        if r0 != null goto label1;
+
+        $r3 = org.gjt.sp.jedit.jEdit.getColorProperty("view.gutter.bgColor");
+
+        return $r3;
+
+     label1:
+        $r1 = java.awt.Color.black;
+
+        $r2 = org.gjt.sp.util.SyntaxUtilities.parseColor(r0, $r1);
+
+        return $r2;
+    }
+
+    public static int getSelectionAreaWidth()
+    {
+        int i0, i0_1, i0_2;
+
+        i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("view.gutter.selectionAreaWidth", 12);
+
+(0)     if i0 >= 0 goto label1;
+
+(1)     i0_1 = 12;
+
+     label1:
+        i0_2 = Phi(i0 #0, i0_1 #1);
+
+        return i0_2;
+    }
+
+    static void access$000(org.gjt.sp.jedit.options.GutterOptionPane)
+    {
+        org.gjt.sp.jedit.options.GutterOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.setGutterComponentsEnabledState();
+
+        return;
+    }
+}

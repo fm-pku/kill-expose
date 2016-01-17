@@ -1,0 +1,376 @@
+class org.gjt.sp.jedit.pluginmgr.PluginList$Dependency extends java.lang.Object
+{
+    final java.lang.String what;
+    final java.lang.String 'from';
+    final java.lang.String 'to';
+    final java.lang.String pluginName;
+    org.gjt.sp.jedit.pluginmgr.PluginList$Plugin plugin;
+
+    void <init>(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList$Dependency r0;
+        java.lang.String r1, r2, r3, r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        specialinvoke r0.<init>();
+
+        r0.what = r1;
+
+        r0.from = r2;
+
+        r0.to = r3;
+
+        r0.pluginName = r4;
+
+        return;
+    }
+
+    boolean isSatisfied()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList$Dependency r0;
+        java.lang.String r1, $r2, $r3, $r4, $r7, $r9, $r10, $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18, $r22, $r23, $r24, $r25, r26, r27;
+        boolean $z0, $z1, $z2;
+        java.lang.StringBuilder $r5, $r6, $r8;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, i7;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin $r19, $r21;
+        java.util.List $r20;
+
+        r0 := @this;
+
+        $r2 = r0.what;
+
+        $z0 = $r2.equals("plugin");
+
+        if $z0 == 0 goto label06;
+
+(0)     i7 = 0;
+
+     label01:
+        i7 = Phi(i7 #0, i7 #1);
+
+        $r19 = r0.plugin;
+
+        $r20 = $r19.branches;
+
+        $i4 = $r20.size();
+
+        if i7 >= $i4 goto label05;
+
+        $r21 = r0.plugin;
+
+        r1 = $r21.getInstalledVersion();
+
+        if r1 == null goto label04;
+
+        $r22 = r0.from;
+
+        if $r22 == null goto label02;
+
+        $r25 = r0.from;
+
+        $i6 = org.gjt.sp.util.StandardUtilities.compareStrings(r1, $r25, 0);
+
+        if $i6 < 0 goto label04;
+
+     label02:
+        $r23 = r0.to;
+
+        if $r23 == null goto label03;
+
+        $r24 = r0.to;
+
+        $i5 = org.gjt.sp.util.StandardUtilities.compareStrings(r1, $r24, 0);
+
+        if $i5 > 0 goto label04;
+
+     label03:
+        return 1;
+
+     label04:
+        i7 = i7 + 1;
+
+(1)     goto label01;
+
+     label05:
+        return 0;
+
+     label06:
+        $r3 = r0.what;
+
+        $z1 = $r3.equals("jdk");
+
+        if $z1 == 0 goto label10;
+
+        $r14 = java.lang.System.getProperty("java.version");
+
+        r26 = $r14.substring(0, 3);
+
+        $r15 = r0.from;
+
+        if $r15 == null goto label07;
+
+        $r18 = r0.from;
+
+        $i3 = org.gjt.sp.util.StandardUtilities.compareStrings(r26, $r18, 0);
+
+        if $i3 < 0 goto label09;
+
+     label07:
+        $r16 = r0.to;
+
+        if $r16 == null goto label08;
+
+        $r17 = r0.to;
+
+        $i2 = org.gjt.sp.util.StandardUtilities.compareStrings(r26, $r17, 0);
+
+        if $i2 > 0 goto label09;
+
+     label08:
+        return 1;
+
+     label09:
+        return 0;
+
+     label10:
+        $r4 = r0.what;
+
+        $z2 = $r4.equals("jedit");
+
+        if $z2 == 0 goto label14;
+
+        r27 = org.gjt.sp.jedit.jEdit.getBuild();
+
+        $r10 = r0.from;
+
+        if $r10 == null goto label11;
+
+        $r13 = r0.from;
+
+        $i1 = org.gjt.sp.util.StandardUtilities.compareStrings(r27, $r13, 0);
+
+        if $i1 < 0 goto label13;
+
+     label11:
+        $r11 = r0.to;
+
+        if $r11 == null goto label12;
+
+        $r12 = r0.to;
+
+        $i0 = org.gjt.sp.util.StandardUtilities.compareStrings(r27, $r12, 0);
+
+        if $i0 > 0 goto label13;
+
+     label12:
+        return 1;
+
+     label13:
+        return 0;
+
+     label14:
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append("Invalid dependency: ");
+
+        $r7 = r0.what;
+
+        $r8 = $r6.append($r7);
+
+        $r9 = $r8.toString();
+
+        org.gjt.sp.util.Log.log(9, r0, $r9);
+
+        return 0;
+    }
+
+    boolean canSatisfy()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList$Dependency r0;
+        boolean $z0, $z1, $z2;
+        java.lang.String $r1;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin $r2;
+
+        r0 := @this;
+
+        $z0 = r0.isSatisfied();
+
+        if $z0 == 0 goto label1;
+
+        return 1;
+
+     label1:
+        $r1 = r0.what;
+
+        $z1 = $r1.equals("plugin");
+
+        if $z1 == 0 goto label2;
+
+        $r2 = r0.plugin;
+
+        $z2 = $r2.canBeInstalled();
+
+        return $z2;
+
+     label2:
+        return 0;
+    }
+
+    void satisfy(org.gjt.sp.jedit.pluginmgr.Roster, java.lang.String, boolean)
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList$Dependency r0;
+        org.gjt.sp.jedit.pluginmgr.Roster r1;
+        java.lang.String r2, r3, $r5, $r12, $r13, $r15, $r16, $r17, $r18, $r19;
+        boolean z0, $z1;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Branch r4;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin $r6, $r7, $r9, $r14;
+        java.util.List $r8, $r10;
+        int $i0, $i1, $i2, $i3, i4;
+        java.lang.Object $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        $r5 = r0.what;
+
+        $z1 = $r5.equals("plugin");
+
+(0)     if $z1 == 0 goto label6;
+
+        $r6 = r0.plugin;
+
+        r3 = $r6.getInstalledVersion();
+
+(1)     i4 = 0;
+
+     label1:
+        i4 = Phi(i4 #1, i4 #3);
+
+        $r7 = r0.plugin;
+
+        $r8 = $r7.branches;
+
+        $i0 = $r8.size();
+
+(2)     if i4 >= $i0 goto label6;
+
+        $r9 = r0.plugin;
+
+        $r10 = $r9.branches;
+
+        $r11 = $r10.get(i4);
+
+        r4 = (org.gjt.sp.jedit.pluginmgr.PluginList$Branch) $r11;
+
+        if r3 == null goto label2;
+
+        $r19 = r4.version;
+
+        $i3 = org.gjt.sp.util.StandardUtilities.compareStrings(r3, $r19, 0);
+
+        if $i3 >= 0 goto label5;
+
+     label2:
+        $r12 = r0.from;
+
+        if $r12 == null goto label3;
+
+        $r18 = r4.version;
+
+        $r17 = r0.from;
+
+        $i2 = org.gjt.sp.util.StandardUtilities.compareStrings($r18, $r17, 0);
+
+        if $i2 < 0 goto label5;
+
+     label3:
+        $r13 = r0.to;
+
+        if $r13 == null goto label4;
+
+        $r16 = r4.version;
+
+        $r15 = r0.to;
+
+        $i1 = org.gjt.sp.util.StandardUtilities.compareStrings($r16, $r15, 0);
+
+        if $i1 > 0 goto label5;
+
+     label4:
+        $r14 = r0.plugin;
+
+        $r14.install(r1, r2, z0, 0);
+
+        return;
+
+     label5:
+        i4 = i4 + 1;
+
+(3)     goto label1;
+
+     label6:
+        i4 = Phi(i4 #0, i4 #2);
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList$Dependency r0;
+        java.lang.StringBuilder $r1, $r2, $r4, $r5, $r7, $r8, $r10, $r11, $r13, $r14;
+        java.lang.String $r3, $r6, $r9, $r15;
+        org.gjt.sp.jedit.pluginmgr.PluginList$Plugin $r12;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("[what=");
+
+        $r3 = r0.what;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.append(",from=");
+
+        $r6 = r0.from;
+
+        $r7 = $r5.append($r6);
+
+        $r8 = $r7.append(",to=");
+
+        $r9 = r0.to;
+
+        $r10 = $r8.append($r9);
+
+        $r11 = $r10.append(",plugin=");
+
+        $r12 = r0.plugin;
+
+        $r13 = $r11.append($r12);
+
+        $r14 = $r13.append(93);
+
+        $r15 = $r14.toString();
+
+        return $r15;
+    }
+}

@@ -1,0 +1,274 @@
+class org.gjt.sp.jedit.indent.BracketIndentRule$LineScanner extends java.lang.Object implements org.gjt.sp.jedit.syntax.TokenHandler
+{
+    public final org.gjt.sp.jedit.indent.BracketIndentRule$Brackets result;
+    private int scannedIndex;
+    private final int beginIndex;
+    private final int endIndex;
+    final org.gjt.sp.jedit.indent.BracketIndentRule this$0;
+
+    public void <init>(org.gjt.sp.jedit.indent.BracketIndentRule, int, int)
+    {
+        org.gjt.sp.jedit.indent.BracketIndentRule$LineScanner r0;
+        org.gjt.sp.jedit.indent.BracketIndentRule r1;
+        int i0, i1;
+        org.gjt.sp.jedit.indent.BracketIndentRule$Brackets $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r2 = new org.gjt.sp.jedit.indent.BracketIndentRule$Brackets;
+
+        specialinvoke $r2.<init>();
+
+        r0.result = $r2;
+
+        r0.scannedIndex = 0;
+
+        r0.beginIndex = i0;
+
+        r0.endIndex = i1;
+
+        return;
+    }
+
+    boolean rejectsToken(byte)
+    {
+        org.gjt.sp.jedit.indent.BracketIndentRule$LineScanner r0;
+        byte b0;
+
+        r0 := @this;
+
+        b0 := @parameter0;
+
+        tableswitch(b0)
+        {
+            case 1: goto label1;
+            case 2: goto label1;
+            case 3: goto label1;
+            case 4: goto label1;
+            case 5: goto label2;
+            case 6: goto label2;
+            case 7: goto label2;
+            case 8: goto label2;
+            case 9: goto label2;
+            case 10: goto label2;
+            case 11: goto label2;
+            case 12: goto label2;
+            case 13: goto label1;
+            case 14: goto label1;
+            case 15: goto label1;
+            case 16: goto label1;
+            default: goto label2;
+        };
+
+     label1:
+        return 1;
+
+     label2:
+        return 0;
+    }
+
+    private void scan(javax.swing.text.Segment, int, int)
+    {
+        org.gjt.sp.jedit.indent.BracketIndentRule$LineScanner r0;
+        javax.swing.text.Segment r1;
+        char c0, $c8, $c9;
+        int $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, i19, i20, i21, i22, i23, i19_1, i20_1, i21_1, i20_2, i19_2, i21_2, i20_3, i20_4;
+        char[] $r2;
+        org.gjt.sp.jedit.indent.BracketIndentRule $r3, $r4;
+        org.gjt.sp.jedit.indent.BracketIndentRule$Brackets $r5, $r6, $r7, $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i19 := @parameter1;
+
+        i20 := @parameter2;
+
+        i21 = r0.scannedIndex;
+
+        $i1 = r0.endIndex;
+
+        if i21 < $i1 goto label1;
+
+        return;
+
+     label1:
+        $i2 = r0.beginIndex;
+
+(0)     if i21 >= $i2 goto label3;
+
+        $i18 = r0.beginIndex;
+
+        i22 = $i18 - i21;
+
+        if i22 < i20 goto label2;
+
+        return;
+
+     label2:
+        i19_1 = i19 + i22;
+
+        i20_1 = i20 - i22;
+
+(1)     i21_1 = r0.beginIndex;
+
+     label3:
+        i20_2 = Phi(i20 #0, i20_1 #1);
+
+        i19_2 = Phi(i19 #0, i19_1 #1);
+
+        i21_2 = Phi(i21 #0, i21_1 #1);
+
+        $i4 = i21_2 + i20_2;
+
+        $i3 = r0.endIndex;
+
+(2)     if $i4 <= $i3 goto label4;
+
+        $i17 = r0.endIndex;
+
+(3)     i20_3 = $i17 - i21_2;
+
+     label4:
+        i20_4 = Phi(i20_2 #2, i20_3 #3);
+
+(4)     i23 = 0;
+
+     label5:
+        i20 = Phi(i20_4 #4, i20 #5);
+
+        i19 = Phi(i19_2 #4, i19 #5);
+
+        i21 = Phi(i21_2 #4, i21 #5);
+
+        i23 = Phi(i23 #4, i23 #5);
+
+        if i23 >= i20 goto label9;
+
+        $r2 = r1.array;
+
+        $i5 = r1.offset;
+
+        $i6 = $i5 + i19;
+
+        $i7 = $i6 + i23;
+
+        c0 = $r2[$i7];
+
+        $r3 = r0.this$0;
+
+        $c8 = $r3.openBracket;
+
+        if c0 != $c8 goto label6;
+
+        $r8 = r0.result;
+
+        $i15 = $r8.openCount;
+
+        $i16 = $i15 + 1;
+
+        $r8.openCount = $i16;
+
+        goto label8;
+
+     label6:
+        $r4 = r0.this$0;
+
+        $c9 = $r4.closeBracket;
+
+        if c0 != $c9 goto label8;
+
+        $r5 = r0.result;
+
+        $i10 = $r5.openCount;
+
+        if $i10 == 0 goto label7;
+
+        $r7 = r0.result;
+
+        $i13 = $r7.openCount;
+
+        $i14 = $i13 - 1;
+
+        $r7.openCount = $i14;
+
+        goto label8;
+
+     label7:
+        $r6 = r0.result;
+
+        $i11 = $r6.closeCount;
+
+        $i12 = $i11 + 1;
+
+        $r6.closeCount = $i12;
+
+     label8:
+        i23 = i23 + 1;
+
+(5)     goto label5;
+
+     label9:
+        return;
+    }
+
+    public void handleToken(javax.swing.text.Segment, byte, int, int, org.gjt.sp.jedit.syntax.TokenMarker$LineContext)
+    {
+        org.gjt.sp.jedit.indent.BracketIndentRule$LineScanner r0;
+        javax.swing.text.Segment r1;
+        byte b0;
+        int i1, i2, $i3, $i4;
+        org.gjt.sp.jedit.syntax.TokenMarker$LineContext r2;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        b0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        r2 := @parameter4;
+
+        $z0 = r0.rejectsToken(b0);
+
+        if $z0 != 0 goto label1;
+
+        specialinvoke r0.scan(r1, i1, i2);
+
+     label1:
+        $i3 = r0.scannedIndex;
+
+        $i4 = $i3 + i2;
+
+        r0.scannedIndex = $i4;
+
+        return;
+    }
+
+    public void setLineContext(org.gjt.sp.jedit.syntax.TokenMarker$LineContext)
+    {
+        org.gjt.sp.jedit.indent.BracketIndentRule$LineScanner r0;
+        org.gjt.sp.jedit.syntax.TokenMarker$LineContext r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+}

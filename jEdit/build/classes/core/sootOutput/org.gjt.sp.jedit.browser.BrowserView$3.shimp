@@ -1,0 +1,63 @@
+class org.gjt.sp.jedit.browser.BrowserView$3 extends java.lang.Object implements javax.swing.event.PopupMenuListener
+{
+    final org.gjt.sp.jedit.browser.BrowserView this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.BrowserView)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$3 r0;
+        org.gjt.sp.jedit.browser.BrowserView r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void popupMenuCanceled(javax.swing.event.PopupMenuEvent)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$3 r0;
+        javax.swing.event.PopupMenuEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$3 r0;
+        javax.swing.event.PopupMenuEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$3 r0;
+        javax.swing.event.PopupMenuEvent r1;
+        org.gjt.sp.jedit.browser.BrowserView$3$1 $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new org.gjt.sp.jedit.browser.BrowserView$3$1;
+
+        specialinvoke $r2.<init>(r0);
+
+        java.awt.EventQueue.invokeLater($r2);
+
+        return;
+    }
+}

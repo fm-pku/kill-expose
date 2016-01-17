@@ -1,0 +1,336 @@
+class org.gjt.sp.jedit.JEditKillRing extends org.gjt.sp.jedit.buffer.KillRing
+{
+    private org.gjt.sp.jedit.SettingsXML killringXML;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.JEditKillRing r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.SettingsXML $r2;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        r1 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        if r1 == null goto label1;
+
+        $r2 = new org.gjt.sp.jedit.SettingsXML;
+
+        Packer.Unpack(r0);
+
+        specialinvoke $r2.<init>(r1, "killring");
+
+        r0.killringXML = $r2;
+
+     label1:
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void load()
+    {
+        org.gjt.sp.jedit.JEditKillRing r0;
+        org.gjt.sp.jedit.JEditKillRing$KillRingHandler r1, $r12;
+        java.lang.String r2, r3, r4, $r11, $r18, $r19;
+        int i0;
+        org.gjt.sp.jedit.SettingsXML $r5, $r6, $r9, $r13;
+        boolean $z0;
+        java.lang.StringBuilder $r7, $r8, $r10;
+        java.util.List $r14;
+        java.lang.OutOfMemoryError $r15, r21;
+        java.lang.Object[] $r16;
+        java.io.File $r17;
+        java.io.IOException $r20, r22;
+
+        r0 := @this;
+
+        $r5 = r0.killringXML;
+
+        if $r5 != null goto label1;
+
+        return;
+
+     label1:
+        $r6 = r0.killringXML;
+
+        Packer.Unpack(r0);
+
+        $z0 = $r6.fileExists();
+
+        Packer.Pack(r0);
+
+        if $z0 != 0 goto label2;
+
+        return;
+
+     label2:
+        Packer.Unpack(r0);
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("Loading ");
+
+        $r9 = r0.killringXML;
+
+        $r10 = $r8.append($r9);
+
+        $r11 = $r10.toString();
+
+        org.gjt.sp.util.Log.log(3, class "org/gjt/sp/jedit/buffer/KillRing", $r11);
+
+        $r12 = new org.gjt.sp.jedit.JEditKillRing$KillRingHandler;
+
+        specialinvoke $r12.<init>(null);
+
+        r1 = $r12;
+
+     label3:
+        $r13 = r0.killringXML;
+
+        $r13.load(r1);
+
+     label4:
+        Packer.Pack(r0);
+
+        goto label9;
+
+     label5:
+        $r15 := @caughtexception;
+
+        r21 = $r15;
+
+        org.gjt.sp.util.Log.log(9, r0, "Unable to load entire Killring, too low memory, increase your jvm max heap size");
+
+        r2 = org.gjt.sp.jedit.jEdit.getProperty("killring.start");
+
+        r3 = org.gjt.sp.jedit.jEdit.getProperty("killring.delete");
+
+        r4 = org.gjt.sp.jedit.jEdit.getProperty("killring.stop");
+
+        $r16 = newarray (java.lang.Object)[3];
+
+        $r16[0] = r2;
+
+        $r16[1] = r3;
+
+        $r16[2] = r4;
+
+        i0 = org.gjt.sp.jedit.GUIUtilities.option(null, "killring.load-memoryerror", null, 0, $r16, r2);
+
+        if i0 != 2 goto label6;
+
+        java.lang.System.exit(-1);
+
+        goto label7;
+
+     label6:
+        if i0 != 1 goto label7;
+
+        $r17 = new java.io.File;
+
+        $r18 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        $r19 = org.gjt.sp.jedit.MiscUtilities.constructPath($r18, "killring.xml");
+
+        specialinvoke $r17.<init>($r19);
+
+        $r17.delete();
+
+        return;
+
+     label7:
+        goto label9;
+
+     label8:
+        $r20 := @caughtexception;
+
+        r22 = $r20;
+
+        org.gjt.sp.util.Log.log(9, r0, r22);
+
+     label9:
+        $r14 = r1.list;
+
+        r0.reset($r14);
+
+        return;
+
+        catch java.lang.OutOfMemoryError from label3 to label4 with label5;
+        catch java.io.IOException from label3 to label4 with label8;
+    }
+
+    public void save()
+    {
+        org.gjt.sp.jedit.JEditKillRing r0;
+        java.lang.String r1, $r9, $r12, $r13, $r19;
+        java.lang.Throwable r2, $r20;
+        org.gjt.sp.jedit.SettingsXML $r3, $r4, $r7, $r10, $r15;
+        boolean $z0;
+        java.lang.StringBuilder $r5, $r6, $r8, $r14, $r16, $r17, $r18;
+        java.lang.Object $r11;
+        java.lang.Exception $r21, r23;
+        org.gjt.sp.jedit.SettingsXML$Saver r22, r22_1;
+        int i0, i1;
+
+        r0 := @this;
+
+        $r3 = r0.killringXML;
+
+        if $r3 != null goto label01;
+
+        return;
+
+     label01:
+        $r4 = r0.killringXML;
+
+        Packer.Unpack(r0);
+
+        $z0 = $r4.hasChangedOnDisk();
+
+        if $z0 == 0 goto label02;
+
+        $r14 = new java.lang.StringBuilder;
+
+        specialinvoke $r14.<init>();
+
+        $r15 = r0.killringXML;
+
+        $r16 = $r14.append($r15);
+
+        Packer.Pack(r0);
+
+        $r17 = $r16.append(" changed on disk; will not save killring");
+
+        $r18 = $r17.append(" files");
+
+        $r19 = $r18.toString();
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/buffer/KillRing", $r19);
+
+        return;
+
+     label02:
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append("Saving ");
+
+        $r7 = r0.killringXML;
+
+        $r8 = $r6.append($r7);
+
+        $r9 = $r8.toString();
+
+        org.gjt.sp.util.Log.log(3, class "org/gjt/sp/jedit/buffer/KillRing", $r9);
+
+        r1 = java.lang.System.getProperty("line.separator");
+
+(0)     r22 = null;
+
+     label03:
+        $r10 = r0.killringXML;
+
+(1)     r22_1 = $r10.openSaver();
+
+        Packer.Pack(r0);
+
+        r22_1.writeXMLDeclaration("1.1");
+
+        r22_1.write("<!DOCTYPE KILLRING SYSTEM \"killring.dtd\">");
+
+        r22_1.write(r1);
+
+        r22_1.write("<KILLRING>");
+
+        r22_1.write(r1);
+
+        i0 = r0.getSize();
+
+(2)     i1 = i0 - 1;
+
+     label04:
+        r22 = Phi(r22_1 #2, r22 #4);
+
+        i1 = Phi(i1 #2, i1 #4);
+
+(3)     if i1 < 0 goto label05;
+
+        r22.write("<ENTRY>");
+
+        $r11 = r0.getElementAt(i1);
+
+        $r12 = $r11.toString();
+
+        $r13 = org.gjt.sp.util.XMLUtilities.charsToEntities($r12, 1);
+
+        r22.write($r13);
+
+        r22.write("</ENTRY>");
+
+        r22.write(r1);
+
+        i1 = i1 + -1;
+
+(4)     goto label04;
+
+     label05:
+        r22.write("</KILLRING>");
+
+        r22.write(r1);
+
+        r22.finish();
+
+     label06:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r22);
+
+(5)     goto label11;
+
+     label07:
+(6)     $r21 := @caughtexception;
+
+        r22 = Phi(r22 #0, r22_1 #1, r22 #3);
+
+(7)     i1 = Phi(i1 #0, i1 #3);
+
+        r23 = $r21;
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/buffer/KillRing", r23);
+
+     label08:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r22);
+
+(8)     goto label11;
+
+     label09:
+        $r20 := @caughtexception;
+
+        r22 = Phi(r22 #0, r22_1 #1, r22 #3, r22 #7, r22 #9);
+
+(9)     i1 = Phi(i1 #0, i1 #3, i1 #6, i1 #9);
+
+        r2 = $r20;
+
+     label10:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r22);
+
+        throw r2;
+
+     label11:
+        r22 = Phi(r22 #5, r22 #8);
+
+        i1 = Phi(i1 #5, i1 #8);
+
+        return;
+
+        catch java.lang.Exception from label03 to label06 with label07;
+        catch java.lang.Throwable from label03 to label06 with label09;
+        catch java.lang.Throwable from label07 to label08 with label09;
+        catch java.lang.Throwable from label09 to label10 with label09;
+    }
+}

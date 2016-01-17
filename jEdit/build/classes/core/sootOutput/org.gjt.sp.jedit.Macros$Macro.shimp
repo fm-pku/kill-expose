@@ -1,0 +1,174 @@
+public class org.gjt.sp.jedit.Macros$Macro extends org.gjt.sp.jedit.EditAction
+{
+    private org.gjt.sp.jedit.Macros$Handler handler;
+    private java.lang.String path;
+    java.lang.String label;
+
+    public void <init>(org.gjt.sp.jedit.Macros$Handler, java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.Macros$Macro r0;
+        org.gjt.sp.jedit.Macros$Handler r1;
+        java.lang.String r2, r3, r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        specialinvoke r0.<init>(r2);
+
+        r0.handler = r1;
+
+        r0.label = r3;
+
+        r0.path = r4;
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.Macros$Handler getHandler()
+    {
+        org.gjt.sp.jedit.Macros$Macro r0;
+        org.gjt.sp.jedit.Macros$Handler $r1;
+
+        r0 := @this;
+
+        $r1 = r0.handler;
+
+        return $r1;
+    }
+
+    public java.lang.String getPath()
+    {
+        org.gjt.sp.jedit.Macros$Macro r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.path;
+
+        return $r1;
+    }
+
+    public void invoke(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.Macros$Macro r0;
+        org.gjt.sp.jedit.View r1;
+        java.lang.Throwable r2, $r7;
+        org.gjt.sp.jedit.Buffer $r3, $r5, $r8;
+        org.gjt.sp.jedit.Macros$Handler $r4, $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        org.gjt.sp.jedit.Macros.setLastMacro(r0);
+
+        if r1 != null goto label1;
+
+        $r6 = r0.handler;
+
+        $r6.runMacro(null, r0);
+
+        goto label5;
+
+     label1:
+        $r3 = r1.getBuffer();
+
+        $r3.beginCompoundEdit();
+
+        $r4 = r0.handler;
+
+        $r4.runMacro(r1, r0);
+
+     label2:
+        $r5 = r1.getBuffer();
+
+        $r5.endCompoundEdit();
+
+        goto label5;
+
+     label3:
+        $r7 := @caughtexception;
+
+        r2 = $r7;
+
+     label4:
+        $r8 = r1.getBuffer();
+
+        $r8.endCompoundEdit();
+
+        throw r2;
+
+     label5:
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+
+    public java.lang.String getCode()
+    {
+        org.gjt.sp.jedit.Macros$Macro r0;
+        java.lang.StringBuilder $r1, $r2, $r4, $r5;
+        java.lang.String $r3, $r6;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("Macros.getMacro(\"");
+
+        $r3 = r0.getName();
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.append("\").invoke(view);");
+
+        $r6 = $r5.toString();
+
+        return $r6;
+    }
+
+    public static java.lang.String macroNameToLabel(java.lang.String)
+    {
+        java.lang.String r0, $r1, $r2;
+        int i0, $i1;
+
+        r0 := @parameter0;
+
+        i0 = r0.lastIndexOf(47);
+
+        $i1 = i0 + 1;
+
+        $r1 = r0.substring($i1);
+
+        $r2 = $r1.replace(95, 32);
+
+        return $r2;
+    }
+
+    public volatile void invoke(java.lang.Object)
+    {
+        org.gjt.sp.jedit.Macros$Macro r0;
+        java.lang.Object r1;
+        org.gjt.sp.jedit.View $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = (org.gjt.sp.jedit.View) r1;
+
+        r0.invoke($r2);
+
+        return;
+    }
+}

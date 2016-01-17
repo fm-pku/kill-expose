@@ -1,0 +1,7 @@
+public interface  org.gjt.sp.jedit.buffer.FoldHandlerProvider extends java.lang.Object
+{
+
+    public abstract org.gjt.sp.jedit.buffer.FoldHandler getFoldHandler(java.lang.String);
+
+    public abstract java.lang.String[] getFoldModes();
+}

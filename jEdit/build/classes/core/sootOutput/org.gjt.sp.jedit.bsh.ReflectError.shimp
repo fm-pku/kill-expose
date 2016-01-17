@@ -1,0 +1,28 @@
+class org.gjt.sp.jedit.bsh.ReflectError extends java.lang.Exception
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.ReflectError r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.ReflectError r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

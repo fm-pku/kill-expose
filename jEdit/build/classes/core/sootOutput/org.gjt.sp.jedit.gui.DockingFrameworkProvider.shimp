@@ -1,0 +1,7 @@
+public interface  org.gjt.sp.jedit.gui.DockingFrameworkProvider extends java.lang.Object
+{
+
+    public abstract org.gjt.sp.jedit.gui.DockableWindowManager create(org.gjt.sp.jedit.View, org.gjt.sp.jedit.gui.DockableWindowFactory, org.gjt.sp.jedit.View$ViewConfig);
+
+    public abstract org.gjt.sp.jedit.gui.DockableWindowManager$DockingLayout createDockingLayout();
+}

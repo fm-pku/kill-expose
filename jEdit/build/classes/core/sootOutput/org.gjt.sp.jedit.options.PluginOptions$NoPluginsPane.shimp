@@ -1,0 +1,14 @@
+public class org.gjt.sp.jedit.options.PluginOptions$NoPluginsPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.PluginOptions$NoPluginsPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("no-plugins");
+
+        return;
+    }
+}

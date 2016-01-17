@@ -1,0 +1,170 @@
+class org.gjt.sp.jedit.browser.BrowserView$ParentDirectoryRenderer extends javax.swing.DefaultListCellRenderer
+{
+    private java.awt.Font plainFont;
+    private final java.awt.Font boldFont;
+    final org.gjt.sp.jedit.browser.BrowserView this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.BrowserView)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$ParentDirectoryRenderer r0;
+        org.gjt.sp.jedit.browser.BrowserView r1;
+        java.awt.Font $r2, $r3, $r4, $r5, $r7, $r8;
+        java.lang.String $r6;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r2 = javax.swing.UIManager.getFont("Tree.font");
+
+        r0.plainFont = $r2;
+
+        $r3 = r0.plainFont;
+
+        if $r3 != null goto label1;
+
+        $r8 = org.gjt.sp.jedit.jEdit.getFontProperty("metal.secondary.font");
+
+        r0.plainFont = $r8;
+
+     label1:
+        $r4 = new java.awt.Font;
+
+        $r5 = r0.plainFont;
+
+        $r6 = $r5.getName();
+
+        $r7 = r0.plainFont;
+
+        $i0 = $r7.getSize();
+
+        specialinvoke $r4.<init>($r6, 1, $i0);
+
+        r0.boldFont = $r4;
+
+        return;
+    }
+
+    public java.awt.Component getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+    {
+        org.gjt.sp.jedit.browser.BrowserView$ParentDirectoryRenderer r0;
+        javax.swing.JList r1;
+        java.lang.Object r2;
+        int i0, $i1, $i2;
+        boolean z0, z1, $z2, $z3, $z4, $z5;
+        org.gjt.sp.jedit.io.VFSFile r3;
+        javax.swing.border.EmptyBorder $r5;
+        java.awt.Font $r6, $r9;
+        org.gjt.sp.jedit.browser.BrowserView $r7, $r10;
+        java.lang.String $r8, $r11;
+        javax.swing.Icon $r12, $r13, $r12_1, $r12_2, $r13_1, $r13_2, $r12_3, $r13_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        specialinvoke r0.getListCellRendererComponent(r1, r2, i0, z0, z1);
+
+        $r5 = new javax.swing.border.EmptyBorder;
+
+        $i1 = i0 * 5;
+
+        $i2 = $i1 + 1;
+
+        specialinvoke $r5.<init>(1, $i2, 1, 1);
+
+        r0.setBorder($r5);
+
+        $z2 = r2 instanceof org.gjt.sp.jedit.browser.BrowserView$LoadingPlaceholder;
+
+        if $z2 == 0 goto label3;
+
+        $r9 = r0.plainFont;
+
+        r0.setFont($r9);
+
+        $r10 = r0.this$0;
+
+        $z5 = org.gjt.sp.jedit.browser.BrowserView.access$700($r10);
+
+        if $z5 == 0 goto label1;
+
+        $r12 = org.gjt.sp.jedit.browser.FileCellRenderer.loadingIcon;
+
+(0)     goto label2;
+
+     label1:
+(1)     $r12_1 = null;
+
+     label2:
+        $r12_2 = Phi($r12 #0, $r12_1 #1);
+
+        r0.setIcon($r12_2);
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.tree.loading");
+
+        r0.setText($r11);
+
+(2)     goto label7;
+
+     label3:
+        $z3 = r2 instanceof org.gjt.sp.jedit.io.VFSFile;
+
+        if $z3 == 0 goto label6;
+
+        r3 = (org.gjt.sp.jedit.io.VFSFile) r2;
+
+        $r6 = r0.boldFont;
+
+        r0.setFont($r6);
+
+        $r7 = r0.this$0;
+
+        $z4 = org.gjt.sp.jedit.browser.BrowserView.access$700($r7);
+
+        if $z4 == 0 goto label4;
+
+        $r13 = org.gjt.sp.jedit.browser.FileCellRenderer.getIconForFile(r3, 1);
+
+(3)     goto label5;
+
+     label4:
+(4)     $r13_1 = null;
+
+     label5:
+        $r13_2 = Phi($r13 #3, $r13_1 #4);
+
+        r0.setIcon($r13_2);
+
+        $r8 = r3.getName();
+
+        r0.setText($r8);
+
+(5)     goto label7;
+
+     label6:
+(6)     if r2 != null goto label7;
+
+(7)     r0.setText("VFS does not follow VFS API");
+
+     label7:
+        $r12_3 = Phi($r12_2 #2, $r12 #5, $r12 #6, $r12 #7);
+
+        $r13_3 = Phi($r13 #2, $r13_2 #5, $r13 #6, $r13 #7);
+
+        return r0;
+    }
+}

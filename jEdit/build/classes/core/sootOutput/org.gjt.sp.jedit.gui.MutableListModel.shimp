@@ -1,0 +1,7 @@
+public interface  org.gjt.sp.jedit.gui.MutableListModel extends java.lang.Object implements javax.swing.ListModel
+{
+
+    public abstract boolean removeElement(java.lang.Object);
+
+    public abstract void insertElementAt(java.lang.Object, int);
+}

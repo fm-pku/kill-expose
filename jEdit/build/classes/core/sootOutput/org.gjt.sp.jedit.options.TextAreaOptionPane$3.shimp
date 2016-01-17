@@ -1,0 +1,67 @@
+class org.gjt.sp.jedit.options.TextAreaOptionPane$3 extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.options.TextAreaOptionPane this$0;
+
+    void <init>(org.gjt.sp.jedit.options.TextAreaOptionPane)
+    {
+        org.gjt.sp.jedit.options.TextAreaOptionPane$3 r0;
+        org.gjt.sp.jedit.options.TextAreaOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.options.TextAreaOptionPane$3 r0;
+        java.awt.event.ActionEvent r1;
+        int i0;
+        org.gjt.sp.jedit.options.TextAreaOptionPane $r2, $r4, $r6;
+        javax.swing.JComboBox $r3;
+        org.gjt.sp.jedit.gui.FontSelector $r5, $r7;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.options.TextAreaOptionPane.access$300($r2);
+
+        i0 = $r3.getSelectedIndex();
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.options.TextAreaOptionPane.access$400($r4);
+
+        if i0 <= 0 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        $r5.setAntiAliasEnabled($z0_2);
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.options.TextAreaOptionPane.access$400($r6);
+
+        $r7.repaint();
+
+        return;
+    }
+}

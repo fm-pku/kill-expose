@@ -1,0 +1,88 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderRenderer extends javax.swing.table.DefaultTableCellRenderer
+{
+    private final javax.swing.table.DefaultTableCellRenderer tcr;
+
+    void <init>(javax.swing.table.DefaultTableCellRenderer)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderRenderer r0;
+        javax.swing.table.DefaultTableCellRenderer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.tcr = r1;
+
+        return;
+    }
+
+    public java.awt.Component getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderRenderer r0;
+        javax.swing.JTable r1;
+        java.lang.Object r2;
+        boolean z0, z1;
+        int i0, i1, $i2, $i3;
+        javax.swing.JLabel r3;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel r4;
+        javax.swing.Icon r5, $r9, $r9_1, $r9_2, $r9_3;
+        javax.swing.table.DefaultTableCellRenderer $r6;
+        java.awt.Component $r7;
+        javax.swing.table.TableModel $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        z1 := @parameter3;
+
+        i0 := @parameter4;
+
+        i1 := @parameter5;
+
+        $r6 = r0.tcr;
+
+        $r7 = $r6.getTableCellRendererComponent(r1, r2, z0, z1, i0, i1);
+
+        r3 = (javax.swing.JLabel) $r7;
+
+        $r8 = r1.getModel();
+
+        r4 = (org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel) $r8;
+
+        $i2 = org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel.access$1600(r4);
+
+        if i1 != $i2 goto label2;
+
+        $i3 = org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel.access$1300(r4);
+
+        if $i3 != 1 goto label1;
+
+        $r9 = org.gjt.sp.jedit.pluginmgr.InstallPanel.ASC_ICON;
+
+(0)     goto label3;
+
+     label1:
+        $r9_1 = org.gjt.sp.jedit.pluginmgr.InstallPanel.DESC_ICON;
+
+(1)     goto label3;
+
+     label2:
+(2)     $r9_2 = null;
+
+     label3:
+        $r9_3 = Phi($r9 #0, $r9_1 #1, $r9_2 #2);
+
+        r5 = $r9_3;
+
+        r3.setIcon(r5);
+
+        return r3;
+    }
+}

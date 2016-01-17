@@ -1,0 +1,56 @@
+class org.gjt.sp.jedit.print.BufferPrintable$PrintTabExpander extends java.lang.Object implements javax.swing.text.TabExpander
+{
+    private double tabWidth;
+
+    void <init>(double)
+    {
+        org.gjt.sp.jedit.print.BufferPrintable$PrintTabExpander r0;
+        double d0;
+
+        r0 := @this;
+
+        d0 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.tabWidth = d0;
+
+        return;
+    }
+
+    public float nextTabStop(float, int)
+    {
+        org.gjt.sp.jedit.print.BufferPrintable$PrintTabExpander r0;
+        float f0, $f1, $f2;
+        int i0, i1, $i2;
+        double $d0, $d1, $d2, $d3, $d4, $d5;
+
+        r0 := @this;
+
+        f0 := @parameter0;
+
+        i0 := @parameter1;
+
+        $f1 = f0 + 1.0F;
+
+        $d1 = (double) $f1;
+
+        $d0 = r0.tabWidth;
+
+        $d2 = $d1 / $d0;
+
+        i1 = (int) $d2;
+
+        $i2 = i1 + 1;
+
+        $d4 = (double) $i2;
+
+        $d3 = r0.tabWidth;
+
+        $d5 = $d4 * $d3;
+
+        $f2 = (float) $d5;
+
+        return $f2;
+    }
+}

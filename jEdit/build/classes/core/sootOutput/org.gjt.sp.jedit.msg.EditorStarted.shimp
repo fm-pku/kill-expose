@@ -1,0 +1,17 @@
+public class org.gjt.sp.jedit.msg.EditorStarted extends org.gjt.sp.jedit.EBMessage
+{
+
+    public void <init>(org.gjt.sp.jedit.EBComponent)
+    {
+        org.gjt.sp.jedit.msg.EditorStarted r0;
+        org.gjt.sp.jedit.EBComponent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

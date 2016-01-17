@@ -1,0 +1,95 @@
+class org.gjt.sp.jedit.gui.statusbar.EncodingWidgetFactory$EncodingWidget extends java.lang.Object implements org.gjt.sp.jedit.gui.statusbar.Widget
+{
+    private final javax.swing.JLabel encoding;
+    private final org.gjt.sp.jedit.View view;
+
+    public void <init>(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.statusbar.EncodingWidgetFactory$EncodingWidget r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.gui.statusbar.ToolTipLabel $r2;
+        javax.swing.JLabel $r3, $r6;
+        java.lang.String $r4;
+        org.gjt.sp.jedit.gui.statusbar.EncodingWidgetFactory$EncodingWidget$1 $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        $r2 = new org.gjt.sp.jedit.gui.statusbar.ToolTipLabel;
+
+        specialinvoke $r2.<init>();
+
+        r0.encoding = $r2;
+
+        r0.view = r1;
+
+        $r3 = r0.encoding;
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("view.status.mode-tooltip");
+
+        $r3.setToolTipText($r4);
+
+        $r6 = r0.encoding;
+
+        $r5 = new org.gjt.sp.jedit.gui.statusbar.EncodingWidgetFactory$EncodingWidget$1;
+
+        specialinvoke $r5.<init>(r0, r1);
+
+        $r6.addMouseListener($r5);
+
+        return;
+    }
+
+    public javax.swing.JComponent getComponent()
+    {
+        org.gjt.sp.jedit.gui.statusbar.EncodingWidgetFactory$EncodingWidget r0;
+        javax.swing.JLabel $r1;
+
+        r0 := @this;
+
+        $r1 = r0.encoding;
+
+        return $r1;
+    }
+
+    public void update()
+    {
+        org.gjt.sp.jedit.gui.statusbar.EncodingWidgetFactory$EncodingWidget r0;
+        org.gjt.sp.jedit.Buffer r1;
+        org.gjt.sp.jedit.View $r2;
+        boolean $z0;
+        javax.swing.JLabel $r3;
+        java.lang.String $r4;
+
+        r0 := @this;
+
+        $r2 = r0.view;
+
+        r1 = $r2.getBuffer();
+
+        $z0 = r1.isLoaded();
+
+        if $z0 == 0 goto label1;
+
+        $r3 = r0.encoding;
+
+        $r4 = r1.getStringProperty("encoding");
+
+        $r3.setText($r4);
+
+     label1:
+        return;
+    }
+
+    public void propertiesChanged()
+    {
+        org.gjt.sp.jedit.gui.statusbar.EncodingWidgetFactory$EncodingWidget r0;
+
+        r0 := @this;
+
+        return;
+    }
+}

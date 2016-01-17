@@ -1,0 +1,111 @@
+abstract class org.gjt.sp.jedit.browser.VFSBrowser$MenuButton extends org.gjt.sp.jedit.gui.RolloverButton implements java.awt.event.KeyListener
+{
+    javax.swing.JPopupMenu popup;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$MenuButton r0;
+        java.lang.String $r1;
+        javax.swing.Icon $r2;
+        java.awt.Insets $r3;
+        org.gjt.sp.jedit.browser.VFSBrowser$MenuButton$MouseHandler $r4;
+        boolean $z0;
+        org.gjt.sp.jedit.browser.VFSBrowser$MenuButton$Action $r5;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = org.gjt.sp.jedit.jEdit.getProperty("dropdown-arrow.icon");
+
+        $r2 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r1);
+
+        r0.setIcon($r2);
+
+        r0.setHorizontalTextPosition(10);
+
+        $r3 = new java.awt.Insets;
+
+        specialinvoke $r3.<init>(1, 1, 1, 1);
+
+        r0.setMargin($r3);
+
+        $r4 = new org.gjt.sp.jedit.browser.VFSBrowser$MenuButton$MouseHandler;
+
+        specialinvoke $r4.<init>(r0);
+
+        r0.addMouseListener($r4);
+
+        r0.addKeyListener(r0);
+
+        $z0 = org.gjt.sp.jedit.OperatingSystem.isMacOSLF();
+
+        if $z0 == 0 goto label1;
+
+        r0.putClientProperty("JButton.buttonType", "toolbar");
+
+     label1:
+        $r5 = new org.gjt.sp.jedit.browser.VFSBrowser$MenuButton$Action;
+
+        specialinvoke $r5.<init>(r0);
+
+        r0.setAction($r5);
+
+        return;
+    }
+
+    public void keyReleased(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$MenuButton r0;
+        java.awt.event.KeyEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void keyTyped(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$MenuButton r0;
+        java.awt.event.KeyEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void keyPressed(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$MenuButton r0;
+        java.awt.event.KeyEvent r1;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r1.getKeyCode();
+
+        if $i0 == 40 goto label1;
+
+        $i1 = r1.getKeyCode();
+
+        if $i1 != 10 goto label2;
+
+     label1:
+        r0.doPopup();
+
+        r1.consume();
+
+        return;
+
+     label2:
+        return;
+    }
+
+    abstract void doPopup();
+}

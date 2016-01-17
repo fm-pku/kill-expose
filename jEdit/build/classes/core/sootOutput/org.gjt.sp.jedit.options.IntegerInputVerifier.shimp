@@ -1,0 +1,73 @@
+class org.gjt.sp.jedit.options.IntegerInputVerifier extends javax.swing.InputVerifier
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.options.IntegerInputVerifier r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public boolean verify(javax.swing.JComponent)
+    {
+        org.gjt.sp.jedit.options.IntegerInputVerifier r0;
+        javax.swing.JComponent r1;
+        javax.swing.JTextField r2;
+        int i0;
+        java.lang.Exception r3, $r6;
+        boolean $z0, $z1, $z1_1, $z1_2;
+        java.lang.String $r4;
+        java.lang.Integer $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1 instanceof javax.swing.JTextField;
+
+        if $z0 != 0 goto label1;
+
+        return 1;
+
+     label1:
+        r2 = (javax.swing.JTextField) r1;
+
+     label2:
+        $r4 = r2.getText();
+
+        $r5 = java.lang.Integer.valueOf($r4);
+
+        i0 = $r5.intValue();
+
+     label3:
+        goto label5;
+
+     label4:
+        $r6 := @caughtexception;
+
+        r3 = $r6;
+
+        return 0;
+
+     label5:
+        if i0 < 0 goto label6;
+
+        $z1 = 1;
+
+(0)     goto label7;
+
+     label6:
+(1)     $z1_1 = 0;
+
+     label7:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        return $z1_2;
+
+        catch java.lang.Exception from label2 to label3 with label4;
+    }
+}

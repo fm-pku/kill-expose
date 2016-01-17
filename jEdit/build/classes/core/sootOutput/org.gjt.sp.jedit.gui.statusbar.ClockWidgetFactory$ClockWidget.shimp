@@ -1,0 +1,52 @@
+class org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$ClockWidget extends java.lang.Object implements org.gjt.sp.jedit.gui.statusbar.Widget
+{
+    private final org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$Clock clock;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$ClockWidget r0;
+        org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$Clock $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$Clock;
+
+        specialinvoke $r1.<init>();
+
+        r0.clock = $r1;
+
+        return;
+    }
+
+    public javax.swing.JComponent getComponent()
+    {
+        org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$ClockWidget r0;
+        org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$Clock $r1;
+
+        r0 := @this;
+
+        $r1 = r0.clock;
+
+        return $r1;
+    }
+
+    public void update()
+    {
+        org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$ClockWidget r0;
+
+        r0 := @this;
+
+        return;
+    }
+
+    public void propertiesChanged()
+    {
+        org.gjt.sp.jedit.gui.statusbar.ClockWidgetFactory$ClockWidget r0;
+
+        r0 := @this;
+
+        return;
+    }
+}

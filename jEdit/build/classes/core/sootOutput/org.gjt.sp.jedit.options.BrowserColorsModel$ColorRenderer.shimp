@@ -1,0 +1,91 @@
+class org.gjt.sp.jedit.options.BrowserColorsModel$ColorRenderer extends javax.swing.JLabel implements javax.swing.table.TableCellRenderer
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel$ColorRenderer r0;
+        javax.swing.border.EmptyBorder $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        r0.setOpaque(1);
+
+        $r1 = org.gjt.sp.jedit.options.SyntaxHiliteOptionPane.noFocusBorder;
+
+        r0.setBorder($r1);
+
+        return;
+    }
+
+    public java.awt.Component getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel$ColorRenderer r0;
+        javax.swing.JTable r1;
+        java.lang.Object r2;
+        boolean z0, z1;
+        int i0, i1;
+        java.awt.Color $r3, $r4, $r5, $r6, $r7;
+        javax.swing.border.Border $r8, $r8_1, $r8_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        z1 := @parameter3;
+
+        i0 := @parameter4;
+
+        i1 := @parameter5;
+
+        if z0 == 0 goto label1;
+
+        $r6 = r1.getSelectionBackground();
+
+        r0.setBackground($r6);
+
+        $r7 = r1.getSelectionForeground();
+
+        r0.setForeground($r7);
+
+        goto label2;
+
+     label1:
+        $r3 = r1.getBackground();
+
+        r0.setBackground($r3);
+
+        $r4 = r1.getForeground();
+
+        r0.setForeground($r4);
+
+     label2:
+        if r2 == null goto label3;
+
+        $r5 = (java.awt.Color) r2;
+
+        r0.setBackground($r5);
+
+     label3:
+        if z1 == 0 goto label4;
+
+        $r8 = javax.swing.UIManager.getBorder("Table.focusCellHighlightBorder");
+
+(0)     goto label5;
+
+     label4:
+(1)     $r8_1 = org.gjt.sp.jedit.options.SyntaxHiliteOptionPane.noFocusBorder;
+
+     label5:
+        $r8_2 = Phi($r8 #0, $r8_1 #1);
+
+        r0.setBorder($r8_2);
+
+        return r0;
+    }
+}

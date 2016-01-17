@@ -1,0 +1,466 @@
+class org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler extends org.xml.sax.helpers.DefaultHandler
+{
+    private org.gjt.sp.jedit.PluginJAR plugin;
+    private java.net.URL uri;
+    private java.util.List cachedDockableNames;
+    private java.util.List cachedDockableActionFlags;
+    private java.util.List cachedDockableMovableFlags;
+    private java.lang.String dockableName;
+    private java.lang.StringBuilder code;
+    private boolean actions;
+    private boolean movable;
+    static final boolean MOVABLE_DEFAULT;
+    private java.util.Stack stateStack;
+    final org.gjt.sp.jedit.gui.DockableWindowFactory this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.DockableWindowFactory, org.gjt.sp.jedit.PluginJAR, java.net.URL)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler r0;
+        org.gjt.sp.jedit.gui.DockableWindowFactory r1;
+        org.gjt.sp.jedit.PluginJAR r2;
+        java.net.URL r3;
+        java.util.Stack $r4;
+        java.lang.StringBuilder $r5;
+        java.util.LinkedList $r6, $r7, $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.plugin = r2;
+
+        r0.uri = r3;
+
+        $r4 = new java.util.Stack;
+
+        specialinvoke $r4.<init>();
+
+        r0.stateStack = $r4;
+
+        r0.actions = 1;
+
+        r0.movable = 0;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        r0.code = $r5;
+
+        $r6 = new java.util.LinkedList;
+
+        specialinvoke $r6.<init>();
+
+        r0.cachedDockableNames = $r6;
+
+        $r7 = new java.util.LinkedList;
+
+        specialinvoke $r7.<init>();
+
+        r0.cachedDockableActionFlags = $r7;
+
+        $r8 = new java.util.LinkedList;
+
+        specialinvoke $r8.<init>();
+
+        r0.cachedDockableMovableFlags = $r8;
+
+        return;
+    }
+
+    public org.xml.sax.InputSource resolveEntity(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler r0;
+        java.lang.String r1, r2;
+        org.xml.sax.InputSource $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = org.gjt.sp.util.XMLUtilities.findEntity(r2, "dockables.dtd", class "org/gjt/sp/jedit/MiscUtilities");
+
+        return $r3;
+    }
+
+    public void characters(char[], int, int)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler r0;
+        char[] r1;
+        int i0, i1;
+        java.lang.String r2;
+        boolean $z0;
+        java.lang.StringBuilder $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        r2 = specialinvoke r0.peekElement();
+
+        $z0 = r2.equals("DOCKABLE");
+
+        if $z0 == 0 goto label1;
+
+        $r3 = r0.code;
+
+        $r3.append(r1, i0, i1);
+
+     label1:
+        return;
+    }
+
+    public void startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler r0;
+        java.lang.String r1, r2, r3, r5, r6, $r7, $r8, $r9;
+        org.xml.sax.Attributes r4;
+        boolean $z0, $z1, $z2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 = specialinvoke r0.pushElement(r3);
+
+        $z0 = r5.equals("DOCKABLE");
+
+        if $z0 == 0 goto label1;
+
+        $r7 = r4.getValue("NAME");
+
+        r0.dockableName = $r7;
+
+        $r8 = "FALSE";
+
+        $r9 = r4.getValue("NO_ACTIONS");
+
+        $z1 = $r8.equals($r9);
+
+        r0.actions = $z1;
+
+        r6 = r4.getValue("MOVABLE");
+
+        if r6 == null goto label1;
+
+        $z2 = r6.equalsIgnoreCase("TRUE");
+
+        r0.movable = $z2;
+
+     label1:
+        return;
+    }
+
+    public void endElement(java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler r0;
+        java.lang.String r1, r2, r3, r4, $r10, $r11, $r12;
+        boolean $z0, $z1, $z2, $z3, $z5, $z7;
+        java.lang.InternalError $r5;
+        java.lang.StringBuilder $r7, $r18;
+        org.gjt.sp.jedit.gui.DockableWindowFactory $r8;
+        org.gjt.sp.jedit.PluginJAR $r9;
+        java.util.List $r13, $r14, $r16;
+        java.lang.Boolean $r15, $r17;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        if r3 != null goto label1;
+
+        return;
+
+     label1:
+        r4 = specialinvoke r0.peekElement();
+
+        $z0 = r3.equals(r4);
+
+        if $z0 == 0 goto label3;
+
+        $z1 = r4.equals("DOCKABLE");
+
+        if $z1 == 0 goto label2;
+
+        $r8 = r0.this$0;
+
+        $r9 = r0.plugin;
+
+        $r10 = r0.dockableName;
+
+        $r7 = r0.code;
+
+        $r11 = $r7.toString();
+
+        $z3 = r0.actions;
+
+        $z2 = r0.movable;
+
+        $r8.registerDockableWindow($r9, $r10, $r11, $z3, $z2);
+
+        $r13 = r0.cachedDockableNames;
+
+        $r12 = r0.dockableName;
+
+        $r13.add($r12);
+
+        $r14 = r0.cachedDockableActionFlags;
+
+        $z5 = r0.actions;
+
+        $r15 = java.lang.Boolean.valueOf($z5);
+
+        $r14.add($r15);
+
+        $r16 = r0.cachedDockableMovableFlags;
+
+        $z7 = r0.movable;
+
+        $r17 = java.lang.Boolean.valueOf($z7);
+
+        $r16.add($r17);
+
+        r0.actions = 1;
+
+        r0.movable = 0;
+
+        $r18 = r0.code;
+
+        $r18.setLength(0);
+
+     label2:
+        specialinvoke r0.popElement();
+
+        goto label4;
+
+     label3:
+        $r5 = new java.lang.InternalError;
+
+        specialinvoke $r5.<init>();
+
+        throw $r5;
+
+     label4:
+        return;
+    }
+
+    public void startDocument()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler r0;
+        java.lang.Exception r1, $r3;
+
+        r0 := @this;
+
+     label1:
+        specialinvoke r0.pushElement(null);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r3 := @caughtexception;
+
+        r1 = $r3;
+
+        org.gjt.sp.util.Log.log(9, r0, r1);
+
+     label4:
+        return;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    public java.lang.String[] getCachedDockableNames()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler r0;
+        java.util.List $r1, $r2;
+        int $i0;
+        java.lang.String[] $r3, $r5;
+        java.lang.Object[] $r4;
+
+        r0 := @this;
+
+        $r2 = r0.cachedDockableNames;
+
+        $r1 = r0.cachedDockableNames;
+
+        $i0 = $r1.size();
+
+        $r3 = newarray (java.lang.String)[$i0];
+
+        $r4 = $r2.toArray($r3);
+
+        $r5 = (java.lang.String[]) $r4;
+
+        return $r5;
+    }
+
+    public boolean[] getCachedDockableActionFlags()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler r0;
+        java.util.List $r1;
+        boolean[] $r2;
+
+        r0 := @this;
+
+        $r1 = r0.cachedDockableActionFlags;
+
+        $r2 = specialinvoke r0.booleanListToArray($r1);
+
+        return $r2;
+    }
+
+    public boolean[] getCachedDockableMovableFlags()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler r0;
+        java.util.List $r1;
+        boolean[] $r2;
+
+        r0 := @this;
+
+        $r1 = r0.cachedDockableMovableFlags;
+
+        $r2 = specialinvoke r0.booleanListToArray($r1);
+
+        return $r2;
+    }
+
+    private boolean[] booleanListToArray(java.util.List)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler r0;
+        java.util.List r1;
+        boolean[] r2;
+        java.util.Iterator r3;
+        java.lang.Boolean r4;
+        int $i0, $i1, i2;
+        boolean $z0, $z1;
+        java.lang.Object $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r1.size();
+
+        r2 = newarray (boolean)[$i0];
+
+        i2 = 0;
+
+(0)     r3 = r1.iterator();
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $z0 = r3.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r5 = r3.next();
+
+        r4 = (java.lang.Boolean) $r5;
+
+        $i1 = i2;
+
+        i2 = i2 + 1;
+
+        $z1 = r4.booleanValue();
+
+        r2[$i1] = $z1;
+
+(1)     goto label1;
+
+     label2:
+        return r2;
+    }
+
+    private java.lang.String pushElement(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler r0;
+        java.util.Stack $r1;
+        java.lang.String r3, $r4, r5, $r4_1, $r4_2;
+
+        r0 := @this;
+
+        r3 := @parameter0;
+
+        if r3 != null goto label1;
+
+        $r4 = null;
+
+(0)     goto label2;
+
+     label1:
+(1)     $r4_1 = r3.intern();
+
+     label2:
+        $r4_2 = Phi($r4 #0, $r4_1 #1);
+
+        r5 = $r4_2;
+
+        $r1 = r0.stateStack;
+
+        $r1.push(r5);
+
+        return r5;
+    }
+
+    private java.lang.String peekElement()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler r0;
+        java.util.Stack $r1;
+        java.lang.Object $r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        $r1 = r0.stateStack;
+
+        $r2 = $r1.peek();
+
+        $r3 = (java.lang.String) $r2;
+
+        return $r3;
+    }
+
+    private java.lang.String popElement()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowFactory$DockableListHandler r0;
+        java.util.Stack $r1;
+        java.lang.Object $r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        $r1 = r0.stateStack;
+
+        $r2 = $r1.pop();
+
+        $r3 = (java.lang.String) $r2;
+
+        return $r3;
+    }
+}

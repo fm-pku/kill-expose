@@ -1,0 +1,88 @@
+public class org.gjt.sp.jedit.bsh.UtilTargetError extends org.gjt.sp.jedit.bsh.UtilEvalError
+{
+    public java.lang.Throwable t;
+
+    public void <init>(java.lang.String, java.lang.Throwable)
+    {
+        org.gjt.sp.jedit.bsh.UtilTargetError r0;
+        java.lang.String r1;
+        java.lang.Throwable r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        r0.t = r2;
+
+        return;
+    }
+
+    public void <init>(java.lang.Throwable)
+    {
+        org.gjt.sp.jedit.bsh.UtilTargetError r0;
+        java.lang.Throwable r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(null, r1);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.EvalError toEvalError(java.lang.String, org.gjt.sp.jedit.bsh.SimpleNode, org.gjt.sp.jedit.bsh.CallStack)
+    {
+        org.gjt.sp.jedit.bsh.UtilTargetError r0;
+        org.gjt.sp.jedit.bsh.SimpleNode r1;
+        org.gjt.sp.jedit.bsh.CallStack r2;
+        java.lang.StringBuilder $r3, $r4, $r5, $r7;
+        java.lang.String $r6, r10, r11, r11_1, r11_2;
+        org.gjt.sp.jedit.bsh.TargetError $r8;
+        java.lang.Throwable $r9;
+
+        r0 := @this;
+
+        r10 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        if r10 != null goto label1;
+
+        r11 = r0.getMessage();
+
+(0)     goto label2;
+
+     label1:
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append(r10);
+
+        $r5 = $r4.append(": ");
+
+        $r6 = r0.getMessage();
+
+        $r7 = $r5.append($r6);
+
+(1)     r11_1 = $r7.toString();
+
+     label2:
+        r11_2 = Phi(r11 #0, r11_1 #1);
+
+        $r8 = new org.gjt.sp.jedit.bsh.TargetError;
+
+        $r9 = r0.t;
+
+        specialinvoke $r8.<init>(r11_2, $r9, r1, r2, 0);
+
+        return $r8;
+    }
+}

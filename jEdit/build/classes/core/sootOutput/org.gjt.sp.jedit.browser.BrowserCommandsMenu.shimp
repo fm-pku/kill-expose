@@ -1,0 +1,1023 @@
+public class org.gjt.sp.jedit.browser.BrowserCommandsMenu extends javax.swing.JPopupMenu
+{
+    private org.gjt.sp.jedit.browser.VFSBrowser browser;
+    private java.util.HashMap encodingMenuItems;
+    private javax.swing.JCheckBoxMenuItem autoDetect;
+    private javax.swing.JRadioButtonMenuItem otherEncoding;
+
+    public void <init>(org.gjt.sp.jedit.browser.VFSBrowser, org.gjt.sp.jedit.io.VFSFile[])
+    {
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+        org.gjt.sp.jedit.io.VFSFile[] r2, $r48, $r64;
+        org.gjt.sp.jedit.io.VFSFile r3, $r33, $r35, $r36, $r39;
+        org.gjt.sp.jedit.io.VFS r4, r74;
+        javax.swing.JMenuItem $r5, $r7, $r9, $r11, $r13, $r15, $r17, $r19, $r21, $r27, $r29, $r31, $r42, $r44, $r46, $r49, $r51, $r53, $r55, $r57, $r59, $r65, $r67, $r69;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, i19, i20, i21, i22;
+        javax.swing.JMenu $r23, $r25, $r62, r75;
+        java.lang.String $r34, $r37, $r40, $r71, $r72;
+        org.gjt.sp.jedit.Buffer $r38, $r41, $r73;
+        org.gjt.sp.jedit.ActionContext $r61;
+        boolean $z0, z1, $z2, z3, $z4, z5, $z6, z7, $z8, $z0_1, $z0_2, $z2_1, $z2_2, $z4_1, $z4_2, $z6_1, $z6_2;
+        java.awt.Component[] r76, r77;
+        java.awt.Component r78;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.browser = r1;
+
+        Packer.Pack(r0);
+
+(0)     if r2 == null goto label27;
+
+        $r33 = r2[0];
+
+        $r34 = $r33.getDeletePath();
+
+        r74 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath($r34);
+
+        $r35 = r2[0];
+
+        i19 = $r35.getType();
+
+        $r36 = r2[0];
+
+        $r37 = $r36.getPath();
+
+        $r38 = org.gjt.sp.jedit.jEdit.getBuffer($r37);
+
+        if $r38 == null goto label01;
+
+        $z0 = 1;
+
+(1)     goto label02;
+
+     label01:
+(2)     $z0_1 = 0;
+
+     label02:
+        $z0_2 = Phi($z0 #1, $z0_1 #2);
+
+        z1 = $z0_2;
+
+        $r39 = r2[0];
+
+        $r40 = $r39.getDeletePath();
+
+        $r41 = org.gjt.sp.jedit.jEdit.getBuffer($r40);
+
+        if $r41 == null goto label03;
+
+        $z2 = 1;
+
+(3)     goto label04;
+
+     label03:
+(4)     $z2_1 = 0;
+
+     label04:
+        $z2_2 = Phi($z2 #3, $z2_1 #4);
+
+        z3 = $z2_2;
+
+        if z3 != 0 goto label05;
+
+        $i17 = r74.getCapabilities();
+
+        $i18 = $i17 & 8;
+
+        if $i18 == 0 goto label05;
+
+        $z4 = 1;
+
+(5)     goto label06;
+
+     label05:
+(6)     $z4_1 = 0;
+
+     label06:
+        $z4_2 = Phi($z4 #5, $z4_1 #6);
+
+        z5 = $z4_2;
+
+        if z1 != 0 goto label07;
+
+        $i15 = r74.getCapabilities();
+
+        $i16 = $i15 & 16;
+
+        if $i16 == 0 goto label07;
+
+        $z6 = 1;
+
+(7)     goto label08;
+
+     label07:
+(8)     $z6_1 = 0;
+
+     label08:
+        $z6_2 = Phi($z6 #7, $z6_1 #8);
+
+        z7 = $z6_2;
+
+(9)     i20 = 1;
+
+     label09:
+        $z4 = Phi($z4_2 #9, $z4 #16);
+
+        i19 = Phi(i19 #9, i19 #16);
+
+        $z8 = Phi($z8 #9, $z8 #16);
+
+        z1 = Phi(z1 #9, z1 #16);
+
+        $z0 = Phi($z0_2 #9, $z0 #16);
+
+        i20 = Phi(i20 #9, i20 #16);
+
+        z5 = Phi(z5 #9, z5 #16);
+
+        $z6 = Phi($z6_2 #9, $z6 #16);
+
+        $z2 = Phi($z2_2 #9, $z2 #16);
+
+        z7 = Phi(z7 #9, z7 #16);
+
+        $i4 = lengthof r2;
+
+        if i20 >= $i4 goto label15;
+
+        r3 = r2[i20];
+
+        $r71 = r3.getDeletePath();
+
+        r4 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath($r71);
+
+        if r74 != r4 goto label10;
+
+        $i13 = r4.getCapabilities();
+
+        $i14 = $i13 & 8;
+
+        if $i14 == 0 goto label10;
+
+        $z8 = 1;
+
+(10)    goto label11;
+
+     label10:
+(11)    $z8 = 0;
+
+     label11:
+        $z8 = Phi($z8 #10, $z8 #11);
+
+        z5 = z5 & $z8;
+
+        $i12 = r3.getType();
+
+        if i19 != $i12 goto label12;
+
+(12)    goto label13;
+
+     label12:
+(13)    i19 = -1;
+
+     label13:
+        i19 = Phi(i19 #12, i19 #13);
+
+        z7 = 0;
+
+        $r72 = r3.getPath();
+
+        $r73 = org.gjt.sp.jedit.jEdit.getBuffer($r72);
+
+(14)    if $r73 == null goto label14;
+
+(15)    z1 = 1;
+
+     label14:
+        z1 = Phi(z1 #14, z1 #15);
+
+        i20 = i20 + 1;
+
+(16)    goto label09;
+
+     label15:
+        if i19 == 1 goto label16;
+
+        if i19 != 2 goto label18;
+
+     label16:
+        $i5 = lengthof r2;
+
+        if $i5 != 1 goto label17;
+
+        $r55 = specialinvoke r0.createMenuItem("browse");
+
+        r0.add($r55);
+
+     label17:
+        Packer.Unpack(r0);
+
+        Packer.Unpack(r0);
+
+        $i6 = r1.getMode();
+
+        Packer.Pack(r0);
+
+        if $i6 != 2 goto label22;
+
+        $r53 = specialinvoke r0.createMenuItem("browse-window");
+
+        r0.add($r53);
+
+        goto label22;
+
+     label18:
+        if i19 != 0 goto label21;
+
+        Packer.Unpack(r0);
+
+        $i9 = r1.getMode();
+
+        Packer.Pack(r0);
+
+        if $i9 == 2 goto label19;
+
+        Packer.Unpack(r0);
+
+        $i11 = r1.getMode();
+
+        Packer.Pack(r0);
+
+        if $i11 != 4 goto label21;
+
+     label19:
+        $r59 = specialinvoke r0.createMenuItem("open", "22x22/actions/document-open.png");
+
+        r0.add($r59);
+
+        $r61 = org.gjt.sp.jedit.browser.VFSBrowser.getActionContext();
+
+        $r62 = org.gjt.sp.jedit.GUIUtilities.loadMenu($r61, "vfs.browser.open-in");
+
+        r0.add($r62);
+
+        Packer.Unpack(r0);
+
+        $r64 = r1.getSelectedFiles();
+
+        Packer.Pack(r0);
+
+        $i10 = lengthof $r64;
+
+        if $i10 != 1 goto label20;
+
+        $r67 = specialinvoke r0.createMenuItem("open-desktop", "22x22/actions/document-open.png");
+
+        r0.add($r67);
+
+        $r69 = specialinvoke r0.createMenuItem("insert");
+
+        r0.add($r69);
+
+     label20:
+        if z1 == 0 goto label22;
+
+        $r65 = specialinvoke r0.createMenuItem("close");
+
+        r0.add($r65);
+
+        goto label22;
+
+     label21:
+        if i19 == -1 goto label22;
+
+        $r57 = specialinvoke r0.createMenuItem("open", "22x22/actions/document-open.png");
+
+        r0.add($r57);
+
+     label22:
+        if z7 == 0 goto label23;
+
+        $r51 = specialinvoke r0.createMenuItem("rename");
+
+        r0.add($r51);
+
+     label23:
+        if z5 == 0 goto label24;
+
+        $r49 = specialinvoke r0.createMenuItem("delete", "22x22/actions/edit-delete.png");
+
+        r0.add($r49);
+
+     label24:
+        $r42 = specialinvoke r0.createMenuItem("copy-path", "22x22/actions/edit-copy.png");
+
+        r0.add($r42);
+
+        $r44 = specialinvoke r0.createMenuItem("paste", "22x22/actions/edit-paste.png");
+
+        r0.add($r44);
+
+        $i7 = lengthof r2;
+
+        if $i7 == 1 goto label25;
+
+        Packer.Unpack(r0);
+
+        $r48 = r1.getSelectedFiles();
+
+        Packer.Pack(r0);
+
+        $i8 = lengthof $r48;
+
+        if $i8 == 0 goto label26;
+
+     label25:
+        $r46 = specialinvoke r0.createMenuItem("properties", "22x22/actions/document-properties.png");
+
+        r0.add($r46);
+
+     label26:
+(17)    r0.addSeparator();
+
+     label27:
+        $z4 = Phi($z4 #0, $z4 #17);
+
+        i19 = Phi(i19 #0, i19 #17);
+
+        $z8 = Phi($z8 #0, $z8 #17);
+
+        z1 = Phi(z1 #0, z1 #17);
+
+        $z0 = Phi($z0 #0, $z0 #17);
+
+        i20 = Phi(i20 #0, i20 #17);
+
+        z5 = Phi(z5 #0, z5 #17);
+
+        $z6 = Phi($z6 #0, $z6 #17);
+
+        $z2 = Phi($z2 #0, $z2 #17);
+
+        z7 = Phi(z7 #0, z7 #17);
+
+        $r5 = specialinvoke r0.createMenuItem("up", "22x22/actions/go-parent.png");
+
+        r0.add($r5);
+
+        $r7 = specialinvoke r0.createMenuItem("previous", "22x22/actions/go-previous.png");
+
+        r0.add($r7);
+
+        $r9 = specialinvoke r0.createMenuItem("next", "22x22/actions/go-next.png");
+
+        r0.add($r9);
+
+        $r11 = specialinvoke r0.createMenuItem("reload", "22x22/actions/document-reload.png");
+
+        r0.add($r11);
+
+        $r13 = specialinvoke r0.createMenuItem("roots");
+
+        r0.add($r13);
+
+        $r15 = specialinvoke r0.createMenuItem("home", "22x22/actions/go-home.png");
+
+        r0.add($r15);
+
+        $r17 = specialinvoke r0.createMenuItem("synchronize");
+
+        r0.add($r17);
+
+        r0.addSeparator();
+
+        Packer.Unpack(r0);
+
+        $i0 = r1.getMode();
+
+        Packer.Pack(r0);
+
+        if $i0 != 2 goto label28;
+
+        $r31 = specialinvoke r0.createMenuItem("new-file", "22x22/actions/document-new.png");
+
+        r0.add($r31);
+
+     label28:
+        $r19 = specialinvoke r0.createMenuItem("new-directory", "22x22/actions/folder-new.png");
+
+        r0.add($r19);
+
+        Packer.Unpack(r0);
+
+        $i1 = r1.getMode();
+
+        Packer.Pack(r0);
+
+        if $i1 != 2 goto label29;
+
+        r0.addSeparator();
+
+        $r29 = specialinvoke r0.createMenuItem("search-directory", "22x22/actions/system-search.png");
+
+        r0.add($r29);
+
+     label29:
+        r0.addSeparator();
+
+        $r21 = specialinvoke r0.createMenuItem("show-hidden-files");
+
+        r0.add($r21);
+
+        Packer.Unpack(r0);
+
+        $i2 = r1.getMode();
+
+        Packer.Pack(r0);
+
+        if $i2 == 2 goto label30;
+
+        Packer.Unpack(r0);
+
+        $i3 = r1.getMode();
+
+        Packer.Pack(r0);
+
+        if $i3 != 4 goto label31;
+
+     label30:
+        r0.addSeparator();
+
+        $r23 = specialinvoke r0.createEncodingMenu();
+
+        r0.add($r23);
+
+     label31:
+        r75 = specialinvoke r0.createCustomMenu();
+
+(18)    if r75 == null goto label33;
+
+        r0.addSeparator();
+
+        r76 = r75.getMenuComponents();
+
+        r77 = r76;
+
+        i21 = lengthof r77;
+
+(19)    i22 = 0;
+
+     label32:
+        $z4 = Phi($z4 #19, $z4 #21);
+
+        i19 = Phi(i19 #19, i19 #21);
+
+        $z8 = Phi($z8 #19, $z8 #21);
+
+        z1 = Phi(z1 #19, z1 #21);
+
+        $z0 = Phi($z0 #19, $z0 #21);
+
+        i20 = Phi(i20 #19, i20 #21);
+
+        i22 = Phi(i22 #19, i22 #21);
+
+        z5 = Phi(z5 #19, z5 #21);
+
+        $z6 = Phi($z6 #19, $z6 #21);
+
+        $z2 = Phi($z2 #19, $z2 #21);
+
+        z7 = Phi(z7 #19, z7 #21);
+
+(20)    if i22 >= i21 goto label33;
+
+        r78 = r77[i22];
+
+        $r27 = (javax.swing.JMenuItem) r78;
+
+        r0.add($r27);
+
+        i22 = i22 + 1;
+
+(21)    goto label32;
+
+     label33:
+        $z4 = Phi($z4 #18, $z4 #20);
+
+        i19 = Phi(i19 #18, i19 #20);
+
+        $z8 = Phi($z8 #18, $z8 #20);
+
+        z1 = Phi(z1 #18, z1 #20);
+
+        $z0 = Phi($z0 #18, $z0 #20);
+
+        i20 = Phi(i20 #18, i20 #20);
+
+        i22 = Phi(i22 #18, i22 #20);
+
+        z5 = Phi(z5 #18, z5 #20);
+
+        $z6 = Phi($z6 #18, $z6 #20);
+
+        $z2 = Phi($z2 #18, $z2 #20);
+
+        z7 = Phi(z7 #18, z7 #20);
+
+        r0.addSeparator();
+
+        Packer.Unpack(r0);
+
+        $r25 = specialinvoke r0.createPluginMenu(r1);
+
+        Packer.Pack(r0);
+
+        r0.add($r25);
+
+        r0.update();
+
+        return;
+    }
+
+    public void update()
+    {
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu r0;
+        javax.swing.JRadioButtonMenuItem r1, $r9, $r13, $r15;
+        java.util.HashMap $r2, $r7;
+        org.gjt.sp.jedit.browser.VFSBrowser $r3, $r5, $r11;
+        java.lang.String $r4, $r6, $r12, $r14, $r16;
+        java.lang.Object $r8;
+        java.lang.String[] $r10;
+
+        r0 := @this;
+
+        $r2 = r0.encodingMenuItems;
+
+        if $r2 == null goto label2;
+
+        $r3 = r0.browser;
+
+        $r4 = $r3.currentEncoding;
+
+        if $r4 == null goto label2;
+
+        $r7 = r0.encodingMenuItems;
+
+        $r5 = r0.browser;
+
+        $r6 = $r5.currentEncoding;
+
+        Packer.Unpack(r0);
+
+        Packer.Unpack($r5);
+
+        $r8 = $r7.get($r6);
+
+        Packer.Pack($r5);
+
+        r1 = (javax.swing.JRadioButtonMenuItem) $r8;
+
+        if r1 == null goto label1;
+
+        r1.setSelected(1);
+
+        $r15 = r0.otherEncoding;
+
+        $r16 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.other-encoding.label");
+
+        $r15.setText($r16);
+
+        Packer.Pack(r0);
+
+        goto label2;
+
+     label1:
+        $r9 = r0.otherEncoding;
+
+        $r9.setSelected(1);
+
+        $r13 = r0.otherEncoding;
+
+        $r10 = newarray (java.lang.String)[1];
+
+        $r11 = r0.browser;
+
+        $r12 = $r11.currentEncoding;
+
+        $r10[0] = $r12;
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.other-encoding-2.label", $r10);
+
+        $r13.setText($r14);
+
+     label2:
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    private javax.swing.JMenuItem createMenuItem(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu r0;
+        java.lang.String r1, r2, $r8;
+        javax.swing.JMenuItem r3;
+        org.gjt.sp.jedit.ActionContext $r4;
+        java.lang.StringBuilder $r5, $r6, $r7;
+        javax.swing.Icon $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = org.gjt.sp.jedit.browser.VFSBrowser.getActionContext();
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append("vfs.browser.");
+
+        $r7 = $r6.append(r1);
+
+        $r8 = $r7.toString();
+
+        r3 = org.gjt.sp.jedit.GUIUtilities.loadMenuItem($r4, $r8, 0);
+
+        $r9 = org.gjt.sp.jedit.GUIUtilities.loadIcon(r2);
+
+        r3.setIcon($r9);
+
+        return r3;
+    }
+
+    private javax.swing.JMenuItem createMenuItem(java.lang.String)
+    {
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu r0;
+        java.lang.String r1;
+        javax.swing.JMenuItem $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = specialinvoke r0.createMenuItem(r1, null);
+
+        return $r2;
+    }
+
+    private javax.swing.JMenu createEncodingMenu()
+    {
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu r0;
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu$ActionHandler r1, $r6;
+        javax.swing.JMenu r2, $r8, $r31, r48, r57;
+        javax.swing.ButtonGroup r3, $r18;
+        java.util.ArrayList r4, $r19;
+        java.lang.String[] r5, r49;
+        java.util.HashMap $r7, $r20, $r39, $r46;
+        java.lang.String $r9, $r11, $r32, $r38, $r45, r50, r52;
+        javax.swing.JCheckBoxMenuItem $r10, $r13, $r14, $r15, $r16;
+        org.gjt.sp.jedit.browser.VFSBrowser $r12;
+        boolean $z0, $z1;
+        java.lang.Object $r21, $r29;
+        org.gjt.sp.jedit.menu.MenuItemTextComparator $r22;
+        javax.swing.JRadioButtonMenuItem $r23, $r24, $r25, $r26, $r27, $r34, $r41, r51, r53, r56;
+        int $i0, i1, i2;
+        java.lang.StringBuilder $r35, $r36, $r37, $r42, $r43, $r44;
+        java.util.Iterator r54;
+        javax.swing.JMenuItem r55;
+
+        r0 := @this;
+
+        $r6 = new org.gjt.sp.jedit.browser.BrowserCommandsMenu$ActionHandler;
+
+        specialinvoke $r6.<init>(r0);
+
+        r1 = $r6;
+
+        $r7 = new java.util.HashMap;
+
+        Packer.Unpack(r0);
+
+        specialinvoke $r7.<init>();
+
+        r0.encodingMenuItems = $r7;
+
+        $r8 = new javax.swing.JMenu;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.commands.encoding.label");
+
+        specialinvoke $r8.<init>($r9);
+
+        r2 = $r8;
+
+        r48 = r2;
+
+        $r10 = new javax.swing.JCheckBoxMenuItem;
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.commands.encoding.auto-detect");
+
+        specialinvoke $r10.<init>($r11);
+
+        r0.autoDetect = $r10;
+
+        $r13 = r0.autoDetect;
+
+        $r12 = r0.browser;
+
+        $z0 = $r12.autoDetectEncoding;
+
+        Packer.Unpack($r12);
+
+        $r13.setSelected($z0);
+
+        Packer.Pack($r12);
+
+        $r14 = r0.autoDetect;
+
+        $r14.setActionCommand("auto-detect");
+
+        $r15 = r0.autoDetect;
+
+        $r15.addActionListener(r1);
+
+        $r16 = r0.autoDetect;
+
+        r48.add($r16);
+
+        r48.addSeparator();
+
+        $r18 = new javax.swing.ButtonGroup;
+
+        specialinvoke $r18.<init>();
+
+        r3 = $r18;
+
+        $r19 = new java.util.ArrayList;
+
+        specialinvoke $r19.<init>();
+
+        r4 = $r19;
+
+        r5 = org.gjt.sp.jedit.MiscUtilities.getEncodings(1);
+
+        r49 = r5;
+
+        i1 = lengthof r49;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        r48 = Phi(r48 #0, r48 #1);
+
+        if i2 >= i1 goto label2;
+
+        r50 = r49[i2];
+
+        $r41 = new javax.swing.JRadioButtonMenuItem;
+
+        specialinvoke $r41.<init>(r50);
+
+        r51 = $r41;
+
+        $r42 = new java.lang.StringBuilder;
+
+        specialinvoke $r42.<init>();
+
+        $r43 = $r42.append("encoding@");
+
+        $r44 = $r43.append(r50);
+
+        $r45 = $r44.toString();
+
+        r51.setActionCommand($r45);
+
+        r51.addActionListener(r1);
+
+        r3.add(r51);
+
+        $r46 = r0.encodingMenuItems;
+
+        $r46.put(r50, r51);
+
+        r4.add(r51);
+
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label2:
+        r52 = java.lang.System.getProperty("file.encoding");
+
+        $r20 = r0.encodingMenuItems;
+
+        $r21 = $r20.get(r52);
+
+        Packer.Pack(r0);
+
+        if $r21 != null goto label3;
+
+        Packer.Unpack(r0);
+
+        $r34 = new javax.swing.JRadioButtonMenuItem;
+
+        specialinvoke $r34.<init>(r52);
+
+        r53 = $r34;
+
+        $r35 = new java.lang.StringBuilder;
+
+        specialinvoke $r35.<init>();
+
+        $r36 = $r35.append("encoding@");
+
+        $r37 = $r36.append(r52);
+
+        $r38 = $r37.toString();
+
+        r53.setActionCommand($r38);
+
+        r53.addActionListener(r1);
+
+        r3.add(r53);
+
+        $r39 = r0.encodingMenuItems;
+
+        $r39.put(r52, r53);
+
+        Packer.Pack(r0);
+
+        r4.add(r53);
+
+     label3:
+        $r22 = new org.gjt.sp.jedit.menu.MenuItemTextComparator;
+
+        specialinvoke $r22.<init>();
+
+        java.util.Collections.sort(r4, $r22);
+
+(2)     r54 = r4.iterator();
+
+     label4:
+        i2 = Phi(i2 #2, i2 #5);
+
+        r48 = Phi(r48 #2, r48 #5);
+
+        $z1 = r54.hasNext();
+
+        if $z1 == 0 goto label6;
+
+        $r29 = r54.next();
+
+        r55 = (javax.swing.JMenuItem) $r29;
+
+        r56 = (javax.swing.JRadioButtonMenuItem) r55;
+
+        $i0 = r48.getMenuComponentCount();
+
+(3)     if $i0 <= 20 goto label5;
+
+        $r31 = new javax.swing.JMenu;
+
+        $r32 = org.gjt.sp.jedit.jEdit.getProperty("common.more");
+
+        specialinvoke $r31.<init>($r32);
+
+        r57 = $r31;
+
+        r48.add(r57);
+
+(4)     r48 = r57;
+
+     label5:
+        r48 = Phi(r48 #3, r48 #4);
+
+        r48.add(r56);
+
+(5)     goto label4;
+
+     label6:
+        Packer.Unpack(r0);
+
+        r48.addSeparator();
+
+        $r23 = new javax.swing.JRadioButtonMenuItem;
+
+        specialinvoke $r23.<init>();
+
+        r0.otherEncoding = $r23;
+
+        $r24 = r0.otherEncoding;
+
+        $r24.setActionCommand("other-encoding");
+
+        $r25 = r0.otherEncoding;
+
+        $r25.addActionListener(r1);
+
+        $r26 = r0.otherEncoding;
+
+        r3.add($r26);
+
+        $r27 = r0.otherEncoding;
+
+        r48.add($r27);
+
+        Packer.Pack(r0);
+
+        return r2;
+    }
+
+    private javax.swing.JMenu createCustomMenu()
+    {
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu r0;
+        javax.swing.JMenu r1;
+        java.lang.String $r2;
+        int $i0;
+        org.gjt.sp.jedit.ActionContext $r3;
+
+        r0 := @this;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("browser.custom.context", "");
+
+        $i0 = $r2.length();
+
+        if $i0 == 0 goto label1;
+
+        $r3 = org.gjt.sp.jedit.browser.VFSBrowser.getActionContext();
+
+        r1 = org.gjt.sp.jedit.GUIUtilities.loadMenu($r3, "browser.custom.context");
+
+        return r1;
+
+     label1:
+        return null;
+    }
+
+    private javax.swing.JMenu createPluginMenu(org.gjt.sp.jedit.browser.VFSBrowser)
+    {
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+        javax.swing.JMenu r2, $r3, $r6;
+        java.lang.String $r4;
+        javax.swing.JComponent $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new javax.swing.JMenu;
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.plugins.label");
+
+        specialinvoke $r3.<init>($r4);
+
+        r2 = $r3;
+
+        org.gjt.sp.jedit.GUIUtilities.setAutoMnemonic(r2);
+
+        $r5 = r1.createPluginsMenu(r2, 0);
+
+        $r6 = (javax.swing.JMenu) $r5;
+
+        return $r6;
+    }
+
+    static org.gjt.sp.jedit.browser.VFSBrowser access$000(org.gjt.sp.jedit.browser.BrowserCommandsMenu)
+    {
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu r0;
+        org.gjt.sp.jedit.browser.VFSBrowser $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.browser;
+
+        return $r1;
+    }
+
+    static javax.swing.JCheckBoxMenuItem access$100(org.gjt.sp.jedit.browser.BrowserCommandsMenu)
+    {
+        org.gjt.sp.jedit.browser.BrowserCommandsMenu r0;
+        javax.swing.JCheckBoxMenuItem $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.autoDetect;
+
+        return $r1;
+    }
+}

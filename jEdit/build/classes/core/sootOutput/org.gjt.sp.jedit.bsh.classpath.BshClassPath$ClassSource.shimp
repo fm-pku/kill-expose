@@ -1,0 +1,17 @@
+public abstract class org.gjt.sp.jedit.bsh.classpath.BshClassPath$ClassSource extends java.lang.Object
+{
+    java.lang.Object source;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath$ClassSource r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    abstract byte[] getCode(java.lang.String);
+}

@@ -1,0 +1,688 @@
+class org.gjt.sp.jedit.buffer.ContentManager extends java.lang.Object
+{
+    private static final char[] EMPTY_TEXT;
+    private char[] text;
+    private int gapStart;
+    private int length;
+    static final boolean $assertionsDisabled;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        char[] $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = org.gjt.sp.jedit.buffer.ContentManager.EMPTY_TEXT;
+
+        r0.text = $r1;
+
+        return;
+    }
+
+    public final int getLength()
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.length;
+
+        return $i0;
+    }
+
+    public java.lang.String getText(int, int)
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        int i0, i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12;
+        java.lang.String $r1, $r3, $r5, $r6, $r8;
+        char[] $r2, $r4, $r7, $r9;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $i2 = r0.gapStart;
+
+        if i0 < $i2 goto label1;
+
+        $r8 = new java.lang.String;
+
+        $r9 = r0.text;
+
+        $i11 = specialinvoke r0.gapLength();
+
+        $i12 = i0 + $i11;
+
+        specialinvoke $r8.<init>($r9, $i12, i1);
+
+        return $r8;
+
+     label1:
+        $i4 = i0 + i1;
+
+        $i3 = r0.gapStart;
+
+        if $i4 > $i3 goto label2;
+
+        $r6 = new java.lang.String;
+
+        $r7 = r0.text;
+
+        specialinvoke $r6.<init>($r7, i0, i1);
+
+        return $r6;
+
+     label2:
+        $r1 = new java.lang.String;
+
+        $r2 = r0.text;
+
+        $i5 = r0.gapStart;
+
+        $i6 = $i5 - i0;
+
+        specialinvoke $r1.<init>($r2, i0, $i6);
+
+        $r3 = new java.lang.String;
+
+        $r4 = r0.text;
+
+        $i7 = specialinvoke r0.gapEnd();
+
+        $i9 = i0 + i1;
+
+        $i8 = r0.gapStart;
+
+        $i10 = $i9 - $i8;
+
+        specialinvoke $r3.<init>($r4, $i7, $i10);
+
+        $r5 = $r1.concat($r3);
+
+        return $r5;
+    }
+
+    public void getText(int, int, javax.swing.text.Segment)
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        int i0, i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14;
+        javax.swing.text.Segment r1;
+        char[] $r2, $r3, $r4, $r5, $r6, $r7, $r8;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        r1 := @parameter2;
+
+        $i2 = r0.gapStart;
+
+        if i0 < $i2 goto label1;
+
+        $r8 = r0.text;
+
+        r1.array = $r8;
+
+        $i13 = specialinvoke r0.gapLength();
+
+        $i14 = i0 + $i13;
+
+        r1.offset = $i14;
+
+        r1.count = i1;
+
+        goto label3;
+
+     label1:
+        $i4 = i0 + i1;
+
+        $i3 = r0.gapStart;
+
+        if $i4 > $i3 goto label2;
+
+        $r7 = r0.text;
+
+        r1.array = $r7;
+
+        r1.offset = i0;
+
+        r1.count = i1;
+
+        goto label3;
+
+     label2:
+        $r2 = newarray (char)[i1];
+
+        r1.array = $r2;
+
+        $r4 = r0.text;
+
+        $r3 = r1.array;
+
+        $i5 = r0.gapStart;
+
+        $i6 = $i5 - i0;
+
+        java.lang.System.arraycopy($r4, i0, $r3, 0, $i6);
+
+        $r5 = r0.text;
+
+        $i7 = specialinvoke r0.gapEnd();
+
+        $r6 = r1.array;
+
+        $i8 = r0.gapStart;
+
+        $i12 = $i8 - i0;
+
+        $i10 = i1 + i0;
+
+        $i9 = r0.gapStart;
+
+        $i11 = $i10 - $i9;
+
+        java.lang.System.arraycopy($r5, $i7, $r6, $i12, $i11);
+
+        r1.offset = 0;
+
+        r1.count = i1;
+
+     label3:
+        return;
+    }
+
+    public java.lang.CharSequence getSegment(int, int)
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        int i0, i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12;
+        org.gjt.sp.jedit.buffer.BufferSegment $r1, $r2, $r5, $r7;
+        char[] $r3, $r4, $r6, $r8;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $i2 = r0.gapStart;
+
+        if i0 < $i2 goto label1;
+
+        $r7 = new org.gjt.sp.jedit.buffer.BufferSegment;
+
+        $r8 = r0.text;
+
+        $i11 = specialinvoke r0.gapLength();
+
+        $i12 = i0 + $i11;
+
+        specialinvoke $r7.<init>($r8, $i12, i1);
+
+        return $r7;
+
+     label1:
+        $i4 = i0 + i1;
+
+        $i3 = r0.gapStart;
+
+        if $i4 > $i3 goto label2;
+
+        $r5 = new org.gjt.sp.jedit.buffer.BufferSegment;
+
+        $r6 = r0.text;
+
+        specialinvoke $r5.<init>($r6, i0, i1);
+
+        return $r5;
+
+     label2:
+        $r1 = new org.gjt.sp.jedit.buffer.BufferSegment;
+
+        $r3 = r0.text;
+
+        $i5 = r0.gapStart;
+
+        $i6 = $i5 - i0;
+
+        $r2 = new org.gjt.sp.jedit.buffer.BufferSegment;
+
+        $r4 = r0.text;
+
+        $i7 = specialinvoke r0.gapEnd();
+
+        $i9 = i0 + i1;
+
+        $i8 = r0.gapStart;
+
+        $i10 = $i9 - $i8;
+
+        specialinvoke $r2.<init>($r4, $i7, $i10);
+
+        specialinvoke $r1.<init>($r3, i0, $i6, $r2);
+
+        return $r1;
+    }
+
+    public void insert(int, java.lang.String)
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        int i0, i1, $i2, $i3, $i4, $i5;
+        java.lang.String r1;
+        char[] $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        i1 = r1.length();
+
+        specialinvoke r0.prepareGapForInsertion(i0, i1);
+
+        $r2 = r0.text;
+
+        r1.getChars(0, i1, $r2, i0);
+
+        $i2 = r0.gapStart;
+
+        $i3 = $i2 + i1;
+
+        r0.gapStart = $i3;
+
+        $i4 = r0.length;
+
+        $i5 = $i4 + i1;
+
+        r0.length = $i5;
+
+        return;
+    }
+
+    public void insert(int, java.lang.CharSequence)
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        int i0, i1, $i2, $i3, $i4, $i5, $i6, i8;
+        java.lang.CharSequence r1;
+        char[] $r2;
+        char $c7;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        i1 = r1.length();
+
+        specialinvoke r0.prepareGapForInsertion(i0, i1);
+
+(0)     i8 = 0;
+
+     label1:
+        i8 = Phi(i8 #0, i8 #1);
+
+        if i8 >= i1 goto label2;
+
+        $r2 = r0.text;
+
+        $i6 = i0 + i8;
+
+        $c7 = r1.charAt(i8);
+
+        $r2[$i6] = $c7;
+
+        i8 = i8 + 1;
+
+(1)     goto label1;
+
+     label2:
+        $i2 = r0.gapStart;
+
+        $i3 = $i2 + i1;
+
+        r0.gapStart = $i3;
+
+        $i4 = r0.length;
+
+        $i5 = $i4 + i1;
+
+        r0.length = $i5;
+
+        return;
+    }
+
+    public void insert(int, javax.swing.text.Segment)
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9;
+        javax.swing.text.Segment r1;
+        char[] $r2, $r3;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $i1 = r1.count;
+
+        specialinvoke r0.prepareGapForInsertion(i0, $i1);
+
+        $r3 = r1.array;
+
+        $i3 = r1.offset;
+
+        $r2 = r0.text;
+
+        $i2 = r1.count;
+
+        java.lang.System.arraycopy($r3, $i3, $r2, i0, $i2);
+
+        $i5 = r0.gapStart;
+
+        $i4 = r1.count;
+
+        $i6 = $i5 + $i4;
+
+        r0.gapStart = $i6;
+
+        $i8 = r0.length;
+
+        $i7 = r1.count;
+
+        $i9 = $i8 + $i7;
+
+        r0.length = $i9;
+
+        return;
+    }
+
+    public void _setContent(char[], int)
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        char[] r1;
+        int i0, $i1;
+        boolean $z0, $z1;
+        java.lang.AssertionError $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        $z0 = org.gjt.sp.jedit.buffer.ContentManager.$assertionsDisabled;
+
+        if $z0 != 0 goto label1;
+
+        if r1 != null goto label1;
+
+        $r3 = new java.lang.AssertionError;
+
+        specialinvoke $r3.<init>();
+
+        throw $r3;
+
+     label1:
+        $z1 = org.gjt.sp.jedit.buffer.ContentManager.$assertionsDisabled;
+
+        if $z1 != 0 goto label2;
+
+        $i1 = lengthof r1;
+
+        if $i1 >= i0 goto label2;
+
+        $r2 = new java.lang.AssertionError;
+
+        specialinvoke $r2.<init>();
+
+        throw $r2;
+
+     label2:
+        r0.text = r1;
+
+        r0.gapStart = i0;
+
+        r0.length = i0;
+
+        return;
+    }
+
+    public void remove(int, int)
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        int i0, i1, $i2, $i3;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        specialinvoke r0.moveGapStart(i0);
+
+        $i2 = r0.length;
+
+        $i3 = $i2 - i1;
+
+        r0.length = $i3;
+
+        return;
+    }
+
+    private int gapEnd()
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        int $i0, $i1, $i2;
+
+        r0 := @this;
+
+        $i0 = r0.gapStart;
+
+        $i1 = specialinvoke r0.gapLength();
+
+        $i2 = $i0 + $i1;
+
+        return $i2;
+    }
+
+    private int gapLength()
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        char[] $r1;
+        int $i0, $i1, $i2;
+
+        r0 := @this;
+
+        $r1 = r0.text;
+
+        $i1 = lengthof $r1;
+
+        $i0 = r0.length;
+
+        $i2 = $i1 - $i0;
+
+        return $i2;
+    }
+
+    private void moveGapStart(int)
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        int i0, i1, i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12;
+        char[] $r1, $r2, $r3, $r4;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 = specialinvoke r0.gapEnd();
+
+        $i3 = r0.gapStart;
+
+        $i4 = i0 - $i3;
+
+        i2 = i1 + $i4;
+
+        $i5 = r0.gapStart;
+
+        if i0 != $i5 goto label1;
+
+        goto label3;
+
+     label1:
+        $i6 = r0.gapStart;
+
+        if i0 <= $i6 goto label2;
+
+        $r4 = r0.text;
+
+        $r3 = r0.text;
+
+        $i12 = r0.gapStart;
+
+        $i10 = r0.gapStart;
+
+        $i11 = i0 - $i10;
+
+        java.lang.System.arraycopy($r4, i1, $r3, $i12, $i11);
+
+        goto label3;
+
+     label2:
+        $i7 = r0.gapStart;
+
+        if i0 >= $i7 goto label3;
+
+        $r2 = r0.text;
+
+        $r1 = r0.text;
+
+        $i8 = r0.gapStart;
+
+        $i9 = $i8 - i0;
+
+        java.lang.System.arraycopy($r2, i0, $r1, i2, $i9);
+
+     label3:
+        r0.gapStart = i0;
+
+        return;
+    }
+
+    private void ensureCapacity(int)
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        int i0, i1, i2, $i3, $i4, $i5, $i6, $i7;
+        char[] r1, $r2, $r3, $r4, $r5, $r6, $r7;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r2 = r0.text;
+
+        $i3 = lengthof $r2;
+
+        if i0 < $i3 goto label1;
+
+        i1 = specialinvoke r0.gapEnd();
+
+        $i4 = i0 * 2;
+
+        r1 = newarray (char)[$i4];
+
+        $r4 = r0.text;
+
+        $r3 = r0.text;
+
+        $i5 = lengthof $r3;
+
+        java.lang.System.arraycopy($r4, 0, r1, 0, $i5);
+
+        r0.text = r1;
+
+        i2 = specialinvoke r0.gapEnd();
+
+        $r7 = r0.text;
+
+        $r6 = r0.text;
+
+        $r5 = r0.text;
+
+        $i6 = lengthof $r5;
+
+        $i7 = $i6 - i2;
+
+        java.lang.System.arraycopy($r7, i1, $r6, i2, $i7);
+
+     label1:
+        return;
+    }
+
+    private void prepareGapForInsertion(int, int)
+    {
+        org.gjt.sp.jedit.buffer.ContentManager r0;
+        int i0, i1, $i2, $i3, $i4;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        specialinvoke r0.moveGapStart(i0);
+
+        $i2 = specialinvoke r0.gapLength();
+
+        if $i2 >= i1 goto label1;
+
+        $i3 = r0.length;
+
+        $i4 = $i3 + i1;
+
+        specialinvoke r0.ensureCapacity($i4);
+
+     label1:
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Class $r0;
+        boolean $z0, $z1, $z1_1, $z1_2;
+        char[] $r1;
+
+        $r0 = class "org/gjt/sp/jedit/buffer/ContentManager";
+
+        $z0 = $r0.desiredAssertionStatus();
+
+        if $z0 != 0 goto label1;
+
+        $z1 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z1_1 = 0;
+
+     label2:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        org.gjt.sp.jedit.buffer.ContentManager.$assertionsDisabled = $z1_2;
+
+        $r1 = newarray (char)[0];
+
+        org.gjt.sp.jedit.buffer.ContentManager.EMPTY_TEXT = $r1;
+
+        return;
+    }
+}

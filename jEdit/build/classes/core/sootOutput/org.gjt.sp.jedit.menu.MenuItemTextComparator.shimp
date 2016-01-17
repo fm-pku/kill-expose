@@ -1,0 +1,86 @@
+public class org.gjt.sp.jedit.menu.MenuItemTextComparator extends java.lang.Object implements java.util.Comparator
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.menu.MenuItemTextComparator r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public int compare(javax.swing.JMenuItem, javax.swing.JMenuItem)
+    {
+        org.gjt.sp.jedit.menu.MenuItemTextComparator r0;
+        javax.swing.JMenuItem r1, r2;
+        boolean z0, z1, z2;
+        java.lang.String $r3, $r4;
+        int i0, i0_1, i0_2, i0_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z2 = 0;
+
+        z0 = r1 instanceof org.gjt.sp.jedit.menu.EnhancedMenuItem;
+
+        z1 = r2 instanceof org.gjt.sp.jedit.menu.EnhancedMenuItem;
+
+        if z0 == 0 goto label1;
+
+        if z1 != 0 goto label1;
+
+        i0 = 1;
+
+(0)     goto label3;
+
+     label1:
+        if z1 == 0 goto label2;
+
+        if z0 != 0 goto label2;
+
+        i0_1 = -1;
+
+(1)     goto label3;
+
+     label2:
+        $r3 = r1.getText();
+
+        $r4 = r2.getText();
+
+(2)     i0_2 = org.gjt.sp.util.StandardUtilities.compareStrings($r3, $r4, 1);
+
+     label3:
+        i0_3 = Phi(i0 #0, i0_1 #1, i0_2 #2);
+
+        return i0_3;
+    }
+
+    public volatile int compare(java.lang.Object, java.lang.Object)
+    {
+        org.gjt.sp.jedit.menu.MenuItemTextComparator r0;
+        java.lang.Object r1, r2;
+        javax.swing.JMenuItem $r3, $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = (javax.swing.JMenuItem) r1;
+
+        $r3 = (javax.swing.JMenuItem) r2;
+
+        $i0 = r0.compare($r4, $r3);
+
+        return $i0;
+    }
+}

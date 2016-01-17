@@ -1,0 +1,189 @@
+public class org.gjt.sp.jedit.GUIUtilities$UnixWorkaround extends java.lang.Object
+{
+    java.awt.Window win;
+    java.lang.String name;
+    java.awt.Rectangle desired;
+    java.awt.Rectangle required;
+    long start;
+    boolean windowOpened;
+
+    public void <init>(java.awt.Window, java.lang.String, java.awt.Rectangle, int)
+    {
+        org.gjt.sp.jedit.GUIUtilities$UnixWorkaround r0;
+        java.awt.Window r1;
+        java.lang.String r2, $r7, $r11, $r15, $r19, $r26, $r33;
+        java.awt.Rectangle r3, $r20, $r31, $r34;
+        int i0, i1, i2, i3, i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12;
+        java.lang.StringBuilder $r4, $r5, $r6, $r8, $r9, $r10, $r12, $r13, $r14, $r16, $r17, $r18, $r21, $r22, $r23, $r24, $r25, $r27, $r28, $r29, $r30, $r32;
+        long $l13;
+        boolean $z0;
+        org.gjt.sp.jedit.GUIUtilities$UnixWorkaround$ComponentHandler $r35;
+        org.gjt.sp.jedit.GUIUtilities$UnixWorkaround$WindowHandler $r36;
+        java.awt.Frame $r37;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        i0 := @parameter3;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.win = r1;
+
+        r0.name = r2;
+
+        r0.desired = r3;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append(r2);
+
+        $r6 = $r5.append(".dx");
+
+        $r7 = $r6.toString();
+
+        i1 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r7, 0);
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append(r2);
+
+        $r10 = $r9.append(".dy");
+
+        $r11 = $r10.toString();
+
+        i2 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r11, 0);
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = $r12.append(r2);
+
+        $r14 = $r13.append(".d-width");
+
+        $r15 = $r14.toString();
+
+        i3 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r15, 0);
+
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<init>();
+
+        $r17 = $r16.append(r2);
+
+        $r18 = $r17.append(".d-height");
+
+        $r19 = $r18.toString();
+
+        i4 = org.gjt.sp.jedit.jEdit.getIntegerProperty($r19, 0);
+
+        $r20 = new java.awt.Rectangle;
+
+        $i5 = r3.x;
+
+        $i12 = $i5 - i1;
+
+        $i6 = r3.y;
+
+        $i11 = $i6 - i2;
+
+        $i7 = r3.width;
+
+        $i10 = $i7 - i3;
+
+        $i8 = r3.height;
+
+        $i9 = $i8 - i4;
+
+        specialinvoke $r20.<init>($i12, $i11, $i10, $i9);
+
+        r0.required = $r20;
+
+        $r21 = new java.lang.StringBuilder;
+
+        specialinvoke $r21.<init>();
+
+        $r22 = $r21.append("Window ");
+
+        $r23 = $r22.append(r2);
+
+        $r24 = $r23.append(": desired geometry is ");
+
+        $r25 = $r24.append(r3);
+
+        $r26 = $r25.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/GUIUtilities", $r26);
+
+        $r27 = new java.lang.StringBuilder;
+
+        specialinvoke $r27.<init>();
+
+        $r28 = $r27.append("Window ");
+
+        $r29 = $r28.append(r2);
+
+        $r30 = $r29.append(": setting geometry to ");
+
+        $r31 = r0.required;
+
+        $r32 = $r30.append($r31);
+
+        $r33 = $r32.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/GUIUtilities", $r33);
+
+        $l13 = java.lang.System.currentTimeMillis();
+
+        r0.start = $l13;
+
+        $r34 = r0.required;
+
+        r1.setBounds($r34);
+
+        Packer.Pack(r0);
+
+        $z0 = r1 instanceof java.awt.Frame;
+
+        if $z0 == 0 goto label1;
+
+        $r37 = (java.awt.Frame) r1;
+
+        $r37.setExtendedState(i0);
+
+     label1:
+        $r35 = new org.gjt.sp.jedit.GUIUtilities$UnixWorkaround$ComponentHandler;
+
+        specialinvoke $r35.<init>(r0, null);
+
+        Packer.Unpack(r0);
+
+        r1.addComponentListener($r35);
+
+        Packer.Pack(r0);
+
+        $r36 = new org.gjt.sp.jedit.GUIUtilities$UnixWorkaround$WindowHandler;
+
+        specialinvoke $r36.<init>(r0, null);
+
+        Packer.Unpack(r0);
+
+        r1.addWindowListener($r36);
+
+        Packer.Pack(r0);
+
+        return;
+    }
+}

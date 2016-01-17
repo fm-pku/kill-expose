@@ -1,0 +1,122 @@
+class org.gjt.sp.jedit.bsh.BSHImportDeclaration extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+    public boolean importPackage;
+    public boolean staticImport;
+    public boolean superImport;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHImportDeclaration r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHImportDeclaration r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.NameSpace r3;
+        boolean $z0, $z1, $z2, $z3;
+        org.gjt.sp.jedit.bsh.Node $r4, $r8;
+        org.gjt.sp.jedit.bsh.BSHAmbiguousName $r5, $r9;
+        org.gjt.sp.jedit.bsh.Primitive $r6;
+        org.gjt.sp.jedit.bsh.EvalError $r7, $r11;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r10, r12;
+        java.lang.Class r13;
+        java.lang.String r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 = r1.top();
+
+        $z0 = r0.superImport;
+
+        if $z0 == 0 goto label4;
+
+     label1:
+        r3.doSuperImport();
+
+     label2:
+        goto label8;
+
+     label3:
+        $r10 := @caughtexception;
+
+        r12 = $r10;
+
+        $r11 = r12.toEvalError(r0, r1);
+
+        throw $r11;
+
+     label4:
+        $z1 = r0.staticImport;
+
+        if $z1 == 0 goto label6;
+
+        $z3 = r0.importPackage;
+
+        if $z3 == 0 goto label5;
+
+        $r8 = r0.jjtGetChild(0);
+
+        $r9 = (org.gjt.sp.jedit.bsh.BSHAmbiguousName) $r8;
+
+        r13 = $r9.toClass(r1, r2);
+
+        r3.importStatic(r13);
+
+        goto label8;
+
+     label5:
+        $r7 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        specialinvoke $r7.<init>("static field imports not supported yet", r0, r1);
+
+        throw $r7;
+
+     label6:
+        $r4 = r0.jjtGetChild(0);
+
+        $r5 = (org.gjt.sp.jedit.bsh.BSHAmbiguousName) $r4;
+
+        r14 = $r5.text;
+
+        $z2 = r0.importPackage;
+
+        if $z2 == 0 goto label7;
+
+        Packer.Unpack($r5);
+
+        r3.importPackage(r14);
+
+        Packer.Pack($r5);
+
+        goto label8;
+
+     label7:
+        Packer.Unpack($r5);
+
+        r3.importClass(r14);
+
+     label8:
+        Packer.Pack($r5);
+
+        $r6 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        return $r6;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label1 to label2 with label3;
+    }
+}

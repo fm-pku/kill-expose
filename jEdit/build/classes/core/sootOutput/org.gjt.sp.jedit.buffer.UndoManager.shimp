@@ -1,0 +1,1031 @@
+public class org.gjt.sp.jedit.buffer.UndoManager extends java.lang.Object
+{
+    private org.gjt.sp.jedit.buffer.JEditBuffer buffer;
+    private org.gjt.sp.jedit.buffer.UndoManager$Edit undosFirst;
+    private org.gjt.sp.jedit.buffer.UndoManager$Edit undosLast;
+    private org.gjt.sp.jedit.buffer.UndoManager$Edit redosFirst;
+    private int limit;
+    private int undoCount;
+    private int compoundEditCount;
+    private org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit compoundEdit;
+    private org.gjt.sp.jedit.buffer.UndoManager$Edit undoClearDirty;
+    private org.gjt.sp.jedit.buffer.UndoManager$Edit redoClearDirty;
+    private java.lang.Object undoId;
+    static final boolean $assertionsDisabled;
+
+    public void <init>(org.gjt.sp.jedit.buffer.JEditBuffer)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.buffer = r1;
+
+        return;
+    }
+
+    public void setLimit(int)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r0.limit = i0;
+
+        return;
+    }
+
+    public void clear()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+
+        r0 := @this;
+
+        r0.redosFirst = null;
+
+        r0.undosLast = null;
+
+        r0.undosFirst = null;
+
+        r0.undoCount = 0;
+
+        return;
+    }
+
+    public boolean canUndo()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit $r1;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        $r1 = r0.undosLast;
+
+        if $r1 == null goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    public org.gjt.sp.jedit.textarea.Selection[] undo()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.textarea.Selection[] r1;
+        boolean $z0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit $r2, $r3, $r4, $r5, $r6, $r7;
+        int $i0, $i1;
+        java.lang.InternalError $r8;
+
+        r0 := @this;
+
+        $z0 = r0.insideCompoundEdit();
+
+        if $z0 == 0 goto label1;
+
+        $r8 = new java.lang.InternalError;
+
+        specialinvoke $r8.<init>("Unbalanced begin/endCompoundEdit()");
+
+        throw $r8;
+
+     label1:
+        $r2 = r0.undosLast;
+
+        if $r2 != null goto label2;
+
+        return null;
+
+     label2:
+        specialinvoke r0.reviseUndoId();
+
+        $i0 = r0.undoCount;
+
+        $i1 = $i0 - 1;
+
+        r0.undoCount = $i1;
+
+        $r3 = r0.undosLast;
+
+        r1 = $r3.undo(r0);
+
+        $r4 = r0.undosLast;
+
+        r0.redosFirst = $r4;
+
+        $r5 = r0.undosLast;
+
+        $r6 = $r5.prev;
+
+        r0.undosLast = $r6;
+
+        $r7 = r0.undosLast;
+
+        if $r7 != null goto label3;
+
+        r0.undosFirst = null;
+
+     label3:
+        return r1;
+    }
+
+    public boolean canRedo()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit $r1;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        $r1 = r0.redosFirst;
+
+        if $r1 == null goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    public org.gjt.sp.jedit.textarea.Selection[] redo()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.textarea.Selection[] r1;
+        boolean $z0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit $r2, $r3, $r4, $r5, $r6, $r7, $r8;
+        int $i0, $i1;
+        java.lang.InternalError $r9;
+
+        r0 := @this;
+
+        $z0 = r0.insideCompoundEdit();
+
+        if $z0 == 0 goto label1;
+
+        $r9 = new java.lang.InternalError;
+
+        specialinvoke $r9.<init>("Unbalanced begin/endCompoundEdit()");
+
+        throw $r9;
+
+     label1:
+        $r2 = r0.redosFirst;
+
+        if $r2 != null goto label2;
+
+        return null;
+
+     label2:
+        specialinvoke r0.reviseUndoId();
+
+        $i0 = r0.undoCount;
+
+        $i1 = $i0 + 1;
+
+        r0.undoCount = $i1;
+
+        $r3 = r0.redosFirst;
+
+        r1 = $r3.redo(r0);
+
+        $r4 = r0.redosFirst;
+
+        r0.undosLast = $r4;
+
+        $r5 = r0.undosFirst;
+
+        if $r5 != null goto label3;
+
+        $r8 = r0.undosLast;
+
+        r0.undosFirst = $r8;
+
+     label3:
+        $r6 = r0.redosFirst;
+
+        $r7 = $r6.next;
+
+        r0.redosFirst = $r7;
+
+        return r1;
+    }
+
+    public void beginCompoundEdit()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        int $i0, $i1, $i2;
+        org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit $r1;
+
+        r0 := @this;
+
+        $i0 = r0.compoundEditCount;
+
+        if $i0 != 0 goto label1;
+
+        $r1 = new org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit;
+
+        specialinvoke $r1.<init>(null);
+
+        r0.compoundEdit = $r1;
+
+        specialinvoke r0.reviseUndoId();
+
+     label1:
+        $i1 = r0.compoundEditCount;
+
+        $i2 = $i1 + 1;
+
+        r0.compoundEditCount = $i2;
+
+        return;
+    }
+
+    public void endCompoundEdit()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        int $i0, $i1, $i2, $i3;
+        org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit $r1, $r3, $r4, $r7, $r8;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit $r2, $r5, $r6, $r9;
+        java.lang.Exception $r10;
+
+        r0 := @this;
+
+        $i0 = r0.compoundEditCount;
+
+        if $i0 != 0 goto label1;
+
+        $r10 = new java.lang.Exception;
+
+        specialinvoke $r10.<init>("Unbalanced begin/endCompoundEdit()");
+
+        org.gjt.sp.util.Log.log(7, r0, $r10);
+
+        return;
+
+     label1:
+        $i1 = r0.compoundEditCount;
+
+        if $i1 != 1 goto label5;
+
+        $r1 = r0.compoundEdit;
+
+        $r2 = $r1.first;
+
+        if $r2 != null goto label2;
+
+        goto label4;
+
+     label2:
+        $r3 = r0.compoundEdit;
+
+        $r6 = $r3.first;
+
+        $r4 = r0.compoundEdit;
+
+        $r5 = $r4.last;
+
+        if $r6 != $r5 goto label3;
+
+        $r8 = r0.compoundEdit;
+
+        $r9 = $r8.first;
+
+        specialinvoke r0.addEdit($r9);
+
+        goto label4;
+
+     label3:
+        $r7 = r0.compoundEdit;
+
+        specialinvoke r0.addEdit($r7);
+
+     label4:
+        r0.compoundEdit = null;
+
+     label5:
+        $i2 = r0.compoundEditCount;
+
+        $i3 = $i2 - 1;
+
+        r0.compoundEditCount = $i3;
+
+        return;
+    }
+
+    public boolean insideCompoundEdit()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        int $i0;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        $i0 = r0.compoundEditCount;
+
+        if $i0 == 0 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    public java.lang.Object getUndoId()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        java.lang.Object $r1;
+
+        r0 := @this;
+
+        $r1 = r0.undoId;
+
+        return $r1;
+    }
+
+    public void contentInserted(int, int, java.lang.String, boolean)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        int i0, i1, $i2, $i3, $i4, $i5;
+        java.lang.String r1, $r8, $r9, $r10, $r11, $r12;
+        boolean z0, $z1;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit r2, $r6, $r7;
+        org.gjt.sp.jedit.buffer.UndoManager$Insert $r3, r13, r14;
+        org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit $r4, $r5;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        r1 := @parameter2;
+
+        z0 := @parameter3;
+
+        r2 = specialinvoke r0.getMergeEdit();
+
+        if z0 != 0 goto label2;
+
+        $z1 = r2 instanceof org.gjt.sp.jedit.buffer.UndoManager$Insert;
+
+        if $z1 == 0 goto label2;
+
+        $r7 = r0.redosFirst;
+
+        if $r7 != null goto label2;
+
+        r13 = (org.gjt.sp.jedit.buffer.UndoManager$Insert) r2;
+
+        $i2 = r13.offset;
+
+        if $i2 != i0 goto label1;
+
+        $r11 = r13.str;
+
+        $r12 = r1.concat($r11);
+
+        r13.str = $r12;
+
+        return;
+
+     label1:
+        $i3 = r13.offset;
+
+        $r8 = r13.str;
+
+        $i4 = $r8.length();
+
+        $i5 = $i3 + $i4;
+
+        if $i5 != i0 goto label2;
+
+        $r9 = r13.str;
+
+        $r10 = $r9.concat(r1);
+
+        r13.str = $r10;
+
+        return;
+
+     label2:
+        $r3 = new org.gjt.sp.jedit.buffer.UndoManager$Insert;
+
+        specialinvoke $r3.<init>(i0, r1);
+
+        r14 = $r3;
+
+        if z0 == 0 goto label3;
+
+        $r6 = specialinvoke r0.getLastEdit();
+
+        r0.redoClearDirty = $r6;
+
+        r0.undoClearDirty = r14;
+
+     label3:
+        $r4 = r0.compoundEdit;
+
+        if $r4 == null goto label4;
+
+        $r5 = r0.compoundEdit;
+
+        $r5.add(r0, r14);
+
+        goto label5;
+
+     label4:
+        specialinvoke r0.reviseUndoId();
+
+        specialinvoke r0.addEdit(r14);
+
+     label5:
+        return;
+    }
+
+    public void contentRemoved(int, int, java.lang.String, boolean)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        int i0, i1, $i2, $i3, $i4;
+        java.lang.String r1, $r4, $r7, $r11, $r13, $r14, $r16, r18, r19;
+        boolean z0, $z1;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit r2, $r9, $r10;
+        org.gjt.sp.jedit.buffer.UndoManager$Remove $r3, r17, r20;
+        org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit $r5, $r8;
+        org.gjt.sp.jedit.buffer.KillRing $r6, $r12, $r15;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        r1 := @parameter2;
+
+        z0 := @parameter3;
+
+        r2 = specialinvoke r0.getMergeEdit();
+
+        if z0 != 0 goto label2;
+
+        $z1 = r2 instanceof org.gjt.sp.jedit.buffer.UndoManager$Remove;
+
+        if $z1 == 0 goto label2;
+
+        $r10 = r0.redosFirst;
+
+        if $r10 != null goto label2;
+
+        r17 = (org.gjt.sp.jedit.buffer.UndoManager$Remove) r2;
+
+        $i2 = r17.offset;
+
+        if $i2 != i0 goto label1;
+
+        $r14 = r17.str;
+
+        r18 = $r14.concat(r1);
+
+        $r15 = org.gjt.sp.jedit.buffer.KillRing.getInstance();
+
+        $r16 = r17.str;
+
+        $r15.changed($r16, r18);
+
+        r17.str = r18;
+
+        return;
+
+     label1:
+        $i4 = i0 + i1;
+
+        $i3 = r17.offset;
+
+        if $i4 != $i3 goto label2;
+
+        $r11 = r17.str;
+
+        r19 = r1.concat($r11);
+
+        $r12 = org.gjt.sp.jedit.buffer.KillRing.getInstance();
+
+        $r13 = r17.str;
+
+        $r12.changed($r13, r19);
+
+        r17.offset = i0;
+
+        r17.str = r19;
+
+        return;
+
+     label2:
+        $r3 = new org.gjt.sp.jedit.buffer.UndoManager$Remove;
+
+        $r4 = r1.intern();
+
+        specialinvoke $r3.<init>(i0, $r4);
+
+        r20 = $r3;
+
+        if z0 == 0 goto label3;
+
+        $r9 = specialinvoke r0.getLastEdit();
+
+        r0.redoClearDirty = $r9;
+
+        r0.undoClearDirty = r20;
+
+     label3:
+        $r5 = r0.compoundEdit;
+
+        if $r5 == null goto label4;
+
+        $r8 = r0.compoundEdit;
+
+        $r8.add(r0, r20);
+
+        goto label5;
+
+     label4:
+        specialinvoke r0.reviseUndoId();
+
+        specialinvoke r0.addEdit(r20);
+
+     label5:
+        $r6 = org.gjt.sp.jedit.buffer.KillRing.getInstance();
+
+        $r7 = r20.str;
+
+        $r6.add($r7);
+
+        return;
+    }
+
+    public void resetClearDirty()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit $r1, $r2, $r3, $r4, $r6;
+        boolean $z0;
+        org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit $r5;
+
+        r0 := @this;
+
+        $r1 = specialinvoke r0.getLastEdit();
+
+        r0.redoClearDirty = $r1;
+
+        $r2 = r0.redosFirst;
+
+        $z0 = $r2 instanceof org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit;
+
+        if $z0 == 0 goto label1;
+
+        $r4 = r0.redosFirst;
+
+        $r5 = (org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit) $r4;
+
+        $r6 = $r5.first;
+
+        r0.undoClearDirty = $r6;
+
+        goto label2;
+
+     label1:
+        $r3 = r0.redosFirst;
+
+        r0.undoClearDirty = $r3;
+
+     label2:
+        return;
+    }
+
+    private void addEdit(org.gjt.sp.jedit.buffer.UndoManager$Edit)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10;
+        int $i0, $i1, $i2, $i3, $i4, $i5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.undosFirst;
+
+        if $r2 != null goto label1;
+
+        r0.undosLast = r1;
+
+        r0.undosFirst = r1;
+
+        goto label2;
+
+     label1:
+        $r3 = r0.undosLast;
+
+        $r3.next = r1;
+
+        $r4 = r0.undosLast;
+
+        r1.prev = $r4;
+
+        r0.undosLast = r1;
+
+     label2:
+        r0.redosFirst = null;
+
+        $i0 = r0.undoCount;
+
+        $i1 = $i0 + 1;
+
+        r0.undoCount = $i1;
+
+     label3:
+        $i3 = r0.undoCount;
+
+        $i2 = r0.limit;
+
+        if $i3 <= $i2 goto label5;
+
+        $i4 = r0.undoCount;
+
+        $i5 = $i4 - 1;
+
+        r0.undoCount = $i5;
+
+        $r6 = r0.undosFirst;
+
+        $r5 = r0.undosLast;
+
+        if $r6 != $r5 goto label4;
+
+        r0.undosLast = null;
+
+        r0.undosFirst = null;
+
+        goto label3;
+
+     label4:
+        $r7 = r0.undosFirst;
+
+        $r8 = $r7.next;
+
+        $r8.prev = null;
+
+        $r9 = r0.undosFirst;
+
+        $r10 = $r9.next;
+
+        r0.undosFirst = $r10;
+
+        goto label3;
+
+     label5:
+        return;
+    }
+
+    private org.gjt.sp.jedit.buffer.UndoManager$Edit getMergeEdit()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit $r1, $r2;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit $r3, $r3_1, $r3_2;
+
+        r0 := @this;
+
+        $r1 = r0.compoundEdit;
+
+        if $r1 == null goto label1;
+
+        $r2 = r0.compoundEdit;
+
+        $r3 = $r2.last;
+
+(0)     goto label2;
+
+     label1:
+(1)     $r3_1 = specialinvoke r0.getLastEdit();
+
+     label2:
+        $r3_2 = Phi($r3 #0, $r3_1 #1);
+
+        return $r3_2;
+    }
+
+    private org.gjt.sp.jedit.buffer.UndoManager$Edit getLastEdit()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit $r1, $r2, $r3, $r5;
+        boolean $z0;
+        org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit $r4;
+
+        r0 := @this;
+
+        $r1 = r0.undosLast;
+
+        $z0 = $r1 instanceof org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit;
+
+        if $z0 == 0 goto label1;
+
+        $r3 = r0.undosLast;
+
+        $r4 = (org.gjt.sp.jedit.buffer.UndoManager$CompoundEdit) $r3;
+
+        $r5 = $r4.last;
+
+        return $r5;
+
+     label1:
+        $r2 = r0.undosLast;
+
+        return $r2;
+    }
+
+    private void reviseUndoId()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        java.lang.Object $r1;
+
+        r0 := @this;
+
+        $r1 = new java.lang.Object;
+
+        specialinvoke $r1.<init>();
+
+        r0.undoId = $r1;
+
+        return;
+    }
+
+    private org.gjt.sp.jedit.buffer.UndoManager$Replace getReplaceFromRemoveInsert(org.gjt.sp.jedit.buffer.UndoManager$Edit, org.gjt.sp.jedit.buffer.UndoManager$Edit)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit r1, r2, $r5, $r6, $r10, $r12;
+        org.gjt.sp.jedit.buffer.UndoManager$Remove r3;
+        org.gjt.sp.jedit.buffer.UndoManager$Insert r4;
+        boolean $z0, $z1, $z2, $z3;
+        int $i0, $i1, $i2;
+        org.gjt.sp.jedit.buffer.UndoManager$Replace $r7;
+        java.lang.String $r8, $r9;
+        java.lang.AssertionError $r11, $r13;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.buffer.UndoManager$Remove;
+
+        if $z0 == 0 goto label5;
+
+        $z1 = r2 instanceof org.gjt.sp.jedit.buffer.UndoManager$Insert;
+
+        if $z1 == 0 goto label5;
+
+        $r5 = r0.undoClearDirty;
+
+        if r1 == $r5 goto label1;
+
+        $r6 = r0.undoClearDirty;
+
+        if r2 != $r6 goto label2;
+
+     label1:
+        return null;
+
+     label2:
+        $z2 = org.gjt.sp.jedit.buffer.UndoManager.$assertionsDisabled;
+
+        if $z2 != 0 goto label3;
+
+        $r12 = r0.redoClearDirty;
+
+        if r2 != $r12 goto label3;
+
+        $r13 = new java.lang.AssertionError;
+
+        specialinvoke $r13.<init>();
+
+        throw $r13;
+
+     label3:
+        $z3 = org.gjt.sp.jedit.buffer.UndoManager.$assertionsDisabled;
+
+        if $z3 != 0 goto label4;
+
+        $r10 = r0.redoClearDirty;
+
+        if r1 != $r10 goto label4;
+
+        $r11 = new java.lang.AssertionError;
+
+        specialinvoke $r11.<init>();
+
+        throw $r11;
+
+     label4:
+        r3 = (org.gjt.sp.jedit.buffer.UndoManager$Remove) r1;
+
+        r4 = (org.gjt.sp.jedit.buffer.UndoManager$Insert) r2;
+
+        $i1 = r3.offset;
+
+        $i0 = r4.offset;
+
+        if $i1 != $i0 goto label5;
+
+        $r7 = new org.gjt.sp.jedit.buffer.UndoManager$Replace;
+
+        $i2 = r3.offset;
+
+        $r9 = r3.str;
+
+        $r8 = r4.str;
+
+        specialinvoke $r7.<init>($i2, $r9, $r8);
+
+        return $r7;
+
+     label5:
+        return null;
+    }
+
+    private org.gjt.sp.jedit.buffer.UndoManager$CompressedReplace getCompressedReplaceFromReplaceReplace(org.gjt.sp.jedit.buffer.UndoManager$Edit, org.gjt.sp.jedit.buffer.UndoManager$Edit)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit r1, r2;
+        boolean $z0, $z1, $z2;
+        org.gjt.sp.jedit.buffer.UndoManager$CompressedReplace $r3, $r6, $r8, r9, r10;
+        org.gjt.sp.jedit.buffer.UndoManager$Replace $r4, $r5, $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $z0 = r2 instanceof org.gjt.sp.jedit.buffer.UndoManager$Replace;
+
+        if $z0 == 0 goto label2;
+
+        $z1 = r1 instanceof org.gjt.sp.jedit.buffer.UndoManager$CompressedReplace;
+
+        if $z1 == 0 goto label1;
+
+        r9 = (org.gjt.sp.jedit.buffer.UndoManager$CompressedReplace) r1;
+
+        $r7 = (org.gjt.sp.jedit.buffer.UndoManager$Replace) r2;
+
+        $r8 = r9.add($r7);
+
+        return $r8;
+
+     label1:
+        $z2 = r1 instanceof org.gjt.sp.jedit.buffer.UndoManager$Replace;
+
+        if $z2 == 0 goto label2;
+
+        $r3 = new org.gjt.sp.jedit.buffer.UndoManager$CompressedReplace;
+
+        $r4 = (org.gjt.sp.jedit.buffer.UndoManager$Replace) r1;
+
+        specialinvoke $r3.<init>($r4);
+
+        r10 = $r3;
+
+        $r5 = (org.gjt.sp.jedit.buffer.UndoManager$Replace) r2;
+
+        $r6 = r10.add($r5);
+
+        return $r6;
+
+     label2:
+        return null;
+    }
+
+    static org.gjt.sp.jedit.buffer.JEditBuffer access$200(org.gjt.sp.jedit.buffer.UndoManager)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.buffer;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.buffer.UndoManager$Edit access$300(org.gjt.sp.jedit.buffer.UndoManager)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.undoClearDirty;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.buffer.UndoManager$Edit access$400(org.gjt.sp.jedit.buffer.UndoManager)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.redoClearDirty;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.buffer.UndoManager$Replace access$500(org.gjt.sp.jedit.buffer.UndoManager, org.gjt.sp.jedit.buffer.UndoManager$Edit, org.gjt.sp.jedit.buffer.UndoManager$Edit)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit r1, r2;
+        org.gjt.sp.jedit.buffer.UndoManager$Replace $r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        $r3 = specialinvoke r0.getReplaceFromRemoveInsert(r1, r2);
+
+        return $r3;
+    }
+
+    static org.gjt.sp.jedit.buffer.UndoManager$CompressedReplace access$600(org.gjt.sp.jedit.buffer.UndoManager, org.gjt.sp.jedit.buffer.UndoManager$Edit, org.gjt.sp.jedit.buffer.UndoManager$Edit)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager r0;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit r1, r2;
+        org.gjt.sp.jedit.buffer.UndoManager$CompressedReplace $r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        $r3 = specialinvoke r0.getCompressedReplaceFromReplaceReplace(r1, r2);
+
+        return $r3;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Class $r0;
+        boolean $z0, $z1, $z1_1, $z1_2;
+
+        $r0 = class "org/gjt/sp/jedit/buffer/UndoManager";
+
+        $z0 = $r0.desiredAssertionStatus();
+
+        if $z0 != 0 goto label1;
+
+        $z1 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z1_1 = 0;
+
+     label2:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        org.gjt.sp.jedit.buffer.UndoManager.$assertionsDisabled = $z1_2;
+
+        return;
+    }
+}

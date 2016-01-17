@@ -1,0 +1,323 @@
+public class org.gjt.sp.jedit.gui.HistoryTextArea extends javax.swing.JTextArea
+{
+    private org.gjt.sp.jedit.gui.HistoryText controller;
+
+    public void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.HistoryTextArea r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.gui.HistoryText $r2;
+        javax.swing.KeyStroke $r3, $r5;
+        java.util.Set $r4, $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(3, 15);
+
+        $r2 = new org.gjt.sp.jedit.gui.HistoryText;
+
+        specialinvoke $r2.<init>(r0, r1);
+
+        r0.controller = $r2;
+
+        $r3 = javax.swing.KeyStroke.getKeyStroke(9, 0);
+
+        $r4 = java.util.Collections.singleton($r3);
+
+        r0.setFocusTraversalKeys(0, $r4);
+
+        $r5 = javax.swing.KeyStroke.getKeyStroke(9, 1);
+
+        $r6 = java.util.Collections.singleton($r5);
+
+        r0.setFocusTraversalKeys(1, $r6);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.gui.HistoryModel getModel()
+    {
+        org.gjt.sp.jedit.gui.HistoryTextArea r0;
+        org.gjt.sp.jedit.gui.HistoryText $r1;
+        org.gjt.sp.jedit.gui.HistoryModel $r2;
+
+        r0 := @this;
+
+        $r1 = r0.controller;
+
+        $r2 = $r1.getModel();
+
+        return $r2;
+    }
+
+    public void setModel(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.HistoryTextArea r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.gui.HistoryText $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.controller;
+
+        $r2.setModel(r1);
+
+        return;
+    }
+
+    public void setInstantPopups(boolean)
+    {
+        org.gjt.sp.jedit.gui.HistoryTextArea r0;
+        boolean z0;
+        org.gjt.sp.jedit.gui.HistoryText $r1;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        $r1 = r0.controller;
+
+        $r1.setInstantPopups(z0);
+
+        return;
+    }
+
+    public boolean getInstantPopups()
+    {
+        org.gjt.sp.jedit.gui.HistoryTextArea r0;
+        org.gjt.sp.jedit.gui.HistoryText $r1;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r1 = r0.controller;
+
+        $z0 = $r1.getInstantPopups();
+
+        return $z0;
+    }
+
+    public void addCurrentToHistory()
+    {
+        org.gjt.sp.jedit.gui.HistoryTextArea r0;
+        org.gjt.sp.jedit.gui.HistoryText $r1;
+
+        r0 := @this;
+
+        $r1 = r0.controller;
+
+        $r1.addCurrentToHistory();
+
+        return;
+    }
+
+    public void setText(java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.HistoryTextArea r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.gui.HistoryText $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.setText(r1);
+
+        $r2 = r0.controller;
+
+        $r2.setIndex(-1);
+
+        return;
+    }
+
+    protected void processKeyEvent(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.gui.HistoryTextArea r0;
+        java.awt.event.KeyEvent r1;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8;
+        int $i0, $i1;
+        org.gjt.sp.jedit.gui.HistoryText $r2, $r3, $r4, $r5, $r6, $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r0.isEnabled();
+
+        if $z0 != 0 goto label01;
+
+        return;
+
+     label01:
+        $i0 = r1.getID();
+
+        if $i0 != 401 goto label12;
+
+        $i1 = r1.getKeyCode();
+
+        lookupswitch($i1)
+        {
+            case 9: goto label03;
+            case 10: goto label02;
+            case 33: goto label04;
+            case 34: goto label07;
+            case 38: goto label10;
+            case 525: goto label11;
+            default: goto label12;
+        };
+
+     label02:
+        $z7 = r1.isControlDown();
+
+        if $z7 == 0 goto label12;
+
+        r0.replaceSelection("\n");
+
+        r1.consume();
+
+        goto label12;
+
+     label03:
+        $z8 = r1.isControlDown();
+
+        if $z8 == 0 goto label12;
+
+        r0.replaceSelection("\t");
+
+        r1.consume();
+
+        goto label12;
+
+     label04:
+        $z6 = r1.isShiftDown();
+
+        if $z6 == 0 goto label05;
+
+        $r7 = r0.controller;
+
+        $r7.doBackwardSearch();
+
+        goto label06;
+
+     label05:
+        $r6 = r0.controller;
+
+        $r6.historyPrevious();
+
+     label06:
+        r1.consume();
+
+        goto label12;
+
+     label07:
+        $z5 = r1.isShiftDown();
+
+        if $z5 == 0 goto label08;
+
+        $r5 = r0.controller;
+
+        $r5.doForwardSearch();
+
+        goto label09;
+
+     label08:
+        $r4 = r0.controller;
+
+        $r4.historyNext();
+
+     label09:
+        r1.consume();
+
+        goto label12;
+
+     label10:
+        $z3 = r1.isAltDown();
+
+        if $z3 == 0 goto label12;
+
+        $r3 = r0.controller;
+
+        $z4 = r1.isShiftDown();
+
+        $r3.showPopupMenu($z4);
+
+        r1.consume();
+
+        goto label12;
+
+     label11:
+        $r2 = r0.controller;
+
+        $z2 = r1.isShiftDown();
+
+        $r2.showPopupMenu($z2);
+
+        r1.consume();
+
+     label12:
+        $z1 = r1.isConsumed();
+
+        if $z1 != 0 goto label13;
+
+        specialinvoke r0.processKeyEvent(r1);
+
+     label13:
+        return;
+    }
+
+    protected void processMouseEvent(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.HistoryTextArea r0;
+        java.awt.event.MouseEvent r1;
+        boolean $z0, $z1, $z2;
+        int $i0;
+        org.gjt.sp.jedit.gui.HistoryText $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r0.isEnabled();
+
+        if $z0 != 0 goto label1;
+
+        return;
+
+     label1:
+        $i0 = r1.getID();
+
+        lookupswitch($i0)
+        {
+            case 501: goto label2;
+            default: goto label4;
+        };
+
+     label2:
+        $z1 = org.gjt.sp.jedit.GUIUtilities.isPopupTrigger(r1);
+
+        if $z1 == 0 goto label3;
+
+        $r2 = r0.controller;
+
+        $z2 = r1.isShiftDown();
+
+        $r2.showPopupMenu($z2);
+
+        goto label5;
+
+     label3:
+        specialinvoke r0.processMouseEvent(r1);
+
+        goto label5;
+
+     label4:
+        specialinvoke r0.processMouseEvent(r1);
+
+     label5:
+        return;
+    }
+}

@@ -1,0 +1,392 @@
+public class org.gjt.sp.jedit.options.BrowserOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private javax.swing.JComboBox defaultDirectory;
+    private javax.swing.JCheckBox showToolbar;
+    private javax.swing.JCheckBox showMenubar;
+    private javax.swing.JCheckBox showIcons;
+    private javax.swing.JCheckBox showHiddenFiles;
+    private javax.swing.JCheckBox sortIgnoreCase;
+    private javax.swing.JCheckBox sortMixFilesAndDirs;
+    private javax.swing.JCheckBox doubleClickClose;
+    private javax.swing.JCheckBox currentBufferFilter;
+    private javax.swing.JCheckBox useDefaultIcons;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.BrowserOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("browser.general");
+
+        return;
+    }
+
+    public void _init()
+    {
+        org.gjt.sp.jedit.options.BrowserOptionPane r0;
+        java.lang.String[] r1, $r3;
+        java.lang.String r2, $r4, $r5, $r6, $r7, $r8, $r10, $r11, $r12, $r13, $r14, $r15, $r18, $r22, $r26, $r30, $r34, $r38, $r42, $r46, $r50;
+        javax.swing.JComboBox $r9, $r16, $r53, $r54, $r55, $r56, $r57;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z10, $z11, $z12, $z13;
+        javax.swing.JCheckBox $r17, $r19, $r20, $r21, $r23, $r24, $r25, $r27, $r28, $r29, $r31, $r32, $r33, $r35, $r36, $r37, $r39, $r40, $r41, $r43, $r44, $r45, $r47, $r48, $r49, $r51, $r52;
+
+        r0 := @this;
+
+        $r3 = newarray (java.lang.String)[5];
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.defaultPath.favorites");
+
+        $r3[0] = $r4;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.defaultPath.home");
+
+        $r3[1] = $r5;
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.defaultPath.last");
+
+        $r3[2] = $r6;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.defaultPath.buffer");
+
+        $r3[3] = $r7;
+
+        $r8 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.defaultPath.working");
+
+        $r3[4] = $r8;
+
+        r1 = $r3;
+
+        $r9 = new javax.swing.JComboBox;
+
+        specialinvoke $r9.<init>(r1);
+
+        r0.defaultDirectory = $r9;
+
+        r2 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.defaultPath");
+
+        $r10 = "favorites";
+
+        $z0 = $r10.equals(r2);
+
+        if $z0 == 0 goto label1;
+
+        $r57 = r0.defaultDirectory;
+
+        $r57.setSelectedIndex(0);
+
+        goto label5;
+
+     label1:
+        $r11 = "home";
+
+        $z1 = $r11.equals(r2);
+
+        if $z1 == 0 goto label2;
+
+        $r56 = r0.defaultDirectory;
+
+        $r56.setSelectedIndex(1);
+
+        goto label5;
+
+     label2:
+        $r12 = "last";
+
+        $z2 = $r12.equals(r2);
+
+        if $z2 == 0 goto label3;
+
+        $r55 = r0.defaultDirectory;
+
+        $r55.setSelectedIndex(2);
+
+        goto label5;
+
+     label3:
+        $r13 = "buffer";
+
+        $z3 = $r13.equals(r2);
+
+        if $z3 == 0 goto label4;
+
+        $r54 = r0.defaultDirectory;
+
+        $r54.setSelectedIndex(3);
+
+        goto label5;
+
+     label4:
+        $r14 = "working";
+
+        $z4 = $r14.equals(r2);
+
+        if $z4 == 0 goto label5;
+
+        $r53 = r0.defaultDirectory;
+
+        $r53.setSelectedIndex(4);
+
+     label5:
+        $r15 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.defaultPath");
+
+        $r16 = r0.defaultDirectory;
+
+        r0.addComponent($r15, $r16);
+
+        $r17 = new javax.swing.JCheckBox;
+
+        $r18 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.showToolbar");
+
+        specialinvoke $r17.<init>($r18);
+
+        r0.showToolbar = $r17;
+
+        $r19 = r0.showToolbar;
+
+        $z5 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.showToolbar");
+
+        $r19.setSelected($z5);
+
+        $r20 = r0.showToolbar;
+
+        r0.addComponent($r20);
+
+        $r21 = new javax.swing.JCheckBox;
+
+        $r22 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.showMenubar");
+
+        specialinvoke $r21.<init>($r22);
+
+        r0.showMenubar = $r21;
+
+        $r23 = r0.showMenubar;
+
+        $z6 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.showMenubar");
+
+        $r23.setSelected($z6);
+
+        $r24 = r0.showMenubar;
+
+        r0.addComponent($r24);
+
+        $r25 = new javax.swing.JCheckBox;
+
+        $r26 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.showIcons");
+
+        specialinvoke $r25.<init>($r26);
+
+        r0.showIcons = $r25;
+
+        $r27 = r0.showIcons;
+
+        $z7 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.showIcons");
+
+        $r27.setSelected($z7);
+
+        $r28 = r0.showIcons;
+
+        r0.addComponent($r28);
+
+        $r29 = new javax.swing.JCheckBox;
+
+        $r30 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.showHiddenFiles");
+
+        specialinvoke $r29.<init>($r30);
+
+        r0.showHiddenFiles = $r29;
+
+        $r31 = r0.showHiddenFiles;
+
+        $z8 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.showHiddenFiles");
+
+        $r31.setSelected($z8);
+
+        $r32 = r0.showHiddenFiles;
+
+        r0.addComponent($r32);
+
+        $r33 = new javax.swing.JCheckBox;
+
+        $r34 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.sortIgnoreCase");
+
+        specialinvoke $r33.<init>($r34);
+
+        r0.sortIgnoreCase = $r33;
+
+        $r35 = r0.sortIgnoreCase;
+
+        $z9 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.sortIgnoreCase");
+
+        $r35.setSelected($z9);
+
+        $r36 = r0.sortIgnoreCase;
+
+        r0.addComponent($r36);
+
+        $r37 = new javax.swing.JCheckBox;
+
+        $r38 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.sortMixFilesAndDirs");
+
+        specialinvoke $r37.<init>($r38);
+
+        r0.sortMixFilesAndDirs = $r37;
+
+        $r39 = r0.sortMixFilesAndDirs;
+
+        $z10 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.sortMixFilesAndDirs");
+
+        $r39.setSelected($z10);
+
+        $r40 = r0.sortMixFilesAndDirs;
+
+        r0.addComponent($r40);
+
+        $r41 = new javax.swing.JCheckBox;
+
+        $r42 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.doubleClickClose");
+
+        specialinvoke $r41.<init>($r42);
+
+        r0.doubleClickClose = $r41;
+
+        $r43 = r0.doubleClickClose;
+
+        $z11 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.doubleClickClose");
+
+        $r43.setSelected($z11);
+
+        $r44 = r0.doubleClickClose;
+
+        r0.addComponent($r44);
+
+        $r45 = new javax.swing.JCheckBox;
+
+        $r46 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.currentBufferFilter");
+
+        specialinvoke $r45.<init>($r46);
+
+        r0.currentBufferFilter = $r45;
+
+        $r47 = r0.currentBufferFilter;
+
+        $z12 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.currentBufferFilter");
+
+        $r47.setSelected($z12);
+
+        $r48 = r0.currentBufferFilter;
+
+        r0.addComponent($r48);
+
+        $r49 = new javax.swing.JCheckBox;
+
+        $r50 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.general.useDefaultIcons");
+
+        specialinvoke $r49.<init>($r50);
+
+        r0.useDefaultIcons = $r49;
+
+        $r51 = r0.useDefaultIcons;
+
+        $z13 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.useDefaultIcons");
+
+        $r51.setSelected($z13);
+
+        $r52 = r0.useDefaultIcons;
+
+        r0.addComponent($r52);
+
+        return;
+    }
+
+    public void _save()
+    {
+        org.gjt.sp.jedit.options.BrowserOptionPane r0;
+        java.lang.String[] r1, $r2;
+        javax.swing.JComboBox $r3;
+        int $i0;
+        java.lang.String $r4;
+        javax.swing.JCheckBox $r5, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r13;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8;
+
+        r0 := @this;
+
+        $r2 = newarray (java.lang.String)[5];
+
+        $r2[0] = "favorites";
+
+        $r2[1] = "home";
+
+        $r2[2] = "last";
+
+        $r2[3] = "buffer";
+
+        $r2[4] = "working";
+
+        r1 = $r2;
+
+        $r3 = r0.defaultDirectory;
+
+        $i0 = $r3.getSelectedIndex();
+
+        $r4 = r1[$i0];
+
+        org.gjt.sp.jedit.jEdit.setProperty("vfs.browser.defaultPath", $r4);
+
+        $r5 = r0.showToolbar;
+
+        $z0 = $r5.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("vfs.browser.showToolbar", $z0);
+
+        $r6 = r0.showMenubar;
+
+        $z1 = $r6.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("vfs.browser.showMenubar", $z1);
+
+        $r7 = r0.showIcons;
+
+        $z2 = $r7.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("vfs.browser.showIcons", $z2);
+
+        $r8 = r0.showHiddenFiles;
+
+        $z3 = $r8.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("vfs.browser.showHiddenFiles", $z3);
+
+        $r9 = r0.sortIgnoreCase;
+
+        $z4 = $r9.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("vfs.browser.sortIgnoreCase", $z4);
+
+        $r10 = r0.sortMixFilesAndDirs;
+
+        $z5 = $r10.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("vfs.browser.sortMixFilesAndDirs", $z5);
+
+        $r11 = r0.doubleClickClose;
+
+        $z6 = $r11.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("vfs.browser.doubleClickClose", $z6);
+
+        $r12 = r0.currentBufferFilter;
+
+        $z7 = $r12.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("vfs.browser.currentBufferFilter", $z7);
+
+        $r13 = r0.useDefaultIcons;
+
+        $z8 = $r13.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("vfs.browser.useDefaultIcons", $z8);
+
+        return;
+    }
+}

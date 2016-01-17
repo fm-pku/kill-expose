@@ -1,0 +1,51 @@
+public class org.gjt.sp.jedit.gui.DockableWindowManagerProvider extends java.lang.Object implements org.gjt.sp.jedit.gui.DockingFrameworkProvider
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManagerProvider r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.gui.DockableWindowManager create(org.gjt.sp.jedit.View, org.gjt.sp.jedit.gui.DockableWindowFactory, org.gjt.sp.jedit.View$ViewConfig)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManagerProvider r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.gui.DockableWindowFactory r2;
+        org.gjt.sp.jedit.View$ViewConfig r3;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = new org.gjt.sp.jedit.gui.DockableWindowManagerImpl;
+
+        specialinvoke $r4.<init>(r1, r2, r3);
+
+        return $r4;
+    }
+
+    public org.gjt.sp.jedit.gui.DockableWindowManager$DockingLayout createDockingLayout()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManagerProvider r0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$DockableWindowConfig $r1;
+
+        r0 := @this;
+
+        $r1 = new org.gjt.sp.jedit.gui.DockableWindowManagerImpl$DockableWindowConfig;
+
+        specialinvoke $r1.<init>();
+
+        return $r1;
+    }
+}

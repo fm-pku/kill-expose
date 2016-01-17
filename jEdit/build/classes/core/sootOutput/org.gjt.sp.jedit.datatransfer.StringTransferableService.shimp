@@ -1,0 +1,49 @@
+public class org.gjt.sp.jedit.datatransfer.StringTransferableService extends java.lang.Object implements org.gjt.sp.jedit.datatransfer.JEditTransferableService
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.datatransfer.StringTransferableService r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public boolean accept(org.gjt.sp.jedit.textarea.TextArea, java.lang.String)
+    {
+        org.gjt.sp.jedit.datatransfer.StringTransferableService r0;
+        org.gjt.sp.jedit.textarea.TextArea r1;
+        java.lang.String r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        return 1;
+    }
+
+    public java.awt.datatransfer.Transferable getTransferable(org.gjt.sp.jedit.textarea.TextArea, java.lang.String)
+    {
+        org.gjt.sp.jedit.datatransfer.StringTransferableService r0;
+        org.gjt.sp.jedit.textarea.TextArea r1;
+        java.lang.String r2;
+        java.awt.datatransfer.StringSelection $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = new java.awt.datatransfer.StringSelection;
+
+        specialinvoke $r3.<init>(r2);
+
+        return $r3;
+    }
+}

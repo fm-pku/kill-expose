@@ -1,0 +1,59 @@
+class org.gjt.sp.jedit.browser.VFSBrowser$3 extends org.gjt.sp.util.TaskAdapter
+{
+    final org.gjt.sp.util.Task val$task;
+    final java.util.concurrent.CountDownLatch val$latch;
+    final org.gjt.sp.jedit.browser.VFSBrowser this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSBrowser, org.gjt.sp.util.Task, java.util.concurrent.CountDownLatch)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$3 r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+        org.gjt.sp.util.Task r2;
+        java.util.concurrent.CountDownLatch r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$0 = r1;
+
+        r0.val$task = r2;
+
+        r0.val$latch = r3;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void done(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$3 r0;
+        org.gjt.sp.util.Task r1, $r2;
+        java.util.concurrent.CountDownLatch $r3;
+        org.gjt.sp.util.TaskManager $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.val$task;
+
+        if $r2 != r1 goto label1;
+
+        $r3 = r0.val$latch;
+
+        $r3.countDown();
+
+        $r4 = org.gjt.sp.util.TaskManager.instance;
+
+        $r4.removeTaskListener(r0);
+
+     label1:
+        return;
+    }
+}

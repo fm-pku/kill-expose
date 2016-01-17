@@ -1,0 +1,5 @@
+public interface  org.gjt.sp.jedit.indent.IndentRule extends java.lang.Object
+{
+
+    public abstract void apply(org.gjt.sp.jedit.buffer.JEditBuffer, int, int, int, java.util.List);
+}

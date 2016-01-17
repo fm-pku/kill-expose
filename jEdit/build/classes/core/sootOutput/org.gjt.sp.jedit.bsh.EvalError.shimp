@@ -1,0 +1,394 @@
+public class org.gjt.sp.jedit.bsh.EvalError extends java.lang.Exception
+{
+    org.gjt.sp.jedit.bsh.SimpleNode node;
+    java.lang.String message;
+    org.gjt.sp.jedit.bsh.CallStack callstack;
+
+    public void <init>(java.lang.String, org.gjt.sp.jedit.bsh.SimpleNode, org.gjt.sp.jedit.bsh.CallStack)
+    {
+        org.gjt.sp.jedit.bsh.EvalError r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.bsh.SimpleNode r2;
+        org.gjt.sp.jedit.bsh.CallStack r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.setMessage(r1);
+
+        r0.node = r2;
+
+        if r3 == null goto label1;
+
+        $r4 = r3.copy();
+
+        r0.callstack = $r4;
+
+     label1:
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.bsh.EvalError r0;
+        org.gjt.sp.jedit.bsh.SimpleNode $r1, $r15, $r18, $r22;
+        org.gjt.sp.jedit.bsh.CallStack $r2;
+        java.lang.StringBuilder $r3, $r5, $r6, $r8, $r9, $r10, $r12, $r13, $r14, $r16, $r17, $r20, $r21, $r24;
+        java.lang.String $r4, $r7, $r11, $r19, $r23, r25, r25_1, r25_2, r25_3, r25_4;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.node;
+
+        if $r1 == null goto label1;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r14 = $r13.append(" : at Line: ");
+
+        $r15 = r0.node;
+
+        $i0 = $r15.getLineNumber();
+
+        $r16 = $r14.append($i0);
+
+        $r17 = $r16.append(" :\n in file: ");
+
+        $r18 = r0.node;
+
+        $r19 = $r18.getSourceFile();
+
+        $r20 = $r17.append($r19);
+
+        $r21 = $r20.append("\n : ");
+
+        $r22 = r0.node;
+
+        $r23 = $r22.getText();
+
+        $r24 = $r21.append($r23);
+
+        r25 = $r24.toString();
+
+(0)     goto label2;
+
+     label1:
+(1)     r25_1 = ": <at unknown location>";
+
+     label2:
+        r25_2 = Phi(r25 #0, r25_1 #1);
+
+        $r2 = r0.callstack;
+
+(2)     if $r2 == null goto label3;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append(r25_2);
+
+        $r10 = $r9.append("\n");
+
+        $r11 = r0.getScriptStackTrace();
+
+        $r12 = $r10.append($r11);
+
+(3)     r25_3 = $r12.toString();
+
+     label3:
+        r25_4 = Phi(r25_2 #2, r25_3 #3);
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = r0.getMessage();
+
+        $r5 = $r3.append($r4);
+
+        $r6 = $r5.append(r25_4);
+
+        $r7 = $r6.toString();
+
+        return $r7;
+    }
+
+    public void reThrow(java.lang.String) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.EvalError r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.prependMessage(r1);
+
+        throw r0;
+    }
+
+    org.gjt.sp.jedit.bsh.SimpleNode getNode()
+    {
+        org.gjt.sp.jedit.bsh.EvalError r0;
+        org.gjt.sp.jedit.bsh.SimpleNode $r1;
+
+        r0 := @this;
+
+        $r1 = r0.node;
+
+        return $r1;
+    }
+
+    void setNode(org.gjt.sp.jedit.bsh.SimpleNode)
+    {
+        org.gjt.sp.jedit.bsh.EvalError r0;
+        org.gjt.sp.jedit.bsh.SimpleNode r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.node = r1;
+
+        return;
+    }
+
+    public java.lang.String getErrorText()
+    {
+        org.gjt.sp.jedit.bsh.EvalError r0;
+        org.gjt.sp.jedit.bsh.SimpleNode $r1, $r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        $r1 = r0.node;
+
+        if $r1 == null goto label1;
+
+        $r2 = r0.node;
+
+        $r3 = $r2.getText();
+
+        return $r3;
+
+     label1:
+        return "<unknown error>";
+    }
+
+    public int getErrorLineNumber()
+    {
+        org.gjt.sp.jedit.bsh.EvalError r0;
+        org.gjt.sp.jedit.bsh.SimpleNode $r1, $r2;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.node;
+
+        if $r1 == null goto label1;
+
+        $r2 = r0.node;
+
+        $i0 = $r2.getLineNumber();
+
+        return $i0;
+
+     label1:
+        return -1;
+    }
+
+    public java.lang.String getErrorSourceFile()
+    {
+        org.gjt.sp.jedit.bsh.EvalError r0;
+        org.gjt.sp.jedit.bsh.SimpleNode $r1, $r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        $r1 = r0.node;
+
+        if $r1 == null goto label1;
+
+        $r2 = r0.node;
+
+        $r3 = $r2.getSourceFile();
+
+        return $r3;
+
+     label1:
+        return "<unknown file>";
+    }
+
+    public java.lang.String getScriptStackTrace()
+    {
+        org.gjt.sp.jedit.bsh.EvalError r0;
+        org.gjt.sp.jedit.bsh.CallStack r1, $r4, $r5;
+        org.gjt.sp.jedit.bsh.NameSpace r2;
+        org.gjt.sp.jedit.bsh.SimpleNode r3;
+        int $i0, $i1;
+        boolean $z0;
+        java.lang.StringBuilder $r6, $r7, $r8, $r10, $r11, $r12, $r13, $r14, $r15, $r17, $r18, $r20;
+        java.lang.String $r9, $r16, $r19, r21;
+
+        r0 := @this;
+
+        $r4 = r0.callstack;
+
+        if $r4 != null goto label1;
+
+        return "<Unknown>";
+
+     label1:
+        r21 = "";
+
+        $r5 = r0.callstack;
+
+(0)     r1 = $r5.copy();
+
+     label2:
+        r21 = Phi(r21 #0, r21 #4);
+
+        $i0 = r1.depth();
+
+        if $i0 <= 0 goto label4;
+
+        r2 = r1.pop();
+
+        r3 = r2.getNode();
+
+        $z0 = r2.isMethod;
+
+(1)     if $z0 == 0 goto label3;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append(r21);
+
+        $r8 = $r7.append("\nCalled from method: ");
+
+        $r9 = r2.getName();
+
+        $r10 = $r8.append($r9);
+
+        r21 = $r10.toString();
+
+(2)     if r3 == null goto label3;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = $r11.append(r21);
+
+        $r13 = $r12.append(" : at Line: ");
+
+        $i1 = r3.getLineNumber();
+
+        $r14 = $r13.append($i1);
+
+        $r15 = $r14.append(" : in file: ");
+
+        $r16 = r3.getSourceFile();
+
+        $r17 = $r15.append($r16);
+
+        $r18 = $r17.append(" : ");
+
+        $r19 = r3.getText();
+
+        $r20 = $r18.append($r19);
+
+(3)     r21 = $r20.toString();
+
+     label3:
+        r21 = Phi(r21 #1, r21 #2, r21 #3);
+
+(4)     goto label2;
+
+     label4:
+        return r21;
+    }
+
+    public java.lang.String getMessage()
+    {
+        org.gjt.sp.jedit.bsh.EvalError r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.message;
+
+        return $r1;
+    }
+
+    public void setMessage(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.EvalError r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.message = r1;
+
+        return;
+    }
+
+    protected void prependMessage(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.EvalError r0;
+        java.lang.String r1, $r2, $r6, $r8;
+        java.lang.StringBuilder $r3, $r4, $r5, $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 != null goto label1;
+
+        return;
+
+     label1:
+        $r2 = r0.message;
+
+        if $r2 != null goto label2;
+
+        r0.message = r1;
+
+        goto label3;
+
+     label2:
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append(r1);
+
+        $r5 = $r4.append(" : ");
+
+        $r6 = r0.message;
+
+        $r7 = $r5.append($r6);
+
+        $r8 = $r7.toString();
+
+        r0.message = $r8;
+
+     label3:
+        return;
+    }
+}

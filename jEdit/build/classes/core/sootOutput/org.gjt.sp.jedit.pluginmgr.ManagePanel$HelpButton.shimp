@@ -1,0 +1,155 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$HelpButton extends javax.swing.JButton implements javax.swing.event.ListSelectionListener, java.awt.event.ActionListener
+{
+    private java.net.URL docURL;
+    final org.gjt.sp.jedit.pluginmgr.ManagePanel this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HelpButton r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+        java.lang.String $r2;
+        javax.swing.JTable $r3;
+        javax.swing.ListSelectionModel $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("manage-plugins.help");
+
+        specialinvoke r0.<init>($r2);
+
+        $r3 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800(r1);
+
+        $r4 = $r3.getSelectionModel();
+
+        $r4.addListSelectionListener(r0);
+
+        r0.addActionListener(r0);
+
+        r0.setEnabled(0);
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HelpButton r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.help.HelpViewer $r2;
+        java.net.URL $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new org.gjt.sp.jedit.help.HelpViewer;
+
+        $r3 = r0.docURL;
+
+        specialinvoke $r2.<init>($r3);
+
+        return;
+    }
+
+    public void valueChanged(javax.swing.event.ListSelectionEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HelpButton r0;
+        javax.swing.event.ListSelectionEvent r1;
+        java.lang.String r2, r3;
+        org.gjt.sp.jedit.EditPlugin r4;
+        java.net.URL r5;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r6, $r8, $r10;
+        javax.swing.JTable $r7, $r11;
+        int $i0, $i1;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel $r9;
+        org.gjt.sp.jedit.JARClassLoader $r12;
+        java.lang.Exception $r13, r16;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r14;
+        org.gjt.sp.jedit.PluginJAR r15, r15_1, r15_2, r15_3, r15_4, r15_5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r6);
+
+        $i0 = $r7.getSelectedRowCount();
+
+(0)     if $i0 != 1 goto label6;
+
+     label1:
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$600($r8);
+
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r10);
+
+        $i1 = $r11.getSelectedRow();
+
+        r14 = $r9.getEntry($i1);
+
+        r2 = r14.clazz;
+
+        r3 = r14.docs;
+
+(1)     if r2 == null goto label4;
+
+        r4 = org.gjt.sp.jedit.jEdit.getPlugin(r2, 0);
+
+        r15 = null;
+
+(2)     if r4 == null goto label2;
+
+(3)     r15_1 = r4.getPluginJAR();
+
+     label2:
+        r15_2 = Phi(r15 #2, r15_1 #3);
+
+(4)     if r15_2 == null goto label4;
+
+(5)     if r3 == null goto label4;
+
+        $r12 = r15_2.getClassLoader();
+
+        r5 = $r12.getResource(r3);
+
+(6)     if r5 == null goto label4;
+
+        r0.docURL = r5;
+
+        r0.setEnabled(1);
+
+     label3:
+        return;
+
+     label4:
+        r15_3 = Phi(r15 #1, r15_2 #4, r15_2 #5, r15_2 #6);
+
+(7)     goto label6;
+
+     label5:
+        $r13 := @caughtexception;
+
+        r15_4 = Phi(r15 #0, r15_1 #3, r15_2 #5);
+
+        r16 = $r13;
+
+(8)     org.gjt.sp.util.Log.log(9, r0, "ManagePanel HelpButton Update", r16);
+
+     label6:
+        r15_5 = Phi(r15 #0, r15_3 #7, r15_4 #8);
+
+        r0.setEnabled(0);
+
+        return;
+
+        catch java.lang.Exception from label1 to label3 with label5;
+    }
+}

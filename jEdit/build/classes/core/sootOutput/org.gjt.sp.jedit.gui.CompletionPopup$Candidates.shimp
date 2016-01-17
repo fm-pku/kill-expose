@@ -1,0 +1,13 @@
+public interface  org.gjt.sp.jedit.gui.CompletionPopup$Candidates extends java.lang.Object
+{
+
+    public abstract int getSize();
+
+    public abstract boolean isValid();
+
+    public abstract void complete(int);
+
+    public abstract java.awt.Component getCellRenderer(javax.swing.JList, int, boolean, boolean);
+
+    public abstract java.lang.String getDescription(int);
+}

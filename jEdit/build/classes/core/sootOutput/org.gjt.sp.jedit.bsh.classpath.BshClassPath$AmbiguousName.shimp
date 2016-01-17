@@ -1,0 +1,51 @@
+public class org.gjt.sp.jedit.bsh.classpath.BshClassPath$AmbiguousName extends java.lang.Object
+{
+    java.util.List list;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath$AmbiguousName r0;
+        java.util.ArrayList $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.ArrayList;
+
+        specialinvoke $r1.<init>();
+
+        r0.list = $r1;
+
+        return;
+    }
+
+    public void add(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath$AmbiguousName r0;
+        java.lang.String r1;
+        java.util.List $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.list;
+
+        $r2.add(r1);
+
+        return;
+    }
+
+    public java.util.List get()
+    {
+        org.gjt.sp.jedit.bsh.classpath.BshClassPath$AmbiguousName r0;
+        java.util.List $r1;
+
+        r0 := @this;
+
+        $r1 = r0.list;
+
+        return $r1;
+    }
+}

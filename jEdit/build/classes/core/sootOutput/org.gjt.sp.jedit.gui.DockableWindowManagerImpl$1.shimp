@@ -1,0 +1,101 @@
+class org.gjt.sp.jedit.gui.DockableWindowManagerImpl$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.gui.DockableWindowManagerImpl this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.DockableWindowManagerImpl)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$1 r0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$1 r0;
+        org.gjt.sp.jedit.gui.DockablePanel r1;
+        org.gjt.sp.jedit.gui.PanelWindowContainer r2;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r3, $r6, $r8, $r10;
+        java.util.Stack $r4;
+        java.lang.Object $r5;
+        java.lang.Exception $r7, r14;
+        org.gjt.sp.jedit.View $r9;
+        java.awt.Toolkit $r11;
+        boolean $z0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry $r12;
+        java.lang.String r13;
+        java.awt.Component r15;
+
+        r0 := @this;
+
+     label1:
+        $r3 = r0.this$0;
+
+        $r4 = $r3.showStack;
+
+        $r5 = $r4.pop();
+
+        r13 = (java.lang.String) $r5;
+
+        $r6 = r0.this$0;
+
+        $r6.hideDockableWindow(r13);
+
+     label2:
+        return;
+
+     label3:
+        $r7 := @caughtexception;
+
+        r14 = $r7;
+
+        $r8 = r0.this$0;
+
+        $r9 = $r8.view;
+
+(0)     r15 = $r9.getFocusOwner();
+
+     label4:
+        r15 = Phi(r15 #0, r15 #1);
+
+        if r15 == null goto label6;
+
+        $z0 = r15 instanceof org.gjt.sp.jedit.gui.DockablePanel;
+
+        if $z0 == 0 goto label5;
+
+        r1 = (org.gjt.sp.jedit.gui.DockablePanel) r15;
+
+        r2 = r1.getWindowContainer();
+
+        $r12 = (org.gjt.sp.jedit.gui.DockableWindowManagerImpl$Entry) null;
+
+        r2.show($r12);
+
+        return;
+
+     label5:
+        r15 = r15.getParent();
+
+(1)     goto label4;
+
+     label6:
+        $r10 = r0.this$0;
+
+        $r11 = $r10.getToolkit();
+
+        $r11.beep();
+
+        return;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+}

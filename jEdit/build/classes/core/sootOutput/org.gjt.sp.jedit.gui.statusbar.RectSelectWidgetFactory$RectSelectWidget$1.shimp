@@ -1,0 +1,49 @@
+class org.gjt.sp.jedit.gui.statusbar.RectSelectWidgetFactory$RectSelectWidget$1 extends java.awt.event.MouseAdapter
+{
+    final org.gjt.sp.jedit.View val$view;
+    final org.gjt.sp.jedit.gui.statusbar.RectSelectWidgetFactory$RectSelectWidget this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.statusbar.RectSelectWidgetFactory$RectSelectWidget, org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.gui.statusbar.RectSelectWidgetFactory$RectSelectWidget$1 r0;
+        org.gjt.sp.jedit.gui.statusbar.RectSelectWidgetFactory$RectSelectWidget r1;
+        org.gjt.sp.jedit.View r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$view = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mouseClicked(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.statusbar.RectSelectWidgetFactory$RectSelectWidget$1 r0;
+        java.awt.event.MouseEvent r1;
+        org.gjt.sp.jedit.textarea.JEditTextArea r2;
+        org.gjt.sp.jedit.View $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.val$view;
+
+        r2 = $r3.getTextArea();
+
+        if r2 == null goto label1;
+
+        r2.toggleRectangularSelectionEnabled();
+
+     label1:
+        return;
+    }
+}

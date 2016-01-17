@@ -1,0 +1,206 @@
+public class org.gjt.sp.jedit.gui.FontSelector extends javax.swing.JButton
+{
+    private boolean antiAlias;
+
+    public void <init>(java.awt.Font)
+    {
+        org.gjt.sp.jedit.gui.FontSelector r0;
+        java.awt.Font r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(r1, 0);
+
+        return;
+    }
+
+    public void <init>(java.awt.Font, boolean)
+    {
+        org.gjt.sp.jedit.gui.FontSelector r0;
+        java.awt.Font r1;
+        boolean z0;
+        org.gjt.sp.jedit.gui.FontSelector$ActionHandler $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.setFont(r1);
+
+        r0.antiAlias = z0;
+
+        specialinvoke r0.updateText();
+
+        r0.setRequestFocusEnabled(0);
+
+        $r2 = new org.gjt.sp.jedit.gui.FontSelector$ActionHandler;
+
+        specialinvoke $r2.<init>(r0);
+
+        r0.addActionListener($r2);
+
+        return;
+    }
+
+    public void paintComponent(java.awt.Graphics)
+    {
+        org.gjt.sp.jedit.gui.FontSelector r0;
+        java.awt.Graphics r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.setAntiAliasEnabled(r1);
+
+        specialinvoke r0.paintComponent(r1);
+
+        return;
+    }
+
+    public boolean isAntiAliasEnabled()
+    {
+        org.gjt.sp.jedit.gui.FontSelector r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.antiAlias;
+
+        return $z0;
+    }
+
+    public void setAntiAliasEnabled(boolean)
+    {
+        org.gjt.sp.jedit.gui.FontSelector r0;
+        boolean z0;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        r0.antiAlias = z0;
+
+        return;
+    }
+
+    private void updateText()
+    {
+        org.gjt.sp.jedit.gui.FontSelector r0;
+        java.awt.Font r1;
+        int $i0, $i1;
+        java.lang.StringBuilder $r2, $r4, $r5, $r6, $r7, $r8;
+        java.lang.String $r3, $r9, r10, r10_1, r10_2, r10_3, r10_4, r10_5;
+
+        r0 := @this;
+
+        r1 = r0.getFont();
+
+        $i0 = r1.getStyle();
+
+        tableswitch($i0)
+        {
+            case 0: goto label1;
+            case 1: goto label2;
+            case 2: goto label3;
+            case 3: goto label4;
+            default: goto label5;
+        };
+
+     label1:
+        r10 = org.gjt.sp.jedit.jEdit.getProperty("font-selector.plain");
+
+(0)     goto label6;
+
+     label2:
+        r10_1 = org.gjt.sp.jedit.jEdit.getProperty("font-selector.bold");
+
+(1)     goto label6;
+
+     label3:
+        r10_2 = org.gjt.sp.jedit.jEdit.getProperty("font-selector.italic");
+
+(2)     goto label6;
+
+     label4:
+        r10_3 = org.gjt.sp.jedit.jEdit.getProperty("font-selector.bolditalic");
+
+(3)     goto label6;
+
+     label5:
+(4)     r10_4 = "UNKNOWN!!!???";
+
+     label6:
+        r10_5 = Phi(r10 #0, r10_1 #1, r10_2 #2, r10_3 #3, r10_4 #4);
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = r1.getName();
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.append(32);
+
+        $i1 = r1.getSize();
+
+        $r6 = $r5.append($i1);
+
+        $r7 = $r6.append(32);
+
+        $r8 = $r7.append(r10_5);
+
+        $r9 = $r8.toString();
+
+        r0.setText($r9);
+
+        return;
+    }
+
+    void setAntiAliasEnabled(java.awt.Graphics)
+    {
+        org.gjt.sp.jedit.gui.FontSelector r0;
+        java.awt.Graphics r1;
+        java.awt.Graphics2D r2;
+        boolean $z0;
+        java.lang.Object $r3;
+        java.awt.RenderingHints$Key $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r0.antiAlias;
+
+        if $z0 == 0 goto label1;
+
+        r2 = (java.awt.Graphics2D) r1;
+
+        $r4 = java.awt.RenderingHints.KEY_ANTIALIASING;
+
+        $r3 = java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
+
+        r2.setRenderingHint($r4, $r3);
+
+     label1:
+        return;
+    }
+
+    static void access$000(org.gjt.sp.jedit.gui.FontSelector)
+    {
+        org.gjt.sp.jedit.gui.FontSelector r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updateText();
+
+        return;
+    }
+}

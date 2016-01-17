@@ -1,0 +1,93 @@
+public class org.gjt.sp.jedit.io.AutoDetection$Result extends java.lang.Object
+{
+    private final java.io.BufferedInputStream markedStream;
+    private final boolean gzipped;
+    private final java.lang.String encoding;
+
+    public void <init>(java.io.InputStream) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.AutoDetection$Result r0;
+        java.io.InputStream r1;
+        boolean $z0, $z1;
+        java.lang.String $r2;
+        java.util.zip.GZIPInputStream $r3;
+        java.io.BufferedInputStream r4, r4_1, r4_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r4 = org.gjt.sp.jedit.io.AutoDetection.getMarkedStream(r1);
+
+        $z0 = org.gjt.sp.jedit.io.AutoDetection.isGzipped(r4);
+
+        r0.gzipped = $z0;
+
+        $z1 = r0.gzipped;
+
+(0)     if $z1 == 0 goto label1;
+
+        r4.reset();
+
+        $r3 = new java.util.zip.GZIPInputStream;
+
+        specialinvoke $r3.<init>(r4);
+
+(1)     r4_1 = org.gjt.sp.jedit.io.AutoDetection.getMarkedStream($r3);
+
+     label1:
+        r4_2 = Phi(r4 #0, r4_1 #1);
+
+        r4_2.reset();
+
+        $r2 = org.gjt.sp.jedit.io.AutoDetection.getDetectedEncoding(r4_2);
+
+        r0.encoding = $r2;
+
+        r0.markedStream = r4_2;
+
+        return;
+    }
+
+    public java.io.BufferedInputStream getRewindedStream() throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.AutoDetection$Result r0;
+        java.io.BufferedInputStream $r1, $r2;
+
+        r0 := @this;
+
+        $r1 = r0.markedStream;
+
+        $r1.reset();
+
+        $r2 = r0.markedStream;
+
+        return $r2;
+    }
+
+    public boolean streamIsGzipped()
+    {
+        org.gjt.sp.jedit.io.AutoDetection$Result r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.gzipped;
+
+        return $z0;
+    }
+
+    public java.lang.String getDetectedEncoding()
+    {
+        org.gjt.sp.jedit.io.AutoDetection$Result r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.encoding;
+
+        return $r1;
+    }
+}

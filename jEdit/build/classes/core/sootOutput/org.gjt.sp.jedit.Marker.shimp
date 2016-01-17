@@ -1,0 +1,160 @@
+public class org.gjt.sp.jedit.Marker extends java.lang.Object
+{
+    private org.gjt.sp.jedit.Buffer buffer;
+    private char shortcut;
+    private int pos;
+    private javax.swing.text.Position position;
+
+    public char getShortcut()
+    {
+        org.gjt.sp.jedit.Marker r0;
+        char $c0;
+
+        r0 := @this;
+
+        $c0 = r0.shortcut;
+
+        return $c0;
+    }
+
+    public int getPosition()
+    {
+        org.gjt.sp.jedit.Marker r0;
+        javax.swing.text.Position $r1, $r2;
+        int $i0, $i0_1, $i0_2;
+
+        r0 := @this;
+
+        $r1 = r0.position;
+
+        if $r1 != null goto label1;
+
+        $i0 = r0.pos;
+
+(0)     goto label2;
+
+     label1:
+        $r2 = r0.position;
+
+        Packer.Unpack(r0);
+
+(1)     $i0_1 = $r2.getOffset();
+
+     label2:
+        Packer.Pack(r0);
+
+        $i0_2 = Phi($i0 #0, $i0_1 #1);
+
+        return $i0_2;
+    }
+
+    void <init>(org.gjt.sp.jedit.Buffer, char, int)
+    {
+        org.gjt.sp.jedit.Marker r0;
+        org.gjt.sp.jedit.Buffer r1;
+        char c0;
+        int i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        c0 := @parameter1;
+
+        i1 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.buffer = r1;
+
+        Packer.Pack(r0);
+
+        r0.shortcut = c0;
+
+        r0.pos = i1;
+
+        return;
+    }
+
+    void setShortcut(char)
+    {
+        org.gjt.sp.jedit.Marker r0;
+        char c0;
+
+        r0 := @this;
+
+        c0 := @parameter0;
+
+        r0.shortcut = c0;
+
+        return;
+    }
+
+    void createPosition()
+    {
+        org.gjt.sp.jedit.Marker r0;
+        int $i0;
+        org.gjt.sp.jedit.Buffer $r1;
+        javax.swing.text.Position $r2;
+
+        r0 := @this;
+
+        $r1 = r0.buffer;
+
+        $i0 = r0.pos;
+
+        Packer.Unpack(r0);
+
+        $r2 = $r1.createPosition($i0);
+
+        r0.position = $r2;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    void removePosition()
+    {
+        org.gjt.sp.jedit.Marker r0;
+        javax.swing.text.Position $r1, $r2;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.position;
+
+        if $r1 == null goto label1;
+
+        $r2 = r0.position;
+
+        Packer.Unpack(r0);
+
+        $i0 = $r2.getOffset();
+
+        r0.pos = $i0;
+
+        r0.position = null;
+
+     label1:
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    void setPosition(int)
+    {
+        org.gjt.sp.jedit.Marker r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r0.pos = i0;
+
+        return;
+    }
+}

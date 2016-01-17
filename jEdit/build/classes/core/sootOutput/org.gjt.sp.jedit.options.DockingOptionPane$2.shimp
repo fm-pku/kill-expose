@@ -1,0 +1,51 @@
+class org.gjt.sp.jedit.options.DockingOptionPane$2 extends java.lang.Object implements java.awt.event.ItemListener
+{
+    final org.gjt.sp.jedit.options.DockingOptionPane this$0;
+
+    void <init>(org.gjt.sp.jedit.options.DockingOptionPane)
+    {
+        org.gjt.sp.jedit.options.DockingOptionPane$2 r0;
+        org.gjt.sp.jedit.options.DockingOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void itemStateChanged(java.awt.event.ItemEvent)
+    {
+        org.gjt.sp.jedit.options.DockingOptionPane$2 r0;
+        java.awt.event.ItemEvent r1;
+        org.gjt.sp.jedit.options.DockingOptionPane $r2, $r4;
+        org.gjt.sp.jedit.options.WindowTableModel $r3;
+        javax.swing.JComboBox $r5;
+        java.lang.Object $r6;
+        java.lang.String $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.options.DockingOptionPane.access$300($r2);
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.options.DockingOptionPane.access$200($r4);
+
+        $r6 = $r5.getSelectedItem();
+
+        $r7 = (java.lang.String) $r6;
+
+        $r3.showSet($r7);
+
+        return;
+    }
+}

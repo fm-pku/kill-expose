@@ -1,0 +1,321 @@
+public class org.gjt.sp.jedit.gui.TextAreaDialog extends org.gjt.sp.jedit.gui.EnhancedDialog
+{
+
+    public void <init>(java.awt.Frame, java.lang.String, java.lang.String, javax.swing.Icon, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.TextAreaDialog r0;
+        java.awt.Frame r1;
+        java.lang.String r2, r3, r5;
+        javax.swing.Icon r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        specialinvoke r0.<init>(r1, r2, 1);
+
+        specialinvoke r0.init(r3, r4, r5);
+
+        return;
+    }
+
+    public void <init>(java.awt.Frame, java.lang.String, java.lang.Throwable)
+    {
+        org.gjt.sp.jedit.gui.TextAreaDialog r0;
+        java.awt.Frame r1;
+        java.lang.String r2, $r7, $r8, $r12, $r13, $r15;
+        java.lang.Throwable r3;
+        java.lang.StringBuilder $r4, $r5, $r6, $r9, $r10, $r11;
+        javax.swing.Icon $r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append(r2);
+
+        $r6 = $r5.append(".title");
+
+        $r7 = $r6.toString();
+
+        $r8 = org.gjt.sp.jedit.jEdit.getProperty($r7);
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append(r2);
+
+        $r11 = $r10.append(".message");
+
+        $r12 = $r11.toString();
+
+        $r13 = org.gjt.sp.jedit.jEdit.getProperty($r12);
+
+        $r14 = javax.swing.UIManager.getIcon("OptionPane.errorIcon");
+
+        $r15 = org.gjt.sp.jedit.MiscUtilities.throwableToString(r3);
+
+        specialinvoke r0.<init>(r1, $r8, $r13, $r14, $r15);
+
+        return;
+    }
+
+    public void <init>(java.awt.Dialog, java.lang.String, java.lang.String, javax.swing.Icon, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.TextAreaDialog r0;
+        java.awt.Dialog r1;
+        java.lang.String r2, r3, r5;
+        javax.swing.Icon r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        specialinvoke r0.<init>(r1, r2, 1);
+
+        specialinvoke r0.init(r3, r4, r5);
+
+        return;
+    }
+
+    public void <init>(java.awt.Dialog, java.lang.String, java.lang.Throwable)
+    {
+        org.gjt.sp.jedit.gui.TextAreaDialog r0;
+        java.awt.Dialog r1;
+        java.lang.String r2, $r7, $r8, $r12, $r13, $r15;
+        java.lang.Throwable r3;
+        java.lang.StringBuilder $r4, $r5, $r6, $r9, $r10, $r11;
+        javax.swing.Icon $r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append(r2);
+
+        $r6 = $r5.append(".title");
+
+        $r7 = $r6.toString();
+
+        $r8 = org.gjt.sp.jedit.jEdit.getProperty($r7);
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append(r2);
+
+        $r11 = $r10.append(".message");
+
+        $r12 = $r11.toString();
+
+        $r13 = org.gjt.sp.jedit.jEdit.getProperty($r12);
+
+        $r14 = javax.swing.UIManager.getIcon("OptionPane.errorIcon");
+
+        $r15 = org.gjt.sp.jedit.MiscUtilities.throwableToString(r3);
+
+        specialinvoke r0.<init>(r1, $r8, $r13, $r14, $r15);
+
+        return;
+    }
+
+    private void init(java.lang.String, javax.swing.Icon, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.TextAreaDialog r0;
+        java.lang.String r1, r3, $r31;
+        javax.swing.Icon r2;
+        javax.swing.JPanel r4, r6, $r10, $r19;
+        javax.swing.Box r5, r8, $r13, $r27;
+        javax.swing.JTextArea r7, $r23;
+        javax.swing.JButton r9, $r30;
+        java.awt.BorderLayout $r11, $r20;
+        javax.swing.border.EmptyBorder $r12;
+        javax.swing.JLabel $r14;
+        java.awt.Component $r16, $r28, $r34;
+        javax.swing.JComponent $r21;
+        javax.swing.JScrollPane $r24;
+        org.gjt.sp.jedit.gui.TextAreaDialog$ActionHandler $r32;
+        javax.swing.JRootPane $r37;
+        java.awt.Container $r38;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r10 = new javax.swing.JPanel;
+
+        $r11 = new java.awt.BorderLayout;
+
+        specialinvoke $r11.<init>(12, 12);
+
+        specialinvoke $r10.<init>($r11);
+
+        r4 = $r10;
+
+        $r12 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r12.<init>(12, 12, 12, 12);
+
+        r4.setBorder($r12);
+
+        r0.setContentPane(r4);
+
+        $r13 = new javax.swing.Box;
+
+        specialinvoke $r13.<init>(1);
+
+        r5 = $r13;
+
+        $r14 = new javax.swing.JLabel;
+
+        specialinvoke $r14.<init>(r2);
+
+        r5.add($r14);
+
+        $r16 = javax.swing.Box.createGlue();
+
+        r5.add($r16);
+
+        r4.add("West", r5);
+
+        $r19 = new javax.swing.JPanel;
+
+        $r20 = new java.awt.BorderLayout;
+
+        specialinvoke $r20.<init>(6, 6);
+
+        specialinvoke $r19.<init>($r20);
+
+        r6 = $r19;
+
+        $r21 = org.gjt.sp.jedit.GUIUtilities.createMultilineLabel(r1);
+
+        r6.add("North", $r21);
+
+        $r23 = new javax.swing.JTextArea;
+
+        specialinvoke $r23.<init>(10, 80);
+
+        r7 = $r23;
+
+        r7.setText(r3);
+
+        r7.setLineWrap(1);
+
+        r7.setCaretPosition(0);
+
+        $r24 = new javax.swing.JScrollPane;
+
+        specialinvoke $r24.<init>(r7);
+
+        r6.add("Center", $r24);
+
+        r4.add("Center", r6);
+
+        $r27 = new javax.swing.Box;
+
+        specialinvoke $r27.<init>(0);
+
+        r8 = $r27;
+
+        $r28 = javax.swing.Box.createGlue();
+
+        r8.add($r28);
+
+        $r30 = new javax.swing.JButton;
+
+        $r31 = org.gjt.sp.jedit.jEdit.getProperty("common.ok");
+
+        specialinvoke $r30.<init>($r31);
+
+        r9 = $r30;
+
+        $r32 = new org.gjt.sp.jedit.gui.TextAreaDialog$ActionHandler;
+
+        specialinvoke $r32.<init>(r0);
+
+        r9.addActionListener($r32);
+
+        r8.add(r9);
+
+        $r34 = javax.swing.Box.createGlue();
+
+        r8.add($r34);
+
+        r4.add("South", r8);
+
+        $r37 = r0.getRootPane();
+
+        $r37.setDefaultButton(r9);
+
+        r0.pack();
+
+        $r38 = r0.getParent();
+
+        r0.setLocationRelativeTo($r38);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.gui.TextAreaDialog r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.gui.TextAreaDialog r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+}

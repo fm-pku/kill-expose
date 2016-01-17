@@ -1,0 +1,102 @@
+class org.gjt.sp.jedit.browser.VFSBrowser$4 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.io.VFSFile[] val$selected;
+    final org.gjt.sp.jedit.browser.VFSBrowser this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSBrowser, org.gjt.sp.jedit.io.VFSFile[])
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$4 r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+        org.gjt.sp.jedit.io.VFSFile[] r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$selected = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$4 r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r1;
+        int i0, $i1, $i2;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r2;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry r3;
+        org.gjt.sp.jedit.browser.VFSBrowser $r4, $r8, $r12, $r14;
+        org.gjt.sp.jedit.io.VFSFile[] $r5, $r6;
+        org.gjt.sp.jedit.io.VFSFile $r7, $r16;
+        org.gjt.sp.jedit.browser.BrowserView $r9, $r13, $r15;
+        javax.swing.table.TableModel $r10;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel$Entry[] $r11;
+        boolean $z0;
+        java.lang.String $r17;
+
+        r0 := @this;
+
+        $r4 = r0.this$0;
+
+        $r4.endRequest();
+
+        $r5 = r0.val$selected;
+
+        $i1 = lengthof $r5;
+
+        if $i1 == 0 goto label1;
+
+        $r6 = r0.val$selected;
+
+        $r7 = $r6[0];
+
+        $i2 = $r7.getType();
+
+        if $i2 == 0 goto label1;
+
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.browser.VFSBrowser.access$400($r8);
+
+        r1 = $r9.getTable();
+
+        i0 = r1.getSelectedRow();
+
+        $r10 = r1.getModel();
+
+        r2 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel) $r10;
+
+        $r11 = r2.files;
+
+        r3 = $r11[i0];
+
+        $z0 = r3.expanded;
+
+        if $z0 != 0 goto label1;
+
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.browser.VFSBrowser.access$400($r12);
+
+        $r13.clearExpansionState();
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.browser.VFSBrowser.access$400($r14);
+
+        $r16 = r3.dirEntry;
+
+        $r17 = $r16.getPath();
+
+        $r15.loadDirectory(r3, $r17, 0);
+
+     label1:
+        return;
+    }
+}

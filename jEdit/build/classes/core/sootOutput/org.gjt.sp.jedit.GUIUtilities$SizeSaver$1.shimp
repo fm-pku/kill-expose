@@ -1,0 +1,42 @@
+class org.gjt.sp.jedit.GUIUtilities$SizeSaver$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final java.awt.Rectangle val$bounds;
+    final org.gjt.sp.jedit.GUIUtilities$SizeSaver this$0;
+
+    void <init>(org.gjt.sp.jedit.GUIUtilities$SizeSaver, java.awt.Rectangle)
+    {
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver$1 r0;
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver r1;
+        java.awt.Rectangle r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$bounds = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver$1 r0;
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver$1$1 $r1;
+
+        r0 := @this;
+
+        $r1 = new org.gjt.sp.jedit.GUIUtilities$SizeSaver$1$1;
+
+        specialinvoke $r1.<init>(r0);
+
+        java.awt.EventQueue.invokeLater($r1);
+
+        return;
+    }
+}

@@ -1,0 +1,393 @@
+public class org.gjt.sp.jedit.EditBus extends java.lang.Object
+{
+    private static final org.gjt.sp.jedit.EditBus$HandlerList components;
+    static final boolean $assertionsDisabled;
+
+    public static void addToBus(org.gjt.sp.jedit.EBComponent)
+    {
+        org.gjt.sp.jedit.EBComponent r0;
+
+        r0 := @parameter0;
+
+        org.gjt.sp.jedit.EditBus.addToBus(r0);
+
+        return;
+    }
+
+    public static void addToBus(java.lang.Object)
+    {
+        java.lang.Object r0;
+        org.gjt.sp.jedit.EditBus$HandlerList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.EditBus.components;
+
+        $r1.addComponent(r0);
+
+        return;
+    }
+
+    public static void removeFromBus(org.gjt.sp.jedit.EBComponent)
+    {
+        org.gjt.sp.jedit.EBComponent r0;
+
+        r0 := @parameter0;
+
+        org.gjt.sp.jedit.EditBus.removeFromBus(r0);
+
+        return;
+    }
+
+    public static void removeFromBus(java.lang.Object)
+    {
+        java.lang.Object r0;
+        org.gjt.sp.jedit.EditBus$HandlerList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.EditBus.components;
+
+        $r1.removeComponent(r0);
+
+        return;
+    }
+
+    public static void send(org.gjt.sp.jedit.EBMessage)
+    {
+        org.gjt.sp.jedit.EBMessage r0;
+        org.gjt.sp.jedit.EditBus$SendMessage r1, $r2;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $r2 = new org.gjt.sp.jedit.EditBus$SendMessage;
+
+        specialinvoke $r2.<init>(r0);
+
+        r1 = $r2;
+
+        $z0 = java.awt.EventQueue.isDispatchThread();
+
+        if $z0 == 0 goto label1;
+
+        r1.run();
+
+        goto label2;
+
+     label1:
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThreadNow(r1);
+
+     label2:
+        return;
+    }
+
+    public static void sendAsync(org.gjt.sp.jedit.EBMessage)
+    {
+        org.gjt.sp.jedit.EBMessage r0;
+        org.gjt.sp.jedit.EditBus$SendMessage $r1;
+
+        r0 := @parameter0;
+
+        $r1 = new org.gjt.sp.jedit.EditBus$SendMessage;
+
+        specialinvoke $r1.<init>(r0);
+
+        java.awt.EventQueue.invokeLater($r1);
+
+        return;
+    }
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.EditBus r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    private static void dispatch(org.gjt.sp.jedit.EditBus$EBMessageHandler, org.gjt.sp.jedit.EBMessage) throws java.lang.Exception
+    {
+        org.gjt.sp.jedit.EditBus$EBMessageHandler r0;
+        org.gjt.sp.jedit.EBMessage r1;
+        java.lang.reflect.Method $r2, $r10;
+        boolean $z0, $z1;
+        java.lang.Object $r3, $r5, $r7, $r9;
+        org.gjt.sp.jedit.EBComponent $r4;
+        java.lang.AssertionError $r6;
+        java.lang.Object[] $r8;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r2 = r0.handler;
+
+        if $r2 == null goto label1;
+
+        $r7 = r0.comp;
+
+        if $r7 == null goto label1;
+
+        $r10 = r0.handler;
+
+        $r9 = r0.comp;
+
+        $r8 = newarray (java.lang.Object)[1];
+
+        $r8[0] = r1;
+
+        $r10.invoke($r9, $r8);
+
+        goto label3;
+
+     label1:
+        $z0 = org.gjt.sp.jedit.EditBus.$assertionsDisabled;
+
+        if $z0 != 0 goto label2;
+
+        $r5 = r0.comp;
+
+        $z1 = $r5 instanceof org.gjt.sp.jedit.EBComponent;
+
+        if $z1 != 0 goto label2;
+
+        $r6 = new java.lang.AssertionError;
+
+        specialinvoke $r6.<init>();
+
+        throw $r6;
+
+     label2:
+        $r3 = r0.comp;
+
+        $r4 = (org.gjt.sp.jedit.EBComponent) $r3;
+
+        $r4.handleMessage(r1);
+
+     label3:
+        return;
+    }
+
+    private static void sendImpl(org.gjt.sp.jedit.EBMessage)
+    {
+        org.gjt.sp.jedit.EBMessage r0;
+        java.util.List r1;
+        org.gjt.sp.jedit.EditBus$EBMessageHandler r2;
+        long l0, l1, $l2;
+        boolean $z0, $z1, $z2, $z3, z4;
+        org.gjt.sp.jedit.EditBus$HandlerList $r3;
+        java.lang.Object $r4, $r5, $r7;
+        byte $b3;
+        java.lang.StringBuilder $r6, $r8, $r9, $r10, $r11;
+        java.lang.String $r12;
+        org.gjt.sp.jedit.EditBus$EBHandler $r13, $r14;
+        java.lang.Throwable $r15, $r17, r21;
+        java.lang.reflect.InvocationTargetException $r16, r20;
+        java.lang.Class r18;
+        java.util.Iterator r19;
+
+        r0 := @parameter0;
+
+        z4 = 1;
+
+(0)     r18 = r0.getClass();
+
+     label01:
+        r18 = Phi(r18 #0, r18 #9);
+
+        z4 = Phi(z4 #0, z4 #9);
+
+        $z0 = r18.equals(class "java/lang/Object");
+
+        if $z0 != 0 goto label12;
+
+        $r3 = org.gjt.sp.jedit.EditBus.components;
+
+        $r4 = $r3.get(r18);
+
+        r1 = (java.util.List) $r4;
+
+(1)     if r1 == null goto label11;
+
+     label02:
+(2)     r19 = r1.iterator();
+
+     label03:
+        r18 = Phi(r18 #2, r18 #4, r18 #5);
+
+        z4 = Phi(z4 #2, z4 #4, z4 #5);
+
+(3)     $z1 = r19.hasNext();
+
+        if $z1 == 0 goto label08;
+
+        $r5 = r19.next();
+
+        r2 = (org.gjt.sp.jedit.EditBus$EBMessageHandler) $r5;
+
+        if z4 != 0 goto label04;
+
+        $r13 = r2.source;
+
+        if $r13 == null goto label04;
+
+        $r14 = r2.source;
+
+        $z3 = $r14.exact();
+
+        if $z3 == 0 goto label04;
+
+(4)     goto label03;
+
+     label04:
+        $z2 = org.gjt.sp.jedit.Debug.EB_TIMER;
+
+        if $z2 == 0 goto label06;
+
+        l0 = java.lang.System.nanoTime();
+
+        org.gjt.sp.jedit.EditBus.dispatch(r2, r0);
+
+        $l2 = java.lang.System.nanoTime();
+
+        l1 = $l2 - l0;
+
+        $b3 = l1 cmp 1000000L;
+
+        if $b3 < 0 goto label05;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = r2.comp;
+
+        $r8 = $r6.append($r7);
+
+        $r9 = $r8.append(": ");
+
+        $r10 = $r9.append(l1);
+
+        $r11 = $r10.append(" ns");
+
+        $r12 = $r11.toString();
+
+        org.gjt.sp.util.Log.log(1, class "org/gjt/sp/jedit/EditBus", $r12);
+
+     label05:
+        goto label07;
+
+     label06:
+        org.gjt.sp.jedit.EditBus.dispatch(r2, r0);
+
+     label07:
+(5)     goto label03;
+
+     label08:
+(6)     goto label11;
+
+     label09:
+        $r16 := @caughtexception;
+
+        r18 = Phi(r18 #1, r18 #3);
+
+        z4 = Phi(z4 #1, z4 #3);
+
+        r20 = $r16;
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/EditBus", "Exception while sending message on EditBus:");
+
+        $r17 = r20.getCause();
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/EditBus", $r17);
+
+(7)     goto label11;
+
+     label10:
+        $r15 := @caughtexception;
+
+        r18 = Phi(r18 #1, r18 #3);
+
+        z4 = Phi(z4 #1, z4 #3);
+
+        r21 = $r15;
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/EditBus", "Exception while sending message on EditBus:");
+
+(8)     org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/EditBus", r21);
+
+     label11:
+        r18 = Phi(r18 #1, r18 #6, r18 #7, r18 #8);
+
+        z4 = Phi(z4 #1, z4 #6, z4 #7, z4 #8);
+
+        r18 = r18.getSuperclass();
+
+        z4 = 0;
+
+(9)     goto label01;
+
+     label12:
+        return;
+
+        catch java.lang.reflect.InvocationTargetException from label02 to label08 with label09;
+        catch java.lang.Throwable from label02 to label08 with label10;
+    }
+
+    static org.gjt.sp.jedit.EditBus$HandlerList access$100()
+    {
+        org.gjt.sp.jedit.EditBus$HandlerList $r0;
+
+        $r0 = org.gjt.sp.jedit.EditBus.components;
+
+        return $r0;
+    }
+
+    static void access$200(org.gjt.sp.jedit.EBMessage)
+    {
+        org.gjt.sp.jedit.EBMessage r0;
+
+        r0 := @parameter0;
+
+        org.gjt.sp.jedit.EditBus.sendImpl(r0);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Class $r0;
+        boolean $z0, $z1, $z1_1, $z1_2;
+        org.gjt.sp.jedit.EditBus$HandlerList $r1;
+
+        $r0 = class "org/gjt/sp/jedit/EditBus";
+
+        $z0 = $r0.desiredAssertionStatus();
+
+        if $z0 != 0 goto label1;
+
+        $z1 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z1_1 = 0;
+
+     label2:
+        $z1_2 = Phi($z1 #0, $z1_1 #1);
+
+        org.gjt.sp.jedit.EditBus.$assertionsDisabled = $z1_2;
+
+        $r1 = new org.gjt.sp.jedit.EditBus$HandlerList;
+
+        specialinvoke $r1.<init>(null);
+
+        org.gjt.sp.jedit.EditBus.components = $r1;
+
+        return;
+    }
+}

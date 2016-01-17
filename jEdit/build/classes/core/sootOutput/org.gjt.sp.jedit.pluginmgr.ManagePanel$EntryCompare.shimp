@@ -1,0 +1,185 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$EntryCompare extends java.lang.Object implements java.util.Comparator
+{
+    public static final int NAME;
+    public static final int VERSION;
+    public static final int STATUS;
+    public static final int DATA;
+    private final int type;
+    private final int direction;
+
+    void <init>(int, int)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$EntryCompare r0;
+        int i0, i1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.type = i0;
+
+        r0.direction = i1;
+
+        return;
+    }
+
+    public int compare(org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry, org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$EntryCompare r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r1, r2;
+        int $i0, $i1, $i2, $i3, i4, i4_1, i4_2, i4_3, i4_4;
+        java.lang.String $r3, $r4, $r5, $r6, $r7, $r8, $r13;
+        java.lang.IllegalStateException $r9;
+        java.lang.StringBuilder $r10, $r11, $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $i0 = r0.type;
+
+        tableswitch($i0)
+        {
+            case 1: goto label1;
+            case 2: goto label2;
+            case 3: goto label3;
+            case 4: goto label4;
+            default: goto label5;
+        };
+
+     label1:
+        i4 = org.gjt.sp.jedit.pluginmgr.ManagePanel$EntryCompare.compareNames(r1, r2);
+
+(0)     goto label6;
+
+     label2:
+        $r8 = r1.version;
+
+        $r7 = r2.version;
+
+        i4_1 = org.gjt.sp.util.StandardUtilities.compareStrings($r8, $r7, 1);
+
+(1)     goto label6;
+
+     label3:
+        $r6 = r1.status;
+
+        $r5 = r2.status;
+
+        i4_2 = $r6.compareToIgnoreCase($r5);
+
+(2)     goto label6;
+
+     label4:
+        $r4 = r1.dataSize;
+
+        $r3 = r2.dataSize;
+
+        i4_3 = org.gjt.sp.util.StandardUtilities.compareStrings($r4, $r3, 0);
+
+(3)     goto label6;
+
+     label5:
+        $r9 = new java.lang.IllegalStateException;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("Invalid sort type ");
+
+        $i3 = r0.type;
+
+        $r12 = $r11.append($i3);
+
+        $r13 = $r12.toString();
+
+        specialinvoke $r9.<init>($r13);
+
+        throw $r9;
+
+     label6:
+        i4_4 = Phi(i4 #0, i4_1 #1, i4_2 #2, i4_3 #3);
+
+        $i1 = r0.direction;
+
+        $i2 = i4_4 * $i1;
+
+        return $i2;
+    }
+
+    private static int compareNames(org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry, org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r0, r1;
+        java.lang.String $r2, $r3, $r4, $r5, r6, r7, r6_1, r6_2, r7_1, r7_2;
+        int $i0;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r2 = r0.name;
+
+        if $r2 != null goto label1;
+
+        $r5 = r0.jar;
+
+        r6 = org.gjt.sp.jedit.MiscUtilities.getFileName($r5);
+
+(0)     goto label2;
+
+     label1:
+(1)     r6_1 = r0.name;
+
+     label2:
+        r6_2 = Phi(r6 #0, r6_1 #1);
+
+        $r3 = r1.name;
+
+        if $r3 != null goto label3;
+
+        $r4 = r1.jar;
+
+        r7 = org.gjt.sp.jedit.MiscUtilities.getFileName($r4);
+
+(2)     goto label4;
+
+     label3:
+(3)     r7_1 = r1.name;
+
+     label4:
+        r7_2 = Phi(r7 #2, r7_1 #3);
+
+        $i0 = r6_2.compareToIgnoreCase(r7_2);
+
+        return $i0;
+    }
+
+    public volatile int compare(java.lang.Object, java.lang.Object)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$EntryCompare r0;
+        java.lang.Object r1, r2;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry $r3, $r4;
+        int $i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = (org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry) r1;
+
+        $r3 = (org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry) r2;
+
+        $i0 = r0.compare($r4, $r3);
+
+        return $i0;
+    }
+}

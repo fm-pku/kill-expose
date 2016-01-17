@@ -1,0 +1,44 @@
+final class org.gjt.sp.jedit.bsh.SimpleNode$1 extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode$1 r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.String getSourceFile()
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode$1 r0;
+
+        r0 := @this;
+
+        return "<Called from Java Code>";
+    }
+
+    public int getLineNumber()
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode$1 r0;
+
+        r0 := @this;
+
+        return -1;
+    }
+
+    public java.lang.String getText()
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode$1 r0;
+
+        r0 := @this;
+
+        return "<Compiled Java Code>";
+    }
+}

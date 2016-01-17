@@ -1,0 +1,125 @@
+class org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$MouseHandler extends javax.swing.event.MouseInputAdapter
+{
+    final org.gjt.sp.jedit.browser.VFSDirectoryEntryTable this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSDirectoryEntryTable)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$MouseHandler r0;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mousePressed(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable$MouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel r2;
+        javax.swing.table.TableColumnModel r3;
+        int i0, i1, $i2, $i3;
+        java.lang.Object $r4;
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable $r5, $r7, $r11, $r14, $r15;
+        javax.swing.table.JTableHeader $r6, $r8, $r12;
+        javax.swing.JTable $r9;
+        javax.swing.table.TableModel $r10;
+        javax.swing.table.TableColumn $r13;
+        boolean $z0, $z1;
+        java.lang.StringBuilder $r16, $r17, $r19, $r20;
+        java.lang.String $r18, $r21, $r22, $r22_1, $r22_2, $r22_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r1.getSource();
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.browser.VFSDirectoryEntryTable.access$300($r5);
+
+(0)     if $r4 != $r6 goto label3;
+
+        $i2 = r1.getClickCount();
+
+(1)     if $i2 != 2 goto label3;
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.browser.VFSDirectoryEntryTable.access$300($r7);
+
+        $r9 = $r8.getTable();
+
+        $r10 = $r9.getModel();
+
+        r2 = (org.gjt.sp.jedit.browser.VFSDirectoryEntryTableModel) $r10;
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.browser.VFSDirectoryEntryTable.access$300($r11);
+
+        r3 = $r12.getColumnModel();
+
+        $i3 = r1.getX();
+
+        i0 = r3.getColumnIndexAtX($i3);
+
+        $r13 = r3.getColumn(i0);
+
+        i1 = $r13.getModelIndex();
+
+        $r14 = r0.this$0;
+
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable.access$100($r14);
+
+        $z0 = r2.sortByColumn(i1);
+
+(2)     if $z0 == 0 goto label3;
+
+        $r15 = r0.this$0;
+
+        org.gjt.sp.jedit.browser.VFSDirectoryEntryTable.access$400($r15);
+
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<init>();
+
+        $r17 = $r16.append("VFSDirectoryEntryTable sorted by ");
+
+        $r18 = r2.getColumnName(i1);
+
+        $r19 = $r17.append($r18);
+
+        $z1 = r2.getAscending();
+
+        if $z1 == 0 goto label1;
+
+        $r22 = " ascending";
+
+(3)     goto label2;
+
+     label1:
+(4)     $r22_1 = " descending";
+
+     label2:
+        $r22_2 = Phi($r22 #3, $r22_1 #4);
+
+        $r20 = $r19.append($r22_2);
+
+        $r21 = $r20.toString();
+
+(5)     org.gjt.sp.util.Log.log(1, r0, $r21);
+
+     label3:
+        $r22_3 = Phi($r22 #0, $r22 #1, $r22 #2, $r22_2 #5);
+
+        return;
+    }
+}

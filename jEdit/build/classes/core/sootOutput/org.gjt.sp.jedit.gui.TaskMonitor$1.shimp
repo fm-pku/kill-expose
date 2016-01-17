@@ -1,0 +1,48 @@
+class org.gjt.sp.jedit.gui.TaskMonitor$1 extends java.lang.Object implements javax.swing.event.TableModelListener
+{
+    final org.gjt.sp.jedit.gui.TaskMonitor this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.TaskMonitor)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$1 r0;
+        org.gjt.sp.jedit.gui.TaskMonitor r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void tableChanged(javax.swing.event.TableModelEvent)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$1 r0;
+        javax.swing.event.TableModelEvent r1;
+        int $i0, $i1;
+        org.gjt.sp.jedit.gui.TaskMonitor $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i0 = r1.getType();
+
+        if $i0 == 1 goto label1;
+
+        $i1 = r1.getType();
+
+        if $i1 != -1 goto label2;
+
+     label1:
+        $r2 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.TaskMonitor.access$100($r2);
+
+     label2:
+        return;
+    }
+}

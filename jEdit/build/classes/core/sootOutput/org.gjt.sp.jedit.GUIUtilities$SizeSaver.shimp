@@ -1,0 +1,330 @@
+class org.gjt.sp.jedit.GUIUtilities$SizeSaver extends java.awt.event.ComponentAdapter implements java.awt.event.WindowStateListener
+{
+    private final java.awt.Frame frame;
+    private final java.awt.Container parent;
+    private final java.lang.String name;
+    private java.util.concurrent.Future resizeDelayFuture;
+
+    void <init>(java.awt.Frame, java.awt.Container, java.lang.String)
+    {
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver r0;
+        java.awt.Frame r1;
+        java.awt.Container r2;
+        java.lang.String r3;
+        java.lang.NullPointerException $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        if r1 == null goto label1;
+
+        if r3 != null goto label2;
+
+     label1:
+        $r4 = new java.lang.NullPointerException;
+
+        specialinvoke $r4.<init>();
+
+        throw $r4;
+
+     label2:
+        Packer.Unpack(r0);
+
+        r0.frame = r1;
+
+        r0.parent = r2;
+
+        r0.name = r3;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void windowStateChanged(java.awt.event.WindowEvent)
+    {
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver r0;
+        java.awt.event.WindowEvent r1;
+        int i0;
+        java.awt.Rectangle r2;
+        java.lang.StringBuilder $r3, $r5, $r6;
+        java.lang.String $r4, $r7;
+        java.awt.Frame $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 = r1.getNewState();
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = r0.name;
+
+        Packer.Unpack(r0);
+
+        $r5 = $r3.append($r4);
+
+        $r6 = $r5.append(".extendedState");
+
+        $r7 = $r6.toString();
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty($r7, i0);
+
+        $r8 = r0.frame;
+
+        r2 = $r8.getBounds();
+
+        Packer.Pack(r0);
+
+        specialinvoke r0.save(i0, r2);
+
+        return;
+    }
+
+    private void save(int, java.awt.Rectangle)
+    {
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver r0;
+        int i0, $i1, $i2, $i3, $i4;
+        java.awt.Rectangle r1;
+        java.lang.StringBuilder $r2, $r4, $r5, $r7, $r9, $r10, $r12, $r14, $r15, $r17, $r19, $r20;
+        java.lang.String $r3, $r6, $r8, $r11, $r13, $r16, $r18, $r21, $r22;
+        java.awt.Container $r23;
+        java.awt.Frame $r24;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        specialinvoke r0.cancelResizeSave();
+
+        tableswitch(i0)
+        {
+            case 0: goto label3;
+            case 1: goto label4;
+            case 2: goto label2;
+            case 3: goto label4;
+            case 4: goto label1;
+            default: goto label4;
+        };
+
+     label1:
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = r0.name;
+
+        Packer.Unpack(r0);
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.append(".x");
+
+        $r6 = $r5.toString();
+
+        $i1 = r1.x;
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty($r6, $i1);
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = r0.name;
+
+        $r9 = $r7.append($r8);
+
+        Packer.Pack(r0);
+
+        $r10 = $r9.append(".width");
+
+        $r11 = $r10.toString();
+
+        $i2 = r1.width;
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty($r11, $i2);
+
+        goto label4;
+
+     label2:
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = r0.name;
+
+        Packer.Unpack(r0);
+
+        $r14 = $r12.append($r13);
+
+        $r15 = $r14.append(".y");
+
+        $r16 = $r15.toString();
+
+        $i3 = r1.y;
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty($r16, $i3);
+
+        $r17 = new java.lang.StringBuilder;
+
+        specialinvoke $r17.<init>();
+
+        $r18 = r0.name;
+
+        $r19 = $r17.append($r18);
+
+        Packer.Pack(r0);
+
+        $r20 = $r19.append(".height");
+
+        $r21 = $r20.toString();
+
+        $i4 = r1.height;
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty($r21, $i4);
+
+        goto label4;
+
+     label3:
+        $r24 = r0.frame;
+
+        $r23 = r0.parent;
+
+        $r22 = r0.name;
+
+        Packer.Unpack(r0);
+
+        org.gjt.sp.jedit.GUIUtilities.saveGeometry($r24, $r23, $r22);
+
+     label4:
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    private void cancelResizeSave()
+    {
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver r0;
+        java.util.concurrent.Future $r1, $r2;
+
+        r0 := @this;
+
+        $r1 = r0.resizeDelayFuture;
+
+        if $r1 == null goto label1;
+
+        $r2 = r0.resizeDelayFuture;
+
+        Packer.Unpack(r0);
+
+        $r2.cancel(0);
+
+        r0.resizeDelayFuture = null;
+
+     label1:
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void componentResized(java.awt.event.ComponentEvent)
+    {
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver r0;
+        java.awt.event.ComponentEvent r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.componentMoved(r1);
+
+        return;
+    }
+
+    public void componentMoved(java.awt.event.ComponentEvent)
+    {
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver r0;
+        java.awt.event.ComponentEvent r1;
+        java.awt.Rectangle r2;
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver$1 r3, $r5;
+        java.awt.Frame $r4;
+        java.util.concurrent.ScheduledExecutorService $r6;
+        java.util.concurrent.TimeUnit $r7;
+        java.util.concurrent.ScheduledFuture $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.frame;
+
+        Packer.Unpack(r0);
+
+        r2 = $r4.getBounds();
+
+        Packer.Pack(r0);
+
+        $r5 = new org.gjt.sp.jedit.GUIUtilities$SizeSaver$1;
+
+        specialinvoke $r5.<init>(r0, r2);
+
+        r3 = $r5;
+
+        specialinvoke r0.cancelResizeSave();
+
+        $r6 = org.gjt.sp.jedit.GUIUtilities.access$600();
+
+        $r7 = java.util.concurrent.TimeUnit.MILLISECONDS;
+
+        $r8 = $r6.schedule(r3, 500L, $r7);
+
+        Packer.Unpack(r0);
+
+        r0.resizeDelayFuture = $r8;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    static java.awt.Frame access$400(org.gjt.sp.jedit.GUIUtilities$SizeSaver)
+    {
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver r0;
+        java.awt.Frame $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.frame;
+
+        return $r1;
+    }
+
+    static void access$500(org.gjt.sp.jedit.GUIUtilities$SizeSaver, int, java.awt.Rectangle)
+    {
+        org.gjt.sp.jedit.GUIUtilities$SizeSaver r0;
+        int i0;
+        java.awt.Rectangle r1;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        specialinvoke r0.save(i0, r1);
+
+        return;
+    }
+}

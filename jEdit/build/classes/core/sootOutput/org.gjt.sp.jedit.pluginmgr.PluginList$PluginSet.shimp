@@ -1,0 +1,38 @@
+class org.gjt.sp.jedit.pluginmgr.PluginList$PluginSet extends java.lang.Object
+{
+    java.lang.String name;
+    final java.util.List plugins;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList$PluginSet r0;
+        java.util.ArrayList $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.ArrayList;
+
+        specialinvoke $r1.<init>();
+
+        r0.plugins = $r1;
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.pluginmgr.PluginList$PluginSet r0;
+        java.util.List $r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        $r1 = r0.plugins;
+
+        $r2 = $r1.toString();
+
+        return $r2;
+    }
+}

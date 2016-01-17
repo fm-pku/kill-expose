@@ -1,0 +1,391 @@
+public abstract class org.gjt.sp.jedit.JEditActionContext extends java.lang.Object
+{
+    java.lang.String[] actionNames;
+    java.util.Hashtable actionHash;
+    java.util.Hashtable overriddenActions;
+    private final java.util.Vector actionSets;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.JEditActionContext r0;
+        java.util.Hashtable $r1, $r2;
+        java.util.Vector $r3;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.util.Hashtable;
+
+        Packer.Unpack(r0);
+
+        specialinvoke $r1.<init>();
+
+        r0.actionHash = $r1;
+
+        $r2 = new java.util.Hashtable;
+
+        specialinvoke $r2.<init>();
+
+        r0.overriddenActions = $r2;
+
+        Packer.Pack(r0);
+
+        $r3 = new java.util.Vector;
+
+        specialinvoke $r3.<init>();
+
+        r0.actionSets = $r3;
+
+        return;
+    }
+
+    public abstract void invokeAction(java.util.EventObject, org.gjt.sp.jedit.JEditAbstractEditAction);
+
+    public void addActionSet(org.gjt.sp.jedit.JEditActionSet)
+    {
+        org.gjt.sp.jedit.JEditActionContext r0;
+        org.gjt.sp.jedit.JEditActionSet r1, r5;
+        java.lang.String[] r2, r3;
+        int i0, i1;
+        java.lang.String r4;
+        java.util.Vector $r6;
+        java.util.Hashtable $r7, $r8, $r10, $r12;
+        boolean $z0;
+        java.lang.Object $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.actionNames = null;
+
+        $r6 = r0.actionSets;
+
+        $r6.addElement(r1);
+
+        Packer.Unpack(r1);
+
+        r1.context = r0;
+
+        Packer.Pack(r1);
+
+        r2 = r1.getActionNames();
+
+        r3 = r2;
+
+        i0 = lengthof r3;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label3;
+
+        r4 = r3[i1];
+
+        $r7 = r0.actionHash;
+
+        Packer.Unpack(r1);
+
+        Packer.Unpack(r0);
+
+        $z0 = $r7.containsKey(r4);
+
+        Packer.Pack(r0);
+
+        Packer.Pack(r1);
+
+        if $z0 == 0 goto label2;
+
+        Packer.Unpack(r1);
+
+        Packer.Unpack(r0);
+
+        $r10 = r0.actionHash;
+
+        $r11 = $r10.get(r4);
+
+        r5 = (org.gjt.sp.jedit.JEditActionSet) $r11;
+
+        $r12 = r0.overriddenActions;
+
+        $r12.put(r4, r5);
+
+     label2:
+        Packer.Pack(r0);
+
+        Packer.Pack(r1);
+
+        $r8 = r0.actionHash;
+
+        $r8.put(r4, r1);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        return;
+    }
+
+    public void removeActionSet(org.gjt.sp.jedit.JEditActionSet)
+    {
+        org.gjt.sp.jedit.JEditActionContext r0;
+        org.gjt.sp.jedit.JEditActionSet r1, r5;
+        java.lang.String[] r2, r3;
+        int i0, i1;
+        java.lang.String r4;
+        java.util.Vector $r6;
+        java.util.Hashtable $r7, $r9, $r10, $r12;
+        boolean $z1;
+        java.lang.Object $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.actionNames = null;
+
+        $r6 = r0.actionSets;
+
+        $r6.removeElement(r1);
+
+        Packer.Unpack(r1);
+
+        r1.context = null;
+
+        Packer.Pack(r1);
+
+        r2 = r1.getActionNames();
+
+        r3 = r2;
+
+        i0 = lengthof r3;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        if i1 >= i0 goto label3;
+
+        Packer.Unpack(r0);
+
+        r4 = r3[i1];
+
+        $r7 = r0.actionHash;
+
+        $r7.remove(r4);
+
+        $r9 = r0.overriddenActions;
+
+        $z1 = $r9.containsKey(r4);
+
+        Packer.Pack(r0);
+
+        if $z1 == 0 goto label2;
+
+        Packer.Unpack(r0);
+
+        $r10 = r0.overriddenActions;
+
+        $r11 = $r10.remove(r4);
+
+        r5 = (org.gjt.sp.jedit.JEditActionSet) $r11;
+
+        $r12 = r0.actionHash;
+
+        $r12.put(r4, r5);
+
+     label2:
+        Packer.Pack(r0);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        return;
+    }
+
+    public org.gjt.sp.jedit.JEditActionSet[] getActionSets()
+    {
+        org.gjt.sp.jedit.JEditActionContext r0;
+        java.lang.Class r1;
+        org.gjt.sp.jedit.JEditActionSet[] r2, $r9;
+        java.util.Vector $r3, $r4, $r7, $r10;
+        boolean $z0;
+        java.lang.Object $r5, $r8;
+        org.gjt.sp.jedit.JEditActionSet $r6;
+        int $i0;
+
+        r0 := @this;
+
+        $r3 = r0.actionSets;
+
+        $z0 = $r3.isEmpty();
+
+        if $z0 == 0 goto label1;
+
+        return null;
+
+     label1:
+        $r4 = r0.actionSets;
+
+        $r5 = $r4.get(0);
+
+        $r6 = (org.gjt.sp.jedit.JEditActionSet) $r5;
+
+        r1 = $r6.getClass();
+
+        $r7 = r0.actionSets;
+
+        $i0 = $r7.size();
+
+        $r8 = java.lang.reflect.Array.newInstance(r1, $i0);
+
+        $r9 = (org.gjt.sp.jedit.JEditActionSet[]) $r8;
+
+        r2 = (org.gjt.sp.jedit.JEditActionSet[]) $r9;
+
+        $r10 = r0.actionSets;
+
+        $r10.copyInto(r2);
+
+        return r2;
+    }
+
+    public org.gjt.sp.jedit.JEditAbstractEditAction getAction(java.lang.String)
+    {
+        org.gjt.sp.jedit.JEditActionContext r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.JEditActionSet r2;
+        java.util.Hashtable $r3;
+        java.lang.Object $r4;
+        org.gjt.sp.jedit.JEditAbstractEditAction $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.actionHash;
+
+        Packer.Unpack(r0);
+
+        $r4 = $r3.get(r1);
+
+        Packer.Pack(r0);
+
+        r2 = (org.gjt.sp.jedit.JEditActionSet) $r4;
+
+        if r2 != null goto label1;
+
+        return null;
+
+     label1:
+        $r5 = r2.getAction(r1);
+
+        return $r5;
+    }
+
+    public org.gjt.sp.jedit.JEditActionSet getActionSetForAction(java.lang.String)
+    {
+        org.gjt.sp.jedit.JEditActionContext r0;
+        java.lang.String r1;
+        java.util.Hashtable $r2;
+        java.lang.Object $r3;
+        org.gjt.sp.jedit.JEditActionSet $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.actionHash;
+
+        Packer.Unpack(r0);
+
+        $r3 = $r2.get(r1);
+
+        Packer.Pack(r0);
+
+        $r4 = (org.gjt.sp.jedit.JEditActionSet) $r3;
+
+        return $r4;
+    }
+
+    public java.lang.String[] getActionNames()
+    {
+        org.gjt.sp.jedit.JEditActionContext r0;
+        java.util.LinkedList r1, $r4;
+        java.lang.String[] $r2, $r3, $r6, $r8, $r10;
+        java.util.Vector $r5, $r11;
+        int $i0, $i1, i2;
+        java.lang.Object[] $r7;
+        org.gjt.sp.util.StandardUtilities$StringCompare $r9;
+        java.lang.Object $r12;
+        org.gjt.sp.jedit.JEditActionSet $r13;
+
+        r0 := @this;
+
+        $r2 = r0.actionNames;
+
+(0)     if $r2 != null goto label3;
+
+        $r4 = new java.util.LinkedList;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4;
+
+(1)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #1, i2 #2);
+
+        $r5 = r0.actionSets;
+
+        $i0 = $r5.size();
+
+        if i2 >= $i0 goto label2;
+
+        $r11 = r0.actionSets;
+
+        $r12 = $r11.elementAt(i2);
+
+        $r13 = (org.gjt.sp.jedit.JEditActionSet) $r12;
+
+        $r13.getActionNames(r1);
+
+        i2 = i2 + 1;
+
+(2)     goto label1;
+
+     label2:
+        $i1 = r1.size();
+
+        $r6 = newarray (java.lang.String)[$i1];
+
+        $r7 = r1.toArray($r6);
+
+        $r8 = (java.lang.String[]) $r7;
+
+        r0.actionNames = $r8;
+
+        $r10 = r0.actionNames;
+
+        $r9 = new org.gjt.sp.util.StandardUtilities$StringCompare;
+
+        specialinvoke $r9.<init>(1);
+
+(3)     java.util.Arrays.sort($r10, $r9);
+
+     label3:
+        i2 = Phi(i2 #0, i2 #3);
+
+        $r3 = r0.actionNames;
+
+        return $r3;
+    }
+}

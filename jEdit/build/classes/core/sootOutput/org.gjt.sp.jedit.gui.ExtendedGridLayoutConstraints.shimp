@@ -1,0 +1,736 @@
+public class org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints extends java.lang.Object
+{
+    public static final int REMAINDER;
+    private int row;
+    private int col;
+    private int colspan;
+    private int effectiveColspan;
+    private int rowspan;
+    private int effectiveRowspan;
+    private boolean placeholder;
+    private org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints mainConstraints;
+    private java.awt.Component component;
+
+    public void <init>(java.awt.Component)
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0;
+        java.awt.Component r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(0, 0, 1, 1, r1, 0, null);
+
+        return;
+    }
+
+    public void <init>(int, java.awt.Component)
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0;
+        int i0;
+        java.awt.Component r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        specialinvoke r0.<init>(i0, 0, 1, 1, r1, 0, null);
+
+        return;
+    }
+
+    public void <init>(int, int, int, java.awt.Component)
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0;
+        int i0, i1, i2;
+        java.awt.Component r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        i2 := @parameter2;
+
+        r1 := @parameter3;
+
+        specialinvoke r0.<init>(i0, 0, i1, i2, r1, 0, null);
+
+        return;
+    }
+
+    private void <init>(int, int, int, int, java.awt.Component, boolean, org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints)
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0, r2;
+        int i0, i1, i2, i3;
+        java.awt.Component r1;
+        boolean z0;
+        java.lang.IllegalArgumentException $r3, $r9, $r15, $r21;
+        java.lang.StringBuilder $r4, $r5, $r6, $r7, $r10, $r11, $r12, $r13, $r16, $r17, $r18, $r19, $r22, $r23, $r24, $r25;
+        java.lang.String $r8, $r14, $r20, $r26;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        i2 := @parameter2;
+
+        i3 := @parameter3;
+
+        r1 := @parameter4;
+
+        z0 := @parameter5;
+
+        r2 := @parameter6;
+
+        specialinvoke r0.<init>();
+
+        if i0 >= 0 goto label1;
+
+        $r21 = new java.lang.IllegalArgumentException;
+
+        $r22 = new java.lang.StringBuilder;
+
+        specialinvoke $r22.<init>();
+
+        $r23 = $r22.append("row must be non-negative (");
+
+        $r24 = $r23.append(i0);
+
+        $r25 = $r24.append(41);
+
+        $r26 = $r25.toString();
+
+        specialinvoke $r21.<init>($r26);
+
+        throw $r21;
+
+     label1:
+        if i1 >= 0 goto label2;
+
+        $r15 = new java.lang.IllegalArgumentException;
+
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<init>();
+
+        $r17 = $r16.append("col must be non-negative (");
+
+        $r18 = $r17.append(i1);
+
+        $r19 = $r18.append(41);
+
+        $r20 = $r19.toString();
+
+        specialinvoke $r15.<init>($r20);
+
+        throw $r15;
+
+     label2:
+        if i2 >= 1 goto label3;
+
+        $r9 = new java.lang.IllegalArgumentException;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("colspan must be at least 1 (");
+
+        $r12 = $r11.append(i2);
+
+        $r13 = $r12.append(41);
+
+        $r14 = $r13.toString();
+
+        specialinvoke $r9.<init>($r14);
+
+        throw $r9;
+
+     label3:
+        if i3 >= 1 goto label4;
+
+        $r3 = new java.lang.IllegalArgumentException;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("rowspan must be at least 1 (");
+
+        $r6 = $r5.append(i3);
+
+        $r7 = $r6.append(41);
+
+        $r8 = $r7.toString();
+
+        specialinvoke $r3.<init>($r8);
+
+        throw $r3;
+
+     label4:
+        r0.row = i0;
+
+        r0.col = i1;
+
+        r0.colspan = i2;
+
+        r0.effectiveColspan = 1;
+
+        r0.rowspan = i3;
+
+        r0.effectiveRowspan = 1;
+
+        r0.component = r1;
+
+        r0.placeholder = z0;
+
+        r0.mainConstraints = r2;
+
+        return;
+    }
+
+    org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints getColspanPlaceholder(boolean)
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0, r1, $r2, $r3, $r5, $r6, $r7, $r7_1, $r7_2;
+        boolean z0;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i11_1, $i11_2;
+        java.awt.Component $r4;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        $i0 = r0.colspan;
+
+        if 1 != $i0 goto label1;
+
+        return null;
+
+     label1:
+        $r2 = new org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints;
+
+        $i6 = r0.row;
+
+        $i1 = r0.col;
+
+        $i5 = $i1 + 1;
+
+        $i2 = r0.colspan;
+
+        if $i2 != 2147483647 goto label2;
+
+        $i11 = 2147483647;
+
+(0)     goto label3;
+
+     label2:
+        $i3 = r0.colspan;
+
+(1)     $i11_1 = $i3 - 1;
+
+     label3:
+        $i11_2 = Phi($i11 #0, $i11_1 #1);
+
+        $i4 = r0.rowspan;
+
+        $r4 = r0.component;
+
+        $r3 = r0.mainConstraints;
+
+        if null != $r3 goto label4;
+
+        $r7 = r0;
+
+(2)     goto label5;
+
+     label4:
+(3)     $r7_1 = r0.mainConstraints;
+
+     label5:
+        $r7_2 = Phi($r7 #2, $r7_1 #3);
+
+        specialinvoke $r2.<init>($i6, $i5, $i11_2, $i4, $r4, 1, $r7_2);
+
+        r1 = $r2;
+
+        if z0 == 0 goto label6;
+
+        $r5 = r1.mainConstraints;
+
+        $i8 = $r5.row;
+
+        $i7 = r0.row;
+
+        if $i8 != $i7 goto label6;
+
+        $r6 = r1.mainConstraints;
+
+        $i9 = $r6.effectiveColspan;
+
+        $i10 = $i9 + 1;
+
+        $r6.effectiveColspan = $i10;
+
+     label6:
+        return r1;
+    }
+
+    org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints getRowspanPlaceholder(boolean)
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0, r1, $r2, $r3, $r5, $r6, $r7, $r7_1, $r7_2;
+        boolean z0;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i11_1, $i11_2;
+        java.awt.Component $r4;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        $i0 = r0.rowspan;
+
+        if 1 != $i0 goto label1;
+
+        return null;
+
+     label1:
+        $r2 = new org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints;
+
+        $i1 = r0.row;
+
+        $i6 = $i1 + 1;
+
+        $i5 = r0.col;
+
+        $i4 = r0.colspan;
+
+        $i2 = r0.rowspan;
+
+        if $i2 != 2147483647 goto label2;
+
+        $i11 = 2147483647;
+
+(0)     goto label3;
+
+     label2:
+        $i3 = r0.rowspan;
+
+(1)     $i11_1 = $i3 - 1;
+
+     label3:
+        $i11_2 = Phi($i11 #0, $i11_1 #1);
+
+        $r4 = r0.component;
+
+        $r3 = r0.mainConstraints;
+
+        if null != $r3 goto label4;
+
+        $r7 = r0;
+
+(2)     goto label5;
+
+     label4:
+(3)     $r7_1 = r0.mainConstraints;
+
+     label5:
+        $r7_2 = Phi($r7 #2, $r7_1 #3);
+
+        specialinvoke $r2.<init>($i6, $i5, $i4, $i11_2, $r4, 1, $r7_2);
+
+        r1 = $r2;
+
+        if z0 == 0 goto label6;
+
+        $r5 = r1.mainConstraints;
+
+        $i8 = $r5.col;
+
+        $i7 = r0.col;
+
+        if $i8 != $i7 goto label6;
+
+        $r6 = r1.mainConstraints;
+
+        $i9 = $r6.effectiveRowspan;
+
+        $i10 = $i9 + 1;
+
+        $r6.effectiveRowspan = $i10;
+
+     label6:
+        return r1;
+    }
+
+    public int getRow()
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.row;
+
+        return $i0;
+    }
+
+    public int getCol()
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.col;
+
+        return $i0;
+    }
+
+    void setCol(int)
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0;
+        int i0;
+        java.lang.IllegalArgumentException $r1;
+        java.lang.StringBuilder $r2, $r3, $r4, $r5;
+        java.lang.String $r6;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        if i0 >= 0 goto label1;
+
+        $r1 = new java.lang.IllegalArgumentException;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append("col must be non-negative (");
+
+        $r4 = $r3.append(i0);
+
+        $r5 = $r4.append(41);
+
+        $r6 = $r5.toString();
+
+        specialinvoke $r1.<init>($r6);
+
+        throw $r1;
+
+     label1:
+        r0.col = i0;
+
+        return;
+    }
+
+    public int getColspan()
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.colspan;
+
+        return $i0;
+    }
+
+    int getEffectiveColspan()
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0, $r1, $r2;
+        int $i0, $i0_1, $i0_2;
+
+        r0 := @this;
+
+        $r1 = r0.mainConstraints;
+
+        if null != $r1 goto label1;
+
+        $i0 = r0.effectiveColspan;
+
+(0)     goto label2;
+
+     label1:
+        $r2 = r0.mainConstraints;
+
+(1)     $i0_1 = $r2.effectiveColspan;
+
+     label2:
+        $i0_2 = Phi($i0 #0, $i0_1 #1);
+
+        return $i0_2;
+    }
+
+    public int getRowspan()
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.rowspan;
+
+        return $i0;
+    }
+
+    int getEffectiveRowspan()
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0, $r1, $r2;
+        int $i0, $i0_1, $i0_2;
+
+        r0 := @this;
+
+        $r1 = r0.mainConstraints;
+
+        if null != $r1 goto label1;
+
+        $i0 = r0.effectiveRowspan;
+
+(0)     goto label2;
+
+     label1:
+        $r2 = r0.mainConstraints;
+
+(1)     $i0_1 = $r2.effectiveRowspan;
+
+     label2:
+        $i0_2 = Phi($i0 #0, $i0_1 #1);
+
+        return $i0_2;
+    }
+
+    java.awt.Component getComponent()
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0;
+        java.awt.Component $r1;
+
+        r0 := @this;
+
+        $r1 = r0.component;
+
+        return $r1;
+    }
+
+    public boolean isPlaceholder()
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.placeholder;
+
+        return $z0;
+    }
+
+    org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints getWorkCopy()
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0, $r1, $r2, $r3, $r5, $r5_1, $r5_2;
+        int $i0, $i1, $i2, $i3;
+        java.awt.Component $r4;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r1 = new org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints;
+
+        $i0 = r0.row;
+
+        $i1 = r0.col;
+
+        $i2 = r0.colspan;
+
+        $i3 = r0.rowspan;
+
+        $r4 = r0.component;
+
+        $z0 = r0.placeholder;
+
+        $r2 = r0.mainConstraints;
+
+        if null != $r2 goto label1;
+
+        $r5 = null;
+
+(0)     goto label2;
+
+     label1:
+        $r3 = r0.mainConstraints;
+
+(1)     $r5_1 = $r3.getWorkCopy();
+
+     label2:
+        $r5_2 = Phi($r5 #0, $r5_1 #1);
+
+        specialinvoke $r1.<init>($i0, $i1, $i2, $i3, $r4, $z0, $r5_2);
+
+        return $r1;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0, $r3, $r6;
+        java.lang.Object r1;
+        boolean $z0, $z1, $z2, $z2_1, $z2_2;
+        java.awt.Component $r2, $r4, $r5, $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 == null goto label1;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints;
+
+        if $z0 != 0 goto label2;
+
+     label1:
+        return 0;
+
+     label2:
+        $r2 = r0.component;
+
+        if $r2 != null goto label5;
+
+        $r6 = (org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints) r1;
+
+        $r7 = $r6.component;
+
+        if $r7 != null goto label3;
+
+        $z2 = 1;
+
+(0)     goto label4;
+
+     label3:
+(1)     $z2_1 = 0;
+
+     label4:
+        $z2_2 = Phi($z2 #0, $z2_1 #1);
+
+        return $z2_2;
+
+     label5:
+        $r5 = r0.component;
+
+        $r3 = (org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints) r1;
+
+        $r4 = $r3.component;
+
+        $z1 = $r5.equals($r4);
+
+        return $z1;
+    }
+
+    public int hashCode()
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0;
+        java.awt.Component $r1, $r2;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.component;
+
+        if null != $r1 goto label1;
+
+        return 0;
+
+     label1:
+        $r2 = r0.component;
+
+        $i0 = $r2.hashCode();
+
+        return $i0;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.gui.ExtendedGridLayoutConstraints r0, $r23;
+        java.lang.StringBuilder $r1, $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18, $r19, $r21, $r22, $r24, $r25;
+        java.lang.Class $r2;
+        java.lang.String $r3, $r26;
+        int $i0, $i1, $i2, $i3, $i4, $i5;
+        boolean $z0;
+        java.awt.Component $r20;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = r0.getClass();
+
+        $r3 = $r2.getName();
+
+        $r4 = $r1.append($r3);
+
+        $r5 = $r4.append("[row=");
+
+        $i0 = r0.row;
+
+        $r6 = $r5.append($i0);
+
+        $r7 = $r6.append(",col=");
+
+        $i1 = r0.col;
+
+        $r8 = $r7.append($i1);
+
+        $r9 = $r8.append(",colspan=");
+
+        $i2 = r0.colspan;
+
+        $r10 = $r9.append($i2);
+
+        $r11 = $r10.append(",effectiveColspan=");
+
+        $i3 = r0.effectiveColspan;
+
+        $r12 = $r11.append($i3);
+
+        $r13 = $r12.append(",rowspan=");
+
+        $i4 = r0.rowspan;
+
+        $r14 = $r13.append($i4);
+
+        $r15 = $r14.append(",effectiveRowspan=");
+
+        $i5 = r0.effectiveRowspan;
+
+        $r16 = $r15.append($i5);
+
+        $r17 = $r16.append(",placeholder=");
+
+        $z0 = r0.placeholder;
+
+        $r18 = $r17.append($z0);
+
+        $r19 = $r18.append(",component=");
+
+        $r20 = r0.component;
+
+        $r21 = $r19.append($r20);
+
+        $r22 = $r21.append(",mainConstraints=");
+
+        $r23 = r0.mainConstraints;
+
+        $r24 = $r22.append($r23);
+
+        $r25 = $r24.append("]");
+
+        $r26 = $r25.toString();
+
+        return $r26;
+    }
+}

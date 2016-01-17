@@ -1,0 +1,17 @@
+public class org.gjt.sp.jedit.bsh.InterpreterError extends java.lang.RuntimeException
+{
+
+    public void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.InterpreterError r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

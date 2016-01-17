@@ -1,0 +1,197 @@
+class org.gjt.sp.jedit.gui.LogViewer$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.LogViewer this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.LogViewer)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$ActionHandler r0;
+        org.gjt.sp.jedit.gui.LogViewer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2, r5, $r16;
+        java.lang.StringBuilder r3, $r10;
+        java.lang.Object[] r4, r26;
+        org.gjt.sp.jedit.gui.LogViewer $r6, $r8, $r11, $r13, $r21, $r22, $r23, $r24, $r25;
+        javax.swing.JCheckBox $r7;
+        javax.swing.JButton $r9;
+        javax.swing.JList $r12, $r14;
+        int $i0, $i1, i2, i3, i4;
+        java.lang.String $r15;
+        boolean $z0, $z2, $z3, $z4, $z4_1, $z4_2;
+        javax.swing.ListModel r27;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.gui.LogViewer.access$500($r6);
+
+        if r2 != $r7 goto label3;
+
+        $r22 = r0.this$0;
+
+        $r21 = r0.this$0;
+
+        $z0 = org.gjt.sp.jedit.gui.LogViewer.access$600($r21);
+
+        if $z0 != 0 goto label1;
+
+        $z4 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z4_1 = 0;
+
+     label2:
+        $z4_2 = Phi($z4 #0, $z4_1 #1);
+
+        org.gjt.sp.jedit.gui.LogViewer.access$602($r22, $z4_2);
+
+        $r23 = r0.this$0;
+
+        $z2 = org.gjt.sp.jedit.gui.LogViewer.access$600($r23);
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("log-viewer.tail", $z2);
+
+        $r24 = r0.this$0;
+
+        $z3 = org.gjt.sp.jedit.gui.LogViewer.access$600($r24);
+
+(2)     if $z3 == 0 goto label9;
+
+        $r25 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.LogViewer.access$400($r25);
+
+(3)     goto label9;
+
+     label3:
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.gui.LogViewer.access$700($r8);
+
+(4)     if r2 != $r9 goto label9;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        r3 = $r10;
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.gui.LogViewer.access$800($r11);
+
+        r4 = $r12.getSelectedValues();
+
+        if r4 == null goto label6;
+
+        $i1 = lengthof r4;
+
+        if $i1 == 0 goto label6;
+
+        r26 = r4;
+
+        i2 = lengthof r26;
+
+(5)     i3 = 0;
+
+     label4:
+        i3 = Phi(i3 #5, i3 #6);
+
+        if i3 >= i2 goto label5;
+
+        r5 = r26[i3];
+
+        r3.append(r5);
+
+        r3.append(10);
+
+        i3 = i3 + 1;
+
+(6)     goto label4;
+
+     label5:
+(7)     goto label8;
+
+     label6:
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.gui.LogViewer.access$800($r13);
+
+        r27 = $r14.getModel();
+
+(8)     i4 = 0;
+
+     label7:
+        i4 = Phi(i4 #8, i4 #10);
+
+        $i0 = r27.getSize();
+
+(9)     if i4 >= $i0 goto label8;
+
+        $r16 = r27.getElementAt(i4);
+
+        r3.append($r16);
+
+        r3.append(10);
+
+        i4 = i4 + 1;
+
+(10)    goto label7;
+
+     label8:
+        i4 = Phi(i4 #7, i4 #9);
+
+        i3 = Phi(i3 #7, i3 #9);
+
+        $r15 = r3.toString();
+
+(11)    org.gjt.sp.jedit.Registers.setRegister(36, $r15);
+
+     label9:
+        $z4 = Phi($z4_2 #2, $z4_2 #3, $z4 #4, $z4 #11);
+
+        i4 = Phi(i4 #2, i4 #3, i4 #4, i4 #11);
+
+        i3 = Phi(i3 #2, i3 #3, i3 #4, i3 #11);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.LogViewer, org.gjt.sp.jedit.gui.LogViewer$1)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$ActionHandler r0;
+        org.gjt.sp.jedit.gui.LogViewer r1;
+        org.gjt.sp.jedit.gui.LogViewer$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

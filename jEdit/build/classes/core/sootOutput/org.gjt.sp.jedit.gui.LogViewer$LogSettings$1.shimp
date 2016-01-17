@@ -1,0 +1,469 @@
+class org.gjt.sp.jedit.gui.LogViewer$LogSettings$1 extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    final org.gjt.sp.jedit.gui.LogViewer val$this$0;
+    final org.gjt.sp.jedit.gui.LogViewer$LogSettings this$1;
+
+    void <init>(org.gjt.sp.jedit.gui.LogViewer$LogSettings, java.lang.String, org.gjt.sp.jedit.gui.LogViewer)
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings$1 r0;
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings r1;
+        java.lang.String r2;
+        org.gjt.sp.jedit.gui.LogViewer r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$1 = r1;
+
+        r0.val$this$0 = r3;
+
+        specialinvoke r0.<init>(r2);
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings$1 r0;
+        javax.swing.JPanel r1, $r78;
+        javax.swing.JButton r2, r3, $r80, $r83;
+        javax.swing.border.Border $r4;
+        javax.swing.JSpinner $r5, $r11;
+        javax.swing.SpinnerNumberModel $r6;
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings $r7, $r10, $r14, $r18, $r22, $r26, $r30, $r35, $r39, $r42, $r46, $r49, $r53, $r56, $r60, $r63, $r67, $r72, $r75;
+        int $i0;
+        java.lang.String $r9, $r15, $r19, $r23, $r27, $r31, $r34, $r73, $r81, $r84;
+        java.awt.Component $r12, $r70, $r77;
+        javax.swing.JCheckBox $r13, $r17, $r21, $r25, $r29, $r36, $r43, $r50, $r57, $r64, $r71, $r76;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        javax.swing.JLabel $r33;
+        org.gjt.sp.jedit.gui.ColorWellButton $r37, $r41, $r44, $r48, $r51, $r55, $r58, $r62, $r65, $r69;
+        java.awt.Color $r38, $r40, $r45, $r47, $r52, $r54, $r59, $r61, $r66, $r68;
+        java.awt.FlowLayout $r79;
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings$1$1 $r82;
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings$1$2 $r85;
+
+        r0 := @this;
+
+        $r4 = javax.swing.BorderFactory.createEmptyBorder(11, 11, 12, 12);
+
+        r0.setBorder($r4);
+
+        $r7 = r0.this$1;
+
+        $r5 = new javax.swing.JSpinner;
+
+        $r6 = new javax.swing.SpinnerNumberModel;
+
+        $i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("log-viewer.maxlines", 500);
+
+        specialinvoke $r6.<init>($i0, 500, 2147483647, 1);
+
+        specialinvoke $r5.<init>($r6);
+
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1502($r7, $r5);
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("log-viewer.maxlines.label", "Max lines");
+
+        $r10 = r0.this$1;
+
+        $r11 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1500($r10);
+
+        r0.addComponent($r9, $r11, 0);
+
+        $r12 = javax.swing.Box.createVerticalStrut(11);
+
+        r0.addComponent($r12);
+
+        $r14 = r0.this$1;
+
+        $r13 = new javax.swing.JCheckBox;
+
+        $r15 = org.gjt.sp.jedit.jEdit.getProperty("log-viewer.message.debug.label", "Debug");
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("log-viewer.message.debug", 1);
+
+        specialinvoke $r13.<init>($r15, $z0);
+
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1602($r14, $r13);
+
+        $r18 = r0.this$1;
+
+        $r17 = new javax.swing.JCheckBox;
+
+        $r19 = org.gjt.sp.jedit.jEdit.getProperty("log-viewer.message.message.label", "Message");
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("log-viewer.message.message", 1);
+
+        specialinvoke $r17.<init>($r19, $z1);
+
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1702($r18, $r17);
+
+        $r22 = r0.this$1;
+
+        $r21 = new javax.swing.JCheckBox;
+
+        $r23 = org.gjt.sp.jedit.jEdit.getProperty("log-viewer.message.notice.label", "Notice");
+
+        $z2 = org.gjt.sp.jedit.jEdit.getBooleanProperty("log-viewer.message.notice", 1);
+
+        specialinvoke $r21.<init>($r23, $z2);
+
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1802($r22, $r21);
+
+        $r26 = r0.this$1;
+
+        $r25 = new javax.swing.JCheckBox;
+
+        $r27 = org.gjt.sp.jedit.jEdit.getProperty("log-viewer.message.warning.label", "Warning");
+
+        $z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty("log-viewer.message.warning", 1);
+
+        specialinvoke $r25.<init>($r27, $z3);
+
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1902($r26, $r25);
+
+        $r30 = r0.this$1;
+
+        $r29 = new javax.swing.JCheckBox;
+
+        $r31 = org.gjt.sp.jedit.jEdit.getProperty("log-viewer.message.error.label", "Error");
+
+        $z4 = org.gjt.sp.jedit.jEdit.getBooleanProperty("log-viewer.message.error", 1);
+
+        specialinvoke $r29.<init>($r31, $z4);
+
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2002($r30, $r29);
+
+        $r33 = new javax.swing.JLabel;
+
+        $r34 = org.gjt.sp.jedit.jEdit.getProperty("log-viewer.message.label", "Message Display:");
+
+        specialinvoke $r33.<init>($r34);
+
+        r0.addComponent($r33);
+
+        $r35 = r0.this$1;
+
+        $r36 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1600($r35);
+
+        $r39 = r0.this$1;
+
+        $r37 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r38 = java.awt.Color.BLUE;
+
+        $r40 = org.gjt.sp.jedit.jEdit.getColorProperty("log-viewer.message.debug.color", $r38);
+
+        specialinvoke $r37.<init>($r40);
+
+        $r41 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2102($r39, $r37);
+
+        r0.addComponent($r36, $r41, 0);
+
+        $r42 = r0.this$1;
+
+        $r43 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1700($r42);
+
+        $r46 = r0.this$1;
+
+        $r44 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r45 = java.awt.Color.GREEN;
+
+        $r47 = org.gjt.sp.jedit.jEdit.getColorProperty("log-viewer.message.message.color", $r45);
+
+        specialinvoke $r44.<init>($r47);
+
+        $r48 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2202($r46, $r44);
+
+        r0.addComponent($r43, $r48, 0);
+
+        $r49 = r0.this$1;
+
+        $r50 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1800($r49);
+
+        $r53 = r0.this$1;
+
+        $r51 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r52 = java.awt.Color.GREEN;
+
+        $r54 = org.gjt.sp.jedit.jEdit.getColorProperty("log-viewer.message.notice.color", $r52);
+
+        specialinvoke $r51.<init>($r54);
+
+        $r55 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2302($r53, $r51);
+
+        r0.addComponent($r50, $r55, 0);
+
+        $r56 = r0.this$1;
+
+        $r57 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1900($r56);
+
+        $r60 = r0.this$1;
+
+        $r58 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r59 = java.awt.Color.ORANGE;
+
+        $r61 = org.gjt.sp.jedit.jEdit.getColorProperty("log-viewer.message.warning.color", $r59);
+
+        specialinvoke $r58.<init>($r61);
+
+        $r62 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2402($r60, $r58);
+
+        r0.addComponent($r57, $r62, 0);
+
+        $r63 = r0.this$1;
+
+        $r64 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2000($r63);
+
+        $r67 = r0.this$1;
+
+        $r65 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r66 = java.awt.Color.RED;
+
+        $r68 = org.gjt.sp.jedit.jEdit.getColorProperty("log-viewer.message.error.color", $r66);
+
+        specialinvoke $r65.<init>($r68);
+
+        $r69 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2502($r67, $r65);
+
+        r0.addComponent($r64, $r69, 0);
+
+        $r70 = javax.swing.Box.createVerticalStrut(11);
+
+        r0.addComponent($r70);
+
+        $r72 = r0.this$1;
+
+        $r71 = new javax.swing.JCheckBox;
+
+        $r73 = org.gjt.sp.jedit.jEdit.getProperty("debug.beepOnOutput.label");
+
+        $z5 = org.gjt.sp.jedit.jEdit.getBooleanProperty("debug.beepOnOutput", 0);
+
+        specialinvoke $r71.<init>($r73, $z5);
+
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2602($r72, $r71);
+
+        $r75 = r0.this$1;
+
+        $r76 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2600($r75);
+
+        r0.addComponent($r76);
+
+        $r77 = javax.swing.Box.createVerticalStrut(11);
+
+        r0.addComponent($r77);
+
+        $r78 = new javax.swing.JPanel;
+
+        $r79 = new java.awt.FlowLayout;
+
+        specialinvoke $r79.<init>(1);
+
+        specialinvoke $r78.<init>($r79);
+
+        r1 = $r78;
+
+        $r80 = new javax.swing.JButton;
+
+        $r81 = org.gjt.sp.jedit.jEdit.getProperty("common.ok");
+
+        specialinvoke $r80.<init>($r81);
+
+        r2 = $r80;
+
+        $r82 = new org.gjt.sp.jedit.gui.LogViewer$LogSettings$1$1;
+
+        specialinvoke $r82.<init>(r0);
+
+        r2.addActionListener($r82);
+
+        $r83 = new javax.swing.JButton;
+
+        $r84 = org.gjt.sp.jedit.jEdit.getProperty("common.cancel");
+
+        specialinvoke $r83.<init>($r84);
+
+        r3 = $r83;
+
+        $r85 = new org.gjt.sp.jedit.gui.LogViewer$LogSettings$1$2;
+
+        specialinvoke $r85.<init>(r0);
+
+        r3.addActionListener($r85);
+
+        r1.add(r2);
+
+        r1.add(r3);
+
+        r0.addComponent(r1, 2);
+
+        return;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings$1 r0;
+        org.gjt.sp.jedit.gui.LogViewer$LogSettings $r1, $r6, $r8, $r10, $r12, $r14, $r16, $r19, $r22, $r25, $r28, $r31, $r33, $r35;
+        javax.swing.JSpinner $r2;
+        javax.swing.SpinnerModel $r3;
+        javax.swing.SpinnerNumberModel $r4;
+        java.lang.Number $r5;
+        int $i0;
+        javax.swing.JCheckBox $r7, $r9, $r11, $r13, $r15, $r32, $r36;
+        boolean $z0, $z2, $z3, $z5, $z6, $z8, $z9, $z11, $z12, $z14, $z15, $z16;
+        org.gjt.sp.jedit.gui.ColorWellButton $r17, $r20, $r23, $r26, $r29;
+        java.awt.Color $r18, $r21, $r24, $r27, $r30;
+        org.gjt.sp.jedit.gui.LogViewer $r34;
+
+        r0 := @this;
+
+        $r1 = r0.this$1;
+
+        $r2 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1500($r1);
+
+        $r3 = $r2.getModel();
+
+        $r4 = (javax.swing.SpinnerNumberModel) $r3;
+
+        $r5 = $r4.getNumber();
+
+        $i0 = $r5.intValue();
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty("log-viewer.maxlines", $i0);
+
+        $r6 = r0.this$1;
+
+        $r7 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1600($r6);
+
+        $z0 = $r7.isSelected();
+
+        org.gjt.sp.jedit.gui.LogViewer.access$1002($z0);
+
+        $z2 = org.gjt.sp.jedit.gui.LogViewer.access$1000();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("log-viewer.message.debug", $z2);
+
+        $r8 = r0.this$1;
+
+        $r9 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1700($r8);
+
+        $z3 = $r9.isSelected();
+
+        org.gjt.sp.jedit.gui.LogViewer.access$1102($z3);
+
+        $z5 = org.gjt.sp.jedit.gui.LogViewer.access$1100();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("log-viewer.message.message", $z5);
+
+        $r10 = r0.this$1;
+
+        $r11 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1800($r10);
+
+        $z6 = $r11.isSelected();
+
+        org.gjt.sp.jedit.gui.LogViewer.access$1202($z6);
+
+        $z8 = org.gjt.sp.jedit.gui.LogViewer.access$1200();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("log-viewer.message.notice", $z8);
+
+        $r12 = r0.this$1;
+
+        $r13 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$1900($r12);
+
+        $z9 = $r13.isSelected();
+
+        org.gjt.sp.jedit.gui.LogViewer.access$1302($z9);
+
+        $z11 = org.gjt.sp.jedit.gui.LogViewer.access$1300();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("log-viewer.message.warning", $z11);
+
+        $r14 = r0.this$1;
+
+        $r15 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2000($r14);
+
+        $z12 = $r15.isSelected();
+
+        org.gjt.sp.jedit.gui.LogViewer.access$1402($z12);
+
+        $z14 = org.gjt.sp.jedit.gui.LogViewer.access$1400();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("log-viewer.message.error", $z14);
+
+        $r16 = r0.this$1;
+
+        $r17 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2100($r16);
+
+        $r18 = $r17.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("log-viewer.message.debug.color", $r18);
+
+        $r19 = r0.this$1;
+
+        $r20 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2200($r19);
+
+        $r21 = $r20.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("log-viewer.message.message.color", $r21);
+
+        $r22 = r0.this$1;
+
+        $r23 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2300($r22);
+
+        $r24 = $r23.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("log-viewer.message.notice.color", $r24);
+
+        $r25 = r0.this$1;
+
+        $r26 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2400($r25);
+
+        $r27 = $r26.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("log-viewer.message.warning.color", $r27);
+
+        $r28 = r0.this$1;
+
+        $r29 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2500($r28);
+
+        $r30 = $r29.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("log-viewer.message.error.color", $r30);
+
+        $r31 = r0.this$1;
+
+        $r32 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2600($r31);
+
+        $z15 = $r32.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("debug.beepOnOutput", $z15);
+
+        $r33 = r0.this$1;
+
+        $r34 = $r33.this$0;
+
+        org.gjt.sp.jedit.gui.LogViewer.access$100($r34);
+
+        $r35 = r0.this$1;
+
+        $r36 = org.gjt.sp.jedit.gui.LogViewer$LogSettings.access$2600($r35);
+
+        $z16 = $r36.isSelected();
+
+        org.gjt.sp.util.Log.setBeepOnOutput($z16);
+
+        return;
+    }
+}

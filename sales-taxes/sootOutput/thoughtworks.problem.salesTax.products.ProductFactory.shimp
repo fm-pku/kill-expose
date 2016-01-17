@@ -1,0 +1,111 @@
+public class thoughtworks.problem.salesTax.products.ProductFactory extends java.lang.Object
+{
+    private static thoughtworks.problem.salesTax.products.ProductFactory instance;
+
+    public static thoughtworks.problem.salesTax.products.ProductFactory getInstance()
+    {
+        thoughtworks.problem.salesTax.products.ProductFactory $r0, $r1, $r2;
+
+        $r0 = thoughtworks.problem.salesTax.products.ProductFactory.instance;
+
+        if $r0 != null goto label1;
+
+        $r2 = new thoughtworks.problem.salesTax.products.ProductFactory;
+
+        specialinvoke $r2.<init>();
+
+        thoughtworks.problem.salesTax.products.ProductFactory.instance = $r2;
+
+     label1:
+        $r1 = thoughtworks.problem.salesTax.products.ProductFactory.instance;
+
+        return $r1;
+    }
+
+    private void <init>()
+    {
+        thoughtworks.problem.salesTax.products.ProductFactory r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public thoughtworks.problem.salesTax.products.Product createProduct(java.lang.String, java.lang.String, double, int, boolean)
+    {
+        thoughtworks.problem.salesTax.products.ProductFactory r0;
+        java.lang.String r1, r2;
+        double d0;
+        int i0;
+        boolean z0, $z1, $z2, $z3;
+        thoughtworks.problem.salesTax.products.Other $r3;
+        thoughtworks.problem.salesTax.products.Medical $r4;
+        thoughtworks.problem.salesTax.products.Food $r5;
+        thoughtworks.problem.salesTax.products.Book $r6;
+        thoughtworks.problem.salesTax.products.Product r7, r7_1, r7_2, r7_3, r7_4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        d0 := @parameter2;
+
+        i0 := @parameter3;
+
+        z0 := @parameter4;
+
+        $z1 = r1.equals("Book");
+
+        if $z1 == 0 goto label1;
+
+        $r6 = new thoughtworks.problem.salesTax.products.Book;
+
+        specialinvoke $r6.<init>(r2, d0, i0, z0);
+
+        r7 = $r6;
+
+(0)     goto label4;
+
+     label1:
+        $z2 = r1.equals("Food");
+
+        if $z2 == 0 goto label2;
+
+        $r5 = new thoughtworks.problem.salesTax.products.Food;
+
+        specialinvoke $r5.<init>(r2, d0, i0, z0);
+
+        r7_1 = $r5;
+
+(1)     goto label4;
+
+     label2:
+        $z3 = r1.equals("Medical");
+
+        if $z3 == 0 goto label3;
+
+        $r4 = new thoughtworks.problem.salesTax.products.Medical;
+
+        specialinvoke $r4.<init>(r2, d0, i0, z0);
+
+        r7_2 = $r4;
+
+(2)     goto label4;
+
+     label3:
+        $r3 = new thoughtworks.problem.salesTax.products.Other;
+
+        specialinvoke $r3.<init>(r2, d0, i0, z0);
+
+(3)     r7_3 = $r3;
+
+     label4:
+        r7_4 = Phi(r7 #0, r7_1 #1, r7_2 #2, r7_3 #3);
+
+        return r7_4;
+    }
+}

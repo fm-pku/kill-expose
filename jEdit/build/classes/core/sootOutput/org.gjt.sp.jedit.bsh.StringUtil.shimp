@@ -1,0 +1,316 @@
+public class org.gjt.sp.jedit.bsh.StringUtil extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.StringUtil r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static java.lang.String[] split(java.lang.String, java.lang.String)
+    {
+        java.lang.String r0, r1, $r7;
+        java.util.Vector r2, $r5;
+        java.util.StringTokenizer r3, $r6;
+        java.lang.String[] r4;
+        boolean $z0;
+        int $i0;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r5 = new java.util.Vector;
+
+        specialinvoke $r5.<init>();
+
+        r2 = $r5;
+
+        $r6 = new java.util.StringTokenizer;
+
+        specialinvoke $r6.<init>(r0, r1);
+
+        r3 = $r6;
+
+     label1:
+        $z0 = r3.hasMoreTokens();
+
+        if $z0 == 0 goto label2;
+
+        $r7 = r3.nextToken();
+
+        r2.addElement($r7);
+
+        goto label1;
+
+     label2:
+        $i0 = r2.size();
+
+        r4 = newarray (java.lang.String)[$i0];
+
+        r2.copyInto(r4);
+
+        return r4;
+    }
+
+    public static java.lang.String[] bubbleSort(java.lang.String[])
+    {
+        java.lang.String[] r0, r8, r11;
+        java.util.Vector r1, $r2;
+        int $i0, $i1, $i2, $i3, $i4, i5, i6, i7, i8;
+        java.lang.Object $r3, $r5, $r7;
+        java.lang.String $r4, $r6, r9, r10;
+        boolean z0;
+
+        r0 := @parameter0;
+
+        $r2 = new java.util.Vector;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+        r8 = r0;
+
+        i5 = lengthof r8;
+
+(0)     i6 = 0;
+
+     label1:
+        i6 = Phi(i6 #0, i6 #1);
+
+        if i6 >= i5 goto label2;
+
+        r9 = r8[i6];
+
+        r1.addElement(r9);
+
+        i6 = i6 + 1;
+
+(1)     goto label1;
+
+     label2:
+        i7 = r1.size();
+
+(2)     z0 = 1;
+
+     label3:
+        z0 = Phi(z0 #2, z0 #7);
+
+        i6 = Phi(i6 #2, i6 #7);
+
+        i8 = Phi(i8 #2, i8 #7);
+
+        if z0 == 0 goto label7;
+
+        z0 = 0;
+
+(3)     i8 = 0;
+
+     label4:
+        z0 = Phi(z0 #3, z0 #6);
+
+        i6 = Phi(i6 #3, i6 #6);
+
+        i8 = Phi(i8 #3, i8 #6);
+
+        $i0 = i7 - 1;
+
+        if i8 >= $i0 goto label6;
+
+        $r3 = r1.elementAt(i8);
+
+        $r4 = (java.lang.String) $r3;
+
+        $i1 = i8 + 1;
+
+        $r5 = r1.elementAt($i1);
+
+        $r6 = (java.lang.String) $r5;
+
+        $i2 = $r4.compareTo($r6);
+
+(4)     if $i2 <= 0 goto label5;
+
+        $i3 = i8 + 1;
+
+        $r7 = r1.elementAt($i3);
+
+        r10 = (java.lang.String) $r7;
+
+        $i4 = i8 + 1;
+
+        r1.removeElementAt($i4);
+
+        r1.insertElementAt(r10, i8);
+
+(5)     z0 = 1;
+
+     label5:
+        z0 = Phi(z0 #4, z0 #5);
+
+        i8 = i8 + 1;
+
+(6)     goto label4;
+
+     label6:
+(7)     goto label3;
+
+     label7:
+        r11 = newarray (java.lang.String)[i7];
+
+        r1.copyInto(r11);
+
+        return r11;
+    }
+
+    public static java.lang.String maxCommonPrefix(java.lang.String, java.lang.String)
+    {
+        java.lang.String r0, r1, $r2;
+        boolean $z0;
+        int $i0, i1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $z0 = r0.regionMatches(0, r1, 0, i1);
+
+        if $z0 == 0 goto label2;
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        $i0 = i1 - 1;
+
+        $r2 = r0.substring(0, $i0);
+
+        return $r2;
+    }
+
+    public static java.lang.String methodString(java.lang.String, java.lang.Class[])
+    {
+        java.lang.String r0, $r8, $r10, $r14, $r17, $r18;
+        java.lang.Class[] r1;
+        java.lang.StringBuilder r2, $r4, $r5, $r6, $r7, $r11, $r12, $r13;
+        java.lang.Class r3;
+        int $i0, $i1, $i2, $i3, i4;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r4 = new java.lang.StringBuilder;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append(r0);
+
+        $r7 = $r6.append("(");
+
+        $r8 = $r7.toString();
+
+        specialinvoke $r4.<init>($r8);
+
+        r2 = $r4;
+
+        $i0 = lengthof r1;
+
+        if $i0 <= 0 goto label1;
+
+        r2.append(" ");
+
+     label1:
+(0)     i4 = 0;
+
+     label2:
+        $r17 = Phi($r17 #0, $r17 #5);
+
+        $r18 = Phi($r18 #0, $r18 #5);
+
+        i4 = Phi(i4 #0, i4 #5);
+
+        $i1 = lengthof r1;
+
+        if i4 >= $i1 goto label7;
+
+        r3 = r1[i4];
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        if r3 != null goto label3;
+
+        $r17 = "null";
+
+(1)     goto label4;
+
+     label3:
+(2)     $r17 = r3.getName();
+
+     label4:
+        $r17 = Phi($r17 #1, $r17 #2);
+
+        $r12 = $r11.append($r17);
+
+        $i2 = lengthof r1;
+
+        $i3 = $i2 - 1;
+
+        if i4 >= $i3 goto label5;
+
+        $r18 = ", ";
+
+(3)     goto label6;
+
+     label5:
+(4)     $r18 = " ";
+
+     label6:
+        $r18 = Phi($r18 #3, $r18 #4);
+
+        $r13 = $r12.append($r18);
+
+        $r14 = $r13.toString();
+
+        r2.append($r14);
+
+        i4 = i4 + 1;
+
+(5)     goto label2;
+
+     label7:
+        r2.append(")");
+
+        $r10 = r2.toString();
+
+        return $r10;
+    }
+
+    public static java.lang.String normalizeClassName(java.lang.Class)
+    {
+        java.lang.Class r0;
+        java.lang.String $r1;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.bsh.Reflect.normalizeClassName(r0);
+
+        return $r1;
+    }
+}

@@ -1,0 +1,186 @@
+public class org.gjt.sp.jedit.bsh.Capabilities extends java.lang.Object
+{
+    private static boolean accessibility;
+    private static java.util.Hashtable classes;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.Capabilities r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static boolean haveSwing()
+    {
+        boolean $z0;
+
+        $z0 = org.gjt.sp.jedit.bsh.Capabilities.classExists("javax.swing.JButton");
+
+        return $z0;
+    }
+
+    public static boolean canGenerateInterfaces()
+    {
+        boolean $z0;
+
+        $z0 = org.gjt.sp.jedit.bsh.Capabilities.classExists("java.lang.reflect.Proxy");
+
+        return $z0;
+    }
+
+    public static boolean haveAccessibility()
+    {
+        boolean $z0;
+
+        $z0 = org.gjt.sp.jedit.bsh.Capabilities.accessibility;
+
+        return $z0;
+    }
+
+    public static void setAccessibility(boolean) throws org.gjt.sp.jedit.bsh.Capabilities$Unavailable
+    {
+        boolean z0, $z1, $z2;
+        java.lang.SecurityException r0, $r4;
+        org.gjt.sp.jedit.bsh.Capabilities$Unavailable $r1, $r5;
+        java.lang.Class $r2;
+        java.lang.StringBuilder $r6, $r7, $r8;
+        java.lang.String $r9;
+
+        z0 := @parameter0;
+
+        if z0 != 0 goto label1;
+
+        org.gjt.sp.jedit.bsh.Capabilities.accessibility = 0;
+
+        return;
+
+     label1:
+        $z1 = org.gjt.sp.jedit.bsh.Capabilities.classExists("java.lang.reflect.AccessibleObject");
+
+        if $z1 == 0 goto label2;
+
+        $z2 = org.gjt.sp.jedit.bsh.Capabilities.classExists("org.gjt.sp.jedit.bsh.reflect.ReflectManagerImpl");
+
+        if $z2 != 0 goto label3;
+
+     label2:
+        $r1 = new org.gjt.sp.jedit.bsh.Capabilities$Unavailable;
+
+        specialinvoke $r1.<init>("Accessibility unavailable");
+
+        throw $r1;
+
+     label3:
+        $r2 = class "java/lang/String";
+
+        $r2.getDeclaredMethods();
+
+     label4:
+        goto label6;
+
+     label5:
+        $r4 := @caughtexception;
+
+        r0 = $r4;
+
+        $r5 = new org.gjt.sp.jedit.bsh.Capabilities$Unavailable;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("Accessibility unavailable: ");
+
+        $r8 = $r7.append(r0);
+
+        $r9 = $r8.toString();
+
+        specialinvoke $r5.<init>($r9);
+
+        throw $r5;
+
+     label6:
+        org.gjt.sp.jedit.bsh.Capabilities.accessibility = 1;
+
+        return;
+
+        catch java.lang.SecurityException from label3 to label4 with label5;
+    }
+
+    public static boolean classExists(java.lang.String)
+    {
+        java.lang.String r0;
+        java.lang.ClassNotFoundException r1, $r5;
+        java.util.Hashtable $r2, $r3;
+        java.lang.Object r6, r6_1, r6_2, r6_3, r6_4;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.bsh.Capabilities.classes;
+
+        r6 = $r2.get(r0);
+
+(0)     if r6 != null goto label5;
+
+     label1:
+(1)     r6_1 = java.lang.Class.forName(r0);
+
+     label2:
+(2)     goto label4;
+
+     label3:
+        $r5 := @caughtexception;
+
+        r6_2 = Phi(r6 #0, r6_1 #1);
+
+(3)     r1 = $r5;
+
+     label4:
+        r6_3 = Phi(r6_1 #2, r6_2 #3);
+
+(4)     if r6_3 == null goto label5;
+
+        $r3 = org.gjt.sp.jedit.bsh.Capabilities.classes;
+
+(5)     $r3.put(r6_3, "unused");
+
+     label5:
+        r6_4 = Phi(r6 #0, r6_3 #4, r6_3 #5);
+
+        if r6_4 == null goto label6;
+
+        $z0 = 1;
+
+(6)     goto label7;
+
+     label6:
+(7)     $z0_1 = 0;
+
+     label7:
+        $z0_2 = Phi($z0 #6, $z0_1 #7);
+
+        return $z0_2;
+
+        catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+    }
+
+    static void <clinit>()
+    {
+        java.util.Hashtable $r0;
+
+        org.gjt.sp.jedit.bsh.Capabilities.accessibility = 0;
+
+        $r0 = new java.util.Hashtable;
+
+        specialinvoke $r0.<init>();
+
+        org.gjt.sp.jedit.bsh.Capabilities.classes = $r0;
+
+        return;
+    }
+}

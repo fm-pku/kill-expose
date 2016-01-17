@@ -1,0 +1,242 @@
+public class org.gjt.sp.jedit.gui.AnimatedIcon extends javax.swing.ImageIcon
+{
+    private java.awt.Image[] frames;
+    private int current;
+    private int delay;
+    private javax.swing.Timer timer;
+    private java.awt.Component host;
+    private java.awt.Image icon;
+
+    public void <init>(java.awt.Image, java.awt.Image[], int, java.awt.Component)
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon r0;
+        java.awt.Image r1;
+        java.awt.Image[] r2;
+        int i0, $i1;
+        java.awt.Component r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        r3 := @parameter3;
+
+        specialinvoke r0.<init>(r1);
+
+        r0.icon = r1;
+
+        r0.frames = r2;
+
+        $i1 = 1000 / i0;
+
+        r0.delay = $i1;
+
+        r0.host = r3;
+
+        return;
+    }
+
+    public java.awt.Image[] getFrames()
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon r0;
+        java.awt.Image[] $r1;
+
+        r0 := @this;
+
+        $r1 = r0.frames;
+
+        return $r1;
+    }
+
+    public java.awt.Image getIcon()
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon r0;
+        java.awt.Image $r1;
+
+        r0 := @this;
+
+        $r1 = r0.icon;
+
+        return $r1;
+    }
+
+    public int getRate()
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon r0;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        $i0 = r0.delay;
+
+        $i1 = 1000 / $i0;
+
+        return $i1;
+    }
+
+    public void setFrames(java.awt.Image[])
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon r0;
+        java.awt.Image[] r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.frames = r1;
+
+        return;
+    }
+
+    public void setIcon(java.awt.Image)
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon r0;
+        java.awt.Image r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.icon = r1;
+
+        return;
+    }
+
+    public void setRate(int)
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon r0;
+        int i0, $i1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $i1 = 1000 / i0;
+
+        r0.delay = $i1;
+
+        return;
+    }
+
+    public void start()
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon r0;
+        javax.swing.Timer $r1, $r2, $r4;
+        org.gjt.sp.jedit.gui.AnimatedIcon$Animator $r3;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.timer;
+
+        if $r1 == null goto label1;
+
+        return;
+
+     label1:
+        $r2 = new javax.swing.Timer;
+
+        $i0 = r0.delay;
+
+        $r3 = new org.gjt.sp.jedit.gui.AnimatedIcon$Animator;
+
+        specialinvoke $r3.<init>(r0);
+
+        specialinvoke $r2.<init>($i0, $r3);
+
+        r0.timer = $r2;
+
+        $r4 = r0.timer;
+
+        $r4.start();
+
+        return;
+    }
+
+    public void stop()
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon r0;
+        javax.swing.Timer $r1, $r4;
+        java.awt.Image $r2;
+        java.awt.Component $r3;
+
+        r0 := @this;
+
+        r0.current = 0;
+
+        $r1 = r0.timer;
+
+        if $r1 == null goto label1;
+
+        $r4 = r0.timer;
+
+        $r4.stop();
+
+        r0.timer = null;
+
+     label1:
+        $r2 = r0.icon;
+
+        r0.setImage($r2);
+
+        $r3 = r0.host;
+
+        $r3.repaint();
+
+        return;
+    }
+
+    static int access$002(org.gjt.sp.jedit.gui.AnimatedIcon, int)
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon r0;
+        int i0;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r0.current = i0;
+
+        return i0;
+    }
+
+    static int access$000(org.gjt.sp.jedit.gui.AnimatedIcon)
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon r0;
+        int $i0;
+
+        r0 := @parameter0;
+
+        $i0 = r0.current;
+
+        return $i0;
+    }
+
+    static java.awt.Image[] access$100(org.gjt.sp.jedit.gui.AnimatedIcon)
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon r0;
+        java.awt.Image[] $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.frames;
+
+        return $r1;
+    }
+
+    static java.awt.Component access$200(org.gjt.sp.jedit.gui.AnimatedIcon)
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon r0;
+        java.awt.Component $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.host;
+
+        return $r1;
+    }
+}

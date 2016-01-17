@@ -1,0 +1,335 @@
+public class org.gjt.sp.jedit.menu.DirectoryProvider extends java.lang.Object implements org.gjt.sp.jedit.menu.DynamicMenuProvider
+{
+    private final java.lang.String dir;
+
+    public void <init>(java.lang.String)
+    {
+        org.gjt.sp.jedit.menu.DirectoryProvider r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.dir = r1;
+
+        return;
+    }
+
+    public boolean updateEveryTime()
+    {
+        org.gjt.sp.jedit.menu.DirectoryProvider r0;
+
+        r0 := @this;
+
+        return 1;
+    }
+
+    public void update(javax.swing.JMenu)
+    {
+        org.gjt.sp.jedit.menu.DirectoryProvider r0;
+        javax.swing.JMenu r1, r11, $r31, r43;
+        org.gjt.sp.jedit.View r2;
+        org.gjt.sp.jedit.menu.DirectoryProvider$1 r3, $r19;
+        org.gjt.sp.jedit.menu.DirectoryProvider$2 r4, $r20;
+        java.io.File r5, r9, $r23;
+        java.lang.String r6, r7, r10, $r12, $r17, $r22, $r25, $r29, $r32, $r37, r40, r40_1, r40_2;
+        java.io.File[] r8;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, i8;
+        javax.swing.JMenuItem $r13, $r24, $r28, $r36, r41, r42, r44, r45;
+        java.lang.StringBuilder $r14, $r15, $r16;
+        javax.swing.Icon $r18, $r47;
+        org.gjt.sp.util.StandardUtilities$StringCompare $r27;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7;
+        org.gjt.sp.jedit.Buffer $r34, $r39;
+        org.gjt.sp.jedit.io.VFS $r35;
+        java.awt.event.ActionListener $r46;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = org.gjt.sp.jedit.GUIUtilities.getView(r1);
+
+        $r12 = r0.dir;
+
+        if $r12 != null goto label01;
+
+        $r39 = r2.getBuffer();
+
+        r40 = $r39.getDirectory();
+
+(0)     goto label02;
+
+     label01:
+(1)     r40_1 = r0.dir;
+
+     label02:
+        r40_2 = Phi(r40 #0, r40_1 #1);
+
+        $r13 = new javax.swing.JMenuItem;
+
+        $r14 = new java.lang.StringBuilder;
+
+        specialinvoke $r14.<init>();
+
+        $r15 = $r14.append(r40_2);
+
+        $r16 = $r15.append(58);
+
+        $r17 = $r16.toString();
+
+        specialinvoke $r13.<init>($r17);
+
+        r41 = $r13;
+
+        r41.setActionCommand(r40_2);
+
+        $r18 = org.gjt.sp.jedit.browser.FileCellRenderer.openDirIcon;
+
+        r41.setIcon($r18);
+
+        $r19 = new org.gjt.sp.jedit.menu.DirectoryProvider$1;
+
+        specialinvoke $r19.<init>(r0, r2);
+
+        r3 = $r19;
+
+        $r20 = new org.gjt.sp.jedit.menu.DirectoryProvider$2;
+
+        specialinvoke $r20.<init>(r0, r2);
+
+        r4 = $r20;
+
+        r41.addActionListener(r4);
+
+        r1.add(r41);
+
+        r1.addSeparator();
+
+        $r22 = r0.dir;
+
+        if $r22 != null goto label03;
+
+        $r34 = r2.getBuffer();
+
+        $r35 = $r34.getVFS();
+
+        $z7 = $r35 instanceof org.gjt.sp.jedit.io.FileVFS;
+
+        if $z7 != 0 goto label03;
+
+        $r36 = new javax.swing.JMenuItem;
+
+        $r37 = org.gjt.sp.jedit.jEdit.getProperty("directory.not-local");
+
+        specialinvoke $r36.<init>($r37);
+
+        r42 = $r36;
+
+        r42.setEnabled(0);
+
+        r1.add(r42);
+
+        return;
+
+     label03:
+        $r23 = new java.io.File;
+
+        specialinvoke $r23.<init>(r40_2);
+
+        r5 = $r23;
+
+        r43 = r1;
+
+        r6 = org.gjt.sp.jedit.jEdit.getProperty("backup.prefix");
+
+        r7 = org.gjt.sp.jedit.jEdit.getProperty("backup.suffix");
+
+        r8 = r5.listFiles();
+
+        if r8 == null goto label04;
+
+        $i1 = lengthof r8;
+
+        if $i1 != 0 goto label05;
+
+     label04:
+        $r24 = new javax.swing.JMenuItem;
+
+        $r25 = org.gjt.sp.jedit.jEdit.getProperty("directory.no-files");
+
+        specialinvoke $r24.<init>($r25);
+
+        r44 = $r24;
+
+        r44.setEnabled(0);
+
+        r1.add(r44);
+
+(2)     goto label17;
+
+     label05:
+        i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("menu.spillover", 20);
+
+        $r27 = new org.gjt.sp.util.StandardUtilities$StringCompare;
+
+        specialinvoke $r27.<init>(1);
+
+        java.util.Arrays.sort(r8, $r27);
+
+(3)     i8 = 0;
+
+     label06:
+        i8 = Phi(i8 #3, i8 #17);
+
+        $r47 = Phi($r47 #3, $r47 #17);
+
+        r43 = Phi(r43 #3, r43 #17);
+
+        r40 = Phi(r40_2 #3, r40 #17);
+
+        $r46 = Phi($r46 #3, $r46 #17);
+
+        $i2 = lengthof r8;
+
+(4)     if i8 >= $i2 goto label17;
+
+        r9 = r8[i8];
+
+        r10 = r9.getName();
+
+        $z0 = r10.endsWith(".marks");
+
+        if $z0 == 0 goto label07;
+
+(5)     goto label16;
+
+     label07:
+        $z1 = r10.startsWith("#");
+
+        if $z1 == 0 goto label08;
+
+        $z6 = r10.endsWith("#");
+
+        if $z6 == 0 goto label08;
+
+(6)     goto label16;
+
+     label08:
+        $i3 = r6.length();
+
+        if $i3 == 0 goto label09;
+
+        $z5 = r10.startsWith(r6);
+
+(7)     if $z5 != 0 goto label16;
+
+     label09:
+        $i4 = r7.length();
+
+        if $i4 == 0 goto label10;
+
+        $z4 = r10.endsWith(r7);
+
+        if $z4 == 0 goto label10;
+
+(8)     goto label16;
+
+     label10:
+        $r28 = new javax.swing.JMenuItem;
+
+        specialinvoke $r28.<init>(r10);
+
+        r45 = $r28;
+
+        $r29 = r9.getPath();
+
+        r45.setActionCommand($r29);
+
+        $z2 = r9.isDirectory();
+
+        if $z2 == 0 goto label11;
+
+        $r46 = r4;
+
+(9)     goto label12;
+
+     label11:
+(10)    $r46 = r3;
+
+     label12:
+        $r46 = Phi($r46 #9, $r46 #10);
+
+        r45.addActionListener($r46);
+
+        $z3 = r9.isDirectory();
+
+        if $z3 == 0 goto label13;
+
+        $r47 = org.gjt.sp.jedit.browser.FileCellRenderer.dirIcon;
+
+(11)    goto label14;
+
+     label13:
+(12)    $r47 = org.gjt.sp.jedit.browser.FileCellRenderer.fileIcon;
+
+     label14:
+        $r47 = Phi($r47 #11, $r47 #12);
+
+        r45.setIcon($r47);
+
+        $i5 = r43.getItemCount();
+
+(13)    if $i5 < i0 goto label15;
+
+        $i6 = lengthof r8;
+
+        $i7 = $i6 - 1;
+
+(14)    if i8 == $i7 goto label15;
+
+        $r31 = new javax.swing.JMenu;
+
+        $r32 = org.gjt.sp.jedit.jEdit.getProperty("common.more");
+
+        specialinvoke $r31.<init>($r32);
+
+        r11 = $r31;
+
+        r43.add(r11);
+
+(15)    r43 = r11;
+
+     label15:
+        r43 = Phi(r43 #13, r43 #14, r43 #15);
+
+(16)    r43.add(r45);
+
+     label16:
+        $r47 = Phi($r47 #5, $r47 #6, $r47 #7, $r47 #8, $r47 #16);
+
+        r43 = Phi(r43 #5, r43 #6, r43 #7, r43 #8, r43 #16);
+
+        $r46 = Phi($r46 #5, $r46 #6, $r46 #7, $r46 #8, $r46 #16);
+
+        i8 = i8 + 1;
+
+(17)    goto label06;
+
+     label17:
+        i8 = Phi(i8 #2, i8 #4);
+
+        $r47 = Phi($r47 #2, $r47 #4);
+
+        r43 = Phi(r43 #2, r43 #4);
+
+        r40 = Phi(r40_2 #2, r40 #4);
+
+        $r46 = Phi($r46 #2, $r46 #4);
+
+        return;
+    }
+}

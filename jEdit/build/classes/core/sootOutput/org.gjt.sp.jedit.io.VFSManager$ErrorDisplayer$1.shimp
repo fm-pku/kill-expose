@@ -1,0 +1,112 @@
+class org.gjt.sp.jedit.io.VFSManager$ErrorDisplayer$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final java.util.Vector val$errors;
+    final java.awt.Frame val$frame;
+    final org.gjt.sp.jedit.io.VFSManager$ErrorDisplayer this$0;
+
+    void <init>(org.gjt.sp.jedit.io.VFSManager$ErrorDisplayer, java.util.Vector, java.awt.Frame)
+    {
+        org.gjt.sp.jedit.io.VFSManager$ErrorDisplayer$1 r0;
+        org.gjt.sp.jedit.io.VFSManager$ErrorDisplayer r1;
+        java.util.Vector r2;
+        java.awt.Frame r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$0 = r1;
+
+        r0.val$errors = r2;
+
+        r0.val$frame = r3;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.io.VFSManager$ErrorDisplayer$1 r0;
+        java.lang.String r1, $r6, $r12, $r14, $r14_1, $r14_2;
+        java.lang.StringBuilder $r2, $r3, $r5;
+        java.util.Vector $r4, $r8, $r13;
+        int $i0, $i1;
+        java.lang.Integer[] $r7;
+        java.lang.Integer $r9;
+        org.gjt.sp.jedit.gui.ErrorListDialog $r10;
+        java.awt.Frame $r11, $r15, $r15_1, $r15_2;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append("ioerror.caption");
+
+        $r4 = r0.val$errors;
+
+        $i0 = $r4.size();
+
+        if $i0 != 1 goto label1;
+
+        $r14 = "-1";
+
+(0)     goto label2;
+
+     label1:
+(1)     $r14_1 = "";
+
+     label2:
+        $r14_2 = Phi($r14 #0, $r14_1 #1);
+
+        $r5 = $r3.append($r14_2);
+
+        $r6 = $r5.toString();
+
+        $r7 = newarray (java.lang.Integer)[1];
+
+        $r8 = r0.val$errors;
+
+        $i1 = $r8.size();
+
+        $r9 = java.lang.Integer.valueOf($i1);
+
+        $r7[0] = $r9;
+
+        r1 = org.gjt.sp.jedit.jEdit.getProperty($r6, $r7);
+
+        $r10 = new org.gjt.sp.jedit.gui.ErrorListDialog;
+
+        $r11 = r0.val$frame;
+
+        $z0 = $r11.isShowing();
+
+        if $z0 == 0 goto label3;
+
+        $r15 = r0.val$frame;
+
+(2)     goto label4;
+
+     label3:
+(3)     $r15_1 = org.gjt.sp.jedit.jEdit.getFirstView();
+
+     label4:
+        $r15_2 = Phi($r15 #2, $r15_1 #3);
+
+        $r12 = org.gjt.sp.jedit.jEdit.getProperty("ioerror.title");
+
+        $r13 = r0.val$errors;
+
+        specialinvoke $r10.<init>($r15_2, $r12, r1, $r13, 0);
+
+        return;
+    }
+}

@@ -1,0 +1,69 @@
+class org.gjt.sp.jedit.gui.CompletionPopup$CellRenderer extends java.lang.Object implements javax.swing.ListCellRenderer
+{
+    final org.gjt.sp.jedit.gui.CompletionPopup this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.CompletionPopup)
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$CellRenderer r0;
+        org.gjt.sp.jedit.gui.CompletionPopup r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.awt.Component getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$CellRenderer r0;
+        javax.swing.JList r1;
+        java.lang.Object r2;
+        int i0;
+        boolean z0, z1;
+        org.gjt.sp.jedit.gui.CompletionPopup $r3;
+        org.gjt.sp.jedit.gui.CompletionPopup$Candidates $r4;
+        java.awt.Component $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.CompletionPopup.access$600($r3);
+
+        $r5 = $r4.getCellRenderer(r1, i0, z0, z1);
+
+        return $r5;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.CompletionPopup, org.gjt.sp.jedit.gui.CompletionPopup$1)
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$CellRenderer r0;
+        org.gjt.sp.jedit.gui.CompletionPopup r1;
+        org.gjt.sp.jedit.gui.CompletionPopup$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

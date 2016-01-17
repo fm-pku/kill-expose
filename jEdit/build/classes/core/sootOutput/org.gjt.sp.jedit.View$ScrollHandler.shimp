@@ -1,0 +1,77 @@
+class org.gjt.sp.jedit.View$ScrollHandler extends java.lang.Object implements org.gjt.sp.jedit.textarea.ScrollListener
+{
+    final org.gjt.sp.jedit.View this$0;
+
+    private void <init>(org.gjt.sp.jedit.View)
+    {
+        org.gjt.sp.jedit.View$ScrollHandler r0;
+        org.gjt.sp.jedit.View r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void scrolledVertically(org.gjt.sp.jedit.textarea.TextArea)
+    {
+        org.gjt.sp.jedit.View$ScrollHandler r0;
+        org.gjt.sp.jedit.textarea.TextArea r1;
+        org.gjt.sp.jedit.View $r2, $r4;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r3;
+        org.gjt.sp.jedit.gui.StatusBar $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = $r2.getTextArea();
+
+        if $r3 != r1 goto label1;
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.View.access$500($r4);
+
+        $r5.updateCaretStatus();
+
+     label1:
+        return;
+    }
+
+    public void scrolledHorizontally(org.gjt.sp.jedit.textarea.TextArea)
+    {
+        org.gjt.sp.jedit.View$ScrollHandler r0;
+        org.gjt.sp.jedit.textarea.TextArea r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.View$1)
+    {
+        org.gjt.sp.jedit.View$ScrollHandler r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.View$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

@@ -1,0 +1,77 @@
+class org.gjt.sp.jedit.gui.ActionBar$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.ActionBar this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.ActionBar)
+    {
+        org.gjt.sp.jedit.gui.ActionBar$ActionHandler r0;
+        org.gjt.sp.jedit.gui.ActionBar r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.ActionBar$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object $r2;
+        org.gjt.sp.jedit.gui.ActionBar $r3, $r5, $r6, $r8;
+        org.gjt.sp.jedit.gui.RolloverButton $r4;
+        org.gjt.sp.jedit.View $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getSource();
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.ActionBar.access$400($r3);
+
+        if $r2 != $r4 goto label1;
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.gui.ActionBar.access$200($r6);
+
+        $r8 = r0.this$0;
+
+        $r7.removeToolBar($r8);
+
+        goto label2;
+
+     label1:
+        $r5 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.ActionBar.access$500($r5);
+
+     label2:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.ActionBar, org.gjt.sp.jedit.gui.ActionBar$1)
+    {
+        org.gjt.sp.jedit.gui.ActionBar$ActionHandler r0;
+        org.gjt.sp.jedit.gui.ActionBar r1;
+        org.gjt.sp.jedit.gui.ActionBar$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

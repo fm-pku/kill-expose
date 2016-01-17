@@ -1,0 +1,54 @@
+public class org.gjt.sp.jedit.bsh.Token extends java.lang.Object implements java.io.Serializable
+{
+    public int kind;
+    public int beginLine;
+    public int beginColumn;
+    public int endLine;
+    public int endColumn;
+    public java.lang.String image;
+    public org.gjt.sp.jedit.bsh.Token next;
+    public org.gjt.sp.jedit.bsh.Token specialToken;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.Token r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.bsh.Token r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.image;
+
+        return $r1;
+    }
+
+    public static final org.gjt.sp.jedit.bsh.Token newToken(int)
+    {
+        int i0;
+        org.gjt.sp.jedit.bsh.Token $r0;
+
+        i0 := @parameter0;
+
+        lookupswitch(i0)
+        {
+            default: goto label1;
+        };
+
+     label1:
+        $r0 = new org.gjt.sp.jedit.bsh.Token;
+
+        specialinvoke $r0.<init>();
+
+        return $r0;
+    }
+}

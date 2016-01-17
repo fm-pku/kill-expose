@@ -1,0 +1,809 @@
+public class org.gjt.sp.jedit.options.ToolBarOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private javax.swing.JCheckBox showToolbar;
+    private javax.swing.DefaultListModel listModel;
+    private javax.swing.JList list;
+    private org.gjt.sp.jedit.gui.RolloverButton add;
+    private org.gjt.sp.jedit.gui.RolloverButton remove;
+    private org.gjt.sp.jedit.gui.RolloverButton moveUp;
+    private org.gjt.sp.jedit.gui.RolloverButton moveDown;
+    private org.gjt.sp.jedit.gui.RolloverButton edit;
+    private org.gjt.sp.jedit.gui.RolloverButton reset;
+    private javax.swing.DefaultComboBoxModel iconList;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("toolbar");
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+        javax.swing.JPanel r1, r2, $r7, $r30;
+        org.gjt.sp.jedit.options.ToolBarOptionPane$ActionHandler r3, $r33;
+        java.util.StringTokenizer r4, $r94;
+        java.lang.String r5, $r10, $r15, $r19, $r35, $r38, $r45, $r48, $r55, $r58, $r65, $r68, $r75, $r78, $r85, $r88, $r95;
+        java.awt.BorderLayout $r6;
+        java.awt.GridLayout $r8;
+        javax.swing.JCheckBox $r9, $r11, $r12;
+        boolean $z0, $z1;
+        javax.swing.JLabel $r14;
+        javax.swing.DefaultListModel $r18, $r21;
+        javax.swing.JList $r20, $r22, $r24, $r26, $r28;
+        org.gjt.sp.jedit.options.ToolBarOptionPane$ListHandler $r23;
+        org.gjt.sp.jedit.options.ToolBarOptionPane$ButtonCellRenderer $r25;
+        javax.swing.JScrollPane $r27;
+        javax.swing.border.EmptyBorder $r31;
+        javax.swing.BoxLayout $r32;
+        org.gjt.sp.jedit.gui.RolloverButton $r34, $r37, $r39, $r40, $r44, $r47, $r49, $r50, $r54, $r57, $r59, $r60, $r64, $r67, $r69, $r70, $r74, $r77, $r79, $r80, $r84, $r87, $r89, $r90;
+        javax.swing.Icon $r36, $r46, $r56, $r66, $r76, $r86, $r98;
+        java.awt.Component $r42, $r52, $r62, $r72, $r82;
+        javax.swing.DefaultComboBoxModel $r93, $r97;
+        org.gjt.sp.jedit.options.ToolBarOptionPane$IconListEntry $r96;
+
+        r0 := @this;
+
+        $r6 = new java.awt.BorderLayout;
+
+        specialinvoke $r6.<init>();
+
+        r0.setLayout($r6);
+
+        $r7 = new javax.swing.JPanel;
+
+        $r8 = new java.awt.GridLayout;
+
+        specialinvoke $r8.<init>(2, 1);
+
+        specialinvoke $r7.<init>($r8);
+
+        r1 = $r7;
+
+        $r9 = new javax.swing.JCheckBox;
+
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty("options.toolbar.showToolbar");
+
+        specialinvoke $r9.<init>($r10);
+
+        r0.showToolbar = $r9;
+
+        $r11 = r0.showToolbar;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.showToolbar");
+
+        $r11.setSelected($z0);
+
+        $r12 = r0.showToolbar;
+
+        r1.add($r12);
+
+        $r14 = new javax.swing.JLabel;
+
+        $r15 = org.gjt.sp.jedit.jEdit.getProperty("options.toolbar.caption");
+
+        specialinvoke $r14.<init>($r15);
+
+        r1.add($r14);
+
+        r0.add("North", r1);
+
+        $r18 = new javax.swing.DefaultListModel;
+
+        specialinvoke $r18.<init>();
+
+        r0.listModel = $r18;
+
+        $r19 = org.gjt.sp.jedit.jEdit.getProperty("view.toolbar");
+
+        specialinvoke r0.reloadButtonList($r19);
+
+        $r20 = new javax.swing.JList;
+
+        $r21 = r0.listModel;
+
+        specialinvoke $r20.<init>($r21);
+
+        r0.list = $r20;
+
+        $r22 = r0.list;
+
+        $r22.setSelectionMode(0);
+
+        $r24 = r0.list;
+
+        $r23 = new org.gjt.sp.jedit.options.ToolBarOptionPane$ListHandler;
+
+        specialinvoke $r23.<init>(r0);
+
+        $r24.addListSelectionListener($r23);
+
+        $r26 = r0.list;
+
+        $r25 = new org.gjt.sp.jedit.options.ToolBarOptionPane$ButtonCellRenderer;
+
+        specialinvoke $r25.<init>();
+
+        $r26.setCellRenderer($r25);
+
+        $r27 = new javax.swing.JScrollPane;
+
+        $r28 = r0.list;
+
+        specialinvoke $r27.<init>($r28);
+
+        r0.add("Center", $r27);
+
+        $r30 = new javax.swing.JPanel;
+
+        specialinvoke $r30.<init>();
+
+        r2 = $r30;
+
+        $r31 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r31.<init>(3, 0, 0, 0);
+
+        r2.setBorder($r31);
+
+        $r32 = new javax.swing.BoxLayout;
+
+        specialinvoke $r32.<init>(r2, 0);
+
+        r2.setLayout($r32);
+
+        $r33 = new org.gjt.sp.jedit.options.ToolBarOptionPane$ActionHandler;
+
+        specialinvoke $r33.<init>(r0);
+
+        r3 = $r33;
+
+        $r34 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r35 = org.gjt.sp.jedit.jEdit.getProperty("options.toolbar.add.icon");
+
+        $r36 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r35);
+
+        specialinvoke $r34.<init>($r36);
+
+        r0.add = $r34;
+
+        $r37 = r0.add;
+
+        $r38 = org.gjt.sp.jedit.jEdit.getProperty("options.toolbar.add");
+
+        $r37.setToolTipText($r38);
+
+        $r39 = r0.add;
+
+        $r39.addActionListener(r3);
+
+        $r40 = r0.add;
+
+        r2.add($r40);
+
+        $r42 = javax.swing.Box.createHorizontalStrut(6);
+
+        r2.add($r42);
+
+        $r44 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r45 = org.gjt.sp.jedit.jEdit.getProperty("options.toolbar.remove.icon");
+
+        $r46 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r45);
+
+        specialinvoke $r44.<init>($r46);
+
+        r0.remove = $r44;
+
+        $r47 = r0.remove;
+
+        $r48 = org.gjt.sp.jedit.jEdit.getProperty("options.toolbar.remove");
+
+        $r47.setToolTipText($r48);
+
+        $r49 = r0.remove;
+
+        $r49.addActionListener(r3);
+
+        $r50 = r0.remove;
+
+        r2.add($r50);
+
+        $r52 = javax.swing.Box.createHorizontalStrut(6);
+
+        r2.add($r52);
+
+        $r54 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r55 = org.gjt.sp.jedit.jEdit.getProperty("options.toolbar.moveUp.icon");
+
+        $r56 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r55);
+
+        specialinvoke $r54.<init>($r56);
+
+        r0.moveUp = $r54;
+
+        $r57 = r0.moveUp;
+
+        $r58 = org.gjt.sp.jedit.jEdit.getProperty("options.toolbar.moveUp");
+
+        $r57.setToolTipText($r58);
+
+        $r59 = r0.moveUp;
+
+        $r59.addActionListener(r3);
+
+        $r60 = r0.moveUp;
+
+        r2.add($r60);
+
+        $r62 = javax.swing.Box.createHorizontalStrut(6);
+
+        r2.add($r62);
+
+        $r64 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r65 = org.gjt.sp.jedit.jEdit.getProperty("options.toolbar.moveDown.icon");
+
+        $r66 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r65);
+
+        specialinvoke $r64.<init>($r66);
+
+        r0.moveDown = $r64;
+
+        $r67 = r0.moveDown;
+
+        $r68 = org.gjt.sp.jedit.jEdit.getProperty("options.toolbar.moveDown");
+
+        $r67.setToolTipText($r68);
+
+        $r69 = r0.moveDown;
+
+        $r69.addActionListener(r3);
+
+        $r70 = r0.moveDown;
+
+        r2.add($r70);
+
+        $r72 = javax.swing.Box.createHorizontalStrut(6);
+
+        r2.add($r72);
+
+        $r74 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r75 = org.gjt.sp.jedit.jEdit.getProperty("options.toolbar.edit.icon");
+
+        $r76 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r75);
+
+        specialinvoke $r74.<init>($r76);
+
+        r0.edit = $r74;
+
+        $r77 = r0.edit;
+
+        $r78 = org.gjt.sp.jedit.jEdit.getProperty("options.toolbar.edit");
+
+        $r77.setToolTipText($r78);
+
+        $r79 = r0.edit;
+
+        $r79.addActionListener(r3);
+
+        $r80 = r0.edit;
+
+        r2.add($r80);
+
+        $r82 = javax.swing.Box.createGlue();
+
+        r2.add($r82);
+
+        $r84 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r85 = org.gjt.sp.jedit.jEdit.getProperty("options.toolbar.reset.icon");
+
+        $r86 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r85);
+
+        specialinvoke $r84.<init>($r86);
+
+        r0.reset = $r84;
+
+        $r87 = r0.reset;
+
+        $r88 = org.gjt.sp.jedit.jEdit.getProperty("options.toolbar.reset");
+
+        $r87.setToolTipText($r88);
+
+        $r89 = r0.reset;
+
+        $r89.addActionListener(r3);
+
+        $r90 = r0.reset;
+
+        r2.add($r90);
+
+        specialinvoke r0.updateButtons();
+
+        r0.add("South", r2);
+
+        $r93 = new javax.swing.DefaultComboBoxModel;
+
+        specialinvoke $r93.<init>();
+
+        r0.iconList = $r93;
+
+        $r94 = new java.util.StringTokenizer;
+
+        $r95 = org.gjt.sp.jedit.jEdit.getProperty("icons");
+
+        specialinvoke $r94.<init>($r95);
+
+        r4 = $r94;
+
+     label1:
+        $z1 = r4.hasMoreElements();
+
+        if $z1 == 0 goto label2;
+
+        r5 = r4.nextToken();
+
+        $r97 = r0.iconList;
+
+        $r96 = new org.gjt.sp.jedit.options.ToolBarOptionPane$IconListEntry;
+
+        $r98 = org.gjt.sp.jedit.GUIUtilities.loadIcon(r5);
+
+        specialinvoke $r96.<init>($r98, r5);
+
+        $r97.addElement($r96);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+        java.lang.StringBuilder r1, $r4, $r11, $r13, $r14;
+        org.gjt.sp.jedit.options.ToolBarOptionPane$Button r2;
+        javax.swing.JCheckBox $r3;
+        boolean $z0;
+        javax.swing.DefaultListModel $r5, $r7;
+        int $i0, i1;
+        java.lang.String $r6, $r9, $r12, $r15, $r16;
+        java.lang.Object $r8;
+
+        r0 := @this;
+
+        $r3 = r0.showToolbar;
+
+        $z0 = $r3.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.showToolbar", $z0);
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $r5 = r0.listModel;
+
+        $i0 = $r5.getSize();
+
+        if i1 >= $i0 goto label3;
+
+        if i1 == 0 goto label2;
+
+        r1.append(32);
+
+     label2:
+        $r7 = r0.listModel;
+
+        $r8 = $r7.elementAt(i1);
+
+        r2 = (org.gjt.sp.jedit.options.ToolBarOptionPane$Button) $r8;
+
+        $r9 = r2.actionName;
+
+        r1.append($r9);
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = r2.actionName;
+
+        $r13 = $r11.append($r12);
+
+        $r14 = $r13.append(".icon");
+
+        $r15 = $r14.toString();
+
+        $r16 = r2.iconName;
+
+        org.gjt.sp.jedit.jEdit.setProperty($r15, $r16);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        $r6 = r1.toString();
+
+        org.gjt.sp.jedit.jEdit.setProperty("view.toolbar", $r6);
+
+        return;
+    }
+
+    private void updateButtons()
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+        int i0, $i1, $i2, $i3;
+        javax.swing.JList $r1;
+        org.gjt.sp.jedit.gui.RolloverButton $r2, $r3, $r4, $r5;
+        javax.swing.DefaultListModel $r6, $r7;
+        boolean $z0, $z1, $z2, $z3, $z0_1, $z0_2, $z1_1, $z1_2, $z2_1, $z2_2, $z3_1, $z3_2;
+
+        r0 := @this;
+
+        $r1 = r0.list;
+
+        i0 = $r1.getSelectedIndex();
+
+        $r2 = r0.remove;
+
+        if i0 == -1 goto label1;
+
+        $r7 = r0.listModel;
+
+        $i3 = $r7.getSize();
+
+        if $i3 == 0 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        $r2.setEnabled($z0_2);
+
+        $r3 = r0.moveUp;
+
+        if i0 <= 0 goto label3;
+
+        $z1 = 1;
+
+(2)     goto label4;
+
+     label3:
+(3)     $z1_1 = 0;
+
+     label4:
+        $z1_2 = Phi($z1 #2, $z1_1 #3);
+
+        $r3.setEnabled($z1_2);
+
+        $r4 = r0.moveDown;
+
+        if i0 == -1 goto label5;
+
+        $r6 = r0.listModel;
+
+        $i1 = $r6.getSize();
+
+        $i2 = $i1 - 1;
+
+        if i0 == $i2 goto label5;
+
+        $z2 = 1;
+
+(4)     goto label6;
+
+     label5:
+(5)     $z2_1 = 0;
+
+     label6:
+        $z2_2 = Phi($z2 #4, $z2_1 #5);
+
+        $r4.setEnabled($z2_2);
+
+        $r5 = r0.edit;
+
+        if i0 == -1 goto label7;
+
+        $z3 = 1;
+
+(6)     goto label8;
+
+     label7:
+(7)     $z3_1 = 0;
+
+     label8:
+        $z3_2 = Phi($z3 #6, $z3_1 #7);
+
+        $r5.setEnabled($z3_2);
+
+        return;
+    }
+
+    private void reloadButtonList(java.lang.String)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+        java.lang.String r1, r3, r5, $r11, $r14, $r15, r18;
+        java.util.StringTokenizer r2, $r6;
+        org.gjt.sp.jedit.EditAction r4;
+        javax.swing.DefaultListModel $r7, $r13, $r17;
+        boolean $z0, $z1, $z2;
+        java.lang.StringBuilder $r8, $r9, $r10;
+        org.gjt.sp.jedit.options.ToolBarOptionPane$Button $r12, $r16;
+        javax.swing.Icon r19;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r6 = new java.util.StringTokenizer;
+
+        specialinvoke $r6.<init>(r1);
+
+        r2 = $r6;
+
+        $r7 = r0.listModel;
+
+(0)     $r7.clear();
+
+     label1:
+        r19 = Phi(r19 #0, r19 #2, r19 #3, r19 #9);
+
+        r18 = Phi(r18 #0, r18 #2, r18 #3, r18 #9);
+
+        $z0 = r2.hasMoreTokens();
+
+        if $z0 == 0 goto label9;
+
+        r3 = r2.nextToken();
+
+        $z1 = r3.equals("-");
+
+        if $z1 == 0 goto label2;
+
+        $r17 = r0.listModel;
+
+        $r16 = new org.gjt.sp.jedit.options.ToolBarOptionPane$Button;
+
+        specialinvoke $r16.<init>("-", null, null, "-");
+
+        $r17.addElement($r16);
+
+(1)     goto label8;
+
+     label2:
+        r4 = org.gjt.sp.jedit.jEdit.getAction(r3);
+
+        if r4 != null goto label3;
+
+(2)     goto label1;
+
+     label3:
+        r5 = r4.getLabel();
+
+        if r5 != null goto label4;
+
+(3)     goto label1;
+
+     label4:
+        $z2 = r3.equals("-");
+
+        if $z2 == 0 goto label5;
+
+        r18 = null;
+
+        r19 = null;
+
+(4)     goto label7;
+
+     label5:
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append(r3);
+
+        $r10 = $r9.append(".icon");
+
+        $r11 = $r10.toString();
+
+        r18 = org.gjt.sp.jedit.jEdit.getProperty($r11);
+
+        if r18 != null goto label6;
+
+        $r15 = org.gjt.sp.jedit.jEdit.getProperty("broken-image.icon");
+
+        r19 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r15);
+
+(5)     goto label7;
+
+     label6:
+        r19 = org.gjt.sp.jedit.GUIUtilities.loadIcon(r18);
+
+(6)     if r19 != null goto label7;
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("broken-image.icon");
+
+(7)     r19 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r14);
+
+     label7:
+        r19 = Phi(r19 #4, r19 #5, r19 #6, r19 #7);
+
+        r18 = Phi(r18 #4, r18 #5, r18 #6, r18 #7);
+
+        $r13 = r0.listModel;
+
+        $r12 = new org.gjt.sp.jedit.options.ToolBarOptionPane$Button;
+
+        specialinvoke $r12.<init>(r3, r18, r19, r5);
+
+(8)     $r13.addElement($r12);
+
+     label8:
+        r19 = Phi(r19 #1, r19 #8);
+
+        r18 = Phi(r18 #1, r18 #8);
+
+(9)     goto label1;
+
+     label9:
+        return;
+    }
+
+    static org.gjt.sp.jedit.gui.RolloverButton access$000(org.gjt.sp.jedit.options.ToolBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+        org.gjt.sp.jedit.gui.RolloverButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.add;
+
+        return $r1;
+    }
+
+    static javax.swing.DefaultComboBoxModel access$100(org.gjt.sp.jedit.options.ToolBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+        javax.swing.DefaultComboBoxModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.iconList;
+
+        return $r1;
+    }
+
+    static javax.swing.JList access$200(org.gjt.sp.jedit.options.ToolBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+        javax.swing.JList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.list;
+
+        return $r1;
+    }
+
+    static javax.swing.DefaultListModel access$300(org.gjt.sp.jedit.options.ToolBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+        javax.swing.DefaultListModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.listModel;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.RolloverButton access$400(org.gjt.sp.jedit.options.ToolBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+        org.gjt.sp.jedit.gui.RolloverButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.remove;
+
+        return $r1;
+    }
+
+    static void access$500(org.gjt.sp.jedit.options.ToolBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updateButtons();
+
+        return;
+    }
+
+    static org.gjt.sp.jedit.gui.RolloverButton access$600(org.gjt.sp.jedit.options.ToolBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+        org.gjt.sp.jedit.gui.RolloverButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.moveUp;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.RolloverButton access$700(org.gjt.sp.jedit.options.ToolBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+        org.gjt.sp.jedit.gui.RolloverButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.moveDown;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.RolloverButton access$800(org.gjt.sp.jedit.options.ToolBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+        org.gjt.sp.jedit.gui.RolloverButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.edit;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.RolloverButton access$900(org.gjt.sp.jedit.options.ToolBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+        org.gjt.sp.jedit.gui.RolloverButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.reset;
+
+        return $r1;
+    }
+
+    static void access$1000(org.gjt.sp.jedit.options.ToolBarOptionPane, java.lang.String)
+    {
+        org.gjt.sp.jedit.options.ToolBarOptionPane r0;
+        java.lang.String r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        specialinvoke r0.reloadButtonList(r1);
+
+        return;
+    }
+}

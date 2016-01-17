@@ -1,0 +1,26 @@
+final class org.gjt.sp.jedit.bsh.Interpreter$1 extends java.io.FilterInputStream
+{
+
+    void <init>(java.io.InputStream)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter$1 r0;
+        java.io.InputStream r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+
+    public int available() throws java.io.IOException
+    {
+        org.gjt.sp.jedit.bsh.Interpreter$1 r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+}

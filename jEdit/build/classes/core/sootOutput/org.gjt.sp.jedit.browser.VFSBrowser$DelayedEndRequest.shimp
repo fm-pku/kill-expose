@@ -1,0 +1,51 @@
+class org.gjt.sp.jedit.browser.VFSBrowser$DelayedEndRequest extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.browser.VFSBrowser this$0;
+
+    private void <init>(org.gjt.sp.jedit.browser.VFSBrowser)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$DelayedEndRequest r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$DelayedEndRequest r0;
+        org.gjt.sp.jedit.browser.VFSBrowser $r1;
+
+        r0 := @this;
+
+        $r1 = r0.this$0;
+
+        $r1.endRequest();
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.browser.VFSBrowser, org.gjt.sp.jedit.browser.VFSBrowser$1)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$DelayedEndRequest r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+        org.gjt.sp.jedit.browser.VFSBrowser$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

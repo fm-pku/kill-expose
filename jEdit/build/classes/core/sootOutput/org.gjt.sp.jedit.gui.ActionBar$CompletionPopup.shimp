@@ -1,0 +1,142 @@
+class org.gjt.sp.jedit.gui.ActionBar$CompletionPopup extends javax.swing.JWindow
+{
+    org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$CompletionList list;
+    final org.gjt.sp.jedit.gui.ActionBar this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.ActionBar, java.lang.String[])
+    {
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup r0;
+        org.gjt.sp.jedit.gui.ActionBar r1;
+        java.lang.String[] r2;
+        javax.swing.JScrollPane r3, $r15;
+        java.awt.Point r4, $r19;
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$KeyHandler r5, $r21;
+        org.gjt.sp.jedit.View $r6;
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$1 $r7;
+        java.awt.BorderLayout $r8;
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$CompletionList $r9, $r10, $r12, $r13, $r14, $r16, $r18, $r22;
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$MouseHandler $r11;
+        java.awt.Container $r17;
+        int $i0, $i1;
+        org.gjt.sp.jedit.gui.HistoryTextField $r20;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        $r6 = org.gjt.sp.jedit.gui.ActionBar.access$200(r1);
+
+        specialinvoke r0.<init>($r6);
+
+        $r7 = new org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$1;
+
+        $r8 = new java.awt.BorderLayout;
+
+        specialinvoke $r8.<init>();
+
+        specialinvoke $r7.<init>(r0, $r8, r1);
+
+        r0.setContentPane($r7);
+
+        $r9 = new org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$CompletionList;
+
+        specialinvoke $r9.<init>(r0, r2);
+
+        r0.list = $r9;
+
+        $r10 = r0.list;
+
+        $r10.setVisibleRowCount(8);
+
+        $r12 = r0.list;
+
+        $r11 = new org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$MouseHandler;
+
+        specialinvoke $r11.<init>(r0, null);
+
+        $r12.addMouseListener($r11);
+
+        $r13 = r0.list;
+
+        $r13.setSelectedIndex(0);
+
+        $r14 = r0.list;
+
+        $r14.setSelectionMode(0);
+
+        $r15 = new javax.swing.JScrollPane;
+
+        $r16 = r0.list;
+
+        specialinvoke $r15.<init>($r16, 22, 31);
+
+        r3 = $r15;
+
+        $r17 = r0.getContentPane();
+
+        $r17.add(r3, "Center");
+
+        $r18 = r0.list;
+
+        org.gjt.sp.jedit.GUIUtilities.requestFocus(r0, $r18);
+
+        r0.pack();
+
+        $r19 = new java.awt.Point;
+
+        $i0 = r0.getHeight();
+
+        $i1 = neg $i0;
+
+        specialinvoke $r19.<init>(0, $i1);
+
+        r4 = $r19;
+
+        $r20 = org.gjt.sp.jedit.gui.ActionBar.access$800(r1);
+
+        javax.swing.SwingUtilities.convertPointToScreen(r4, $r20);
+
+        r0.setLocation(r4);
+
+        r0.setVisible(1);
+
+        $r21 = new org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$KeyHandler;
+
+        specialinvoke $r21.<init>(r0, null);
+
+        r5 = $r21;
+
+        r0.addKeyListener(r5);
+
+        $r22 = r0.list;
+
+        $r22.addKeyListener(r5);
+
+        return;
+    }
+
+    void setModel(java.lang.String[])
+    {
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup r0;
+        java.lang.String[] r1;
+        org.gjt.sp.jedit.gui.ActionBar$CompletionPopup$CompletionList $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.list;
+
+        $r2.setListData(r1);
+
+        $r3 = r0.list;
+
+        $r3.setSelectedIndex(0);
+
+        return;
+    }
+}

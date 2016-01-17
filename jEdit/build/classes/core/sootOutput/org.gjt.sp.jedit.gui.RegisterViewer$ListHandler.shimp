@@ -1,0 +1,130 @@
+class org.gjt.sp.jedit.gui.RegisterViewer$ListHandler extends java.lang.Object implements javax.swing.event.ListSelectionListener
+{
+    final org.gjt.sp.jedit.gui.RegisterViewer this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.RegisterViewer)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer$ListHandler r0;
+        org.gjt.sp.jedit.gui.RegisterViewer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void valueChanged(javax.swing.event.ListSelectionEvent)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer$ListHandler r0;
+        javax.swing.event.ListSelectionEvent r1;
+        java.lang.Object r2;
+        char c0;
+        org.gjt.sp.jedit.Registers$Register r3;
+        org.gjt.sp.jedit.gui.RegisterViewer $r4, $r7, $r8, $r11, $r13, $r15, $r16, $r18, $r20, $r21, $r23;
+        javax.swing.JList $r5;
+        boolean $z0, $z1, $z2, $z3;
+        java.lang.Character $r6;
+        javax.swing.JTextArea $r9, $r12, $r14, $r17, $r19, $r22, $r24;
+        java.lang.String $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.gui.RegisterViewer.access$000($r4);
+
+        r2 = $r5.getSelectedValue();
+
+        $z0 = r2 instanceof java.lang.Character;
+
+        if $z0 != 0 goto label2;
+
+        $r20 = r0.this$0;
+
+        $z3 = org.gjt.sp.jedit.gui.RegisterViewer.access$100($r20);
+
+        if $z3 != 0 goto label1;
+
+        $r21 = r0.this$0;
+
+        $r22 = org.gjt.sp.jedit.gui.RegisterViewer.access$200($r21);
+
+        $r22.setText("");
+
+        $r23 = r0.this$0;
+
+        $r24 = org.gjt.sp.jedit.gui.RegisterViewer.access$200($r23);
+
+        $r24.setEditable(0);
+
+     label1:
+        return;
+
+     label2:
+        $r6 = (java.lang.Character) r2;
+
+        c0 = $r6.charValue();
+
+        r3 = org.gjt.sp.jedit.Registers.getRegister(c0);
+
+        if r3 != null goto label4;
+
+        $r15 = r0.this$0;
+
+        $z2 = org.gjt.sp.jedit.gui.RegisterViewer.access$100($r15);
+
+        if $z2 != 0 goto label3;
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.gui.RegisterViewer.access$200($r16);
+
+        $r17.setText("");
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.gui.RegisterViewer.access$200($r18);
+
+        $r19.setEditable(0);
+
+     label3:
+        return;
+
+     label4:
+        $r7 = r0.this$0;
+
+        $z1 = org.gjt.sp.jedit.gui.RegisterViewer.access$100($r7);
+
+        if $z1 != 0 goto label5;
+
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.gui.RegisterViewer.access$200($r8);
+
+        $r10 = r3.toString();
+
+        $r9.setText($r10);
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.gui.RegisterViewer.access$200($r11);
+
+        $r12.setEditable(1);
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.gui.RegisterViewer.access$200($r13);
+
+        $r14.setCaretPosition(0);
+
+     label5:
+        return;
+    }
+}

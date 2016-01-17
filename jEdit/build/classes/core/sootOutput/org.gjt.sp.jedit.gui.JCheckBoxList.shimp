@@ -1,0 +1,358 @@
+public class org.gjt.sp.jedit.gui.JCheckBoxList extends javax.swing.JTable
+{
+    private javax.swing.table.TableCellRenderer dummy;
+
+    public void <init>(java.lang.Object[])
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList r0;
+        java.lang.Object[] r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.setModel(r1);
+
+        return;
+    }
+
+    public void <init>(java.util.Vector)
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList r0;
+        java.util.Vector r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.setModel(r1);
+
+        return;
+    }
+
+    public void setModel(java.lang.Object[])
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList r0;
+        java.lang.Object[] r1;
+        org.gjt.sp.jedit.gui.CheckBoxListModel $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new org.gjt.sp.jedit.gui.CheckBoxListModel;
+
+        specialinvoke $r2.<init>(r1);
+
+        r0.setModel($r2);
+
+        specialinvoke r0.init();
+
+        return;
+    }
+
+    public void setModel(java.util.Vector)
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList r0;
+        java.util.Vector r1;
+        org.gjt.sp.jedit.gui.CheckBoxListModel $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new org.gjt.sp.jedit.gui.CheckBoxListModel;
+
+        specialinvoke $r2.<init>(r1);
+
+        r0.setModel($r2);
+
+        specialinvoke r0.init();
+
+        return;
+    }
+
+    public java.lang.Object[] getCheckedValues()
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList r0;
+        java.util.ArrayList r1, $r4;
+        org.gjt.sp.jedit.gui.CheckBoxListModel r2;
+        org.gjt.sp.jedit.gui.JCheckBoxList$Entry r3;
+        javax.swing.table.TableModel $r5;
+        java.util.Vector $r6, $r8;
+        int $i0, $i1, i2;
+        java.lang.Object[] $r7, r11;
+        java.lang.Object $r9, $r10;
+        boolean $z0, $z1;
+
+        r0 := @this;
+
+        $r4 = new java.util.ArrayList;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4;
+
+        $r5 = r0.getModel();
+
+        r2 = (org.gjt.sp.jedit.gui.CheckBoxListModel) $r5;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $r6 = r2.items;
+
+        $i0 = $r6.size();
+
+        if i2 >= $i0 goto label3;
+
+        $r8 = r2.items;
+
+        $r9 = $r8.get(i2);
+
+        r3 = (org.gjt.sp.jedit.gui.JCheckBoxList$Entry) $r9;
+
+        $z0 = r3.checked;
+
+        if $z0 == 0 goto label2;
+
+        $z1 = r3.caption;
+
+        if $z1 != 0 goto label2;
+
+        $r10 = r3.value;
+
+        r1.add($r10);
+
+     label2:
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label3:
+        $i1 = r1.size();
+
+        r11 = newarray (java.lang.Object)[$i1];
+
+        $r7 = r1.toArray(r11);
+
+        return $r7;
+    }
+
+    public void selectAll()
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList r0;
+        org.gjt.sp.jedit.gui.CheckBoxListModel r1;
+        org.gjt.sp.jedit.gui.JCheckBoxList$Entry r2;
+        javax.swing.table.TableModel $r3;
+        java.util.Vector $r4, $r5;
+        int $i0, $i1, i2;
+        java.lang.Object $r6;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r3 = r0.getModel();
+
+        r1 = (org.gjt.sp.jedit.gui.CheckBoxListModel) $r3;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $r4 = r1.items;
+
+        $i0 = $r4.size();
+
+        if i2 >= $i0 goto label3;
+
+        $r5 = r1.items;
+
+        $r6 = $r5.elementAt(i2);
+
+        r2 = (org.gjt.sp.jedit.gui.JCheckBoxList$Entry) $r6;
+
+        $z0 = r2.caption;
+
+        if $z0 != 0 goto label2;
+
+        r2.checked = 1;
+
+     label2:
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label3:
+        $i1 = r1.getRowCount();
+
+        r1.fireTableRowsUpdated(0, $i1);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.gui.JCheckBoxList$Entry[] getValues()
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList r0;
+        org.gjt.sp.jedit.gui.CheckBoxListModel r1;
+        org.gjt.sp.jedit.gui.JCheckBoxList$Entry[] r2;
+        javax.swing.table.TableModel $r3;
+        java.util.Vector $r4, $r5;
+        int $i0;
+
+        r0 := @this;
+
+        $r3 = r0.getModel();
+
+        r1 = (org.gjt.sp.jedit.gui.CheckBoxListModel) $r3;
+
+        $r4 = r1.items;
+
+        $i0 = $r4.size();
+
+        r2 = newarray (org.gjt.sp.jedit.gui.JCheckBoxList$Entry)[$i0];
+
+        $r5 = r1.items;
+
+        $r5.copyInto(r2);
+
+        return r2;
+    }
+
+    public java.lang.Object getSelectedValue()
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList r0;
+        int i0;
+        javax.swing.table.TableModel $r1;
+        java.lang.Object $r2;
+
+        r0 := @this;
+
+        i0 = r0.getSelectedRow();
+
+        if i0 != -1 goto label1;
+
+        return null;
+
+     label1:
+        $r1 = r0.getModel();
+
+        $r2 = $r1.getValueAt(i0, 1);
+
+        return $r2;
+    }
+
+    public javax.swing.table.TableCellRenderer getCellRenderer(int, int)
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList r0;
+        int i0, i1;
+        org.gjt.sp.jedit.gui.JCheckBoxList$Entry r1;
+        javax.swing.table.TableCellRenderer $r2, $r7;
+        javax.swing.table.TableModel $r3;
+        org.gjt.sp.jedit.gui.CheckBoxListModel $r4;
+        java.util.Vector $r5;
+        java.lang.Object $r6;
+        boolean $z0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        if i1 != 0 goto label1;
+
+        $r3 = r0.getModel();
+
+        $r4 = (org.gjt.sp.jedit.gui.CheckBoxListModel) $r3;
+
+        $r5 = $r4.items;
+
+        $r6 = $r5.get(i0);
+
+        r1 = (org.gjt.sp.jedit.gui.JCheckBoxList$Entry) $r6;
+
+        $z0 = r1.caption;
+
+        if $z0 == 0 goto label1;
+
+        $r7 = r0.dummy;
+
+        return $r7;
+
+     label1:
+        $r2 = specialinvoke r0.getCellRenderer(i0, i1);
+
+        return $r2;
+    }
+
+    private void init()
+    {
+        org.gjt.sp.jedit.gui.JCheckBoxList r0;
+        int i0;
+        org.gjt.sp.jedit.gui.JCheckBoxList$DummyRenderer $r1;
+        javax.swing.ListSelectionModel $r2;
+        javax.swing.table.TableColumnModel $r3, $r6;
+        javax.swing.JCheckBox $r4;
+        java.awt.Dimension $r5;
+        org.gjt.sp.jedit.gui.JCheckBoxList$LabelRenderer $r7;
+        javax.swing.table.TableColumn r8, r9;
+
+        r0 := @this;
+
+        $r1 = new org.gjt.sp.jedit.gui.JCheckBoxList$DummyRenderer;
+
+        specialinvoke $r1.<init>(null);
+
+        r0.dummy = $r1;
+
+        $r2 = r0.getSelectionModel();
+
+        $r2.setSelectionMode(0);
+
+        r0.setShowGrid(0);
+
+        r0.setAutoResizeMode(3);
+
+        $r3 = r0.getColumnModel();
+
+        r8 = $r3.getColumn(0);
+
+        $r4 = new javax.swing.JCheckBox;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.getPreferredSize();
+
+        i0 = $r5.width;
+
+        r8.setPreferredWidth(i0);
+
+        r8.setMinWidth(i0);
+
+        r8.setWidth(i0);
+
+        r8.setMaxWidth(i0);
+
+        r8.setResizable(0);
+
+        $r6 = r0.getColumnModel();
+
+        r9 = $r6.getColumn(1);
+
+        $r7 = new org.gjt.sp.jedit.gui.JCheckBoxList$LabelRenderer;
+
+        specialinvoke $r7.<init>(r0);
+
+        r9.setCellRenderer($r7);
+
+        return;
+    }
+}

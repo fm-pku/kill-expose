@@ -1,0 +1,15 @@
+public class Account extends java.lang.Object
+{
+    int value;
+
+    public void <init>()
+    {
+        Account r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

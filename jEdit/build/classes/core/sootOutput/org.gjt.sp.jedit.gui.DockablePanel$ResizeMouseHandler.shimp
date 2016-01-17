@@ -1,0 +1,534 @@
+class org.gjt.sp.jedit.gui.DockablePanel$ResizeMouseHandler extends java.awt.event.MouseAdapter implements java.awt.event.MouseMotionListener
+{
+    boolean canDrag;
+    private boolean continuousLayout;
+    final org.gjt.sp.jedit.gui.DockablePanel this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.DockablePanel)
+    {
+        org.gjt.sp.jedit.gui.DockablePanel$ResizeMouseHandler r0;
+        org.gjt.sp.jedit.gui.DockablePanel r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void mousePressed(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.DockablePanel$ResizeMouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.gui.DockablePanel $r2, $r4, $r6;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r3;
+        org.gjt.sp.jedit.gui.PanelWindowContainer $r5, $r7;
+        int $i0;
+        java.awt.Point $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r0.canDrag;
+
+        if $z0 == 0 goto label1;
+
+        $z1 = javax.swing.UIManager.getBoolean("SplitPane.continuousLayout");
+
+        r0.continuousLayout = $z1;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.DockablePanel.access$100($r2);
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.gui.DockablePanel.access$000($r4);
+
+        $i0 = $r5.getDimension();
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.gui.DockablePanel.access$000($r6);
+
+        $r3.setResizePos($i0, $r7);
+
+        $r8 = r1.getPoint();
+
+        org.gjt.sp.jedit.gui.DockablePanel.dragStart = $r8;
+
+     label1:
+        return;
+    }
+
+    public void mouseReleased(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.DockablePanel$ResizeMouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.gui.DockablePanel $r2, $r4, $r6, $r8;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r3, $r5, $r9;
+        org.gjt.sp.jedit.gui.PanelWindowContainer $r7;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r0.canDrag;
+
+        if $z0 == 0 goto label2;
+
+        $z1 = r0.continuousLayout;
+
+        if $z1 != 0 goto label1;
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.gui.DockablePanel.access$000($r6);
+
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.gui.DockablePanel.access$100($r8);
+
+        $i0 = $r9.resizePos;
+
+        $i1 = $i0 + 10;
+
+        $r7.setDimension($i1);
+
+     label1:
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.DockablePanel.access$100($r2);
+
+        $r3.finishResizing();
+
+        org.gjt.sp.jedit.gui.DockablePanel.dragStart = null;
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.gui.DockablePanel.access$100($r4);
+
+        $r5.revalidate();
+
+     label2:
+        return;
+    }
+
+    public void mouseMoved(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.DockablePanel$ResizeMouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        javax.swing.border.Border r2;
+        java.lang.String r3;
+        java.awt.Insets r4;
+        org.gjt.sp.jedit.gui.DockablePanel $r5, $r6, $r8, $r10, $r13, $r16, $r17;
+        org.gjt.sp.jedit.gui.PanelWindowContainer $r7;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        java.awt.Point $r9;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r11, $r14;
+        java.awt.Cursor $r12, $r15;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r5 = r0.this$0;
+
+        r2 = $r5.getBorder();
+
+        if r2 != null goto label1;
+
+        return;
+
+     label1:
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.gui.DockablePanel.access$000($r6);
+
+        r3 = $r7.getPosition();
+
+        $r8 = r0.this$0;
+
+        r4 = r2.getBorderInsets($r8);
+
+        r0.canDrag = 0;
+
+        $z0 = r3.equals("top");
+
+        if $z0 == 0 goto label2;
+
+        $i9 = r1.getY();
+
+        $r17 = r0.this$0;
+
+        $i10 = $r17.getHeight();
+
+        $i11 = r4.bottom;
+
+        $i12 = $i10 - $i11;
+
+        if $i9 < $i12 goto label5;
+
+        r0.canDrag = 1;
+
+        goto label5;
+
+     label2:
+        $z1 = r3.equals("left");
+
+        if $z1 == 0 goto label3;
+
+        $i5 = r1.getX();
+
+        $r16 = r0.this$0;
+
+        $i6 = $r16.getWidth();
+
+        $i7 = r4.right;
+
+        $i8 = $i6 - $i7;
+
+        if $i5 < $i8 goto label5;
+
+        r0.canDrag = 1;
+
+        goto label5;
+
+     label3:
+        $z2 = r3.equals("bottom");
+
+        if $z2 == 0 goto label4;
+
+        $i3 = r1.getY();
+
+        $i4 = r4.top;
+
+        if $i3 > $i4 goto label5;
+
+        r0.canDrag = 1;
+
+        goto label5;
+
+     label4:
+        $z3 = r3.equals("right");
+
+        if $z3 == 0 goto label5;
+
+        $i1 = r1.getX();
+
+        $i2 = r4.left;
+
+        if $i1 > $i2 goto label5;
+
+        r0.canDrag = 1;
+
+     label5:
+        $r9 = org.gjt.sp.jedit.gui.DockablePanel.dragStart;
+
+        if $r9 != null goto label7;
+
+        $z4 = r0.canDrag;
+
+        if $z4 == 0 goto label6;
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.gui.DockablePanel.access$100($r13);
+
+        $i0 = specialinvoke r0.getAppropriateCursor();
+
+        $r15 = java.awt.Cursor.getPredefinedCursor($i0);
+
+        $r14.setCursor($r15);
+
+        goto label7;
+
+     label6:
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.gui.DockablePanel.access$100($r10);
+
+        $r12 = java.awt.Cursor.getPredefinedCursor(0);
+
+        $r11.setCursor($r12);
+
+     label7:
+        return;
+    }
+
+    public void mouseDragged(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.DockablePanel$ResizeMouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, i20, i20_1, i20_2, i20_3, i20_4, i20_5;
+        java.lang.String r2;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        java.awt.Point $r3, $r14, $r19, $r24, $r29;
+        org.gjt.sp.jedit.gui.DockablePanel $r4, $r6, $r8, $r10, $r12, $r15, $r17, $r20, $r22, $r25, $r27, $r30;
+        org.gjt.sp.jedit.gui.PanelWindowContainer $r5, $r7, $r9, $r16, $r21, $r26, $r31;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r11, $r13, $r18, $r23, $r28;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r0.canDrag;
+
+        if $z0 != 0 goto label1;
+
+        return;
+
+     label1:
+        $r3 = org.gjt.sp.jedit.gui.DockablePanel.dragStart;
+
+        if $r3 != null goto label2;
+
+        return;
+
+     label2:
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.gui.DockablePanel.access$000($r4);
+
+        i0 = $r5.getDimension();
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.gui.DockablePanel.access$000($r6);
+
+        r2 = $r7.getPosition();
+
+        i20 = 0;
+
+        $z1 = r2.equals("top");
+
+        if $z1 == 0 goto label3;
+
+        i20_1 = r1.getY();
+
+        $r27 = r0.this$0;
+
+        $r28 = org.gjt.sp.jedit.gui.DockablePanel.access$100($r27);
+
+        $i16 = r1.getY();
+
+        $r29 = org.gjt.sp.jedit.gui.DockablePanel.dragStart;
+
+        $i17 = $r29.y;
+
+        $i18 = $i16 - $i17;
+
+        $i19 = $i18 + i0;
+
+        $r30 = r0.this$0;
+
+        $r31 = org.gjt.sp.jedit.gui.DockablePanel.access$000($r30);
+
+        $r28.setResizePos($i19, $r31);
+
+(0)     goto label6;
+
+     label3:
+        $z2 = r2.equals("left");
+
+        if $z2 == 0 goto label4;
+
+        i20_2 = r1.getX();
+
+        $r22 = r0.this$0;
+
+        $r23 = org.gjt.sp.jedit.gui.DockablePanel.access$100($r22);
+
+        $i12 = r1.getX();
+
+        $r24 = org.gjt.sp.jedit.gui.DockablePanel.dragStart;
+
+        $i13 = $r24.x;
+
+        $i14 = $i12 - $i13;
+
+        $i15 = $i14 + i0;
+
+        $r25 = r0.this$0;
+
+        $r26 = org.gjt.sp.jedit.gui.DockablePanel.access$000($r25);
+
+        $r23.setResizePos($i15, $r26);
+
+(1)     goto label6;
+
+     label4:
+        $z3 = r2.equals("bottom");
+
+        if $z3 == 0 goto label5;
+
+        $i7 = r1.getY();
+
+        i20_3 = i0 - $i7;
+
+        $r17 = r0.this$0;
+
+        $r18 = org.gjt.sp.jedit.gui.DockablePanel.access$100($r17);
+
+        $i8 = r1.getY();
+
+        $i10 = i0 - $i8;
+
+        $r19 = org.gjt.sp.jedit.gui.DockablePanel.dragStart;
+
+        $i9 = $r19.y;
+
+        $i11 = $i10 + $i9;
+
+        $r20 = r0.this$0;
+
+        $r21 = org.gjt.sp.jedit.gui.DockablePanel.access$000($r20);
+
+        $r18.setResizePos($i11, $r21);
+
+(2)     goto label6;
+
+     label5:
+        $z4 = r2.equals("right");
+
+(3)     if $z4 == 0 goto label6;
+
+        $i2 = r1.getX();
+
+        i20_4 = i0 - $i2;
+
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.gui.DockablePanel.access$100($r12);
+
+        $i3 = r1.getX();
+
+        $i5 = i0 - $i3;
+
+        $r14 = org.gjt.sp.jedit.gui.DockablePanel.dragStart;
+
+        $i4 = $r14.x;
+
+        $i6 = $i5 + $i4;
+
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.gui.DockablePanel.access$000($r15);
+
+(4)     $r13.setResizePos($i6, $r16);
+
+     label6:
+        i20_5 = Phi(i20_1 #0, i20_2 #1, i20_3 #2, i20 #3, i20_4 #4);
+
+        $z5 = r0.continuousLayout;
+
+        if $z5 == 0 goto label7;
+
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.gui.DockablePanel.access$000($r8);
+
+        $i1 = i20_5 + 10;
+
+        $r9.setDimension($i1);
+
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.gui.DockablePanel.access$100($r10);
+
+        $r11.revalidate();
+
+     label7:
+        return;
+    }
+
+    public void mouseExited(java.awt.event.MouseEvent)
+    {
+        org.gjt.sp.jedit.gui.DockablePanel$ResizeMouseHandler r0;
+        java.awt.event.MouseEvent r1;
+        java.awt.Point $r2;
+        org.gjt.sp.jedit.gui.DockablePanel $r3;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r4;
+        java.awt.Cursor $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.gui.DockablePanel.dragStart;
+
+        if $r2 != null goto label1;
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.DockablePanel.access$100($r3);
+
+        $r5 = java.awt.Cursor.getPredefinedCursor(0);
+
+        $r4.setCursor($r5);
+
+     label1:
+        return;
+    }
+
+    private int getAppropriateCursor()
+    {
+        org.gjt.sp.jedit.gui.DockablePanel$ResizeMouseHandler r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.gui.DockablePanel $r2;
+        org.gjt.sp.jedit.gui.PanelWindowContainer $r3;
+        boolean $z0, $z1, $z2, $z3;
+        java.lang.InternalError $r4;
+
+        r0 := @this;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.DockablePanel.access$000($r2);
+
+        r1 = $r3.getPosition();
+
+        $z0 = r1.equals("top");
+
+        if $z0 == 0 goto label1;
+
+        return 8;
+
+     label1:
+        $z1 = r1.equals("left");
+
+        if $z1 == 0 goto label2;
+
+        return 10;
+
+     label2:
+        $z2 = r1.equals("bottom");
+
+        if $z2 == 0 goto label3;
+
+        return 9;
+
+     label3:
+        $z3 = r1.equals("right");
+
+        if $z3 == 0 goto label4;
+
+        return 11;
+
+     label4:
+        $r4 = new java.lang.InternalError;
+
+        specialinvoke $r4.<init>();
+
+        throw $r4;
+    }
+}

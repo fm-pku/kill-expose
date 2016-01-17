@@ -1,0 +1,1038 @@
+class org.gjt.sp.jedit.pluginmgr.InstallPanel extends javax.swing.JPanel implements org.gjt.sp.jedit.EBComponent
+{
+    private final javax.swing.JTable table;
+    private final javax.swing.JScrollPane scrollpane;
+    private final org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel pluginModel;
+    private final org.gjt.sp.jedit.pluginmgr.PluginManager window;
+    private final org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginInfoBox infoBox;
+    private final org.gjt.sp.jedit.pluginmgr.InstallPanel$ChoosePluginSet chooseButton;
+    private final boolean updates;
+    private final java.awt.CardLayout layout;
+    private final javax.swing.JTextField searchField;
+    private boolean hideInstalled;
+    private boolean isLoading;
+    private final java.util.Collection pluginSet;
+    static final javax.swing.Icon ASC_ICON;
+    static final javax.swing.Icon DESC_ICON;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.PluginManager, boolean)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManager r1;
+        boolean z0, $z1, $z2, $z4, $z4_1, $z4_2;
+        javax.swing.JSplitPane r2, $r24;
+        javax.swing.InputMap r3;
+        javax.swing.ActionMap r4;
+        javax.swing.table.TableColumn r5, r6, r7, r8, r9;
+        javax.swing.table.JTableHeader r10;
+        javax.swing.JScrollPane r11, $r69, $r71, $r75, $r76;
+        javax.swing.JCheckBox r12, $r88;
+        javax.swing.Box r13, r14, r15, $r94, $r96;
+        javax.swing.JPanel r16, r17, r18, r19, $r111, $r116, $r126, $r136;
+        java.lang.String r20, $r121, $r124, $r131, $r134, $r141, $r144;
+        java.util.HashSet $r21;
+        java.awt.CardLayout $r22, $r146;
+        javax.swing.border.EmptyBorder $r23;
+        javax.swing.JTable $r25, $r27, $r29, $r30, $r32, $r34, $r35, $r39, $r40, $r41, $r54, $r56, $r58, $r60, $r62, $r64, $r70, $r73, $r87;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel $r26;
+        java.awt.Dimension $r28, $r31, $r78;
+        int $i0, $i1;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$TextRenderer $r33;
+        javax.swing.table.TableCellRenderer $r36, $r67;
+        javax.swing.table.DefaultTableCellRenderer $r37, $r68;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$TableFocusHandler $r38;
+        javax.swing.KeyStroke $r42, $r45, $r48, $r51;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$KeyboardAction $r43, $r46, $r49, $r52;
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand $r44, $r47, $r50, $r53;
+        javax.swing.table.TableColumnModel $r55, $r57, $r59, $r61, $r63;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$HeaderMouseHandler $r65;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$HeaderRenderer $r66;
+        javax.swing.JViewport $r72;
+        java.awt.Color $r74;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginInfoBox $r77;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$1 $r79;
+        javax.swing.JTextField $r80, $r82, $r83, $r92;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$2 $r81;
+        javax.swing.text.Document $r84;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$3 $r85;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$4 $r86;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$5 $r89;
+        javax.swing.JLabel $r90, $r118, $r128, $r138;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$InstallButton $r97;
+        java.awt.Component $r99, $r107;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$SelectallButton $r101;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$ChoosePluginSet $r103;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$ClearPluginSet $r105;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$SizeLabel $r109;
+        java.awt.BorderLayout $r112;
+        java.awt.GridBagLayout $r117, $r127, $r137;
+        java.lang.StringBuilder $r119, $r120, $r122, $r123, $r129, $r130, $r132, $r133, $r139, $r140, $r142, $r143;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        specialinvoke r0.<init>(null);
+
+        $r21 = new java.util.HashSet;
+
+        specialinvoke $r21.<init>();
+
+        r0.pluginSet = $r21;
+
+        $r22 = new java.awt.CardLayout;
+
+        specialinvoke $r22.<init>();
+
+        r0.layout = $r22;
+
+        r0.setLayout($r22);
+
+        r0.window = r1;
+
+        r0.updates = z0;
+
+        $r23 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r23.<init>(12, 12, 12, 12);
+
+        r0.setBorder($r23);
+
+        $r24 = new javax.swing.JSplitPane;
+
+        specialinvoke $r24.<init>(0);
+
+        r2 = $r24;
+
+        r2.setResizeWeight(0.75);
+
+        $r25 = new javax.swing.JTable;
+
+        $r26 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel;
+
+        specialinvoke $r26.<init>(r0, null);
+
+        r0.pluginModel = $r26;
+
+        specialinvoke $r25.<init>($r26);
+
+        r0.table = $r25;
+
+        $r27 = r0.table;
+
+        $r27.setShowGrid(0);
+
+        $r29 = r0.table;
+
+        $r28 = new java.awt.Dimension;
+
+        specialinvoke $r28.<init>(0, 0);
+
+        $r29.setIntercellSpacing($r28);
+
+        $r30 = r0.table;
+
+        $i0 = org.gjt.sp.jedit.GUIUtilities.defaultRowHeight();
+
+        $i1 = $i0 + 2;
+
+        $r30.setRowHeight($i1);
+
+        $r32 = r0.table;
+
+        $r31 = new java.awt.Dimension;
+
+        specialinvoke $r31.<init>(500, 200);
+
+        $r32.setPreferredScrollableViewportSize($r31);
+
+        $r35 = r0.table;
+
+        $r33 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$TextRenderer;
+
+        $r34 = r0.table;
+
+        $r36 = $r34.getDefaultRenderer(class "java/lang/Object");
+
+        $r37 = (javax.swing.table.DefaultTableCellRenderer) $r36;
+
+        specialinvoke $r33.<init>($r37);
+
+        $r35.setDefaultRenderer(class "java/lang/Object", $r33);
+
+        $r39 = r0.table;
+
+        $r38 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$TableFocusHandler;
+
+        specialinvoke $r38.<init>(r0, null);
+
+        $r39.addFocusListener($r38);
+
+        $r40 = r0.table;
+
+        r3 = $r40.getInputMap(0);
+
+        $r41 = r0.table;
+
+        r4 = $r41.getActionMap();
+
+        $r42 = javax.swing.KeyStroke.getKeyStroke(9, 0);
+
+        r3.put($r42, "tabOutForward");
+
+        $r43 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$KeyboardAction;
+
+        $r44 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.TAB_OUT_FORWARD;
+
+        specialinvoke $r43.<init>(r0, $r44);
+
+        r4.put("tabOutForward", $r43);
+
+        $r45 = javax.swing.KeyStroke.getKeyStroke(9, 1);
+
+        r3.put($r45, "tabOutBack");
+
+        $r46 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$KeyboardAction;
+
+        $r47 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.TAB_OUT_BACK;
+
+        specialinvoke $r46.<init>(r0, $r47);
+
+        r4.put("tabOutBack", $r46);
+
+        $r48 = javax.swing.KeyStroke.getKeyStroke(32, 0);
+
+        r3.put($r48, "editPlugin");
+
+        $r49 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$KeyboardAction;
+
+        $r50 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.EDIT_PLUGIN;
+
+        specialinvoke $r49.<init>(r0, $r50);
+
+        r4.put("editPlugin", $r49);
+
+        $r51 = javax.swing.KeyStroke.getKeyStroke(10, 0);
+
+        r3.put($r51, "closePluginManager");
+
+        $r52 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$KeyboardAction;
+
+        $r53 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.CLOSE_PLUGIN_MANAGER;
+
+        specialinvoke $r52.<init>(r0, $r53);
+
+        r4.put("closePluginManager", $r52);
+
+        $r54 = r0.table;
+
+        $r55 = $r54.getColumnModel();
+
+        r5 = $r55.getColumn(0);
+
+        $r56 = r0.table;
+
+        $r57 = $r56.getColumnModel();
+
+        r6 = $r57.getColumn(1);
+
+        $r58 = r0.table;
+
+        $r59 = $r58.getColumnModel();
+
+        r7 = $r59.getColumn(2);
+
+        $r60 = r0.table;
+
+        $r61 = $r60.getColumnModel();
+
+        r8 = $r61.getColumn(3);
+
+        $r62 = r0.table;
+
+        $r63 = $r62.getColumnModel();
+
+        r9 = $r63.getColumn(4);
+
+        r5.setPreferredWidth(30);
+
+        r5.setMinWidth(30);
+
+        r5.setMaxWidth(30);
+
+        r5.setResizable(0);
+
+        r6.setPreferredWidth(180);
+
+        r7.setPreferredWidth(130);
+
+        r8.setPreferredWidth(70);
+
+        r9.setPreferredWidth(70);
+
+        $r64 = r0.table;
+
+        r10 = $r64.getTableHeader();
+
+        r10.setReorderingAllowed(0);
+
+        $r65 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$HeaderMouseHandler;
+
+        specialinvoke $r65.<init>(r0, null);
+
+        r10.addMouseListener($r65);
+
+        $r66 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$HeaderRenderer;
+
+        $r67 = r10.getDefaultRenderer();
+
+        $r68 = (javax.swing.table.DefaultTableCellRenderer) $r67;
+
+        specialinvoke $r66.<init>($r68);
+
+        r10.setDefaultRenderer($r66);
+
+        $r69 = new javax.swing.JScrollPane;
+
+        $r70 = r0.table;
+
+        specialinvoke $r69.<init>($r70);
+
+        r0.scrollpane = $r69;
+
+        $r71 = r0.scrollpane;
+
+        $r72 = $r71.getViewport();
+
+        $r73 = r0.table;
+
+        $r74 = $r73.getBackground();
+
+        $r72.setBackground($r74);
+
+        $r75 = r0.scrollpane;
+
+        r2.setTopComponent($r75);
+
+        $r76 = new javax.swing.JScrollPane;
+
+        $r77 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginInfoBox;
+
+        specialinvoke $r77.<init>(r0);
+
+        r0.infoBox = $r77;
+
+        specialinvoke $r76.<init>($r77);
+
+        r11 = $r76;
+
+        $r78 = new java.awt.Dimension;
+
+        specialinvoke $r78.<init>(500, 100);
+
+        r11.setPreferredSize($r78);
+
+        r2.setBottomComponent(r11);
+
+        $r79 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$1;
+
+        specialinvoke $r79.<init>(r0, r2);
+
+        java.awt.EventQueue.invokeLater($r79);
+
+        $r80 = new javax.swing.JTextField;
+
+        specialinvoke $r80.<init>();
+
+        r0.searchField = $r80;
+
+        $r82 = r0.searchField;
+
+        $r81 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$2;
+
+        specialinvoke $r81.<init>(r0);
+
+        $r82.addKeyListener($r81);
+
+        $r83 = r0.searchField;
+
+        $r84 = $r83.getDocument();
+
+        $r85 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$3;
+
+        specialinvoke $r85.<init>(r0);
+
+        $r84.addDocumentListener($r85);
+
+        $r87 = r0.table;
+
+        $r86 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$4;
+
+        specialinvoke $r86.<init>(r0);
+
+        $r87.addKeyListener($r86);
+
+        if z0 != 0 goto label1;
+
+        $z4 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z4_1 = 0;
+
+     label2:
+        $z4_2 = Phi($z4 #0, $z4_1 #1);
+
+        r0.hideInstalled = $z4_2;
+
+        $r88 = new javax.swing.JCheckBox;
+
+        $z1 = r0.hideInstalled;
+
+        specialinvoke $r88.<init>("Hide installed plugins", $z1);
+
+        r12 = $r88;
+
+        $r89 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$5;
+
+        specialinvoke $r89.<init>(r0, r12);
+
+        r12.addActionListener($r89);
+
+        r12.setAlignmentX(0.0F);
+
+        r13 = javax.swing.Box.createHorizontalBox();
+
+        $r90 = new javax.swing.JLabel;
+
+        specialinvoke $r90.<init>("Filter : ");
+
+        r13.add($r90);
+
+        $r92 = r0.searchField;
+
+        r13.add($r92);
+
+        r13.setAlignmentX(0.0F);
+
+        $r94 = new javax.swing.Box;
+
+        specialinvoke $r94.<init>(3);
+
+        r14 = $r94;
+
+        r14.add(r13);
+
+        if z0 != 0 goto label3;
+
+        r14.add(r12);
+
+     label3:
+        $r96 = new javax.swing.Box;
+
+        specialinvoke $r96.<init>(0);
+
+        r15 = $r96;
+
+        $r97 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$InstallButton;
+
+        specialinvoke $r97.<init>(r0);
+
+        r15.add($r97);
+
+        $r99 = javax.swing.Box.createHorizontalStrut(12);
+
+        r15.add($r99);
+
+        $r101 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$SelectallButton;
+
+        specialinvoke $r101.<init>(r0);
+
+        r15.add($r101);
+
+        $r103 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$ChoosePluginSet;
+
+        specialinvoke $r103.<init>(r0);
+
+        r0.chooseButton = $r103;
+
+        r15.add($r103);
+
+        $r105 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$ClearPluginSet;
+
+        specialinvoke $r105.<init>(r0);
+
+        r15.add($r105);
+
+        $r107 = javax.swing.Box.createGlue();
+
+        r15.add($r107);
+
+        $r109 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$SizeLabel;
+
+        specialinvoke $r109.<init>(r0);
+
+        r15.add($r109);
+
+        $r111 = new javax.swing.JPanel;
+
+        $r112 = new java.awt.BorderLayout;
+
+        specialinvoke $r112.<init>(12, 12);
+
+        specialinvoke $r111.<init>($r112);
+
+        r16 = $r111;
+
+        r16.add("North", r14);
+
+        r16.add("Center", r2);
+
+        r16.add("South", r15);
+
+        r0.add(r16, "INSTALL");
+
+        $r116 = new javax.swing.JPanel;
+
+        $r117 = new java.awt.GridBagLayout;
+
+        specialinvoke $r117.<init>();
+
+        specialinvoke $r116.<init>($r117);
+
+        r17 = $r116;
+
+        $r118 = new javax.swing.JLabel;
+
+        $r119 = new java.lang.StringBuilder;
+
+        specialinvoke $r119.<init>();
+
+        $r120 = $r119.append("<html><b><strong>");
+
+        $r121 = org.gjt.sp.jedit.jEdit.getProperty("common.loading", "Loading...");
+
+        $r122 = $r120.append($r121);
+
+        $r123 = $r122.append("</strong></b></html>");
+
+        $r124 = $r123.toString();
+
+        specialinvoke $r118.<init>($r124);
+
+        r17.add($r118);
+
+        r0.add(r17, "LOADING");
+
+        $r126 = new javax.swing.JPanel;
+
+        $r127 = new java.awt.GridBagLayout;
+
+        specialinvoke $r127.<init>();
+
+        specialinvoke $r126.<init>($r127);
+
+        r18 = $r126;
+
+        $r128 = new javax.swing.JLabel;
+
+        $r129 = new java.lang.StringBuilder;
+
+        specialinvoke $r129.<init>();
+
+        $r130 = $r129.append("<html><b><strong>");
+
+        $r131 = org.gjt.sp.jedit.jEdit.getProperty("options.plugin-manager.no-plugin-available", "No available plugins...");
+
+        $r132 = $r130.append($r131);
+
+        $r133 = $r132.append("</strong></b></html>");
+
+        $r134 = $r133.toString();
+
+        specialinvoke $r128.<init>($r134);
+
+        r18.add($r128);
+
+        r0.add(r18, "NO_PLUGIN_AVAILABLE");
+
+        $r136 = new javax.swing.JPanel;
+
+        $r137 = new java.awt.GridBagLayout;
+
+        specialinvoke $r137.<init>();
+
+        specialinvoke $r136.<init>($r137);
+
+        r19 = $r136;
+
+        $r138 = new javax.swing.JLabel;
+
+        $r139 = new java.lang.StringBuilder;
+
+        specialinvoke $r139.<init>();
+
+        $r140 = $r139.append("<html><b><strong>");
+
+        $r141 = org.gjt.sp.jedit.jEdit.getProperty("options.plugin-manager.no-plugin-uptodate", "Plugins are up to date...");
+
+        $r142 = $r140.append($r141);
+
+        $r143 = $r142.append("</strong></b></html>");
+
+        $r144 = $r143.toString();
+
+        specialinvoke $r138.<init>($r144);
+
+        r19.add($r138);
+
+        r0.add(r19, "PLUGIN_ARE_UP_TO_DATE");
+
+        $r146 = r0.layout;
+
+        $r146.show(r0, "INSTALL");
+
+        r20 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.pluginset.path", "");
+
+        $z2 = r20.isEmpty();
+
+        if $z2 != 0 goto label4;
+
+        r0.loadPluginSet(r20);
+
+     label4:
+        return;
+    }
+
+    boolean loadPluginSet(java.lang.String)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        java.lang.String r1, $r11, $r13;
+        org.gjt.sp.jedit.io.VFS r2;
+        java.lang.Object r3;
+        java.util.Collection $r4;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel $r5, $r7;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$StringMapHandler $r6;
+        java.lang.Exception $r8, r15;
+        java.lang.StringBuilder $r9, $r10, $r12;
+        java.io.InputStream r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.pluginSet;
+
+        $r4.clear();
+
+        $r5 = r0.pluginModel;
+
+        $r5.clearSelection();
+
+        r2 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r1);
+
+        r3 = r2.createVFSSession(r1, r0);
+
+     label1:
+        r14 = r2._createInputStream(r3, r1, 0, r0);
+
+        $r6 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$StringMapHandler;
+
+        specialinvoke $r6.<init>(r0);
+
+        org.gjt.sp.util.XMLUtilities.parseXML(r14, $r6);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r8 := @caughtexception;
+
+        r15 = $r8;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("Loading Pluginset failed:");
+
+        $r11 = r15.getMessage();
+
+        $r12 = $r10.append($r11);
+
+        $r13 = $r12.toString();
+
+        org.gjt.sp.util.Log.log(7, r0, $r13);
+
+        return 0;
+
+     label4:
+        $r7 = r0.pluginModel;
+
+        $r7.update();
+
+        return 1;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    public void updateModel()
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginInfoBox $r1;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel $r2, $r3;
+        int $i0;
+        java.awt.CardLayout $r4, $r6, $r7;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$6 $r5;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r1 = r0.infoBox;
+
+        $r1.setText(null);
+
+        $r2 = r0.pluginModel;
+
+        $r2.update();
+
+        $r3 = r0.pluginModel;
+
+        $i0 = $r3.getRowCount();
+
+        if $i0 != 0 goto label2;
+
+        $z0 = r0.updates;
+
+        if $z0 == 0 goto label1;
+
+        $r7 = r0.layout;
+
+        $r7.show(r0, "PLUGIN_ARE_UP_TO_DATE");
+
+        goto label3;
+
+     label1:
+        $r6 = r0.layout;
+
+        $r6.show(r0, "NO_PLUGIN_AVAILABLE");
+
+        goto label3;
+
+     label2:
+        $r4 = r0.layout;
+
+        $r4.show(r0, "INSTALL");
+
+        $r5 = new org.gjt.sp.jedit.pluginmgr.InstallPanel$6;
+
+        specialinvoke $r5.<init>(r0);
+
+        java.awt.EventQueue.invokeLater($r5);
+
+     label3:
+        r0.isLoading = 0;
+
+        return;
+    }
+
+    public void handleMessage(org.gjt.sp.jedit.EBMessage)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        org.gjt.sp.jedit.EBMessage r1;
+        java.lang.Object $r2;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r3;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$ChoosePluginSet $r4, $r7, $r9, $r12;
+        java.lang.String $r5, $r8, $r10;
+        int $i0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getSource();
+
+        $r3 = org.gjt.sp.jedit.pluginmgr.PluginManager.getInstance();
+
+        if $r2 != $r3 goto label1;
+
+        $r4 = r0.chooseButton;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.pluginset.path", "");
+
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$ChoosePluginSet.access$702($r4, $r5);
+
+        $r7 = r0.chooseButton;
+
+        $r8 = org.gjt.sp.jedit.pluginmgr.InstallPanel$ChoosePluginSet.access$700($r7);
+
+        $i0 = $r8.length();
+
+        if $i0 <= 0 goto label1;
+
+        $r9 = r0.chooseButton;
+
+        $r10 = org.gjt.sp.jedit.pluginmgr.InstallPanel$ChoosePluginSet.access$700($r9);
+
+        r0.loadPluginSet($r10);
+
+        $r11 = r0.pluginModel;
+
+        $r11.clearSelection();
+
+        $r12 = r0.chooseButton;
+
+        $r12.updateUI();
+
+     label1:
+        return;
+    }
+
+    void loading()
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        java.awt.CardLayout $r1;
+
+        r0 := @this;
+
+        $r1 = r0.layout;
+
+        $r1.show(r0, "LOADING");
+
+        r0.isLoading = 1;
+
+        return;
+    }
+
+    private boolean isDownloadingList()
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.isLoading;
+
+        return $z0;
+    }
+
+    private static java.lang.String formatSize(int)
+    {
+        int i0, $i1;
+        java.text.NumberFormat r0;
+        java.lang.StringBuilder $r1, $r3, $r4, $r5, $r6, $r7;
+        double $d0, $d1;
+        java.lang.String $r2, r8, r8_1, r8_2;
+
+        i0 := @parameter0;
+
+        r0 = java.text.NumberFormat.getInstance();
+
+        r0.setMaximumFractionDigits(1);
+
+        r0.setMinimumFractionDigits(0);
+
+        if i0 >= 1048576 goto label1;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $i1 = i0 >> 10;
+
+        $r6 = $r5.append($i1);
+
+        $r7 = $r6.append("KB");
+
+        r8 = $r7.toString();
+
+(0)     goto label2;
+
+     label1:
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $d0 = (double) i0;
+
+        $d1 = $d0 / 1048576.0;
+
+        $r2 = r0.format($d1);
+
+        $r3 = $r1.append($r2);
+
+        $r4 = $r3.append("MB");
+
+(1)     r8_1 = $r4.toString();
+
+     label2:
+        r8_2 = Phi(r8 #0, r8_1 #1);
+
+        return r8_2;
+    }
+
+    static javax.swing.JTable access$300(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        javax.swing.JTable $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.table;
+
+        return $r1;
+    }
+
+    static javax.swing.JTextField access$400(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.searchField;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel access$500(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.pluginModel;
+
+        return $r1;
+    }
+
+    static boolean access$602(org.gjt.sp.jedit.pluginmgr.InstallPanel, boolean)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        boolean z0;
+
+        r0 := @parameter0;
+
+        z0 := @parameter1;
+
+        r0.hideInstalled = z0;
+
+        return z0;
+    }
+
+    static boolean access$600(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $z0 = r0.hideInstalled;
+
+        return $z0;
+    }
+
+    static boolean access$800(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $z0 = r0.updates;
+
+        return $z0;
+    }
+
+    static java.lang.String access$900(int)
+    {
+        int i0;
+        java.lang.String $r0;
+
+        i0 := @parameter0;
+
+        $r0 = org.gjt.sp.jedit.pluginmgr.InstallPanel.formatSize(i0);
+
+        return $r0;
+    }
+
+    static boolean access$1000(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        $z0 = specialinvoke r0.isDownloadingList();
+
+        return $z0;
+    }
+
+    static org.gjt.sp.jedit.pluginmgr.PluginManager access$1100(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.window;
+
+        return $r1;
+    }
+
+    static java.util.Collection access$1200(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        java.util.Collection $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.pluginSet;
+
+        return $r1;
+    }
+
+    static javax.swing.JScrollPane access$1300(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        javax.swing.JScrollPane $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.scrollpane;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.pluginmgr.InstallPanel$ChoosePluginSet access$1600(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$ChoosePluginSet $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.chooseButton;
+
+        return $r1;
+    }
+
+    static void <clinit>()
+    {
+        javax.swing.Icon $r0, $r1;
+
+        $r0 = org.gjt.sp.jedit.GUIUtilities.loadIcon("arrow-asc.png");
+
+        org.gjt.sp.jedit.pluginmgr.InstallPanel.ASC_ICON = $r0;
+
+        $r1 = org.gjt.sp.jedit.GUIUtilities.loadIcon("arrow-desc.png");
+
+        org.gjt.sp.jedit.pluginmgr.InstallPanel.DESC_ICON = $r1;
+
+        return;
+    }
+}

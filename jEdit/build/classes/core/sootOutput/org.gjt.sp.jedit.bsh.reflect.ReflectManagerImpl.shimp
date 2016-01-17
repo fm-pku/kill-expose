@@ -1,0 +1,39 @@
+public class org.gjt.sp.jedit.bsh.reflect.ReflectManagerImpl extends org.gjt.sp.jedit.bsh.ReflectManager
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.reflect.ReflectManagerImpl r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public boolean setAccessible(java.lang.Object)
+    {
+        org.gjt.sp.jedit.bsh.reflect.ReflectManagerImpl r0;
+        java.lang.Object r1;
+        boolean $z0;
+        java.lang.reflect.AccessibleObject $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1 instanceof java.lang.reflect.AccessibleObject;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = (java.lang.reflect.AccessibleObject) r1;
+
+        $r2.setAccessible(1);
+
+        return 1;
+
+     label1:
+        return 0;
+    }
+}

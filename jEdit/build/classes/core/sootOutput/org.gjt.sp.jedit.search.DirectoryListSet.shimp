@@ -1,0 +1,233 @@
+public class org.gjt.sp.jedit.search.DirectoryListSet extends org.gjt.sp.jedit.search.BufferListSet
+{
+    private java.lang.String directory;
+    private java.lang.String glob;
+    private boolean recurse;
+
+    public void <init>(java.lang.String, java.lang.String, boolean)
+    {
+        org.gjt.sp.jedit.search.DirectoryListSet r0;
+        java.lang.String r1, r2;
+        boolean z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.directory = r1;
+
+        r0.glob = r2;
+
+        r0.recurse = z0;
+
+        return;
+    }
+
+    public java.lang.String getDirectory()
+    {
+        org.gjt.sp.jedit.search.DirectoryListSet r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.directory;
+
+        return $r1;
+    }
+
+    public void setDirectory(java.lang.String)
+    {
+        org.gjt.sp.jedit.search.DirectoryListSet r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.directory = r1;
+
+        r0.invalidateCachedList();
+
+        return;
+    }
+
+    public java.lang.String getFileFilter()
+    {
+        org.gjt.sp.jedit.search.DirectoryListSet r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.glob;
+
+        return $r1;
+    }
+
+    public void setFileFilter(java.lang.String)
+    {
+        org.gjt.sp.jedit.search.DirectoryListSet r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.glob = r1;
+
+        r0.invalidateCachedList();
+
+        return;
+    }
+
+    public boolean isRecursive()
+    {
+        org.gjt.sp.jedit.search.DirectoryListSet r0;
+        boolean $z0;
+
+        r0 := @this;
+
+        $z0 = r0.recurse;
+
+        return $z0;
+    }
+
+    public void setRecursive(boolean)
+    {
+        org.gjt.sp.jedit.search.DirectoryListSet r0;
+        boolean z0;
+
+        r0 := @this;
+
+        z0 := @parameter0;
+
+        r0.recurse = z0;
+
+        r0.invalidateCachedList();
+
+        return;
+    }
+
+    public java.lang.String getCode()
+    {
+        org.gjt.sp.jedit.search.DirectoryListSet r0;
+        java.lang.StringBuilder $r1, $r2, $r5, $r6, $r9, $r10, $r11, $r12;
+        java.lang.String $r3, $r4, $r7, $r8, $r13;
+        boolean $z0;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("new DirectoryListSet(\"");
+
+        $r3 = r0.directory;
+
+        $r4 = org.gjt.sp.util.StandardUtilities.charsToEscapes($r3);
+
+        $r5 = $r2.append($r4);
+
+        $r6 = $r5.append("\",\"");
+
+        $r7 = r0.glob;
+
+        $r8 = org.gjt.sp.util.StandardUtilities.charsToEscapes($r7);
+
+        $r9 = $r6.append($r8);
+
+        $r10 = $r9.append("\",");
+
+        $z0 = r0.recurse;
+
+        $r11 = $r10.append($z0);
+
+        $r12 = $r11.append(41);
+
+        $r13 = $r12.toString();
+
+        return $r13;
+    }
+
+    protected java.lang.String[] _getFiles(java.awt.Component)
+    {
+        org.gjt.sp.jedit.search.DirectoryListSet r0;
+        java.awt.Component r1;
+        boolean z0, z1, $z2;
+        org.gjt.sp.jedit.io.VFS r2;
+        java.lang.Object r3;
+        java.lang.Throwable r4, $r9;
+        java.lang.String $r5, $r6, $r7, $r8, $r12, $r13;
+        java.io.IOException $r10, r15;
+        java.lang.String[] $r11, r14;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("search.skipBinary.toggle");
+
+        z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("search.skipHidden.toggle");
+
+        $r5 = r0.directory;
+
+        r2 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath($r5);
+
+        $r6 = r0.directory;
+
+        r3 = r2.createVFSSessionSafe($r6, r1);
+
+     label1:
+        $r8 = r0.directory;
+
+        $r7 = r0.glob;
+
+        $z2 = r0.recurse;
+
+        r14 = r2._listDirectory(r3, $r8, $r7, $z2, r1, z0, z1);
+
+     label2:
+        r2._endVFSSession(r3, r1);
+
+     label3:
+        return r14;
+
+     label4:
+        $r9 := @caughtexception;
+
+        r4 = $r9;
+
+     label5:
+        r2._endVFSSession(r3, r1);
+
+        throw r4;
+
+     label6:
+        $r10 := @caughtexception;
+
+        r15 = $r10;
+
+        $r12 = r0.directory;
+
+        $r11 = newarray (java.lang.String)[1];
+
+        $r13 = r15.toString();
+
+        $r11[0] = $r13;
+
+        org.gjt.sp.jedit.io.VFSManager.error(r1, $r12, "ioerror", $r11);
+
+        return null;
+
+        catch java.lang.Throwable from label1 to label2 with label4;
+        catch java.lang.Throwable from label4 to label5 with label4;
+        catch java.io.IOException from label1 to label3 with label6;
+        catch java.io.IOException from label4 to label6 with label6;
+    }
+}

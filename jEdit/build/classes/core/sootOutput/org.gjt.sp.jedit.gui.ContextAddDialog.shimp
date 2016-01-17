@@ -1,0 +1,609 @@
+public class org.gjt.sp.jedit.gui.ContextAddDialog extends org.gjt.sp.jedit.gui.EnhancedDialog
+{
+    private static final java.lang.String CONTEXT_ADD_DIALOG_LAST_SELECTION;
+    private boolean isOK;
+    private final javax.swing.JRadioButton separator;
+    private final javax.swing.JRadioButton action;
+    private final javax.swing.JComboBox combo;
+    private final javax.swing.JList list;
+    private final javax.swing.JButton ok;
+    private final javax.swing.JButton cancel;
+
+    public void <init>(java.awt.Component, org.gjt.sp.jedit.ActionContext)
+    {
+        org.gjt.sp.jedit.gui.ContextAddDialog r0;
+        java.awt.Component r1, $r58, $r67, $r74;
+        org.gjt.sp.jedit.ActionContext r2;
+        javax.swing.JPanel r3, r6, r7, $r13, $r18, $r38, $r55, r84;
+        org.gjt.sp.jedit.gui.ContextAddDialog$ActionHandler r4, $r16;
+        javax.swing.ButtonGroup r5, $r17;
+        org.gjt.sp.jedit.ActionSet[] r8, r80;
+        java.util.TreeSet r9, $r41;
+        java.lang.String r10, $r12, $r22, $r25, $r31, $r61, $r70, $r79;
+        javax.swing.JDialog $r11, $r77;
+        java.awt.BorderLayout $r14, $r39;
+        javax.swing.border.EmptyBorder $r15, $r20, $r57;
+        java.awt.GridLayout $r19;
+        javax.swing.JLabel $r21;
+        javax.swing.JRadioButton $r24, $r26, $r27, $r28, $r30, $r32, $r33, $r34, $r35;
+        org.gjt.sp.jedit.JEditActionSet[] $r40;
+        boolean $z0, $z1;
+        javax.swing.JComboBox $r42, $r44, $r45, $r46;
+        java.lang.Object[] $r43;
+        javax.swing.JList $r48, $r49, $r50, $r52;
+        javax.swing.JScrollPane $r51;
+        javax.swing.BoxLayout $r56;
+        javax.swing.JButton $r60, $r62, $r64, $r65, $r69, $r71, $r72;
+        javax.swing.JRootPane $r63;
+        java.lang.Object $r78;
+        int $i0, i1, i2, i3, i4;
+        org.gjt.sp.jedit.ActionSet r81, r83;
+        java.util.Iterator r82;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r11 = org.gjt.sp.jedit.GUIUtilities.getParentDialog(r1);
+
+        $r12 = org.gjt.sp.jedit.jEdit.getProperty("options.context.add.title");
+
+        specialinvoke r0.<init>($r11, $r12, 1);
+
+        $r13 = new javax.swing.JPanel;
+
+        $r14 = new java.awt.BorderLayout;
+
+        specialinvoke $r14.<init>();
+
+        specialinvoke $r13.<init>($r14);
+
+        r3 = $r13;
+
+        $r15 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r15.<init>(12, 12, 12, 12);
+
+        r3.setBorder($r15);
+
+        r0.setContentPane(r3);
+
+        $r16 = new org.gjt.sp.jedit.gui.ContextAddDialog$ActionHandler;
+
+        specialinvoke $r16.<init>(r0);
+
+        r4 = $r16;
+
+        $r17 = new javax.swing.ButtonGroup;
+
+        specialinvoke $r17.<init>();
+
+        r5 = $r17;
+
+        $r18 = new javax.swing.JPanel;
+
+        $r19 = new java.awt.GridLayout;
+
+        specialinvoke $r19.<init>(3, 1, 6, 6);
+
+        specialinvoke $r18.<init>($r19);
+
+        r6 = $r18;
+
+        $r20 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r20.<init>(0, 0, 6, 0);
+
+        r6.setBorder($r20);
+
+        $r21 = new javax.swing.JLabel;
+
+        $r22 = org.gjt.sp.jedit.jEdit.getProperty("options.context.add.caption");
+
+        specialinvoke $r21.<init>($r22);
+
+        r6.add($r21);
+
+        $r24 = new javax.swing.JRadioButton;
+
+        $r25 = org.gjt.sp.jedit.jEdit.getProperty("options.context.add.separator");
+
+        specialinvoke $r24.<init>($r25);
+
+        r0.separator = $r24;
+
+        $r26 = r0.separator;
+
+        $r26.addActionListener(r4);
+
+        $r27 = r0.separator;
+
+        r5.add($r27);
+
+        $r28 = r0.separator;
+
+        r6.add($r28);
+
+        $r30 = new javax.swing.JRadioButton;
+
+        $r31 = org.gjt.sp.jedit.jEdit.getProperty("options.context.add.action");
+
+        specialinvoke $r30.<init>($r31);
+
+        r0.action = $r30;
+
+        $r32 = r0.action;
+
+        $r32.addActionListener(r4);
+
+        $r33 = r0.action;
+
+        r5.add($r33);
+
+        $r34 = r0.action;
+
+        $r34.setSelected(1);
+
+        $r35 = r0.action;
+
+        r6.add($r35);
+
+        r3.add("North", r6);
+
+        $r38 = new javax.swing.JPanel;
+
+        $r39 = new java.awt.BorderLayout;
+
+        specialinvoke $r39.<init>(6, 6);
+
+        specialinvoke $r38.<init>($r39);
+
+        r7 = $r38;
+
+        $r40 = r2.getActionSets();
+
+        r8 = (org.gjt.sp.jedit.ActionSet[]) $r40;
+
+        $r41 = new java.util.TreeSet;
+
+        specialinvoke $r41.<init>();
+
+        r9 = $r41;
+
+        r10 = org.gjt.sp.jedit.jEdit.getProperty("contextAddDialog.lastSelection");
+
+        r80 = r8;
+
+        i1 = lengthof r80;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 >= i1 goto label3;
+
+        r81 = r80[i2];
+
+        $i0 = r81.getActionCount();
+
+        if $i0 == 0 goto label2;
+
+        r9.add(r81);
+
+     label2:
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label3:
+        i3 = 0;
+
+        i4 = 0;
+
+(2)     r82 = r9.iterator();
+
+     label4:
+        i3 = Phi(i3 #2, i3 #5);
+
+        i2 = Phi(i2 #2, i2 #5);
+
+        i4 = Phi(i4 #2, i4 #5);
+
+        $z0 = r82.hasNext();
+
+(3)     if $z0 == 0 goto label6;
+
+        $r78 = r82.next();
+
+        r83 = (org.gjt.sp.jedit.ActionSet) $r78;
+
+        $r79 = r83.getLabel();
+
+        $z1 = $r79.equals(r10);
+
+        if $z1 == 0 goto label5;
+
+        i3 = i4;
+
+(4)     goto label6;
+
+     label5:
+        i4 = i4 + 1;
+
+(5)     goto label4;
+
+     label6:
+        i3 = Phi(i3 #3, i3 #4);
+
+        $r42 = new javax.swing.JComboBox;
+
+        $r43 = r9.toArray();
+
+        specialinvoke $r42.<init>($r43);
+
+        r0.combo = $r42;
+
+        $r44 = r0.combo;
+
+        $r44.setSelectedIndex(i3);
+
+        $r45 = r0.combo;
+
+        $r45.addActionListener(r4);
+
+        $r46 = r0.combo;
+
+        r7.add("North", $r46);
+
+        $r48 = new javax.swing.JList;
+
+        specialinvoke $r48.<init>();
+
+        r0.list = $r48;
+
+        $r49 = r0.list;
+
+        $r49.setVisibleRowCount(8);
+
+        $r50 = r0.list;
+
+        $r50.setSelectionMode(0);
+
+        $r51 = new javax.swing.JScrollPane;
+
+        $r52 = r0.list;
+
+        specialinvoke $r51.<init>($r52);
+
+        r7.add("Center", $r51);
+
+        r3.add("Center", r7);
+
+        $r55 = new javax.swing.JPanel;
+
+        specialinvoke $r55.<init>();
+
+        r84 = $r55;
+
+        $r56 = new javax.swing.BoxLayout;
+
+        specialinvoke $r56.<init>(r84, 0);
+
+        r84.setLayout($r56);
+
+        $r57 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r57.<init>(12, 0, 0, 0);
+
+        r84.setBorder($r57);
+
+        $r58 = javax.swing.Box.createGlue();
+
+        r84.add($r58);
+
+        $r60 = new javax.swing.JButton;
+
+        $r61 = org.gjt.sp.jedit.jEdit.getProperty("common.ok");
+
+        specialinvoke $r60.<init>($r61);
+
+        r0.ok = $r60;
+
+        $r62 = r0.ok;
+
+        $r62.addActionListener(r4);
+
+        $r63 = r0.getRootPane();
+
+        $r64 = r0.ok;
+
+        $r63.setDefaultButton($r64);
+
+        $r65 = r0.ok;
+
+        r84.add($r65);
+
+        $r67 = javax.swing.Box.createHorizontalStrut(6);
+
+        r84.add($r67);
+
+        $r69 = new javax.swing.JButton;
+
+        $r70 = org.gjt.sp.jedit.jEdit.getProperty("common.cancel");
+
+        specialinvoke $r69.<init>($r70);
+
+        r0.cancel = $r69;
+
+        $r71 = r0.cancel;
+
+        $r71.addActionListener(r4);
+
+        $r72 = r0.cancel;
+
+        r84.add($r72);
+
+        $r74 = javax.swing.Box.createGlue();
+
+        r84.add($r74);
+
+        r3.add("South", r84);
+
+        specialinvoke r0.updateList();
+
+        r0.pack();
+
+        $r77 = org.gjt.sp.jedit.GUIUtilities.getParentDialog(r1);
+
+        r0.setLocationRelativeTo($r77);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.gui.ContextAddDialog r0;
+
+        r0 := @this;
+
+        r0.isOK = 1;
+
+        r0.dispose();
+
+        return;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.gui.ContextAddDialog r0;
+
+        r0 := @this;
+
+        r0.dispose();
+
+        return;
+    }
+
+    public java.lang.String getSelection()
+    {
+        org.gjt.sp.jedit.gui.ContextAddDialog r0;
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem r1;
+        boolean $z0, $z1, $z2;
+        javax.swing.JRadioButton $r2, $r3;
+        java.lang.InternalError $r4;
+        javax.swing.JList $r5;
+        java.lang.Object $r6;
+        java.lang.String $r7, $r7_1, $r7_2;
+
+        r0 := @this;
+
+        $z0 = r0.isOK;
+
+        if $z0 != 0 goto label1;
+
+        return null;
+
+     label1:
+        $r2 = r0.separator;
+
+        $z1 = $r2.isSelected();
+
+        if $z1 == 0 goto label2;
+
+        return "-";
+
+     label2:
+        $r3 = r0.action;
+
+        $z2 = $r3.isSelected();
+
+        if $z2 == 0 goto label5;
+
+        $r5 = r0.list;
+
+        $r6 = $r5.getSelectedValue();
+
+        r1 = (org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem) $r6;
+
+        if r1 != null goto label3;
+
+        $r7 = null;
+
+(0)     goto label4;
+
+     label3:
+(1)     $r7_1 = r1.actionName;
+
+     label4:
+        $r7_2 = Phi($r7 #0, $r7_1 #1);
+
+        return $r7_2;
+
+     label5:
+        $r4 = new java.lang.InternalError;
+
+        specialinvoke $r4.<init>();
+
+        throw $r4;
+    }
+
+    private void updateList()
+    {
+        org.gjt.sp.jedit.gui.ContextAddDialog r0;
+        org.gjt.sp.jedit.ActionSet r1;
+        org.gjt.sp.jedit.EditAction[] r2, r4;
+        java.util.Vector r3, $r10;
+        int i0, $i1, i2;
+        org.gjt.sp.jedit.EditAction r5;
+        java.lang.String r6, $r9, $r14;
+        javax.swing.JComboBox $r7;
+        java.lang.Object $r8;
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItemCompare $r11;
+        javax.swing.JList $r12;
+        org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem $r13;
+
+        r0 := @this;
+
+        $r7 = r0.combo;
+
+        $r8 = $r7.getSelectedItem();
+
+        r1 = (org.gjt.sp.jedit.ActionSet) $r8;
+
+        $r9 = r1.getLabel();
+
+        org.gjt.sp.jedit.jEdit.setProperty("contextAddDialog.lastSelection", $r9);
+
+        r2 = r1.getActions();
+
+        $r10 = new java.util.Vector;
+
+        $i1 = lengthof r2;
+
+        specialinvoke $r10.<init>($i1);
+
+        r3 = $r10;
+
+        r4 = r2;
+
+        i0 = lengthof r4;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 >= i0 goto label4;
+
+        r5 = r4[i2];
+
+        r6 = r5.getLabel();
+
+        if r6 != null goto label2;
+
+        goto label3;
+
+     label2:
+        $r13 = new org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItem;
+
+        $r14 = r5.getName();
+
+        specialinvoke $r13.<init>($r14, r6);
+
+        r3.addElement($r13);
+
+     label3:
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label4:
+        $r11 = new org.gjt.sp.jedit.gui.AbstractContextOptionPane$MenuItemCompare;
+
+        specialinvoke $r11.<init>();
+
+        java.util.Collections.sort(r3, $r11);
+
+        $r12 = r0.list;
+
+        $r12.setListData(r3);
+
+        return;
+    }
+
+    static javax.swing.JRadioButton access$000(org.gjt.sp.jedit.gui.ContextAddDialog)
+    {
+        org.gjt.sp.jedit.gui.ContextAddDialog r0;
+        javax.swing.JRadioButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.action;
+
+        return $r1;
+    }
+
+    static javax.swing.JComboBox access$100(org.gjt.sp.jedit.gui.ContextAddDialog)
+    {
+        org.gjt.sp.jedit.gui.ContextAddDialog r0;
+        javax.swing.JComboBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.combo;
+
+        return $r1;
+    }
+
+    static javax.swing.JList access$200(org.gjt.sp.jedit.gui.ContextAddDialog)
+    {
+        org.gjt.sp.jedit.gui.ContextAddDialog r0;
+        javax.swing.JList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.list;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$300(org.gjt.sp.jedit.gui.ContextAddDialog)
+    {
+        org.gjt.sp.jedit.gui.ContextAddDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.ok;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$400(org.gjt.sp.jedit.gui.ContextAddDialog)
+    {
+        org.gjt.sp.jedit.gui.ContextAddDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.cancel;
+
+        return $r1;
+    }
+
+    static void access$500(org.gjt.sp.jedit.gui.ContextAddDialog)
+    {
+        org.gjt.sp.jedit.gui.ContextAddDialog r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updateList();
+
+        return;
+    }
+}

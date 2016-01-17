@@ -1,0 +1,651 @@
+public class org.gjt.sp.jedit.bsh.ClassGeneratorImpl extends org.gjt.sp.jedit.bsh.ClassGenerator
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorImpl r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.lang.Class generateClass(java.lang.String, org.gjt.sp.jedit.bsh.Modifiers, java.lang.Class[], java.lang.Class, org.gjt.sp.jedit.bsh.BSHBlock, boolean, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorImpl r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.bsh.Modifiers r2;
+        java.lang.Class[] r3;
+        java.lang.Class r4, $r8;
+        org.gjt.sp.jedit.bsh.BSHBlock r5;
+        boolean z0;
+        org.gjt.sp.jedit.bsh.CallStack r6;
+        org.gjt.sp.jedit.bsh.Interpreter r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        z0 := @parameter5;
+
+        r6 := @parameter6;
+
+        r7 := @parameter7;
+
+        $r8 = org.gjt.sp.jedit.bsh.ClassGeneratorImpl.generateClassImpl(r1, r2, r3, r4, r5, z0, r6, r7);
+
+        return $r8;
+    }
+
+    public java.lang.Object invokeSuperclassMethod(org.gjt.sp.jedit.bsh.BshClassManager, java.lang.Object, java.lang.String, java.lang.Object[]) throws org.gjt.sp.jedit.bsh.UtilEvalError, org.gjt.sp.jedit.bsh.ReflectError, java.lang.reflect.InvocationTargetException
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorImpl r0;
+        org.gjt.sp.jedit.bsh.BshClassManager r1;
+        java.lang.Object r2, $r5;
+        java.lang.String r3;
+        java.lang.Object[] r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        $r5 = org.gjt.sp.jedit.bsh.ClassGeneratorImpl.invokeSuperclassMethodImpl(r1, r2, r3, r4);
+
+        return $r5;
+    }
+
+    public void setInstanceNameSpaceParent(java.lang.Object, java.lang.String, org.gjt.sp.jedit.bsh.NameSpace)
+    {
+        org.gjt.sp.jedit.bsh.ClassGeneratorImpl r0;
+        java.lang.Object r1;
+        java.lang.String r2;
+        org.gjt.sp.jedit.bsh.NameSpace r3, $r5;
+        org.gjt.sp.jedit.bsh.This r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 = org.gjt.sp.jedit.bsh.ClassGeneratorUtil.getClassInstanceThis(r1, r2);
+
+        $r5 = r4.getNameSpace();
+
+        $r5.setParent(r3);
+
+        return;
+    }
+
+    public static java.lang.Class generateClassImpl(java.lang.String, org.gjt.sp.jedit.bsh.Modifiers, java.lang.Class[], java.lang.Class, org.gjt.sp.jedit.bsh.BSHBlock, boolean, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        java.lang.String r0, r7, r8, r9, r16, $r25, $r40, $r42, $r53, $r59, $r63, $r64, r69, $r63_1, $r63_2, $r64_1, $r64_2;
+        org.gjt.sp.jedit.bsh.Modifiers r1;
+        java.lang.Class[] r2;
+        java.lang.Class r3, r67;
+        org.gjt.sp.jedit.bsh.BSHBlock r4;
+        boolean z0, $z1, $z2;
+        org.gjt.sp.jedit.bsh.CallStack r5;
+        org.gjt.sp.jedit.bsh.Interpreter r6;
+        org.gjt.sp.jedit.bsh.BshClassManager r10;
+        org.gjt.sp.jedit.bsh.NameSpace r11, $r21, r62;
+        org.gjt.sp.jedit.bsh.Variable[] r12;
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[] r13;
+        org.gjt.sp.jedit.bsh.ClassGeneratorUtil r14, $r24;
+        byte[] r15;
+        java.lang.StringBuilder $r17, $r18, $r19, $r20, $r29, $r30, $r31, $r35, $r36, $r37, $r38, $r39, $r41, $r43, $r44, $r45, $r50, $r51, $r52, $r56, $r57, $r58;
+        org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter $r22, $r26;
+        org.gjt.sp.jedit.bsh.This $r32;
+        java.io.FileOutputStream $r34, r65;
+        org.gjt.sp.jedit.bsh.Capabilities$Unavailable $r46, r61;
+        org.gjt.sp.jedit.bsh.EvalError $r47;
+        java.lang.Exception $r48, r71;
+        org.gjt.sp.jedit.bsh.InterpreterError $r49, $r55;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r54, r68;
+        java.io.IOException $r60, r66;
+        org.gjt.sp.jedit.bsh.LHS r70;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        r4 := @parameter4;
+
+        z0 := @parameter5;
+
+        r5 := @parameter6;
+
+        r6 := @parameter7;
+
+     label01:
+        org.gjt.sp.jedit.bsh.Capabilities.setAccessibility(1);
+
+     label02:
+        goto label04;
+
+     label03:
+        $r46 := @caughtexception;
+
+        r61 = $r46;
+
+        $r47 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        specialinvoke $r47.<init>("Defining classes currently requires reflective Accessibility.", r4, r5);
+
+        throw $r47;
+
+     label04:
+        r62 = r5.top();
+
+        r7 = r62.getPackage();
+
+        $z1 = r62.isClass;
+
+        if $z1 == 0 goto label05;
+
+        $r41 = new java.lang.StringBuilder;
+
+        specialinvoke $r41.<init>();
+
+        $r42 = r62.getName();
+
+        $r43 = $r41.append($r42);
+
+        $r44 = $r43.append("$");
+
+        $r45 = $r44.append(r0);
+
+        $r63 = $r45.toString();
+
+(0)     goto label06;
+
+     label05:
+(1)     $r63_1 = r0;
+
+     label06:
+        $r63_2 = Phi($r63 #0, $r63_1 #1);
+
+        r8 = $r63_2;
+
+        if r7 != null goto label07;
+
+        $r64 = r8;
+
+(2)     goto label08;
+
+     label07:
+        $r17 = new java.lang.StringBuilder;
+
+        specialinvoke $r17.<init>();
+
+        $r18 = $r17.append(r7);
+
+        $r19 = $r18.append(".");
+
+        $r20 = $r19.append(r8);
+
+(3)     $r64_1 = $r20.toString();
+
+     label08:
+        $r64_2 = Phi($r64 #2, $r64_1 #3);
+
+        r9 = $r64_2;
+
+        r10 = r6.getClassManager();
+
+        r10.definingClass(r9);
+
+        $r21 = new org.gjt.sp.jedit.bsh.NameSpace;
+
+        specialinvoke $r21.<init>(r62, r8);
+
+        r11 = $r21;
+
+        r11.isClass = 1;
+
+        r5.push(r11);
+
+        $r22 = org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter.CLASSCLASSES;
+
+        r4.evalBlock(r5, r6, 1, $r22);
+
+        r12 = org.gjt.sp.jedit.bsh.ClassGeneratorImpl.getDeclaredVariables(r4, r5, r6, r7);
+
+        r13 = org.gjt.sp.jedit.bsh.ClassGeneratorImpl.getDeclaredMethods(r4, r5, r6, r7);
+
+        $r24 = new org.gjt.sp.jedit.bsh.ClassGeneratorUtil;
+
+        specialinvoke $r24.<init>(r1, r8, r7, r3, r2, r12, r13, r11, z0);
+
+        r14 = $r24;
+
+        r15 = r14.generateClass();
+
+        r16 = java.lang.System.getProperty("debugClasses");
+
+        if r16 == null goto label12;
+
+     label09:
+        $r34 = new java.io.FileOutputStream;
+
+        $r35 = new java.lang.StringBuilder;
+
+        specialinvoke $r35.<init>();
+
+        $r36 = $r35.append(r16);
+
+        $r37 = $r36.append("/");
+
+        $r38 = $r37.append(r8);
+
+        $r39 = $r38.append(".class");
+
+        $r40 = $r39.toString();
+
+        specialinvoke $r34.<init>($r40);
+
+        r65 = $r34;
+
+        r65.write(r15);
+
+        r65.close();
+
+     label10:
+        goto label12;
+
+     label11:
+        $r60 := @caughtexception;
+
+        r66 = $r60;
+
+     label12:
+        r67 = r10.defineClass(r9, r15);
+
+        $r25 = r9.replace(36, 46);
+
+        r62.importClass($r25);
+
+     label13:
+        r11.setLocalVariable("_bshInstanceInitializer", r4, 0);
+
+     label14:
+        goto label16;
+
+     label15:
+        $r54 := @caughtexception;
+
+        r68 = $r54;
+
+        $r55 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r56 = new java.lang.StringBuilder;
+
+        specialinvoke $r56.<init>();
+
+        $r57 = $r56.append("unable to init static: ");
+
+        $r58 = $r57.append(r68);
+
+        $r59 = $r58.toString();
+
+        specialinvoke $r55.<init>($r59);
+
+        throw $r55;
+
+     label16:
+        r11.setClassStatic(r67);
+
+        $r26 = org.gjt.sp.jedit.bsh.ClassGeneratorImpl$ClassNodeFilter.CLASSSTATIC;
+
+        r4.evalBlock(r5, r6, 1, $r26);
+
+        r5.pop();
+
+        $z2 = r67.isInterface();
+
+        if $z2 != 0 goto label20;
+
+        $r29 = new java.lang.StringBuilder;
+
+        specialinvoke $r29.<init>();
+
+        $r30 = $r29.append("_bshStatic");
+
+        $r31 = $r30.append(r8);
+
+        r69 = $r31.toString();
+
+     label17:
+        r70 = org.gjt.sp.jedit.bsh.Reflect.getLHSStaticField(r67, r69);
+
+        $r32 = r11.getThis(r6);
+
+        r70.assign($r32, 0);
+
+     label18:
+        goto label20;
+
+     label19:
+        $r48 := @caughtexception;
+
+        r71 = $r48;
+
+        $r49 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r50 = new java.lang.StringBuilder;
+
+        specialinvoke $r50.<init>();
+
+        $r51 = $r50.append("Error in class gen setup: ");
+
+        $r52 = $r51.append(r71);
+
+        $r53 = $r52.toString();
+
+        specialinvoke $r49.<init>($r53);
+
+        throw $r49;
+
+     label20:
+        r10.doneDefiningClass(r9);
+
+        return r67;
+
+        catch org.gjt.sp.jedit.bsh.Capabilities$Unavailable from label01 to label02 with label03;
+        catch java.io.IOException from label09 to label10 with label11;
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label13 to label14 with label15;
+        catch java.lang.Exception from label17 to label18 with label19;
+    }
+
+    static org.gjt.sp.jedit.bsh.Variable[] getDeclaredVariables(org.gjt.sp.jedit.bsh.BSHBlock, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter, java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BSHBlock r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        java.lang.String r3, r8, r10;
+        java.util.ArrayList r4, $r11;
+        org.gjt.sp.jedit.bsh.SimpleNode r5;
+        org.gjt.sp.jedit.bsh.BSHTypedVariableDeclaration r6;
+        org.gjt.sp.jedit.bsh.Modifiers r7;
+        org.gjt.sp.jedit.bsh.BSHVariableDeclarator[] r9;
+        int $i0, $i1, i2, i3;
+        org.gjt.sp.jedit.bsh.Variable[] $r12, $r14, $r15;
+        java.lang.Object[] $r13;
+        org.gjt.sp.jedit.bsh.Node $r16;
+        boolean $z0;
+        org.gjt.sp.jedit.bsh.BSHVariableDeclarator $r17;
+        org.gjt.sp.jedit.bsh.Variable $r18, r20;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r19, r21;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        $r11 = new java.util.ArrayList;
+
+        specialinvoke $r11.<init>();
+
+        r4 = $r11;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #5);
+
+        i3 = Phi(i3 #0, i3 #5);
+
+        $i0 = r0.jjtGetNumChildren();
+
+        if i2 >= $i0 goto label8;
+
+        $r16 = r0.jjtGetChild(i2);
+
+        r5 = (org.gjt.sp.jedit.bsh.SimpleNode) $r16;
+
+        $z0 = r5 instanceof org.gjt.sp.jedit.bsh.BSHTypedVariableDeclaration;
+
+(1)     if $z0 == 0 goto label7;
+
+        r6 = (org.gjt.sp.jedit.bsh.BSHTypedVariableDeclaration) r5;
+
+        r7 = r6.modifiers;
+
+        r8 = r6.getTypeDescriptor(r1, r2, r3);
+
+        r9 = r6.getDeclarators();
+
+(2)     i3 = 0;
+
+     label2:
+        i2 = Phi(i2 #2, i2 #4);
+
+        i3 = Phi(i3 #2, i3 #4);
+
+        $i1 = lengthof r9;
+
+(3)     if i3 >= $i1 goto label7;
+
+        $r17 = r9[i3];
+
+        r10 = $r17.name;
+
+     label3:
+        $r18 = new org.gjt.sp.jedit.bsh.Variable;
+
+        specialinvoke $r18.<init>(r10, r8, null, r7);
+
+        r20 = $r18;
+
+        r4.add(r20);
+
+     label4:
+        goto label6;
+
+     label5:
+        $r19 := @caughtexception;
+
+        r21 = $r19;
+
+     label6:
+        i3 = i3 + 1;
+
+(4)     goto label2;
+
+     label7:
+        i2 = Phi(i2 #1, i2 #3);
+
+        i3 = Phi(i3 #1, i3 #3);
+
+        i2 = i2 + 1;
+
+(5)     goto label1;
+
+     label8:
+        $r12 = newarray (org.gjt.sp.jedit.bsh.Variable)[0];
+
+        $r13 = r4.toArray($r12);
+
+        $r14 = (org.gjt.sp.jedit.bsh.Variable[]) $r13;
+
+        $r15 = (org.gjt.sp.jedit.bsh.Variable[]) $r14;
+
+        return $r15;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label3 to label4 with label5;
+    }
+
+    static org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[] getDeclaredMethods(org.gjt.sp.jedit.bsh.BSHBlock, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter, java.lang.String) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHBlock r0, $r23;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        java.lang.String r3, r8, r9;
+        java.util.ArrayList r4, $r14;
+        org.gjt.sp.jedit.bsh.SimpleNode r5;
+        org.gjt.sp.jedit.bsh.BSHMethodDeclaration r6;
+        org.gjt.sp.jedit.bsh.Modifiers r7;
+        org.gjt.sp.jedit.bsh.BSHReturnType r10;
+        org.gjt.sp.jedit.bsh.BSHFormalParameters r11, $r21;
+        java.lang.String[] r12, $r22;
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod r13, $r20;
+        int $i0, i1;
+        org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[] $r15, $r17, $r18;
+        java.lang.Object[] $r16;
+        org.gjt.sp.jedit.bsh.Node $r19;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        $r14 = new java.util.ArrayList;
+
+        specialinvoke $r14.<init>();
+
+        r4 = $r14;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $i0 = r0.jjtGetNumChildren();
+
+        if i1 >= $i0 goto label3;
+
+        $r19 = r0.jjtGetChild(i1);
+
+        r5 = (org.gjt.sp.jedit.bsh.SimpleNode) $r19;
+
+        $z0 = r5 instanceof org.gjt.sp.jedit.bsh.BSHMethodDeclaration;
+
+        if $z0 == 0 goto label2;
+
+        r6 = (org.gjt.sp.jedit.bsh.BSHMethodDeclaration) r5;
+
+        r6.insureNodesParsed();
+
+        r7 = r6.modifiers;
+
+        r8 = r6.name;
+
+        r9 = r6.getReturnTypeDescriptor(r1, r2, r3);
+
+        r10 = r6.getReturnTypeNode();
+
+        r11 = r6.paramsNode;
+
+        r12 = r11.getTypeDescriptors(r1, r2, r3);
+
+        $r20 = new org.gjt.sp.jedit.bsh.DelayedEvalBshMethod;
+
+        $r21 = r6.paramsNode;
+
+        $r22 = $r21.getParamNames();
+
+        $r23 = r6.blockNode;
+
+        specialinvoke $r20.<init>(r8, r9, r10, $r22, r12, r11, $r23, null, r7, r1, r2);
+
+        r13 = $r20;
+
+        r4.add(r13);
+
+     label2:
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        $r15 = newarray (org.gjt.sp.jedit.bsh.DelayedEvalBshMethod)[0];
+
+        $r16 = r4.toArray($r15);
+
+        $r17 = (org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[]) $r16;
+
+        $r18 = (org.gjt.sp.jedit.bsh.DelayedEvalBshMethod[]) $r17;
+
+        return $r18;
+    }
+
+    public static java.lang.Object invokeSuperclassMethodImpl(org.gjt.sp.jedit.bsh.BshClassManager, java.lang.Object, java.lang.String, java.lang.Object[]) throws org.gjt.sp.jedit.bsh.UtilEvalError, org.gjt.sp.jedit.bsh.ReflectError, java.lang.reflect.InvocationTargetException
+    {
+        org.gjt.sp.jedit.bsh.BshClassManager r0;
+        java.lang.Object r1, $r11, $r12;
+        java.lang.String r2, r4;
+        java.lang.Object[] r3;
+        java.lang.Class r5, r6;
+        java.lang.StringBuilder $r7, $r8, $r9;
+        java.lang.Class[] $r10;
+        java.lang.reflect.Method r13, r14;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("_bshSuper");
+
+        $r9 = $r8.append(r2);
+
+        r4 = $r9.toString();
+
+        r5 = r1.getClass();
+
+        $r10 = org.gjt.sp.jedit.bsh.Types.getTypes(r3);
+
+        r13 = org.gjt.sp.jedit.bsh.Reflect.resolveJavaMethod(r0, r5, r4, $r10, 0);
+
+        if r13 == null goto label1;
+
+        $r12 = org.gjt.sp.jedit.bsh.Reflect.invokeMethod(r13, r1, r3);
+
+        return $r12;
+
+     label1:
+        r6 = r5.getSuperclass();
+
+        r14 = org.gjt.sp.jedit.bsh.Reflect.resolveExpectedJavaMethod(r0, r6, r1, r2, r3, 0);
+
+        $r11 = org.gjt.sp.jedit.bsh.Reflect.invokeMethod(r14, r1, r3);
+
+        return $r11;
+    }
+}

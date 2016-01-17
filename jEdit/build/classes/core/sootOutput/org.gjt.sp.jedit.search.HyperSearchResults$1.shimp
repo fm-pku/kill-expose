@@ -1,0 +1,76 @@
+class org.gjt.sp.jedit.search.HyperSearchResults$1 extends org.gjt.sp.jedit.search.HyperSearchResults$TreeNodeCallbackAdapter
+{
+    final org.gjt.sp.jedit.Buffer val$buffer;
+    final org.gjt.sp.jedit.search.HyperSearchResults$ResultVisitor val$visitor;
+    final org.gjt.sp.jedit.search.HyperSearchResults this$0;
+
+    void <init>(org.gjt.sp.jedit.search.HyperSearchResults, org.gjt.sp.jedit.Buffer, org.gjt.sp.jedit.search.HyperSearchResults$ResultVisitor)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$1 r0;
+        org.gjt.sp.jedit.search.HyperSearchResults r1;
+        org.gjt.sp.jedit.Buffer r2;
+        org.gjt.sp.jedit.search.HyperSearchResults$ResultVisitor r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$0 = r1;
+
+        r0.val$buffer = r2;
+
+        r0.val$visitor = r3;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public boolean processNode(javax.swing.tree.DefaultMutableTreeNode)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$1 r0;
+        javax.swing.tree.DefaultMutableTreeNode r1;
+        java.lang.Object r2;
+        org.gjt.sp.jedit.search.HyperSearchResult r3;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.Buffer $r4, $r6;
+        java.lang.String $r5;
+        org.gjt.sp.jedit.search.HyperSearchResults$ResultVisitor $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getUserObject();
+
+        $z0 = r2 instanceof org.gjt.sp.jedit.search.HyperSearchResult;
+
+        if $z0 != 0 goto label1;
+
+        return 1;
+
+     label1:
+        r3 = (org.gjt.sp.jedit.search.HyperSearchResult) r2;
+
+        $r4 = r0.val$buffer;
+
+        $r5 = $r4.getSymlinkPath();
+
+        $z1 = r3.pathEquals($r5);
+
+        if $z1 == 0 goto label2;
+
+        $r7 = r0.val$visitor;
+
+        $r6 = r0.val$buffer;
+
+        $r7.visit($r6, r3);
+
+     label2:
+        return 1;
+    }
+}

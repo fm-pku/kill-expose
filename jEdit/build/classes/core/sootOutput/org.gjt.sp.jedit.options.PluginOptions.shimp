@@ -1,0 +1,259 @@
+public class org.gjt.sp.jedit.options.PluginOptions extends org.gjt.sp.jedit.gui.OptionsDialog
+{
+    private org.gjt.sp.jedit.OptionGroup pluginsGroup;
+
+    public void <init>(java.awt.Frame)
+    {
+        org.gjt.sp.jedit.options.PluginOptions r0;
+        java.awt.Frame r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("plugin-options.last");
+
+        specialinvoke r0.<init>(r1, "plugin-options", $r2);
+
+        return;
+    }
+
+    public void <init>(java.awt.Frame, java.lang.String)
+    {
+        org.gjt.sp.jedit.options.PluginOptions r0;
+        java.awt.Frame r1;
+        java.lang.String r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1, "plugin-options", r2);
+
+        return;
+    }
+
+    public void <init>(java.awt.Dialog)
+    {
+        org.gjt.sp.jedit.options.PluginOptions r0;
+        java.awt.Dialog r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("plugin-options.last");
+
+        specialinvoke r0.<init>(r1, "plugin-options", $r2);
+
+        return;
+    }
+
+    public void <init>(java.awt.Dialog, java.lang.String)
+    {
+        org.gjt.sp.jedit.options.PluginOptions r0;
+        java.awt.Dialog r1;
+        java.lang.String r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1, "plugin-options", r2);
+
+        return;
+    }
+
+    protected org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel createOptionTreeModel()
+    {
+        org.gjt.sp.jedit.options.PluginOptions r0;
+        org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel r1, $r9;
+        org.gjt.sp.jedit.OptionGroup r2, $r11, $r12, $r13, $r14, $r16, $r33, $r35, $r45;
+        org.gjt.sp.jedit.EditPlugin[] r3, r4;
+        int i0, $i1, i2;
+        org.gjt.sp.jedit.EditPlugin r5;
+        java.lang.String r6, r7, r8, $r21, $r22, $r27, $r32, $r38, $r43, $r44;
+        java.lang.Object $r10;
+        org.gjt.sp.jedit.options.PluginOptions$NoPluginsPane $r15;
+        boolean $z0;
+        java.lang.StringBuilder $r17, $r18, $r19, $r20, $r23, $r24, $r25, $r26, $r28, $r29, $r30, $r31, $r34, $r36, $r37, $r39, $r40, $r41, $r42;
+
+        r0 := @this;
+
+        $r9 = new org.gjt.sp.jedit.gui.OptionsDialog$OptionTreeModel;
+
+        specialinvoke $r9.<init>(r0);
+
+        r1 = $r9;
+
+        $r10 = r1.getRoot();
+
+        r2 = (org.gjt.sp.jedit.OptionGroup) $r10;
+
+        $r11 = new org.gjt.sp.jedit.OptionGroup;
+
+        specialinvoke $r11.<init>("plugins");
+
+        r0.pluginsGroup = $r11;
+
+        $r12 = r0.pluginsGroup;
+
+        $r12.setSort(1);
+
+        r3 = org.gjt.sp.jedit.jEdit.getPlugins();
+
+        r4 = r3;
+
+        i0 = lengthof r4;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 >= i0 goto label5;
+
+        r5 = r4[i2];
+
+        $z0 = r5 instanceof org.gjt.sp.jedit.EditPlugin$Broken;
+
+        if $z0 == 0 goto label2;
+
+        goto label4;
+
+     label2:
+        r6 = r5.getClassName();
+
+        $r17 = new java.lang.StringBuilder;
+
+        specialinvoke $r17.<init>();
+
+        $r18 = $r17.append("plugin.");
+
+        $r19 = $r18.append(r6);
+
+        $r20 = $r19.append(".activate");
+
+        $r21 = $r20.toString();
+
+        $r22 = org.gjt.sp.jedit.jEdit.getProperty($r21);
+
+        if $r22 == null goto label4;
+
+        $r23 = new java.lang.StringBuilder;
+
+        specialinvoke $r23.<init>();
+
+        $r24 = $r23.append("plugin.");
+
+        $r25 = $r24.append(r6);
+
+        $r26 = $r25.append(".option-pane");
+
+        $r27 = $r26.toString();
+
+        r7 = org.gjt.sp.jedit.jEdit.getProperty($r27);
+
+        if r7 == null goto label3;
+
+        $r45 = r0.pluginsGroup;
+
+        $r45.addOptionPane(r7);
+
+        goto label4;
+
+     label3:
+        $r28 = new java.lang.StringBuilder;
+
+        specialinvoke $r28.<init>();
+
+        $r29 = $r28.append("plugin.");
+
+        $r30 = $r29.append(r6);
+
+        $r31 = $r30.append(".option-group");
+
+        $r32 = $r31.toString();
+
+        r8 = org.gjt.sp.jedit.jEdit.getProperty($r32);
+
+        if r8 == null goto label4;
+
+        $r35 = r0.pluginsGroup;
+
+        $r33 = new org.gjt.sp.jedit.OptionGroup;
+
+        $r34 = new java.lang.StringBuilder;
+
+        specialinvoke $r34.<init>();
+
+        $r36 = $r34.append("plugin.");
+
+        $r37 = $r36.append(r6);
+
+        $r38 = $r37.toString();
+
+        $r39 = new java.lang.StringBuilder;
+
+        specialinvoke $r39.<init>();
+
+        $r40 = $r39.append("plugin.");
+
+        $r41 = $r40.append(r6);
+
+        $r42 = $r41.append(".name");
+
+        $r43 = $r42.toString();
+
+        $r44 = org.gjt.sp.jedit.jEdit.getProperty($r43);
+
+        specialinvoke $r33.<init>($r38, $r44, r8);
+
+        $r35.addOptionGroup($r33);
+
+     label4:
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label5:
+        $r13 = r0.pluginsGroup;
+
+        $i1 = $r13.getMemberCount();
+
+        if $i1 != 0 goto label6;
+
+        $r16 = r0.pluginsGroup;
+
+        $r15 = new org.gjt.sp.jedit.options.PluginOptions$NoPluginsPane;
+
+        specialinvoke $r15.<init>();
+
+        $r16.addOptionPane($r15);
+
+     label6:
+        $r14 = r0.pluginsGroup;
+
+        r2.addOptionGroup($r14);
+
+        return r1;
+    }
+
+    protected org.gjt.sp.jedit.OptionGroup getDefaultGroup()
+    {
+        org.gjt.sp.jedit.options.PluginOptions r0;
+        org.gjt.sp.jedit.OptionGroup $r1;
+
+        r0 := @this;
+
+        $r1 = r0.pluginsGroup;
+
+        return $r1;
+    }
+}

@@ -1,0 +1,202 @@
+public class org.gjt.sp.jedit.io.LocalFileSaveTask extends org.gjt.sp.util.Task
+{
+    private static final int BUFFER_SIZE;
+    private java.io.File file;
+    private java.lang.String body;
+    private java.lang.String charset;
+
+    public void <init>(java.io.File, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.io.LocalFileSaveTask r0;
+        java.io.File r1;
+        java.lang.String r2, r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.file = r1;
+
+        r0.body = r2;
+
+        r0.charset = r3;
+
+        return;
+    }
+
+    public void _run()
+    {
+        org.gjt.sp.jedit.io.LocalFileSaveTask r0;
+        java.nio.ByteBuffer r1, $r17, $r19;
+        int i0, $i2, $i3, $i4, i6;
+        java.lang.Throwable r2, $r22;
+        java.io.FileOutputStream $r3, $r7, r23, r23_1, r23_2;
+        java.io.File $r4, $r8, $r13;
+        java.lang.String $r5, $r6, $r14, $r16;
+        long $l1, $l5;
+        java.lang.StringBuilder $r9, $r10, $r11, $r12, $r15;
+        java.nio.Buffer $r18;
+        java.io.IOException $r21, r26;
+        java.nio.channels.FileChannel r24, r24_1, r24_2;
+        byte[] r25;
+
+        r0 := @this;
+
+        r23 = null;
+
+(0)     r24 = null;
+
+     label1:
+        $r3 = new java.io.FileOutputStream;
+
+(1)     $r4 = r0.file;
+
+        specialinvoke $r3.<init>($r4);
+
+(2)     r23_1 = $r3;
+
+(3)     r24_1 = r23_1.getChannel();
+
+        $r6 = r0.body;
+
+        $r5 = r0.charset;
+
+        r25 = $r6.getBytes($r5);
+
+        $r7 = new java.io.FileOutputStream;
+
+        $r8 = r0.file;
+
+        specialinvoke $r7.<init>($r8);
+
+(4)     r23_2 = $r7;
+
+(5)     r24_2 = r23_2.getChannel();
+
+        r1 = java.nio.ByteBuffer.allocate(4096);
+
+        i0 = lengthof r25;
+
+        $l1 = (long) i0;
+
+        r0.setMaximum($l1);
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("Saving ");
+
+        $r11 = $r10.append(i0);
+
+        $r12 = $r11.append(" bytes to ");
+
+        $r13 = r0.file;
+
+        $r14 = $r13.getPath();
+
+        $r15 = $r12.append($r14);
+
+        $r16 = $r15.toString();
+
+        r0.setStatus($r16);
+
+(6)     i6 = 0;
+
+     label2:
+        i6 = Phi(i6 #6, i6 #9);
+
+        r23 = Phi(r23_2 #6, r23 #9);
+
+        r24 = Phi(r24_2 #6, r24 #9);
+
+(7)     if i6 >= i0 goto label3;
+
+(8)     $i2 = i0 - i6;
+
+        $i3 = java.lang.Math.min(4096, $i2);
+
+        $r17 = r1.put(r25, i6, $i3);
+
+        $r18 = $r17.flip();
+
+        $r19 = (java.nio.ByteBuffer) $r18;
+
+        $i4 = r24.write($r19);
+
+        i6 = i6 + $i4;
+
+        r1.rewind();
+
+        $l5 = (long) i6;
+
+        r0.setValue($l5);
+
+(9)     goto label2;
+
+     label3:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r24);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r23);
+
+(10)    goto label8;
+
+     label4:
+        $r21 := @caughtexception;
+
+        i6 = Phi(i6 #1, i6 #8);
+
+        r23 = Phi(r23 #1, r23_1 #2, r23_2 #4, r23 #8);
+
+(11)    r24 = Phi(r24 #1, r24_1 #3, r24_2 #5, r24 #8);
+
+        r26 = $r21;
+
+        org.gjt.sp.util.Log.log(9, r0, r26, r26);
+
+     label5:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r24);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r23);
+
+(12)    goto label8;
+
+     label6:
+        $r22 := @caughtexception;
+
+        i6 = Phi(i6 #0, i6 #7, i6 #11, i6 #13);
+
+        r23 = Phi(r23_1 #2, r23_2 #4, r23 #0, r23 #7, r23 #11, r23 #13);
+
+(13)    r24 = Phi(r24_1 #3, r24_2 #5, r24 #0, r24 #7, r24 #11, r24 #13);
+
+        r2 = $r22;
+
+     label7:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r24);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r23);
+
+        throw r2;
+
+     label8:
+        i6 = Phi(i6 #10, i6 #12);
+
+        r23 = Phi(r23 #10, r23 #12);
+
+        r24 = Phi(r24 #10, r24 #12);
+
+        return;
+
+        catch java.io.IOException from label1 to label3 with label4;
+        catch java.lang.Throwable from label1 to label3 with label6;
+        catch java.lang.Throwable from label4 to label5 with label6;
+        catch java.lang.Throwable from label6 to label7 with label6;
+    }
+}

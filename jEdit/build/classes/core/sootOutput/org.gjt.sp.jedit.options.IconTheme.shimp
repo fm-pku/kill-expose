@@ -1,0 +1,74 @@
+public class org.gjt.sp.jedit.options.IconTheme extends java.lang.Object
+{
+    static final java.lang.String[] builtIn;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.IconTheme r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static java.lang.String[] builtInNames()
+    {
+        java.lang.String[] $r0;
+
+        $r0 = org.gjt.sp.jedit.options.IconTheme.builtIn;
+
+        return $r0;
+    }
+
+    public static java.lang.String get()
+    {
+        java.lang.String $r0;
+
+        $r0 = org.gjt.sp.jedit.jEdit.getProperty("icon-theme", "tango");
+
+        return $r0;
+    }
+
+    public static void set(java.lang.String)
+    {
+        java.lang.String r0, $r5;
+        java.lang.StringBuilder $r1, $r2, $r3, $r4;
+
+        r0 := @parameter0;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("jeditresource:/org/gjt/sp/jedit/icons/themes/");
+
+        $r3 = $r2.append(r0);
+
+        $r4 = $r3.append("/");
+
+        $r5 = $r4.toString();
+
+        org.gjt.sp.jedit.GUIUtilities.setIconPath($r5);
+
+        org.gjt.sp.jedit.jEdit.setProperty("icon-theme", r0);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String[] $r0;
+
+        $r0 = newarray (java.lang.String)[2];
+
+        $r0[0] = "tango";
+
+        $r0[1] = "classic";
+
+        org.gjt.sp.jedit.options.IconTheme.builtIn = $r0;
+
+        return;
+    }
+}

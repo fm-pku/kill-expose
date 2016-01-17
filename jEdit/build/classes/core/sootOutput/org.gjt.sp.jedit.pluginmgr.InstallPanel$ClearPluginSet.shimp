@@ -1,0 +1,68 @@
+class org.gjt.sp.jedit.pluginmgr.InstallPanel$ClearPluginSet extends org.gjt.sp.jedit.gui.RolloverButton implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.pluginmgr.InstallPanel this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$ClearPluginSet r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r1;
+        java.lang.String $r2;
+        javax.swing.Icon $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("install-plugins.clear-plugin-set.icon");
+
+        $r3 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r2);
+
+        r0.setIcon($r3);
+
+        r0.setToolTipText("clear plugin set");
+
+        r0.addActionListener(r0);
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$ClearPluginSet r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r2, $r4, $r6;
+        java.util.Collection $r3;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$PluginTableModel $r5;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$ChoosePluginSet $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$1200($r2);
+
+        $r3.clear();
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$500($r4);
+
+        $r5.clearSelection();
+
+        org.gjt.sp.jedit.jEdit.unsetProperty("plugin-manager.pluginset.path");
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$1600($r6);
+
+        $r7.updateUI();
+
+        return;
+    }
+}

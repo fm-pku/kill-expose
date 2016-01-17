@@ -1,0 +1,138 @@
+class org.gjt.sp.jedit.bsh.BSHIfStatement extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHIfStatement r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHIfStatement r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.Node $r3, $r6, $r8;
+        org.gjt.sp.jedit.bsh.SimpleNode $r4, $r7, $r9;
+        boolean $z0, $z1;
+        int $i0;
+        org.gjt.sp.jedit.bsh.Primitive $r5;
+        java.lang.Object r10, r10_1, r10_2, r10_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r10 = null;
+
+        $r3 = r0.jjtGetChild(0);
+
+        $r4 = (org.gjt.sp.jedit.bsh.SimpleNode) $r3;
+
+        $z0 = org.gjt.sp.jedit.bsh.BSHIfStatement.evaluateCondition($r4, r1, r2);
+
+        if $z0 == 0 goto label1;
+
+        $r8 = r0.jjtGetChild(1);
+
+        $r9 = (org.gjt.sp.jedit.bsh.SimpleNode) $r8;
+
+        r10_1 = $r9.eval(r1, r2);
+
+(0)     goto label2;
+
+     label1:
+        $i0 = r0.jjtGetNumChildren();
+
+(1)     if $i0 <= 2 goto label2;
+
+        $r6 = r0.jjtGetChild(2);
+
+        $r7 = (org.gjt.sp.jedit.bsh.SimpleNode) $r6;
+
+(2)     r10_2 = $r7.eval(r1, r2);
+
+     label2:
+        r10_3 = Phi(r10_1 #0, r10 #1, r10_2 #2);
+
+        $z1 = r10_3 instanceof org.gjt.sp.jedit.bsh.ReturnControl;
+
+        if $z1 == 0 goto label3;
+
+        return r10_3;
+
+     label3:
+        $r5 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        return $r5;
+    }
+
+    public static boolean evaluateCondition(org.gjt.sp.jedit.bsh.SimpleNode, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        boolean $z0, $z1, $z2;
+        org.gjt.sp.jedit.bsh.EvalError $r3, $r7;
+        java.lang.Boolean $r4;
+        org.gjt.sp.jedit.bsh.Primitive $r5, $r6;
+        java.lang.Object r8, r8_1, r8_2;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r8 = r0.eval(r1, r2);
+
+        $z0 = r8 instanceof org.gjt.sp.jedit.bsh.Primitive;
+
+(0)     if $z0 == 0 goto label2;
+
+        $r5 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+        if r8 != $r5 goto label1;
+
+        $r7 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        specialinvoke $r7.<init>("Condition evaluates to void type", r0, r1);
+
+        throw $r7;
+
+     label1:
+        $r6 = (org.gjt.sp.jedit.bsh.Primitive) r8;
+
+(1)     r8_1 = $r6.getValue();
+
+     label2:
+        r8_2 = Phi(r8 #0, r8_1 #1);
+
+        $z1 = r8_2 instanceof java.lang.Boolean;
+
+        if $z1 == 0 goto label3;
+
+        $r4 = (java.lang.Boolean) r8_2;
+
+        $z2 = $r4.booleanValue();
+
+        return $z2;
+
+     label3:
+        $r3 = new org.gjt.sp.jedit.bsh.EvalError;
+
+        specialinvoke $r3.<init>("Condition must evaluate to a Boolean or boolean.", r0, r1);
+
+        throw $r3;
+    }
+}

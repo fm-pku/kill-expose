@@ -1,0 +1,35 @@
+class org.gjt.sp.jedit.bsh.Primitive$Special extends java.lang.Object implements java.io.Serializable
+{
+    public static final org.gjt.sp.jedit.bsh.Primitive$Special NULL_VALUE;
+    public static final org.gjt.sp.jedit.bsh.Primitive$Special VOID_TYPE;
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.bsh.Primitive$Special r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.bsh.Primitive$Special $r0, $r1;
+
+        $r0 = new org.gjt.sp.jedit.bsh.Primitive$Special;
+
+        specialinvoke $r0.<init>();
+
+        org.gjt.sp.jedit.bsh.Primitive$Special.NULL_VALUE = $r0;
+
+        $r1 = new org.gjt.sp.jedit.bsh.Primitive$Special;
+
+        specialinvoke $r1.<init>();
+
+        org.gjt.sp.jedit.bsh.Primitive$Special.VOID_TYPE = $r1;
+
+        return;
+    }
+}

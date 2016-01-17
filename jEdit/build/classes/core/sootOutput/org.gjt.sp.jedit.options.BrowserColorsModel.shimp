@@ -1,0 +1,511 @@
+class org.gjt.sp.jedit.options.BrowserColorsModel extends javax.swing.table.AbstractTableModel
+{
+    private java.util.List entries;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel r0;
+        java.lang.String r1, $r7, $r8, $r15;
+        java.util.ArrayList $r2;
+        java.lang.StringBuilder $r3, $r4, $r5, $r6, $r10, $r12, $r13, $r14;
+        org.gjt.sp.jedit.options.BrowserColorsModel$Entry $r9;
+        java.util.List $r11;
+        java.awt.Color $r16, $r17;
+        int i0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r2 = new java.util.ArrayList;
+
+        specialinvoke $r2.<init>();
+
+        r0.entries = $r2;
+
+(0)     i0 = 0;
+
+     label1:
+        i0 = Phi(i0 #0, i0 #1);
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("vfs.browser.colors.");
+
+        $r5 = $r4.append(i0);
+
+        $r6 = $r5.append(".glob");
+
+        $r7 = $r6.toString();
+
+        $r8 = org.gjt.sp.jedit.jEdit.getProperty($r7);
+
+        r1 = $r8;
+
+        if $r8 == null goto label2;
+
+        $r11 = r0.entries;
+
+        $r9 = new org.gjt.sp.jedit.options.BrowserColorsModel$Entry;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r12 = $r10.append("vfs.browser.colors.");
+
+        $r13 = $r12.append(i0);
+
+        $r14 = $r13.append(".color");
+
+        $r15 = $r14.toString();
+
+        $r16 = java.awt.Color.black;
+
+        $r17 = org.gjt.sp.jedit.jEdit.getColorProperty($r15, $r16);
+
+        specialinvoke $r9.<init>(r1, $r17);
+
+        $r11.add($r9);
+
+        i0 = i0 + 1;
+
+(1)     goto label1;
+
+     label2:
+        return;
+    }
+
+    void add()
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel r0;
+        org.gjt.sp.jedit.options.BrowserColorsModel$Entry $r1;
+        java.util.List $r2, $r4, $r5;
+        java.awt.Color $r3;
+        int $i0, $i1, $i2, $i3;
+
+        r0 := @this;
+
+        $r2 = r0.entries;
+
+        $r1 = new org.gjt.sp.jedit.options.BrowserColorsModel$Entry;
+
+        $r3 = javax.swing.UIManager.getColor("Tree.foreground");
+
+        specialinvoke $r1.<init>("", $r3);
+
+        $r2.add($r1);
+
+        $r4 = r0.entries;
+
+        $i0 = $r4.size();
+
+        $i1 = $i0 - 1;
+
+        $r5 = r0.entries;
+
+        $i2 = $r5.size();
+
+        $i3 = $i2 - 1;
+
+        r0.fireTableRowsInserted($i1, $i3);
+
+        return;
+    }
+
+    void remove(int)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel r0;
+        int i0, $i1, $i2;
+        java.util.List $r1, $r3, $r4;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.entries;
+
+        $r1.remove(i0);
+
+        $r3 = r0.entries;
+
+        $i1 = $r3.size();
+
+        $r4 = r0.entries;
+
+        $i2 = $r4.size();
+
+        r0.fireTableRowsDeleted($i1, $i2);
+
+        return;
+    }
+
+    public void moveUp(int)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel r0;
+        int i0, $i1, $i2;
+        org.gjt.sp.jedit.options.BrowserColorsModel$Entry r1;
+        java.util.List $r2, $r4, $r6;
+        java.lang.Object $r3;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r2 = r0.entries;
+
+        $r3 = $r2.get(i0);
+
+        r1 = (org.gjt.sp.jedit.options.BrowserColorsModel$Entry) $r3;
+
+        $r4 = r0.entries;
+
+        $r4.remove(i0);
+
+        $r6 = r0.entries;
+
+        $i1 = i0 - 1;
+
+        $r6.add($i1, r1);
+
+        $i2 = i0 - 1;
+
+        r0.fireTableRowsUpdated($i2, i0);
+
+        return;
+    }
+
+    public void moveDown(int)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel r0;
+        int i0, $i1, $i2;
+        org.gjt.sp.jedit.options.BrowserColorsModel$Entry r1;
+        java.util.List $r2, $r4, $r6;
+        java.lang.Object $r3;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r2 = r0.entries;
+
+        $r3 = $r2.get(i0);
+
+        r1 = (org.gjt.sp.jedit.options.BrowserColorsModel$Entry) $r3;
+
+        $r4 = r0.entries;
+
+        $r4.remove(i0);
+
+        $r6 = r0.entries;
+
+        $i1 = i0 + 1;
+
+        $r6.add($i1, r1);
+
+        $i2 = i0 + 1;
+
+        r0.fireTableRowsUpdated(i0, $i2);
+
+        return;
+    }
+
+    void save()
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel r0;
+        org.gjt.sp.jedit.options.BrowserColorsModel$Entry r1;
+        java.util.List $r2, $r13;
+        int $i0, i1;
+        java.lang.StringBuilder $r3, $r4, $r5, $r6, $r8, $r9, $r10, $r11, $r15, $r16, $r17, $r18, $r21, $r22, $r23, $r24;
+        java.lang.String $r7, $r12, $r19, $r20, $r25;
+        java.lang.Object $r14;
+        java.awt.Color $r26;
+
+        r0 := @this;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $r2 = r0.entries;
+
+        $i0 = $r2.size();
+
+        if i1 >= $i0 goto label2;
+
+        $r13 = r0.entries;
+
+        $r14 = $r13.get(i1);
+
+        r1 = (org.gjt.sp.jedit.options.BrowserColorsModel$Entry) $r14;
+
+        $r15 = new java.lang.StringBuilder;
+
+        specialinvoke $r15.<init>();
+
+        $r16 = $r15.append("vfs.browser.colors.");
+
+        $r17 = $r16.append(i1);
+
+        $r18 = $r17.append(".glob");
+
+        $r19 = $r18.toString();
+
+        $r20 = r1.glob;
+
+        org.gjt.sp.jedit.jEdit.setProperty($r19, $r20);
+
+        $r21 = new java.lang.StringBuilder;
+
+        specialinvoke $r21.<init>();
+
+        $r22 = $r21.append("vfs.browser.colors.");
+
+        $r23 = $r22.append(i1);
+
+        $r24 = $r23.append(".color");
+
+        $r25 = $r24.toString();
+
+        $r26 = r1.color;
+
+        org.gjt.sp.jedit.jEdit.setColorProperty($r25, $r26);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("vfs.browser.colors.");
+
+        $r5 = $r4.append(i1);
+
+        $r6 = $r5.append(".glob");
+
+        $r7 = $r6.toString();
+
+        org.gjt.sp.jedit.jEdit.unsetProperty($r7);
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append("vfs.browser.colors.");
+
+        $r10 = $r9.append(i1);
+
+        $r11 = $r10.append(".color");
+
+        $r12 = $r11.toString();
+
+        org.gjt.sp.jedit.jEdit.unsetProperty($r12);
+
+        return;
+    }
+
+    public int getColumnCount()
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel r0;
+
+        r0 := @this;
+
+        return 2;
+    }
+
+    public int getRowCount()
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel r0;
+        java.util.List $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.entries;
+
+        $i0 = $r1.size();
+
+        return $i0;
+    }
+
+    public java.lang.Object getValueAt(int, int)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel r0;
+        int i0, i1;
+        org.gjt.sp.jedit.options.BrowserColorsModel$Entry r1;
+        java.util.List $r2;
+        java.lang.Object $r3;
+        java.awt.Color $r4;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        $r2 = r0.entries;
+
+        $r3 = $r2.get(i0);
+
+        r1 = (org.gjt.sp.jedit.options.BrowserColorsModel$Entry) $r3;
+
+        lookupswitch(i1)
+        {
+            case 0: goto label1;
+            case 1: goto label2;
+            default: goto label3;
+        };
+
+     label1:
+        $r5 = r1.glob;
+
+        return $r5;
+
+     label2:
+        $r4 = r1.color;
+
+        return $r4;
+
+     label3:
+        return null;
+    }
+
+    public boolean isCellEditable(int, int)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel r0;
+        int i0, i1;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        i1 := @parameter1;
+
+        if i1 != 0 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    public void setValueAt(java.lang.Object, int, int)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel r0;
+        java.lang.Object r1, $r4;
+        int i0, i1;
+        org.gjt.sp.jedit.options.BrowserColorsModel$Entry r2;
+        java.util.List $r3;
+        java.awt.Color $r5;
+        java.lang.String $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        $r3 = r0.entries;
+
+        $r4 = $r3.get(i0);
+
+        r2 = (org.gjt.sp.jedit.options.BrowserColorsModel$Entry) $r4;
+
+        if i1 != 0 goto label1;
+
+        $r6 = (java.lang.String) r1;
+
+        r2.glob = $r6;
+
+        goto label2;
+
+     label1:
+        $r5 = (java.awt.Color) r1;
+
+        r2.color = $r5;
+
+     label2:
+        r0.fireTableRowsUpdated(i0, i0);
+
+        return;
+    }
+
+    public java.lang.String getColumnName(int)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel r0;
+        int i0;
+        java.lang.String $r1, $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        lookupswitch(i0)
+        {
+            case 0: goto label1;
+            case 1: goto label2;
+            default: goto label3;
+        };
+
+     label1:
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.colors.glob");
+
+        return $r2;
+
+     label2:
+        $r1 = org.gjt.sp.jedit.jEdit.getProperty("options.browser.colors.color");
+
+        return $r1;
+
+     label3:
+        return null;
+    }
+
+    public java.lang.Class getColumnClass(int)
+    {
+        org.gjt.sp.jedit.options.BrowserColorsModel r0;
+        int i0;
+        java.lang.InternalError $r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        lookupswitch(i0)
+        {
+            case 0: goto label1;
+            case 1: goto label2;
+            default: goto label3;
+        };
+
+     label1:
+        return class "java/lang/String";
+
+     label2:
+        return class "java/awt/Color";
+
+     label3:
+        $r1 = new java.lang.InternalError;
+
+        specialinvoke $r1.<init>();
+
+        throw $r1;
+    }
+}

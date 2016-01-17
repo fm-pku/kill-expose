@@ -1,0 +1,196 @@
+class org.gjt.sp.jedit.Abbrevs$Expansion extends java.lang.Object
+{
+    java.lang.String text;
+    int caretPosition;
+    int lineCount;
+    int posParamCount;
+
+    void <init>(java.lang.String, int, java.util.List)
+    {
+        org.gjt.sp.jedit.Abbrevs$Expansion r0;
+        java.lang.String r1, $r5, $r10;
+        int i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, i12, i14, i16;
+        java.util.List r2;
+        java.lang.StringBuilder r3, $r4;
+        boolean $z0, z1;
+        java.lang.Object $r9;
+        char c13, c15;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        r2 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.caretPosition = -1;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        r3 = $r4;
+
+        z1 = 0;
+
+(0)     i12 = 0;
+
+     label01:
+        z1 = Phi(z1 #0, z1 #13);
+
+        i12 = Phi(i12 #0, i12 #13);
+
+        i14 = Phi(i14 #0, i14 #13);
+
+        $i1 = r1.length();
+
+        if i12 >= $i1 goto label15;
+
+        c13 = r1.charAt(i12);
+
+        if z1 == 0 goto label08;
+
+        z1 = 0;
+
+        if c13 != 124 goto label02;
+
+        $i11 = r3.length();
+
+        r0.caretPosition = $i11;
+
+(1)     goto label14;
+
+     label02:
+        if c13 != 110 goto label03;
+
+        r3.append(10);
+
+        $i9 = r0.lineCount;
+
+        $i10 = $i9 + 1;
+
+        r0.lineCount = $i10;
+
+(2)     goto label14;
+
+     label03:
+        if c13 != 116 goto label07;
+
+        if i0 != 0 goto label04;
+
+        r3.append(9);
+
+(3)     goto label14;
+
+     label04:
+(4)     i14 = 0;
+
+     label05:
+        z1 = Phi(z1 #4, z1 #5);
+
+        i12 = Phi(i12 #4, i12 #5);
+
+        i14 = Phi(i14 #4, i14 #5);
+
+        if i14 >= i0 goto label06;
+
+        r3.append(32);
+
+        i14 = i14 + 1;
+
+(5)     goto label05;
+
+     label06:
+(6)     goto label14;
+
+     label07:
+        r3.append(c13);
+
+(7)     goto label14;
+
+     label08:
+        if c13 != 92 goto label09;
+
+        z1 = 1;
+
+(8)     goto label14;
+
+     label09:
+        if c13 != 36 goto label13;
+
+        $i2 = r1.length();
+
+        $i3 = $i2 - 1;
+
+        if i12 == $i3 goto label12;
+
+        $i4 = i12 + 1;
+
+        c15 = r1.charAt($i4);
+
+        $z0 = java.lang.Character.isDigit(c15);
+
+        if $z0 == 0 goto label11;
+
+        if c15 == 48 goto label11;
+
+        i12 = i12 + 1;
+
+        i16 = c15 - 48;
+
+        $i5 = r0.posParamCount;
+
+        $i6 = java.lang.Math.max(i16, $i5);
+
+        r0.posParamCount = $i6;
+
+        $i7 = r2.size();
+
+        if i16 > $i7 goto label10;
+
+        $i8 = i16 - 1;
+
+        $r9 = r2.get($i8);
+
+        $r10 = (java.lang.String) $r9;
+
+        r3.append($r10);
+
+     label10:
+(9)     goto label14;
+
+     label11:
+        r3.append(36);
+
+(10)    goto label14;
+
+     label12:
+        r3.append(36);
+
+(11)    goto label14;
+
+     label13:
+(12)    r3.append(c13);
+
+     label14:
+        z1 = Phi(z1 #1, z1 #2, z1 #3, z1 #6, z1 #7, z1 #8, z1 #9, z1 #10, z1 #11, z1 #12);
+
+        i12 = Phi(i12 #1, i12 #2, i12 #3, i12 #6, i12 #7, i12 #8, i12 #9, i12 #10, i12 #11, i12 #12);
+
+        i14 = Phi(i14 #1, i14 #2, i14 #3, i14 #6, i14 #7, i14 #8, i14 #9, i14 #10, i14 #11, i14 #12);
+
+        i12 = i12 + 1;
+
+(13)    goto label01;
+
+     label15:
+        $r5 = r3.toString();
+
+        r0.text = $r5;
+
+        return;
+    }
+}

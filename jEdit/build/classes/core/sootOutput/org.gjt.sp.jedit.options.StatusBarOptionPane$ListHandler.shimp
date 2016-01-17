@@ -1,0 +1,54 @@
+class org.gjt.sp.jedit.options.StatusBarOptionPane$ListHandler extends java.lang.Object implements javax.swing.event.ListSelectionListener
+{
+    final org.gjt.sp.jedit.options.StatusBarOptionPane this$0;
+
+    private void <init>(org.gjt.sp.jedit.options.StatusBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$ListHandler r0;
+        org.gjt.sp.jedit.options.StatusBarOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void valueChanged(javax.swing.event.ListSelectionEvent)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$ListHandler r0;
+        javax.swing.event.ListSelectionEvent r1;
+        org.gjt.sp.jedit.options.StatusBarOptionPane $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        org.gjt.sp.jedit.options.StatusBarOptionPane.access$800($r2);
+
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.options.StatusBarOptionPane, org.gjt.sp.jedit.options.StatusBarOptionPane$1)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane$ListHandler r0;
+        org.gjt.sp.jedit.options.StatusBarOptionPane r1;
+        org.gjt.sp.jedit.options.StatusBarOptionPane$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

@@ -1,0 +1,34 @@
+final class org.gjt.sp.jedit.MiscUtilities$1 extends java.util.Properties
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.MiscUtilities$1 r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public synchronized java.util.Enumeration keys()
+    {
+        org.gjt.sp.jedit.MiscUtilities$1 r0;
+        java.util.TreeSet $r1;
+        java.util.Set $r2;
+        java.util.Enumeration $r3;
+
+        r0 := @this;
+
+        $r1 = new java.util.TreeSet;
+
+        $r2 = specialinvoke r0.keySet();
+
+        specialinvoke $r1.<init>($r2);
+
+        $r3 = java.util.Collections.enumeration($r1);
+
+        return $r3;
+    }
+}

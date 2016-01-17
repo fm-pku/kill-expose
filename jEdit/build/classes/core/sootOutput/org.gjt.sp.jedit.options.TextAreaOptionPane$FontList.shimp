@@ -1,0 +1,488 @@
+class org.gjt.sp.jedit.options.TextAreaOptionPane$FontList extends javax.swing.JPanel implements java.awt.event.ActionListener
+{
+    private javax.swing.DefaultListModel fontsModel;
+    private javax.swing.JList fonts;
+    private javax.swing.JButton add;
+    private javax.swing.JButton remove;
+    private javax.swing.JButton up;
+    private javax.swing.JButton down;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.TextAreaOptionPane$FontList r0;
+        javax.swing.JLabel r1, $r5;
+        java.awt.Font r2, $r16;
+        javax.swing.Box r3, $r17;
+        java.awt.BorderLayout $r4;
+        java.lang.String $r6, $r15, $r19, $r22, $r29, $r32, $r39, $r42, $r49, $r52;
+        javax.swing.DefaultListModel $r7, $r9, $r63;
+        javax.swing.JList $r8, $r11, $r60;
+        org.gjt.sp.jedit.options.TextAreaOptionPane$FontList$FontItemRenderer $r10;
+        java.lang.StringBuilder $r12, $r13, $r14;
+        org.gjt.sp.jedit.gui.RolloverButton $r18, $r28, $r38, $r48;
+        javax.swing.Icon $r20, $r30, $r40, $r50;
+        javax.swing.JButton $r21, $r23, $r24, $r31, $r33, $r34, $r41, $r43, $r44, $r51, $r53, $r54;
+        java.awt.Component $r26, $r36, $r46, $r56;
+        javax.swing.JScrollPane $r59;
+        int i0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        i0 = 0;
+
+        $r4 = new java.awt.BorderLayout;
+
+        specialinvoke $r4.<init>();
+
+        r0.setLayout($r4);
+
+        $r5 = new javax.swing.JLabel;
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("options.textarea.fontSubstList");
+
+        specialinvoke $r5.<init>($r6);
+
+        r1 = $r5;
+
+        $r7 = new javax.swing.DefaultListModel;
+
+        specialinvoke $r7.<init>();
+
+        r0.fontsModel = $r7;
+
+        $r8 = new javax.swing.JList;
+
+        $r9 = r0.fontsModel;
+
+        specialinvoke $r8.<init>($r9);
+
+        r0.fonts = $r8;
+
+        $r11 = r0.fonts;
+
+        $r10 = new org.gjt.sp.jedit.options.TextAreaOptionPane$FontList$FontItemRenderer;
+
+        specialinvoke $r10.<init>(null);
+
+(0)     $r11.setCellRenderer($r10);
+
+     label1:
+        i0 = Phi(i0 #0, i0 #1);
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = $r12.append("view.fontSubstList.");
+
+        $r14 = $r13.append(i0);
+
+        $r15 = $r14.toString();
+
+        $r16 = org.gjt.sp.jedit.jEdit.getFontProperty($r15);
+
+        r2 = $r16;
+
+        if $r16 == null goto label2;
+
+        $r63 = r0.fontsModel;
+
+        $r63.addElement(r2);
+
+        i0 = i0 + 1;
+
+(1)     goto label1;
+
+     label2:
+        $r17 = new javax.swing.Box;
+
+        specialinvoke $r17.<init>(1);
+
+        r3 = $r17;
+
+        $r18 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r19 = org.gjt.sp.jedit.jEdit.getProperty("options.context.add.icon");
+
+        $r20 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r19);
+
+        specialinvoke $r18.<init>($r20);
+
+        r0.add = $r18;
+
+        $r21 = r0.add;
+
+        $r22 = org.gjt.sp.jedit.jEdit.getProperty("common.add");
+
+        $r21.setToolTipText($r22);
+
+        $r23 = r0.add;
+
+        $r23.addActionListener(r0);
+
+        $r24 = r0.add;
+
+        r3.add($r24);
+
+        $r26 = javax.swing.Box.createVerticalStrut(2);
+
+        r3.add($r26);
+
+        $r28 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r29 = org.gjt.sp.jedit.jEdit.getProperty("options.context.remove.icon");
+
+        $r30 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r29);
+
+        specialinvoke $r28.<init>($r30);
+
+        r0.remove = $r28;
+
+        $r31 = r0.remove;
+
+        $r32 = org.gjt.sp.jedit.jEdit.getProperty("common.remove");
+
+        $r31.setToolTipText($r32);
+
+        $r33 = r0.remove;
+
+        $r33.addActionListener(r0);
+
+        $r34 = r0.remove;
+
+        r3.add($r34);
+
+        $r36 = javax.swing.Box.createVerticalStrut(2);
+
+        r3.add($r36);
+
+        $r38 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r39 = org.gjt.sp.jedit.jEdit.getProperty("options.context.moveUp.icon");
+
+        $r40 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r39);
+
+        specialinvoke $r38.<init>($r40);
+
+        r0.up = $r38;
+
+        $r41 = r0.up;
+
+        $r42 = org.gjt.sp.jedit.jEdit.getProperty("common.moveUp");
+
+        $r41.setToolTipText($r42);
+
+        $r43 = r0.up;
+
+        $r43.addActionListener(r0);
+
+        $r44 = r0.up;
+
+        r3.add($r44);
+
+        $r46 = javax.swing.Box.createVerticalStrut(2);
+
+        r3.add($r46);
+
+        $r48 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r49 = org.gjt.sp.jedit.jEdit.getProperty("options.context.moveDown.icon");
+
+        $r50 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r49);
+
+        specialinvoke $r48.<init>($r50);
+
+        r0.down = $r48;
+
+        $r51 = r0.down;
+
+        $r52 = org.gjt.sp.jedit.jEdit.getProperty("common.moveDown");
+
+        $r51.setToolTipText($r52);
+
+        $r53 = r0.down;
+
+        $r53.addActionListener(r0);
+
+        $r54 = r0.down;
+
+        r3.add($r54);
+
+        $r56 = javax.swing.Box.createGlue();
+
+        r3.add($r56);
+
+        r0.add("North", r1);
+
+        $r59 = new javax.swing.JScrollPane;
+
+        $r60 = r0.fonts;
+
+        specialinvoke $r59.<init>($r60);
+
+        r0.add("Center", $r59);
+
+        r0.add("East", r3);
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.options.TextAreaOptionPane$FontList r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object $r2, $r4, $r6, $r8, r30, r31;
+        javax.swing.JButton $r3, $r5, $r7, $r9;
+        javax.swing.JList $r10, $r15, $r16, $r20, $r21, $r26;
+        javax.swing.DefaultListModel $r11, $r12, $r13, $r14, $r17, $r18, $r19, $r22, $r24, $r25;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, i8, i9, i10;
+        org.gjt.sp.jedit.gui.FontSelectorDialog $r23;
+        javax.swing.JDialog r27;
+        java.awt.Font r28, r29;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r1.getSource();
+
+        $r3 = r0.add;
+
+        if $r2 != $r3 goto label2;
+
+        r27 = org.gjt.sp.jedit.GUIUtilities.getParentDialog(r0);
+
+        $r23 = new org.gjt.sp.jedit.gui.FontSelectorDialog;
+
+        specialinvoke $r23.<init>(r27, null);
+
+        r28 = $r23.getSelectedFont();
+
+        if r28 == null goto label1;
+
+        r29 = r28.deriveFont(0, 12.0F);
+
+        $r24 = r0.fontsModel;
+
+        $r24.addElement(r29);
+
+        $r26 = r0.fonts;
+
+        $r25 = r0.fontsModel;
+
+        $i6 = $r25.size();
+
+        $i7 = $i6 - 1;
+
+        $r26.setSelectedIndex($i7);
+
+     label1:
+        goto label7;
+
+     label2:
+        $r4 = r1.getSource();
+
+        $r5 = r0.remove;
+
+        if $r4 != $r5 goto label4;
+
+        $r21 = r0.fonts;
+
+        i8 = $r21.getSelectedIndex();
+
+        if i8 == -1 goto label3;
+
+        $r22 = r0.fontsModel;
+
+        $r22.removeElementAt(i8);
+
+     label3:
+        goto label7;
+
+     label4:
+        $r6 = r1.getSource();
+
+        $r7 = r0.up;
+
+        if $r6 != $r7 goto label6;
+
+        $r16 = r0.fonts;
+
+        i9 = $r16.getSelectedIndex();
+
+        if i9 <= 0 goto label5;
+
+        $r17 = r0.fontsModel;
+
+        r30 = $r17.getElementAt(i9);
+
+        $r18 = r0.fontsModel;
+
+        $r18.removeElementAt(i9);
+
+        $r19 = r0.fontsModel;
+
+        $i4 = i9 - 1;
+
+        $r19.add($i4, r30);
+
+        $r20 = r0.fonts;
+
+        $i5 = i9 - 1;
+
+        $r20.setSelectedIndex($i5);
+
+     label5:
+        goto label7;
+
+     label6:
+        $r8 = r1.getSource();
+
+        $r9 = r0.down;
+
+        if $r8 != $r9 goto label7;
+
+        $r10 = r0.fonts;
+
+        i10 = $r10.getSelectedIndex();
+
+        if i10 == -1 goto label7;
+
+        $r11 = r0.fontsModel;
+
+        $i0 = $r11.size();
+
+        $i1 = $i0 - 1;
+
+        if i10 >= $i1 goto label7;
+
+        $r12 = r0.fontsModel;
+
+        r31 = $r12.getElementAt(i10);
+
+        $r13 = r0.fontsModel;
+
+        $r13.removeElementAt(i10);
+
+        $r14 = r0.fontsModel;
+
+        $i2 = i10 + 1;
+
+        $r14.add($i2, r31);
+
+        $r15 = r0.fonts;
+
+        $i3 = i10 + 1;
+
+        $r15.setSelectedIndex($i3);
+
+     label7:
+        return;
+    }
+
+    public void save()
+    {
+        org.gjt.sp.jedit.options.TextAreaOptionPane$FontList r0;
+        java.lang.StringBuilder $r1, $r2, $r3, $r9, $r10, $r11, $r13, $r14, $r15;
+        java.lang.String $r4, $r12, $r16;
+        java.awt.Font $r5, r17, r18;
+        javax.swing.DefaultListModel $r6, $r7;
+        int $i0, i1, i2;
+        java.lang.Object $r8;
+
+        r0 := @this;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("view.fontSubstList.");
+
+        $r3 = $r2.append(i1);
+
+        $r4 = $r3.toString();
+
+        $r5 = org.gjt.sp.jedit.jEdit.getFontProperty($r4);
+
+        r17 = $r5;
+
+        if $r5 == null goto label2;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r14 = $r13.append("view.fontSubstList.");
+
+        $r15 = $r14.append(i1);
+
+        $r16 = $r15.toString();
+
+        org.gjt.sp.jedit.jEdit.unsetProperty($r16);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label2:
+(2)     i2 = 0;
+
+     label3:
+        i2 = Phi(i2 #2, i2 #3);
+
+        i1 = Phi(i1 #2, i1 #3);
+
+        $r6 = r0.fontsModel;
+
+        $i0 = $r6.size();
+
+        if i2 >= $i0 goto label4;
+
+        $r7 = r0.fontsModel;
+
+        $r8 = $r7.getElementAt(i2);
+
+        r18 = (java.awt.Font) $r8;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("view.fontSubstList.");
+
+        $r11 = $r10.append(i2);
+
+        $r12 = $r11.toString();
+
+        org.gjt.sp.jedit.jEdit.setFontProperty($r12, r18);
+
+        i2 = i2 + 1;
+
+(3)     goto label3;
+
+     label4:
+        return;
+    }
+
+    public int listSize()
+    {
+        org.gjt.sp.jedit.options.TextAreaOptionPane$FontList r0;
+        javax.swing.DefaultListModel $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.fontsModel;
+
+        $i0 = $r1.size();
+
+        return $i0;
+    }
+}

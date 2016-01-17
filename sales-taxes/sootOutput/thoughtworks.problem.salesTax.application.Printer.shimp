@@ -1,0 +1,42 @@
+public class thoughtworks.problem.salesTax.application.Printer extends java.lang.Object
+{
+    thoughtworks.problem.salesTax.application.Receipt receipt;
+
+    public void <init>(thoughtworks.problem.salesTax.application.Receipt)
+    {
+        thoughtworks.problem.salesTax.application.Printer r0;
+        thoughtworks.problem.salesTax.application.Receipt r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        Packer.Unpack(r0);
+
+        r0.receipt = r1;
+
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void print()
+    {
+        thoughtworks.problem.salesTax.application.Printer r0;
+        thoughtworks.problem.salesTax.application.Receipt $r1;
+
+        r0 := @this;
+
+        $r1 = r0.receipt;
+
+        Packer.Unpack(r0);
+
+        $r1.print();
+
+        Packer.Pack(r0);
+
+        return;
+    }
+}

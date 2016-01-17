@@ -1,0 +1,40 @@
+class org.gjt.sp.jedit.gui.TaskMonitor$2 extends java.lang.Object implements org.gjt.sp.util.TaskManager$TaskVisitor
+{
+    final org.gjt.sp.jedit.gui.TaskMonitor this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.TaskMonitor)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$2 r0;
+        org.gjt.sp.jedit.gui.TaskMonitor r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void visit(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.jedit.gui.TaskMonitor$2 r0;
+        org.gjt.sp.util.Task r1;
+        org.gjt.sp.jedit.gui.TaskMonitor $r2;
+        org.gjt.sp.jedit.gui.TaskMonitor$TaskTableModel $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.gui.TaskMonitor.access$400($r2);
+
+        $r3.addTask(r1);
+
+        return;
+    }
+}

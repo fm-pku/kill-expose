@@ -1,0 +1,107 @@
+class org.gjt.sp.jedit.gui.ContextAddDialog$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.ContextAddDialog this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.ContextAddDialog)
+    {
+        org.gjt.sp.jedit.gui.ContextAddDialog$ActionHandler r0;
+        org.gjt.sp.jedit.gui.ContextAddDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.ContextAddDialog$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2;
+        boolean $z0, $z1, $z2;
+        org.gjt.sp.jedit.gui.ContextAddDialog $r3, $r5, $r7, $r9, $r10, $r11, $r12, $r14, $r16, $r18;
+        javax.swing.JButton $r4, $r6;
+        javax.swing.JComboBox $r8, $r13;
+        javax.swing.JRadioButton $r15, $r19;
+        javax.swing.JList $r17;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $z0 = r2 instanceof javax.swing.JRadioButton;
+
+        if $z0 == 0 goto label1;
+
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.gui.ContextAddDialog.access$100($r12);
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.gui.ContextAddDialog.access$000($r14);
+
+        $z1 = $r15.isSelected();
+
+        $r13.setEnabled($z1);
+
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.gui.ContextAddDialog.access$200($r16);
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.gui.ContextAddDialog.access$000($r18);
+
+        $z2 = $r19.isSelected();
+
+        $r17.setEnabled($z2);
+
+     label1:
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.ContextAddDialog.access$300($r3);
+
+        if r2 != $r4 goto label2;
+
+        $r11 = r0.this$0;
+
+        $r11.ok();
+
+        goto label4;
+
+     label2:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.ContextAddDialog.access$400($r5);
+
+        if r2 != $r6 goto label3;
+
+        $r10 = r0.this$0;
+
+        $r10.cancel();
+
+        goto label4;
+
+     label3:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.ContextAddDialog.access$100($r7);
+
+        if r2 != $r8 goto label4;
+
+        $r9 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.ContextAddDialog.access$500($r9);
+
+     label4:
+        return;
+    }
+}

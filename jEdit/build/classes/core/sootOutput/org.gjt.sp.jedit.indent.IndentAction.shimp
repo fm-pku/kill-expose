@@ -1,0 +1,28 @@
+public interface  org.gjt.sp.jedit.indent.IndentAction extends java.lang.Object
+{
+    public static final org.gjt.sp.jedit.indent.IndentAction$Collapse PrevCollapse;
+    public static final org.gjt.sp.jedit.indent.IndentAction$Collapse PrevPrevCollapse;
+
+    public abstract int calculateIndent(org.gjt.sp.jedit.buffer.JEditBuffer, int, int, int);
+
+    public abstract boolean keepChecking();
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.indent.IndentAction$Collapse $r0, $r1;
+
+        $r0 = new org.gjt.sp.jedit.indent.IndentAction$Collapse;
+
+        specialinvoke $r0.<init>(null);
+
+        org.gjt.sp.jedit.indent.IndentAction.PrevCollapse = $r0;
+
+        $r1 = new org.gjt.sp.jedit.indent.IndentAction$Collapse;
+
+        specialinvoke $r1.<init>(null);
+
+        org.gjt.sp.jedit.indent.IndentAction.PrevPrevCollapse = $r1;
+
+        return;
+    }
+}

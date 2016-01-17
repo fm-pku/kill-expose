@@ -1,0 +1,7 @@
+public interface  org.gjt.sp.jedit.browser.BrowserListener extends java.lang.Object implements java.util.EventListener
+{
+
+    public abstract void filesSelected(org.gjt.sp.jedit.browser.VFSBrowser, org.gjt.sp.jedit.io.VFSFile[]);
+
+    public abstract void filesActivated(org.gjt.sp.jedit.browser.VFSBrowser, org.gjt.sp.jedit.io.VFSFile[]);
+}

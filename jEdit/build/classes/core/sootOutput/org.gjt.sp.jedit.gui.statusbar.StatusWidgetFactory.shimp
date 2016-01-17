@@ -1,0 +1,5 @@
+public interface  org.gjt.sp.jedit.gui.statusbar.StatusWidgetFactory extends java.lang.Object
+{
+
+    public abstract org.gjt.sp.jedit.gui.statusbar.Widget getWidget(org.gjt.sp.jedit.View);
+}

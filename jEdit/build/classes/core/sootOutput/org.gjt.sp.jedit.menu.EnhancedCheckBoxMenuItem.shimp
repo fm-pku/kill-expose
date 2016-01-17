@@ -1,0 +1,312 @@
+public class org.gjt.sp.jedit.menu.EnhancedCheckBoxMenuItem extends javax.swing.JCheckBoxMenuItem
+{
+    private final org.gjt.sp.jedit.ActionContext context;
+    private java.lang.String shortcut;
+    private final java.lang.String action;
+
+    public void <init>(java.lang.String, java.lang.String, org.gjt.sp.jedit.ActionContext)
+    {
+        org.gjt.sp.jedit.menu.EnhancedCheckBoxMenuItem r0;
+        java.lang.String r1, r2, r4, r6, $r9, $r13, $r17, $r22, $r26, $r29;
+        org.gjt.sp.jedit.ActionContext r3;
+        org.jedit.keymap.Keymap r5;
+        javax.swing.KeyStroke r7;
+        java.lang.Boolean $r8;
+        java.lang.StringBuilder $r10, $r11, $r12, $r19, $r20, $r21, $r23, $r24, $r25, $r27, $r28;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.menu.EnhancedCheckBoxMenuItem$Model $r14;
+        org.gjt.sp.jedit.EditAction$Wrapper $r15;
+        org.gjt.sp.jedit.menu.EnhancedCheckBoxMenuItem$MouseHandler $r16;
+        org.jedit.keymap.KeymapManager $r18;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.context = r3;
+
+        r0.action = r2;
+
+        $r8 = java.lang.Boolean.valueOf(1);
+
+        $r9 = org.gjt.sp.jedit.GUIUtilities.getShortcutLabel(r2, $r8);
+
+        r0.shortcut = $r9;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append(r2);
+
+        $r12 = $r11.append(".tooltip");
+
+        $r13 = $r12.toString();
+
+        r4 = org.gjt.sp.jedit.jEdit.getProperty($r13);
+
+        if r4 == null goto label1;
+
+        r0.setToolTipText(r4);
+
+     label1:
+        $z0 = org.gjt.sp.jedit.OperatingSystem.hasScreenMenuBar();
+
+        if $z0 == 0 goto label4;
+
+        $r17 = r0.shortcut;
+
+        if $r17 == null goto label4;
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("menu.multiShortcut", 0);
+
+        if $z1 == 0 goto label2;
+
+        $r23 = new java.lang.StringBuilder;
+
+        specialinvoke $r23.<init>();
+
+        $r24 = $r23.append(r1);
+
+        $r25 = $r24.append(" ( ");
+
+        $r26 = r0.shortcut;
+
+        $r27 = $r25.append($r26);
+
+        $r28 = $r27.append(" )");
+
+        $r29 = $r28.toString();
+
+        r0.setText($r29);
+
+        goto label3;
+
+     label2:
+        r0.setText(r1);
+
+        $r18 = org.gjt.sp.jedit.jEdit.getKeymapManager();
+
+        r5 = $r18.getKeymap();
+
+        $r19 = new java.lang.StringBuilder;
+
+        specialinvoke $r19.<init>();
+
+        $r20 = $r19.append(r2);
+
+        $r21 = $r20.append(".shortcut");
+
+        $r22 = $r21.toString();
+
+        r6 = r5.getShortcut($r22);
+
+        r7 = org.gjt.sp.jedit.gui.KeyEventTranslator.parseKeyStroke(r6);
+
+        if r7 == null goto label3;
+
+        r0.setAccelerator(r7);
+
+     label3:
+        r0.shortcut = null;
+
+        goto label5;
+
+     label4:
+        r0.setText(r1);
+
+     label5:
+        if r2 == null goto label6;
+
+        r0.setEnabled(1);
+
+        $r15 = new org.gjt.sp.jedit.EditAction$Wrapper;
+
+        specialinvoke $r15.<init>(r3, r2);
+
+        r0.addActionListener($r15);
+
+        $r16 = new org.gjt.sp.jedit.menu.EnhancedCheckBoxMenuItem$MouseHandler;
+
+        specialinvoke $r16.<init>(r0);
+
+        r0.addMouseListener($r16);
+
+        goto label7;
+
+     label6:
+        r0.setEnabled(0);
+
+     label7:
+        $r14 = new org.gjt.sp.jedit.menu.EnhancedCheckBoxMenuItem$Model;
+
+        specialinvoke $r14.<init>(r0);
+
+        r0.setModel($r14);
+
+        return;
+    }
+
+    public java.awt.Dimension getPreferredSize()
+    {
+        org.gjt.sp.jedit.menu.EnhancedCheckBoxMenuItem r0;
+        java.awt.Dimension r1;
+        java.awt.FontMetrics r2;
+        java.lang.String $r3, $r5;
+        java.awt.Font $r4;
+        int $i0, $i1, $i2, $i3, $i4;
+
+        r0 := @this;
+
+        r1 = specialinvoke r0.getPreferredSize();
+
+        $r3 = r0.shortcut;
+
+        if $r3 == null goto label1;
+
+        $r4 = org.gjt.sp.jedit.menu.EnhancedMenuItem.acceleratorFont;
+
+        r2 = r0.getFontMetrics($r4);
+
+        $i0 = r1.width;
+
+        $r5 = r0.shortcut;
+
+        $i1 = r2.stringWidth($r5);
+
+        $i2 = r2.stringWidth("AAAA");
+
+        $i3 = $i1 + $i2;
+
+        $i4 = $i0 + $i3;
+
+        r1.width = $i4;
+
+     label1:
+        return r1;
+    }
+
+    public void paint(java.awt.Graphics)
+    {
+        org.gjt.sp.jedit.menu.EnhancedCheckBoxMenuItem r0;
+        java.awt.Graphics r1;
+        java.awt.Graphics2D r2;
+        java.awt.FontMetrics r3;
+        java.awt.Insets r4;
+        java.lang.String $r5, $r10, $r11;
+        java.awt.Font $r6;
+        java.lang.Object $r7;
+        java.awt.RenderingHints$Key $r8;
+        javax.swing.ButtonModel $r9;
+        boolean $z0;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10;
+        java.awt.Color $r12, $r12_1, $r12_2, $r12_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.paint(r1);
+
+        $r5 = r0.shortcut;
+
+(0)     if $r5 == null goto label3;
+
+        r2 = (java.awt.Graphics2D) r1;
+
+        $r6 = org.gjt.sp.jedit.menu.EnhancedMenuItem.acceleratorFont;
+
+        r1.setFont($r6);
+
+        $r8 = java.awt.RenderingHints.KEY_ANTIALIASING;
+
+        $r7 = java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
+
+        r2.setRenderingHint($r8, $r7);
+
+        $r9 = r0.getModel();
+
+        $z0 = $r9.isArmed();
+
+        if $z0 == 0 goto label1;
+
+        $r12 = org.gjt.sp.jedit.menu.EnhancedMenuItem.acceleratorSelectionForeground;
+
+(1)     goto label2;
+
+     label1:
+(2)     $r12_1 = org.gjt.sp.jedit.menu.EnhancedMenuItem.acceleratorForeground;
+
+     label2:
+        $r12_2 = Phi($r12 #1, $r12_1 #2);
+
+        r1.setColor($r12_2);
+
+        r3 = r1.getFontMetrics();
+
+        r4 = r0.getInsets();
+
+        $r10 = r0.shortcut;
+
+        $i0 = r0.getWidth();
+
+        $r11 = r0.shortcut;
+
+        $i1 = r3.stringWidth($r11);
+
+        $i2 = r4.right;
+
+        $i4 = $i1 + $i2;
+
+        $i3 = r4.left;
+
+        $i5 = $i4 + $i3;
+
+        $i6 = $i5 + 5;
+
+        $i7 = $i0 - $i6;
+
+        $i8 = r3.getAscent();
+
+        $i9 = r4.top;
+
+        $i10 = $i8 + $i9;
+
+(3)     r1.drawString($r10, $i7, $i10);
+
+     label3:
+        $r12_3 = Phi($r12 #0, $r12_2 #3);
+
+        return;
+    }
+
+    static java.lang.String access$000(org.gjt.sp.jedit.menu.EnhancedCheckBoxMenuItem)
+    {
+        org.gjt.sp.jedit.menu.EnhancedCheckBoxMenuItem r0;
+        java.lang.String $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.action;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.ActionContext access$100(org.gjt.sp.jedit.menu.EnhancedCheckBoxMenuItem)
+    {
+        org.gjt.sp.jedit.menu.EnhancedCheckBoxMenuItem r0;
+        org.gjt.sp.jedit.ActionContext $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.context;
+
+        return $r1;
+    }
+}

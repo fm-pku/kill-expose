@@ -1,0 +1,151 @@
+public abstract class org.gjt.sp.jedit.buffer.BufferAdapter extends java.lang.Object implements org.gjt.sp.jedit.buffer.BufferListener
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.buffer.BufferAdapter r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void foldLevelChanged(org.gjt.sp.jedit.buffer.JEditBuffer, int, int)
+    {
+        org.gjt.sp.jedit.buffer.BufferAdapter r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+        int i0, i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        return;
+    }
+
+    public void contentInserted(org.gjt.sp.jedit.buffer.JEditBuffer, int, int, int, int)
+    {
+        org.gjt.sp.jedit.buffer.BufferAdapter r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+        int i0, i1, i2, i3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        i3 := @parameter4;
+
+        return;
+    }
+
+    public void preContentInserted(org.gjt.sp.jedit.buffer.JEditBuffer, int, int, int, int)
+    {
+        org.gjt.sp.jedit.buffer.BufferAdapter r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+        int i0, i1, i2, i3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        i3 := @parameter4;
+
+        return;
+    }
+
+    public void preContentRemoved(org.gjt.sp.jedit.buffer.JEditBuffer, int, int, int, int)
+    {
+        org.gjt.sp.jedit.buffer.BufferAdapter r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+        int i0, i1, i2, i3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        i3 := @parameter4;
+
+        return;
+    }
+
+    public void contentRemoved(org.gjt.sp.jedit.buffer.JEditBuffer, int, int, int, int)
+    {
+        org.gjt.sp.jedit.buffer.BufferAdapter r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+        int i0, i1, i2, i3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        i3 := @parameter4;
+
+        return;
+    }
+
+    public void transactionComplete(org.gjt.sp.jedit.buffer.JEditBuffer)
+    {
+        org.gjt.sp.jedit.buffer.BufferAdapter r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void foldHandlerChanged(org.gjt.sp.jedit.buffer.JEditBuffer)
+    {
+        org.gjt.sp.jedit.buffer.BufferAdapter r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public void bufferLoaded(org.gjt.sp.jedit.buffer.JEditBuffer)
+    {
+        org.gjt.sp.jedit.buffer.BufferAdapter r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+}

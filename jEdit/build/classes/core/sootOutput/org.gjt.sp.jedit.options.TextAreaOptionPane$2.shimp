@@ -1,0 +1,68 @@
+class org.gjt.sp.jedit.options.TextAreaOptionPane$2 extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.options.TextAreaOptionPane this$0;
+
+    void <init>(org.gjt.sp.jedit.options.TextAreaOptionPane)
+    {
+        org.gjt.sp.jedit.options.TextAreaOptionPane$2 r0;
+        org.gjt.sp.jedit.options.TextAreaOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.options.TextAreaOptionPane$2 r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.options.TextAreaOptionPane $r2, $r4, $r6;
+        javax.swing.JCheckBox $r3, $r7;
+        boolean $z0;
+        org.gjt.sp.jedit.options.TextAreaOptionPane$FontList $r5;
+        int $i0;
+        java.awt.Container $r8;
+        java.lang.String $r9, $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.options.TextAreaOptionPane.access$200($r2);
+
+        $z0 = $r3.isSelected();
+
+        if $z0 != 0 goto label1;
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.options.TextAreaOptionPane.access$100($r4);
+
+        $i0 = $r5.listSize();
+
+        if $i0 != 0 goto label1;
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.options.TextAreaOptionPane.access$200($r6);
+
+        $r8 = $r7.getParent();
+
+        $r9 = org.gjt.sp.jedit.jEdit.getProperty("options.textarea.fontSubstWarning");
+
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty("options.textarea.fontSubstWarning.label");
+
+        javax.swing.JOptionPane.showMessageDialog($r8, $r9, $r10, 2);
+
+     label1:
+        return;
+    }
+}

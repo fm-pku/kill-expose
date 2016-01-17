@@ -1,0 +1,1116 @@
+public class org.gjt.sp.jedit.bufferio.BufferLoadRequest extends org.gjt.sp.jedit.bufferio.BufferIORequest
+{
+
+    public void <init>(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Buffer, java.lang.Object, org.gjt.sp.jedit.io.VFS, java.lang.String)
+    {
+        org.gjt.sp.jedit.bufferio.BufferLoadRequest r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Buffer r2;
+        java.lang.Object r3;
+        org.gjt.sp.jedit.io.VFS r4;
+        java.lang.String r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        specialinvoke r0.<init>(r1, r2, r3, r4, r5);
+
+        return;
+    }
+
+    public void _run()
+    {
+        org.gjt.sp.jedit.bufferio.BufferLoadRequest r0;
+        java.lang.Throwable r1, r2, $r39, $r49;
+        java.lang.Exception r3, $r32, $r38, $r40, $r53, $r59, $r71, $r77, r93, r94, r97, r99, r101, r104;
+        java.lang.String[] r4, $r16, $r27, $r33, $r54, $r60, $r72, $r78, r90, r92, r95, r98, r102, r105;
+        org.gjt.sp.jedit.Buffer $r5, $r11, $r20, $r25, $r37, $r45, $r58, $r64, $r66, $r76, $r82, $r86;
+        boolean $z0, $z1, $z2, $z3;
+        org.gjt.sp.jedit.View $r6, $r12, $r21, $r36, $r44, $r46, $r50, $r57, $r63, $r68, $r75, $r81, $r85, $r87;
+        java.lang.String $r7, $r10, $r17, $r19, $r22, $r26, $r28, $r30, $r31, $r34, $r35, $r42, $r43, $r55, $r56, $r61, $r62, $r73, $r74, $r79, $r80, $r84;
+        java.lang.Object $r8, $r13, $r23, $r47, $r51, $r69, $r88;
+        org.gjt.sp.jedit.io.VFS $r9, $r14, $r15, $r18, $r24, $r29, $r48, $r52, $r70, $r89;
+        java.lang.Object[] $r41, r100;
+        java.lang.InterruptedException $r65, r96;
+        java.lang.Thread $r67;
+        java.lang.OutOfMemoryError $r83, r103;
+        java.io.InputStream r91, r91_1, r91_2, r91_3, r91_4;
+
+(0)     r0 := @this;
+
+     label01:
+        r0.setCancellable(1);
+
+        $r5 = r0.buffer;
+
+        $z0 = $r5.isTemporary();
+
+        if $z0 != 0 goto label02;
+
+        $r27 = newarray (java.lang.String)[1];
+
+        $r29 = r0.vfs;
+
+        $r28 = r0.path;
+
+        $r30 = $r29.getFileName($r28);
+
+        $r27[0] = $r30;
+
+        r90 = $r27;
+
+        $r31 = org.gjt.sp.jedit.jEdit.getProperty("vfs.status.load", r90);
+
+        r0.setStatus($r31);
+
+        r0.setValue(0L);
+
+     label02:
+        $r9 = r0.vfs;
+
+        $r8 = r0.session;
+
+        $r7 = r0.path;
+
+        $r6 = r0.view;
+
+        $r10 = $r9._canonPath($r8, $r7, $r6);
+
+        r0.path = $r10;
+
+        specialinvoke r0.readContents();
+
+        $r11 = r0.buffer;
+
+        $r11.setNewFile(0);
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("persistentMarkers");
+
+(1)     if $z1 == 0 goto label10;
+
+        $r15 = r0.vfs;
+
+        $z2 = $r15.isMarkersFileSupported();
+
+(2)     if $z2 == 0 goto label10;
+
+(3)     r91 = null;
+
+     label03:
+        $r16 = newarray (java.lang.String)[1];
+
+        $r18 = r0.vfs;
+
+        $r17 = r0.path;
+
+        $r19 = $r18.getFileName($r17);
+
+        $r16[0] = $r19;
+
+        r92 = $r16;
+
+        $r20 = r0.buffer;
+
+        $z3 = $r20.isTemporary();
+
+        if $z3 != 0 goto label04;
+
+        $r26 = org.gjt.sp.jedit.jEdit.getProperty("vfs.status.load-markers", r92);
+
+        r0.setStatus($r26);
+
+     label04:
+        r0.setCancellable(1);
+
+        $r24 = r0.vfs;
+
+        $r23 = r0.session;
+
+        $r22 = r0.markersPath;
+
+        $r21 = r0.view;
+
+(4)     r91_1 = $r24._createInputStream($r23, $r22, 1, $r21);
+
+(5)     if r91_1 == null goto label05;
+
+        $r25 = r0.buffer;
+
+        org.gjt.sp.jedit.bufferio.BufferLoadRequest.readMarkers($r25, r91_1);
+
+     label05:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r91_1);
+
+(6)     goto label10;
+
+     label06:
+        $r38 := @caughtexception;
+
+(7)     r91_2 = Phi(r91 #3, r91_1 #4);
+
+(8)     r93 = $r38;
+
+     label07:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r91_2);
+
+(9)     goto label10;
+
+     label08:
+        $r39 := @caughtexception;
+
+(10)    r91 = Phi(r91 #3, r91_1 #4, r91_2 #7, r91 #10);
+
+(11)    r1 = $r39;
+
+     label09:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r91);
+
+        throw r1;
+
+     label10:
+        r91_3 = Phi(r91 #1, r91 #2, r91_1 #6, r91_2 #9);
+
+(12)    $r14 = r0.vfs;
+
+        $r13 = r0.session;
+
+        $r12 = r0.view;
+
+        $r14._endVFSSession($r13, $r12);
+
+     label11:
+(13)    goto label30;
+
+     label12:
+        $r53 := @caughtexception;
+
+        r91_4 = Phi(r91 #1, r91_1 #6, r91_2 #9, r91_3 #12);
+
+        r94 = $r53;
+
+        org.gjt.sp.util.Log.log(9, r0, r94);
+
+        $r54 = newarray (java.lang.String)[1];
+
+        $r55 = r94.toString();
+
+        $r54[0] = $r55;
+
+        r95 = $r54;
+
+        $r57 = r0.view;
+
+        $r56 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r57, $r56, "ioerror.read-error", r95);
+
+        $r58 = r0.buffer;
+
+        $r58.setBooleanProperty("BufferIORequest__error", 1);
+
+(14)    goto label30;
+
+     label13:
+        $r65 := @caughtexception;
+
+(15)    r91 = Phi(r91 #0, r91_1 #5, r91_2 #8, r91 #11);
+
+        r96 = $r65;
+
+        $r66 = r0.buffer;
+
+        $r66.setBooleanProperty("BufferIORequest__error", 1);
+
+        $r67 = java.lang.Thread.currentThread();
+
+        $r67.interrupt();
+
+     label14:
+        $r70 = r0.vfs;
+
+        $r69 = r0.session;
+
+        $r68 = r0.view;
+
+        $r70._endVFSSession($r69, $r68);
+
+     label15:
+(16)    goto label30;
+
+     label16:
+        $r77 := @caughtexception;
+
+        r97 = $r77;
+
+        org.gjt.sp.util.Log.log(9, r0, r97);
+
+        $r78 = newarray (java.lang.String)[1];
+
+        $r79 = r97.toString();
+
+        $r78[0] = $r79;
+
+        r98 = $r78;
+
+        $r81 = r0.view;
+
+        $r80 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r81, $r80, "ioerror.read-error", r98);
+
+        $r82 = r0.buffer;
+
+        $r82.setBooleanProperty("BufferIORequest__error", 1);
+
+(17)    goto label30;
+
+     label17:
+        $r40 := @caughtexception;
+
+(18)    r91 = Phi(r91 #0, r91_1 #5, r91_2 #8, r91 #11);
+
+        r99 = $r40;
+
+        org.gjt.sp.util.Log.log(9, r0, r99);
+
+        $r41 = newarray (java.lang.Object)[1];
+
+        $r42 = r99.toString();
+
+        $r41[0] = $r42;
+
+        r100 = $r41;
+
+        $r44 = r0.view;
+
+        $r43 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r44, $r43, "ioerror.read-error", r100);
+
+        $r45 = r0.buffer;
+
+        $r45.setBooleanProperty("BufferIORequest__error", 1);
+
+     label18:
+        $r48 = r0.vfs;
+
+        $r47 = r0.session;
+
+        $r46 = r0.view;
+
+        $r48._endVFSSession($r47, $r46);
+
+     label19:
+(19)    goto label30;
+
+     label20:
+        $r71 := @caughtexception;
+
+        r101 = $r71;
+
+        org.gjt.sp.util.Log.log(9, r0, r101);
+
+        $r72 = newarray (java.lang.String)[1];
+
+        $r73 = r101.toString();
+
+        $r72[0] = $r73;
+
+        r102 = $r72;
+
+        $r75 = r0.view;
+
+        $r74 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r75, $r74, "ioerror.read-error", r102);
+
+        $r76 = r0.buffer;
+
+        $r76.setBooleanProperty("BufferIORequest__error", 1);
+
+(20)    goto label30;
+
+     label21:
+        $r83 := @caughtexception;
+
+(21)    r91 = Phi(r91 #0, r91_1 #5, r91_2 #8, r91 #11);
+
+        r103 = $r83;
+
+        org.gjt.sp.util.Log.log(9, r0, r103);
+
+        $r85 = r0.view;
+
+        $r84 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r85, $r84, "out-of-memory-error", null);
+
+        $r86 = r0.buffer;
+
+        $r86.setBooleanProperty("BufferIORequest__error", 1);
+
+     label22:
+        $r89 = r0.vfs;
+
+        $r88 = r0.session;
+
+        $r87 = r0.view;
+
+        $r89._endVFSSession($r88, $r87);
+
+     label23:
+(22)    goto label30;
+
+     label24:
+        $r59 := @caughtexception;
+
+        r104 = $r59;
+
+        org.gjt.sp.util.Log.log(9, r0, r104);
+
+        $r60 = newarray (java.lang.String)[1];
+
+        $r61 = r104.toString();
+
+        $r60[0] = $r61;
+
+        r105 = $r60;
+
+        $r63 = r0.view;
+
+        $r62 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r63, $r62, "ioerror.read-error", r105);
+
+        $r64 = r0.buffer;
+
+        $r64.setBooleanProperty("BufferIORequest__error", 1);
+
+(23)    goto label30;
+
+     label25:
+        $r49 := @caughtexception;
+
+(24)    r91 = Phi(r91 #0, r91_1 #5, r91_2 #8, r91 #11, r91 #15, r91 #18, r91 #21, r91 #24);
+
+        r2 = $r49;
+
+     label26:
+        $r52 = r0.vfs;
+
+        $r51 = r0.session;
+
+        $r50 = r0.view;
+
+        $r52._endVFSSession($r51, $r50);
+
+     label27:
+        goto label29;
+
+     label28:
+        $r32 := @caughtexception;
+
+        r3 = $r32;
+
+        org.gjt.sp.util.Log.log(9, r0, r3);
+
+        $r33 = newarray (java.lang.String)[1];
+
+        $r34 = r3.toString();
+
+        $r33[0] = $r34;
+
+        r4 = $r33;
+
+        $r36 = r0.view;
+
+        $r35 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r36, $r35, "ioerror.read-error", r4);
+
+        $r37 = r0.buffer;
+
+        $r37.setBooleanProperty("BufferIORequest__error", 1);
+
+     label29:
+        throw r2;
+
+     label30:
+        r91 = Phi(r91_3 #13, r91_4 #14, r91 #16, r91 #17, r91 #19, r91 #20, r91 #22, r91 #23);
+
+        return;
+
+        catch java.lang.Exception from label03 to label05 with label06;
+        catch java.lang.Throwable from label03 to label05 with label08;
+        catch java.lang.Throwable from label06 to label07 with label08;
+        catch java.lang.Throwable from label08 to label09 with label08;
+        catch java.lang.Exception from label10 to label11 with label12;
+        catch java.lang.InterruptedException from label01 to label10 with label13;
+        catch java.lang.Exception from label14 to label15 with label16;
+        catch java.lang.Exception from label01 to label10 with label17;
+        catch java.lang.Exception from label18 to label19 with label20;
+        catch java.lang.OutOfMemoryError from label01 to label10 with label21;
+        catch java.lang.Exception from label22 to label23 with label24;
+        catch java.lang.Throwable from label01 to label10 with label25;
+        catch java.lang.Throwable from label13 to label14 with label25;
+        catch java.lang.Throwable from label17 to label18 with label25;
+        catch java.lang.Throwable from label21 to label22 with label25;
+        catch java.lang.Exception from label26 to label27 with label28;
+        catch java.lang.Throwable from label25 to label26 with label25;
+    }
+
+    private java.io.InputStream getNakedStream() throws java.io.IOException
+    {
+        org.gjt.sp.jedit.bufferio.BufferLoadRequest r0;
+        java.io.InputStream r1;
+        org.gjt.sp.jedit.View $r2;
+        java.lang.String $r3, $r9, $r11;
+        java.lang.Object $r4;
+        org.gjt.sp.jedit.io.VFS $r5;
+        java.io.IOException $r6;
+        java.lang.StringBuilder $r7, $r8, $r10;
+
+        r0 := @this;
+
+        $r5 = r0.vfs;
+
+        $r4 = r0.session;
+
+        $r3 = r0.path;
+
+        $r2 = r0.view;
+
+        r1 = $r5._createInputStream($r4, $r3, 0, $r2);
+
+        if r1 == null goto label1;
+
+        return r1;
+
+     label1:
+        $r6 = new java.io.IOException;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("Unable to get a Stream for ");
+
+        $r9 = r0.path;
+
+        $r10 = $r8.append($r9);
+
+        $r11 = $r10.toString();
+
+        specialinvoke $r6.<init>($r11);
+
+        throw $r6;
+    }
+
+    private long getContentLength() throws java.io.IOException
+    {
+        org.gjt.sp.jedit.bufferio.BufferLoadRequest r0;
+        org.gjt.sp.jedit.io.VFSFile r1;
+        org.gjt.sp.jedit.View $r2;
+        java.lang.String $r3;
+        java.lang.Object $r4;
+        org.gjt.sp.jedit.io.VFS $r5;
+        long $l0;
+
+        r0 := @this;
+
+        $r5 = r0.vfs;
+
+        $r4 = r0.session;
+
+        $r3 = r0.path;
+
+        $r2 = r0.view;
+
+        r1 = $r5._getFile($r4, $r3, $r2);
+
+        if r1 == null goto label1;
+
+        $l0 = r1.getLength();
+
+        return $l0;
+
+     label1:
+        return 0L;
+    }
+
+    private java.io.BufferedInputStream rewindContentsStream(java.io.BufferedInputStream, boolean) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.bufferio.BufferLoadRequest r0;
+        java.io.BufferedInputStream r1, r3, r4;
+        boolean z0;
+        java.io.IOException r2, $r7;
+        java.lang.Throwable r5, $r6;
+        java.lang.StringBuilder $r8, $r10, $r11;
+        java.lang.String $r9, $r12;
+        java.util.zip.GZIPInputStream $r13;
+        java.io.InputStream r14, r14_1, r14_2, r14_3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+     label1:
+        r1.reset();
+
+     label2:
+        return r1;
+
+     label3:
+        $r7 := @caughtexception;
+
+        r2 = $r7;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = r0.path;
+
+        $r10 = $r8.append($r9);
+
+        $r11 = $r10.append(": Reopening to rewind the stream");
+
+        $r12 = $r11.toString();
+
+        org.gjt.sp.util.Log.log(5, r0, $r12);
+
+        r1.close();
+
+(0)     r14 = specialinvoke r0.getNakedStream();
+
+     label4:
+(1)     if z0 == 0 goto label5;
+
+        $r13 = new java.util.zip.GZIPInputStream;
+
+        specialinvoke $r13.<init>(r14);
+
+(2)     r14_1 = $r13;
+
+     label5:
+        r14_2 = Phi(r14 #1, r14_1 #2);
+
+(3)     r3 = org.gjt.sp.jedit.io.AutoDetection.getMarkedStream(r14_2);
+
+(4)     r14_3 = null;
+
+        r4 = r3;
+
+     label6:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r14_3);
+
+        return r4;
+
+     label7:
+        $r6 := @caughtexception;
+
+(5)     r14 = Phi(r14 #0, r14_1 #2, r14_2 #3, r14_3 #4, r14 #5);
+
+        r5 = $r6;
+
+     label8:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r14);
+
+        throw r5;
+
+        catch java.io.IOException from label1 to label2 with label3;
+        catch java.lang.Throwable from label4 to label6 with label7;
+        catch java.lang.Throwable from label7 to label8 with label7;
+    }
+
+    private void readContents() throws java.io.IOException, java.lang.InterruptedException
+    {
+        org.gjt.sp.jedit.bufferio.BufferLoadRequest r0;
+        long l0;
+        java.util.ArrayList r1, $r5;
+        boolean z0, $z2, $z3, $z4, $z5, z10, z11, z11_1, z11_2;
+        java.lang.Object r2;
+        java.lang.Throwable r3, $r52;
+        java.io.InputStream $r4;
+        org.gjt.sp.jedit.Buffer $r6, $r7, $r8, $r15, $r20, $r28, $r29, $r39;
+        java.lang.String $r9, $r12, $r13, $r16, $r21, $r25, $r33, $r36, $r40, $r44, $r50, r56, r60;
+        java.util.HashSet $r10, r57;
+        java.lang.Object[] $r11, r65;
+        int $i1, $i2, $i3;
+        org.gjt.sp.jedit.View $r14;
+        org.gjt.sp.jedit.io.Encoding $r17;
+        java.io.Reader $r18, $r26;
+        java.lang.StringBuilder $r22, $r23, $r24, $r32, $r34, $r35, $r43, $r45, $r46, $r47, $r48, $r49;
+        java.io.BufferedInputStream $r30, r55, r55_1, r55_2;
+        org.gjt.sp.jedit.io.EncodingDetector $r31;
+        java.util.zip.GZIPInputStream $r37;
+        java.util.List $r38;
+        java.lang.String[] $r41;
+        java.nio.charset.CharacterCodingException $r42, r62;
+        java.nio.charset.UnsupportedCharsetException $r51, r64;
+        java.io.UnsupportedEncodingException $r53, r63;
+        java.io.CharConversionException $r54, r61;
+        java.lang.Exception r58;
+        java.util.Iterator r59;
+
+        r0 := @this;
+
+        l0 = specialinvoke r0.getContentLength();
+
+        $r4 = specialinvoke r0.getNakedStream();
+
+(0)     r55 = org.gjt.sp.jedit.io.AutoDetection.getMarkedStream($r4);
+
+     label01:
+        z10 = 0;
+
+        $r5 = new java.util.ArrayList;
+
+        specialinvoke $r5.<init>();
+
+        r1 = $r5;
+
+        $r6 = r0.buffer;
+
+        z0 = $r6.getBooleanProperty("encodingAutodetect");
+
+        if z0 == 0 goto label03;
+
+        z11 = org.gjt.sp.jedit.io.AutoDetection.isGzipped(r55);
+
+        r55.reset();
+
+        $r38 = org.gjt.sp.jedit.io.AutoDetection.getEncodingDetectors();
+
+        r1.addAll($r38);
+
+        $r39 = r0.buffer;
+
+        $r40 = $r39.getStringProperty("encoding");
+
+        r1.add($r40);
+
+        r56 = org.gjt.sp.jedit.jEdit.getProperty("fallbackEncodings");
+
+        if r56 == null goto label02;
+
+        $i3 = r56.length();
+
+        if $i3 <= 0 goto label02;
+
+        $r41 = r56.split("\\s+");
+
+        java.util.Collections.addAll(r1, $r41);
+
+     label02:
+(1)     goto label04;
+
+     label03:
+        $r7 = r0.buffer;
+
+(2)     z11_1 = $r7.getBooleanProperty("gzipped");
+
+        $r8 = r0.buffer;
+
+        $r9 = $r8.getStringProperty("encoding");
+
+(3)     r1.add($r9);
+
+     label04:
+        z11_2 = Phi(z11 #1, z11_1 #3);
+
+(4)     if z11_2 == 0 goto label05;
+
+        $r32 = new java.lang.StringBuilder;
+
+        specialinvoke $r32.<init>();
+
+        $r33 = r0.path;
+
+        $r34 = $r32.append($r33);
+
+        $r35 = $r34.append(": Stream is gzipped.");
+
+        $r36 = $r35.toString();
+
+        org.gjt.sp.util.Log.log(1, r0, $r36);
+
+        $r37 = new java.util.zip.GZIPInputStream;
+
+        specialinvoke $r37.<init>(r55);
+
+(5)     r55_1 = org.gjt.sp.jedit.io.AutoDetection.getMarkedStream($r37);
+
+     label05:
+        r55_2 = Phi(r55 #4, r55_1 #5);
+
+(6)     $r10 = new java.util.HashSet;
+
+        specialinvoke $r10.<init>();
+
+        r57 = $r10;
+
+        r58 = null;
+
+(7)     r59 = r1.iterator();
+
+     label06:
+        r58 = Phi(r58 #7, r58 #12, r58 #13, r58 #14, r58 #19);
+
+        r60 = Phi(r60 #7, r60 #12, r60 #13, r60 #14, r60 #19);
+
+        z11 = Phi(z11_2 #7, z11 #12, z11 #13, z11 #14, z11 #19);
+
+        r55 = Phi(r55_2 #7, r55 #12, r55 #13, r55 #14, r55 #19);
+
+(8)     $z2 = r59.hasNext();
+
+        if $z2 == 0 goto label19;
+
+        r2 = r59.next();
+
+        r60 = null;
+
+        $z3 = r2 instanceof java.lang.String;
+
+        if $z3 == 0 goto label07;
+
+        r60 = (java.lang.String) r2;
+
+(9)     goto label09;
+
+     label07:
+        $z4 = r2 instanceof org.gjt.sp.jedit.io.EncodingDetector;
+
+        if $z4 == 0 goto label08;
+
+        r55 = specialinvoke r0.rewindContentsStream(r55, z11);
+
+        $r31 = (org.gjt.sp.jedit.io.EncodingDetector) r2;
+
+        $r30 = new java.io.BufferedInputStream;
+
+        specialinvoke $r30.<init>(r55);
+
+        r60 = $r31.detectEncoding($r30);
+
+(10)    goto label09;
+
+     label08:
+        $r22 = new java.lang.StringBuilder;
+
+        specialinvoke $r22.<init>();
+
+        $r23 = $r22.append("Strange encodingProvider: ");
+
+        $r24 = $r23.append(r2);
+
+        $r25 = $r24.toString();
+
+(11)    org.gjt.sp.util.Log.log(1, r0, $r25);
+
+     label09:
+        r60 = Phi(r60 #9, r60 #10, r60 #11);
+
+        r55 = Phi(r55 #9, r55 #10, r55 #11);
+
+(12)    if r60 == null goto label06;
+
+        $i2 = r60.length();
+
+(13)    if $i2 <= 0 goto label06;
+
+        $z5 = r57.contains(r60);
+
+        if $z5 == 0 goto label10;
+
+(14)    goto label06;
+
+     label10:
+        r55 = specialinvoke r0.rewindContentsStream(r55, z11);
+
+     label11:
+        $r26 = org.gjt.sp.jedit.io.EncodingServer.getTextReader(r55, r60);
+
+        r0.read($r26, l0, 0);
+
+        if z0 == 0 goto label13;
+
+        if z11 == 0 goto label12;
+
+        $r29 = r0.buffer;
+
+        $r29.setBooleanProperty("gzipped", 1);
+
+     label12:
+        $r28 = r0.buffer;
+
+        $r28.setProperty("encoding", r60);
+
+     label13:
+        r55.close();
+
+        return;
+
+     label14:
+        $r54 := @caughtexception;
+
+        r61 = $r54;
+
+        r58 = r61;
+
+(15)    goto label18;
+
+     label15:
+        $r42 := @caughtexception;
+
+        r62 = $r42;
+
+        r58 = r62;
+
+(16)    goto label18;
+
+     label16:
+        $r53 := @caughtexception;
+
+        r63 = $r53;
+
+        r58 = r63;
+
+(17)    goto label18;
+
+     label17:
+        $r51 := @caughtexception;
+
+        r64 = $r51;
+
+(18)    r58 = r64;
+
+     label18:
+        r58 = Phi(r58 #15, r58 #16, r58 #17, r58 #18);
+
+        $r43 = new java.lang.StringBuilder;
+
+        specialinvoke $r43.<init>();
+
+        $r44 = r0.path;
+
+        $r45 = $r43.append($r44);
+
+        $r46 = $r45.append(": ");
+
+        $r47 = $r46.append(r60);
+
+        $r48 = $r47.append(": ");
+
+        $r49 = $r48.append(r58);
+
+        $r50 = $r49.toString();
+
+        org.gjt.sp.util.Log.log(5, r0, $r50);
+
+        r57.add(r60);
+
+(19)    goto label06;
+
+     label19:
+        $r11 = newarray (java.lang.Object)[2];
+
+        $r12 = org.gjt.sp.jedit.TextUtilities.join(r57, ",");
+
+        $r11[0] = $r12;
+
+        $r11[1] = "";
+
+        r65 = $r11;
+
+        $i1 = r57.size();
+
+        if $i1 >= 2 goto label20;
+
+        $r21 = r58.toString();
+
+        r65[1] = $r21;
+
+        goto label21;
+
+     label20:
+        r65[1] = "See details in Activity Log";
+
+     label21:
+        $r14 = r0.view;
+
+        $r13 = r0.path;
+
+        org.gjt.sp.jedit.io.VFSManager.error($r14, $r13, "ioerror.encoding-error", r65, 5);
+
+        r55 = specialinvoke r0.rewindContentsStream(r55, z11);
+
+        $r15 = r0.buffer;
+
+        $r16 = $r15.getStringProperty("encoding");
+
+        $r17 = org.gjt.sp.jedit.io.EncodingServer.getEncoding($r16);
+
+        $r18 = $r17.getPermissiveTextReader(r55);
+
+        r0.read($r18, l0, 0);
+
+        if z0 == 0 goto label22;
+
+        if z11 == 0 goto label22;
+
+        $r20 = r0.buffer;
+
+        $r20.setBooleanProperty("gzipped", 1);
+
+     label22:
+        r55.close();
+
+        goto label25;
+
+     label23:
+        $r52 := @caughtexception;
+
+        r58 = Phi(r58 #0, r58 #8, r58 #20);
+
+        r60 = Phi(r60 #0, r60 #8, r60 #20);
+
+        z11 = Phi(z11 #0, z11_1 #2, z11_2 #4, z11 #8, z11 #20);
+
+(20)    r55 = Phi(r55 #0, r55_1 #5, r55_2 #6, r55 #8, r55 #20);
+
+        r3 = $r52;
+
+     label24:
+        r55.close();
+
+        throw r3;
+
+     label25:
+        return;
+
+        catch java.io.CharConversionException from label11 to label13 with label14;
+        catch java.nio.charset.CharacterCodingException from label11 to label13 with label15;
+        catch java.io.UnsupportedEncodingException from label11 to label13 with label16;
+        catch java.nio.charset.UnsupportedCharsetException from label11 to label13 with label17;
+        catch java.lang.Throwable from label01 to label13 with label23;
+        catch java.lang.Throwable from label14 to label22 with label23;
+        catch java.lang.Throwable from label23 to label24 with label23;
+    }
+
+    private static void readMarkers(org.gjt.sp.jedit.Buffer, java.io.InputStream) throws java.io.IOException, java.lang.InterruptedException
+    {
+        org.gjt.sp.jedit.Buffer r0;
+        java.io.InputStream r1;
+        java.io.BufferedReader r2, $r5;
+        java.lang.String r3, $r7, $r8;
+        char c0, $c5;
+        int i1, i2, i3, $i4, $i6, $i7;
+        java.lang.Throwable r4, $r10;
+        java.io.InputStreamReader $r6;
+        boolean $z0;
+        java.lang.InterruptedException $r9;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.removeAllMarkers();
+
+        $r5 = new java.io.BufferedReader;
+
+        $r6 = new java.io.InputStreamReader;
+
+        specialinvoke $r6.<init>(r1);
+
+        specialinvoke $r5.<init>($r6);
+
+        r2 = $r5;
+
+     label1:
+        $r7 = r2.readLine();
+
+        r3 = $r7;
+
+        if $r7 == null goto label5;
+
+        $z0 = java.lang.Thread.interrupted();
+
+        if $z0 == 0 goto label2;
+
+        $r9 = new java.lang.InterruptedException;
+
+        specialinvoke $r9.<init>();
+
+        throw $r9;
+
+     label2:
+        $i4 = r3.length();
+
+        if $i4 != 0 goto label3;
+
+        goto label1;
+
+     label3:
+        $c5 = r3.charAt(0);
+
+        if $c5 == 33 goto label4;
+
+        goto label1;
+
+     label4:
+        c0 = r3.charAt(1);
+
+        i1 = r3.indexOf(59);
+
+        $i6 = i1 + 1;
+
+        i2 = r3.indexOf(59, $i6);
+
+        $i7 = i1 + 1;
+
+        $r8 = r3.substring($i7, i2);
+
+        i3 = java.lang.Integer.parseInt($r8);
+
+        r0.addMarker(c0, i3);
+
+        goto label1;
+
+     label5:
+        r0.setMarkersChanged(0);
+
+     label6:
+        r2.close();
+
+        goto label9;
+
+     label7:
+        $r10 := @caughtexception;
+
+        r4 = $r10;
+
+     label8:
+        r2.close();
+
+        throw r4;
+
+     label9:
+        return;
+
+        catch java.lang.Throwable from label1 to label6 with label7;
+        catch java.lang.Throwable from label7 to label8 with label7;
+    }
+}

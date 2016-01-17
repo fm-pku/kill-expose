@@ -1,0 +1,84 @@
+public class org.gjt.sp.jedit.BufferHistory$Entry extends java.lang.Object
+{
+    public java.lang.String path;
+    public int caret;
+    public java.lang.String selection;
+    public java.lang.String encoding;
+    public java.lang.String mode;
+
+    public org.gjt.sp.jedit.textarea.Selection[] getSelection()
+    {
+        org.gjt.sp.jedit.BufferHistory$Entry r0;
+        java.lang.String $r1;
+        org.gjt.sp.jedit.textarea.Selection[] $r2;
+
+        r0 := @this;
+
+        $r1 = r0.selection;
+
+        $r2 = org.gjt.sp.jedit.BufferHistory.access$000($r1);
+
+        return $r2;
+    }
+
+    public void <init>(java.lang.String, int, java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.BufferHistory$Entry r0;
+        java.lang.String r1, r2, r3, r4;
+        int i0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        r4 := @parameter4;
+
+        specialinvoke r0.<init>();
+
+        r0.path = r1;
+
+        r0.caret = i0;
+
+        r0.selection = r2;
+
+        r0.encoding = r3;
+
+        r0.mode = r4;
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.BufferHistory$Entry r0;
+        java.lang.StringBuilder $r1, $r3, $r4, $r5;
+        java.lang.String $r2, $r6;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = r0.path;
+
+        $r3 = $r1.append($r2);
+
+        $r4 = $r3.append(": ");
+
+        $i0 = r0.caret;
+
+        $r5 = $r4.append($i0);
+
+        $r6 = $r5.toString();
+
+        return $r6;
+    }
+}

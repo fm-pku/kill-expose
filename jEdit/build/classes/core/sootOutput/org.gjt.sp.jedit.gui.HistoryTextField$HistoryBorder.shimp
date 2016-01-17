@@ -1,0 +1,154 @@
+class org.gjt.sp.jedit.gui.HistoryTextField$HistoryBorder extends javax.swing.border.AbstractBorder
+{
+    static final int WIDTH;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.gui.HistoryTextField$HistoryBorder r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void paintBorder(java.awt.Component, java.awt.Graphics, int, int, int, int)
+    {
+        org.gjt.sp.jedit.gui.HistoryTextField$HistoryBorder r0;
+        java.awt.Component r1;
+        java.awt.Graphics r2;
+        int i0, i1, i2, i3, i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i20, $i21, $i22, $i23, $i24, $i25, $i26, $i27, $i28, $i29, $i30;
+        byte b4;
+        boolean $z0;
+        java.awt.Color $r3;
+        org.gjt.sp.jedit.gui.HistoryTextField $r4;
+        org.gjt.sp.jedit.gui.HistoryModel $r5;
+        java.lang.String $r6, $r6_1, $r6_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        i1 := @parameter3;
+
+        i2 := @parameter4;
+
+        i3 := @parameter5;
+
+        $i6 = i0 + i2;
+
+        $i8 = $i6 - 16;
+
+        $i7 = i1 - 1;
+
+        r2.translate($i8, $i7);
+
+        b4 = 8;
+
+        i5 = i3 / 2;
+
+        $z0 = r1.isEnabled();
+
+        if $z0 == 0 goto label1;
+
+        $r4 = (org.gjt.sp.jedit.gui.HistoryTextField) r1;
+
+        $r5 = $r4.getModel();
+
+        if $r5 == null goto label1;
+
+        $r6 = "TextField.foreground";
+
+(0)     goto label2;
+
+     label1:
+(1)     $r6_1 = "TextField.disabledForeground";
+
+     label2:
+        $r6_2 = Phi($r6 #0, $r6_1 #1);
+
+        $r3 = javax.swing.UIManager.getColor($r6_2);
+
+        r2.setColor($r3);
+
+        $i12 = b4 - 5;
+
+        $i11 = i5 - 2;
+
+        $i10 = b4 + 4;
+
+        $i9 = i5 - 2;
+
+        r2.drawLine($i12, $i11, $i10, $i9);
+
+        $i16 = b4 - 4;
+
+        $i15 = i5 - 1;
+
+        $i14 = b4 + 3;
+
+        $i13 = i5 - 1;
+
+        r2.drawLine($i16, $i15, $i14, $i13);
+
+        $i18 = b4 - 3;
+
+        $i17 = b4 + 2;
+
+        r2.drawLine($i18, i5, $i17, i5);
+
+        $i22 = b4 - 2;
+
+        $i21 = i5 + 1;
+
+        $i20 = b4 + 1;
+
+        $i19 = i5 + 1;
+
+        r2.drawLine($i22, $i21, $i20, $i19);
+
+        $i25 = b4 - 1;
+
+        $i24 = i5 + 2;
+
+        $i23 = i5 + 2;
+
+        r2.drawLine($i25, $i24, b4, $i23);
+
+        $i26 = i0 + i2;
+
+        $i27 = $i26 - 16;
+
+        $i30 = neg $i27;
+
+        $i28 = i1 - 1;
+
+        $i29 = neg $i28;
+
+        r2.translate($i30, $i29);
+
+        return;
+    }
+
+    public java.awt.Insets getBorderInsets(java.awt.Component)
+    {
+        org.gjt.sp.jedit.gui.HistoryTextField$HistoryBorder r0;
+        java.awt.Component r1;
+        java.awt.Insets $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.awt.Insets;
+
+        specialinvoke $r2.<init>(0, 0, 0, 16);
+
+        return $r2;
+    }
+}

@@ -1,0 +1,616 @@
+public class org.gjt.sp.jedit.gui.PasteFromListDialog extends org.gjt.sp.jedit.gui.EnhancedDialog
+{
+    private org.gjt.sp.jedit.View view;
+    private org.gjt.sp.jedit.gui.MutableListModel listModel;
+    private javax.swing.JList clips;
+    private javax.swing.JTextArea clipText;
+    private javax.swing.JButton insert;
+    private javax.swing.JButton cancel;
+
+    public void <init>(java.lang.String, org.gjt.sp.jedit.View, org.gjt.sp.jedit.gui.MutableListModel)
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog r0;
+        java.lang.String r1, $r11, $r12, $r27, $r29, $r34, $r35;
+        org.gjt.sp.jedit.View r2;
+        org.gjt.sp.jedit.gui.MutableListModel r3;
+        javax.swing.JPanel r4, r5, r7, $r13, $r16, $r48;
+        int i0, $i1;
+        javax.swing.JLabel r6, $r30;
+        java.lang.StringBuilder $r8, $r9, $r10, $r31, $r32, $r33;
+        java.awt.BorderLayout $r14;
+        javax.swing.border.EmptyBorder $r15, $r36, $r50;
+        java.awt.GridLayout $r17;
+        javax.swing.JList $r18, $r20, $r21, $r23, $r25, $r39, $r67, $r68;
+        org.gjt.sp.jedit.gui.PasteFromListDialog$Renderer $r19;
+        org.gjt.sp.jedit.gui.PasteFromListDialog$MouseHandler $r22;
+        org.gjt.sp.jedit.gui.PasteFromListDialog$ListHandler $r24;
+        javax.swing.JButton $r26, $r28, $r53, $r57, $r62, $r64, $r66;
+        javax.swing.JScrollPane $r38, $r44, r69, r70;
+        java.awt.Dimension $r40, $r46;
+        javax.swing.JTextArea $r42, $r43, $r45;
+        javax.swing.BoxLayout $r49;
+        java.awt.Component $r51, $r55, $r59;
+        javax.swing.JRootPane $r61;
+        org.gjt.sp.jedit.gui.PasteFromListDialog$ActionHandler $r63, $r65;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<init>();
+
+        $r9 = $r8.append(r1);
+
+        $r10 = $r9.append(".title");
+
+        $r11 = $r10.toString();
+
+        $r12 = org.gjt.sp.jedit.jEdit.getProperty($r11);
+
+        specialinvoke r0.<init>(r2, $r12, 1);
+
+        r0.view = r2;
+
+        r0.listModel = r3;
+
+        $r13 = new javax.swing.JPanel;
+
+        $r14 = new java.awt.BorderLayout;
+
+        specialinvoke $r14.<init>();
+
+        specialinvoke $r13.<init>($r14);
+
+        r4 = $r13;
+
+        $r15 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r15.<init>(12, 12, 12, 12);
+
+        r4.setBorder($r15);
+
+        r0.setContentPane(r4);
+
+        $r16 = new javax.swing.JPanel;
+
+        $r17 = new java.awt.GridLayout;
+
+        specialinvoke $r17.<init>(2, 1, 2, 12);
+
+        specialinvoke $r16.<init>($r17);
+
+        r5 = $r16;
+
+        i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("paste-from-list.max-item-length", 1000);
+
+        $r18 = new javax.swing.JList;
+
+        specialinvoke $r18.<init>(r3);
+
+        r0.clips = $r18;
+
+        $r20 = r0.clips;
+
+        $r19 = new org.gjt.sp.jedit.gui.PasteFromListDialog$Renderer;
+
+        specialinvoke $r19.<init>(i0);
+
+        $r20.setCellRenderer($r19);
+
+        $r21 = r0.clips;
+
+        $r21.setVisibleRowCount(12);
+
+        $r23 = r0.clips;
+
+        $r22 = new org.gjt.sp.jedit.gui.PasteFromListDialog$MouseHandler;
+
+        specialinvoke $r22.<init>(r0);
+
+        $r23.addMouseListener($r22);
+
+        $r25 = r0.clips;
+
+        $r24 = new org.gjt.sp.jedit.gui.PasteFromListDialog$ListHandler;
+
+        specialinvoke $r24.<init>(r0);
+
+        $r25.addListSelectionListener($r24);
+
+        $r26 = new javax.swing.JButton;
+
+        $r27 = org.gjt.sp.jedit.jEdit.getProperty("common.insert");
+
+        specialinvoke $r26.<init>($r27);
+
+        r0.insert = $r26;
+
+        $r28 = new javax.swing.JButton;
+
+        $r29 = org.gjt.sp.jedit.jEdit.getProperty("common.cancel");
+
+        specialinvoke $r28.<init>($r29);
+
+        r0.cancel = $r28;
+
+        $r30 = new javax.swing.JLabel;
+
+        $r31 = new java.lang.StringBuilder;
+
+        specialinvoke $r31.<init>();
+
+        $r32 = $r31.append(r1);
+
+        $r33 = $r32.append(".caption");
+
+        $r34 = $r33.toString();
+
+        $r35 = org.gjt.sp.jedit.jEdit.getProperty($r34);
+
+        specialinvoke $r30.<init>($r35);
+
+        r6 = $r30;
+
+        $r36 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r36.<init>(0, 0, 6, 0);
+
+        r6.setBorder($r36);
+
+        r4.add("North", r6);
+
+        $r38 = new javax.swing.JScrollPane;
+
+        $r39 = r0.clips;
+
+        specialinvoke $r38.<init>($r39);
+
+        r69 = $r38;
+
+        $r40 = new java.awt.Dimension;
+
+        specialinvoke $r40.<init>(500, 150);
+
+        r69.setPreferredSize($r40);
+
+        r5.add(r69);
+
+        $r42 = new javax.swing.JTextArea;
+
+        specialinvoke $r42.<init>();
+
+        r0.clipText = $r42;
+
+        $r43 = r0.clipText;
+
+        $r43.setEditable(0);
+
+        $r44 = new javax.swing.JScrollPane;
+
+        $r45 = r0.clipText;
+
+        specialinvoke $r44.<init>($r45);
+
+        r70 = $r44;
+
+        $r46 = new java.awt.Dimension;
+
+        specialinvoke $r46.<init>(500, 150);
+
+        r70.setPreferredSize($r46);
+
+        r5.add(r70);
+
+        r4.add(r5, "Center");
+
+        $r48 = new javax.swing.JPanel;
+
+        specialinvoke $r48.<init>();
+
+        r7 = $r48;
+
+        $r49 = new javax.swing.BoxLayout;
+
+        specialinvoke $r49.<init>(r7, 0);
+
+        r7.setLayout($r49);
+
+        $r50 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r50.<init>(12, 0, 0, 0);
+
+        r7.setBorder($r50);
+
+        $r51 = javax.swing.Box.createGlue();
+
+        r7.add($r51);
+
+        $r53 = r0.insert;
+
+        r7.add($r53);
+
+        $r55 = javax.swing.Box.createHorizontalStrut(6);
+
+        r7.add($r55);
+
+        $r57 = r0.cancel;
+
+        r7.add($r57);
+
+        $r59 = javax.swing.Box.createGlue();
+
+        r7.add($r59);
+
+        r4.add(r7, "South");
+
+        $i1 = r3.getSize();
+
+        if $i1 < 1 goto label1;
+
+        $r68 = r0.clips;
+
+        $r68.setSelectedIndex(0);
+
+     label1:
+        specialinvoke r0.updateButtons();
+
+        $r61 = r0.getRootPane();
+
+        $r62 = r0.insert;
+
+        $r61.setDefaultButton($r62);
+
+        $r64 = r0.insert;
+
+        $r63 = new org.gjt.sp.jedit.gui.PasteFromListDialog$ActionHandler;
+
+        specialinvoke $r63.<init>(r0);
+
+        $r64.addActionListener($r63);
+
+        $r66 = r0.cancel;
+
+        $r65 = new org.gjt.sp.jedit.gui.PasteFromListDialog$ActionHandler;
+
+        specialinvoke $r65.<init>(r0);
+
+        $r66.addActionListener($r65);
+
+        $r67 = r0.clips;
+
+        org.gjt.sp.jedit.GUIUtilities.requestFocus(r0, $r67);
+
+        r0.pack();
+
+        r0.setLocationRelativeTo(r2);
+
+        r0.setVisible(1);
+
+        return;
+    }
+
+    public void ok()
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog r0;
+        java.lang.Object[] r1, r3;
+        java.lang.String r2;
+        int i0, $i1, i2;
+        java.lang.Object r4;
+        javax.swing.JList $r5;
+        java.awt.Toolkit $r6;
+        org.gjt.sp.jedit.View $r7;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r8;
+        org.gjt.sp.jedit.gui.MutableListModel $r9, $r10;
+
+        r0 := @this;
+
+        $r5 = r0.clips;
+
+        r1 = $r5.getSelectedValues();
+
+        if r1 == null goto label1;
+
+        $i1 = lengthof r1;
+
+        if $i1 != 0 goto label2;
+
+     label1:
+        $r6 = r0.getToolkit();
+
+        $r6.beep();
+
+        return;
+
+     label2:
+        r2 = specialinvoke r0.getSelectedClipText();
+
+        r3 = r1;
+
+        i0 = lengthof r3;
+
+(0)     i2 = 0;
+
+     label3:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 >= i0 goto label4;
+
+        r4 = r3[i2];
+
+        $r9 = r0.listModel;
+
+        $r9.removeElement(r4);
+
+        $r10 = r0.listModel;
+
+        $r10.insertElementAt(r4, 0);
+
+        i2 = i2 + 1;
+
+(1)     goto label3;
+
+     label4:
+        $r7 = r0.view;
+
+        $r8 = $r7.getTextArea();
+
+        $r8.setSelectedText(r2);
+
+        specialinvoke r0.cleanup();
+
+        return;
+    }
+
+    public void cancel()
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog r0;
+
+        r0 := @this;
+
+        specialinvoke r0.cleanup();
+
+        return;
+    }
+
+    private void cleanup()
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog r0;
+        java.lang.Object[] r1;
+        javax.swing.JList $r2;
+
+        r0 := @this;
+
+        r1 = newarray (java.lang.Object)[0];
+
+        $r2 = r0.clips;
+
+        $r2.setListData(r1);
+
+        r0.dispose();
+
+        return;
+    }
+
+    private java.lang.String getSelectedClipText()
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog r0;
+        java.lang.Object[] r1;
+        java.lang.StringBuilder r2, $r4;
+        javax.swing.JList $r3;
+        int $i0, $i1, i2;
+        java.lang.String $r5, $r10;
+        java.lang.Object $r6, $r9;
+
+        r0 := @this;
+
+        $r3 = r0.clips;
+
+        r1 = $r3.getSelectedValues();
+
+        $i0 = lengthof r1;
+
+        if $i0 != 1 goto label1;
+
+        $r9 = r1[0];
+
+        $r10 = $r9.toString();
+
+        return $r10;
+
+     label1:
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        r2 = $r4;
+
+(0)     i2 = 0;
+
+     label2:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $i1 = lengthof r1;
+
+        if i2 >= $i1 goto label4;
+
+        if i2 == 0 goto label3;
+
+        r2.append(10);
+
+     label3:
+        $r6 = r1[i2];
+
+        r2.append($r6);
+
+        i2 = i2 + 1;
+
+(1)     goto label2;
+
+     label4:
+        $r5 = r2.toString();
+
+        return $r5;
+    }
+
+    private void updateButtons()
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog r0;
+        int i0;
+        javax.swing.JList $r1;
+        javax.swing.JButton $r2;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        $r1 = r0.clips;
+
+        i0 = $r1.getSelectedIndex();
+
+        $r2 = r0.insert;
+
+        if i0 == -1 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        $r2.setEnabled($z0_2);
+
+        return;
+    }
+
+    private void showClipText()
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog r0;
+        java.lang.Object[] r1;
+        java.lang.String r2, r13, r14;
+        int i0, $i1, $i2, $i3, $i4;
+        javax.swing.JList $r3;
+        javax.swing.JTextArea $r4, $r5, $r6, $r12;
+        java.lang.StringBuilder $r7, $r8, $r9, $r10, $r11;
+
+        r0 := @this;
+
+        $r3 = r0.clips;
+
+        r1 = $r3.getSelectedValues();
+
+        if r1 == null goto label1;
+
+        $i1 = lengthof r1;
+
+        if $i1 != 0 goto label2;
+
+     label1:
+        $r4 = r0.clipText;
+
+        $r4.setText("");
+
+        goto label4;
+
+     label2:
+        r2 = specialinvoke r0.getSelectedClipText();
+
+        i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("paste-from-list.max-preview-length", 100000);
+
+        $i2 = r2.length();
+
+        if $i2 <= i0 goto label3;
+
+        r13 = r2.substring(0, i0);
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append(r13);
+
+        $r9 = $r8.append("<");
+
+        $i3 = r2.length();
+
+        $i4 = $i3 - i0;
+
+        $r10 = $r9.append($i4);
+
+        $r11 = $r10.append(" more bytes>");
+
+        r14 = $r11.toString();
+
+        $r12 = r0.clipText;
+
+        $r12.setText(r14);
+
+        goto label4;
+
+     label3:
+        $r6 = r0.clipText;
+
+        $r6.setText(r2);
+
+     label4:
+        $r5 = r0.clipText;
+
+        $r5.setCaretPosition(0);
+
+        return;
+    }
+
+    static javax.swing.JButton access$000(org.gjt.sp.jedit.gui.PasteFromListDialog)
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.insert;
+
+        return $r1;
+    }
+
+    static javax.swing.JButton access$100(org.gjt.sp.jedit.gui.PasteFromListDialog)
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.cancel;
+
+        return $r1;
+    }
+
+    static void access$200(org.gjt.sp.jedit.gui.PasteFromListDialog)
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.showClipText();
+
+        return;
+    }
+
+    static void access$300(org.gjt.sp.jedit.gui.PasteFromListDialog)
+    {
+        org.gjt.sp.jedit.gui.PasteFromListDialog r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updateButtons();
+
+        return;
+    }
+}

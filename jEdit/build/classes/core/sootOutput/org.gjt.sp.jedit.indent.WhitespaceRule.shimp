@@ -1,0 +1,121 @@
+public class org.gjt.sp.jedit.indent.WhitespaceRule extends java.lang.Object implements org.gjt.sp.jedit.indent.IndentRule
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.indent.WhitespaceRule r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void apply(org.gjt.sp.jedit.buffer.JEditBuffer, int, int, int, java.util.List)
+    {
+        org.gjt.sp.jedit.indent.WhitespaceRule r0;
+        org.gjt.sp.jedit.buffer.JEditBuffer r1;
+        int i0, i1, i2, $i3, $i4, i7, i8;
+        java.util.List r2;
+        java.lang.CharSequence r3, r5;
+        org.gjt.sp.jedit.indent.IndentAction$NoIncrease $r4;
+        char $c5, $c6;
+        boolean $z1, $z2, z3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        i2 := @parameter3;
+
+        r2 := @parameter4;
+
+        r3 = r1.getLineSegment(i0);
+
+        z3 = 0;
+
+(0)     i7 = 0;
+
+     label1:
+        z3 = Phi(z3 #0, z3 #3);
+
+        i7 = Phi(i7 #0, i7 #3);
+
+        $i3 = r3.length();
+
+(1)     if i7 >= $i3 goto label3;
+
+        $c6 = r3.charAt(i7);
+
+        $z2 = java.lang.Character.isWhitespace($c6);
+
+        if $z2 != 0 goto label2;
+
+        z3 = 1;
+
+(2)     goto label3;
+
+     label2:
+        i7 = i7 + 1;
+
+(3)     goto label1;
+
+     label3:
+        z3 = Phi(z3 #1, z3 #2);
+
+        if z3 != 0 goto label4;
+
+        return;
+
+     label4:
+(4)     if i1 < 0 goto label7;
+
+        r5 = r1.getLineSegment(i1);
+
+(5)     i8 = 0;
+
+     label5:
+        z3 = Phi(z3 #5, z3 #7);
+
+        i7 = Phi(i7 #5, i7 #7);
+
+        i8 = Phi(i8 #5, i8 #7);
+
+        $i4 = r5.length();
+
+(6)     if i8 >= $i4 goto label7;
+
+        $c5 = r5.charAt(i8);
+
+        $z1 = java.lang.Character.isWhitespace($c5);
+
+        if $z1 != 0 goto label6;
+
+        return;
+
+     label6:
+        i8 = i8 + 1;
+
+(7)     goto label5;
+
+     label7:
+        z3 = Phi(z3 #4, z3 #6);
+
+        i7 = Phi(i7 #4, i7 #6);
+
+        i8 = Phi(i8 #4, i8 #6);
+
+        $r4 = new org.gjt.sp.jedit.indent.IndentAction$NoIncrease;
+
+        specialinvoke $r4.<init>();
+
+        r2.add($r4);
+
+        return;
+    }
+}

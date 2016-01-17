@@ -1,0 +1,49 @@
+final class org.gjt.sp.jedit.GUIUtilities$11 extends java.lang.Object implements java.util.concurrent.ThreadFactory
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.GUIUtilities$11 r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.lang.Thread newThread(java.lang.Runnable)
+    {
+        org.gjt.sp.jedit.GUIUtilities$11 r0;
+        java.lang.Runnable r1;
+        java.lang.Thread $r2;
+        java.lang.StringBuilder $r3, $r4, $r6;
+        java.util.concurrent.atomic.AtomicLong $r5;
+        long $l0;
+        java.lang.String $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.lang.Thread;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("SizeSaver-");
+
+        $r5 = org.gjt.sp.jedit.GUIUtilities.access$300();
+
+        $l0 = $r5.incrementAndGet();
+
+        $r6 = $r4.append($l0);
+
+        $r7 = $r6.toString();
+
+        specialinvoke $r2.<init>(r1, $r7);
+
+        return $r2;
+    }
+}

@@ -1,0 +1,45 @@
+class org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler$1 extends java.lang.Object implements java.lang.Runnable
+{
+    final org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler this$1;
+
+    void <init>(org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler)
+    {
+        org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler$1 r0;
+        org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$1 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler$1 r0;
+        org.gjt.sp.jedit.gui.HistoryTextField$MouseHandler $r1, $r2;
+        boolean $z0;
+        org.gjt.sp.jedit.gui.HistoryTextField $r3;
+
+        r0 := @this;
+
+        $r1 = r0.this$1;
+
+        $z0 = $r1.selectAll;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = r0.this$1;
+
+        $r3 = $r2.this$0;
+
+        $r3.selectAll();
+
+     label1:
+        return;
+    }
+}

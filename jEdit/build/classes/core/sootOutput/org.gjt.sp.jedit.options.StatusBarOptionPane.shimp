@@ -1,0 +1,952 @@
+public class org.gjt.sp.jedit.options.StatusBarOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private org.gjt.sp.jedit.gui.ColorWellButton foregroundColor;
+    private org.gjt.sp.jedit.gui.ColorWellButton backgroundColor;
+    private org.gjt.sp.jedit.gui.ColorWellButton memForegroundColor;
+    private org.gjt.sp.jedit.gui.ColorWellButton memBackgroundColor;
+    private javax.swing.JCheckBox showStatusbar;
+    private javax.swing.JCheckBox showStatusbarPlain;
+    private javax.swing.DefaultListModel listModel;
+    private javax.swing.JLabel previewStatusBar;
+    private javax.swing.JList list;
+    private org.gjt.sp.jedit.gui.RolloverButton add;
+    private org.gjt.sp.jedit.gui.RolloverButton remove;
+    private org.gjt.sp.jedit.gui.RolloverButton moveUp;
+    private org.gjt.sp.jedit.gui.RolloverButton moveDown;
+    private org.gjt.sp.jedit.gui.RolloverButton edit;
+    private javax.swing.JCheckBox showCaretLineNumber;
+    private javax.swing.JCheckBox showCaretDot;
+    private javax.swing.JCheckBox showCaretVirtual;
+    private javax.swing.JCheckBox showCaretOffset;
+    private javax.swing.JCheckBox showCaretBufferLength;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("status");
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane r0;
+        javax.swing.JPanel r1, r2, r3, r7, $r11, $r26, $r30, $r78, $r82, r135;
+        org.gjt.sp.jedit.AbstractOptionPane r4, $r34;
+        java.lang.String r5, $r14, $r19, $r24, $r35, $r38, $r41, $r44, $r48, $r50, $r53, $r56, $r59, $r62, $r89, $r98, $r107, $r116, $r125, r134;
+        java.util.StringTokenizer r6, $r69;
+        org.gjt.sp.jedit.options.StatusBarOptionPane$ActionHandler r8, $r85;
+        javax.swing.JTabbedPane r9, $r131;
+        java.awt.BorderLayout $r10, $r79;
+        java.awt.GridLayout $r12, $r31;
+        javax.swing.JCheckBox $r13, $r15, $r16, $r18, $r20, $r21, $r49, $r51, $r52, $r54, $r55, $r57, $r58, $r60, $r61, $r63, $r64, $r65, $r66, $r67, $r68;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7;
+        javax.swing.JLabel $r23, $r27, $r28, $r47;
+        org.gjt.sp.jedit.gui.ColorWellButton $r36, $r39, $r42, $r45;
+        java.awt.Color $r37, $r40, $r43, $r46;
+        javax.swing.DefaultListModel $r70, $r72, $r133;
+        javax.swing.JList $r71, $r74, $r75, $r77, $r81;
+        org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetListCellRenderer $r73;
+        org.gjt.sp.jedit.options.StatusBarOptionPane$ListHandler $r76;
+        javax.swing.JScrollPane $r80;
+        javax.swing.border.EmptyBorder $r83;
+        javax.swing.BoxLayout $r84;
+        org.gjt.sp.jedit.gui.RolloverButton $r86, $r88, $r90, $r91, $r95, $r97, $r99, $r100, $r104, $r106, $r108, $r109, $r113, $r115, $r117, $r118, $r122, $r124, $r126, $r127;
+        javax.swing.Icon $r87, $r96, $r105, $r114, $r123;
+        java.awt.Component $r93, $r102, $r111, $r120, $r129;
+
+        r0 := @this;
+
+        $r10 = new java.awt.BorderLayout;
+
+        specialinvoke $r10.<init>();
+
+        r0.setLayout($r10);
+
+        $r11 = new javax.swing.JPanel;
+
+        $r12 = new java.awt.GridLayout;
+
+        specialinvoke $r12.<init>(2, 1);
+
+        specialinvoke $r11.<init>($r12);
+
+        r1 = $r11;
+
+        $r13 = new javax.swing.JCheckBox;
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("options.status.visible");
+
+        specialinvoke $r13.<init>($r14);
+
+        r0.showStatusbar = $r13;
+
+        $r15 = r0.showStatusbar;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.visible");
+
+        $r15.setSelected($z0);
+
+        $r16 = r0.showStatusbar;
+
+        r1.add($r16);
+
+        $r18 = new javax.swing.JCheckBox;
+
+        $r19 = org.gjt.sp.jedit.jEdit.getProperty("options.status.plainview.visible");
+
+        specialinvoke $r18.<init>($r19);
+
+        r0.showStatusbarPlain = $r18;
+
+        $r20 = r0.showStatusbarPlain;
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.plainview.visible");
+
+        $r20.setSelected($z1);
+
+        $r21 = r0.showStatusbarPlain;
+
+        r1.add($r21);
+
+        $r23 = new javax.swing.JLabel;
+
+        $r24 = org.gjt.sp.jedit.jEdit.getProperty("options.status.caption");
+
+        specialinvoke $r23.<init>($r24);
+
+        r1.add($r23);
+
+        $r26 = new javax.swing.JPanel;
+
+        specialinvoke $r26.<init>();
+
+        r2 = $r26;
+
+        $r27 = new javax.swing.JLabel;
+
+        specialinvoke $r27.<init>();
+
+        r0.previewStatusBar = $r27;
+
+        $r28 = r0.previewStatusBar;
+
+        r2.add($r28);
+
+        $r30 = new javax.swing.JPanel;
+
+        $r31 = new java.awt.GridLayout;
+
+        specialinvoke $r31.<init>(2, 1);
+
+        specialinvoke $r30.<init>($r31);
+
+        r3 = $r30;
+
+        r3.add(r1);
+
+        r3.add(r2);
+
+        r0.add(r3, "North");
+
+        $r34 = new org.gjt.sp.jedit.AbstractOptionPane;
+
+        specialinvoke $r34.<init>("Status Options");
+
+        r4 = $r34;
+
+        $r35 = org.gjt.sp.jedit.jEdit.getProperty("options.status.foreground");
+
+        $r36 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r37 = org.gjt.sp.jedit.jEdit.getColorProperty("view.status.foreground");
+
+        specialinvoke $r36.<init>($r37);
+
+        r0.foregroundColor = $r36;
+
+        r4.addComponent($r35, $r36, 3);
+
+        $r38 = org.gjt.sp.jedit.jEdit.getProperty("options.status.background");
+
+        $r39 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r40 = org.gjt.sp.jedit.jEdit.getColorProperty("view.status.background");
+
+        specialinvoke $r39.<init>($r40);
+
+        r0.backgroundColor = $r39;
+
+        r4.addComponent($r38, $r39, 3);
+
+        $r41 = org.gjt.sp.jedit.jEdit.getProperty("options.status.memory.foreground");
+
+        $r42 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r43 = org.gjt.sp.jedit.jEdit.getColorProperty("view.status.memory.foreground");
+
+        specialinvoke $r42.<init>($r43);
+
+        r0.memForegroundColor = $r42;
+
+        r4.addComponent($r41, $r42, 3);
+
+        $r44 = org.gjt.sp.jedit.jEdit.getProperty("options.status.memory.background");
+
+        $r45 = new org.gjt.sp.jedit.gui.ColorWellButton;
+
+        $r46 = org.gjt.sp.jedit.jEdit.getColorProperty("view.status.memory.background");
+
+        specialinvoke $r45.<init>($r46);
+
+        r0.memBackgroundColor = $r45;
+
+        r4.addComponent($r44, $r45, 3);
+
+        r4.addSeparator();
+
+        $r47 = new javax.swing.JLabel;
+
+        $r48 = org.gjt.sp.jedit.jEdit.getProperty("options.status.caret.title", "Caret position display options:");
+
+        specialinvoke $r47.<init>($r48);
+
+        r4.addComponent($r47);
+
+        $r49 = new javax.swing.JCheckBox;
+
+        $r50 = org.gjt.sp.jedit.jEdit.getProperty("options.status.caret.linenumber", "Show caret line number");
+
+        $z2 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.show-caret-linenumber", 1);
+
+        specialinvoke $r49.<init>($r50, $z2);
+
+        r0.showCaretLineNumber = $r49;
+
+        $r51 = r0.showCaretLineNumber;
+
+        $r51.setName("showCaretLineNumber");
+
+        $r52 = new javax.swing.JCheckBox;
+
+        $r53 = org.gjt.sp.jedit.jEdit.getProperty("options.status.caret.dot", "Show caret offset from start of line");
+
+        $z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.show-caret-dot", 1);
+
+        specialinvoke $r52.<init>($r53, $z3);
+
+        r0.showCaretDot = $r52;
+
+        $r54 = r0.showCaretDot;
+
+        $r54.setName("showCaretDot");
+
+        $r55 = new javax.swing.JCheckBox;
+
+        $r56 = org.gjt.sp.jedit.jEdit.getProperty("options.status.caret.virtual", "Show caret virtual offset from start of line");
+
+        $z4 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.show-caret-virtual", 1);
+
+        specialinvoke $r55.<init>($r56, $z4);
+
+        r0.showCaretVirtual = $r55;
+
+        $r57 = r0.showCaretVirtual;
+
+        $r57.setName("showCaretVirtual");
+
+        $r58 = new javax.swing.JCheckBox;
+
+        $r59 = org.gjt.sp.jedit.jEdit.getProperty("options.status.caret.offset", "Show caret offset from start of file");
+
+        $z5 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.show-caret-offset", 1);
+
+        specialinvoke $r58.<init>($r59, $z5);
+
+        r0.showCaretOffset = $r58;
+
+        $r60 = r0.showCaretOffset;
+
+        $r60.setName("showCaretOffset");
+
+        $r61 = new javax.swing.JCheckBox;
+
+        $r62 = org.gjt.sp.jedit.jEdit.getProperty("options.status.caret.bufferlength", "Show length of file");
+
+        $z6 = org.gjt.sp.jedit.jEdit.getBooleanProperty("view.status.show-caret-bufferlength", 1);
+
+        specialinvoke $r61.<init>($r62, $z6);
+
+        r0.showCaretBufferLength = $r61;
+
+        $r63 = r0.showCaretBufferLength;
+
+        $r63.setName("showCaretBufferLength");
+
+        $r64 = r0.showCaretLineNumber;
+
+        r4.addComponent($r64);
+
+        $r65 = r0.showCaretDot;
+
+        r4.addComponent($r65);
+
+        $r66 = r0.showCaretVirtual;
+
+        r4.addComponent($r66);
+
+        $r67 = r0.showCaretOffset;
+
+        r4.addComponent($r67);
+
+        $r68 = r0.showCaretBufferLength;
+
+        r4.addComponent($r68);
+
+        r5 = org.gjt.sp.jedit.jEdit.getProperty("view.status");
+
+        $r69 = new java.util.StringTokenizer;
+
+        specialinvoke $r69.<init>(r5);
+
+        r6 = $r69;
+
+        $r70 = new javax.swing.DefaultListModel;
+
+        specialinvoke $r70.<init>();
+
+        r0.listModel = $r70;
+
+     label1:
+        $z7 = r6.hasMoreTokens();
+
+        if $z7 == 0 goto label2;
+
+        r134 = r6.nextToken();
+
+        $r133 = r0.listModel;
+
+        $r133.addElement(r134);
+
+        goto label1;
+
+     label2:
+        $r71 = new javax.swing.JList;
+
+        $r72 = r0.listModel;
+
+        specialinvoke $r71.<init>($r72);
+
+        r0.list = $r71;
+
+        $r74 = r0.list;
+
+        $r73 = new org.gjt.sp.jedit.options.StatusBarOptionPane$WidgetListCellRenderer;
+
+        specialinvoke $r73.<init>(null);
+
+        $r74.setCellRenderer($r73);
+
+        $r75 = r0.list;
+
+        $r75.setSelectionMode(0);
+
+        $r77 = r0.list;
+
+        $r76 = new org.gjt.sp.jedit.options.StatusBarOptionPane$ListHandler;
+
+        specialinvoke $r76.<init>(r0, null);
+
+        $r77.addListSelectionListener($r76);
+
+        $r78 = new javax.swing.JPanel;
+
+        $r79 = new java.awt.BorderLayout;
+
+        specialinvoke $r79.<init>();
+
+        specialinvoke $r78.<init>($r79);
+
+        r135 = $r78;
+
+        $r80 = new javax.swing.JScrollPane;
+
+        $r81 = r0.list;
+
+        specialinvoke $r80.<init>($r81);
+
+        r135.add($r80, "Center");
+
+        $r82 = new javax.swing.JPanel;
+
+        specialinvoke $r82.<init>();
+
+        r7 = $r82;
+
+        $r83 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r83.<init>(3, 0, 0, 0);
+
+        r7.setBorder($r83);
+
+        $r84 = new javax.swing.BoxLayout;
+
+        specialinvoke $r84.<init>(r7, 0);
+
+        r7.setLayout($r84);
+
+        $r85 = new org.gjt.sp.jedit.options.StatusBarOptionPane$ActionHandler;
+
+        specialinvoke $r85.<init>(r0, null);
+
+        r8 = $r85;
+
+        $r86 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r87 = org.gjt.sp.jedit.GUIUtilities.loadIcon("Plus.png");
+
+        specialinvoke $r86.<init>($r87);
+
+        r0.add = $r86;
+
+        $r88 = r0.add;
+
+        $r89 = org.gjt.sp.jedit.jEdit.getProperty("options.status.add");
+
+        $r88.setToolTipText($r89);
+
+        $r90 = r0.add;
+
+        $r90.addActionListener(r8);
+
+        $r91 = r0.add;
+
+        r7.add($r91);
+
+        $r93 = javax.swing.Box.createHorizontalStrut(6);
+
+        r7.add($r93);
+
+        $r95 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r96 = org.gjt.sp.jedit.GUIUtilities.loadIcon("Minus.png");
+
+        specialinvoke $r95.<init>($r96);
+
+        r0.remove = $r95;
+
+        $r97 = r0.remove;
+
+        $r98 = org.gjt.sp.jedit.jEdit.getProperty("options.status.remove");
+
+        $r97.setToolTipText($r98);
+
+        $r99 = r0.remove;
+
+        $r99.addActionListener(r8);
+
+        $r100 = r0.remove;
+
+        r7.add($r100);
+
+        $r102 = javax.swing.Box.createHorizontalStrut(6);
+
+        r7.add($r102);
+
+        $r104 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r105 = org.gjt.sp.jedit.GUIUtilities.loadIcon("ArrowU.png");
+
+        specialinvoke $r104.<init>($r105);
+
+        r0.moveUp = $r104;
+
+        $r106 = r0.moveUp;
+
+        $r107 = org.gjt.sp.jedit.jEdit.getProperty("options.status.moveUp");
+
+        $r106.setToolTipText($r107);
+
+        $r108 = r0.moveUp;
+
+        $r108.addActionListener(r8);
+
+        $r109 = r0.moveUp;
+
+        r7.add($r109);
+
+        $r111 = javax.swing.Box.createHorizontalStrut(6);
+
+        r7.add($r111);
+
+        $r113 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r114 = org.gjt.sp.jedit.GUIUtilities.loadIcon("ArrowD.png");
+
+        specialinvoke $r113.<init>($r114);
+
+        r0.moveDown = $r113;
+
+        $r115 = r0.moveDown;
+
+        $r116 = org.gjt.sp.jedit.jEdit.getProperty("options.status.moveDown");
+
+        $r115.setToolTipText($r116);
+
+        $r117 = r0.moveDown;
+
+        $r117.addActionListener(r8);
+
+        $r118 = r0.moveDown;
+
+        r7.add($r118);
+
+        $r120 = javax.swing.Box.createHorizontalStrut(6);
+
+        r7.add($r120);
+
+        $r122 = new org.gjt.sp.jedit.gui.RolloverButton;
+
+        $r123 = org.gjt.sp.jedit.GUIUtilities.loadIcon("ButtonProperties.png");
+
+        specialinvoke $r122.<init>($r123);
+
+        r0.edit = $r122;
+
+        $r124 = r0.edit;
+
+        $r125 = org.gjt.sp.jedit.jEdit.getProperty("options.status.edit");
+
+        $r124.setToolTipText($r125);
+
+        $r126 = r0.edit;
+
+        $r126.addActionListener(r8);
+
+        $r127 = r0.edit;
+
+        r7.add($r127);
+
+        $r129 = javax.swing.Box.createGlue();
+
+        r7.add($r129);
+
+        specialinvoke r0.updateButtons();
+
+        r135.add(r7, "South");
+
+        $r131 = new javax.swing.JTabbedPane;
+
+        specialinvoke $r131.<init>();
+
+        r9 = $r131;
+
+        r9.addTab("Options", r4);
+
+        r9.add("Widgets", r135);
+
+        r0.add(r9, "Center");
+
+        specialinvoke r0.updatePreview();
+
+        return;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane r0;
+        java.lang.StringBuilder r1, $r13;
+        java.lang.String r2, $r15;
+        org.gjt.sp.jedit.gui.ColorWellButton $r3, $r5, $r7, $r9;
+        java.awt.Color $r4, $r6, $r8, $r10;
+        javax.swing.JCheckBox $r11, $r12, $r16, $r17, $r18, $r19, $r20;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6;
+        javax.swing.DefaultListModel $r14, $r21;
+        int $i0, i1;
+        java.lang.Object $r22;
+
+        r0 := @this;
+
+        $r3 = r0.foregroundColor;
+
+        $r4 = $r3.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("view.status.foreground", $r4);
+
+        $r5 = r0.backgroundColor;
+
+        $r6 = $r5.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("view.status.background", $r6);
+
+        $r7 = r0.memForegroundColor;
+
+        $r8 = $r7.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("view.status.memory.foreground", $r8);
+
+        $r9 = r0.memBackgroundColor;
+
+        $r10 = $r9.getSelectedColor();
+
+        org.gjt.sp.jedit.jEdit.setColorProperty("view.status.memory.background", $r10);
+
+        $r11 = r0.showStatusbar;
+
+        $z0 = $r11.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.status.visible", $z0);
+
+        $r12 = r0.showStatusbarPlain;
+
+        $z1 = $r12.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.status.plainview.visible", $z1);
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        r1 = $r13;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $r14 = r0.listModel;
+
+        $i0 = $r14.getSize();
+
+        if i1 >= $i0 goto label3;
+
+        if i1 == 0 goto label2;
+
+        r1.append(32);
+
+     label2:
+        $r21 = r0.listModel;
+
+        $r22 = $r21.elementAt(i1);
+
+        r2 = (java.lang.String) $r22;
+
+        r1.append(r2);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        $r15 = r1.toString();
+
+        org.gjt.sp.jedit.jEdit.setProperty("view.status", $r15);
+
+        $r16 = r0.showCaretLineNumber;
+
+        $z2 = $r16.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.status.show-caret-linenumber", $z2);
+
+        $r17 = r0.showCaretDot;
+
+        $z3 = $r17.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.status.show-caret-dot", $z3);
+
+        $r18 = r0.showCaretVirtual;
+
+        $z4 = $r18.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.status.show-caret-virtual", $z4);
+
+        $r19 = r0.showCaretOffset;
+
+        $z5 = $r19.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.status.show-caret-offset", $z5);
+
+        $r20 = r0.showCaretBufferLength;
+
+        $z6 = $r20.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("view.status.show-caret-bufferlength", $z6);
+
+        return;
+    }
+
+    private void updateButtons()
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane r0;
+        int i0, $i1, $i2, $i3;
+        javax.swing.JList $r1;
+        org.gjt.sp.jedit.gui.RolloverButton $r2, $r3, $r4, $r5;
+        javax.swing.DefaultListModel $r6, $r7;
+        boolean $z0, $z1, $z2, $z3, $z0_1, $z0_2, $z1_1, $z1_2, $z2_1, $z2_2, $z3_1, $z3_2;
+
+        r0 := @this;
+
+        $r1 = r0.list;
+
+        i0 = $r1.getSelectedIndex();
+
+        $r2 = r0.remove;
+
+        if i0 == -1 goto label1;
+
+        $r7 = r0.listModel;
+
+        $i3 = $r7.getSize();
+
+        if $i3 == 0 goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        $r2.setEnabled($z0_2);
+
+        $r3 = r0.moveUp;
+
+        if i0 <= 0 goto label3;
+
+        $z1 = 1;
+
+(2)     goto label4;
+
+     label3:
+(3)     $z1_1 = 0;
+
+     label4:
+        $z1_2 = Phi($z1 #2, $z1_1 #3);
+
+        $r3.setEnabled($z1_2);
+
+        $r4 = r0.moveDown;
+
+        if i0 == -1 goto label5;
+
+        $r6 = r0.listModel;
+
+        $i1 = $r6.getSize();
+
+        $i2 = $i1 - 1;
+
+        if i0 == $i2 goto label5;
+
+        $z2 = 1;
+
+(4)     goto label6;
+
+     label5:
+(5)     $z2_1 = 0;
+
+     label6:
+        $z2_2 = Phi($z2 #4, $z2_1 #5);
+
+        $r4.setEnabled($z2_2);
+
+        $r5 = r0.edit;
+
+        if i0 == -1 goto label7;
+
+        $z3 = 1;
+
+(6)     goto label8;
+
+     label7:
+(7)     $z3_1 = 0;
+
+     label8:
+        $z3_2 = Phi($z3 #6, $z3_1 #7);
+
+        $r5.setEnabled($z3_2);
+
+        return;
+    }
+
+    private void updatePreview()
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane r0;
+        java.lang.StringBuilder r1, $r4, $r10, $r11, $r12, $r13;
+        java.lang.String r2, r3, $r7, $r14;
+        javax.swing.DefaultListModel $r5, $r8;
+        int $i0, i1;
+        javax.swing.JLabel $r6;
+        java.lang.Object $r9;
+
+        r0 := @this;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4;
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $r5 = r0.listModel;
+
+        $i0 = $r5.getSize();
+
+        if i1 >= $i0 goto label3;
+
+        if i1 == 0 goto label2;
+
+        r1.append(32);
+
+     label2:
+        $r8 = r0.listModel;
+
+        $r9 = $r8.elementAt(i1);
+
+        r2 = (java.lang.String) $r9;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("statusbar.");
+
+        $r12 = $r11.append(r2);
+
+        $r13 = $r12.append(".sample");
+
+        $r14 = $r13.toString();
+
+        r3 = org.gjt.sp.jedit.jEdit.getProperty($r14, r2);
+
+        r1.append(r3);
+
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        $r6 = r0.previewStatusBar;
+
+        $r7 = r1.toString();
+
+        $r6.setText($r7);
+
+        return;
+    }
+
+    static org.gjt.sp.jedit.gui.RolloverButton access$300(org.gjt.sp.jedit.options.StatusBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane r0;
+        org.gjt.sp.jedit.gui.RolloverButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.add;
+
+        return $r1;
+    }
+
+    static javax.swing.JList access$400(org.gjt.sp.jedit.options.StatusBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane r0;
+        javax.swing.JList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.list;
+
+        return $r1;
+    }
+
+    static javax.swing.DefaultListModel access$500(org.gjt.sp.jedit.options.StatusBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane r0;
+        javax.swing.DefaultListModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.listModel;
+
+        return $r1;
+    }
+
+    static void access$600(org.gjt.sp.jedit.options.StatusBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updatePreview();
+
+        return;
+    }
+
+    static org.gjt.sp.jedit.gui.RolloverButton access$700(org.gjt.sp.jedit.options.StatusBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane r0;
+        org.gjt.sp.jedit.gui.RolloverButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.remove;
+
+        return $r1;
+    }
+
+    static void access$800(org.gjt.sp.jedit.options.StatusBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.updateButtons();
+
+        return;
+    }
+
+    static org.gjt.sp.jedit.gui.RolloverButton access$900(org.gjt.sp.jedit.options.StatusBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane r0;
+        org.gjt.sp.jedit.gui.RolloverButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.moveUp;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.RolloverButton access$1000(org.gjt.sp.jedit.options.StatusBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane r0;
+        org.gjt.sp.jedit.gui.RolloverButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.moveDown;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.gui.RolloverButton access$1100(org.gjt.sp.jedit.options.StatusBarOptionPane)
+    {
+        org.gjt.sp.jedit.options.StatusBarOptionPane r0;
+        org.gjt.sp.jedit.gui.RolloverButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.edit;
+
+        return $r1;
+    }
+}

@@ -1,0 +1,198 @@
+class org.gjt.sp.jedit.gui.CompleteWord$Words extends java.lang.Object implements org.gjt.sp.jedit.gui.CompletionPopup$Candidates
+{
+    private final javax.swing.DefaultListCellRenderer renderer;
+    private final org.gjt.sp.jedit.gui.CompleteWord$Completion[] completions;
+    final org.gjt.sp.jedit.gui.CompleteWord this$0;
+
+    public void <init>(org.gjt.sp.jedit.gui.CompleteWord, org.gjt.sp.jedit.gui.CompleteWord$Completion[])
+    {
+        org.gjt.sp.jedit.gui.CompleteWord$Words r0;
+        org.gjt.sp.jedit.gui.CompleteWord r1;
+        org.gjt.sp.jedit.gui.CompleteWord$Completion[] r2;
+        javax.swing.DefaultListCellRenderer $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r3 = new javax.swing.DefaultListCellRenderer;
+
+        specialinvoke $r3.<init>();
+
+        r0.renderer = $r3;
+
+        r0.completions = r2;
+
+        return;
+    }
+
+    public int getSize()
+    {
+        org.gjt.sp.jedit.gui.CompleteWord$Words r0;
+        org.gjt.sp.jedit.gui.CompleteWord$Completion[] $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.completions;
+
+        $i0 = lengthof $r1;
+
+        return $i0;
+    }
+
+    public boolean isValid()
+    {
+        org.gjt.sp.jedit.gui.CompleteWord$Words r0;
+
+        r0 := @this;
+
+        return 1;
+    }
+
+    public void complete(int)
+    {
+        org.gjt.sp.jedit.gui.CompleteWord$Words r0;
+        int i0, $i1;
+        java.lang.String r1, $r4, $r6;
+        org.gjt.sp.jedit.gui.CompleteWord$Completion[] $r2;
+        org.gjt.sp.jedit.gui.CompleteWord$Completion $r3;
+        org.gjt.sp.jedit.gui.CompleteWord $r5, $r7;
+        org.gjt.sp.jedit.textarea.JEditTextArea $r8;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r2 = r0.completions;
+
+        $r3 = $r2[i0];
+
+        $r4 = $r3.toString();
+
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.CompleteWord.access$000($r5);
+
+        $i1 = $r6.length();
+
+        r1 = $r4.substring($i1);
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.CompleteWord.access$100($r7);
+
+        $r8.replaceSelection(r1);
+
+        return;
+    }
+
+    public java.awt.Component getCellRenderer(javax.swing.JList, int, boolean, boolean)
+    {
+        org.gjt.sp.jedit.gui.CompleteWord$Words r0;
+        javax.swing.JList r1;
+        int i0, $i1;
+        boolean z0, z1, $z2;
+        org.gjt.sp.jedit.gui.CompleteWord$Completion r2;
+        javax.swing.DefaultListCellRenderer $r3, $r6, $r7, $r8;
+        org.gjt.sp.jedit.gui.CompleteWord$Completion[] $r5;
+        java.lang.StringBuilder $r9, $r10, $r11, $r12, $r13, $r14, $r15;
+        java.lang.String r16, r16_1, r16_2, r16_3;
+        java.awt.Font r17, r17_1, r17_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        z0 := @parameter2;
+
+        z1 := @parameter3;
+
+        $r3 = r0.renderer;
+
+        $r3.getListCellRendererComponent(r1, null, i0, z0, z1);
+
+        $r5 = r0.completions;
+
+        r2 = $r5[i0];
+
+        r16 = r2.text;
+
+        r17 = r1.getFont();
+
+        if i0 >= 9 goto label1;
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $i1 = i0 + 1;
+
+        $r13 = $r12.append($i1);
+
+        $r14 = $r13.append(": ");
+
+        $r15 = $r14.append(r16);
+
+        r16_1 = $r15.toString();
+
+(0)     goto label2;
+
+     label1:
+(1)     if i0 != 9 goto label2;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("0: ");
+
+        $r11 = $r10.append(r16);
+
+(2)     r16_2 = $r11.toString();
+
+     label2:
+        r16_3 = Phi(r16_1 #0, r16 #1, r16_2 #2);
+
+        $z2 = r2.keyword;
+
+(3)     if $z2 == 0 goto label3;
+
+(4)     r17_1 = r17.deriveFont(1);
+
+     label3:
+        r17_2 = Phi(r17 #3, r17_1 #4);
+
+        $r6 = r0.renderer;
+
+        $r6.setText(r16_3);
+
+        $r7 = r0.renderer;
+
+        $r7.setFont(r17_2);
+
+        $r8 = r0.renderer;
+
+        return $r8;
+    }
+
+    public java.lang.String getDescription(int)
+    {
+        org.gjt.sp.jedit.gui.CompleteWord$Words r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        return null;
+    }
+}

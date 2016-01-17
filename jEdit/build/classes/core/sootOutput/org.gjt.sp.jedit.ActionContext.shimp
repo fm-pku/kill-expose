@@ -1,0 +1,80 @@
+public abstract class org.gjt.sp.jedit.ActionContext extends org.gjt.sp.jedit.JEditActionContext
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.ActionContext r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.ActionSet getActionSetForAction(java.lang.String)
+    {
+        org.gjt.sp.jedit.ActionContext r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.JEditActionSet $r2;
+        org.gjt.sp.jedit.ActionSet $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = specialinvoke r0.getActionSetForAction(r1);
+
+        $r3 = (org.gjt.sp.jedit.ActionSet) $r2;
+
+        return $r3;
+    }
+
+    public org.gjt.sp.jedit.EditAction getAction(java.lang.String)
+    {
+        org.gjt.sp.jedit.ActionContext r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.JEditAbstractEditAction $r2;
+        org.gjt.sp.jedit.EditAction $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = specialinvoke r0.getAction(r1);
+
+        $r3 = (org.gjt.sp.jedit.EditAction) $r2;
+
+        return $r3;
+    }
+
+    public volatile org.gjt.sp.jedit.JEditActionSet getActionSetForAction(java.lang.String)
+    {
+        org.gjt.sp.jedit.ActionContext r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.ActionSet $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.getActionSetForAction(r1);
+
+        return $r2;
+    }
+
+    public volatile org.gjt.sp.jedit.JEditAbstractEditAction getAction(java.lang.String)
+    {
+        org.gjt.sp.jedit.ActionContext r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.EditAction $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.getAction(r1);
+
+        return $r2;
+    }
+}

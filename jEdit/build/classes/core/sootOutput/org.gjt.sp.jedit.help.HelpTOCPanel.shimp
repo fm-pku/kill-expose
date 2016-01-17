@@ -1,0 +1,574 @@
+public class org.gjt.sp.jedit.help.HelpTOCPanel extends javax.swing.JPanel
+{
+    private org.gjt.sp.jedit.help.HelpViewerInterface helpViewer;
+    private javax.swing.tree.DefaultTreeModel tocModel;
+    private javax.swing.tree.DefaultMutableTreeNode tocRoot;
+    private javax.swing.JTree toc;
+    private java.util.Map nodes;
+
+    public void <init>(org.gjt.sp.jedit.help.HelpViewerInterface)
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel r0;
+        org.gjt.sp.jedit.help.HelpViewerInterface r1;
+        java.awt.BorderLayout $r2;
+        java.util.HashMap $r3;
+        org.gjt.sp.jedit.help.HelpTOCPanel$TOCTree $r4;
+        boolean $z0;
+        javax.swing.JTree $r5, $r7, $r8, $r9, $r11, $r13;
+        org.gjt.sp.jedit.help.HelpTOCPanel$TOCCellRenderer $r6;
+        javax.swing.JScrollPane $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.awt.BorderLayout;
+
+        specialinvoke $r2.<init>();
+
+        specialinvoke r0.<init>($r2);
+
+        r0.helpViewer = r1;
+
+        $r3 = new java.util.HashMap;
+
+        specialinvoke $r3.<init>();
+
+        r0.nodes = $r3;
+
+        $r4 = new org.gjt.sp.jedit.help.HelpTOCPanel$TOCTree;
+
+        specialinvoke $r4.<init>(r0);
+
+        r0.toc = $r4;
+
+        $z0 = org.gjt.sp.jedit.OperatingSystem.isMacOSLF();
+
+        if $z0 != 0 goto label1;
+
+        $r13 = r0.toc;
+
+        $r13.putClientProperty("JTree.lineStyle", "Angled");
+
+     label1:
+        $r5 = r0.toc;
+
+        $r5.setRowHeight(0);
+
+        $r7 = r0.toc;
+
+        $r6 = new org.gjt.sp.jedit.help.HelpTOCPanel$TOCCellRenderer;
+
+        specialinvoke $r6.<init>();
+
+        $r7.setCellRenderer($r6);
+
+        $r8 = r0.toc;
+
+        $r8.setEditable(0);
+
+        $r9 = r0.toc;
+
+        $r9.setShowsRootHandles(1);
+
+        $r10 = new javax.swing.JScrollPane;
+
+        $r11 = r0.toc;
+
+        specialinvoke $r10.<init>($r11);
+
+        r0.add("Center", $r10);
+
+        r0.load();
+
+        return;
+    }
+
+    public void selectNode(java.lang.String)
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel r0;
+        java.lang.String r1;
+        javax.swing.tree.DefaultMutableTreeNode r2;
+        javax.swing.tree.DefaultTreeModel $r3;
+        java.util.Map $r4;
+        java.lang.Object $r5;
+        org.gjt.sp.jedit.help.HelpTOCPanel$1 $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.tocModel;
+
+        if $r3 != null goto label1;
+
+        return;
+
+     label1:
+        $r4 = r0.nodes;
+
+        $r5 = $r4.get(r1);
+
+        r2 = (javax.swing.tree.DefaultMutableTreeNode) $r5;
+
+        if r2 != null goto label2;
+
+        return;
+
+     label2:
+        $r6 = new org.gjt.sp.jedit.help.HelpTOCPanel$1;
+
+        specialinvoke $r6.<init>(r0, r2);
+
+        java.awt.EventQueue.invokeLater($r6);
+
+        return;
+    }
+
+    public void load()
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel r0;
+        javax.swing.tree.DefaultTreeModel r1, $r2;
+        javax.swing.tree.DefaultMutableTreeNode $r3;
+        java.lang.String $r4;
+        javax.swing.JTree $r5, $r6;
+        org.gjt.sp.jedit.help.HelpTOCPanel$2 $r7;
+
+        r0 := @this;
+
+        $r2 = new javax.swing.tree.DefaultTreeModel;
+
+        $r3 = new javax.swing.tree.DefaultMutableTreeNode;
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.toc.loading");
+
+        specialinvoke $r3.<init>($r4);
+
+        specialinvoke $r2.<init>($r3);
+
+        r1 = $r2;
+
+        $r5 = r0.toc;
+
+        $r5.setModel(r1);
+
+        $r6 = r0.toc;
+
+        $r6.setRootVisible(1);
+
+        $r7 = new org.gjt.sp.jedit.help.HelpTOCPanel$2;
+
+        specialinvoke $r7.<init>(r0);
+
+        org.gjt.sp.util.ThreadUtilities.runInBackground($r7);
+
+        return;
+    }
+
+    private javax.swing.tree.DefaultMutableTreeNode createNode(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel r0;
+        java.lang.String r1, r2;
+        javax.swing.tree.DefaultMutableTreeNode r3, $r4;
+        org.gjt.sp.jedit.help.HelpTOCPanel$HelpNode $r5;
+        java.util.Map $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = new javax.swing.tree.DefaultMutableTreeNode;
+
+        $r5 = new org.gjt.sp.jedit.help.HelpTOCPanel$HelpNode;
+
+        specialinvoke $r5.<init>(r1, r2);
+
+        specialinvoke $r4.<init>($r5, 1);
+
+        r3 = $r4;
+
+        $r6 = r0.nodes;
+
+        $r6.put(r1, r3);
+
+        return r3;
+    }
+
+    private void createTOC()
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel r0;
+        org.gjt.sp.jedit.EditPlugin[] r1, r2;
+        int i0, $i1, i2;
+        org.gjt.sp.jedit.EditPlugin r3;
+        java.lang.String r4, r5, r6, r7, $r11, $r14, $r17, $r20, $r23, $r26, $r29, $r32, $r38, $r47, $r52;
+        org.gjt.sp.jedit.help.HelpTOCPanel$PluginCompare $r8;
+        javax.swing.tree.DefaultMutableTreeNode $r9, $r10, $r12, $r13, $r15, $r16, $r18, $r19, $r21, $r22, $r24, $r25, $r27, $r28, $r30, $r31, $r33, $r34, $r35, $r36, $r37, $r39, $r41, $r42, $r55, r56;
+        javax.swing.tree.DefaultTreeModel $r40;
+        java.lang.StringBuilder $r43, $r44, $r45, $r46, $r48, $r49, $r50, $r51;
+        org.gjt.sp.jedit.PluginJAR $r53;
+        org.gjt.sp.jedit.JARClassLoader $r54;
+
+        r0 := @this;
+
+        r1 = org.gjt.sp.jedit.jEdit.getPlugins();
+
+        $r8 = new org.gjt.sp.jedit.help.HelpTOCPanel$PluginCompare;
+
+        specialinvoke $r8.<init>();
+
+        java.util.Arrays.sort(r1, $r8);
+
+        $r9 = new javax.swing.tree.DefaultMutableTreeNode;
+
+        specialinvoke $r9.<init>();
+
+        r0.tocRoot = $r9;
+
+        $r10 = r0.tocRoot;
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.toc.welcome");
+
+        $r12 = specialinvoke r0.createNode("welcome.html", $r11);
+
+        $r10.add($r12);
+
+        $r13 = r0.tocRoot;
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.toc.readme");
+
+        $r15 = specialinvoke r0.createNode("README.txt", $r14);
+
+        $r13.add($r15);
+
+        $r16 = r0.tocRoot;
+
+        $r17 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.toc.changes");
+
+        $r18 = specialinvoke r0.createNode("CHANGES.txt", $r17);
+
+        $r16.add($r18);
+
+        $r19 = r0.tocRoot;
+
+        $r20 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.toc.todo");
+
+        $r21 = specialinvoke r0.createNode("TODO.txt", $r20);
+
+        $r19.add($r21);
+
+        $r22 = r0.tocRoot;
+
+        $r23 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.toc.copying");
+
+        $r24 = specialinvoke r0.createNode("COPYING.txt", $r23);
+
+        $r22.add($r24);
+
+        $r25 = r0.tocRoot;
+
+        $r26 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.toc.copying-doc");
+
+        $r27 = specialinvoke r0.createNode("COPYING.DOC.txt", $r26);
+
+        $r25.add($r27);
+
+        $r28 = r0.tocRoot;
+
+        $r29 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.toc.copying-apache");
+
+        $r30 = specialinvoke r0.createNode("Apache.LICENSE.txt", $r29);
+
+        $r28.add($r30);
+
+        $r31 = r0.tocRoot;
+
+        $r32 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.toc.copying-plugins");
+
+        $r33 = specialinvoke r0.createNode("COPYING.PLUGINS.txt", $r32);
+
+        $r31.add($r33);
+
+        $r34 = r0.tocRoot;
+
+        specialinvoke r0.loadTOC($r34, "whatsnew/toc.xml");
+
+        $r35 = r0.tocRoot;
+
+        specialinvoke r0.loadTOC($r35, "users-guide/toc.xml");
+
+        $r36 = r0.tocRoot;
+
+        specialinvoke r0.loadTOC($r36, "FAQ/toc.xml");
+
+        $r37 = new javax.swing.tree.DefaultMutableTreeNode;
+
+        $r38 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.toc.plugins");
+
+        specialinvoke $r37.<init>($r38, 1);
+
+        r56 = $r37;
+
+        r2 = r1;
+
+        i0 = lengthof r2;
+
+(0)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 >= i0 goto label3;
+
+        r3 = r2[i2];
+
+        r4 = r3.getClassName();
+
+        $r43 = new java.lang.StringBuilder;
+
+        specialinvoke $r43.<init>();
+
+        $r44 = $r43.append("plugin.");
+
+        $r45 = $r44.append(r4);
+
+        $r46 = $r45.append(".docs");
+
+        $r47 = $r46.toString();
+
+        r5 = org.gjt.sp.jedit.jEdit.getProperty($r47);
+
+        $r48 = new java.lang.StringBuilder;
+
+        specialinvoke $r48.<init>();
+
+        $r49 = $r48.append("plugin.");
+
+        $r50 = $r49.append(r4);
+
+        $r51 = $r50.append(".name");
+
+        $r52 = $r51.toString();
+
+        r6 = org.gjt.sp.jedit.jEdit.getProperty($r52);
+
+        if r6 == null goto label2;
+
+        if r5 == null goto label2;
+
+        $r53 = r3.getPluginJAR();
+
+        $r54 = $r53.getClassLoader();
+
+        r7 = $r54.getResourceAsPath(r5);
+
+        $r55 = specialinvoke r0.createNode(r7, r6);
+
+        r56.add($r55);
+
+     label2:
+        i2 = i2 + 1;
+
+(1)     goto label1;
+
+     label3:
+        $i1 = r56.getChildCount();
+
+        if $i1 == 0 goto label4;
+
+        $r42 = r0.tocRoot;
+
+        $r42.add(r56);
+
+        goto label4;
+
+     label4:
+        $r39 = r0.tocRoot;
+
+        specialinvoke r0.loadTOC($r39, "api/toc.xml");
+
+        $r40 = new javax.swing.tree.DefaultTreeModel;
+
+        $r41 = r0.tocRoot;
+
+        specialinvoke $r40.<init>($r41);
+
+        r0.tocModel = $r40;
+
+        return;
+    }
+
+    private void loadTOC(javax.swing.tree.DefaultMutableTreeNode, java.lang.String)
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel r0;
+        javax.swing.tree.DefaultMutableTreeNode r1, $r19;
+        java.lang.String r2, $r5, $r9, $r13, $r17, $r18;
+        org.gjt.sp.jedit.help.HelpTOCPanel$TOCHandler r3, $r4;
+        java.net.URL $r6;
+        java.lang.StringBuilder $r7, $r10, $r11, $r12;
+        org.gjt.sp.jedit.help.HelpViewerInterface $r8;
+        java.io.InputStream $r14;
+        java.io.IOException $r15, r21;
+        java.io.FileNotFoundException $r16, r20;
+        boolean $z1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = new org.gjt.sp.jedit.help.HelpTOCPanel$TOCHandler;
+
+        $r5 = org.gjt.sp.jedit.MiscUtilities.getParentOfPath(r2);
+
+        specialinvoke $r4.<init>(r0, r1, $r5);
+
+        r3 = $r4;
+
+     label1:
+        $r6 = new java.net.URL;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = r0.helpViewer;
+
+        $r9 = $r8.getBaseURL();
+
+        $r10 = $r7.append($r9);
+
+        $r11 = $r10.append(47);
+
+        $r12 = $r11.append(r2);
+
+        $r13 = $r12.toString();
+
+        specialinvoke $r6.<init>($r13);
+
+        $r14 = $r6.openStream();
+
+        org.gjt.sp.util.XMLUtilities.parseXML($r14, r3);
+
+     label2:
+        goto label7;
+
+     label3:
+        $r16 := @caughtexception;
+
+        r20 = $r16;
+
+        $r17 = "api/toc.xml";
+
+        $z1 = $r17.equals(r2);
+
+        if $z1 == 0 goto label4;
+
+        org.gjt.sp.util.Log.log(5, r0, "The API docs for jEdit will not be available (reinstall jEdit if you want them)");
+
+        $r18 = org.gjt.sp.jedit.jEdit.getProperty("helpviewer.toc.online-apidocs");
+
+        $r19 = specialinvoke r0.createNode("http://www.jedit.org/api/overview-summary.html", $r18);
+
+        r1.add($r19);
+
+        goto label5;
+
+     label4:
+        org.gjt.sp.util.Log.log(9, r0, r20);
+
+     label5:
+        goto label7;
+
+     label6:
+        $r15 := @caughtexception;
+
+        r21 = $r15;
+
+        org.gjt.sp.util.Log.log(9, r0, r21);
+
+     label7:
+        return;
+
+        catch java.io.FileNotFoundException from label1 to label2 with label3;
+        catch java.io.IOException from label1 to label2 with label6;
+    }
+
+    static javax.swing.tree.DefaultTreeModel access$000(org.gjt.sp.jedit.help.HelpTOCPanel)
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel r0;
+        javax.swing.tree.DefaultTreeModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.tocModel;
+
+        return $r1;
+    }
+
+    static javax.swing.JTree access$100(org.gjt.sp.jedit.help.HelpTOCPanel)
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel r0;
+        javax.swing.JTree $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.toc;
+
+        return $r1;
+    }
+
+    static void access$200(org.gjt.sp.jedit.help.HelpTOCPanel)
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel r0;
+
+        r0 := @parameter0;
+
+        specialinvoke r0.createTOC();
+
+        return;
+    }
+
+    static javax.swing.tree.DefaultMutableTreeNode access$300(org.gjt.sp.jedit.help.HelpTOCPanel)
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel r0;
+        javax.swing.tree.DefaultMutableTreeNode $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.tocRoot;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.help.HelpViewerInterface access$400(org.gjt.sp.jedit.help.HelpTOCPanel)
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel r0;
+        org.gjt.sp.jedit.help.HelpViewerInterface $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.helpViewer;
+
+        return $r1;
+    }
+
+    static javax.swing.tree.DefaultMutableTreeNode access$500(org.gjt.sp.jedit.help.HelpTOCPanel, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.help.HelpTOCPanel r0;
+        java.lang.String r1, r2;
+        javax.swing.tree.DefaultMutableTreeNode $r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        $r3 = specialinvoke r0.createNode(r1, r2);
+
+        return $r3;
+    }
+}

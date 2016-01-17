@@ -1,0 +1,334 @@
+class org.gjt.sp.jedit.JEditRegisterSaver extends java.lang.Object implements org.gjt.sp.jedit.RegisterSaver
+{
+    private org.gjt.sp.jedit.SettingsXML registersXML;
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.JEditRegisterSaver r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.SettingsXML $r2;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        r1 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        if r1 == null goto label1;
+
+        $r2 = new org.gjt.sp.jedit.SettingsXML;
+
+        Packer.Unpack(r0);
+
+        specialinvoke $r2.<init>(r1, "registers");
+
+        r0.registersXML = $r2;
+
+     label1:
+        Packer.Pack(r0);
+
+        return;
+    }
+
+    public void loadRegisters()
+    {
+        org.gjt.sp.jedit.JEditRegisterSaver r0;
+        org.gjt.sp.jedit.JEditRegisterSaver$RegistersHandler r1, $r11;
+        java.io.IOException r2, $r14;
+        java.lang.Throwable r3, $r13;
+        org.gjt.sp.jedit.SettingsXML $r4, $r5, $r8, $r12;
+        boolean $z0;
+        java.lang.StringBuilder $r6, $r7, $r9;
+        java.lang.String $r10;
+
+        r0 := @this;
+
+        $r4 = r0.registersXML;
+
+        if $r4 != null goto label1;
+
+        return;
+
+     label1:
+        $r5 = r0.registersXML;
+
+        Packer.Unpack(r0);
+
+        $z0 = $r5.fileExists();
+
+        Packer.Pack(r0);
+
+        if $z0 != 0 goto label2;
+
+        return;
+
+     label2:
+        Packer.Unpack(r0);
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("Loading ");
+
+        $r8 = r0.registersXML;
+
+        $r9 = $r7.append($r8);
+
+        $r10 = $r9.toString();
+
+        org.gjt.sp.util.Log.log(3, class "org/gjt/sp/jedit/jEdit", $r10);
+
+        $r11 = new org.gjt.sp.jedit.JEditRegisterSaver$RegistersHandler;
+
+        specialinvoke $r11.<init>(null);
+
+        r1 = $r11;
+
+     label3:
+        org.gjt.sp.jedit.Registers.setLoading(1);
+
+        $r12 = r0.registersXML;
+
+        $r12.load(r1);
+
+     label4:
+        Packer.Pack(r0);
+
+        org.gjt.sp.jedit.Registers.setLoading(0);
+
+        goto label9;
+
+     label5:
+        $r14 := @caughtexception;
+
+        r2 = $r14;
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/Registers", r2);
+
+     label6:
+        org.gjt.sp.jedit.Registers.setLoading(0);
+
+        goto label9;
+
+     label7:
+        $r13 := @caughtexception;
+
+        r3 = $r13;
+
+     label8:
+        org.gjt.sp.jedit.Registers.setLoading(0);
+
+        throw r3;
+
+     label9:
+        return;
+
+        catch java.io.IOException from label3 to label4 with label5;
+        catch java.lang.Throwable from label3 to label4 with label7;
+        catch java.lang.Throwable from label5 to label6 with label7;
+        catch java.lang.Throwable from label7 to label8 with label7;
+    }
+
+    public void saveRegisters()
+    {
+        org.gjt.sp.jedit.JEditRegisterSaver r0;
+        java.lang.String r1, $r10, $r12, $r13, $r14, $r19;
+        org.gjt.sp.jedit.Registers$Register r2;
+        java.lang.Throwable r3, $r21;
+        org.gjt.sp.jedit.SettingsXML $r4, $r5, $r8, $r11, $r16;
+        boolean $z0;
+        java.lang.StringBuilder $r6, $r7, $r9, $r15, $r17, $r18;
+        int $i0, $i1, i3;
+        char $c2;
+        java.lang.Exception $r20, r24;
+        org.gjt.sp.jedit.SettingsXML$Saver r22, r22_1;
+        org.gjt.sp.jedit.Registers$Register[] r23;
+
+        r0 := @this;
+
+        $r4 = r0.registersXML;
+
+        if $r4 != null goto label01;
+
+        return;
+
+     label01:
+        $r5 = r0.registersXML;
+
+        Packer.Unpack(r0);
+
+        $z0 = $r5.hasChangedOnDisk();
+
+        if $z0 == 0 goto label02;
+
+        $r15 = new java.lang.StringBuilder;
+
+        specialinvoke $r15.<init>();
+
+        $r16 = r0.registersXML;
+
+        $r17 = $r15.append($r16);
+
+        Packer.Pack(r0);
+
+        $r18 = $r17.append(" changed on disk; will not save registers");
+
+        $r19 = $r18.toString();
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/Registers", $r19);
+
+        return;
+
+     label02:
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("Saving ");
+
+        $r8 = r0.registersXML;
+
+        $r9 = $r7.append($r8);
+
+        $r10 = $r9.toString();
+
+        org.gjt.sp.util.Log.log(3, class "org/gjt/sp/jedit/Registers", $r10);
+
+        r1 = java.lang.System.getProperty("line.separator");
+
+(0)     r22 = null;
+
+     label03:
+        $r11 = r0.registersXML;
+
+(1)     r22_1 = $r11.openSaver();
+
+        Packer.Pack(r0);
+
+        r22_1.writeXMLDeclaration();
+
+        r22_1.write("<!DOCTYPE REGISTERS SYSTEM \"registers.dtd\">");
+
+        r22_1.write(r1);
+
+        r22_1.write("<REGISTERS>");
+
+        r22_1.write(r1);
+
+        r23 = org.gjt.sp.jedit.Registers.getRegisters();
+
+(2)     i3 = 0;
+
+     label04:
+        r22 = Phi(r22_1 #2, r22 #4);
+
+        i3 = Phi(i3 #2, i3 #4);
+
+(3)     $i0 = lengthof r23;
+
+        if i3 >= $i0 goto label09;
+
+        r2 = r23[i3];
+
+        if r2 == null goto label08;
+
+        if i3 == 36 goto label08;
+
+        if i3 == 37 goto label08;
+
+        $r12 = r2.toString();
+
+        $i1 = $r12.length();
+
+        if $i1 != 0 goto label05;
+
+        goto label08;
+
+     label05:
+        r22.write("<REGISTER NAME=\"");
+
+        if i3 != 34 goto label06;
+
+        r22.write("&quot;");
+
+        goto label07;
+
+     label06:
+        $c2 = (char) i3;
+
+        r22.write($c2);
+
+     label07:
+        r22.write("\">");
+
+        $r13 = r2.toString();
+
+        $r14 = org.gjt.sp.util.XMLUtilities.charsToEntities($r13, 0);
+
+        r22.write($r14);
+
+        r22.write("</REGISTER>");
+
+        r22.write(r1);
+
+     label08:
+        i3 = i3 + 1;
+
+(4)     goto label04;
+
+     label09:
+        r22.write("</REGISTERS>");
+
+        r22.write(r1);
+
+        r22.finish();
+
+     label10:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r22);
+
+(5)     goto label15;
+
+     label11:
+(6)     $r20 := @caughtexception;
+
+        r22 = Phi(r22 #0, r22_1 #1, r22 #3);
+
+(7)     i3 = Phi(i3 #0, i3 #3);
+
+        r24 = $r20;
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/Registers", r24);
+
+     label12:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r22);
+
+(8)     goto label15;
+
+     label13:
+        $r21 := @caughtexception;
+
+        r22 = Phi(r22 #0, r22_1 #1, r22 #3, r22 #7, r22 #9);
+
+(9)     i3 = Phi(i3 #0, i3 #3, i3 #6, i3 #9);
+
+        r3 = $r21;
+
+     label14:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r22);
+
+        throw r3;
+
+     label15:
+        r22 = Phi(r22 #5, r22 #8);
+
+        i3 = Phi(i3 #5, i3 #8);
+
+        return;
+
+        catch java.lang.Exception from label03 to label10 with label11;
+        catch java.lang.Throwable from label03 to label10 with label13;
+        catch java.lang.Throwable from label11 to label12 with label13;
+        catch java.lang.Throwable from label13 to label14 with label13;
+    }
+}

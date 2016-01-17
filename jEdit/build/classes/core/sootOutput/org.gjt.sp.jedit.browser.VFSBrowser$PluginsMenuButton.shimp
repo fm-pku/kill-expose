@@ -1,0 +1,106 @@
+class org.gjt.sp.jedit.browser.VFSBrowser$PluginsMenuButton extends org.gjt.sp.jedit.browser.VFSBrowser$MenuButton
+{
+    final org.gjt.sp.jedit.browser.VFSBrowser this$0;
+
+    void <init>(org.gjt.sp.jedit.browser.VFSBrowser)
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$PluginsMenuButton r0;
+        org.gjt.sp.jedit.browser.VFSBrowser r1;
+        java.lang.String $r2;
+        java.awt.Insets $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("vfs.browser.plugins.label");
+
+        r0.setText($r2);
+
+        org.gjt.sp.jedit.GUIUtilities.setAutoMnemonic(r0);
+
+        r0.setName("plugins");
+
+        $r3 = new java.awt.Insets;
+
+        specialinvoke $r3.<init>(1, 1, 1, 1);
+
+        r0.setMargin($r3);
+
+        r0.popup = null;
+
+        specialinvoke r0.createPopupMenu();
+
+        return;
+    }
+
+    void updatePopupMenu()
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$PluginsMenuButton r0;
+
+        r0 := @this;
+
+        r0.popup = null;
+
+        return;
+    }
+
+    void doPopup()
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$PluginsMenuButton r0;
+        javax.swing.JPopupMenu $r1, $r2;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.popup;
+
+        if $r1 != null goto label1;
+
+        specialinvoke r0.createPopupMenu();
+
+     label1:
+        $r2 = r0.popup;
+
+        $i0 = r0.getHeight();
+
+        org.gjt.sp.jedit.GUIUtilities.showPopupMenu($r2, r0, 0, $i0, 0);
+
+        return;
+    }
+
+    private void createPopupMenu()
+    {
+        org.gjt.sp.jedit.browser.VFSBrowser$PluginsMenuButton r0;
+        javax.swing.JPopupMenu $r1, $r2, $r5;
+        org.gjt.sp.jedit.browser.VFSBrowser $r3;
+        javax.swing.JComponent $r4;
+
+        r0 := @this;
+
+        $r1 = r0.popup;
+
+        if $r1 == null goto label1;
+
+        return;
+
+     label1:
+        $r3 = r0.this$0;
+
+        $r2 = new javax.swing.JPopupMenu;
+
+        specialinvoke $r2.<init>();
+
+        $r4 = $r3.createPluginsMenu($r2, 1);
+
+        $r5 = (javax.swing.JPopupMenu) $r4;
+
+        r0.popup = $r5;
+
+        return;
+    }
+}

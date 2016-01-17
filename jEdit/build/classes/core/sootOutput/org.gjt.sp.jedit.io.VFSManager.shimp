@@ -1,0 +1,559 @@
+public class org.gjt.sp.jedit.io.VFSManager extends java.lang.Object
+{
+    public static final java.lang.String SERVICE;
+    private static org.gjt.sp.jedit.io.VFS fileVFS;
+    private static org.gjt.sp.jedit.io.VFS urlVFS;
+    private static boolean error;
+    private static final java.lang.Object errorLock;
+    private static final java.util.Vector errors;
+    private static final java.lang.Object vfsUpdateLock;
+    private static final java.util.List vfsUpdates;
+    private static boolean errorDisplayerActive;
+
+    public static void init()
+    {
+        return;
+    }
+
+    public static void start()
+    {
+        org.gjt.sp.util.AwtRunnableQueue $r0;
+
+        $r0 = org.gjt.sp.util.AwtRunnableQueue.INSTANCE;
+
+        $r0.start();
+
+        return;
+    }
+
+    public static org.gjt.sp.jedit.io.VFS getFileVFS()
+    {
+        org.gjt.sp.jedit.io.VFS $r0;
+
+        $r0 = org.gjt.sp.jedit.io.VFSManager.fileVFS;
+
+        return $r0;
+    }
+
+    public static org.gjt.sp.jedit.io.VFS getUrlVFS()
+    {
+        org.gjt.sp.jedit.io.VFS $r0;
+
+        $r0 = org.gjt.sp.jedit.io.VFSManager.urlVFS;
+
+        return $r0;
+    }
+
+    public static org.gjt.sp.jedit.io.VFS getVFSForProtocol(java.lang.String)
+    {
+        java.lang.String r0;
+        org.gjt.sp.jedit.io.VFS r1, $r3, $r4;
+        boolean $z0;
+        java.lang.Object $r2;
+
+        r0 := @parameter0;
+
+        $z0 = r0.equals("file");
+
+        if $z0 == 0 goto label1;
+
+        $r4 = org.gjt.sp.jedit.io.VFSManager.fileVFS;
+
+        return $r4;
+
+     label1:
+        $r2 = org.gjt.sp.jedit.ServiceManager.getService("org.gjt.sp.jedit.io.VFS", r0);
+
+        r1 = (org.gjt.sp.jedit.io.VFS) $r2;
+
+        if r1 == null goto label2;
+
+        return r1;
+
+     label2:
+        $r3 = org.gjt.sp.jedit.io.VFSManager.urlVFS;
+
+        return $r3;
+    }
+
+    public static org.gjt.sp.jedit.io.VFS getVFSForPath(java.lang.String)
+    {
+        java.lang.String r0, $r2;
+        boolean $z0;
+        org.gjt.sp.jedit.io.VFS $r1, $r3;
+
+        r0 := @parameter0;
+
+        $z0 = org.gjt.sp.jedit.MiscUtilities.isURL(r0);
+
+        if $z0 == 0 goto label1;
+
+        $r2 = org.gjt.sp.jedit.MiscUtilities.getProtocolOfURL(r0);
+
+        $r3 = org.gjt.sp.jedit.io.VFSManager.getVFSForProtocol($r2);
+
+        return $r3;
+
+     label1:
+        $r1 = org.gjt.sp.jedit.io.VFSManager.fileVFS;
+
+        return $r1;
+    }
+
+    public static java.lang.String[] getVFSs()
+    {
+        java.util.LinkedList r0, $r2;
+        java.lang.String[] r1, $r3, $r5;
+        int $i0;
+        java.lang.Object[] $r4;
+
+        $r2 = new java.util.LinkedList;
+
+        specialinvoke $r2.<init>();
+
+        r0 = $r2;
+
+        r1 = org.gjt.sp.jedit.ServiceManager.getServiceNames("org.gjt.sp.jedit.io.VFS");
+
+        if r1 == null goto label1;
+
+        java.util.Collections.addAll(r0, r1);
+
+     label1:
+        $i0 = r0.size();
+
+        $r3 = newarray (java.lang.String)[$i0];
+
+        $r4 = r0.toArray($r3);
+
+        $r5 = (java.lang.String[]) $r4;
+
+        return $r5;
+    }
+
+    public static void waitForRequests()
+    {
+        boolean $z0;
+        org.gjt.sp.util.TaskManager $r0;
+        java.lang.IllegalStateException $r1;
+
+        $z0 = java.awt.EventQueue.isDispatchThread();
+
+        if $z0 != 0 goto label1;
+
+        $r1 = new java.lang.IllegalStateException;
+
+        specialinvoke $r1.<init>();
+
+        throw $r1;
+
+     label1:
+        $r0 = org.gjt.sp.util.TaskManager.instance;
+
+        $r0.waitForIoTasks();
+
+        return;
+    }
+
+    public static boolean errorOccurred()
+    {
+        boolean $z0;
+
+        $z0 = org.gjt.sp.jedit.io.VFSManager.error;
+
+        return $z0;
+    }
+
+    public static int getRequestCount()
+    {
+        org.gjt.sp.util.TaskManager $r0;
+        int $i0;
+
+        $r0 = org.gjt.sp.util.TaskManager.instance;
+
+        $i0 = $r0.countIoTasks();
+
+        return $i0;
+    }
+
+    public static void runInAWTThread(java.lang.Runnable)
+    {
+        java.lang.Runnable r0;
+        org.gjt.sp.util.AwtRunnableQueue $r1;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.util.AwtRunnableQueue.INSTANCE;
+
+        $r1.runAfterIoTasks(r0);
+
+        return;
+    }
+
+    public static void runInWorkThread(org.gjt.sp.util.Task)
+    {
+        org.gjt.sp.util.Task r0;
+        boolean $z0;
+        java.lang.IllegalArgumentException $r1;
+
+        r0 := @parameter0;
+
+        $z0 = r0 instanceof org.gjt.sp.jedit.bufferio.IoTask;
+
+        if $z0 != 0 goto label1;
+
+        $r1 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $r1.<init>();
+
+        throw $r1;
+
+     label1:
+        org.gjt.sp.util.ThreadUtilities.runInBackground(r0);
+
+        return;
+    }
+
+    public static void error(java.io.IOException, java.lang.String, java.awt.Component)
+    {
+        java.io.IOException r0;
+        java.lang.String r1, $r4;
+        java.awt.Component r2;
+        java.lang.String[] $r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/io/VFSManager", r0);
+
+        $r3 = newarray (java.lang.String)[1];
+
+        $r4 = r0.toString();
+
+        $r3[0] = $r4;
+
+        org.gjt.sp.jedit.io.VFSManager.error(r2, r1, "ioerror", $r3);
+
+        return;
+    }
+
+    public static void error(java.awt.Component, java.lang.String, java.lang.String, java.lang.Object[])
+    {
+        java.awt.Component r0;
+        java.lang.String r1, r2;
+        java.lang.Object[] r3;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        org.gjt.sp.jedit.io.VFSManager.error(r0, r1, r2, r3, 9);
+
+        return;
+    }
+
+    public static void error(java.awt.Component, java.lang.String, java.lang.String, java.lang.Object[], int)
+    {
+        java.awt.Component r0;
+        java.lang.String r1, r2;
+        java.lang.Object[] r3;
+        int i0;
+        org.gjt.sp.jedit.io.VFSManager$1 r4, $r5;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        i0 := @parameter4;
+
+        $r5 = new org.gjt.sp.jedit.io.VFSManager$1;
+
+        specialinvoke $r5.<init>(r0, r1, r2, r3, i0);
+
+        r4 = $r5;
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThreadAndWait(r4);
+
+        return;
+    }
+
+    public static void sendVFSUpdate(org.gjt.sp.jedit.io.VFS, java.lang.String, boolean)
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        boolean z0, $z1, $z3, $z4, $z5;
+        java.lang.Object r1, $r5, $r12;
+        java.util.Iterator r2;
+        org.gjt.sp.jedit.msg.VFSUpdate r3, $r7;
+        java.lang.Throwable r4, $r16;
+        int $i0, $i1, $i2, $i3;
+        java.util.List $r6, $r8, $r9;
+        org.gjt.sp.jedit.io.VFSManager$SendVFSUpdatesSafely $r10;
+        org.gjt.sp.util.AwtRunnableQueue $r11;
+        java.lang.String $r13, $r14, $r15, r17, r17_1, r17_2;
+
+        r0 := @parameter0;
+
+        r17 := @parameter1;
+
+        z0 := @parameter2;
+
+        if z0 == 0 goto label01;
+
+        $r15 = r0.getParentOfPath(r17);
+
+        org.gjt.sp.jedit.io.VFSManager.sendVFSUpdate(r0, $r15, 0);
+
+        org.gjt.sp.jedit.io.VFSManager.sendVFSUpdate(r0, r17, 0);
+
+(0)     goto label13;
+
+     label01:
+        $i0 = r17.length();
+
+(1)     if $i0 == 1 goto label03;
+
+        $z4 = r17.endsWith("/");
+
+        if $z4 != 0 goto label02;
+
+        $r14 = java.io.File.separator;
+
+        $z5 = r17.endsWith($r14);
+
+(2)     if $z5 == 0 goto label03;
+
+     label02:
+        $i2 = r17.length();
+
+        $i3 = $i2 - 1;
+
+(3)     r17_1 = r17.substring(0, $i3);
+
+     label03:
+        r17_2 = Phi(r17 #1, r17 #2, r17_1 #3);
+
+        $r5 = org.gjt.sp.jedit.io.VFSManager.vfsUpdateLock;
+
+        r1 = $r5;
+
+(4)     entermonitor $r5;
+
+     label04:
+        $r6 = org.gjt.sp.jedit.io.VFSManager.vfsUpdates;
+
+(5)     r2 = $r6.iterator();
+
+     label05:
+        r17 = Phi(r17_2 #5, r17 #7);
+
+(6)     $z1 = r2.hasNext();
+
+        if $z1 == 0 goto label08;
+
+        $r12 = r2.next();
+
+        r3 = (org.gjt.sp.jedit.msg.VFSUpdate) $r12;
+
+        $r13 = r3.getPath();
+
+        $z3 = $r13.equals(r17);
+
+        if $z3 == 0 goto label07;
+
+        exitmonitor r1;
+
+     label06:
+        return;
+
+     label07:
+(7)     goto label05;
+
+     label08:
+        $r8 = org.gjt.sp.jedit.io.VFSManager.vfsUpdates;
+
+        $r7 = new org.gjt.sp.jedit.msg.VFSUpdate;
+
+        specialinvoke $r7.<init>(r17);
+
+        $r8.add($r7);
+
+        $r9 = org.gjt.sp.jedit.io.VFSManager.vfsUpdates;
+
+        $i1 = $r9.size();
+
+        if $i1 != 1 goto label09;
+
+        $r11 = org.gjt.sp.util.AwtRunnableQueue.INSTANCE;
+
+        $r10 = new org.gjt.sp.jedit.io.VFSManager$SendVFSUpdatesSafely;
+
+        specialinvoke $r10.<init>();
+
+        $r11.runAfterIoTasks($r10);
+
+     label09:
+        exitmonitor r1;
+
+     label10:
+(8)     goto label13;
+
+     label11:
+        $r16 := @caughtexception;
+
+(9)     r17 = Phi(r17_2 #4, r17 #6, r17 #9);
+
+        r4 = $r16;
+
+        exitmonitor r1;
+
+     label12:
+        throw r4;
+
+     label13:
+        r17 = Phi(r17 #0, r17 #8);
+
+        return;
+
+        catch java.lang.Throwable from label04 to label06 with label11;
+        catch java.lang.Throwable from label07 to label10 with label11;
+        catch java.lang.Throwable from label11 to label12 with label11;
+    }
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.io.VFSManager r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    static java.lang.Object access$000()
+    {
+        java.lang.Object $r0;
+
+        $r0 = org.gjt.sp.jedit.io.VFSManager.errorLock;
+
+        return $r0;
+    }
+
+    static boolean access$102(boolean)
+    {
+        boolean z0;
+
+        z0 := @parameter0;
+
+        org.gjt.sp.jedit.io.VFSManager.error = z0;
+
+        return z0;
+    }
+
+    static java.util.Vector access$200()
+    {
+        java.util.Vector $r0;
+
+        $r0 = org.gjt.sp.jedit.io.VFSManager.errors;
+
+        return $r0;
+    }
+
+    static boolean access$300()
+    {
+        boolean $z0;
+
+        $z0 = org.gjt.sp.jedit.io.VFSManager.errorDisplayerActive;
+
+        return $z0;
+    }
+
+    static java.lang.Object access$400()
+    {
+        java.lang.Object $r0;
+
+        $r0 = org.gjt.sp.jedit.io.VFSManager.vfsUpdateLock;
+
+        return $r0;
+    }
+
+    static java.util.List access$500()
+    {
+        java.util.List $r0;
+
+        $r0 = org.gjt.sp.jedit.io.VFSManager.vfsUpdates;
+
+        return $r0;
+    }
+
+    static boolean access$302(boolean)
+    {
+        boolean z0;
+
+        z0 := @parameter0;
+
+        org.gjt.sp.jedit.io.VFSManager.errorDisplayerActive = z0;
+
+        return z0;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Object $r0, $r1;
+        java.util.Vector $r2;
+        org.gjt.sp.jedit.io.FileVFS $r3;
+        org.gjt.sp.jedit.io.UrlVFS $r4;
+        java.util.ArrayList $r5;
+
+        $r0 = new java.lang.Object;
+
+        specialinvoke $r0.<init>();
+
+        org.gjt.sp.jedit.io.VFSManager.errorLock = $r0;
+
+        $r1 = new java.lang.Object;
+
+        specialinvoke $r1.<init>();
+
+        org.gjt.sp.jedit.io.VFSManager.vfsUpdateLock = $r1;
+
+        org.gjt.sp.jedit.io.VFSManager.errorDisplayerActive = 0;
+
+        $r2 = new java.util.Vector;
+
+        specialinvoke $r2.<init>();
+
+        org.gjt.sp.jedit.io.VFSManager.errors = $r2;
+
+        $r3 = new org.gjt.sp.jedit.io.FileVFS;
+
+        specialinvoke $r3.<init>();
+
+        org.gjt.sp.jedit.io.VFSManager.fileVFS = $r3;
+
+        $r4 = new org.gjt.sp.jedit.io.UrlVFS;
+
+        specialinvoke $r4.<init>();
+
+        org.gjt.sp.jedit.io.VFSManager.urlVFS = $r4;
+
+        $r5 = new java.util.ArrayList;
+
+        specialinvoke $r5.<init>(10);
+
+        org.gjt.sp.jedit.io.VFSManager.vfsUpdates = $r5;
+
+        return;
+    }
+}

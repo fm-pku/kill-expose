@@ -1,0 +1,95 @@
+class org.gjt.sp.jedit.bsh.BSHReturnType extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+    public boolean isVoid;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHReturnType r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    org.gjt.sp.jedit.bsh.BSHType getTypeNode()
+    {
+        org.gjt.sp.jedit.bsh.BSHReturnType r0;
+        org.gjt.sp.jedit.bsh.Node $r1;
+        org.gjt.sp.jedit.bsh.BSHType $r2;
+
+        r0 := @this;
+
+        $r1 = r0.jjtGetChild(0);
+
+        $r2 = (org.gjt.sp.jedit.bsh.BSHType) $r1;
+
+        return $r2;
+    }
+
+    public java.lang.String getTypeDescriptor(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter, java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BSHReturnType r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        java.lang.String r3, $r5;
+        boolean $z0;
+        org.gjt.sp.jedit.bsh.BSHType $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $z0 = r0.isVoid;
+
+        if $z0 == 0 goto label1;
+
+        return "V";
+
+     label1:
+        $r4 = r0.getTypeNode();
+
+        $r5 = $r4.getTypeDescriptor(r1, r2, r3);
+
+        return $r5;
+    }
+
+    public java.lang.Class evalReturnType(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHReturnType r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        boolean $z0;
+        org.gjt.sp.jedit.bsh.BSHType $r3;
+        java.lang.Class $r4, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $z0 = r0.isVoid;
+
+        if $z0 == 0 goto label1;
+
+        $r5 = java.lang.Void.TYPE;
+
+        return $r5;
+
+     label1:
+        $r3 = r0.getTypeNode();
+
+        $r4 = $r3.getType(r1, r2);
+
+        return $r4;
+    }
+}

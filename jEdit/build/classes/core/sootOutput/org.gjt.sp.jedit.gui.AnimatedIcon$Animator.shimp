@@ -1,0 +1,75 @@
+class org.gjt.sp.jedit.gui.AnimatedIcon$Animator extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.AnimatedIcon this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.AnimatedIcon)
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon$Animator r0;
+        org.gjt.sp.jedit.gui.AnimatedIcon r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.AnimatedIcon$Animator r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.gui.AnimatedIcon $r2, $r3, $r4, $r6, $r7, $r9, $r11;
+        int $i0, $i1, $i2, $i3, $i5;
+        java.awt.Image[] $r5, $r8;
+        java.awt.Image $r10;
+        java.awt.Component $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.this$0;
+
+        $r2 = r0.this$0;
+
+        $i0 = org.gjt.sp.jedit.gui.AnimatedIcon.access$000($r2);
+
+        $i1 = $i0 + 1;
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.gui.AnimatedIcon.access$100($r4);
+
+        $i2 = lengthof $r5;
+
+        $i3 = $i1 % $i2;
+
+        org.gjt.sp.jedit.gui.AnimatedIcon.access$002($r3, $i3);
+
+        $r7 = r0.this$0;
+
+        $r6 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.AnimatedIcon.access$100($r6);
+
+        $r9 = r0.this$0;
+
+        $i5 = org.gjt.sp.jedit.gui.AnimatedIcon.access$000($r9);
+
+        $r10 = $r8[$i5];
+
+        $r7.setImage($r10);
+
+        $r11 = r0.this$0;
+
+        $r12 = org.gjt.sp.jedit.gui.AnimatedIcon.access$200($r11);
+
+        $r12.repaint();
+
+        return;
+    }
+}

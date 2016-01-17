@@ -1,0 +1,162 @@
+class org.gjt.sp.jedit.SplitConfigParser$Split extends java.lang.Object
+{
+    java.lang.Object left;
+    java.lang.Object right;
+    java.lang.String direction;
+    int offset;
+    final org.gjt.sp.jedit.SplitConfigParser this$0;
+
+    private void <init>(org.gjt.sp.jedit.SplitConfigParser)
+    {
+        org.gjt.sp.jedit.SplitConfigParser$Split r0;
+        org.gjt.sp.jedit.SplitConfigParser r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        r0.left = null;
+
+        r0.right = null;
+
+        r0.direction = null;
+
+        r0.offset = 0;
+
+        return;
+    }
+
+    public void setLeft(java.lang.Object)
+    {
+        org.gjt.sp.jedit.SplitConfigParser$Split r0;
+        java.lang.Object r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.left = r1;
+
+        return;
+    }
+
+    public void setRight(java.lang.Object)
+    {
+        org.gjt.sp.jedit.SplitConfigParser$Split r0;
+        java.lang.Object r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.right = r1;
+
+        return;
+    }
+
+    public void setDirection(java.lang.String)
+    {
+        org.gjt.sp.jedit.SplitConfigParser$Split r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.direction = r1;
+
+        return;
+    }
+
+    public void setOffset(int)
+    {
+        org.gjt.sp.jedit.SplitConfigParser$Split r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r0.offset = i0;
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.SplitConfigParser$Split r0;
+        java.lang.StringBuilder r1, $r2, $r5, $r6, $r12, $r16;
+        java.lang.Object $r3, $r4, $r10, $r14;
+        int $i0;
+        java.lang.String $r7, $r9, $r11, $r15;
+
+        r0 := @this;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+        $r3 = r0.left;
+
+        if $r3 == null goto label1;
+
+        $r14 = r0.left;
+
+        $r15 = $r14.toString();
+
+        $r16 = r1.append($r15);
+
+        $r16.append(32);
+
+     label1:
+        $r4 = r0.right;
+
+        if $r4 == null goto label2;
+
+        $r10 = r0.right;
+
+        $r11 = $r10.toString();
+
+        $r12 = r1.append($r11);
+
+        $r12.append(32);
+
+     label2:
+        $i0 = r0.offset;
+
+        $r5 = r1.append($i0);
+
+        $r6 = $r5.append(32);
+
+        $r7 = r0.direction;
+
+        $r6.append($r7);
+
+        $r9 = r1.toString();
+
+        return $r9;
+    }
+
+    void <init>(org.gjt.sp.jedit.SplitConfigParser, org.gjt.sp.jedit.SplitConfigParser$1)
+    {
+        org.gjt.sp.jedit.SplitConfigParser$Split r0;
+        org.gjt.sp.jedit.SplitConfigParser r1;
+        org.gjt.sp.jedit.SplitConfigParser$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

@@ -1,0 +1,59 @@
+class org.gjt.sp.jedit.options.PluginManagerOptionPane$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.options.PluginManagerOptionPane this$0;
+
+    void <init>(org.gjt.sp.jedit.options.PluginManagerOptionPane)
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$ActionHandler r0;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane $r2, $r4, $r8;
+        javax.swing.JButton $r3;
+        javax.swing.JLabel $r5;
+        java.lang.String $r6;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.options.PluginManagerOptionPane.access$000($r2);
+
+        $r3.setEnabled(0);
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.options.PluginManagerOptionPane.access$100($r4);
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("options.plugin-manager.workthread");
+
+        $r5.setText($r6);
+
+        $r7 = new org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread;
+
+        $r8 = r0.this$0;
+
+        specialinvoke $r7.<init>($r8, 1);
+
+        org.gjt.sp.util.ThreadUtilities.runInBackground($r7);
+
+        return;
+    }
+}

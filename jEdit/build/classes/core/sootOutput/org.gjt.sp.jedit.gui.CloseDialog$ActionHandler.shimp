@@ -1,0 +1,320 @@
+class org.gjt.sp.jedit.gui.CloseDialog$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.gui.CloseDialog this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.CloseDialog)
+    {
+        org.gjt.sp.jedit.gui.CloseDialog$ActionHandler r0;
+        org.gjt.sp.jedit.gui.CloseDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.CloseDialog$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2, r56, r61;
+        org.gjt.sp.jedit.gui.CloseDialog $r3, $r5, $r7, $r9, $r11, $r12, $r14, $r16, $r18, $r20, $r21, $r22, $r24, $r26, $r28, $r30, $r32, $r34, $r35, $r36, $r39, $r41, $r43, $r44, $r46, $r48, $r49, $r52;
+        javax.swing.JButton $r4, $r6, $r8, $r10;
+        javax.swing.JList $r13, $r17, $r19, $r27, $r31, $r33, $r45, $r50;
+        javax.swing.DefaultListModel $r15, $r25, $r29, $r42, $r47;
+        int $i0, $i1, $i2, $i3, i4, i5, i6, i7;
+        org.gjt.sp.jedit.View $r23, $r37, $r40;
+        boolean $z3, $z4;
+        org.gjt.sp.util.TaskManager $r38;
+        java.lang.Throwable $r51, r53;
+        java.lang.Object[] r54, r55, r59, r60;
+        java.lang.String r57, r62;
+        org.gjt.sp.jedit.Buffer r58, r63;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.CloseDialog.access$200($r3);
+
+        if r2 != $r4 goto label06;
+
+     label01:
+        $r43 = r0.this$0;
+
+        $r43.selectAllFlag = 1;
+
+        $r44 = r0.this$0;
+
+        $r45 = org.gjt.sp.jedit.gui.CloseDialog.access$400($r44);
+
+        $r46 = r0.this$0;
+
+        $r47 = org.gjt.sp.jedit.gui.CloseDialog.access$300($r46);
+
+        $i2 = $r47.getSize();
+
+        $i3 = $i2 - 1;
+
+        $r45.setSelectionInterval(0, $i3);
+
+     label02:
+        $r48 = r0.this$0;
+
+        $r48.selectAllFlag = 0;
+
+        goto label05;
+
+     label03:
+        $r51 := @caughtexception;
+
+        r53 = $r51;
+
+     label04:
+        $r52 = r0.this$0;
+
+        $r52.selectAllFlag = 0;
+
+        throw r53;
+
+     label05:
+        $r49 = r0.this$0;
+
+        $r50 = org.gjt.sp.jedit.gui.CloseDialog.access$400($r49);
+
+        $r50.requestFocus();
+
+(0)     goto label19;
+
+     label06:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.CloseDialog.access$500($r5);
+
+        if r2 != $r6 goto label13;
+
+        $r26 = r0.this$0;
+
+        $r27 = org.gjt.sp.jedit.gui.CloseDialog.access$400($r26);
+
+        r54 = $r27.getSelectedValues();
+
+        r55 = r54;
+
+        i4 = lengthof r55;
+
+(1)     i5 = 0;
+
+     label07:
+        i5 = Phi(i5 #1, i5 #2);
+
+        if i5 >= i4 goto label10;
+
+        r56 = r55[i5];
+
+        r57 = (java.lang.String) r56;
+
+        r58 = org.gjt.sp.jedit.jEdit.getBuffer(r57);
+
+        $r36 = r0.this$0;
+
+        $r37 = org.gjt.sp.jedit.gui.CloseDialog.access$600($r36);
+
+        $z3 = r58.save($r37, null, 1, 1);
+
+        if $z3 != 0 goto label08;
+
+        return;
+
+     label08:
+        $r38 = org.gjt.sp.util.TaskManager.instance;
+
+        $r38.waitForIoTasks();
+
+        $z4 = r58.getBooleanProperty("BufferIORequest__error");
+
+        if $z4 == 0 goto label09;
+
+        return;
+
+     label09:
+        $r39 = r0.this$0;
+
+        $r40 = org.gjt.sp.jedit.gui.CloseDialog.access$600($r39);
+
+        org.gjt.sp.jedit.jEdit._closeBuffer($r40, r58);
+
+        $r41 = r0.this$0;
+
+        $r42 = org.gjt.sp.jedit.gui.CloseDialog.access$300($r41);
+
+        $r42.removeElement(r57);
+
+        i5 = i5 + 1;
+
+(2)     goto label07;
+
+     label10:
+        $r28 = r0.this$0;
+
+        $r29 = org.gjt.sp.jedit.gui.CloseDialog.access$300($r28);
+
+        $i1 = $r29.getSize();
+
+        if $i1 != 0 goto label11;
+
+        $r34 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.CloseDialog.access$702($r34, 1);
+
+        $r35 = r0.this$0;
+
+        $r35.dispose();
+
+        goto label12;
+
+     label11:
+        $r30 = r0.this$0;
+
+        $r31 = org.gjt.sp.jedit.gui.CloseDialog.access$400($r30);
+
+        $r31.setSelectedIndex(0);
+
+        $r32 = r0.this$0;
+
+        $r33 = org.gjt.sp.jedit.gui.CloseDialog.access$400($r32);
+
+        $r33.requestFocus();
+
+     label12:
+(3)     goto label19;
+
+     label13:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.CloseDialog.access$800($r7);
+
+        if r2 != $r8 goto label18;
+
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.gui.CloseDialog.access$400($r12);
+
+        r59 = $r13.getSelectedValues();
+
+        r60 = r59;
+
+        i6 = lengthof r60;
+
+(4)     i7 = 0;
+
+     label14:
+        i7 = Phi(i7 #4, i7 #5);
+
+        if i7 >= i6 goto label15;
+
+        r61 = r60[i7];
+
+        r62 = (java.lang.String) r61;
+
+        r63 = org.gjt.sp.jedit.jEdit.getBuffer(r62);
+
+        $r22 = r0.this$0;
+
+        $r23 = org.gjt.sp.jedit.gui.CloseDialog.access$600($r22);
+
+        org.gjt.sp.jedit.jEdit._closeBuffer($r23, r63);
+
+        $r24 = r0.this$0;
+
+        $r25 = org.gjt.sp.jedit.gui.CloseDialog.access$300($r24);
+
+        $r25.removeElement(r62);
+
+        i7 = i7 + 1;
+
+(5)     goto label14;
+
+     label15:
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.gui.CloseDialog.access$300($r14);
+
+        $i0 = $r15.getSize();
+
+        if $i0 != 0 goto label16;
+
+        $r20 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.CloseDialog.access$702($r20, 1);
+
+        $r21 = r0.this$0;
+
+        $r21.dispose();
+
+        goto label17;
+
+     label16:
+        $r16 = r0.this$0;
+
+        $r17 = org.gjt.sp.jedit.gui.CloseDialog.access$400($r16);
+
+        $r17.setSelectedIndex(0);
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.gui.CloseDialog.access$400($r18);
+
+        $r19.requestFocus();
+
+     label17:
+(6)     goto label19;
+
+     label18:
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.gui.CloseDialog.access$900($r9);
+
+(7)     if r2 != $r10 goto label19;
+
+        $r11 = r0.this$0;
+
+(8)     $r11.cancel();
+
+     label19:
+        i7 = Phi(i7 #0, i7 #3, i7 #6, i7 #7, i7 #8);
+
+        i5 = Phi(i5 #0, i5 #3, i5 #6, i5 #7, i5 #8);
+
+        return;
+
+        catch java.lang.Throwable from label01 to label02 with label03;
+        catch java.lang.Throwable from label03 to label04 with label03;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.CloseDialog, org.gjt.sp.jedit.gui.CloseDialog$1)
+    {
+        org.gjt.sp.jedit.gui.CloseDialog$ActionHandler r0;
+        org.gjt.sp.jedit.gui.CloseDialog r1;
+        org.gjt.sp.jedit.gui.CloseDialog$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

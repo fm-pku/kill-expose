@@ -1,0 +1,46 @@
+class org.gjt.sp.jedit.search.HyperSearchRequest$2 extends java.lang.Object implements java.lang.Runnable
+{
+    final java.lang.Exception val$e;
+    final org.gjt.sp.jedit.search.HyperSearchRequest this$0;
+
+    void <init>(org.gjt.sp.jedit.search.HyperSearchRequest, java.lang.Exception)
+    {
+        org.gjt.sp.jedit.search.HyperSearchRequest$2 r0;
+        org.gjt.sp.jedit.search.HyperSearchRequest r1;
+        java.lang.Exception r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        r0.val$e = r2;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.search.HyperSearchRequest$2 r0;
+        org.gjt.sp.jedit.search.HyperSearchRequest $r1;
+        org.gjt.sp.jedit.View $r2;
+        java.lang.Exception $r3;
+
+        r0 := @this;
+
+        $r1 = r0.this$0;
+
+        $r2 = org.gjt.sp.jedit.search.HyperSearchRequest.access$000($r1);
+
+        $r3 = r0.val$e;
+
+        org.gjt.sp.jedit.search.SearchAndReplace.handleError($r2, $r3);
+
+        return;
+    }
+}

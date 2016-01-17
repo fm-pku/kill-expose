@@ -1,0 +1,128 @@
+class org.gjt.sp.jedit.options.BufferOptionPane$ActionHandler extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.options.BufferOptionPane this$0;
+
+    private void <init>(org.gjt.sp.jedit.options.BufferOptionPane)
+    {
+        org.gjt.sp.jedit.options.BufferOptionPane$ActionHandler r0;
+        org.gjt.sp.jedit.options.BufferOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.options.BufferOptionPane$ActionHandler r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.Object r2, $r8, $r11, $r14, $r17, $r20, $r23;
+        org.gjt.sp.jedit.Mode r3;
+        org.gjt.sp.jedit.options.BufferOptionPane $r4, $r6, $r9, $r12, $r15, $r18, $r21, $r24, $r26;
+        javax.swing.JComboBox $r5, $r7, $r10, $r13, $r16, $r19, $r22;
+        javax.swing.JCheckBox $r25, $r27;
+        boolean $z0, $z1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.options.BufferOptionPane.access$100($r4);
+
+        if r2 != $r5 goto label1;
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.options.BufferOptionPane.access$100($r6);
+
+        $r8 = $r7.getSelectedItem();
+
+        r3 = (org.gjt.sp.jedit.Mode) $r8;
+
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.options.BufferOptionPane.access$200($r9);
+
+        $r11 = r3.getProperty("folding");
+
+        $r10.setSelectedItem($r11);
+
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.options.BufferOptionPane.access$300($r12);
+
+        $r14 = r3.getProperty("wrap");
+
+        $r13.setSelectedItem($r14);
+
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.options.BufferOptionPane.access$400($r15);
+
+        $r17 = r3.getProperty("maxLineLen");
+
+        $r16.setSelectedItem($r17);
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.options.BufferOptionPane.access$500($r18);
+
+        $r20 = r3.getProperty("tabSize");
+
+        $r19.setSelectedItem($r20);
+
+        $r21 = r0.this$0;
+
+        $r22 = org.gjt.sp.jedit.options.BufferOptionPane.access$600($r21);
+
+        $r23 = r3.getProperty("indentSize");
+
+        $r22.setSelectedItem($r23);
+
+        $r24 = r0.this$0;
+
+        $r25 = org.gjt.sp.jedit.options.BufferOptionPane.access$700($r24);
+
+        $z0 = r3.getBooleanProperty("noTabs");
+
+        $r25.setSelected($z0);
+
+        $r26 = r0.this$0;
+
+        $r27 = org.gjt.sp.jedit.options.BufferOptionPane.access$800($r26);
+
+        $z1 = r3.getBooleanProperty("elasticTabstops");
+
+        $r27.setSelected($z1);
+
+     label1:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.options.BufferOptionPane, org.gjt.sp.jedit.options.BufferOptionPane$1)
+    {
+        org.gjt.sp.jedit.options.BufferOptionPane$ActionHandler r0;
+        org.gjt.sp.jedit.options.BufferOptionPane r1;
+        org.gjt.sp.jedit.options.BufferOptionPane$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

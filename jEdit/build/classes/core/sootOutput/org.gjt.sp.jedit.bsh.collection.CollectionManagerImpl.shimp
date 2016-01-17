@@ -1,0 +1,111 @@
+public class org.gjt.sp.jedit.bsh.collection.CollectionManagerImpl extends org.gjt.sp.jedit.bsh.CollectionManager
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.collection.CollectionManagerImpl r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.BshIterator getBshIterator(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        org.gjt.sp.jedit.bsh.collection.CollectionManagerImpl r0;
+        java.lang.Object r1;
+        boolean $z0, $z1;
+        org.gjt.sp.jedit.bsh.collection.CollectionIterator $r2;
+        org.gjt.sp.jedit.bsh.CollectionManager$BasicBshIterator $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1 instanceof java.util.Collection;
+
+        if $z0 != 0 goto label1;
+
+        $z1 = r1 instanceof java.util.Iterator;
+
+        if $z1 == 0 goto label2;
+
+     label1:
+        $r2 = new org.gjt.sp.jedit.bsh.collection.CollectionIterator;
+
+        specialinvoke $r2.<init>(r1);
+
+        return $r2;
+
+     label2:
+        $r3 = new org.gjt.sp.jedit.bsh.CollectionManager$BasicBshIterator;
+
+        specialinvoke $r3.<init>(r1);
+
+        return $r3;
+    }
+
+    public boolean isMap(java.lang.Object)
+    {
+        org.gjt.sp.jedit.bsh.collection.CollectionManagerImpl r0;
+        java.lang.Object r1;
+        boolean $z0, $z1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1 instanceof java.util.Map;
+
+        if $z0 == 0 goto label1;
+
+        return 1;
+
+     label1:
+        $z1 = specialinvoke r0.isMap(r1);
+
+        return $z1;
+    }
+
+    public java.lang.Object getFromMap(java.lang.Object, java.lang.Object)
+    {
+        org.gjt.sp.jedit.bsh.collection.CollectionManagerImpl r0;
+        java.lang.Object r1, r2, $r4;
+        java.util.Map $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = (java.util.Map) r1;
+
+        $r4 = $r3.get(r2);
+
+        return $r4;
+    }
+
+    public java.lang.Object putInMap(java.lang.Object, java.lang.Object, java.lang.Object)
+    {
+        org.gjt.sp.jedit.bsh.collection.CollectionManagerImpl r0;
+        java.lang.Object r1, r2, r3, $r5;
+        java.util.Map $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = (java.util.Map) r1;
+
+        $r5 = $r4.put(r2, r3);
+
+        return $r5;
+    }
+}

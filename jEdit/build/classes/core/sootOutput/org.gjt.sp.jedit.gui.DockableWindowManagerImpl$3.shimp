@@ -1,0 +1,82 @@
+class org.gjt.sp.jedit.gui.DockableWindowManagerImpl$3 extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final java.lang.String val$dockable;
+    final java.lang.String val$pos;
+    final org.gjt.sp.jedit.gui.DockableWindowManagerImpl this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.DockableWindowManagerImpl, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$3 r0;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl r1;
+        java.lang.String r2, r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r0.this$0 = r1;
+
+        r0.val$dockable = r2;
+
+        r0.val$pos = r3;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl$3 r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.StringBuilder $r2, $r4, $r5;
+        java.lang.String $r3, $r6, $r7, $r9, $r12;
+        org.gjt.sp.jedit.msg.DockableWindowUpdate $r8;
+        java.lang.Object $r10;
+        org.gjt.sp.jedit.gui.DockableWindowManagerImpl $r11, $r13;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = r0.val$dockable;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.append(".dock-position");
+
+        $r6 = $r5.toString();
+
+        $r7 = r0.val$pos;
+
+        org.gjt.sp.jedit.jEdit.setProperty($r6, $r7);
+
+        $r8 = new org.gjt.sp.jedit.msg.DockableWindowUpdate;
+
+        $r11 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.msg.DockableWindowUpdate.PROPERTIES_CHANGED;
+
+        $r9 = r0.val$dockable;
+
+        specialinvoke $r8.<init>($r11, $r10, $r9);
+
+        org.gjt.sp.jedit.EditBus.send($r8);
+
+        $r13 = r0.this$0;
+
+        $r12 = r0.val$dockable;
+
+        $r13.showDockableWindow($r12);
+
+        return;
+    }
+}

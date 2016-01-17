@@ -1,0 +1,960 @@
+public class org.gjt.sp.jedit.BufferHistory extends java.lang.Object
+{
+    private static java.util.LinkedList history;
+    private static final java.util.concurrent.locks.ReentrantReadWriteLock historyLock;
+    private static org.gjt.sp.jedit.SettingsXML recentXML;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.BufferHistory r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static org.gjt.sp.jedit.BufferHistory$Entry getEntry(java.lang.String)
+    {
+        java.lang.String r0, $r11;
+        java.util.Iterator r1;
+        org.gjt.sp.jedit.BufferHistory$Entry r2, r3;
+        java.lang.Throwable r4, $r14;
+        java.util.concurrent.locks.ReentrantReadWriteLock $r5, $r8, $r12, $r15;
+        java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock $r6, $r9, $r13, $r16;
+        java.util.LinkedList $r7;
+        boolean $z0, $z1;
+        java.lang.Object $r10;
+
+        r0 := @parameter0;
+
+        $r5 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r6 = $r5.readLock();
+
+        $r6.lock();
+
+     label1:
+        $r7 = org.gjt.sp.jedit.BufferHistory.history;
+
+        r1 = $r7.iterator();
+
+     label2:
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label5;
+
+        $r10 = r1.next();
+
+        r2 = (org.gjt.sp.jedit.BufferHistory$Entry) $r10;
+
+        $r11 = r2.path;
+
+        $z1 = org.gjt.sp.jedit.MiscUtilities.pathsEqual($r11, r0);
+
+        if $z1 == 0 goto label4;
+
+        r3 = r2;
+
+     label3:
+        $r12 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r13 = $r12.readLock();
+
+        $r13.unlock();
+
+        return r3;
+
+     label4:
+        goto label2;
+
+     label5:
+        $r8 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r9 = $r8.readLock();
+
+        $r9.unlock();
+
+        goto label8;
+
+     label6:
+        $r14 := @caughtexception;
+
+        r4 = $r14;
+
+     label7:
+        $r15 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r16 = $r15.readLock();
+
+        $r16.unlock();
+
+        throw r4;
+
+     label8:
+        return null;
+
+        catch java.lang.Throwable from label1 to label3 with label6;
+        catch java.lang.Throwable from label4 to label5 with label6;
+        catch java.lang.Throwable from label6 to label7 with label6;
+    }
+
+    public static void setEntry(java.lang.String, int, org.gjt.sp.jedit.textarea.Selection[], java.lang.String, java.lang.String)
+    {
+        java.lang.String r0, r2, r3, $r7;
+        int i0;
+        org.gjt.sp.jedit.textarea.Selection[] r1;
+        org.gjt.sp.jedit.BufferHistory$Entry r4, $r6;
+        java.lang.Throwable r5, $r12;
+        java.util.concurrent.locks.ReentrantReadWriteLock $r8, $r10, $r13;
+        java.util.concurrent.locks.ReentrantReadWriteLock$WriteLock $r9, $r11, $r14;
+
+        r0 := @parameter0;
+
+        i0 := @parameter1;
+
+        r1 := @parameter2;
+
+        r2 := @parameter3;
+
+        r3 := @parameter4;
+
+        $r6 = new org.gjt.sp.jedit.BufferHistory$Entry;
+
+        $r7 = org.gjt.sp.jedit.BufferHistory.selectionToString(r1);
+
+        specialinvoke $r6.<init>(r0, i0, $r7, r2, r3);
+
+        r4 = $r6;
+
+        $r8 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r9 = $r8.writeLock();
+
+        $r9.lock();
+
+     label1:
+        org.gjt.sp.jedit.BufferHistory.removeEntry(r0);
+
+        org.gjt.sp.jedit.BufferHistory.addEntry(r4);
+
+     label2:
+        $r10 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r11 = $r10.writeLock();
+
+        $r11.unlock();
+
+        goto label5;
+
+     label3:
+        $r12 := @caughtexception;
+
+        r5 = $r12;
+
+     label4:
+        $r13 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r14 = $r13.writeLock();
+
+        $r14.unlock();
+
+        throw r5;
+
+     label5:
+        org.gjt.sp.jedit.BufferHistory.notifyChange();
+
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+
+    public static void clear()
+    {
+        java.lang.Throwable r0, $r6;
+        java.util.concurrent.locks.ReentrantReadWriteLock $r1, $r4, $r7;
+        java.util.concurrent.locks.ReentrantReadWriteLock$WriteLock $r2, $r5, $r8;
+        java.util.LinkedList $r3;
+
+        $r1 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r2 = $r1.writeLock();
+
+        $r2.lock();
+
+     label1:
+        $r3 = org.gjt.sp.jedit.BufferHistory.history;
+
+        $r3.clear();
+
+     label2:
+        $r4 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r5 = $r4.writeLock();
+
+        $r5.unlock();
+
+        goto label5;
+
+     label3:
+        $r6 := @caughtexception;
+
+        r0 = $r6;
+
+     label4:
+        $r7 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r8 = $r7.writeLock();
+
+        $r8.unlock();
+
+        throw r0;
+
+     label5:
+        org.gjt.sp.jedit.BufferHistory.notifyChange();
+
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+
+    public static java.util.List getHistory()
+    {
+        java.util.List r0;
+        java.lang.Throwable r1, $r8;
+        java.util.concurrent.locks.ReentrantReadWriteLock $r2, $r6, $r9;
+        java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock $r3, $r7, $r10;
+        java.util.LinkedList $r4;
+        java.lang.Object $r5;
+
+        $r2 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r3 = $r2.readLock();
+
+        $r3.lock();
+
+     label1:
+        $r4 = org.gjt.sp.jedit.BufferHistory.history;
+
+        $r5 = $r4.clone();
+
+        r0 = (java.util.List) $r5;
+
+     label2:
+        $r6 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r7 = $r6.readLock();
+
+        $r7.unlock();
+
+        return r0;
+
+     label3:
+        $r8 := @caughtexception;
+
+        r1 = $r8;
+
+     label4:
+        $r9 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r10 = $r9.readLock();
+
+        $r10.unlock();
+
+        throw r1;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+
+    public static void load()
+    {
+        org.gjt.sp.jedit.BufferHistory$RecentHandler r0, $r9;
+        java.io.IOException r1, $r13;
+        org.gjt.sp.jedit.SettingsXML $r2, $r3, $r6, $r10;
+        boolean $z0;
+        java.lang.StringBuilder $r4, $r5, $r7;
+        java.lang.String $r8;
+        java.util.LinkedList $r11, $r12;
+
+        $r2 = org.gjt.sp.jedit.BufferHistory.recentXML;
+
+        if $r2 != null goto label1;
+
+        return;
+
+     label1:
+        $r3 = org.gjt.sp.jedit.BufferHistory.recentXML;
+
+        $z0 = $r3.fileExists();
+
+        if $z0 != 0 goto label2;
+
+        return;
+
+     label2:
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("Loading ");
+
+        $r6 = org.gjt.sp.jedit.BufferHistory.recentXML;
+
+        $r7 = $r5.append($r6);
+
+        $r8 = $r7.toString();
+
+        org.gjt.sp.util.Log.log(3, class "org/gjt/sp/jedit/BufferHistory", $r8);
+
+        $r9 = new org.gjt.sp.jedit.BufferHistory$RecentHandler;
+
+        specialinvoke $r9.<init>(null);
+
+        r0 = $r9;
+
+     label3:
+        $r10 = org.gjt.sp.jedit.BufferHistory.recentXML;
+
+        $r10.load(r0);
+
+     label4:
+        goto label6;
+
+     label5:
+        $r13 := @caughtexception;
+
+        r1 = $r13;
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/BufferHistory", r1);
+
+     label6:
+        $r11 = r0.result;
+
+        org.gjt.sp.jedit.BufferHistory.trimToLimit($r11);
+
+        $r12 = r0.result;
+
+        org.gjt.sp.jedit.BufferHistory.history = $r12;
+
+        return;
+
+        catch java.io.IOException from label3 to label4 with label5;
+    }
+
+    public static void save()
+    {
+        java.lang.String r0, $r10, $r13, $r14, $r15, $r16, $r17, $r18, $r19, $r20, $r21, $r22, $r28;
+        java.util.Iterator r1;
+        org.gjt.sp.jedit.BufferHistory$Entry r2;
+        java.lang.Throwable r3, $r29;
+        org.gjt.sp.jedit.SettingsXML $r4, $r5, $r8, $r11, $r24;
+        boolean $z0, $z1;
+        java.lang.StringBuilder $r6, $r7, $r9, $r23, $r25, $r26, $r27;
+        java.lang.Object $r12;
+        int $i0, $i1;
+        java.lang.Exception $r30, r33;
+        org.gjt.sp.jedit.SettingsXML$Saver r31, r31_1;
+        java.util.List r32;
+
+        $r4 = org.gjt.sp.jedit.BufferHistory.recentXML;
+
+        if $r4 != null goto label01;
+
+        return;
+
+     label01:
+        $r5 = org.gjt.sp.jedit.BufferHistory.recentXML;
+
+        $z0 = $r5.hasChangedOnDisk();
+
+        if $z0 == 0 goto label02;
+
+        $r23 = new java.lang.StringBuilder;
+
+        specialinvoke $r23.<init>();
+
+        $r24 = org.gjt.sp.jedit.BufferHistory.recentXML;
+
+        $r25 = $r23.append($r24);
+
+        $r26 = $r25.append(" changed on disk; will not save recent");
+
+        $r27 = $r26.append(" files");
+
+        $r28 = $r27.toString();
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/BufferHistory", $r28);
+
+        return;
+
+     label02:
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("Saving ");
+
+        $r8 = org.gjt.sp.jedit.BufferHistory.recentXML;
+
+        $r9 = $r7.append($r8);
+
+        $r10 = $r9.toString();
+
+        org.gjt.sp.util.Log.log(3, class "org/gjt/sp/jedit/BufferHistory", $r10);
+
+        r0 = java.lang.System.getProperty("line.separator");
+
+(0)     r31 = null;
+
+     label03:
+(1)     $r11 = org.gjt.sp.jedit.BufferHistory.recentXML;
+
+(2)     r31_1 = $r11.openSaver();
+
+        r31_1.writeXMLDeclaration();
+
+        r31_1.write("<!DOCTYPE RECENT SYSTEM \"recent.dtd\">");
+
+        r31_1.write(r0);
+
+        r31_1.write("<RECENT>");
+
+        r31_1.write(r0);
+
+        r32 = org.gjt.sp.jedit.BufferHistory.getHistory();
+
+(3)     r1 = r32.iterator();
+
+     label04:
+        r31 = Phi(r31_1 #3, r31 #5);
+
+(4)     $z1 = r1.hasNext();
+
+        if $z1 == 0 goto label08;
+
+        $r12 = r1.next();
+
+        r2 = (org.gjt.sp.jedit.BufferHistory$Entry) $r12;
+
+        r31.write("<ENTRY>");
+
+        r31.write(r0);
+
+        r31.write("<PATH>");
+
+        $r13 = r2.path;
+
+        $r14 = org.gjt.sp.util.XMLUtilities.charsToEntities($r13, 0);
+
+        r31.write($r14);
+
+        r31.write("</PATH>");
+
+        r31.write(r0);
+
+        r31.write("<CARET>");
+
+        $i0 = r2.caret;
+
+        $r15 = java.lang.String.valueOf($i0);
+
+        r31.write($r15);
+
+        r31.write("</CARET>");
+
+        r31.write(r0);
+
+        $r16 = r2.selection;
+
+        if $r16 == null goto label05;
+
+        $r21 = r2.selection;
+
+        $i1 = $r21.length();
+
+        if $i1 <= 0 goto label05;
+
+        r31.write("<SELECTION>");
+
+        $r22 = r2.selection;
+
+        r31.write($r22);
+
+        r31.write("</SELECTION>");
+
+        r31.write(r0);
+
+     label05:
+        $r17 = r2.encoding;
+
+        if $r17 == null goto label06;
+
+        r31.write("<ENCODING>");
+
+        $r20 = r2.encoding;
+
+        r31.write($r20);
+
+        r31.write("</ENCODING>");
+
+        r31.write(r0);
+
+     label06:
+        $r18 = r2.mode;
+
+        if $r18 == null goto label07;
+
+        r31.write("<MODE>");
+
+        $r19 = r2.mode;
+
+        r31.write($r19);
+
+        r31.write("</MODE>");
+
+        r31.write(r0);
+
+     label07:
+        r31.write("</ENTRY>");
+
+        r31.write(r0);
+
+(5)     goto label04;
+
+     label08:
+        r31.write("</RECENT>");
+
+        r31.write(r0);
+
+        r31.finish();
+
+     label09:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r31);
+
+(6)     goto label14;
+
+     label10:
+        $r30 := @caughtexception;
+
+(7)     r31 = Phi(r31 #1, r31_1 #2, r31 #4);
+
+        r33 = $r30;
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/BufferHistory", r33);
+
+     label11:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r31);
+
+(8)     goto label14;
+
+     label12:
+        $r29 := @caughtexception;
+
+(9)     r31 = Phi(r31_1 #2, r31 #4, r31 #0, r31 #7, r31 #9);
+
+        r3 = $r29;
+
+     label13:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r31);
+
+        throw r3;
+
+     label14:
+        r31 = Phi(r31 #6, r31 #8);
+
+        return;
+
+        catch java.lang.Exception from label03 to label09 with label10;
+        catch java.lang.Throwable from label03 to label09 with label12;
+        catch java.lang.Throwable from label10 to label11 with label12;
+        catch java.lang.Throwable from label12 to label13 with label12;
+    }
+
+    private static void addEntry(org.gjt.sp.jedit.BufferHistory$Entry)
+    {
+        org.gjt.sp.jedit.BufferHistory$Entry r0;
+        java.lang.Throwable r1, $r8;
+        java.util.concurrent.locks.ReentrantReadWriteLock $r2, $r6, $r9;
+        java.util.concurrent.locks.ReentrantReadWriteLock$WriteLock $r3, $r7, $r10;
+        java.util.LinkedList $r4, $r5;
+
+        r0 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r3 = $r2.writeLock();
+
+        $r3.lock();
+
+     label1:
+        $r4 = org.gjt.sp.jedit.BufferHistory.history;
+
+        $r4.addFirst(r0);
+
+        $r5 = org.gjt.sp.jedit.BufferHistory.history;
+
+        org.gjt.sp.jedit.BufferHistory.trimToLimit($r5);
+
+     label2:
+        $r6 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r7 = $r6.writeLock();
+
+        $r7.unlock();
+
+        goto label5;
+
+     label3:
+        $r8 := @caughtexception;
+
+        r1 = $r8;
+
+     label4:
+        $r9 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r10 = $r9.writeLock();
+
+        $r10.unlock();
+
+        throw r1;
+
+     label5:
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+
+    private static void removeEntry(java.lang.String)
+    {
+        java.lang.String r0, $r10;
+        java.util.Iterator r1;
+        org.gjt.sp.jedit.BufferHistory$Entry r2;
+        java.lang.Throwable r3, $r13;
+        java.util.concurrent.locks.ReentrantReadWriteLock $r4, $r7, $r11, $r14;
+        java.util.concurrent.locks.ReentrantReadWriteLock$WriteLock $r5, $r8, $r12, $r15;
+        java.util.LinkedList $r6;
+        boolean $z0, $z1;
+        java.lang.Object $r9;
+
+        r0 := @parameter0;
+
+        $r4 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r5 = $r4.writeLock();
+
+        $r5.lock();
+
+     label1:
+        $r6 = org.gjt.sp.jedit.BufferHistory.history;
+
+        r1 = $r6.iterator();
+
+     label2:
+        $z0 = r1.hasNext();
+
+        if $z0 == 0 goto label5;
+
+        $r9 = r1.next();
+
+        r2 = (org.gjt.sp.jedit.BufferHistory$Entry) $r9;
+
+        $r10 = r2.path;
+
+        $z1 = org.gjt.sp.jedit.MiscUtilities.pathsEqual(r0, $r10);
+
+        if $z1 == 0 goto label4;
+
+        r1.remove();
+
+     label3:
+        $r11 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r12 = $r11.writeLock();
+
+        $r12.unlock();
+
+        return;
+
+     label4:
+        goto label2;
+
+     label5:
+        $r7 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r8 = $r7.writeLock();
+
+        $r8.unlock();
+
+        goto label8;
+
+     label6:
+        $r13 := @caughtexception;
+
+        r3 = $r13;
+
+     label7:
+        $r14 = org.gjt.sp.jedit.BufferHistory.historyLock;
+
+        $r15 = $r14.writeLock();
+
+        $r15.unlock();
+
+        throw r3;
+
+     label8:
+        return;
+
+        catch java.lang.Throwable from label1 to label3 with label6;
+        catch java.lang.Throwable from label4 to label5 with label6;
+        catch java.lang.Throwable from label6 to label7 with label6;
+    }
+
+    private static java.lang.String selectionToString(org.gjt.sp.jedit.textarea.Selection[])
+    {
+        org.gjt.sp.jedit.textarea.Selection[] r0;
+        java.lang.StringBuilder r1, $r3;
+        org.gjt.sp.jedit.textarea.Selection r2;
+        int $i0, $i1, $i2, i3;
+        java.lang.String $r4;
+        boolean $z0;
+
+        r0 := @parameter0;
+
+        if r0 != null goto label1;
+
+        return null;
+
+     label1:
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        r1 = $r3;
+
+(0)     i3 = 0;
+
+     label2:
+        i3 = Phi(i3 #0, i3 #1);
+
+        $i0 = lengthof r0;
+
+        if i3 >= $i0 goto label6;
+
+        if i3 == 0 goto label3;
+
+        r1.append(32);
+
+     label3:
+        r2 = r0[i3];
+
+        $z0 = r2 instanceof org.gjt.sp.jedit.textarea.Selection$Range;
+
+        if $z0 == 0 goto label4;
+
+        r1.append("range ");
+
+        goto label5;
+
+     label4:
+        r1.append("rect ");
+
+     label5:
+        $i1 = r2.getStart();
+
+        r1.append($i1);
+
+        r1.append(32);
+
+        $i2 = r2.getEnd();
+
+        r1.append($i2);
+
+        i3 = i3 + 1;
+
+(1)     goto label2;
+
+     label6:
+        $r4 = r1.toString();
+
+        return $r4;
+    }
+
+    private static org.gjt.sp.jedit.textarea.Selection[] stringToSelection(java.lang.String)
+    {
+        java.lang.String r0, $r6, $r7, $r8, r11;
+        java.util.ArrayList r1, $r3;
+        java.util.StringTokenizer r2, $r4;
+        int i0, i1, $i2;
+        boolean $z0, $z1;
+        java.lang.Object[] $r5;
+        org.gjt.sp.jedit.textarea.Selection$Rect $r9;
+        org.gjt.sp.jedit.textarea.Selection$Range $r10;
+        org.gjt.sp.jedit.textarea.Selection r12;
+        org.gjt.sp.jedit.textarea.Selection[] r13, r14;
+
+        r0 := @parameter0;
+
+        if r0 != null goto label1;
+
+        return null;
+
+     label1:
+        $r3 = new java.util.ArrayList;
+
+        specialinvoke $r3.<init>();
+
+        r1 = $r3;
+
+        $r4 = new java.util.StringTokenizer;
+
+        specialinvoke $r4.<init>(r0);
+
+(0)     r2 = $r4;
+
+     label2:
+        r12 = Phi(r12 #0, r12 #1, r12 #4);
+
+        $z0 = r2.hasMoreTokens();
+
+        if $z0 == 0 goto label6;
+
+        r11 = r2.nextToken();
+
+        $r6 = r2.nextToken();
+
+        i0 = java.lang.Integer.parseInt($r6);
+
+        $r7 = r2.nextToken();
+
+        i1 = java.lang.Integer.parseInt($r7);
+
+        if i1 >= i0 goto label3;
+
+(1)     goto label2;
+
+     label3:
+        $r8 = "range";
+
+        $z1 = $r8.equals(r11);
+
+        if $z1 == 0 goto label4;
+
+        $r10 = new org.gjt.sp.jedit.textarea.Selection$Range;
+
+        specialinvoke $r10.<init>(i0, i1);
+
+        r12 = $r10;
+
+(2)     goto label5;
+
+     label4:
+        $r9 = new org.gjt.sp.jedit.textarea.Selection$Rect;
+
+        specialinvoke $r9.<init>(i0, i1);
+
+(3)     r12 = $r9;
+
+     label5:
+        r12 = Phi(r12 #2, r12 #3);
+
+        r1.add(r12);
+
+(4)     goto label2;
+
+     label6:
+        $i2 = r1.size();
+
+        r13 = newarray (org.gjt.sp.jedit.textarea.Selection)[$i2];
+
+        $r5 = r1.toArray(r13);
+
+        r14 = (org.gjt.sp.jedit.textarea.Selection[]) $r5;
+
+        return r14;
+    }
+
+    private static void trimToLimit(java.util.Deque)
+    {
+        java.util.Deque r0;
+        int i0, $i1;
+
+        r0 := @parameter0;
+
+        i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("recentFiles", 40);
+
+     label1:
+        $i1 = r0.size();
+
+        if $i1 <= i0 goto label2;
+
+        r0.removeLast();
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    private static void notifyChange()
+    {
+        org.gjt.sp.jedit.msg.DynamicMenuChanged $r0;
+
+        $r0 = new org.gjt.sp.jedit.msg.DynamicMenuChanged;
+
+        specialinvoke $r0.<init>("recent-files");
+
+        org.gjt.sp.jedit.EditBus.send($r0);
+
+        return;
+    }
+
+    static org.gjt.sp.jedit.textarea.Selection[] access$000(java.lang.String)
+    {
+        java.lang.String r0;
+        org.gjt.sp.jedit.textarea.Selection[] $r1;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.BufferHistory.stringToSelection(r0);
+
+        return $r1;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String r0;
+        java.util.LinkedList $r1;
+        java.util.concurrent.locks.ReentrantReadWriteLock $r2;
+        org.gjt.sp.jedit.SettingsXML $r3;
+
+        $r1 = new java.util.LinkedList;
+
+        specialinvoke $r1.<init>();
+
+        org.gjt.sp.jedit.BufferHistory.history = $r1;
+
+        $r2 = new java.util.concurrent.locks.ReentrantReadWriteLock;
+
+        specialinvoke $r2.<init>();
+
+        org.gjt.sp.jedit.BufferHistory.historyLock = $r2;
+
+        r0 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        if r0 == null goto label1;
+
+        $r3 = new org.gjt.sp.jedit.SettingsXML;
+
+        specialinvoke $r3.<init>(r0, "recent");
+
+        org.gjt.sp.jedit.BufferHistory.recentXML = $r3;
+
+     label1:
+        return;
+    }
+}

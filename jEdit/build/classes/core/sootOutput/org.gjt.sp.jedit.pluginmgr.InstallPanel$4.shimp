@@ -1,0 +1,122 @@
+class org.gjt.sp.jedit.pluginmgr.InstallPanel$4 extends java.awt.event.KeyAdapter
+{
+    final org.gjt.sp.jedit.pluginmgr.InstallPanel this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.InstallPanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$4 r0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void keyPressed(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$4 r0;
+        java.awt.event.KeyEvent r1;
+        int i0, i1, $i3, $i4, $i5;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r2, $r4, $r7, $r9;
+        javax.swing.JTable $r3, $r5;
+        javax.swing.table.TableModel $r6;
+        char $c2;
+        javax.swing.JTextField $r8, $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300($r2);
+
+        i0 = $r3.getSelectedRow();
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$300($r4);
+
+        $r6 = $r5.getModel();
+
+        i1 = $r6.getRowCount();
+
+        $c2 = r1.getKeyChar();
+
+        if $c2 == 47 goto label2;
+
+        $i3 = r1.getKeyCode();
+
+        if $i3 != 40 goto label1;
+
+        $i5 = i1 - 1;
+
+        if i0 == $i5 goto label2;
+
+     label1:
+        $i4 = r1.getKeyCode();
+
+        if $i4 != 38 goto label3;
+
+        if i0 != 0 goto label3;
+
+     label2:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$400($r7);
+
+        $r8.requestFocus();
+
+        $r9 = r0.this$0;
+
+        $r10 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$400($r9);
+
+        $r10.selectAll();
+
+     label3:
+        return;
+    }
+
+    public void keyTyped(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.InstallPanel$4 r0;
+        java.awt.event.KeyEvent r1;
+        char c0;
+        boolean $z0;
+        org.gjt.sp.jedit.pluginmgr.InstallPanel $r2, $r4;
+        javax.swing.JTextField $r3, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        c0 = r1.getKeyChar();
+
+        if c0 == 65535 goto label1;
+
+        $z0 = java.lang.Character.isAlphabetic(c0);
+
+        if $z0 == 0 goto label1;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$400($r2);
+
+        $r3.dispatchEvent(r1);
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.pluginmgr.InstallPanel.access$400($r4);
+
+        $r5.requestFocus();
+
+     label1:
+        return;
+    }
+}

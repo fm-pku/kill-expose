@@ -1,0 +1,150 @@
+public class org.gjt.sp.jedit.msg.BufferUpdate extends org.gjt.sp.jedit.EBMessage
+{
+    public static final java.lang.Object CREATED;
+    public static final java.lang.Object CLOSING;
+    public static final java.lang.Object LOAD_STARTED;
+    public static final java.lang.Object LOADED;
+    public static final java.lang.Object CLOSED;
+    public static final java.lang.Object DIRTY_CHANGED;
+    public static final java.lang.Object MARKERS_CHANGED;
+    public static final java.lang.Object SAVING;
+    public static final java.lang.Object SAVED;
+    public static final java.lang.Object PROPERTIES_CHANGED;
+    private java.lang.Object what;
+    private org.gjt.sp.jedit.View view;
+
+    public void <init>(org.gjt.sp.jedit.Buffer, org.gjt.sp.jedit.View, java.lang.Object)
+    {
+        org.gjt.sp.jedit.msg.BufferUpdate r0;
+        org.gjt.sp.jedit.Buffer r1;
+        org.gjt.sp.jedit.View r2;
+        java.lang.Object r3;
+        java.lang.NullPointerException $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        specialinvoke r0.<init>(r1);
+
+        r0.view = r2;
+
+        if r3 != null goto label1;
+
+        $r4 = new java.lang.NullPointerException;
+
+        specialinvoke $r4.<init>("What must be non-null");
+
+        throw $r4;
+
+     label1:
+        r0.what = r3;
+
+        return;
+    }
+
+    public java.lang.Object getWhat()
+    {
+        org.gjt.sp.jedit.msg.BufferUpdate r0;
+        java.lang.Object $r1;
+
+        r0 := @this;
+
+        $r1 = r0.what;
+
+        return $r1;
+    }
+
+    public org.gjt.sp.jedit.Buffer getBuffer()
+    {
+        org.gjt.sp.jedit.msg.BufferUpdate r0;
+        java.lang.Object $r1;
+        org.gjt.sp.jedit.Buffer $r2;
+
+        r0 := @this;
+
+        $r1 = r0.getSource();
+
+        $r2 = (org.gjt.sp.jedit.Buffer) $r1;
+
+        return $r2;
+    }
+
+    public org.gjt.sp.jedit.View getView()
+    {
+        org.gjt.sp.jedit.msg.BufferUpdate r0;
+        org.gjt.sp.jedit.View $r1;
+
+        r0 := @this;
+
+        $r1 = r0.view;
+
+        return $r1;
+    }
+
+    public java.lang.String paramString()
+    {
+        org.gjt.sp.jedit.msg.BufferUpdate r0;
+        java.lang.StringBuilder $r1, $r2, $r4, $r5, $r7, $r8, $r10;
+        java.lang.Object $r3;
+        org.gjt.sp.jedit.View $r6;
+        java.lang.String $r9, $r11;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("what=");
+
+        $r3 = r0.what;
+
+        $r4 = $r2.append($r3);
+
+        $r5 = $r4.append(",view=");
+
+        $r6 = r0.view;
+
+        $r7 = $r5.append($r6);
+
+        $r8 = $r7.append(",");
+
+        $r9 = specialinvoke r0.paramString();
+
+        $r10 = $r8.append($r9);
+
+        $r11 = $r10.toString();
+
+        return $r11;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.msg.BufferUpdate.CREATED = "CREATED";
+
+        org.gjt.sp.jedit.msg.BufferUpdate.CLOSING = "CLOSING";
+
+        org.gjt.sp.jedit.msg.BufferUpdate.LOAD_STARTED = "LOAD_STARTED";
+
+        org.gjt.sp.jedit.msg.BufferUpdate.LOADED = "LOADED";
+
+        org.gjt.sp.jedit.msg.BufferUpdate.CLOSED = "CLOSED";
+
+        org.gjt.sp.jedit.msg.BufferUpdate.DIRTY_CHANGED = "DIRTY_CHANGED";
+
+        org.gjt.sp.jedit.msg.BufferUpdate.MARKERS_CHANGED = "MARKERS_CHANGED";
+
+        org.gjt.sp.jedit.msg.BufferUpdate.SAVING = "SAVING";
+
+        org.gjt.sp.jedit.msg.BufferUpdate.SAVED = "SAVED";
+
+        org.gjt.sp.jedit.msg.BufferUpdate.PROPERTIES_CHANGED = "PROPERTIES_CHANGED";
+
+        return;
+    }
+}

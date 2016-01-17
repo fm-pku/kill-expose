@@ -1,0 +1,285 @@
+public class org.gjt.sp.jedit.menu.RecentFilesProvider extends java.lang.Object implements org.gjt.sp.jedit.menu.DynamicMenuProvider
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.menu.RecentFilesProvider r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public boolean updateEveryTime()
+    {
+        org.gjt.sp.jedit.menu.RecentFilesProvider r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+
+    public void update(javax.swing.JMenu)
+    {
+        org.gjt.sp.jedit.menu.RecentFilesProvider r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.menu.RecentFilesProvider$1 r2, $r8;
+        org.gjt.sp.jedit.menu.RecentFilesProvider$2 r3, $r9;
+        java.util.List r4;
+        javax.swing.JTextField r5, $r11;
+        boolean z0, $z1, $z2, $z3, $z5;
+        int i0, $i1, $i2, $i3, i4;
+        java.util.Iterator r6;
+        javax.swing.JMenu r7, $r29, $r38, r45, r50;
+        java.util.ArrayList $r10, r47;
+        java.lang.StringBuilder $r12, $r14, $r15, $r17;
+        java.lang.String $r13, $r16, $r18, $r22, $r30, $r35, $r39, $r43, r48;
+        org.gjt.sp.jedit.menu.RecentFilesProvider$3 $r20;
+        javax.swing.JMenuItem $r21, $r27, $r34, $r42, r46, r49, r51;
+        org.gjt.sp.jedit.menu.RecentFilesProvider$4 $r23;
+        org.gjt.sp.jedit.menu.MenuItemTextComparator $r25;
+        java.lang.Object $r26, $r32;
+        org.gjt.sp.jedit.BufferHistory$Entry $r33;
+        javax.swing.Icon $r36;
+        org.gjt.sp.jedit.Buffer $r41;
+
+        r0 := @this;
+
+        r45 := @parameter0;
+
+        r1 = org.gjt.sp.jedit.GUIUtilities.getView(r45);
+
+        $r8 = new org.gjt.sp.jedit.menu.RecentFilesProvider$1;
+
+        specialinvoke $r8.<init>(r0, r1);
+
+        r2 = $r8;
+
+        $r9 = new org.gjt.sp.jedit.menu.RecentFilesProvider$2;
+
+        specialinvoke $r9.<init>(r0, r1);
+
+        r3 = $r9;
+
+        r4 = org.gjt.sp.jedit.BufferHistory.getHistory();
+
+        $z1 = r4.isEmpty();
+
+        if $z1 == 0 goto label1;
+
+        $r42 = new javax.swing.JMenuItem;
+
+        $r43 = org.gjt.sp.jedit.jEdit.getProperty("no-recent-files.label");
+
+        specialinvoke $r42.<init>($r43);
+
+        r46 = $r42;
+
+        r46.setEnabled(0);
+
+        r45.add(r46);
+
+        return;
+
+     label1:
+        $r10 = new java.util.ArrayList;
+
+        specialinvoke $r10.<init>();
+
+        r47 = $r10;
+
+        $r11 = new javax.swing.JTextField;
+
+        specialinvoke $r11.<init>();
+
+        r5 = $r11;
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = org.gjt.sp.jedit.jEdit.getProperty("recent-files.textfield.tooltip");
+
+        $r14 = $r12.append($r13);
+
+        $r15 = $r14.append(": ");
+
+        $r16 = org.gjt.sp.jedit.jEdit.getProperty("glob.tooltip");
+
+        $r17 = $r15.append($r16);
+
+        $r18 = $r17.toString();
+
+        r5.setToolTipText($r18);
+
+        r45.add(r5);
+
+        $r20 = new org.gjt.sp.jedit.menu.RecentFilesProvider$3;
+
+        specialinvoke $r20.<init>(r0, r5, r47);
+
+        r5.addKeyListener($r20);
+
+        z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("sortRecent");
+
+        i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("menu.spillover", 20);
+
+(0)     r6 = r4.iterator();
+
+     label2:
+        r45 = Phi(r45 #0, r45 #1, r45 #7);
+
+        $z2 = r6.hasNext();
+
+        if $z2 == 0 goto label6;
+
+        $r32 = r6.next();
+
+        $r33 = (org.gjt.sp.jedit.BufferHistory$Entry) $r32;
+
+        r48 = $r33.path;
+
+        $z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty("hideOpen");
+
+        if $z3 == 0 goto label3;
+
+        $r41 = org.gjt.sp.jedit.jEdit.getBuffer(r48);
+
+        if $r41 == null goto label3;
+
+(1)     goto label2;
+
+     label3:
+        $r34 = new javax.swing.JMenuItem;
+
+        $r35 = org.gjt.sp.jedit.MiscUtilities.getFileName(r48);
+
+        specialinvoke $r34.<init>($r35);
+
+        r49 = $r34;
+
+        r49.setToolTipText(r48);
+
+        r49.setActionCommand(r48);
+
+        r49.addActionListener(r2);
+
+        r49.addChangeListener(r3);
+
+        $r36 = org.gjt.sp.jedit.browser.FileCellRenderer.fileIcon;
+
+        r49.setIcon($r36);
+
+        r47.add(r49);
+
+(2)     if z0 != 0 goto label5;
+
+        $i3 = r45.getMenuComponentCount();
+
+(3)     if $i3 < i0 goto label4;
+
+        $z5 = r6.hasNext();
+
+(4)     if $z5 == 0 goto label4;
+
+        $r38 = new javax.swing.JMenu;
+
+        $r39 = org.gjt.sp.jedit.jEdit.getProperty("common.more");
+
+        specialinvoke $r38.<init>($r39);
+
+        r7 = $r38;
+
+        r45.add(r7);
+
+(5)     r45 = r7;
+
+     label4:
+        r45 = Phi(r45 #3, r45 #4, r45 #5);
+
+(6)     r45.add(r49);
+
+     label5:
+        r45 = Phi(r45 #2, r45 #6);
+
+(7)     goto label2;
+
+     label6:
+(8)     if z0 == 0 goto label9;
+
+        $r25 = new org.gjt.sp.jedit.menu.MenuItemTextComparator;
+
+        specialinvoke $r25.<init>();
+
+        java.util.Collections.sort(r47, $r25);
+
+(9)     i4 = 0;
+
+     label7:
+        r45 = Phi(r45 #9, r45 #14);
+
+        i4 = Phi(i4 #9, i4 #14);
+
+        $i1 = r47.size();
+
+(10)    if i4 >= $i1 goto label9;
+
+        $i2 = r45.getMenuComponentCount();
+
+(11)    if $i2 < i0 goto label8;
+
+(12)    if i4 == 0 goto label8;
+
+        $r29 = new javax.swing.JMenu;
+
+        $r30 = org.gjt.sp.jedit.jEdit.getProperty("common.more");
+
+        specialinvoke $r29.<init>($r30);
+
+        r50 = $r29;
+
+        r45.add(r50);
+
+(13)    r45 = r50;
+
+     label8:
+        r45 = Phi(r45 #11, r45 #12, r45 #13);
+
+        $r26 = r47.get(i4);
+
+        $r27 = (javax.swing.JMenuItem) $r26;
+
+        r45.add($r27);
+
+        i4 = i4 + 1;
+
+(14)    goto label7;
+
+     label9:
+        r45 = Phi(r45 #8, r45 #10);
+
+        i4 = Phi(i4 #8, i4 #10);
+
+        $r21 = new javax.swing.JMenuItem;
+
+        $r22 = org.gjt.sp.jedit.jEdit.getProperty("clear-recent-files.label");
+
+        specialinvoke $r21.<init>($r22);
+
+        r51 = $r21;
+
+        $r23 = new org.gjt.sp.jedit.menu.RecentFilesProvider$4;
+
+        specialinvoke $r23.<init>(r0);
+
+        r51.addActionListener($r23);
+
+        r45.addSeparator();
+
+        r45.add(r51);
+
+        return;
+    }
+}

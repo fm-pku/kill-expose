@@ -1,0 +1,656 @@
+public class org.gjt.sp.jedit.options.GeneralOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    public static final int checkFileStatus_none;
+    public static final int checkFileStatus_focus;
+    public static final int checkFileStatus_focusBuffer;
+    public static final int checkFileStatus_all;
+    private javax.swing.JComboBox checkModStatus;
+    private javax.swing.JComboBox checkModStatusUpon;
+    private javax.swing.JSpinner recentFiles;
+    private javax.swing.JSpinner hypersearchResultsWarning;
+    private javax.swing.JCheckBox saveCaret;
+    private javax.swing.JCheckBox sortRecent;
+    private javax.swing.JCheckBox hideOpen;
+    private javax.swing.JCheckBox persistentMarkers;
+    private javax.swing.JCheckBox restore;
+    private javax.swing.JCheckBox restoreRemote;
+    private javax.swing.JCheckBox restoreCLI;
+    private javax.swing.JCheckBox restoreSplits;
+    private javax.swing.JCheckBox useDefaultLocale;
+    private javax.swing.JComboBox lang;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.GeneralOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("general");
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.GeneralOptionPane r0;
+        java.lang.String[] r1, r2, $r3, $r12, r88;
+        java.lang.String $r4, $r5, $r6, $r7, $r10, $r13, $r14, $r15, $r16, $r19, $r25, $r29, $r33, $r37, $r41, $r47, $r53, $r59, $r66, $r77, r82, r84, r86, r87;
+        javax.swing.JComboBox $r8, $r9, $r11, $r17, $r18, $r20, $r70, $r72, $r73, $r75, $r78, $r79, $r80, $r81;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z10, $z11, $z12, $z13, $z14, $z15, $z15_1, $z15_2;
+        int $i0, i1, i2;
+        javax.swing.SpinnerNumberModel $r21, $r62, r83, r85;
+        javax.swing.JSpinner $r22, $r23, $r63, $r64;
+        javax.swing.JCheckBox $r24, $r26, $r27, $r28, $r30, $r31, $r32, $r34, $r35, $r36, $r38, $r39, $r40, $r42, $r44, $r45, $r46, $r48, $r49, $r50, $r51, $r52, $r54, $r55, $r56, $r57, $r58, $r60, $r61, $r65, $r67, $r69, $r71, $r76;
+        org.gjt.sp.jedit.options.GeneralOptionPane$1 $r43;
+        org.gjt.sp.jedit.options.GeneralOptionPane$2 $r68;
+        org.gjt.sp.jedit.options.GeneralOptionPane$LangCellRenderer $r74;
+
+        r0 := @this;
+
+        $r3 = newarray (java.lang.String)[4];
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("options.general.checkModStatus.nothing");
+
+        $r3[0] = $r4;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("options.general.checkModStatus.prompt");
+
+        $r3[1] = $r5;
+
+        $r6 = org.gjt.sp.jedit.jEdit.getProperty("options.general.checkModStatus.reload");
+
+        $r3[2] = $r6;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getProperty("options.general.checkModStatus.silentReload");
+
+        $r3[3] = $r7;
+
+        r1 = $r3;
+
+        $r8 = new javax.swing.JComboBox;
+
+        specialinvoke $r8.<init>(r1);
+
+        r0.checkModStatus = $r8;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("autoReload");
+
+        if $z0 == 0 goto label2;
+
+        $z14 = org.gjt.sp.jedit.jEdit.getBooleanProperty("autoReloadDialog");
+
+        if $z14 == 0 goto label1;
+
+        $r81 = r0.checkModStatus;
+
+        $r81.setSelectedIndex(2);
+
+        goto label4;
+
+     label1:
+        $r80 = r0.checkModStatus;
+
+        $r80.setSelectedIndex(3);
+
+        goto label4;
+
+     label2:
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("autoReloadDialog");
+
+        if $z1 == 0 goto label3;
+
+        $r79 = r0.checkModStatus;
+
+        $r79.setSelectedIndex(1);
+
+        goto label4;
+
+     label3:
+        $r9 = r0.checkModStatus;
+
+        $r9.setSelectedIndex(0);
+
+     label4:
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty("options.general.checkModStatus");
+
+        $r11 = r0.checkModStatus;
+
+        r0.addComponent($r10, $r11);
+
+        $r12 = newarray (java.lang.String)[4];
+
+        $r13 = org.gjt.sp.jedit.jEdit.getProperty("options.general.checkModStatusUpon.none");
+
+        $r12[0] = $r13;
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("options.general.checkModStatusUpon.focus");
+
+        $r12[1] = $r14;
+
+        $r15 = org.gjt.sp.jedit.jEdit.getProperty("options.general.checkModStatusUpon.visitBuffer");
+
+        $r12[2] = $r15;
+
+        $r16 = org.gjt.sp.jedit.jEdit.getProperty("options.general.checkModStatusUpon.all");
+
+        $r12[3] = $r16;
+
+        r2 = $r12;
+
+        $r17 = new javax.swing.JComboBox;
+
+        specialinvoke $r17.<init>(r2);
+
+        r0.checkModStatusUpon = $r17;
+
+        $r18 = r0.checkModStatusUpon;
+
+        $i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("checkFileStatus");
+
+        $r18.setSelectedIndex($i0);
+
+        $r19 = org.gjt.sp.jedit.jEdit.getProperty("options.general.checkModStatusUpon");
+
+        $r20 = r0.checkModStatusUpon;
+
+        r0.addComponent($r19, $r20);
+
+        r82 = org.gjt.sp.jedit.jEdit.getProperty("options.general.recentFiles");
+
+        i1 = org.gjt.sp.jedit.jEdit.getIntegerProperty("recentFiles");
+
+        $r21 = new javax.swing.SpinnerNumberModel;
+
+        specialinvoke $r21.<init>(i1, 0, 2147483647, 1);
+
+        r83 = $r21;
+
+        $r22 = new javax.swing.JSpinner;
+
+        specialinvoke $r22.<init>(r83);
+
+        r0.recentFiles = $r22;
+
+        $r23 = r0.recentFiles;
+
+        r0.addComponent(r82, $r23);
+
+        $r24 = new javax.swing.JCheckBox;
+
+        $r25 = org.gjt.sp.jedit.jEdit.getProperty("options.general.sortRecent");
+
+        specialinvoke $r24.<init>($r25);
+
+        r0.sortRecent = $r24;
+
+        $r26 = r0.sortRecent;
+
+        $z2 = org.gjt.sp.jedit.jEdit.getBooleanProperty("sortRecent");
+
+        $r26.setSelected($z2);
+
+        $r27 = r0.sortRecent;
+
+        r0.addComponent($r27);
+
+        $r28 = new javax.swing.JCheckBox;
+
+        $r29 = org.gjt.sp.jedit.jEdit.getProperty("options.general.hideOpen");
+
+        specialinvoke $r28.<init>($r29);
+
+        r0.hideOpen = $r28;
+
+        $r30 = r0.hideOpen;
+
+        $z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty("hideOpen", 1);
+
+        $r30.setSelected($z3);
+
+        $r31 = r0.hideOpen;
+
+        r0.addComponent($r31);
+
+        $r32 = new javax.swing.JCheckBox;
+
+        $r33 = org.gjt.sp.jedit.jEdit.getProperty("options.general.saveCaret");
+
+        specialinvoke $r32.<init>($r33);
+
+        r0.saveCaret = $r32;
+
+        $r34 = r0.saveCaret;
+
+        $z4 = org.gjt.sp.jedit.jEdit.getBooleanProperty("saveCaret");
+
+        $r34.setSelected($z4);
+
+        $r35 = r0.saveCaret;
+
+        r0.addComponent($r35);
+
+        $r36 = new javax.swing.JCheckBox;
+
+        $r37 = org.gjt.sp.jedit.jEdit.getProperty("options.general.persistentMarkers");
+
+        specialinvoke $r36.<init>($r37);
+
+        r0.persistentMarkers = $r36;
+
+        $r38 = r0.persistentMarkers;
+
+        $z5 = org.gjt.sp.jedit.jEdit.getBooleanProperty("persistentMarkers");
+
+        $r38.setSelected($z5);
+
+        $r39 = r0.persistentMarkers;
+
+        r0.addComponent($r39);
+
+        $r40 = new javax.swing.JCheckBox;
+
+        $r41 = org.gjt.sp.jedit.jEdit.getProperty("options.general.restore");
+
+        specialinvoke $r40.<init>($r41);
+
+        r0.restore = $r40;
+
+        $r42 = r0.restore;
+
+        $z6 = org.gjt.sp.jedit.jEdit.getBooleanProperty("restore");
+
+        $r42.setSelected($z6);
+
+        $r44 = r0.restore;
+
+        $r43 = new org.gjt.sp.jedit.options.GeneralOptionPane$1;
+
+        specialinvoke $r43.<init>(r0);
+
+        $r44.addActionListener($r43);
+
+        $r45 = r0.restore;
+
+        r0.addComponent($r45);
+
+        $r46 = new javax.swing.JCheckBox;
+
+        $r47 = org.gjt.sp.jedit.jEdit.getProperty("options.general.restore.remote");
+
+        specialinvoke $r46.<init>($r47);
+
+        r0.restoreRemote = $r46;
+
+        $r48 = r0.restoreRemote;
+
+        $z7 = org.gjt.sp.jedit.jEdit.getBooleanProperty("restore.remote", 0);
+
+        $r48.setSelected($z7);
+
+        $r50 = r0.restoreRemote;
+
+        $r49 = r0.restore;
+
+        $z8 = $r49.isSelected();
+
+        $r50.setEnabled($z8);
+
+        $r51 = r0.restoreRemote;
+
+        r0.addComponent($r51);
+
+        $r52 = new javax.swing.JCheckBox;
+
+        $r53 = org.gjt.sp.jedit.jEdit.getProperty("options.general.restore.cli");
+
+        specialinvoke $r52.<init>($r53);
+
+        r0.restoreCLI = $r52;
+
+        $r54 = r0.restoreCLI;
+
+        $z9 = org.gjt.sp.jedit.jEdit.getBooleanProperty("restore.cli");
+
+        $r54.setSelected($z9);
+
+        $r56 = r0.restoreCLI;
+
+        $r55 = r0.restore;
+
+        $z10 = $r55.isSelected();
+
+        $r56.setEnabled($z10);
+
+        $r57 = r0.restoreCLI;
+
+        r0.addComponent($r57);
+
+        $r58 = new javax.swing.JCheckBox;
+
+        $r59 = org.gjt.sp.jedit.jEdit.getProperty("options.general.restore.splits", "Restore split configuration");
+
+        specialinvoke $r58.<init>($r59);
+
+        r0.restoreSplits = $r58;
+
+        $r60 = r0.restoreSplits;
+
+        $z11 = org.gjt.sp.jedit.jEdit.getBooleanProperty("restore.splits", 1);
+
+        $r60.setSelected($z11);
+
+        $r61 = r0.restoreSplits;
+
+        r0.addComponent($r61);
+
+        r84 = org.gjt.sp.jedit.jEdit.getProperty("options.general.hypersearch.maxWarningResults");
+
+        i2 = org.gjt.sp.jedit.jEdit.getIntegerProperty("hypersearch.maxWarningResults");
+
+        $r62 = new javax.swing.SpinnerNumberModel;
+
+        specialinvoke $r62.<init>(i2, 0, 2147483647, 1);
+
+        r85 = $r62;
+
+        $r63 = new javax.swing.JSpinner;
+
+        specialinvoke $r63.<init>(r85);
+
+        r0.hypersearchResultsWarning = $r63;
+
+        $r64 = r0.hypersearchResultsWarning;
+
+        r0.addComponent(r84, $r64);
+
+        r86 = org.gjt.sp.jedit.jEdit.getCurrentLanguage();
+
+        r87 = org.gjt.sp.jedit.jEdit.getProperty("available.lang", "en");
+
+        r88 = r87.split(" ");
+
+        $r65 = new javax.swing.JCheckBox;
+
+        $r66 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.usedefaultlocale.label");
+
+        specialinvoke $r65.<init>($r66);
+
+        r0.useDefaultLocale = $r65;
+
+        $r67 = r0.useDefaultLocale;
+
+        $z12 = org.gjt.sp.jedit.jEdit.getBooleanProperty("lang.usedefaultlocale");
+
+        $r67.setSelected($z12);
+
+        $r69 = r0.useDefaultLocale;
+
+        $r68 = new org.gjt.sp.jedit.options.GeneralOptionPane$2;
+
+        specialinvoke $r68.<init>(r0);
+
+        $r69.addChangeListener($r68);
+
+        $r70 = new javax.swing.JComboBox;
+
+        specialinvoke $r70.<init>(r88);
+
+        r0.lang = $r70;
+
+        $r72 = r0.lang;
+
+        $r71 = r0.useDefaultLocale;
+
+        $z13 = $r71.isSelected();
+
+        if $z13 != 0 goto label5;
+
+        $z15 = 1;
+
+(0)     goto label6;
+
+     label5:
+(1)     $z15_1 = 0;
+
+     label6:
+        $z15_2 = Phi($z15 #0, $z15_1 #1);
+
+        $r72.setEnabled($z15_2);
+
+        $r73 = r0.lang;
+
+        $r73.setSelectedItem(r86);
+
+        $r75 = r0.lang;
+
+        $r74 = new org.gjt.sp.jedit.options.GeneralOptionPane$LangCellRenderer;
+
+        specialinvoke $r74.<init>(null);
+
+        $r75.setRenderer($r74);
+
+        r0.addSeparator("options.appearance.localization.section.label");
+
+        $r76 = r0.useDefaultLocale;
+
+        r0.addComponent($r76);
+
+        $r77 = org.gjt.sp.jedit.jEdit.getProperty("options.appearance.lang.label");
+
+        $r78 = r0.lang;
+
+        r0.addComponent($r77, $r78);
+
+        return;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.options.GeneralOptionPane r0;
+        int i0, $i1, $i2, $i3;
+        javax.swing.JComboBox $r1, $r2, $r20;
+        javax.swing.JSpinner $r3, $r15;
+        javax.swing.SpinnerModel $r4, $r16;
+        java.lang.Object $r5, $r17, $r21;
+        java.lang.Integer $r6, $r18;
+        javax.swing.JCheckBox $r7, $r8, $r9, $r10, $r11, $r12, $r13, $r14, $r19;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8;
+        java.lang.String $r22;
+
+        r0 := @this;
+
+        $r1 = r0.checkModStatus;
+
+        $i1 = $r1.getSelectedIndex();
+
+        tableswitch($i1)
+        {
+            case 0: goto label1;
+            case 1: goto label2;
+            case 2: goto label3;
+            case 3: goto label4;
+            default: goto label5;
+        };
+
+     label1:
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("autoReloadDialog", 0);
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("autoReload", 0);
+
+        goto label5;
+
+     label2:
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("autoReloadDialog", 1);
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("autoReload", 0);
+
+        goto label5;
+
+     label3:
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("autoReloadDialog", 1);
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("autoReload", 1);
+
+        goto label5;
+
+     label4:
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("autoReloadDialog", 0);
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("autoReload", 1);
+
+     label5:
+        $r2 = r0.checkModStatusUpon;
+
+        $i2 = $r2.getSelectedIndex();
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty("checkFileStatus", $i2);
+
+        $r3 = r0.recentFiles;
+
+        $r4 = $r3.getModel();
+
+        $r5 = $r4.getValue();
+
+        $r6 = (java.lang.Integer) $r5;
+
+        $i3 = $r6.intValue();
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty("recentFiles", $i3);
+
+        $r7 = r0.sortRecent;
+
+        $z0 = $r7.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("sortRecent", $z0);
+
+        $r8 = r0.hideOpen;
+
+        $z1 = $r8.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("hideOpen", $z1);
+
+        $r9 = r0.saveCaret;
+
+        $z2 = $r9.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("saveCaret", $z2);
+
+        $r10 = r0.persistentMarkers;
+
+        $z3 = $r10.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("persistentMarkers", $z3);
+
+        $r11 = r0.restore;
+
+        $z4 = $r11.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("restore", $z4);
+
+        $r12 = r0.restoreCLI;
+
+        $z5 = $r12.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("restore.cli", $z5);
+
+        $r13 = r0.restoreRemote;
+
+        $z6 = $r13.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("restore.remote", $z6);
+
+        $r14 = r0.restoreSplits;
+
+        $z7 = $r14.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("restore.splits", $z7);
+
+        $r15 = r0.hypersearchResultsWarning;
+
+        $r16 = $r15.getModel();
+
+        $r17 = $r16.getValue();
+
+        $r18 = (java.lang.Integer) $r17;
+
+        i0 = $r18.intValue();
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty("hypersearch.maxWarningResults", i0);
+
+        $r19 = r0.useDefaultLocale;
+
+        $z8 = $r19.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("lang.usedefaultlocale", $z8);
+
+        $r20 = r0.lang;
+
+        $r21 = $r20.getSelectedItem();
+
+        $r22 = java.lang.String.valueOf($r21);
+
+        org.gjt.sp.jedit.jEdit.setProperty("lang.current", $r22);
+
+        return;
+    }
+
+    static javax.swing.JCheckBox access$000(org.gjt.sp.jedit.options.GeneralOptionPane)
+    {
+        org.gjt.sp.jedit.options.GeneralOptionPane r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.restore;
+
+        return $r1;
+    }
+
+    static javax.swing.JCheckBox access$100(org.gjt.sp.jedit.options.GeneralOptionPane)
+    {
+        org.gjt.sp.jedit.options.GeneralOptionPane r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.restoreCLI;
+
+        return $r1;
+    }
+
+    static javax.swing.JCheckBox access$200(org.gjt.sp.jedit.options.GeneralOptionPane)
+    {
+        org.gjt.sp.jedit.options.GeneralOptionPane r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.restoreRemote;
+
+        return $r1;
+    }
+
+    static javax.swing.JCheckBox access$300(org.gjt.sp.jedit.options.GeneralOptionPane)
+    {
+        org.gjt.sp.jedit.options.GeneralOptionPane r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.useDefaultLocale;
+
+        return $r1;
+    }
+
+    static javax.swing.JComboBox access$400(org.gjt.sp.jedit.options.GeneralOptionPane)
+    {
+        org.gjt.sp.jedit.options.GeneralOptionPane r0;
+        javax.swing.JComboBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.lang;
+
+        return $r1;
+    }
+}

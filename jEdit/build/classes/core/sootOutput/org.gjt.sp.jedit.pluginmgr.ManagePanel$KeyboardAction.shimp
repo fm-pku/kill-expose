@@ -1,0 +1,149 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$KeyboardAction extends javax.swing.AbstractAction
+{
+    private org.gjt.sp.jedit.pluginmgr.KeyboardCommand command;
+    final org.gjt.sp.jedit.pluginmgr.ManagePanel this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel, org.gjt.sp.jedit.pluginmgr.KeyboardCommand)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$KeyboardAction r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r3 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.NONE;
+
+        r0.command = $r3;
+
+        r0.command = r2;
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$KeyboardAction r0;
+        java.awt.event.ActionEvent r1;
+        int[] r2, r3, $r6;
+        int i0, i1, $i2, $i3, i4;
+        java.lang.Object r4;
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand $r5;
+        java.awt.KeyboardFocusManager $r7, $r18;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r8, $r10, $r12, $r14;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r9;
+        javax.swing.JTable $r11;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel $r13, $r15;
+        java.lang.Boolean $r16, $r17;
+        boolean $z0;
+        java.lang.InternalError $r19;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r6 = org.gjt.sp.jedit.pluginmgr.ManagePanel$1.$SwitchMap$org$gjt$sp$jedit$pluginmgr$KeyboardCommand;
+
+        $r5 = r0.command;
+
+        $i2 = $r5.ordinal();
+
+        $i3 = $r6[$i2];
+
+        tableswitch($i3)
+        {
+            case 1: goto label1;
+            case 2: goto label2;
+            case 3: goto label3;
+            case 4: goto label6;
+            default: goto label7;
+        };
+
+     label1:
+        $r7 = java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager();
+
+        $r7.focusNextComponent();
+
+(0)     goto label8;
+
+     label2:
+        $r18 = java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager();
+
+        $r18.focusPreviousComponent();
+
+(1)     goto label8;
+
+     label3:
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$800($r10);
+
+        r2 = $r11.getSelectedRows();
+
+        r3 = r2;
+
+        i0 = lengthof r3;
+
+(2)     i4 = 0;
+
+     label4:
+        i4 = Phi(i4 #2, i4 #3);
+
+        if i4 >= i0 goto label5;
+
+        i1 = r3[i4];
+
+        $r12 = r0.this$0;
+
+        $r13 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$600($r12);
+
+        r4 = $r13.getValueAt(i1, 0);
+
+        $r14 = r0.this$0;
+
+        $r15 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$600($r14);
+
+        $r16 = java.lang.Boolean.FALSE;
+
+        $z0 = r4.equals($r16);
+
+        $r17 = java.lang.Boolean.valueOf($z0);
+
+        $r15.setValueAt($r17, i1, 0);
+
+        i4 = i4 + 1;
+
+(3)     goto label4;
+
+     label5:
+(4)     goto label8;
+
+     label6:
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1000($r8);
+
+        $r9.ok();
+
+(5)     goto label8;
+
+     label7:
+        $r19 = new java.lang.InternalError;
+
+        specialinvoke $r19.<init>();
+
+        throw $r19;
+
+     label8:
+        i4 = Phi(i4 #0, i4 #1, i4 #4, i4 #5);
+
+        return;
+    }
+}

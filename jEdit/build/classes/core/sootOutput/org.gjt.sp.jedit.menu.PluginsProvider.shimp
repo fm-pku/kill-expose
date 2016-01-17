@@ -1,0 +1,453 @@
+public class org.gjt.sp.jedit.menu.PluginsProvider extends java.lang.Object implements org.gjt.sp.jedit.menu.DynamicMenuProvider
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.menu.PluginsProvider r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public boolean updateEveryTime()
+    {
+        org.gjt.sp.jedit.menu.PluginsProvider r0;
+
+        r0 := @this;
+
+        return 0;
+    }
+
+    public void update(javax.swing.JMenu)
+    {
+        org.gjt.sp.jedit.menu.PluginsProvider r0;
+        javax.swing.JMenu r1, $r4, $r14, r41;
+        java.util.List[] r2, $r3, r35, r37;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, i8, i9, i10, i11, i12, i13, i14, i15, i16, i17, i19;
+        java.lang.StringBuilder $r6, $r7, $r8, $r9, $r16, $r17, $r18, $r19;
+        java.lang.String $r10, $r11, $r20, $r21, $r26;
+        boolean $z0, $z1;
+        java.lang.Object $r12, $r22;
+        org.gjt.sp.jedit.menu.MenuItemTextComparator $r24;
+        javax.swing.JMenuItem $r25, r33, r34, r40, r44;
+        java.util.ArrayList $r28;
+        org.gjt.sp.jedit.PluginJAR[] r29, r30;
+        org.gjt.sp.jedit.PluginJAR r31;
+        org.gjt.sp.jedit.EditPlugin r32;
+        java.util.List r36, r38, r42;
+        java.util.Iterator r39, r43;
+        char c18, c20, c21;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i8 = 0;
+
+        $r3 = newarray (java.util.List)[26];
+
+        r2 = (java.util.List[]) $r3;
+
+(0)     i9 = 0;
+
+     label01:
+        i9 = Phi(i9 #0, i9 #1);
+
+        i8 = Phi(i8 #0, i8 #1);
+
+        $i0 = lengthof r2;
+
+        if i9 >= $i0 goto label02;
+
+        $r28 = new java.util.ArrayList;
+
+        specialinvoke $r28.<init>();
+
+        r2[i9] = $r28;
+
+        i9 = i9 + 1;
+
+(1)     goto label01;
+
+     label02:
+        r29 = org.gjt.sp.jedit.jEdit.getPluginJARs();
+
+        r30 = r29;
+
+        i10 = lengthof r30;
+
+(2)     i11 = 0;
+
+     label03:
+        i9 = Phi(i9 #2, i9 #6);
+
+        i11 = Phi(i11 #2, i11 #6);
+
+        i8 = Phi(i8 #2, i8 #6);
+
+        if i11 >= i10 goto label06;
+
+        r31 = r30[i11];
+
+        r32 = r31.getPlugin();
+
+        if r32 != null goto label04;
+
+(3)     goto label05;
+
+     label04:
+        r33 = r32.createMenuItems();
+
+(4)     if r33 == null goto label05;
+
+        specialinvoke r0.addToLetterMap(r2, r33);
+
+(5)     i8 = i8 + 1;
+
+     label05:
+        i8 = Phi(i8 #3, i8 #4, i8 #5);
+
+        i11 = i11 + 1;
+
+(6)     goto label03;
+
+     label06:
+        if i8 != 0 goto label07;
+
+        $r25 = new javax.swing.JMenuItem;
+
+        $r26 = org.gjt.sp.jedit.jEdit.getProperty("no-plugins.label");
+
+        specialinvoke $r25.<init>($r26);
+
+        r34 = $r25;
+
+        r34.setEnabled(0);
+
+        r1.add(r34);
+
+        return;
+
+     label07:
+        r35 = r2;
+
+        i12 = lengthof r35;
+
+(7)     i13 = 0;
+
+     label08:
+        i13 = Phi(i13 #7, i13 #8);
+
+        i9 = Phi(i9 #7, i9 #8);
+
+        i11 = Phi(i11 #7, i11 #8);
+
+        i8 = Phi(i8 #7, i8 #8);
+
+        if i13 >= i12 goto label09;
+
+        r36 = r35[i13];
+
+        $r24 = new org.gjt.sp.jedit.menu.MenuItemTextComparator;
+
+        specialinvoke $r24.<init>();
+
+        java.util.Collections.sort(r36, $r24);
+
+        i13 = i13 + 1;
+
+(8)     goto label08;
+
+     label09:
+        i14 = org.gjt.sp.jedit.jEdit.getIntegerProperty("menu.spillover", 20);
+
+        if i8 > i14 goto label14;
+
+        r37 = r2;
+
+        i15 = lengthof r37;
+
+(9)     i16 = 0;
+
+     label10:
+        i13 = Phi(i13 #9, i13 #12);
+
+        i16 = Phi(i16 #9, i16 #12);
+
+        i9 = Phi(i9 #9, i9 #12);
+
+        i11 = Phi(i11 #9, i11 #12);
+
+        i8 = Phi(i8 #9, i8 #12);
+
+        if i16 >= i15 goto label13;
+
+        r38 = r37[i16];
+
+(10)    r39 = r38.iterator();
+
+     label11:
+        i13 = Phi(i13 #10, i13 #11);
+
+        i16 = Phi(i16 #10, i16 #11);
+
+        i9 = Phi(i9 #10, i9 #11);
+
+        i11 = Phi(i11 #10, i11 #11);
+
+        i8 = Phi(i8 #10, i8 #11);
+
+        $z1 = r39.hasNext();
+
+        if $z1 == 0 goto label12;
+
+        $r22 = r39.next();
+
+        r40 = (javax.swing.JMenuItem) $r22;
+
+        r1.add(r40);
+
+(11)    goto label11;
+
+     label12:
+        i16 = i16 + 1;
+
+(12)    goto label10;
+
+     label13:
+        return;
+
+     label14:
+        i17 = 0;
+
+        c18 = 65;
+
+        $r4 = new javax.swing.JMenu;
+
+        specialinvoke $r4.<init>();
+
+        r41 = $r4;
+
+        r1.add(r41);
+
+(13)    i19 = 0;
+
+     label15:
+        i13 = Phi(i13 #13, i13 #21);
+
+        i19 = Phi(i19 #13, i19 #21);
+
+        i9 = Phi(i9 #13, i9 #21);
+
+        r41 = Phi(r41 #13, r41 #21);
+
+        i17 = Phi(i17 #13, i17 #21);
+
+        i11 = Phi(i11 #13, i11 #21);
+
+        c18 = Phi(c18 #13, c18 #21);
+
+        i8 = Phi(i8 #13, i8 #21);
+
+        $i1 = lengthof r2;
+
+        if i19 >= $i1 goto label22;
+
+        r42 = r2[i19];
+
+        $i2 = r42.size();
+
+        $i3 = i17 + $i2;
+
+(14)    if $i3 <= i14 goto label18;
+
+(15)    if i17 == 0 goto label18;
+
+        $i5 = i19 + 65;
+
+        $i6 = $i5 - 1;
+
+        c20 = (char) $i6;
+
+        if c20 != c18 goto label16;
+
+        $r21 = java.lang.String.valueOf(c18);
+
+        r41.setText($r21);
+
+        goto label17;
+
+     label16:
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<init>();
+
+        $r17 = $r16.append(c18);
+
+        $r18 = $r17.append(" - ");
+
+        $r19 = $r18.append(c20);
+
+        $r20 = $r19.toString();
+
+        r41.setText($r20);
+
+     label17:
+        $i7 = i19 + 65;
+
+        c18 = (char) $i7;
+
+        i17 = 0;
+
+(16)    r41 = null;
+
+     label18:
+        r41 = Phi(r41 #14, r41 #15, r41 #16);
+
+        i17 = Phi(i17 #14, i17 #15, i17 #16);
+
+        c18 = Phi(c18 #14, c18 #15, c18 #16);
+
+(17)    r43 = r42.iterator();
+
+     label19:
+        i13 = Phi(i13 #17, i13 #20);
+
+        i19 = Phi(i19 #17, i19 #20);
+
+        i9 = Phi(i9 #17, i9 #20);
+
+        r41 = Phi(r41 #17, r41 #20);
+
+        i17 = Phi(i17 #17, i17 #20);
+
+        i11 = Phi(i11 #17, i11 #20);
+
+        c18 = Phi(c18 #17, c18 #20);
+
+        i8 = Phi(i8 #17, i8 #20);
+
+        $z0 = r43.hasNext();
+
+        if $z0 == 0 goto label21;
+
+        $r12 = r43.next();
+
+        r44 = (javax.swing.JMenuItem) $r12;
+
+(18)    if r41 != null goto label20;
+
+        $r14 = new javax.swing.JMenu;
+
+        specialinvoke $r14.<init>();
+
+        r41 = $r14;
+
+(19)    r1.add(r41);
+
+     label20:
+        r41 = Phi(r41 #18, r41 #19);
+
+        r41.add(r44);
+
+(20)    goto label19;
+
+     label21:
+        $i4 = r42.size();
+
+        i17 = i17 + $i4;
+
+        i19 = i19 + 1;
+
+(21)    goto label15;
+
+     label22:
+        if r41 == null goto label24;
+
+        c21 = 90;
+
+        if c21 != c18 goto label23;
+
+        $r11 = java.lang.String.valueOf(c18);
+
+        r41.setText($r11);
+
+        goto label24;
+
+     label23:
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append(c18);
+
+        $r8 = $r7.append(" - ");
+
+        $r9 = $r8.append(c21);
+
+        $r10 = $r9.toString();
+
+        r41.setText($r10);
+
+     label24:
+        return;
+    }
+
+    private void addToLetterMap(java.util.List[], javax.swing.JMenuItem)
+    {
+        org.gjt.sp.jedit.menu.PluginsProvider r0;
+        java.util.List[] r1;
+        javax.swing.JMenuItem r2;
+        java.lang.String $r3, $r6, $r8;
+        java.lang.StringBuilder $r4, $r5, $r7;
+        int $i0;
+        java.util.List $r9;
+        char c1, c2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r2.getText();
+
+        c1 = $r3.charAt(0);
+
+        c2 = java.lang.Character.toUpperCase(c1);
+
+        if c2 < 65 goto label1;
+
+        if c2 <= 90 goto label2;
+
+     label1:
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("Plugin menu item label must begin with A - Z, or a - z: ");
+
+        $r6 = r2.getText();
+
+        $r7 = $r5.append($r6);
+
+        $r8 = $r7.toString();
+
+        org.gjt.sp.util.Log.log(9, r0, $r8);
+
+        goto label3;
+
+     label2:
+        $i0 = c2 - 65;
+
+        $r9 = r1[$i0];
+
+        $r9.add(r2);
+
+     label3:
+        return;
+    }
+}

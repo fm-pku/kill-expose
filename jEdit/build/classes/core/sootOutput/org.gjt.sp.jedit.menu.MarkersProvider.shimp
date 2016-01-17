@@ -1,0 +1,141 @@
+public class org.gjt.sp.jedit.menu.MarkersProvider extends java.lang.Object implements org.gjt.sp.jedit.menu.DynamicMenuProvider
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.menu.MarkersProvider r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public boolean updateEveryTime()
+    {
+        org.gjt.sp.jedit.menu.MarkersProvider r0;
+
+        r0 := @this;
+
+        return 1;
+    }
+
+    public void update(javax.swing.JMenu)
+    {
+        org.gjt.sp.jedit.menu.MarkersProvider r0;
+        javax.swing.JMenu r1, $r10, r17, r18;
+        org.gjt.sp.jedit.View r2;
+        org.gjt.sp.jedit.Buffer r3;
+        java.util.Vector r4;
+        org.gjt.sp.jedit.Marker r5;
+        int i0, $i1, $i2, $i3, $i5, $i6, i7, i8;
+        boolean $z0;
+        java.lang.Object $r6;
+        org.gjt.sp.jedit.menu.MarkersProvider$MarkersMenuItem $r7, r19;
+        char $c4;
+        org.gjt.sp.jedit.menu.MarkersProvider$1 $r8;
+        java.lang.String $r11, $r14;
+        javax.swing.JMenuItem $r13, r16;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = org.gjt.sp.jedit.GUIUtilities.getView(r1);
+
+        r3 = r2.getBuffer();
+
+        r4 = r3.getMarkers();
+
+        $z0 = r4.isEmpty();
+
+        if $z0 == 0 goto label1;
+
+        $r13 = new javax.swing.JMenuItem;
+
+        $r14 = org.gjt.sp.jedit.jEdit.getProperty("no-markers.label");
+
+        specialinvoke $r13.<init>($r14);
+
+        r16 = $r13;
+
+        r16.setEnabled(0);
+
+        r1.add(r16);
+
+        return;
+
+     label1:
+        i7 = org.gjt.sp.jedit.jEdit.getIntegerProperty("menu.spillover", 20);
+
+        r17 = r1;
+
+(0)     i8 = 0;
+
+     label2:
+        i8 = Phi(i8 #0, i8 #4);
+
+        r17 = Phi(r17 #0, r17 #4);
+
+        $i1 = r4.size();
+
+        if i8 >= $i1 goto label4;
+
+        $r6 = r4.get(i8);
+
+        r5 = (org.gjt.sp.jedit.Marker) $r6;
+
+        $i2 = r5.getPosition();
+
+        i0 = r3.getLineOfOffset($i2);
+
+        $i3 = r17.getItemCount();
+
+(1)     if $i3 < i7 goto label3;
+
+        $i5 = r4.size();
+
+        $i6 = $i5 - 1;
+
+(2)     if i8 == $i6 goto label3;
+
+        $r10 = new javax.swing.JMenu;
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty("common.more");
+
+        specialinvoke $r10.<init>($r11);
+
+        r18 = $r10;
+
+        r17.add(r18);
+
+(3)     r17 = r18;
+
+     label3:
+        r17 = Phi(r17 #1, r17 #2, r17 #3);
+
+        $r7 = new org.gjt.sp.jedit.menu.MarkersProvider$MarkersMenuItem;
+
+        $c4 = r5.getShortcut();
+
+        specialinvoke $r7.<init>(r3, i0, $c4);
+
+        r19 = $r7;
+
+        $r8 = new org.gjt.sp.jedit.menu.MarkersProvider$1;
+
+        specialinvoke $r8.<init>(r0, r2, r5);
+
+        r19.addActionListener($r8);
+
+        r17.add(r19);
+
+        i8 = i8 + 1;
+
+(4)     goto label2;
+
+     label4:
+        return;
+    }
+}

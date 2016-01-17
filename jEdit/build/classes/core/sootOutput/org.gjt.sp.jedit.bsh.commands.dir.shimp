@@ -1,0 +1,379 @@
+public class org.gjt.sp.jedit.bsh.commands.dir extends java.lang.Object
+{
+    static final java.lang.String[] months;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.bsh.commands.dir r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public static java.lang.String usage()
+    {
+        return "usage: dir( String dir )\n       dir()";
+    }
+
+    public static void invoke(org.gjt.sp.jedit.bsh.Interpreter, org.gjt.sp.jedit.bsh.CallStack)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        java.lang.String r2;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 = ".";
+
+        org.gjt.sp.jedit.bsh.commands.dir.invoke(r0, r1, r2);
+
+        return;
+    }
+
+    public static void invoke(org.gjt.sp.jedit.bsh.Interpreter, org.gjt.sp.jedit.bsh.CallStack, java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.Interpreter r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        java.lang.String r2, r9, $r13, $r17, $r19, $r21, $r31, $r35, $r40, $r41, $r45, $r47, $r49, $r51, $r59, $r64, $r68, $r69;
+        java.io.File r3, r4, $r14;
+        java.lang.StringBuilder r5, r8, $r10, $r11, $r12, $r15, $r16, $r18, $r20, $r22, $r29, $r32, $r33, $r34, $r38, $r43, $r44, $r46, $r55, $r56, $r57, $r58, $r61, $r62, $r63;
+        java.util.Date r6, $r27;
+        java.util.GregorianCalendar r7, $r28;
+        int i0, $i2, $i4, i6, i7, i8;
+        byte b1;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        long $l3, $l5;
+        java.lang.String[] $r30, r66, r67;
+        java.io.IOException $r60, r65;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+     label01:
+        r3 = r0.pathToFile(r2);
+
+     label02:
+        goto label04;
+
+     label03:
+        $r60 := @caughtexception;
+
+        r65 = $r60;
+
+        $r61 = new java.lang.StringBuilder;
+
+        specialinvoke $r61.<init>();
+
+        $r62 = $r61.append("error reading path: ");
+
+        $r63 = $r62.append(r65);
+
+        $r64 = $r63.toString();
+
+        r0.println($r64);
+
+        return;
+
+     label04:
+        $z0 = r3.exists();
+
+        if $z0 == 0 goto label05;
+
+        $z1 = r3.canRead();
+
+        if $z1 != 0 goto label06;
+
+     label05:
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("Can\'t read ");
+
+        $r12 = $r11.append(r3);
+
+        $r13 = $r12.toString();
+
+        r0.println($r13);
+
+        return;
+
+     label06:
+        $z2 = r3.isDirectory();
+
+        if $z2 != 0 goto label07;
+
+        $r55 = new java.lang.StringBuilder;
+
+        specialinvoke $r55.<init>();
+
+        $r56 = $r55.append("\'");
+
+        $r57 = $r56.append(r2);
+
+        $r58 = $r57.append("\' is not a directory");
+
+        $r59 = $r58.toString();
+
+        r0.println($r59);
+
+     label07:
+        r66 = r3.list();
+
+        r67 = org.gjt.sp.jedit.bsh.StringUtil.bubbleSort(r66);
+
+(0)     i6 = 0;
+
+     label08:
+        i6 = Phi(i6 #0, i6 #7);
+
+        $r69 = Phi($r69 #0, $r69 #7);
+
+        i7 = Phi(i7 #0, i7 #7);
+
+        $r68 = Phi($r68 #0, $r68 #7);
+
+        $i2 = lengthof r67;
+
+        if i6 >= $i2 goto label18;
+
+        $r14 = new java.io.File;
+
+        $r15 = new java.lang.StringBuilder;
+
+        specialinvoke $r15.<init>();
+
+        $r16 = $r15.append(r2);
+
+        $r17 = java.io.File.separator;
+
+        $r18 = $r16.append($r17);
+
+        $r19 = r67[i6];
+
+        $r20 = $r18.append($r19);
+
+        $r21 = $r20.toString();
+
+        specialinvoke $r14.<init>($r21);
+
+        r4 = $r14;
+
+        $r22 = new java.lang.StringBuilder;
+
+        specialinvoke $r22.<init>();
+
+        r5 = $r22;
+
+        $z3 = r4.canRead();
+
+        if $z3 == 0 goto label09;
+
+        $r68 = "r";
+
+(1)     goto label10;
+
+     label09:
+(2)     $r68 = "-";
+
+     label10:
+        $r68 = Phi($r68 #1, $r68 #2);
+
+        r5.append($r68);
+
+        $z4 = r4.canWrite();
+
+        if $z4 == 0 goto label11;
+
+        $r69 = "w";
+
+(3)     goto label12;
+
+     label11:
+(4)     $r69 = "-";
+
+     label12:
+        $r69 = Phi($r69 #3, $r69 #4);
+
+        r5.append($r69);
+
+        r5.append("_");
+
+        r5.append(" ");
+
+        $r27 = new java.util.Date;
+
+        $l3 = r4.lastModified();
+
+        specialinvoke $r27.<init>($l3);
+
+        r6 = $r27;
+
+        $r28 = new java.util.GregorianCalendar;
+
+        specialinvoke $r28.<init>();
+
+        r7 = $r28;
+
+        r7.setTime(r6);
+
+        i0 = r7.get(5);
+
+        $r29 = new java.lang.StringBuilder;
+
+        specialinvoke $r29.<init>();
+
+        $r30 = org.gjt.sp.jedit.bsh.commands.dir.months;
+
+        $i4 = r7.get(2);
+
+        $r31 = $r30[$i4];
+
+        $r32 = $r29.append($r31);
+
+        $r33 = $r32.append(" ");
+
+        $r34 = $r33.append(i0);
+
+        $r35 = $r34.toString();
+
+        r5.append($r35);
+
+        if i0 >= 10 goto label13;
+
+        r5.append(" ");
+
+     label13:
+        r5.append(" ");
+
+        b1 = 8;
+
+        $r38 = new java.lang.StringBuilder;
+
+        specialinvoke $r38.<init>();
+
+        r8 = $r38;
+
+(5)     i7 = 0;
+
+     label14:
+        i6 = Phi(i6 #5, i6 #6);
+
+        $r69 = Phi($r69 #5, $r69 #6);
+
+        i7 = Phi(i7 #5, i7 #6);
+
+        $r68 = Phi($r68 #5, $r68 #6);
+
+        if i7 >= b1 goto label15;
+
+        r8.append(" ");
+
+        i7 = i7 + 1;
+
+(6)     goto label14;
+
+     label15:
+        $l5 = r4.length();
+
+        r8.insert(0, $l5);
+
+        r8.setLength(b1);
+
+        $r40 = r8.toString();
+
+        i8 = $r40.indexOf(" ");
+
+        if i8 == -1 goto label16;
+
+        $r51 = r8.toString();
+
+        r9 = $r51.substring(i8);
+
+        r8.setLength(i8);
+
+        r8.insert(0, r9);
+
+     label16:
+        $r41 = r8.toString();
+
+        r5.append($r41);
+
+        $r43 = new java.lang.StringBuilder;
+
+        specialinvoke $r43.<init>();
+
+        $r44 = $r43.append(" ");
+
+        $r45 = r4.getName();
+
+        $r46 = $r44.append($r45);
+
+        $r47 = $r46.toString();
+
+        r5.append($r47);
+
+        $z5 = r4.isDirectory();
+
+        if $z5 == 0 goto label17;
+
+        r5.append("/");
+
+     label17:
+        $r49 = r5.toString();
+
+        r0.println($r49);
+
+        i6 = i6 + 1;
+
+(7)     goto label08;
+
+     label18:
+        return;
+
+        catch java.io.IOException from label01 to label02 with label03;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String[] $r0;
+
+        $r0 = newarray (java.lang.String)[12];
+
+        $r0[0] = "Jan";
+
+        $r0[1] = "Feb";
+
+        $r0[2] = "Mar";
+
+        $r0[3] = "Apr";
+
+        $r0[4] = "May";
+
+        $r0[5] = "Jun";
+
+        $r0[6] = "Jul";
+
+        $r0[7] = "Aug";
+
+        $r0[8] = "Sep";
+
+        $r0[9] = "Oct";
+
+        $r0[10] = "Nov";
+
+        $r0[11] = "Dec";
+
+        org.gjt.sp.jedit.bsh.commands.dir.months = $r0;
+
+        return;
+    }
+}

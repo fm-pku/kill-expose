@@ -1,0 +1,211 @@
+class org.gjt.sp.jedit.bsh.BSHFormalParameters extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+    private java.lang.String[] paramNames;
+    java.lang.Class[] paramTypes;
+    int numArgs;
+    java.lang.String[] typeDescriptors;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHFormalParameters r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    void insureParsed()
+    {
+        org.gjt.sp.jedit.bsh.BSHFormalParameters r0;
+        java.lang.String[] r1, $r3;
+        org.gjt.sp.jedit.bsh.BSHFormalParameter r2;
+        int $i0, $i1, $i2, i3;
+        org.gjt.sp.jedit.bsh.Node $r4;
+        java.lang.String $r5;
+
+        r0 := @this;
+
+        $r3 = r0.paramNames;
+
+        if $r3 == null goto label1;
+
+        return;
+
+     label1:
+        $i0 = r0.jjtGetNumChildren();
+
+        r0.numArgs = $i0;
+
+        $i1 = r0.numArgs;
+
+        r1 = newarray (java.lang.String)[$i1];
+
+(0)     i3 = 0;
+
+     label2:
+        i3 = Phi(i3 #0, i3 #1);
+
+        $i2 = r0.numArgs;
+
+        if i3 >= $i2 goto label3;
+
+        $r4 = r0.jjtGetChild(i3);
+
+        r2 = (org.gjt.sp.jedit.bsh.BSHFormalParameter) $r4;
+
+        $r5 = r2.name;
+
+        r1[i3] = $r5;
+
+        i3 = i3 + 1;
+
+(1)     goto label2;
+
+     label3:
+        r0.paramNames = r1;
+
+        return;
+    }
+
+    public java.lang.String[] getParamNames()
+    {
+        org.gjt.sp.jedit.bsh.BSHFormalParameters r0;
+        java.lang.String[] $r1;
+
+        r0 := @this;
+
+        r0.insureParsed();
+
+        $r1 = r0.paramNames;
+
+        return $r1;
+    }
+
+    public java.lang.String[] getTypeDescriptors(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter, java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BSHFormalParameters r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        java.lang.String r3, $r8;
+        java.lang.String[] r4, $r6, $r9;
+        org.gjt.sp.jedit.bsh.BSHFormalParameter r5;
+        int $i0, $i1, i2;
+        org.gjt.sp.jedit.bsh.Node $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r6 = r0.typeDescriptors;
+
+        if $r6 == null goto label1;
+
+        $r9 = r0.typeDescriptors;
+
+        return $r9;
+
+     label1:
+        r0.insureParsed();
+
+        $i0 = r0.numArgs;
+
+        r4 = newarray (java.lang.String)[$i0];
+
+(0)     i2 = 0;
+
+     label2:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $i1 = r0.numArgs;
+
+        if i2 >= $i1 goto label3;
+
+        $r7 = r0.jjtGetChild(i2);
+
+        r5 = (org.gjt.sp.jedit.bsh.BSHFormalParameter) $r7;
+
+        $r8 = r5.getTypeDescriptor(r1, r2, r3);
+
+        r4[i2] = $r8;
+
+        i2 = i2 + 1;
+
+(1)     goto label2;
+
+     label3:
+        r0.typeDescriptors = r4;
+
+        return r4;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHFormalParameters r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        java.lang.Class[] r3, $r5, $r9;
+        org.gjt.sp.jedit.bsh.BSHFormalParameter r4;
+        int $i0, $i1, i2;
+        org.gjt.sp.jedit.bsh.Node $r6;
+        java.lang.Object $r7;
+        java.lang.Class $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r5 = r0.paramTypes;
+
+        if $r5 == null goto label1;
+
+        $r9 = r0.paramTypes;
+
+        return $r9;
+
+     label1:
+        r0.insureParsed();
+
+        $i0 = r0.numArgs;
+
+        r3 = newarray (java.lang.Class)[$i0];
+
+(0)     i2 = 0;
+
+     label2:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $i1 = r0.numArgs;
+
+        if i2 >= $i1 goto label3;
+
+        $r6 = r0.jjtGetChild(i2);
+
+        r4 = (org.gjt.sp.jedit.bsh.BSHFormalParameter) $r6;
+
+        $r7 = r4.eval(r1, r2);
+
+        $r8 = (java.lang.Class) $r7;
+
+        r3[i2] = $r8;
+
+        i2 = i2 + 1;
+
+(1)     goto label2;
+
+     label3:
+        r0.paramTypes = r3;
+
+        return r3;
+    }
+}

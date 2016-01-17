@@ -1,0 +1,278 @@
+class org.gjt.sp.jedit.gui.CompletionPopup$KeyHandler extends java.awt.event.KeyAdapter
+{
+    final org.gjt.sp.jedit.gui.CompletionPopup this$0;
+
+    private void <init>(org.gjt.sp.jedit.gui.CompletionPopup)
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$KeyHandler r0;
+        org.gjt.sp.jedit.gui.CompletionPopup r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void keyPressed(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$KeyHandler r0;
+        java.awt.event.KeyEvent r1;
+        org.gjt.sp.jedit.gui.CompletionPopup $r2, $r3, $r5, $r6, $r7, $r9, $r10, $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18;
+        org.gjt.sp.jedit.gui.CompletionPopup$Candidates $r4, $r8;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7;
+        int $i0, $i1, $i2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r2.keyPressed(r1);
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.CompletionPopup.access$600($r3);
+
+        if $r4 == null goto label01;
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.CompletionPopup.access$600($r7);
+
+        $z1 = $r8.isValid();
+
+        if $z1 != 0 goto label02;
+
+     label01:
+        $r5 = r0.this$0;
+
+        $r5.dispose();
+
+        goto label14;
+
+     label02:
+        $z2 = r1.isConsumed();
+
+        if $z2 != 0 goto label14;
+
+        $i0 = r1.getKeyCode();
+
+        lookupswitch($i0)
+        {
+            case 9: goto label03;
+            case 10: goto label03;
+            case 27: goto label05;
+            case 33: goto label10;
+            case 34: goto label11;
+            case 38: goto label06;
+            case 40: goto label07;
+            case 78: goto label09;
+            case 80: goto label08;
+            default: goto label12;
+        };
+
+     label03:
+        $r16 = r0.this$0;
+
+        $z3 = $r16.doSelectedCompletion();
+
+        if $z3 == 0 goto label04;
+
+        r1.consume();
+
+        goto label14;
+
+     label04:
+        $r17 = r0.this$0;
+
+        $r17.dispose();
+
+        goto label14;
+
+     label05:
+        $r15 = r0.this$0;
+
+        $r15.dispose();
+
+        r1.consume();
+
+        goto label14;
+
+     label06:
+        $r12 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.CompletionPopup.access$700($r12, -1);
+
+        r1.consume();
+
+        goto label14;
+
+     label07:
+        $r11 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.CompletionPopup.access$700($r11, 1);
+
+        r1.consume();
+
+        goto label14;
+
+     label08:
+        $i1 = r1.getModifiersEx();
+
+        if $i1 != 128 goto label14;
+
+        $r9 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.CompletionPopup.access$700($r9, -1);
+
+        r1.consume();
+
+        goto label14;
+
+     label09:
+        $i2 = r1.getModifiersEx();
+
+        if $i2 != 128 goto label14;
+
+        $r10 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.CompletionPopup.access$700($r10, 1);
+
+        r1.consume();
+
+        goto label14;
+
+     label10:
+        $r14 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.CompletionPopup.access$800($r14, -1);
+
+        r1.consume();
+
+        goto label14;
+
+     label11:
+        $r13 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.CompletionPopup.access$800($r13, 1);
+
+        r1.consume();
+
+        goto label14;
+
+     label12:
+        $z4 = r1.isActionKey();
+
+        if $z4 != 0 goto label13;
+
+        $z5 = r1.isAltDown();
+
+        if $z5 != 0 goto label13;
+
+        $z6 = r1.isMetaDown();
+
+        if $z6 != 0 goto label13;
+
+        $z7 = r1.isControlDown();
+
+        if $z7 == 0 goto label14;
+
+     label13:
+        $r18 = r0.this$0;
+
+        $r18.dispose();
+
+     label14:
+        $z0 = r1.isConsumed();
+
+        if $z0 != 0 goto label15;
+
+        $r6 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.CompletionPopup.access$900($r6, r1);
+
+     label15:
+        return;
+    }
+
+    public void keyTyped(java.awt.event.KeyEvent)
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$KeyHandler r0;
+        java.awt.event.KeyEvent r1;
+        boolean $z0, $z1, $z2;
+        org.gjt.sp.jedit.gui.CompletionPopup $r2, $r3, $r5, $r6, $r7;
+        org.gjt.sp.jedit.gui.CompletionPopup$Candidates $r4, $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1.isControlDown();
+
+        if $z0 == 0 goto label1;
+
+        r1.consume();
+
+        goto label2;
+
+     label1:
+        $r2 = r0.this$0;
+
+        $r2.keyTyped(r1);
+
+     label2:
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.CompletionPopup.access$600($r3);
+
+        if $r4 == null goto label3;
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.CompletionPopup.access$600($r7);
+
+        $z2 = $r8.isValid();
+
+        if $z2 != 0 goto label4;
+
+     label3:
+        $r5 = r0.this$0;
+
+        $r5.dispose();
+
+     label4:
+        $z1 = r1.isConsumed();
+
+        if $z1 != 0 goto label5;
+
+        $r6 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.CompletionPopup.access$900($r6, r1);
+
+     label5:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.gui.CompletionPopup, org.gjt.sp.jedit.gui.CompletionPopup$1)
+    {
+        org.gjt.sp.jedit.gui.CompletionPopup$KeyHandler r0;
+        org.gjt.sp.jedit.gui.CompletionPopup r1;
+        org.gjt.sp.jedit.gui.CompletionPopup$1 r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1);
+
+        return;
+    }
+}

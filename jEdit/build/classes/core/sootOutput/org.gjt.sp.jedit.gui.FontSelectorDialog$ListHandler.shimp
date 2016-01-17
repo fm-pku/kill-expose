@@ -1,0 +1,118 @@
+class org.gjt.sp.jedit.gui.FontSelectorDialog$ListHandler extends java.lang.Object implements javax.swing.event.ListSelectionListener
+{
+    final org.gjt.sp.jedit.gui.FontSelectorDialog this$0;
+
+    void <init>(org.gjt.sp.jedit.gui.FontSelectorDialog)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog$ListHandler r0;
+        org.gjt.sp.jedit.gui.FontSelectorDialog r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void valueChanged(javax.swing.event.ListSelectionEvent)
+    {
+        org.gjt.sp.jedit.gui.FontSelectorDialog$ListHandler r0;
+        javax.swing.event.ListSelectionEvent r1;
+        java.lang.Object r2, $r12, $r17, $r22;
+        org.gjt.sp.jedit.gui.FontSelectorDialog $r3, $r5, $r7, $r9, $r10, $r13, $r15, $r18, $r20, $r23;
+        javax.swing.JList $r4, $r6, $r8, $r11, $r16, $r21;
+        javax.swing.JTextField $r14, $r19, $r24;
+        java.lang.String r25, r26, r27;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = r1.getSource();
+
+        $r3 = r0.this$0;
+
+        $r4 = org.gjt.sp.jedit.gui.FontSelectorDialog.access$300($r3);
+
+        if r2 != $r4 goto label2;
+
+        $r20 = r0.this$0;
+
+        $r21 = org.gjt.sp.jedit.gui.FontSelectorDialog.access$300($r20);
+
+        $r22 = $r21.getSelectedValue();
+
+        r25 = (java.lang.String) $r22;
+
+        if r25 == null goto label1;
+
+        $r23 = r0.this$0;
+
+        $r24 = org.gjt.sp.jedit.gui.FontSelectorDialog.access$400($r23);
+
+        $r24.setText(r25);
+
+     label1:
+        goto label5;
+
+     label2:
+        $r5 = r0.this$0;
+
+        $r6 = org.gjt.sp.jedit.gui.FontSelectorDialog.access$500($r5);
+
+        if r2 != $r6 goto label4;
+
+        $r15 = r0.this$0;
+
+        $r16 = org.gjt.sp.jedit.gui.FontSelectorDialog.access$500($r15);
+
+        $r17 = $r16.getSelectedValue();
+
+        r26 = (java.lang.String) $r17;
+
+        if r26 == null goto label3;
+
+        $r18 = r0.this$0;
+
+        $r19 = org.gjt.sp.jedit.gui.FontSelectorDialog.access$600($r18);
+
+        $r19.setText(r26);
+
+     label3:
+        goto label5;
+
+     label4:
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.gui.FontSelectorDialog.access$700($r7);
+
+        if r2 != $r8 goto label5;
+
+        $r10 = r0.this$0;
+
+        $r11 = org.gjt.sp.jedit.gui.FontSelectorDialog.access$700($r10);
+
+        $r12 = $r11.getSelectedValue();
+
+        r27 = (java.lang.String) $r12;
+
+        if r27 == null goto label5;
+
+        $r13 = r0.this$0;
+
+        $r14 = org.gjt.sp.jedit.gui.FontSelectorDialog.access$800($r13);
+
+        $r14.setText(r27);
+
+     label5:
+        $r9 = r0.this$0;
+
+        org.gjt.sp.jedit.gui.FontSelectorDialog.access$900($r9);
+
+        return;
+    }
+}

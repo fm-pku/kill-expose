@@ -1,0 +1,55 @@
+public class LNode extends java.lang.Object
+{
+    public int data;
+    public LNode next;
+
+    public void <init>(int)
+    {
+        LNode this, temp$0;
+        int data;
+
+        this := @this;
+
+        data := @parameter0;
+
+        specialinvoke this.<init>();
+
+        this.data = data;
+
+        temp$0 = null;
+
+        this.next = temp$0;
+
+        return;
+    }
+
+    public void addBefore(LNode)
+    {
+        LNode this, n;
+
+        this := @this;
+
+        n := @parameter0;
+
+        n.next = this;
+
+        return;
+    }
+
+    public void addAfter(LNode)
+    {
+        LNode this, n, temp$0;
+
+        this := @this;
+
+        n := @parameter0;
+
+        temp$0 = this.next;
+
+        n.next = temp$0;
+
+        this.next = n;
+
+        return;
+    }
+}

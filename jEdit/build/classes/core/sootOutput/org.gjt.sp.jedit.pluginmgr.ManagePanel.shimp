@@ -1,0 +1,781 @@
+public class org.gjt.sp.jedit.pluginmgr.ManagePanel extends javax.swing.JPanel
+{
+    private final javax.swing.JCheckBox hideLibraries;
+    private final javax.swing.JTable table;
+    private final javax.swing.JScrollPane scrollpane;
+    private final org.gjt.sp.jedit.pluginmgr.PluginDetailPanel pluginDetailPanel;
+    private final org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel pluginModel;
+    private final org.gjt.sp.jedit.pluginmgr.PluginManager window;
+    private javax.swing.JPopupMenu popup;
+    private java.util.Set selectedPlugins;
+    private java.util.Set jarNames;
+
+    public void <init>(org.gjt.sp.jedit.pluginmgr.PluginManager)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManager r1;
+        javax.swing.Box r2, r12, $r15, $r78;
+        javax.swing.InputMap r3;
+        javax.swing.ActionMap r4;
+        javax.swing.table.TableColumn r5, r6, r7, r8;
+        javax.swing.table.JTableHeader r9;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler r10, $r63;
+        javax.swing.JSplitPane r11, $r74;
+        java.awt.BorderLayout $r13;
+        javax.swing.border.EmptyBorder $r14;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HideLibrariesButton $r16;
+        javax.swing.JTable $r19, $r21, $r23, $r24, $r26, $r28, $r29, $r33, $r34, $r37, $r38, $r51, $r53, $r55, $r57, $r59, $r64, $r66, $r69;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel $r20, $r92;
+        java.awt.Dimension $r22, $r25, $r72;
+        int $i0, $i1;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$TextRenderer $r27;
+        javax.swing.table.TableCellRenderer $r30, $r61;
+        javax.swing.table.DefaultTableCellRenderer $r31, $r62;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$TableFocusHandler $r32;
+        javax.swing.ListSelectionModel $r35;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$TableSelectionListener $r36;
+        javax.swing.KeyStroke $r39, $r42, $r45, $r48;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$KeyboardAction $r40, $r43, $r46, $r49;
+        org.gjt.sp.jedit.pluginmgr.KeyboardCommand $r41, $r44, $r47, $r50;
+        javax.swing.table.TableColumnModel $r52, $r54, $r56, $r58;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderRenderer $r60;
+        javax.swing.JScrollPane $r65, $r67, $r73, $r76;
+        javax.swing.JViewport $r68;
+        java.awt.Color $r70;
+        org.gjt.sp.jedit.pluginmgr.PluginDetailPanel $r71, $r75;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$RemoveButton $r79;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$SaveButton $r81;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$RestoreButton $r83;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$FindOrphan $r85;
+        java.awt.Component $r87;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$HelpButton $r89;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r13 = new java.awt.BorderLayout;
+
+        specialinvoke $r13.<init>(12, 12);
+
+        specialinvoke r0.<init>($r13);
+
+        r0.window = r1;
+
+        $r14 = new javax.swing.border.EmptyBorder;
+
+        specialinvoke $r14.<init>(12, 12, 12, 12);
+
+        r0.setBorder($r14);
+
+        $r15 = new javax.swing.Box;
+
+        specialinvoke $r15.<init>(0);
+
+        r2 = $r15;
+
+        $r16 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$HideLibrariesButton;
+
+        specialinvoke $r16.<init>(r0);
+
+        r0.hideLibraries = $r16;
+
+        r2.add($r16);
+
+        r0.add("North", r2);
+
+        $r19 = new javax.swing.JTable;
+
+        $r20 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel;
+
+        specialinvoke $r20.<init>(r0);
+
+        r0.pluginModel = $r20;
+
+        specialinvoke $r19.<init>($r20);
+
+        r0.table = $r19;
+
+        $r21 = r0.table;
+
+        $r21.setShowGrid(0);
+
+        $r23 = r0.table;
+
+        $r22 = new java.awt.Dimension;
+
+        specialinvoke $r22.<init>(0, 0);
+
+        $r23.setIntercellSpacing($r22);
+
+        $r24 = r0.table;
+
+        $i0 = org.gjt.sp.jedit.GUIUtilities.defaultRowHeight();
+
+        $i1 = $i0 + 2;
+
+        $r24.setRowHeight($i1);
+
+        $r26 = r0.table;
+
+        $r25 = new java.awt.Dimension;
+
+        specialinvoke $r25.<init>(500, 300);
+
+        $r26.setPreferredScrollableViewportSize($r25);
+
+        $r29 = r0.table;
+
+        $r27 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$TextRenderer;
+
+        $r28 = r0.table;
+
+        $r30 = $r28.getDefaultRenderer(class "java/lang/Object");
+
+        $r31 = (javax.swing.table.DefaultTableCellRenderer) $r30;
+
+        specialinvoke $r27.<init>(r0, $r31);
+
+        $r29.setDefaultRenderer(class "java/lang/Object", $r27);
+
+        $r33 = r0.table;
+
+        $r32 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$TableFocusHandler;
+
+        specialinvoke $r32.<init>(r0, null);
+
+        $r33.addFocusListener($r32);
+
+        $r34 = r0.table;
+
+        $r35 = $r34.getSelectionModel();
+
+        $r36 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$TableSelectionListener;
+
+        specialinvoke $r36.<init>(r0, null);
+
+        $r35.addListSelectionListener($r36);
+
+        $r37 = r0.table;
+
+        r3 = $r37.getInputMap(0);
+
+        $r38 = r0.table;
+
+        r4 = $r38.getActionMap();
+
+        $r39 = javax.swing.KeyStroke.getKeyStroke(9, 0);
+
+        r3.put($r39, "tabOutForward");
+
+        $r40 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$KeyboardAction;
+
+        $r41 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.TAB_OUT_FORWARD;
+
+        specialinvoke $r40.<init>(r0, $r41);
+
+        r4.put("tabOutForward", $r40);
+
+        $r42 = javax.swing.KeyStroke.getKeyStroke(9, 1);
+
+        r3.put($r42, "tabOutBack");
+
+        $r43 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$KeyboardAction;
+
+        $r44 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.TAB_OUT_BACK;
+
+        specialinvoke $r43.<init>(r0, $r44);
+
+        r4.put("tabOutBack", $r43);
+
+        $r45 = javax.swing.KeyStroke.getKeyStroke(32, 0);
+
+        r3.put($r45, "editPlugin");
+
+        $r46 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$KeyboardAction;
+
+        $r47 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.EDIT_PLUGIN;
+
+        specialinvoke $r46.<init>(r0, $r47);
+
+        r4.put("editPlugin", $r46);
+
+        $r48 = javax.swing.KeyStroke.getKeyStroke(10, 0);
+
+        r3.put($r48, "closePluginManager");
+
+        $r49 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$KeyboardAction;
+
+        $r50 = org.gjt.sp.jedit.pluginmgr.KeyboardCommand.CLOSE_PLUGIN_MANAGER;
+
+        specialinvoke $r49.<init>(r0, $r50);
+
+        r4.put("closePluginManager", $r49);
+
+        $r51 = r0.table;
+
+        $r52 = $r51.getColumnModel();
+
+        r5 = $r52.getColumn(0);
+
+        $r53 = r0.table;
+
+        $r54 = $r53.getColumnModel();
+
+        r6 = $r54.getColumn(1);
+
+        $r55 = r0.table;
+
+        $r56 = $r55.getColumnModel();
+
+        r7 = $r56.getColumn(2);
+
+        $r57 = r0.table;
+
+        $r58 = $r57.getColumnModel();
+
+        r8 = $r58.getColumn(3);
+
+        r5.setPreferredWidth(30);
+
+        r5.setMinWidth(30);
+
+        r5.setMaxWidth(30);
+
+        r5.setResizable(0);
+
+        r6.setPreferredWidth(300);
+
+        r7.setPreferredWidth(100);
+
+        r8.setPreferredWidth(100);
+
+        $r59 = r0.table;
+
+        r9 = $r59.getTableHeader();
+
+        r9.setReorderingAllowed(0);
+
+        $r60 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderRenderer;
+
+        $r61 = r9.getDefaultRenderer();
+
+        $r62 = (javax.swing.table.DefaultTableCellRenderer) $r61;
+
+        specialinvoke $r60.<init>($r62);
+
+        r9.setDefaultRenderer($r60);
+
+        $r63 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$HeaderMouseHandler;
+
+        specialinvoke $r63.<init>(r0, null);
+
+        r10 = $r63;
+
+        r9.addMouseListener(r10);
+
+        $r64 = r0.table;
+
+        $r64.addMouseListener(r10);
+
+        $r65 = new javax.swing.JScrollPane;
+
+        $r66 = r0.table;
+
+        specialinvoke $r65.<init>($r66);
+
+        r0.scrollpane = $r65;
+
+        $r67 = r0.scrollpane;
+
+        $r68 = $r67.getViewport();
+
+        $r69 = r0.table;
+
+        $r70 = $r69.getBackground();
+
+        $r68.setBackground($r70);
+
+        $r71 = new org.gjt.sp.jedit.pluginmgr.PluginDetailPanel;
+
+        specialinvoke $r71.<init>();
+
+        r0.pluginDetailPanel = $r71;
+
+        $r73 = r0.scrollpane;
+
+        $r72 = new java.awt.Dimension;
+
+        specialinvoke $r72.<init>(400, 400);
+
+        $r73.setPreferredSize($r72);
+
+        $r74 = new javax.swing.JSplitPane;
+
+        $r76 = r0.scrollpane;
+
+        $r75 = r0.pluginDetailPanel;
+
+        specialinvoke $r74.<init>(0, 1, $r76, $r75);
+
+        r11 = $r74;
+
+        r0.add("Center", r11);
+
+        r11.setResizeWeight(0.75);
+
+        $r78 = new javax.swing.Box;
+
+        specialinvoke $r78.<init>(0);
+
+        r12 = $r78;
+
+        $r79 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$RemoveButton;
+
+        specialinvoke $r79.<init>(r0);
+
+        r12.add($r79);
+
+        $r81 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$SaveButton;
+
+        specialinvoke $r81.<init>(r0);
+
+        r12.add($r81);
+
+        $r83 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$RestoreButton;
+
+        specialinvoke $r83.<init>(r0);
+
+        r12.add($r83);
+
+        $r85 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$FindOrphan;
+
+        specialinvoke $r85.<init>(r0, null);
+
+        r12.add($r85);
+
+        $r87 = javax.swing.Box.createGlue();
+
+        r12.add($r87);
+
+        $r89 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$HelpButton;
+
+        specialinvoke $r89.<init>(r0);
+
+        r12.add($r89);
+
+        r0.add("South", r12);
+
+        $r92 = r0.pluginModel;
+
+        $r92.update();
+
+        return;
+    }
+
+    public void update()
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel $r1;
+
+        r0 := @this;
+
+        $r1 = r0.pluginModel;
+
+        $r1.update();
+
+        return;
+    }
+
+    boolean loadPluginSet(java.lang.String)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        java.lang.String r1, r5, r6, r7, $r24;
+        org.gjt.sp.jedit.io.VFS r2;
+        java.lang.Object r3;
+        int i0, $i2, $i3, i4;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r4;
+        java.lang.Exception r8, $r19, $r20, r26;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$ManagePanelRestoreHandler $r9;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel $r10, $r11, $r12, $r14, $r17;
+        char $c1;
+        java.util.Set $r13, $r16;
+        boolean $z1, $z2;
+        java.lang.Boolean $r15, $r18;
+        java.lang.StringBuilder $r21, $r22, $r23;
+        java.io.InputStream r25;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r1);
+
+(0)     r3 = r2.createVFSSession(r1, r0);
+
+     label01:
+        r25 = r2._createInputStream(r3, r1, 0, r0);
+
+        $r9 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$ManagePanelRestoreHandler;
+
+        specialinvoke $r9.<init>(r0);
+
+        org.gjt.sp.util.XMLUtilities.parseXML(r25, $r9);
+
+        r25.close();
+
+        $r10 = r0.pluginModel;
+
+        i0 = $r10.getRowCount();
+
+(1)     i4 = 0;
+
+     label02:
+        i4 = Phi(i4 #1, i4 #3);
+
+(2)     if i4 >= i0 goto label08;
+
+        $r12 = r0.pluginModel;
+
+        r4 = $r12.getEntry(i4);
+
+        r5 = r4.name;
+
+        if r5 == null goto label03;
+
+        $r17 = r0.pluginModel;
+
+        $r16 = r0.selectedPlugins;
+
+        $z2 = $r16.contains(r5);
+
+        $r18 = java.lang.Boolean.valueOf($z2);
+
+        $r17.setValueAt($r18, i4, 0);
+
+        goto label07;
+
+     label03:
+        r6 = r4.jar;
+
+        $c1 = java.io.File.separatorChar;
+
+        $i2 = r6.lastIndexOf($c1);
+
+        $i3 = 1 + $i2;
+
+        r7 = r6.substring($i3);
+
+     label04:
+        $r14 = r0.pluginModel;
+
+        $r13 = r0.jarNames;
+
+        $z1 = $r13.contains(r7);
+
+        $r15 = java.lang.Boolean.valueOf($z1);
+
+        $r14.setValueAt($r15, i4, 0);
+
+     label05:
+        goto label07;
+
+     label06:
+        $r20 := @caughtexception;
+
+        r8 = $r20;
+
+        $r21 = new java.lang.StringBuilder;
+
+        specialinvoke $r21.<init>();
+
+        $r22 = $r21.append("Exception thrown loading: ");
+
+        $r23 = $r22.append(r7);
+
+        $r24 = $r23.toString();
+
+        org.gjt.sp.util.Log.log(7, r0, $r24, r8);
+
+     label07:
+        i4 = i4 + 1;
+
+(3)     goto label02;
+
+     label08:
+        goto label10;
+
+     label09:
+        $r19 := @caughtexception;
+
+        i4 = Phi(i4 #0, i4 #2);
+
+        r26 = $r19;
+
+        org.gjt.sp.util.Log.log(9, r0, "Loading Pluginset Error", r26);
+
+        return 0;
+
+     label10:
+        $r11 = r0.pluginModel;
+
+        $r11.update();
+
+        return 1;
+
+        catch java.lang.Exception from label04 to label05 with label06;
+        catch java.lang.Exception from label01 to label08 with label09;
+    }
+
+    private static java.util.Collection getDeclaredJars(java.lang.String) throws java.io.IOException
+    {
+        java.lang.String r0, r5, r8, $r14, $r17, $r18;
+        java.util.ArrayList r1, $r9;
+        org.gjt.sp.jedit.PluginJAR r2, $r10;
+        org.gjt.sp.jedit.PluginJAR$PluginCacheEntry r3;
+        java.util.Properties r4;
+        java.util.Collection r6;
+        java.util.Iterator r7;
+        java.io.File $r11, $r20;
+        java.lang.StringBuilder $r12, $r13, $r15, $r16;
+        boolean $z1, $z2;
+        java.lang.Object $r19;
+
+        r0 := @parameter0;
+
+        $r9 = new java.util.ArrayList;
+
+        specialinvoke $r9.<init>();
+
+        r1 = $r9;
+
+        $r10 = new org.gjt.sp.jedit.PluginJAR;
+
+        $r11 = new java.io.File;
+
+        specialinvoke $r11.<init>(r0);
+
+        specialinvoke $r10.<init>($r11);
+
+        r2 = $r10;
+
+        r3 = org.gjt.sp.jedit.PluginJAR.getPluginCacheEntry(r0);
+
+        if r3 == null goto label3;
+
+        r4 = r3.cachedProperties;
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<init>();
+
+        $r13 = $r12.append("plugin.");
+
+        $r14 = r3.pluginClass;
+
+        $r15 = $r13.append($r14);
+
+        $r16 = $r15.append(".jars");
+
+        $r17 = $r16.toString();
+
+        r5 = r4.getProperty($r17);
+
+        if r5 == null goto label3;
+
+        $r18 = r2.getPath();
+
+        r6 = org.gjt.sp.jedit.PluginJAR.parseJarsFilesString($r18, r5);
+
+        r7 = r6.iterator();
+
+     label1:
+        $z1 = r7.hasNext();
+
+        if $z1 == 0 goto label3;
+
+        $r19 = r7.next();
+
+        r8 = (java.lang.String) $r19;
+
+        $r20 = new java.io.File;
+
+        specialinvoke $r20.<init>(r8);
+
+        $z2 = $r20.exists();
+
+        if $z2 == 0 goto label2;
+
+        r1.add(r8);
+
+     label2:
+        goto label1;
+
+     label3:
+        r1.add(r0);
+
+        return r1;
+    }
+
+    static java.util.Set access$402(org.gjt.sp.jedit.pluginmgr.ManagePanel, java.util.Set)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        java.util.Set r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.selectedPlugins = r1;
+
+        return r1;
+    }
+
+    static java.util.Set access$502(org.gjt.sp.jedit.pluginmgr.ManagePanel, java.util.Set)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        java.util.Set r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.jarNames = r1;
+
+        return r1;
+    }
+
+    static java.util.Set access$400(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        java.util.Set $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.selectedPlugins;
+
+        return $r1;
+    }
+
+    static java.util.Set access$500(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        java.util.Set $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.jarNames;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel access$600(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$PluginTableModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.pluginModel;
+
+        return $r1;
+    }
+
+    static javax.swing.JTable access$800(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        javax.swing.JTable $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.table;
+
+        return $r1;
+    }
+
+    static javax.swing.JCheckBox access$900(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.hideLibraries;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.pluginmgr.PluginManager access$1000(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.window;
+
+        return $r1;
+    }
+
+    static javax.swing.JScrollPane access$1100(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        javax.swing.JScrollPane $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.scrollpane;
+
+        return $r1;
+    }
+
+    static java.util.Collection access$1200(java.lang.String) throws java.io.IOException
+    {
+        java.lang.String r0;
+        java.util.Collection $r1;
+
+        r0 := @parameter0;
+
+        $r1 = org.gjt.sp.jedit.pluginmgr.ManagePanel.getDeclaredJars(r0);
+
+        return $r1;
+    }
+
+    static javax.swing.JPopupMenu access$1400(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        javax.swing.JPopupMenu $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.popup;
+
+        return $r1;
+    }
+
+    static javax.swing.JPopupMenu access$1402(org.gjt.sp.jedit.pluginmgr.ManagePanel, javax.swing.JPopupMenu)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        javax.swing.JPopupMenu r1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r0.popup = r1;
+
+        return r1;
+    }
+
+    static org.gjt.sp.jedit.pluginmgr.PluginDetailPanel access$1700(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r0;
+        org.gjt.sp.jedit.pluginmgr.PluginDetailPanel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.pluginDetailPanel;
+
+        return $r1;
+    }
+}

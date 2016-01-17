@@ -1,0 +1,188 @@
+class org.gjt.sp.jedit.JEditRegisterSaver$RegistersHandler extends org.xml.sax.helpers.DefaultHandler
+{
+    private java.lang.String registerName;
+    private final java.lang.StringBuilder charData;
+    private boolean inRegister;
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.JEditRegisterSaver$RegistersHandler r0;
+        java.lang.StringBuilder $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        r0.charData = $r1;
+
+        return;
+    }
+
+    public org.xml.sax.InputSource resolveEntity(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.JEditRegisterSaver$RegistersHandler r0;
+        java.lang.String r1, r2;
+        java.lang.Class $r3;
+        org.xml.sax.InputSource $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r0.getClass();
+
+        $r4 = org.gjt.sp.util.XMLUtilities.findEntity(r2, "registers.dtd", $r3);
+
+        return $r4;
+    }
+
+    public void startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes)
+    {
+        org.gjt.sp.jedit.JEditRegisterSaver$RegistersHandler r0;
+        java.lang.String r1, r2, r3, $r5, $r6;
+        org.xml.sax.Attributes r4;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        $r5 = r4.getValue("NAME");
+
+        r0.registerName = $r5;
+
+        $r6 = "REGISTER";
+
+        $z0 = $r6.equals(r3);
+
+        r0.inRegister = $z0;
+
+        return;
+    }
+
+    public void endElement(java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.JEditRegisterSaver$RegistersHandler r0;
+        java.lang.String r1, r2, r3, $r4, $r5, $r8, $r10, $r12, $r13, $r15;
+        boolean $z0;
+        java.lang.StringBuilder $r6, $r7, $r9, $r11, $r14;
+        int $i0;
+        char $c1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = "REGISTER";
+
+        $z0 = $r4.equals(r3);
+
+        if $z0 == 0 goto label4;
+
+        $r5 = r0.registerName;
+
+        if $r5 == null goto label1;
+
+        $r12 = r0.registerName;
+
+        $i0 = $r12.length();
+
+        if $i0 == 1 goto label2;
+
+     label1:
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("Malformed NAME: ");
+
+        $r8 = r0.registerName;
+
+        $r9 = $r7.append($r8);
+
+        $r10 = $r9.toString();
+
+        org.gjt.sp.util.Log.log(9, r0, $r10);
+
+        goto label3;
+
+     label2:
+        $r13 = r0.registerName;
+
+        $c1 = $r13.charAt(0);
+
+        $r14 = r0.charData;
+
+        $r15 = $r14.toString();
+
+        org.gjt.sp.jedit.Registers.setRegister($c1, $r15);
+
+     label3:
+        r0.inRegister = 0;
+
+        $r11 = r0.charData;
+
+        $r11.setLength(0);
+
+     label4:
+        return;
+    }
+
+    public void characters(char[], int, int)
+    {
+        org.gjt.sp.jedit.JEditRegisterSaver$RegistersHandler r0;
+        char[] r1;
+        int i0, i1;
+        boolean $z0;
+        java.lang.StringBuilder $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        i1 := @parameter2;
+
+        $z0 = r0.inRegister;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = r0.charData;
+
+        $r2.append(r1, i0, i1);
+
+     label1:
+        return;
+    }
+
+    void <init>(org.gjt.sp.jedit.JEditRegisterSaver$1)
+    {
+        org.gjt.sp.jedit.JEditRegisterSaver$RegistersHandler r0;
+        org.gjt.sp.jedit.JEditRegisterSaver$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

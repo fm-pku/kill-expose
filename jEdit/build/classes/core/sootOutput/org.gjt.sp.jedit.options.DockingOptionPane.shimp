@@ -1,0 +1,480 @@
+public class org.gjt.sp.jedit.options.DockingOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private javax.swing.JComboBox dockingFramework;
+    private javax.swing.JTable windowTable;
+    private org.gjt.sp.jedit.options.WindowTableModel windowModel;
+    private javax.swing.JCheckBox autoLoadModeLayout;
+    private javax.swing.JCheckBox autoSaveModeLayout;
+    private javax.swing.JComboBox dockableSetSelection;
+    private static final java.lang.String DOCKING_OPTIONS_PREFIX;
+    public static final java.lang.String AUTO_LOAD_MODE_LAYOUT_PROP;
+    private static final java.lang.String AUTO_LOAD_MODE_LAYOUT_LABEL;
+    public static final java.lang.String AUTO_SAVE_MODE_LAYOUT_PROP;
+    private static final java.lang.String AUTO_SAVE_MODE_LAYOUT_LABEL;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.DockingOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("docking");
+
+        return;
+    }
+
+    public void _init()
+    {
+        org.gjt.sp.jedit.options.DockingOptionPane r0;
+        java.awt.BorderLayout $r1;
+        javax.swing.JPanel $r2, $r6;
+        javax.swing.JScrollPane $r4;
+        javax.swing.DefaultComboBoxModel $r8;
+        org.gjt.sp.jedit.options.WindowTableModel $r9;
+        javax.swing.JComboBox $r10;
+        java.util.Vector $r11;
+
+        r0 := @this;
+
+        $r1 = new java.awt.BorderLayout;
+
+        specialinvoke $r1.<init>();
+
+        r0.setLayout($r1);
+
+        $r2 = specialinvoke r0.createDockingOptionsPanel();
+
+        r0.add("North", $r2);
+
+        $r4 = specialinvoke r0.createWindowTableScroller();
+
+        r0.add("Center", $r4);
+
+        $r6 = specialinvoke r0.createDockingFrameworkChooser();
+
+        r0.add("South", $r6);
+
+        $r10 = r0.dockableSetSelection;
+
+        $r8 = new javax.swing.DefaultComboBoxModel;
+
+        $r9 = r0.windowModel;
+
+        $r11 = $r9.getDockableSets();
+
+        specialinvoke $r8.<init>($r11);
+
+        $r10.setModel($r8);
+
+        return;
+    }
+
+    public void _save()
+    {
+        org.gjt.sp.jedit.options.DockingOptionPane r0;
+        javax.swing.JCheckBox $r1, $r2;
+        boolean $z0, $z1;
+        javax.swing.JComboBox $r3;
+        java.lang.Object $r4;
+        java.lang.String $r5;
+        org.gjt.sp.jedit.options.WindowTableModel $r6;
+
+        r0 := @this;
+
+        $r1 = r0.autoLoadModeLayout;
+
+        $z0 = $r1.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("options.docking.autoLoadModeLayout", $z0);
+
+        $r2 = r0.autoSaveModeLayout;
+
+        $z1 = $r2.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("options.docking.autoSaveModeLayout", $z1);
+
+        $r3 = r0.dockingFramework;
+
+        $r4 = $r3.getSelectedItem();
+
+        $r5 = (java.lang.String) $r4;
+
+        org.gjt.sp.jedit.jEdit.setProperty("view.docking.framework", $r5);
+
+        $r6 = r0.windowModel;
+
+        $r6.save();
+
+        return;
+    }
+
+    private javax.swing.JPanel createDockingFrameworkChooser()
+    {
+        org.gjt.sp.jedit.options.DockingOptionPane r0;
+        java.lang.String[] r1;
+        java.lang.String r2, $r5, $r7, $r10, $r14;
+        javax.swing.JComboBox $r3, $r4, $r12, $r15;
+        int $i0, i1;
+        javax.swing.JPanel $r6, r16;
+        java.awt.FlowLayout $r8;
+        javax.swing.JLabel $r9;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 = org.gjt.sp.jedit.ServiceManager.getServiceNames("org.gjt.sp.jedit.gui.DockingFrameworkProvider");
+
+        $r3 = new javax.swing.JComboBox;
+
+        specialinvoke $r3.<init>(r1);
+
+        r0.dockingFramework = $r3;
+
+        r2 = org.gjt.sp.jedit.View.getDockingFrameworkName();
+
+(0)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $i0 = lengthof r1;
+
+        if i1 >= $i0 goto label3;
+
+        $r14 = r1[i1];
+
+        $z0 = $r14.equals(r2);
+
+        if $z0 == 0 goto label2;
+
+        $r15 = r0.dockingFramework;
+
+        $r15.setSelectedIndex(i1);
+
+        goto label3;
+
+     label2:
+        i1 = i1 + 1;
+
+(1)     goto label1;
+
+     label3:
+        $r4 = r0.dockingFramework;
+
+        $r5 = org.gjt.sp.jedit.jEdit.getProperty("options.docking.system-change.note");
+
+        $r4.setToolTipText($r5);
+
+        $r6 = new javax.swing.JPanel;
+
+        specialinvoke $r6.<init>();
+
+        r16 = $r6;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getProperty("options.docking.system-change.note");
+
+        r16.setToolTipText($r7);
+
+        $r8 = new java.awt.FlowLayout;
+
+        specialinvoke $r8.<init>();
+
+        r16.setLayout($r8);
+
+        $r9 = new javax.swing.JLabel;
+
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty("options.docking.selectFramework.label");
+
+        specialinvoke $r9.<init>($r10);
+
+        r16.add($r9);
+
+        $r12 = r0.dockingFramework;
+
+        r16.add($r12);
+
+        return r16;
+    }
+
+    private javax.swing.JPanel createDockingOptionsPanel()
+    {
+        org.gjt.sp.jedit.options.DockingOptionPane r0;
+        javax.swing.JPanel r1, $r4;
+        boolean z0, $z1;
+        javax.swing.Box r2, r3;
+        java.awt.GridLayout $r5;
+        javax.swing.JCheckBox $r6, $r8, $r10, $r12, $r14, $r16;
+        java.lang.String $r7, $r11, $r22;
+        org.gjt.sp.jedit.options.DockingOptionPane$1 $r15;
+        java.awt.Component $r19, $r24, $r31, $r33;
+        javax.swing.JLabel $r21;
+        javax.swing.JComboBox $r26, $r27, $r30;
+        org.gjt.sp.jedit.options.DockingOptionPane$2 $r29;
+
+        r0 := @this;
+
+        $r4 = new javax.swing.JPanel;
+
+        specialinvoke $r4.<init>();
+
+        r1 = $r4;
+
+        $r5 = new java.awt.GridLayout;
+
+        specialinvoke $r5.<init>(0, 1);
+
+        r1.setLayout($r5);
+
+        z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("options.docking.autoLoadModeLayout", 0);
+
+        $r6 = new javax.swing.JCheckBox;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getProperty("options.docking.autoLoadModeLayout.label");
+
+        specialinvoke $r6.<init>($r7, z0);
+
+        r0.autoLoadModeLayout = $r6;
+
+        $r8 = r0.autoLoadModeLayout;
+
+        r1.add($r8);
+
+        $r10 = new javax.swing.JCheckBox;
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty("options.docking.autoSaveModeLayout.label");
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("options.docking.autoSaveModeLayout", 0);
+
+        specialinvoke $r10.<init>($r11, $z1);
+
+        r0.autoSaveModeLayout = $r10;
+
+        $r12 = r0.autoSaveModeLayout;
+
+        r1.add($r12);
+
+        $r14 = r0.autoSaveModeLayout;
+
+        $r14.setEnabled(z0);
+
+        $r16 = r0.autoLoadModeLayout;
+
+        $r15 = new org.gjt.sp.jedit.options.DockingOptionPane$1;
+
+        specialinvoke $r15.<init>(r0);
+
+        $r16.addActionListener($r15);
+
+        r2 = javax.swing.Box.createVerticalBox();
+
+        r1.add(r2);
+
+        r3 = javax.swing.Box.createHorizontalBox();
+
+        r2.add(r3);
+
+        $r19 = javax.swing.Box.createHorizontalStrut(6);
+
+        r3.add($r19);
+
+        $r21 = new javax.swing.JLabel;
+
+        $r22 = org.gjt.sp.jedit.jEdit.getProperty("options.docking.selectSet.label");
+
+        specialinvoke $r21.<init>($r22);
+
+        r3.add($r21);
+
+        $r24 = javax.swing.Box.createHorizontalStrut(6);
+
+        r3.add($r24);
+
+        $r26 = new javax.swing.JComboBox;
+
+        specialinvoke $r26.<init>();
+
+        r0.dockableSetSelection = $r26;
+
+        $r27 = r0.dockableSetSelection;
+
+        r3.add($r27);
+
+        $r30 = r0.dockableSetSelection;
+
+        $r29 = new org.gjt.sp.jedit.options.DockingOptionPane$2;
+
+        specialinvoke $r29.<init>(r0);
+
+        $r30.addItemListener($r29);
+
+        $r31 = javax.swing.Box.createHorizontalStrut(6);
+
+        r3.add($r31);
+
+        $r33 = javax.swing.Box.createVerticalStrut(6);
+
+        r2.add($r33);
+
+        return r1;
+    }
+
+    private javax.swing.JScrollPane createWindowTableScroller()
+    {
+        org.gjt.sp.jedit.options.DockingOptionPane r0;
+        org.gjt.sp.jedit.options.DockingOptionPane$DockPositionCellRenderer r1, $r13, $r19;
+        javax.swing.table.TableColumn r2;
+        java.awt.Dimension r3, $r15;
+        javax.swing.JScrollPane r4, $r21;
+        org.gjt.sp.jedit.options.WindowTableModel $r5, $r7;
+        javax.swing.JTable $r6, $r8, $r10, $r11, $r12, $r14, $r16, $r20, $r22;
+        javax.swing.table.JTableHeader $r9;
+        int $i0, $i1, $i2;
+        javax.swing.table.TableColumnModel $r17;
+        javax.swing.DefaultCellEditor $r18;
+
+        r0 := @this;
+
+        $r5 = org.gjt.sp.jedit.options.DockingOptionPane.createWindowModel();
+
+        r0.windowModel = $r5;
+
+        $r6 = new javax.swing.JTable;
+
+        $r7 = r0.windowModel;
+
+        specialinvoke $r6.<init>($r7);
+
+        r0.windowTable = $r6;
+
+        $r8 = r0.windowTable;
+
+        $r9 = $r8.getTableHeader();
+
+        $r9.setReorderingAllowed(0);
+
+        $r10 = r0.windowTable;
+
+        $r10.setColumnSelectionAllowed(0);
+
+        $r11 = r0.windowTable;
+
+        $r11.setRowSelectionAllowed(0);
+
+        $r12 = r0.windowTable;
+
+        $r12.setCellSelectionEnabled(0);
+
+        $r13 = new org.gjt.sp.jedit.options.DockingOptionPane$DockPositionCellRenderer;
+
+        specialinvoke $r13.<init>();
+
+        r1 = $r13;
+
+        $r14 = r0.windowTable;
+
+        $r15 = r1.getPreferredSize();
+
+        $i0 = $r15.height;
+
+        $r14.setRowHeight($i0);
+
+        $r16 = r0.windowTable;
+
+        $r17 = $r16.getColumnModel();
+
+        r2 = $r17.getColumn(1);
+
+        r2.setCellRenderer(r1);
+
+        $r18 = new javax.swing.DefaultCellEditor;
+
+        $r19 = new org.gjt.sp.jedit.options.DockingOptionPane$DockPositionCellRenderer;
+
+        specialinvoke $r19.<init>();
+
+        specialinvoke $r18.<init>($r19);
+
+        r2.setCellEditor($r18);
+
+        $r20 = r0.windowTable;
+
+        r3 = $r20.getPreferredSize();
+
+        $i1 = r3.height;
+
+        $i2 = java.lang.Math.min($i1, 50);
+
+        r3.height = $i2;
+
+        $r21 = new javax.swing.JScrollPane;
+
+        $r22 = r0.windowTable;
+
+        specialinvoke $r21.<init>($r22);
+
+        r4 = $r21;
+
+        r4.setPreferredSize(r3);
+
+        return r4;
+    }
+
+    private static org.gjt.sp.jedit.options.WindowTableModel createWindowModel()
+    {
+        org.gjt.sp.jedit.options.WindowTableModel $r0;
+
+        $r0 = new org.gjt.sp.jedit.options.WindowTableModel;
+
+        specialinvoke $r0.<init>();
+
+        return $r0;
+    }
+
+    static javax.swing.JCheckBox access$000(org.gjt.sp.jedit.options.DockingOptionPane)
+    {
+        org.gjt.sp.jedit.options.DockingOptionPane r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.autoLoadModeLayout;
+
+        return $r1;
+    }
+
+    static javax.swing.JCheckBox access$100(org.gjt.sp.jedit.options.DockingOptionPane)
+    {
+        org.gjt.sp.jedit.options.DockingOptionPane r0;
+        javax.swing.JCheckBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.autoSaveModeLayout;
+
+        return $r1;
+    }
+
+    static javax.swing.JComboBox access$200(org.gjt.sp.jedit.options.DockingOptionPane)
+    {
+        org.gjt.sp.jedit.options.DockingOptionPane r0;
+        javax.swing.JComboBox $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.dockableSetSelection;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.options.WindowTableModel access$300(org.gjt.sp.jedit.options.DockingOptionPane)
+    {
+        org.gjt.sp.jedit.options.DockingOptionPane r0;
+        org.gjt.sp.jedit.options.WindowTableModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.windowModel;
+
+        return $r1;
+    }
+}

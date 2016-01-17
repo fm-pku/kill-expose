@@ -1,0 +1,276 @@
+class org.gjt.sp.jedit.bsh.BSHLiteral extends org.gjt.sp.jedit.bsh.SimpleNode
+{
+    public java.lang.Object value;
+
+    void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.BSHLiteral r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>(i0);
+
+        return;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.BSHLiteral r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        java.lang.Object $r3, $r4, $r8;
+        org.gjt.sp.jedit.bsh.InterpreterError $r5;
+        java.lang.StringBuilder $r6, $r7, $r9;
+        java.lang.String $r10;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r0.value;
+
+        if $r3 != null goto label1;
+
+        $r5 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("Null in bsh literal: ");
+
+        $r8 = r0.value;
+
+        $r9 = $r7.append($r8);
+
+        $r10 = $r9.toString();
+
+        specialinvoke $r5.<init>($r10);
+
+        throw $r5;
+
+     label1:
+        $r4 = r0.value;
+
+        return $r4;
+    }
+
+    private char getEscapeChar(char)
+    {
+        org.gjt.sp.jedit.bsh.BSHLiteral r0;
+        char c0, c0_1, c0_2, c0_3, c0_4, c0_5, c0_6;
+
+        r0 := @this;
+
+        c0 := @parameter0;
+
+(0)     lookupswitch(c0)
+        {
+            case 34: goto label6;
+            case 39: goto label6;
+            case 92: goto label6;
+            case 98: goto label1;
+            case 102: goto label4;
+            case 110: goto label3;
+            case 114: goto label5;
+            case 116: goto label2;
+            default: goto label6;
+        };
+
+     label1:
+        c0_1 = 8;
+
+(1)     goto label6;
+
+     label2:
+        c0_2 = 9;
+
+(2)     goto label6;
+
+     label3:
+        c0_3 = 10;
+
+(3)     goto label6;
+
+     label4:
+        c0_4 = 12;
+
+(4)     goto label6;
+
+     label5:
+        c0_5 = 13;
+
+(5)     goto label6;
+
+     label6:
+        c0_6 = Phi(c0 #0, c0_1 #1, c0_2 #2, c0_3 #3, c0_4 #4, c0_5 #5);
+
+        return c0_6;
+    }
+
+    public void charSetup(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BSHLiteral r0;
+        java.lang.String r1, $r4;
+        org.gjt.sp.jedit.bsh.Primitive $r2;
+        java.lang.Character $r3;
+        char $c0, c2, c3, c2_1, c2_2, c2_3;
+        boolean $z0;
+        int $i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        c2 = r1.charAt(0);
+
+(0)     if c2 != 92 goto label2;
+
+        c3 = r1.charAt(1);
+
+        $z0 = java.lang.Character.isDigit(c3);
+
+        if $z0 == 0 goto label1;
+
+        $r4 = r1.substring(1);
+
+        $i1 = java.lang.Integer.parseInt($r4, 8);
+
+        c2_1 = (char) $i1;
+
+(1)     goto label2;
+
+     label1:
+(2)     c2_2 = specialinvoke r0.getEscapeChar(c3);
+
+     label2:
+        c2_3 = Phi(c2 #0, c2_1 #1, c2_2 #2);
+
+        $r2 = new org.gjt.sp.jedit.bsh.Primitive;
+
+        $r3 = new java.lang.Character;
+
+        specialinvoke $r3.<init>(c2_3);
+
+        $c0 = $r3.charValue();
+
+        specialinvoke $r2.<init>($c0);
+
+        r0.value = $r2;
+
+        return;
+    }
+
+    void stringSetup(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.BSHLiteral r0;
+        java.lang.String r1, $r4, $r5, $r7;
+        java.lang.StringBuilder r2, $r3;
+        int $i0, $i1, $i2, $i3, $i4, i6, i9;
+        boolean $z0, $z1;
+        char $c5, c7, c8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        r2 = $r3;
+
+(0)     i6 = 0;
+
+     label1:
+        i9 = Phi(i9 #0, i9 #6);
+
+        c7 = Phi(c7 #0, c7 #6);
+
+        i6 = Phi(i6 #0, i6 #6);
+
+        $i0 = r1.length();
+
+        if i6 >= $i0 goto label6;
+
+        c7 = r1.charAt(i6);
+
+(1)     if c7 != 92 goto label5;
+
+        i6 = i6 + 1;
+
+        c8 = r1.charAt(i6);
+
+        $z0 = java.lang.Character.isDigit(c8);
+
+        if $z0 == 0 goto label4;
+
+(2)     i9 = i6;
+
+     label2:
+        i9 = Phi(i9 #2, i9 #3);
+
+        c7 = Phi(c7 #2, c7 #3);
+
+        i6 = Phi(i6 #2, i6 #3);
+
+        $i1 = i6 + 2;
+
+        if i9 >= $i1 goto label3;
+
+        $i4 = i9 + 1;
+
+        $c5 = r1.charAt($i4);
+
+        $z1 = java.lang.Character.isDigit($c5);
+
+        if $z1 == 0 goto label3;
+
+        i9 = i9 + 1;
+
+(3)     goto label2;
+
+     label3:
+        $i2 = i9 + 1;
+
+        $r7 = r1.substring(i6, $i2);
+
+        $i3 = java.lang.Integer.parseInt($r7, 8);
+
+        c7 = (char) $i3;
+
+        i6 = i9;
+
+(4)     goto label5;
+
+     label4:
+(5)     c7 = specialinvoke r0.getEscapeChar(c8);
+
+     label5:
+        i9 = Phi(i9 #1, i9 #4, i9 #5);
+
+        c7 = Phi(c7 #1, c7 #4, c7 #5);
+
+        i6 = Phi(i6 #1, i6 #4, i6 #5);
+
+        r2.append(c7);
+
+        i6 = i6 + 1;
+
+(6)     goto label1;
+
+     label6:
+        $r4 = r2.toString();
+
+        $r5 = $r4.intern();
+
+        r0.value = $r5;
+
+        return;
+    }
+}

@@ -1,0 +1,3167 @@
+public class org.gjt.sp.jedit.bsh.NameSpace extends java.lang.Object implements java.io.Serializable, org.gjt.sp.jedit.bsh.BshClassManager$Listener, org.gjt.sp.jedit.bsh.NameSource
+{
+    public static final org.gjt.sp.jedit.bsh.NameSpace JAVACODE;
+    private java.lang.String nsName;
+    private org.gjt.sp.jedit.bsh.NameSpace parent;
+    private java.util.Hashtable variables;
+    private java.util.Hashtable methods;
+    protected java.util.Hashtable importedClasses;
+    private java.util.Vector importedPackages;
+    private java.util.Vector importedCommands;
+    private java.util.Vector importedObjects;
+    private java.util.Vector importedStatic;
+    private java.lang.String packageName;
+    private transient org.gjt.sp.jedit.bsh.BshClassManager classManager;
+    private org.gjt.sp.jedit.bsh.This thisReference;
+    private java.util.Hashtable names;
+    org.gjt.sp.jedit.bsh.SimpleNode callerInfoNode;
+    boolean isMethod;
+    boolean isClass;
+    java.lang.Class classStatic;
+    java.lang.Object classInstance;
+    private transient java.util.Hashtable classCache;
+    java.util.Vector nameSourceListeners;
+
+    void setClassStatic(java.lang.Class)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.Class r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.classStatic = r1;
+
+        r0.importStatic(r1);
+
+        return;
+    }
+
+    void setClassInstance(java.lang.Object)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.Object r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.classInstance = r1;
+
+        r0.importObject(r1);
+
+        return;
+    }
+
+    java.lang.Object getClassInstance() throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.Object $r1, $r9;
+        java.lang.Class $r2;
+        org.gjt.sp.jedit.bsh.InterpreterError $r3;
+        java.lang.StringBuilder $r4, $r5, $r6;
+        java.lang.String $r7;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r8;
+
+        r0 := @this;
+
+        $r1 = r0.classInstance;
+
+        if $r1 == null goto label1;
+
+        $r9 = r0.classInstance;
+
+        return $r9;
+
+     label1:
+        $r2 = r0.classStatic;
+
+        if $r2 == null goto label2;
+
+        $r8 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        specialinvoke $r8.<init>("Can\'t refer to class instance from static context.");
+
+        throw $r8;
+
+     label2:
+        $r3 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("Can\'t resolve class instance \'this\' in: ");
+
+        $r6 = $r5.append(r0);
+
+        $r7 = $r6.toString();
+
+        specialinvoke $r3.<init>($r7);
+
+        throw $r3;
+    }
+
+    public void <init>(org.gjt.sp.jedit.bsh.NameSpace, java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, r1;
+        java.lang.String r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(r1, null, r2);
+
+        return;
+    }
+
+    public void <init>(org.gjt.sp.jedit.bsh.BshClassManager, java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        org.gjt.sp.jedit.bsh.BshClassManager r1;
+        java.lang.String r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        specialinvoke r0.<init>(null, r1, r2);
+
+        return;
+    }
+
+    public void <init>(org.gjt.sp.jedit.bsh.NameSpace, org.gjt.sp.jedit.bsh.BshClassManager, java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, r1;
+        org.gjt.sp.jedit.bsh.BshClassManager r2;
+        java.lang.String r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.setName(r3);
+
+        r0.setParent(r1);
+
+        r0.setClassManager(r2);
+
+        if r2 == null goto label1;
+
+        r2.addListener(r0);
+
+     label1:
+        return;
+    }
+
+    public void setName(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.nsName = r1;
+
+        return;
+    }
+
+    public java.lang.String getName()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.nsName;
+
+        return $r1;
+    }
+
+    void setNode(org.gjt.sp.jedit.bsh.SimpleNode)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        org.gjt.sp.jedit.bsh.SimpleNode r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.callerInfoNode = r1;
+
+        return;
+    }
+
+    org.gjt.sp.jedit.bsh.SimpleNode getNode()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, $r2, $r3;
+        org.gjt.sp.jedit.bsh.SimpleNode $r1, $r4, $r5;
+
+        r0 := @this;
+
+        $r1 = r0.callerInfoNode;
+
+        if $r1 == null goto label1;
+
+        $r5 = r0.callerInfoNode;
+
+        return $r5;
+
+     label1:
+        $r2 = r0.parent;
+
+        if $r2 == null goto label2;
+
+        $r3 = r0.parent;
+
+        $r4 = $r3.getNode();
+
+        return $r4;
+
+     label2:
+        return null;
+    }
+
+    public java.lang.Object get(java.lang.String, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.CallStack r3, $r4;
+        org.gjt.sp.jedit.bsh.Name $r5;
+        java.lang.Object $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = new org.gjt.sp.jedit.bsh.CallStack;
+
+        specialinvoke $r4.<init>(r0);
+
+        r3 = $r4;
+
+        $r5 = r0.getNameResolver(r1);
+
+        $r6 = $r5.toObject(r3, r2);
+
+        return $r6;
+    }
+
+    public void setVariable(java.lang.String, java.lang.Object, boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        java.lang.Object r2;
+        boolean z0, z1, $z2, $z3, $z3_1, $z3_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        $z2 = org.gjt.sp.jedit.bsh.Interpreter.LOCALSCOPING;
+
+        if $z2 == 0 goto label1;
+
+        $z3 = z0;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z3_1 = 1;
+
+     label2:
+        $z3_2 = Phi($z3 #0, $z3_1 #1);
+
+        z1 = $z3_2;
+
+        r0.setVariable(r1, r2, z0, z1);
+
+        return;
+    }
+
+    void setLocalVariable(java.lang.String, java.lang.Object, boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        java.lang.Object r2;
+        boolean z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        r0.setVariable(r1, r2, z0, 0);
+
+        return;
+    }
+
+    void setVariable(java.lang.String, java.lang.Object, boolean, boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, r24;
+        java.lang.String r1, $r12, $r20, $r22;
+        java.lang.Object r2;
+        boolean z0, z1;
+        org.gjt.sp.jedit.bsh.Variable r3, $r5;
+        java.util.Hashtable $r4, $r6, $r13;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r8, $r14, $r15, r23;
+        java.lang.StringBuilder $r9, $r10, $r11, $r16, $r17, $r18, $r19, $r21;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        z1 := @parameter3;
+
+        $r4 = r0.variables;
+
+        if $r4 != null goto label1;
+
+        $r13 = new java.util.Hashtable;
+
+        specialinvoke $r13.<init>();
+
+        r0.variables = $r13;
+
+     label1:
+        if r2 != null goto label2;
+
+        r0.unsetVariable(r1);
+
+        return;
+
+     label2:
+        r3 = r0.getVariableImpl(r1, z1);
+
+        if r3 == null goto label6;
+
+     label3:
+        r3.setValue(r2, 1);
+
+     label4:
+        goto label8;
+
+     label5:
+        $r14 := @caughtexception;
+
+        r23 = $r14;
+
+        $r15 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<init>();
+
+        $r17 = $r16.append("Variable assignment: ");
+
+        $r18 = $r17.append(r1);
+
+        $r19 = $r18.append(": ");
+
+        $r20 = r23.getMessage();
+
+        $r21 = $r19.append($r20);
+
+        $r22 = $r21.toString();
+
+        specialinvoke $r15.<init>($r22);
+
+        throw $r15;
+
+     label6:
+        if z0 == 0 goto label7;
+
+        $r8 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append("(Strict Java mode) Assignment to undeclared variable: ");
+
+        $r11 = $r10.append(r1);
+
+        $r12 = $r11.toString();
+
+        specialinvoke $r8.<init>($r12);
+
+        throw $r8;
+
+     label7:
+        r24 = r0;
+
+        $r6 = r24.variables;
+
+        $r5 = new org.gjt.sp.jedit.bsh.Variable;
+
+        specialinvoke $r5.<init>(r1, r2, null);
+
+        $r6.put(r1, $r5);
+
+        r0.nameSpaceChanged();
+
+     label8:
+        return;
+
+        catch org.gjt.sp.jedit.bsh.UtilEvalError from label3 to label4 with label5;
+    }
+
+    public void unsetVariable(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        java.util.Hashtable $r2, $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.variables;
+
+        if $r2 == null goto label1;
+
+        $r3 = r0.variables;
+
+        $r3.remove(r1);
+
+        r0.nameSpaceChanged();
+
+     label1:
+        return;
+    }
+
+    public java.lang.String[] getVariableNames()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.util.Hashtable $r1, $r2;
+        java.util.Enumeration $r3;
+        java.lang.String[] $r4, $r5;
+
+        r0 := @this;
+
+        $r1 = r0.variables;
+
+        if $r1 != null goto label1;
+
+        $r5 = newarray (java.lang.String)[0];
+
+        return $r5;
+
+     label1:
+        $r2 = r0.variables;
+
+        $r3 = $r2.keys();
+
+        $r4 = specialinvoke r0.enumerationToStringArray($r3);
+
+        return $r4;
+    }
+
+    public java.lang.String[] getMethodNames()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.util.Hashtable $r1, $r2;
+        java.util.Enumeration $r3;
+        java.lang.String[] $r4, $r5;
+
+        r0 := @this;
+
+        $r1 = r0.methods;
+
+        if $r1 != null goto label1;
+
+        $r5 = newarray (java.lang.String)[0];
+
+        return $r5;
+
+     label1:
+        $r2 = r0.methods;
+
+        $r3 = $r2.keys();
+
+        $r4 = specialinvoke r0.enumerationToStringArray($r3);
+
+        return $r4;
+    }
+
+    public org.gjt.sp.jedit.bsh.BshMethod[] getMethods()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.util.Hashtable $r1, $r2;
+        java.util.Enumeration $r3;
+        org.gjt.sp.jedit.bsh.BshMethod[] $r4, $r5;
+
+        r0 := @this;
+
+        $r1 = r0.methods;
+
+        if $r1 != null goto label1;
+
+        $r5 = newarray (org.gjt.sp.jedit.bsh.BshMethod)[0];
+
+        return $r5;
+
+     label1:
+        $r2 = r0.methods;
+
+        $r3 = $r2.elements();
+
+        $r4 = specialinvoke r0.flattenMethodCollection($r3);
+
+        return $r4;
+    }
+
+    private java.lang.String[] enumerationToStringArray(java.util.Enumeration)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.util.Enumeration r1;
+        java.util.Vector r2, $r4;
+        java.lang.String[] r3;
+        boolean $z0;
+        int $i0;
+        java.lang.Object $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = new java.util.Vector;
+
+        specialinvoke $r4.<init>();
+
+        r2 = $r4;
+
+     label1:
+        $z0 = r1.hasMoreElements();
+
+        if $z0 == 0 goto label2;
+
+        $r5 = r1.nextElement();
+
+        r2.addElement($r5);
+
+        goto label1;
+
+     label2:
+        $i0 = r2.size();
+
+        r3 = newarray (java.lang.String)[$i0];
+
+        r2.copyInto(r3);
+
+        return r3;
+    }
+
+    private org.gjt.sp.jedit.bsh.BshMethod[] flattenMethodCollection(java.util.Enumeration)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.util.Enumeration r1;
+        java.util.Vector r2, r3, $r4;
+        boolean $z0, $z1;
+        int $i0, $i1, i2;
+        java.lang.Object $r5, r6;
+        org.gjt.sp.jedit.bsh.BshMethod[] r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = new java.util.Vector;
+
+        specialinvoke $r4.<init>();
+
+(0)     r2 = $r4;
+
+     label1:
+        i2 = Phi(i2 #0, i2 #5);
+
+        $z0 = r1.hasMoreElements();
+
+        if $z0 == 0 goto label5;
+
+        r6 = r1.nextElement();
+
+        $z1 = r6 instanceof org.gjt.sp.jedit.bsh.BshMethod;
+
+        if $z1 == 0 goto label2;
+
+        r2.addElement(r6);
+
+(1)     goto label4;
+
+     label2:
+        r3 = (java.util.Vector) r6;
+
+(2)     i2 = 0;
+
+     label3:
+        i2 = Phi(i2 #2, i2 #4);
+
+        $i1 = r3.size();
+
+(3)     if i2 >= $i1 goto label4;
+
+        $r5 = r3.elementAt(i2);
+
+        r2.addElement($r5);
+
+        i2 = i2 + 1;
+
+(4)     goto label3;
+
+     label4:
+        i2 = Phi(i2 #1, i2 #3);
+
+(5)     goto label1;
+
+     label5:
+        $i0 = r2.size();
+
+        r7 = newarray (org.gjt.sp.jedit.bsh.BshMethod)[$i0];
+
+        r2.copyInto(r7);
+
+        return r7;
+    }
+
+    public org.gjt.sp.jedit.bsh.NameSpace getParent()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, $r1;
+
+        r0 := @this;
+
+        $r1 = r0.parent;
+
+        return $r1;
+    }
+
+    public org.gjt.sp.jedit.bsh.This getSuper(org.gjt.sp.jedit.bsh.Interpreter)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, $r2, $r4;
+        org.gjt.sp.jedit.bsh.Interpreter r1;
+        org.gjt.sp.jedit.bsh.This $r3, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.parent;
+
+        if $r2 == null goto label1;
+
+        $r4 = r0.parent;
+
+        $r5 = $r4.getThis(r1);
+
+        return $r5;
+
+     label1:
+        $r3 = r0.getThis(r1);
+
+        return $r3;
+    }
+
+    public org.gjt.sp.jedit.bsh.This getGlobal(org.gjt.sp.jedit.bsh.Interpreter)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, $r2, $r4;
+        org.gjt.sp.jedit.bsh.Interpreter r1;
+        org.gjt.sp.jedit.bsh.This $r3, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.parent;
+
+        if $r2 == null goto label1;
+
+        $r4 = r0.parent;
+
+        $r5 = $r4.getGlobal(r1);
+
+        return $r5;
+
+     label1:
+        $r3 = r0.getThis(r1);
+
+        return $r3;
+    }
+
+    org.gjt.sp.jedit.bsh.This getThis(org.gjt.sp.jedit.bsh.Interpreter)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        org.gjt.sp.jedit.bsh.Interpreter r1;
+        org.gjt.sp.jedit.bsh.This $r2, $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.thisReference;
+
+        if $r2 != null goto label1;
+
+        $r4 = org.gjt.sp.jedit.bsh.This.getThis(r0, r1);
+
+        r0.thisReference = $r4;
+
+     label1:
+        $r3 = r0.thisReference;
+
+        return $r3;
+    }
+
+    public org.gjt.sp.jedit.bsh.BshClassManager getClassManager()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, $r2, $r6, $r7, $r8;
+        org.gjt.sp.jedit.bsh.BshClassManager $r1, $r4, $r5, $r9, $r10;
+        java.io.PrintStream $r3;
+
+        r0 := @this;
+
+        $r1 = r0.classManager;
+
+        if $r1 == null goto label1;
+
+        $r10 = r0.classManager;
+
+        return $r10;
+
+     label1:
+        $r2 = r0.parent;
+
+        if $r2 == null goto label2;
+
+        $r7 = r0.parent;
+
+        $r6 = org.gjt.sp.jedit.bsh.NameSpace.JAVACODE;
+
+        if $r7 == $r6 goto label2;
+
+        $r8 = r0.parent;
+
+        $r9 = $r8.getClassManager();
+
+        return $r9;
+
+     label2:
+        $r3 = java.lang.System.out;
+
+        $r3.println("experiment: creating class manager");
+
+        $r4 = org.gjt.sp.jedit.bsh.BshClassManager.createClassManager(null);
+
+        r0.classManager = $r4;
+
+        $r5 = r0.classManager;
+
+        return $r5;
+    }
+
+    void setClassManager(org.gjt.sp.jedit.bsh.BshClassManager)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        org.gjt.sp.jedit.bsh.BshClassManager r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.classManager = r1;
+
+        return;
+    }
+
+    public void prune()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        org.gjt.sp.jedit.bsh.BshClassManager $r1, $r2;
+
+        r0 := @this;
+
+        $r1 = r0.classManager;
+
+        if $r1 != null goto label1;
+
+        $r2 = org.gjt.sp.jedit.bsh.BshClassManager.createClassManager(null);
+
+        r0.setClassManager($r2);
+
+     label1:
+        r0.setParent(null);
+
+        return;
+    }
+
+    public void setParent(org.gjt.sp.jedit.bsh.NameSpace)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.parent = r1;
+
+        if r1 != null goto label1;
+
+        r0.loadDefaultImports();
+
+     label1:
+        return;
+    }
+
+    public java.lang.Object getVariable(java.lang.String) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        java.lang.Object $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.getVariable(r1, 1);
+
+        return $r2;
+    }
+
+    public java.lang.Object getVariable(java.lang.String, boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        boolean z0;
+        org.gjt.sp.jedit.bsh.Variable r2;
+        java.lang.Object $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        r2 = r0.getVariableImpl(r1, z0);
+
+        $r3 = r0.unwrapVariable(r2);
+
+        return $r3;
+    }
+
+    protected org.gjt.sp.jedit.bsh.Variable getVariableImpl(java.lang.String, boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, $r2, $r3;
+        java.lang.String r1;
+        boolean z0, $z1, $z2;
+        java.util.Hashtable $r4, $r5;
+        java.lang.Object $r6;
+        org.gjt.sp.jedit.bsh.Variable r7, r7_1, r7_2, r7_3, r7_4, r7_5, r7_6, r7_7, r7_8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        z0 := @parameter1;
+
+        r7 = null;
+
+(0)     if r7 != null goto label1;
+
+        $z2 = r0.isClass;
+
+(1)     if $z2 == 0 goto label1;
+
+(2)     r7_1 = r0.getImportedVar(r1);
+
+     label1:
+        r7_2 = Phi(r7 #0, r7 #1, r7_1 #2);
+
+(3)     if r7_2 != null goto label2;
+
+        $r4 = r0.variables;
+
+(4)     if $r4 == null goto label2;
+
+        $r5 = r0.variables;
+
+        $r6 = $r5.get(r1);
+
+(5)     r7_3 = (org.gjt.sp.jedit.bsh.Variable) $r6;
+
+     label2:
+        r7_4 = Phi(r7_2 #3, r7_2 #4, r7_3 #5);
+
+(6)     if r7_4 != null goto label3;
+
+        $z1 = r0.isClass;
+
+(7)     if $z1 != 0 goto label3;
+
+(8)     r7_5 = r0.getImportedVar(r1);
+
+     label3:
+        r7_6 = Phi(r7_4 #6, r7_4 #7, r7_5 #8);
+
+(9)     if z0 == 0 goto label4;
+
+(10)    if r7_6 != null goto label4;
+
+        $r2 = r0.parent;
+
+(11)    if $r2 == null goto label4;
+
+        $r3 = r0.parent;
+
+(12)    r7_7 = $r3.getVariableImpl(r1, z0);
+
+     label4:
+        r7_8 = Phi(r7_6 #9, r7_6 #10, r7_6 #11, r7_7 #12);
+
+        return r7_8;
+    }
+
+    public org.gjt.sp.jedit.bsh.Variable[] getDeclaredVariables()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        org.gjt.sp.jedit.bsh.Variable[] r1, $r8;
+        java.util.Enumeration r2;
+        java.util.Hashtable $r3, $r4, $r5;
+        int $i0, $i1, i2;
+        boolean $z0;
+        java.lang.Object $r6;
+        org.gjt.sp.jedit.bsh.Variable $r7;
+
+        r0 := @this;
+
+        $r3 = r0.variables;
+
+        if $r3 != null goto label1;
+
+        $r8 = newarray (org.gjt.sp.jedit.bsh.Variable)[0];
+
+        return $r8;
+
+     label1:
+        $r4 = r0.variables;
+
+        $i0 = $r4.size();
+
+        r1 = newarray (org.gjt.sp.jedit.bsh.Variable)[$i0];
+
+        i2 = 0;
+
+        $r5 = r0.variables;
+
+(0)     r2 = $r5.elements();
+
+     label2:
+        i2 = Phi(i2 #0, i2 #1);
+
+        $z0 = r2.hasMoreElements();
+
+        if $z0 == 0 goto label3;
+
+        $i1 = i2;
+
+        i2 = i2 + 1;
+
+        $r6 = r2.nextElement();
+
+        $r7 = (org.gjt.sp.jedit.bsh.Variable) $r6;
+
+        r1[$i1] = $r7;
+
+(1)     goto label2;
+
+     label3:
+        return r1;
+    }
+
+    protected java.lang.Object unwrapVariable(org.gjt.sp.jedit.bsh.Variable) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        org.gjt.sp.jedit.bsh.Variable r1;
+        java.lang.Object $r2, $r2_1, $r2_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        if r1 != null goto label1;
+
+        $r2 = org.gjt.sp.jedit.bsh.Primitive.VOID;
+
+(0)     goto label2;
+
+     label1:
+(1)     $r2_1 = r1.getValue();
+
+     label2:
+        $r2_2 = Phi($r2 #0, $r2_1 #1);
+
+        return $r2_2;
+    }
+
+    public void setTypedVariable(java.lang.String, java.lang.Class, java.lang.Object, boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        java.lang.Class r2;
+        java.lang.Object r3;
+        boolean z0;
+        org.gjt.sp.jedit.bsh.Modifiers r4, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        z0 := @parameter3;
+
+        $r5 = new org.gjt.sp.jedit.bsh.Modifiers;
+
+        specialinvoke $r5.<init>();
+
+        r4 = $r5;
+
+        if z0 == 0 goto label1;
+
+        r4.addModifier(2, "final");
+
+     label1:
+        r0.setTypedVariable(r1, r2, r3, r4);
+
+        return;
+    }
+
+    public void setTypedVariable(java.lang.String, java.lang.Class, java.lang.Object, org.gjt.sp.jedit.bsh.Modifiers) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1, $r19;
+        java.lang.Class r2, $r10, $r11, $r17;
+        java.lang.Object r3;
+        org.gjt.sp.jedit.bsh.Modifiers r4;
+        org.gjt.sp.jedit.bsh.Variable r5, $r7;
+        java.util.Hashtable $r6, $r8, $r20;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r12;
+        java.lang.StringBuilder $r13, $r14, $r15, $r16, $r18;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        $r6 = r0.variables;
+
+        if $r6 != null goto label1;
+
+        $r20 = new java.util.Hashtable;
+
+        specialinvoke $r20.<init>();
+
+        r0.variables = $r20;
+
+     label1:
+        r5 = r0.getVariableImpl(r1, 0);
+
+        if r5 == null goto label3;
+
+        $r10 = r5.getType();
+
+        if $r10 == null goto label3;
+
+        $r11 = r5.getType();
+
+        if $r11 == r2 goto label2;
+
+        $r12 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r14 = $r13.append("Typed variable: ");
+
+        $r15 = $r14.append(r1);
+
+        $r16 = $r15.append(" was previously declared with type: ");
+
+        $r17 = r5.getType();
+
+        $r18 = $r16.append($r17);
+
+        $r19 = $r18.toString();
+
+        specialinvoke $r12.<init>($r19);
+
+        throw $r12;
+
+     label2:
+        r5.setValue(r3, 0);
+
+        return;
+
+     label3:
+        $r8 = r0.variables;
+
+        $r7 = new org.gjt.sp.jedit.bsh.Variable;
+
+        specialinvoke $r7.<init>(r1, r2, r3, r4);
+
+        $r8.put(r1, $r7);
+
+        return;
+    }
+
+    public void setMethod(java.lang.String, org.gjt.sp.jedit.bsh.BshMethod) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.bsh.BshMethod r2, r4, $r11;
+        java.lang.Object r3, $r7;
+        java.util.Hashtable $r5, $r6, $r15, $r17, $r19, $r21;
+        boolean $z0, $z1, $z2;
+        int $i0, i1;
+        java.lang.Class[] $r8, $r9, $r12, $r13;
+        java.util.Vector $r14, r22, r23;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r5 = r0.methods;
+
+        if $r5 != null goto label1;
+
+        $r21 = new java.util.Hashtable;
+
+        specialinvoke $r21.<init>();
+
+        r0.methods = $r21;
+
+     label1:
+        $r6 = r0.methods;
+
+        r3 = $r6.get(r1);
+
+        if r3 != null goto label2;
+
+        $r19 = r0.methods;
+
+        $r19.put(r1, r2);
+
+(0)     goto label8;
+
+     label2:
+        $z0 = r3 instanceof org.gjt.sp.jedit.bsh.BshMethod;
+
+        if $z0 == 0 goto label4;
+
+        $r11 = (org.gjt.sp.jedit.bsh.BshMethod) r3;
+
+        $r12 = $r11.getParameterTypes();
+
+        $r13 = r2.getParameterTypes();
+
+        $z2 = java.util.Arrays.equals($r12, $r13);
+
+        if $z2 == 0 goto label3;
+
+        $r17 = r0.methods;
+
+        $r17.put(r1, r2);
+
+(1)     goto label8;
+
+     label3:
+        $r14 = new java.util.Vector;
+
+        specialinvoke $r14.<init>();
+
+        r22 = $r14;
+
+        r22.addElement(r3);
+
+        r22.addElement(r2);
+
+        $r15 = r0.methods;
+
+        $r15.put(r1, r22);
+
+(2)     goto label8;
+
+     label4:
+        r23 = (java.util.Vector) r3;
+
+(3)     i1 = 0;
+
+     label5:
+        i1 = Phi(i1 #3, i1 #4);
+
+        $i0 = r23.size();
+
+        if i1 >= $i0 goto label7;
+
+        $r7 = r23.get(i1);
+
+        r4 = (org.gjt.sp.jedit.bsh.BshMethod) $r7;
+
+        $r8 = r4.getParameterTypes();
+
+        $r9 = r2.getParameterTypes();
+
+        $z1 = java.util.Arrays.equals($r8, $r9);
+
+        if $z1 == 0 goto label6;
+
+        r23.remove(i1);
+
+        goto label7;
+
+     label6:
+        i1 = i1 + 1;
+
+(4)     goto label5;
+
+     label7:
+(5)     r23.addElement(r2);
+
+     label8:
+        i1 = Phi(i1 #0, i1 #1, i1 #2, i1 #5);
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.BshMethod getMethod(java.lang.String, java.lang.Class[]) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        java.lang.Class[] r2;
+        org.gjt.sp.jedit.bsh.BshMethod $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r0.getMethod(r1, r2, 0);
+
+        return $r3;
+    }
+
+    public org.gjt.sp.jedit.bsh.BshMethod getMethod(java.lang.String, java.lang.Class[], boolean) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, $r3, $r4;
+        java.lang.String r1;
+        java.lang.Class[] r2, $r11;
+        boolean z0, $z1, $z2, $z3;
+        org.gjt.sp.jedit.bsh.BshMethod $r5, $r9, $r10, r12, r12_1, r12_2;
+        java.util.Hashtable $r6, $r7;
+        org.gjt.sp.jedit.bsh.BshMethod[] $r8, r15, r15_1, r15_2;
+        int $i0, $i1, $i2, i3, i4;
+        java.lang.Object r13;
+        java.util.Vector r14;
+        java.lang.Class[][] r16;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        r12 = null;
+
+(0)     if r12 != null goto label1;
+
+        $z3 = r0.isClass;
+
+(1)     if $z3 == 0 goto label1;
+
+(2)     if z0 != 0 goto label1;
+
+(3)     r12_1 = r0.getImportedMethod(r1, r2);
+
+     label1:
+        r12_2 = Phi(r12 #0, r12 #1, r12 #2, r12_1 #3);
+
+(4)     if r12_2 != null goto label6;
+
+        $r6 = r0.methods;
+
+(5)     if $r6 == null goto label6;
+
+        $r7 = r0.methods;
+
+        r13 = $r7.get(r1);
+
+(6)     if r13 == null goto label6;
+
+        $z2 = r13 instanceof java.util.Vector;
+
+        if $z2 == 0 goto label2;
+
+        r14 = (java.util.Vector) r13;
+
+        $i2 = r14.size();
+
+        r15 = newarray (org.gjt.sp.jedit.bsh.BshMethod)[$i2];
+
+        r14.copyInto(r15);
+
+(7)     goto label3;
+
+     label2:
+        $r8 = newarray (org.gjt.sp.jedit.bsh.BshMethod)[1];
+
+        $r9 = (org.gjt.sp.jedit.bsh.BshMethod) r13;
+
+        $r8[0] = $r9;
+
+(8)     r15_1 = $r8;
+
+     label3:
+        r15_2 = Phi(r15 #7, r15_1 #8);
+
+        $i0 = lengthof r15_2;
+
+        r16 = newarray (java.lang.Class[])[$i0];
+
+(9)     i3 = 0;
+
+     label4:
+        r15 = Phi(r15_2 #9, r15 #10);
+
+        r12 = Phi(r12_2 #9, r12 #10);
+
+        i3 = Phi(i3 #9, i3 #10);
+
+        $i1 = lengthof r15;
+
+        if i3 >= $i1 goto label5;
+
+        $r10 = r15[i3];
+
+        $r11 = $r10.getParameterTypes();
+
+        r16[i3] = $r11;
+
+        i3 = i3 + 1;
+
+(10)    goto label4;
+
+     label5:
+        i4 = org.gjt.sp.jedit.bsh.Reflect.findMostSpecificSignature(r2, r16);
+
+(11)    if i4 == -1 goto label6;
+
+(12)    r12 = r15[i4];
+
+     label6:
+        r15 = Phi(r15 #4, r15 #5, r15 #6, r15 #11, r15 #12);
+
+        r12 = Phi(r12_2 #4, r12_2 #5, r12_2 #6, r12 #11, r12 #12);
+
+        i3 = Phi(i3 #4, i3 #5, i3 #6, i3 #11, i3 #12);
+
+(13)    if r12 != null goto label7;
+
+        $z1 = r0.isClass;
+
+(14)    if $z1 != 0 goto label7;
+
+(15)    if z0 != 0 goto label7;
+
+(16)    r12 = r0.getImportedMethod(r1, r2);
+
+     label7:
+        r12 = Phi(r12 #13, r12 #14, r12 #15, r12 #16);
+
+        if z0 != 0 goto label8;
+
+        if r12 != null goto label8;
+
+        $r3 = r0.parent;
+
+        if $r3 == null goto label8;
+
+        $r4 = r0.parent;
+
+        $r5 = $r4.getMethod(r1, r2);
+
+        return $r5;
+
+     label8:
+        return r12;
+    }
+
+    public void importClass(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1, $r4;
+        java.util.Hashtable $r2, $r3, $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.importedClasses;
+
+        if $r2 != null goto label1;
+
+        $r6 = new java.util.Hashtable;
+
+        specialinvoke $r6.<init>();
+
+        r0.importedClasses = $r6;
+
+     label1:
+        $r3 = r0.importedClasses;
+
+        $r4 = org.gjt.sp.jedit.bsh.Name.suffix(r1, 1);
+
+        $r3.put($r4, r1);
+
+        r0.nameSpaceChanged();
+
+        return;
+    }
+
+    public void importPackage(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        java.util.Vector $r2, $r3, $r4, $r5, $r6;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.importedPackages;
+
+        if $r2 != null goto label1;
+
+        $r6 = new java.util.Vector;
+
+        specialinvoke $r6.<init>();
+
+        r0.importedPackages = $r6;
+
+     label1:
+        $r3 = r0.importedPackages;
+
+        $z0 = $r3.contains(r1);
+
+        if $z0 == 0 goto label2;
+
+        $r5 = r0.importedPackages;
+
+        $r5.remove(r1);
+
+     label2:
+        $r4 = r0.importedPackages;
+
+        $r4.addElement(r1);
+
+        r0.nameSpaceChanged();
+
+        return;
+    }
+
+    public void importCommands(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.util.Vector $r1, $r2, $r3, $r4, $r8;
+        boolean $z0, $z1, $z3;
+        int $i0, $i1, $i2;
+        java.lang.StringBuilder $r5, $r6, $r7;
+        java.lang.String r9, r10, r10_1, r10_2, r10_3, r10_4;
+
+        r0 := @this;
+
+        r9 := @parameter0;
+
+        $r1 = r0.importedCommands;
+
+        if $r1 != null goto label1;
+
+        $r8 = new java.util.Vector;
+
+        specialinvoke $r8.<init>();
+
+        r0.importedCommands = $r8;
+
+     label1:
+        r10 = r9.replace(46, 47);
+
+        $z0 = r10.startsWith("/");
+
+(0)     if $z0 != 0 goto label2;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append("/");
+
+        $r7 = $r6.append(r10);
+
+(1)     r10_1 = $r7.toString();
+
+     label2:
+        r10_2 = Phi(r10 #0, r10_1 #1);
+
+        $i0 = r10_2.length();
+
+(2)     if $i0 <= 1 goto label3;
+
+        $z3 = r10_2.endsWith("/");
+
+(3)     if $z3 == 0 goto label3;
+
+        $i1 = r10_2.length();
+
+        $i2 = $i1 - 1;
+
+(4)     r10_3 = r10_2.substring(0, $i2);
+
+     label3:
+        r10_4 = Phi(r10_2 #2, r10_2 #3, r10_3 #4);
+
+        $r2 = r0.importedCommands;
+
+        $z1 = $r2.contains(r10_4);
+
+        if $z1 == 0 goto label4;
+
+        $r4 = r0.importedCommands;
+
+        $r4.remove(r10_4);
+
+     label4:
+        $r3 = r0.importedCommands;
+
+        $r3.addElement(r10_4);
+
+        r0.nameSpaceChanged();
+
+        return;
+    }
+
+    public java.lang.Object getCommand(java.lang.String, java.lang.Class[], org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, $r6, $r7;
+        java.lang.String r1, $r13;
+        java.lang.Class[] r2;
+        org.gjt.sp.jedit.bsh.Interpreter r3;
+        java.io.InputStream r5;
+        boolean $z0;
+        java.lang.Object $r8;
+        org.gjt.sp.jedit.bsh.BshMethod $r9;
+        java.lang.StringBuilder $r10, $r11, $r12;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $z0 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z0 == 0 goto label1;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = $r10.append("getCommand: ");
+
+        $r12 = $r11.append(r1);
+
+        $r13 = $r12.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r13);
+
+     label1:
+        r3.getClassManager();
+
+        r5 = r0.getCommand(r1);
+
+        if r5 == null goto label2;
+
+        $r9 = specialinvoke r0.loadScriptedCommand(r5, r1, r2, r1, r3);
+
+        return $r9;
+
+     label2:
+        $r6 = r0.parent;
+
+        if $r6 == null goto label3;
+
+        $r7 = r0.parent;
+
+        $r8 = $r7.getCommand(r1, r2, r3);
+
+        return $r8;
+
+     label3:
+        return null;
+    }
+
+    protected org.gjt.sp.jedit.bsh.BshMethod getImportedMethod(java.lang.String, java.lang.Class[]) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        java.lang.Class[] r2;
+        java.lang.reflect.Method r3, r18;
+        java.util.Vector $r4, $r5, $r6, $r7, $r11, $r12;
+        int $i0, $i1, i2, i3;
+        java.lang.Object $r8, r15;
+        org.gjt.sp.jedit.bsh.BshClassManager $r9, $r13;
+        org.gjt.sp.jedit.bsh.BshMethod $r10, $r14;
+        java.lang.Class r16, r17;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = r0.importedObjects;
+
+(0)     if $r4 == null goto label3;
+
+(1)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #1, i2 #3);
+
+        $r11 = r0.importedObjects;
+
+        $i1 = $r11.size();
+
+(2)     if i2 >= $i1 goto label3;
+
+        $r12 = r0.importedObjects;
+
+        r15 = $r12.elementAt(i2);
+
+        r16 = r15.getClass();
+
+        $r13 = r0.getClassManager();
+
+        r3 = org.gjt.sp.jedit.bsh.Reflect.resolveJavaMethod($r13, r16, r1, r2, 0);
+
+        if r3 == null goto label2;
+
+        $r14 = new org.gjt.sp.jedit.bsh.BshMethod;
+
+        specialinvoke $r14.<init>(r3, r15);
+
+        return $r14;
+
+     label2:
+        i2 = i2 + 1;
+
+(3)     goto label1;
+
+     label3:
+        i2 = Phi(i2 #0, i2 #2);
+
+        $r5 = r0.importedStatic;
+
+(4)     if $r5 == null goto label6;
+
+(5)     i3 = 0;
+
+     label4:
+        i3 = Phi(i3 #5, i3 #7);
+
+        i2 = Phi(i2 #5, i2 #7);
+
+        $r6 = r0.importedStatic;
+
+        $i0 = $r6.size();
+
+(6)     if i3 >= $i0 goto label6;
+
+        $r7 = r0.importedStatic;
+
+        $r8 = $r7.elementAt(i3);
+
+        r17 = (java.lang.Class) $r8;
+
+        $r9 = r0.getClassManager();
+
+        r18 = org.gjt.sp.jedit.bsh.Reflect.resolveJavaMethod($r9, r17, r1, r2, 1);
+
+        if r18 == null goto label5;
+
+        $r10 = new org.gjt.sp.jedit.bsh.BshMethod;
+
+        specialinvoke $r10.<init>(r18, null);
+
+        return $r10;
+
+     label5:
+        i3 = i3 + 1;
+
+(7)     goto label4;
+
+     label6:
+        i3 = Phi(i3 #4, i3 #6);
+
+        i2 = Phi(i2 #4, i2 #6);
+
+        return null;
+    }
+
+    protected org.gjt.sp.jedit.bsh.Variable getImportedVar(java.lang.String) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        java.lang.reflect.Field r2, r19;
+        java.util.Vector $r3, $r4, $r5, $r6, $r11, $r12;
+        int $i0, $i1, i2, i3;
+        java.lang.Object $r7, r16;
+        org.gjt.sp.jedit.bsh.Variable $r8, $r13;
+        java.lang.Class $r9, $r14, r17, r18;
+        org.gjt.sp.jedit.bsh.LHS $r10, $r15;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.importedObjects;
+
+(0)     if $r3 == null goto label3;
+
+(1)     i2 = 0;
+
+     label1:
+        i2 = Phi(i2 #1, i2 #3);
+
+        $r11 = r0.importedObjects;
+
+        $i1 = $r11.size();
+
+(2)     if i2 >= $i1 goto label3;
+
+        $r12 = r0.importedObjects;
+
+        r16 = $r12.elementAt(i2);
+
+        r17 = r16.getClass();
+
+        r2 = org.gjt.sp.jedit.bsh.Reflect.resolveJavaField(r17, r1, 0);
+
+        if r2 == null goto label2;
+
+        $r13 = new org.gjt.sp.jedit.bsh.Variable;
+
+        $r14 = r2.getType();
+
+        $r15 = new org.gjt.sp.jedit.bsh.LHS;
+
+        specialinvoke $r15.<init>(r16, r2);
+
+        specialinvoke $r13.<init>(r1, $r14, $r15);
+
+        return $r13;
+
+     label2:
+        i2 = i2 + 1;
+
+(3)     goto label1;
+
+     label3:
+        i2 = Phi(i2 #0, i2 #2);
+
+        $r4 = r0.importedStatic;
+
+(4)     if $r4 == null goto label6;
+
+(5)     i3 = 0;
+
+     label4:
+        i3 = Phi(i3 #5, i3 #7);
+
+        i2 = Phi(i2 #5, i2 #7);
+
+        $r5 = r0.importedStatic;
+
+        $i0 = $r5.size();
+
+(6)     if i3 >= $i0 goto label6;
+
+        $r6 = r0.importedStatic;
+
+        $r7 = $r6.elementAt(i3);
+
+        r18 = (java.lang.Class) $r7;
+
+        r19 = org.gjt.sp.jedit.bsh.Reflect.resolveJavaField(r18, r1, 1);
+
+        if r19 == null goto label5;
+
+        $r8 = new org.gjt.sp.jedit.bsh.Variable;
+
+        $r9 = r19.getType();
+
+        $r10 = new org.gjt.sp.jedit.bsh.LHS;
+
+        specialinvoke $r10.<init>(r19);
+
+        specialinvoke $r8.<init>(r1, $r9, $r10);
+
+        return $r8;
+
+     label5:
+        i3 = i3 + 1;
+
+(7)     goto label4;
+
+     label6:
+        i3 = Phi(i3 #4, i3 #6);
+
+        i2 = Phi(i2 #4, i2 #6);
+
+        return null;
+    }
+
+    private org.gjt.sp.jedit.bsh.BshMethod loadScriptedCommand(java.io.InputStream, java.lang.String, java.lang.Class[], java.lang.String, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.io.InputStream r1;
+        java.lang.String r2, r4, $r9, $r13, $r15;
+        java.lang.Class[] r3;
+        org.gjt.sp.jedit.bsh.Interpreter r5;
+        java.io.InputStreamReader $r6;
+        org.gjt.sp.jedit.bsh.EvalError $r8, r16;
+        org.gjt.sp.jedit.bsh.UtilEvalError $r10;
+        java.lang.StringBuilder $r11, $r12, $r14;
+        org.gjt.sp.jedit.bsh.BshMethod r17;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+     label1:
+        $r6 = new java.io.InputStreamReader;
+
+        specialinvoke $r6.<init>(r1);
+
+        r5.eval($r6, r0, r4);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r8 := @caughtexception;
+
+        r16 = $r8;
+
+        $r9 = r16.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r9);
+
+        $r10 = new org.gjt.sp.jedit.bsh.UtilEvalError;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = $r11.append("Error loading script: ");
+
+        $r13 = r16.getMessage();
+
+        $r14 = $r12.append($r13);
+
+        $r15 = $r14.toString();
+
+        specialinvoke $r10.<init>($r15);
+
+        throw $r10;
+
+     label4:
+        r17 = r0.getMethod(r2, r3);
+
+        return r17;
+
+        catch org.gjt.sp.jedit.bsh.EvalError from label1 to label2 with label3;
+    }
+
+    void cacheClass(java.lang.String, java.lang.Class)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        java.lang.Class r2;
+        java.util.Hashtable $r3, $r4, $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = r0.classCache;
+
+        if $r3 != null goto label1;
+
+        $r6 = new java.util.Hashtable;
+
+        specialinvoke $r6.<init>();
+
+        r0.classCache = $r6;
+
+     label1:
+        $r4 = r0.classCache;
+
+        $r4.put(r1, r2);
+
+        return;
+    }
+
+    public java.lang.Class getClass(java.lang.String) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, $r3, $r4;
+        java.lang.String r1;
+        java.lang.Class r2, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 = specialinvoke r0.getClassImpl(r1);
+
+        if r2 == null goto label1;
+
+        return r2;
+
+     label1:
+        $r3 = r0.parent;
+
+        if $r3 == null goto label2;
+
+        $r4 = r0.parent;
+
+        $r5 = $r4.getClass(r1);
+
+        return $r5;
+
+     label2:
+        return null;
+    }
+
+    private java.lang.Class getClassImpl(java.lang.String) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1, $r8;
+        boolean z0, $z1, $z2, $z3, $z3_1, $z3_2;
+        java.util.Hashtable $r2, $r9;
+        java.lang.StringBuilder $r3, $r4, $r5, $r6, $r7;
+        java.lang.Object $r10;
+        java.lang.Class r11, r12, r11_1, r11_2, r11_3, r11_4, r11_5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r11 = null;
+
+        $r2 = r0.classCache;
+
+(0)     if $r2 == null goto label1;
+
+        $r9 = r0.classCache;
+
+        $r10 = $r9.get(r1);
+
+        r11_1 = (java.lang.Class) $r10;
+
+(1)     if r11_1 == null goto label1;
+
+        return r11_1;
+
+     label1:
+        r11_2 = Phi(r11 #0, r11_1 #1);
+
+        $z1 = org.gjt.sp.jedit.bsh.Name.isCompound(r1);
+
+        if $z1 != 0 goto label2;
+
+        $z3 = 1;
+
+(2)     goto label3;
+
+     label2:
+(3)     $z3_1 = 0;
+
+     label3:
+        $z3_2 = Phi($z3 #2, $z3_1 #3);
+
+        z0 = $z3_2;
+
+(4)     if z0 == 0 goto label5;
+
+(5)     if r11_2 != null goto label4;
+
+(6)     r11_3 = specialinvoke r0.getImportedClassImpl(r1);
+
+     label4:
+        r11_4 = Phi(r11_2 #5, r11_3 #6);
+
+(7)     if r11_4 == null goto label5;
+
+        r0.cacheClass(r1, r11_4);
+
+        return r11_4;
+
+     label5:
+        r11_5 = Phi(r11_2 #4, r11_4 #7);
+
+        r12 = specialinvoke r0.classForName(r1);
+
+        if r12 == null goto label7;
+
+        if z0 == 0 goto label6;
+
+        r0.cacheClass(r1, r12);
+
+     label6:
+        return r12;
+
+     label7:
+        $z2 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+        if $z2 == 0 goto label8;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append("getClass(): ");
+
+        $r5 = $r4.append(r1);
+
+        $r6 = $r5.append(" not\tfound in ");
+
+        $r7 = $r6.append(r0);
+
+        $r8 = $r7.toString();
+
+        org.gjt.sp.jedit.bsh.Interpreter.debug($r8);
+
+     label8:
+        return null;
+    }
+
+    private java.lang.Class getImportedClassImpl(java.lang.String) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1, $r10, $r18, r23, r26, r28, r23_1, r23_2;
+        java.lang.Class r2, $r5, r24, r24_1, r24_2, r24_3;
+        java.util.Hashtable $r3, $r20;
+        java.util.Vector $r4, $r6, $r8;
+        boolean $z0, $z1, $z2;
+        int $i0, i1;
+        java.lang.StringBuilder $r7, $r11, $r12, $r13, $r15, $r16, $r17;
+        java.lang.Object $r9, $r21;
+        org.gjt.sp.jedit.bsh.BshClassManager $r14, r27;
+        org.gjt.sp.jedit.bsh.Name $r19;
+        java.lang.ClassNotFoundException $r22, r25;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r23 = null;
+
+        $r3 = r0.importedClasses;
+
+(0)     if $r3 == null goto label01;
+
+        $r20 = r0.importedClasses;
+
+        $r21 = $r20.get(r1);
+
+(1)     r23_1 = (java.lang.String) $r21;
+
+     label01:
+        r23_2 = Phi(r23 #0, r23_1 #1);
+
+        if r23_2 == null goto label09;
+
+        r24 = specialinvoke r0.classForName(r23_2);
+
+        if r24 != null goto label07;
+
+        $z1 = org.gjt.sp.jedit.bsh.Name.isCompound(r23_2);
+
+(2)     if $z1 == 0 goto label05;
+
+     label02:
+        $r19 = r0.getNameResolver(r23_2);
+
+(3)     r24_1 = $r19.toClass();
+
+     label03:
+(4)     goto label06;
+
+     label04:
+        $r22 := @caughtexception;
+
+        r24_2 = Phi(r24 #2, r24_1 #3);
+
+        r25 = $r22;
+
+(5)     goto label06;
+
+     label05:
+        $z2 = org.gjt.sp.jedit.bsh.Interpreter.DEBUG;
+
+(6)     if $z2 == 0 goto label06;
+
+        $r15 = new java.lang.StringBuilder;
+
+        specialinvoke $r15.<init>();
+
+        $r16 = $r15.append("imported unpackaged name not found:");
+
+        $r17 = $r16.append(r23_2);
+
+        $r18 = $r17.toString();
+
+(7)     org.gjt.sp.jedit.bsh.Interpreter.debug($r18);
+
+     label06:
+        r24_3 = Phi(r24_1 #4, r24_2 #5, r24 #6, r24 #7);
+
+        if r24_3 == null goto label08;
+
+        $r14 = r0.getClassManager();
+
+        $r14.cacheClassInfo(r23_2, r24_3);
+
+        return r24_3;
+
+     label07:
+        return r24;
+
+     label08:
+        return null;
+
+     label09:
+        $r4 = r0.importedPackages;
+
+(8)     if $r4 == null goto label12;
+
+        $r6 = r0.importedPackages;
+
+        $i0 = $r6.size();
+
+(9)     i1 = $i0 - 1;
+
+     label10:
+        r23 = Phi(r23_2 #9, r23 #11);
+
+        i1 = Phi(i1 #9, i1 #11);
+
+(10)    if i1 < 0 goto label12;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = r0.importedPackages;
+
+        $r9 = $r8.elementAt(i1);
+
+        $r10 = (java.lang.String) $r9;
+
+        $r11 = $r7.append($r10);
+
+        $r12 = $r11.append(".");
+
+        $r13 = $r12.append(r1);
+
+        r26 = $r13.toString();
+
+        r2 = specialinvoke r0.classForName(r26);
+
+        if r2 == null goto label11;
+
+        return r2;
+
+     label11:
+        i1 = i1 + -1;
+
+(11)    goto label10;
+
+     label12:
+        r23 = Phi(r23_2 #8, r23 #10);
+
+        i1 = Phi(i1 #8, i1 #10);
+
+        r27 = r0.getClassManager();
+
+        $z0 = r27.hasSuperImport();
+
+        if $z0 == 0 goto label13;
+
+        r28 = r27.getClassNameByUnqName(r1);
+
+        if r28 == null goto label13;
+
+        $r5 = specialinvoke r0.classForName(r28);
+
+        return $r5;
+
+     label13:
+        return null;
+
+        catch java.lang.ClassNotFoundException from label02 to label03 with label04;
+    }
+
+    private java.lang.Class classForName(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        org.gjt.sp.jedit.bsh.BshClassManager $r2;
+        java.lang.Class $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.getClassManager();
+
+        $r3 = $r2.classForName(r1);
+
+        return $r3;
+    }
+
+    public java.lang.String[] getAllNames()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.util.Vector r1, $r3;
+        java.lang.String[] r2;
+        int $i0;
+
+        r0 := @this;
+
+        $r3 = new java.util.Vector;
+
+        specialinvoke $r3.<init>();
+
+        r1 = $r3;
+
+        r0.getAllNamesAux(r1);
+
+        $i0 = r1.size();
+
+        r2 = newarray (java.lang.String)[$i0];
+
+        r1.copyInto(r2);
+
+        return r2;
+    }
+
+    protected void getAllNamesAux(java.util.Vector)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, $r6, $r7;
+        java.util.Vector r1;
+        java.util.Enumeration r2, r3;
+        java.util.Hashtable $r4, $r5;
+        boolean $z0, $z1;
+        java.lang.Object $r8, $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r4 = r0.variables;
+
+        r2 = $r4.keys();
+
+     label1:
+        $z0 = r2.hasMoreElements();
+
+        if $z0 == 0 goto label2;
+
+        $r9 = r2.nextElement();
+
+        r1.addElement($r9);
+
+        goto label1;
+
+     label2:
+        $r5 = r0.methods;
+
+        r3 = $r5.keys();
+
+     label3:
+        $z1 = r3.hasMoreElements();
+
+        if $z1 == 0 goto label4;
+
+        $r8 = r3.nextElement();
+
+        r1.addElement($r8);
+
+        goto label3;
+
+     label4:
+        $r6 = r0.parent;
+
+        if $r6 == null goto label5;
+
+        $r7 = r0.parent;
+
+        $r7.getAllNamesAux(r1);
+
+     label5:
+        return;
+    }
+
+    public void addNameSourceListener(org.gjt.sp.jedit.bsh.NameSource$Listener)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        org.gjt.sp.jedit.bsh.NameSource$Listener r1;
+        java.util.Vector $r2, $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.nameSourceListeners;
+
+        if $r2 != null goto label1;
+
+        $r4 = new java.util.Vector;
+
+        specialinvoke $r4.<init>();
+
+        r0.nameSourceListeners = $r4;
+
+     label1:
+        $r3 = r0.nameSourceListeners;
+
+        $r3.addElement(r1);
+
+        return;
+    }
+
+    public void doSuperImport() throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        org.gjt.sp.jedit.bsh.BshClassManager $r1;
+
+        r0 := @this;
+
+        $r1 = r0.getClassManager();
+
+        $r1.doSuperImport();
+
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.StringBuilder $r1, $r2, $r4, $r6, $r7, $r9, $r10, $r11, $r12, $r13, $r15, $r17;
+        java.lang.String $r3, $r5, $r8, $r18, $r19, $r20, $r21, $r22, $r23, $r19_1, $r19_2, $r20_1, $r20_2, $r21_1, $r21_2, $r22_1, $r22_2, $r23_1, $r23_2;
+        boolean $z0, $z1;
+        java.lang.Class $r14;
+        java.lang.Object $r16;
+
+        r0 := @this;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<init>();
+
+        $r2 = $r1.append("NameSpace: ");
+
+        $r3 = r0.nsName;
+
+        if $r3 != null goto label01;
+
+        $r19 = specialinvoke r0.toString();
+
+(0)     goto label02;
+
+     label01:
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = r0.nsName;
+
+        $r6 = $r4.append($r5);
+
+        $r7 = $r6.append(" (");
+
+        $r8 = specialinvoke r0.toString();
+
+        $r9 = $r7.append($r8);
+
+        $r10 = $r9.append(")");
+
+(1)     $r19_1 = $r10.toString();
+
+     label02:
+        $r19_2 = Phi($r19 #0, $r19_1 #1);
+
+        $r11 = $r2.append($r19_2);
+
+        $z0 = r0.isClass;
+
+        if $z0 == 0 goto label03;
+
+        $r20 = " (isClass) ";
+
+(2)     goto label04;
+
+     label03:
+(3)     $r20_1 = "";
+
+     label04:
+        $r20_2 = Phi($r20 #2, $r20_1 #3);
+
+        $r12 = $r11.append($r20_2);
+
+        $z1 = r0.isMethod;
+
+        if $z1 == 0 goto label05;
+
+        $r21 = " (method) ";
+
+(4)     goto label06;
+
+     label05:
+(5)     $r21_1 = "";
+
+     label06:
+        $r21_2 = Phi($r21 #4, $r21_1 #5);
+
+        $r13 = $r12.append($r21_2);
+
+        $r14 = r0.classStatic;
+
+        if $r14 == null goto label07;
+
+        $r22 = " (class static) ";
+
+(6)     goto label08;
+
+     label07:
+(7)     $r22_1 = "";
+
+     label08:
+        $r22_2 = Phi($r22 #6, $r22_1 #7);
+
+        $r15 = $r13.append($r22_2);
+
+        $r16 = r0.classInstance;
+
+        if $r16 == null goto label09;
+
+        $r23 = " (class instance) ";
+
+(8)     goto label10;
+
+     label09:
+(9)     $r23_1 = "";
+
+     label10:
+        $r23_2 = Phi($r23 #8, $r23_1 #9);
+
+        $r17 = $r15.append($r23_2);
+
+        $r18 = $r17.toString();
+
+        return $r18;
+    }
+
+    private synchronized void writeObject(java.io.ObjectOutputStream) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.io.ObjectOutputStream r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.names = null;
+
+        r1.defaultWriteObject();
+
+        return;
+    }
+
+    public java.lang.Object invokeMethod(java.lang.String, java.lang.Object[], org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        java.lang.Object[] r2;
+        org.gjt.sp.jedit.bsh.Interpreter r3;
+        java.lang.Object $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = r0.invokeMethod(r1, r2, r3, null, null);
+
+        return $r4;
+    }
+
+    public java.lang.Object invokeMethod(java.lang.String, java.lang.Object[], org.gjt.sp.jedit.bsh.Interpreter, org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.SimpleNode) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        java.lang.Object[] r2;
+        org.gjt.sp.jedit.bsh.Interpreter r3;
+        org.gjt.sp.jedit.bsh.CallStack r4;
+        org.gjt.sp.jedit.bsh.SimpleNode r5;
+        org.gjt.sp.jedit.bsh.This $r6;
+        java.lang.Object $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        $r6 = r0.getThis(r3);
+
+        $r7 = $r6.invokeMethod(r1, r2, r3, r4, r5, 0);
+
+        return $r7;
+    }
+
+    public void classLoaderChanged()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+
+        r0 := @this;
+
+        r0.nameSpaceChanged();
+
+        return;
+    }
+
+    public void nameSpaceChanged()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+
+        r0 := @this;
+
+        r0.classCache = null;
+
+        r0.names = null;
+
+        return;
+    }
+
+    public void loadDefaultImports()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.Class $r1;
+
+        r0 := @this;
+
+        r0.importClass("org.gjt.sp.jedit.bsh.EvalError");
+
+        r0.importClass("org.gjt.sp.jedit.bsh.Interpreter");
+
+        r0.importPackage("javax.swing.event");
+
+        r0.importPackage("javax.swing");
+
+        r0.importPackage("java.awt.event");
+
+        r0.importPackage("java.awt");
+
+        r0.importPackage("java.net");
+
+        r0.importPackage("java.util");
+
+        r0.importPackage("java.io");
+
+        r0.importPackage("java.lang");
+
+        $r1 = r0.getClass();
+
+        r0.addCommandPath("/org/gjt/sp/jedit/bsh/commands", $r1);
+
+        return;
+    }
+
+    org.gjt.sp.jedit.bsh.Name getNameResolver(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        java.util.Hashtable $r2, $r3, $r6, $r8;
+        java.lang.Object $r4;
+        org.gjt.sp.jedit.bsh.Name $r5, r9, r9_1, r9_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.names;
+
+        if $r2 != null goto label1;
+
+        $r8 = new java.util.Hashtable;
+
+        specialinvoke $r8.<init>();
+
+        r0.names = $r8;
+
+     label1:
+        $r3 = r0.names;
+
+        $r4 = $r3.get(r1);
+
+        r9 = (org.gjt.sp.jedit.bsh.Name) $r4;
+
+(0)     if r9 != null goto label2;
+
+        $r5 = new org.gjt.sp.jedit.bsh.Name;
+
+        specialinvoke $r5.<init>(r0, r1);
+
+        r9_1 = $r5;
+
+        $r6 = r0.names;
+
+(1)     $r6.put(r1, r9_1);
+
+     label2:
+        r9_2 = Phi(r9 #0, r9_1 #1);
+
+        return r9_2;
+    }
+
+    public int getInvocationLine()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        org.gjt.sp.jedit.bsh.SimpleNode r1;
+        int $i0;
+
+        r0 := @this;
+
+        r1 = r0.getNode();
+
+        if r1 == null goto label1;
+
+        $i0 = r1.getLineNumber();
+
+        return $i0;
+
+     label1:
+        return -1;
+    }
+
+    public java.lang.String getInvocationText()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        org.gjt.sp.jedit.bsh.SimpleNode r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        r1 = r0.getNode();
+
+        if r1 == null goto label1;
+
+        $r2 = r1.getText();
+
+        return $r2;
+
+     label1:
+        return "<invoked from Java code>";
+    }
+
+    public static java.lang.Class identifierToClass(org.gjt.sp.jedit.bsh.ClassIdentifier)
+    {
+        org.gjt.sp.jedit.bsh.ClassIdentifier r0;
+        java.lang.Class $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.getTargetClass();
+
+        return $r1;
+    }
+
+    public void clear()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, $r1;
+
+        r0 := @this;
+
+        r0.variables = null;
+
+        r0.methods = null;
+
+        r0.importedClasses = null;
+
+        r0.importedPackages = null;
+
+        r0.importedCommands = null;
+
+        r0.importedObjects = null;
+
+        $r1 = r0.parent;
+
+        if $r1 != null goto label1;
+
+        r0.loadDefaultImports();
+
+     label1:
+        r0.classCache = null;
+
+        r0.names = null;
+
+        return;
+    }
+
+    public void importObject(java.lang.Object)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.Object r1;
+        java.util.Vector $r2, $r3, $r4, $r5, $r6;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.importedObjects;
+
+        if $r2 != null goto label1;
+
+        $r6 = new java.util.Vector;
+
+        specialinvoke $r6.<init>();
+
+        r0.importedObjects = $r6;
+
+     label1:
+        $r3 = r0.importedObjects;
+
+        $z0 = $r3.contains(r1);
+
+        if $z0 == 0 goto label2;
+
+        $r5 = r0.importedObjects;
+
+        $r5.remove(r1);
+
+     label2:
+        $r4 = r0.importedObjects;
+
+        $r4.addElement(r1);
+
+        r0.nameSpaceChanged();
+
+        return;
+    }
+
+    public void importStatic(java.lang.Class)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.Class r1;
+        java.util.Vector $r2, $r3, $r4, $r5, $r6;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.importedStatic;
+
+        if $r2 != null goto label1;
+
+        $r6 = new java.util.Vector;
+
+        specialinvoke $r6.<init>();
+
+        r0.importedStatic = $r6;
+
+     label1:
+        $r3 = r0.importedStatic;
+
+        $z0 = $r3.contains(r1);
+
+        if $z0 == 0 goto label2;
+
+        $r5 = r0.importedStatic;
+
+        $r5.remove(r1);
+
+     label2:
+        $r4 = r0.importedStatic;
+
+        $r4.addElement(r1);
+
+        r0.nameSpaceChanged();
+
+        return;
+    }
+
+    void setPackage(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.packageName = r1;
+
+        return;
+    }
+
+    java.lang.String getPackage()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, $r2, $r3;
+        java.lang.String $r1, $r4, $r5;
+
+        r0 := @this;
+
+        $r1 = r0.packageName;
+
+        if $r1 == null goto label1;
+
+        $r5 = r0.packageName;
+
+        return $r5;
+
+     label1:
+        $r2 = r0.parent;
+
+        if $r2 == null goto label2;
+
+        $r3 = r0.parent;
+
+        $r4 = $r3.getPackage();
+
+        return $r4;
+
+     label2:
+        return null;
+    }
+
+    public void setVariable(java.lang.String, java.lang.Object) throws org.gjt.sp.jedit.bsh.UtilEvalError
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1;
+        java.lang.Object r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.setVariable(r1, r2, 0);
+
+        return;
+    }
+
+    public void addCommandPath(java.lang.String, java.lang.Class)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.Class r1;
+        java.util.Vector $r2, $r4, $r8;
+        boolean $z0;
+        org.gjt.sp.jedit.bsh.NameSpace$CommandPathEntry $r3;
+        java.lang.StringBuilder $r5, $r6, $r7;
+        java.lang.String r9, r9_1, r9_2;
+
+        r0 := @this;
+
+        r9 := @parameter0;
+
+        r1 := @parameter1;
+
+        $r2 = r0.importedCommands;
+
+        if $r2 != null goto label1;
+
+        $r8 = new java.util.Vector;
+
+        specialinvoke $r8.<init>();
+
+        r0.importedCommands = $r8;
+
+     label1:
+        $z0 = r9.endsWith("/");
+
+(0)     if $z0 != 0 goto label2;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>();
+
+        $r6 = $r5.append(r9);
+
+        $r7 = $r6.append(47);
+
+(1)     r9_1 = $r7.toString();
+
+     label2:
+        r9_2 = Phi(r9 #0, r9_1 #1);
+
+        $r4 = r0.importedCommands;
+
+        $r3 = new org.gjt.sp.jedit.bsh.NameSpace$CommandPathEntry;
+
+        specialinvoke $r3.<init>(r9_2, r1);
+
+        $r4.addElement($r3);
+
+        return;
+    }
+
+    public void removeCommandPath(java.lang.String, java.lang.Class)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0;
+        java.lang.String r1, $r8;
+        java.lang.Class r2, $r9;
+        org.gjt.sp.jedit.bsh.NameSpace$CommandPathEntry r3;
+        java.util.Vector $r4, $r5, $r6, $r10;
+        int $i0, i1;
+        java.lang.Object $r7;
+        boolean $z0;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r4 = r0.importedCommands;
+
+        if $r4 != null goto label1;
+
+        return;
+
+     label1:
+(0)     i1 = 0;
+
+     label2:
+        i1 = Phi(i1 #0, i1 #1);
+
+        $r5 = r0.importedCommands;
+
+        $i0 = $r5.size();
+
+        if i1 >= $i0 goto label4;
+
+        $r6 = r0.importedCommands;
+
+        $r7 = $r6.elementAt(i1);
+
+        r3 = (org.gjt.sp.jedit.bsh.NameSpace$CommandPathEntry) $r7;
+
+        $r8 = r3.path;
+
+        $z0 = $r8.equals(r1);
+
+        if $z0 == 0 goto label3;
+
+        $r9 = r3.clas;
+
+        if $r9 != r2 goto label3;
+
+        $r10 = r0.importedCommands;
+
+        $r10.removeElementAt(i1);
+
+        return;
+
+     label3:
+        i1 = i1 + 1;
+
+(1)     goto label2;
+
+     label4:
+        return;
+    }
+
+    public java.io.InputStream getCommand(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.NameSpace r0, $r6, $r7;
+        java.lang.String r1, r2, $r17, $r20;
+        org.gjt.sp.jedit.bsh.NameSpace$CommandPathEntry r3;
+        java.io.InputStream r4, $r8;
+        java.util.Vector $r5, $r12, $r13;
+        java.lang.StringBuilder $r9, $r10, $r11, $r15, $r18, $r19;
+        int $i0, i1;
+        java.lang.Object $r14;
+        java.lang.Class $r16;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r5 = r0.importedCommands;
+
+(0)     if $r5 == null goto label3;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append(r1);
+
+        $r11 = $r10.append(".bsh");
+
+        r2 = $r11.toString();
+
+        $r12 = r0.importedCommands;
+
+        $i0 = $r12.size();
+
+(1)     i1 = $i0 - 1;
+
+     label1:
+        i1 = Phi(i1 #1, i1 #3);
+
+(2)     if i1 < 0 goto label3;
+
+        $r13 = r0.importedCommands;
+
+        $r14 = $r13.elementAt(i1);
+
+        r3 = (org.gjt.sp.jedit.bsh.NameSpace$CommandPathEntry) $r14;
+
+        $r16 = r3.clas;
+
+        $r15 = new java.lang.StringBuilder;
+
+        specialinvoke $r15.<init>();
+
+        $r17 = r3.path;
+
+        $r18 = $r15.append($r17);
+
+        $r19 = $r18.append(r2);
+
+        $r20 = $r19.toString();
+
+        r4 = $r16.getResourceAsStream($r20);
+
+        if r4 == null goto label2;
+
+        return r4;
+
+     label2:
+        i1 = i1 + -1;
+
+(3)     goto label1;
+
+     label3:
+        i1 = Phi(i1 #0, i1 #2);
+
+        $r6 = r0.parent;
+
+        if $r6 != null goto label4;
+
+        return null;
+
+     label4:
+        $r7 = r0.parent;
+
+        $r8 = $r7.getCommand(r1);
+
+        return $r8;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.bsh.NameSpace $r0, $r2;
+        org.gjt.sp.jedit.bsh.BshClassManager $r1;
+
+        $r0 = new org.gjt.sp.jedit.bsh.NameSpace;
+
+        $r1 = (org.gjt.sp.jedit.bsh.BshClassManager) null;
+
+        specialinvoke $r0.<init>($r1, "Called from compiled Java code.");
+
+        org.gjt.sp.jedit.bsh.NameSpace.JAVACODE = $r0;
+
+        $r2 = org.gjt.sp.jedit.bsh.NameSpace.JAVACODE;
+
+        $r2.isMethod = 1;
+
+        return;
+    }
+}

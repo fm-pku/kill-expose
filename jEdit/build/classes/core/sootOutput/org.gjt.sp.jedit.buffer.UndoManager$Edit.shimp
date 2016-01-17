@@ -1,0 +1,34 @@
+abstract class org.gjt.sp.jedit.buffer.UndoManager$Edit extends java.lang.Object
+{
+    org.gjt.sp.jedit.buffer.UndoManager$Edit prev;
+    org.gjt.sp.jedit.buffer.UndoManager$Edit next;
+
+    private void <init>()
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$Edit r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    abstract org.gjt.sp.jedit.textarea.Selection[] undo(org.gjt.sp.jedit.buffer.UndoManager);
+
+    abstract org.gjt.sp.jedit.textarea.Selection[] redo(org.gjt.sp.jedit.buffer.UndoManager);
+
+    void <init>(org.gjt.sp.jedit.buffer.UndoManager$1)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$Edit r0;
+        org.gjt.sp.jedit.buffer.UndoManager$1 r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+}

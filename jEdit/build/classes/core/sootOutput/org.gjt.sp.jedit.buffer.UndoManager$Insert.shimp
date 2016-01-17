@@ -1,0 +1,126 @@
+class org.gjt.sp.jedit.buffer.UndoManager$Insert extends org.gjt.sp.jedit.buffer.UndoManager$Edit
+{
+    int offset;
+    java.lang.String str;
+
+    void <init>(int, java.lang.String)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$Insert r0;
+        int i0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        r1 := @parameter1;
+
+        specialinvoke r0.<init>(null);
+
+        r0.offset = i0;
+
+        r0.str = r1;
+
+        return;
+    }
+
+    org.gjt.sp.jedit.textarea.Selection[] undo(org.gjt.sp.jedit.buffer.UndoManager)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$Insert r0;
+        org.gjt.sp.jedit.buffer.UndoManager r1;
+        org.gjt.sp.jedit.buffer.JEditBuffer $r2, $r7;
+        java.lang.String $r3;
+        int $i0, $i1, $i2, $i3;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit $r4;
+        org.gjt.sp.jedit.textarea.Selection[] $r5;
+        org.gjt.sp.jedit.textarea.Selection$Range $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.buffer.UndoManager.access$200(r1);
+
+        $i0 = r0.offset;
+
+        $r3 = r0.str;
+
+        $i1 = $r3.length();
+
+        $r2.remove($i0, $i1);
+
+        $r4 = org.gjt.sp.jedit.buffer.UndoManager.access$300(r1);
+
+        if $r4 != r0 goto label1;
+
+        $r7 = org.gjt.sp.jedit.buffer.UndoManager.access$200(r1);
+
+        $r7.setDirty(0);
+
+     label1:
+        $r5 = newarray (org.gjt.sp.jedit.textarea.Selection)[1];
+
+        $r6 = new org.gjt.sp.jedit.textarea.Selection$Range;
+
+        $i3 = r0.offset;
+
+        $i2 = r0.offset;
+
+        specialinvoke $r6.<init>($i3, $i2);
+
+        $r5[0] = $r6;
+
+        return $r5;
+    }
+
+    org.gjt.sp.jedit.textarea.Selection[] redo(org.gjt.sp.jedit.buffer.UndoManager)
+    {
+        org.gjt.sp.jedit.buffer.UndoManager$Insert r0;
+        org.gjt.sp.jedit.buffer.UndoManager r1;
+        int i0, $i1, $i2, $i3;
+        org.gjt.sp.jedit.buffer.JEditBuffer $r2, $r8;
+        java.lang.String $r3, $r5;
+        org.gjt.sp.jedit.buffer.UndoManager$Edit $r4;
+        org.gjt.sp.jedit.textarea.Selection[] $r6;
+        org.gjt.sp.jedit.textarea.Selection$Range $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = org.gjt.sp.jedit.buffer.UndoManager.access$200(r1);
+
+        $i1 = r0.offset;
+
+        $r3 = r0.str;
+
+        $r2.insert($i1, $r3);
+
+        $r4 = org.gjt.sp.jedit.buffer.UndoManager.access$400(r1);
+
+        if $r4 != r0 goto label1;
+
+        $r8 = org.gjt.sp.jedit.buffer.UndoManager.access$200(r1);
+
+        $r8.setDirty(0);
+
+     label1:
+        $i2 = r0.offset;
+
+        $r5 = r0.str;
+
+        $i3 = $r5.length();
+
+        i0 = $i2 + $i3;
+
+        $r6 = newarray (org.gjt.sp.jedit.textarea.Selection)[1];
+
+        $r7 = new org.gjt.sp.jedit.textarea.Selection$Range;
+
+        specialinvoke $r7.<init>(i0, i0);
+
+        $r6[0] = $r7;
+
+        return $r6;
+    }
+}

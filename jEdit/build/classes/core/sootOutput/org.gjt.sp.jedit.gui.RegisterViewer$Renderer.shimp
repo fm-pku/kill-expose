@@ -1,0 +1,145 @@
+class org.gjt.sp.jedit.gui.RegisterViewer$Renderer extends javax.swing.DefaultListCellRenderer
+{
+
+    void <init>()
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer$Renderer r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public java.awt.Component getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+    {
+        org.gjt.sp.jedit.gui.RegisterViewer$Renderer r0;
+        javax.swing.JList r1;
+        java.lang.Object r2;
+        int i0, $i2;
+        boolean z0, z1, $z2;
+        char c1;
+        org.gjt.sp.jedit.Registers$Register r3;
+        java.lang.Character $r5;
+        java.lang.StringBuilder $r6, $r7, $r8, $r9, $r11, $r13, $r14;
+        java.lang.String $r10, $r12, r15, r16, r17, r18, r15_1, r15_2, r15_3, r15_4, r15_5, r17_1, r17_2, r16_1, r16_2, r17_3, r15_6, r16_3, r17_4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        i0 := @parameter2;
+
+        z0 := @parameter3;
+
+        z1 := @parameter4;
+
+        specialinvoke r0.getListCellRendererComponent(r1, r2, i0, z0, z1);
+
+        $z2 = r2 instanceof java.lang.Character;
+
+(0)     if $z2 == 0 goto label9;
+
+        $r5 = (java.lang.Character) r2;
+
+        c1 = $r5.charValue();
+
+        if c1 != 10 goto label1;
+
+        r15 = "\n";
+
+(1)     goto label5;
+
+     label1:
+        if c1 != 9 goto label2;
+
+        r15_1 = "\t";
+
+(2)     goto label5;
+
+     label2:
+        if c1 != 36 goto label3;
+
+        r15_2 = org.gjt.sp.jedit.jEdit.getProperty("view-registers.clipboard");
+
+(3)     goto label5;
+
+     label3:
+        if c1 != 37 goto label4;
+
+        r15_3 = org.gjt.sp.jedit.jEdit.getProperty("view-registers.selection");
+
+(4)     goto label5;
+
+     label4:
+(5)     r15_4 = java.lang.String.valueOf(c1);
+
+     label5:
+        r15_5 = Phi(r15 #1, r15_1 #2, r15_2 #3, r15_3 #4, r15_4 #5);
+
+        r3 = org.gjt.sp.jedit.Registers.getRegister(c1);
+
+        if r3 != null goto label6;
+
+        r16 = org.gjt.sp.jedit.jEdit.getProperty("view-registers.undefined");
+
+(6)     goto label8;
+
+     label6:
+        r17 = r3.toString();
+
+        $i2 = r17.length();
+
+(7)     if $i2 <= 100 goto label7;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = r17.substring(0, 100);
+
+        $r13 = $r11.append($r12);
+
+        $r14 = $r13.append("...");
+
+(8)     r17_1 = $r14.toString();
+
+     label7:
+        r17_2 = Phi(r17 #7, r17_1 #8);
+
+        r18 = r17_2.replaceAll("\n", " ");
+
+(9)     r16_1 = r18.replaceAll("\t", " ");
+
+     label8:
+        r16_2 = Phi(r16 #6, r16_1 #9);
+
+        r17_3 = Phi(r17 #6, r17_2 #9);
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append(r15_5);
+
+        $r8 = $r7.append(" : ");
+
+        $r9 = $r8.append(r16_2);
+
+        $r10 = $r9.toString();
+
+(10)    r0.setText($r10);
+
+     label9:
+        r15_6 = Phi(r15 #0, r15_5 #10);
+
+        r16_3 = Phi(r16 #0, r16_2 #10);
+
+        r17_4 = Phi(r17 #0, r17_3 #10);
+
+        return r0;
+    }
+}

@@ -1,0 +1,2013 @@
+public abstract class org.gjt.sp.jedit.io.VFS extends java.lang.Object
+{
+    public static final int READ_CAP;
+    public static final int WRITE_CAP;
+    public static final int BROWSE_CAP;
+    public static final int DELETE_CAP;
+    public static final int RENAME_CAP;
+    public static final int MKDIR_CAP;
+    public static final int LOW_LATENCY_CAP;
+    public static final int CASE_INSENSITIVE_CAP;
+    public static final int NON_AWT_SESSION_CAP;
+    public static final java.lang.String EA_TYPE;
+    public static final java.lang.String EA_STATUS;
+    public static final java.lang.String EA_SIZE;
+    public static final java.lang.String EA_MODIFIED;
+    public static int IOBUFSIZE;
+    private java.lang.String name;
+    private int caps;
+    private java.lang.String[] extAttrs;
+    private static java.util.List colors;
+    private static final java.lang.Object lock;
+
+    protected void <init>(java.lang.String, int)
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.String r1;
+        int i0;
+        java.lang.String[] $r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        specialinvoke r0.<init>();
+
+        r0.name = r1;
+
+        r0.caps = i0;
+
+        $r2 = newarray (java.lang.String)[2];
+
+        $r2[0] = "size";
+
+        $r2[1] = "type";
+
+        r0.extAttrs = $r2;
+
+        return;
+    }
+
+    protected void <init>(java.lang.String, int, java.lang.String[])
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.String r1;
+        int i0;
+        java.lang.String[] r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        r2 := @parameter2;
+
+        specialinvoke r0.<init>();
+
+        r0.name = r1;
+
+        r0.caps = i0;
+
+        r0.extAttrs = r2;
+
+        return;
+    }
+
+    public java.lang.String getName()
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.String $r1;
+
+        r0 := @this;
+
+        $r1 = r0.name;
+
+        return $r1;
+    }
+
+    public int getCapabilities()
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.caps;
+
+        return $i0;
+    }
+
+    public boolean isMarkersFileSupported()
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+
+        r0 := @this;
+
+        return 1;
+    }
+
+    public java.lang.String[] getExtendedAttributes()
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.String[] $r1;
+
+        r0 := @this;
+
+        $r1 = r0.extAttrs;
+
+        return $r1;
+    }
+
+    public java.lang.String getFileName(java.lang.String)
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        boolean $z0, $z1, $z2;
+        int $i0, $i1, $i2, $i4, $i5, $i6, $i7, i8;
+        java.lang.String $r1, $r2, r3;
+        char $c3;
+
+        r0 := @this;
+
+        r3 := @parameter0;
+
+        $z0 = r3.equals("/");
+
+(0)     if $z0 == 0 goto label1;
+
+        return r3;
+
+     label1:
+        r3 = Phi(r3 #0, r3 #1);
+
+        $z1 = r3.endsWith("/");
+
+        if $z1 != 0 goto label2;
+
+        $r1 = java.io.File.separator;
+
+        $z2 = r3.endsWith($r1);
+
+        if $z2 == 0 goto label3;
+
+     label2:
+        $i0 = r3.length();
+
+        $i1 = $i0 - 1;
+
+        r3 = r3.substring(0, $i1);
+
+(1)     goto label1;
+
+     label3:
+        $i2 = r3.lastIndexOf(47);
+
+        $c3 = java.io.File.separatorChar;
+
+        $i4 = r3.lastIndexOf($c3);
+
+        i8 = java.lang.Math.max($i2, $i4);
+
+(2)     if i8 != -1 goto label4;
+
+(3)     i8 = r3.indexOf(58);
+
+     label4:
+        i8 = Phi(i8 #2, i8 #3);
+
+        if i8 == -1 goto label5;
+
+        $i5 = r3.length();
+
+        $i6 = $i5 - 1;
+
+        if i8 != $i6 goto label6;
+
+     label5:
+        return r3;
+
+     label6:
+        $i7 = i8 + 1;
+
+        $r2 = r3.substring($i7);
+
+        return $r2;
+    }
+
+    public java.lang.String getFilePath(java.lang.String)
+    {
+        org.gjt.sp.jedit.io.VFS r0, $r4;
+        java.lang.String r1, r2, $r3, $r5;
+        boolean $z0;
+        int $i0, $i1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = org.gjt.sp.jedit.MiscUtilities.isURL(r1);
+
+        if $z0 != 0 goto label1;
+
+        return r1;
+
+     label1:
+        $r3 = org.gjt.sp.jedit.MiscUtilities.getProtocolOfURL(r1);
+
+        $i0 = $r3.length();
+
+        $i1 = $i0 + 1;
+
+        r2 = r1.substring($i1);
+
+        $r4 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r2);
+
+        $r5 = $r4.getFilePath(r2);
+
+        return $r5;
+    }
+
+    public java.lang.String getParentOfPath(java.lang.String)
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.String r1, $r2;
+        int i0, $i1, $i3, i7, i8;
+        char $c2, $c4, $c5, $c6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $i1 = r1.length();
+
+(0)     i7 = $i1 - 1;
+
+     label1:
+        i7 = Phi(i7 #0, i7 #1);
+
+        if i7 <= 0 goto label3;
+
+        $c4 = r1.charAt(i7);
+
+        $c5 = java.io.File.separatorChar;
+
+        if $c4 == $c5 goto label2;
+
+        $c6 = r1.charAt(i7);
+
+        if $c6 != 47 goto label3;
+
+     label2:
+        i7 = i7 + -1;
+
+(1)     goto label1;
+
+     label3:
+        i0 = java.lang.Math.max(0, i7);
+
+        $c2 = java.io.File.separatorChar;
+
+        i8 = r1.lastIndexOf($c2, i0);
+
+(2)     if i8 != -1 goto label4;
+
+(3)     i8 = r1.lastIndexOf(47, i0);
+
+     label4:
+        i8 = Phi(i8 #2, i8 #3);
+
+(4)     if i8 != -1 goto label5;
+
+(5)     i8 = r1.lastIndexOf(58);
+
+     label5:
+        i8 = Phi(i8 #4, i8 #5);
+
+        $i3 = i8 + 1;
+
+        $r2 = r1.substring(0, $i3);
+
+        return $r2;
+    }
+
+    public java.lang.String constructPath(java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.String r1, r2, $r6;
+        java.lang.StringBuilder $r3, $r4, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append(r1);
+
+        $r5 = $r4.append(r2);
+
+        $r6 = $r5.toString();
+
+        return $r6;
+    }
+
+    public char getFileSeparator()
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+
+        r0 := @this;
+
+        return 47;
+    }
+
+    public java.lang.String getTwoStageSaveName(java.lang.String)
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.String r1, $r2, $r5, $r8, $r9;
+        java.lang.StringBuilder $r3, $r4, $r6, $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.getParentOfPath(r1);
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<init>();
+
+        $r4 = $r3.append(35);
+
+        $r5 = r0.getFileName(r1);
+
+        $r6 = $r4.append($r5);
+
+        $r7 = $r6.append("#save#");
+
+        $r8 = $r7.toString();
+
+        $r9 = org.gjt.sp.jedit.MiscUtilities.constructPath($r2, $r8);
+
+        return $r9;
+    }
+
+    public void reloadDirectory(java.lang.String)
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        return;
+    }
+
+    public java.lang.Object createVFSSession(java.lang.String, java.awt.Component)
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.String r1;
+        java.awt.Component r2;
+        java.lang.Object $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = new java.lang.Object;
+
+        specialinvoke $r3.<init>();
+
+        return $r3;
+    }
+
+    public java.lang.Object createVFSSessionSafe(java.lang.String, java.awt.Component)
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.String r1;
+        java.awt.Component r2;
+        org.gjt.sp.jedit.io.VFS$SessionGetter r3, $r4;
+        int $i0, $i1;
+        java.lang.Object r5, r5_1, r5_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $i0 = r0.getCapabilities();
+
+        $i1 = $i0 & 256;
+
+        if $i1 == 0 goto label1;
+
+        r5 = r0.createVFSSession(r1, r2);
+
+(0)     goto label2;
+
+     label1:
+        $r4 = new org.gjt.sp.jedit.io.VFS$SessionGetter;
+
+        specialinvoke $r4.<init>(r0, r1, r2);
+
+        r3 = $r4;
+
+        org.gjt.sp.util.ThreadUtilities.runInDispatchThreadAndWait(r3);
+
+(1)     r5_1 = r3.get();
+
+     label2:
+        r5_2 = Phi(r5 #0, r5_1 #1);
+
+        return r5_2;
+    }
+
+    public boolean load(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Buffer, java.lang.String)
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Buffer r2;
+        java.lang.String r3, $r8;
+        java.lang.Object r4;
+        org.gjt.sp.jedit.bufferio.BufferLoadRequest r5, $r6;
+        int $i0, $i1, $i2, $i3;
+        boolean $z0;
+        java.lang.String[] $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $i0 = r0.getCapabilities();
+
+        $i1 = $i0 & 1;
+
+        if $i1 != 0 goto label1;
+
+        $r7 = newarray (java.lang.String)[1];
+
+        $r8 = r0.name;
+
+        $r7[0] = $r8;
+
+        org.gjt.sp.jedit.io.VFSManager.error(r1, r3, "vfs.not-supported.load", $r7);
+
+        return 0;
+
+     label1:
+        r4 = r0.createVFSSession(r3, r1);
+
+        if r4 != null goto label2;
+
+        return 0;
+
+     label2:
+        $i2 = r0.getCapabilities();
+
+        $i3 = $i2 & 2;
+
+        if $i3 != 0 goto label3;
+
+        r2.setReadOnly(1);
+
+     label3:
+        $r6 = new org.gjt.sp.jedit.bufferio.BufferLoadRequest;
+
+        specialinvoke $r6.<init>(r1, r2, r4, r0, r3);
+
+        r5 = $r6;
+
+        $z0 = r2.isTemporary();
+
+        if $z0 == 0 goto label4;
+
+        r5.run();
+
+        goto label5;
+
+     label4:
+        org.gjt.sp.util.ThreadUtilities.runInBackground(r5);
+
+     label5:
+        return 1;
+    }
+
+    public boolean save(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Buffer, java.lang.String)
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Buffer r2;
+        java.lang.String r3, $r5, $r8;
+        java.lang.Object r4;
+        int $i0, $i1;
+        boolean $z0;
+        org.gjt.sp.jedit.bufferio.BufferSaveRequest $r6;
+        java.lang.String[] $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $i0 = r0.getCapabilities();
+
+        $i1 = $i0 & 2;
+
+        if $i1 != 0 goto label1;
+
+        $r7 = newarray (java.lang.String)[1];
+
+        $r8 = r0.name;
+
+        $r7[0] = $r8;
+
+        org.gjt.sp.jedit.io.VFSManager.error(r1, r3, "vfs.not-supported.save", $r7);
+
+        return 0;
+
+     label1:
+        r4 = r0.createVFSSession(r3, r1);
+
+        if r4 != null goto label2;
+
+        return 0;
+
+     label2:
+        $r5 = r2.getPath();
+
+        $z0 = r3.equals($r5);
+
+        if $z0 != 0 goto label3;
+
+        r2.unsetProperty("Buffer__backedUp");
+
+     label3:
+        $r6 = new org.gjt.sp.jedit.bufferio.BufferSaveRequest;
+
+        specialinvoke $r6.<init>(r1, r2, r4, r0, r3);
+
+        org.gjt.sp.util.ThreadUtilities.runInBackground($r6);
+
+        return 1;
+    }
+
+    public static boolean copy(org.gjt.sp.util.ProgressObserver, org.gjt.sp.jedit.io.VFS, java.lang.Object, java.lang.String, org.gjt.sp.jedit.io.VFS, java.lang.Object, java.lang.String, java.awt.Component, boolean) throws java.io.IOException
+    {
+        org.gjt.sp.util.ProgressObserver r0;
+        org.gjt.sp.jedit.io.VFS r1, r4;
+        java.lang.Object r2, r5;
+        java.lang.String r3, r6;
+        java.awt.Component r7;
+        boolean z0, $z1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        r4 := @parameter4;
+
+        r5 := @parameter5;
+
+        r6 := @parameter6;
+
+        r7 := @parameter7;
+
+        z0 := @parameter8;
+
+        $z1 = org.gjt.sp.jedit.io.VFS.copy(r0, r1, r2, r3, r4, r5, r6, r7, z0, 1);
+
+        return $z1;
+    }
+
+    public static boolean copy(org.gjt.sp.util.ProgressObserver, org.gjt.sp.jedit.io.VFS, java.lang.Object, java.lang.String, org.gjt.sp.jedit.io.VFS, java.lang.Object, java.lang.String, java.awt.Component, boolean, boolean) throws java.io.IOException
+    {
+        org.gjt.sp.util.ProgressObserver r0;
+        org.gjt.sp.jedit.io.VFS r1, r4;
+        java.lang.Object r2, r5;
+        java.lang.String r3, r9, $r15, $r16, $r17, $r24, $r30, $r32, r34, r37, r34_1, r34_2, r34_3;
+        java.awt.Component r6;
+        boolean z0, z1, $z2, $z3, z4, z5, z6;
+        org.gjt.sp.jedit.io.VFSFile r7, r8, r38;
+        java.lang.Throwable r10, $r33;
+        int $i0, $i1, $i2;
+        java.io.BufferedInputStream $r11, r35, r35_1;
+        java.io.InputStream $r12;
+        java.io.BufferedOutputStream $r13, r36, r36_1;
+        java.io.OutputStream $r14;
+        java.io.IOException $r18;
+        java.io.FileNotFoundException $r19, $r25;
+        java.lang.StringBuilder $r20, $r21, $r22, $r23, $r26, $r27, $r28, $r29;
+        long $l3;
+        java.lang.Object[] $r31;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        r4 := @parameter4;
+
+        r5 := @parameter5;
+
+        r34 := @parameter6;
+
+        r6 := @parameter7;
+
+        z0 := @parameter8;
+
+        z1 := @parameter9;
+
+        $z2 = r3.equals(r34);
+
+        if $z2 == 0 goto label01;
+
+        $r31 = newarray (java.lang.Object)[1];
+
+        $r31[0] = r3;
+
+        $r32 = org.gjt.sp.jedit.jEdit.getProperty("ioerror.copy-self", $r31);
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/io/VFS", $r32);
+
+        return 0;
+
+     label01:
+        if r0 == null goto label02;
+
+        r0.setStatus("Initializing");
+
+     label02:
+        r35 = null;
+
+(0)     r36 = null;
+
+     label03:
+        r7 = r1._getFile(r2, r3, r6);
+
+        if r7 != null goto label04;
+
+        $r25 = new java.io.FileNotFoundException;
+
+        $r26 = new java.lang.StringBuilder;
+
+        specialinvoke $r26.<init>();
+
+        $r27 = $r26.append("source path ");
+
+        $r28 = $r27.append(r3);
+
+        $r29 = $r28.append(" doesn\'t exists");
+
+        $r30 = $r29.toString();
+
+        specialinvoke $r25.<init>($r30);
+
+        throw $r25;
+
+     label04:
+        if r0 == null goto label05;
+
+        $l3 = r7.getLength();
+
+        r0.setMaximum($l3);
+
+     label05:
+        r8 = r4._getFile(r5, r34, r6);
+
+        if r8 != null goto label09;
+
+        r37 = org.gjt.sp.jedit.MiscUtilities.getParentOfPath(r34);
+
+        r38 = r4._getFile(r5, r37, r6);
+
+        if r38 != null goto label06;
+
+        $r19 = new java.io.FileNotFoundException;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<init>();
+
+        $r21 = $r20.append("target path ");
+
+        $r22 = $r21.append(r37);
+
+        $r23 = $r22.append(" doesn\'t exists");
+
+        $r24 = $r23.toString();
+
+        specialinvoke $r19.<init>($r24);
+
+        throw $r19;
+
+     label06:
+        $i2 = r38.getType();
+
+        if $i2 != 1 goto label07;
+
+        r9 = org.gjt.sp.jedit.MiscUtilities.getFileName(r34);
+
+(1)     r34_1 = org.gjt.sp.jedit.MiscUtilities.constructPath(r37, r9);
+
+        goto label08;
+
+     label07:
+        $r18 = new java.io.IOException;
+
+        specialinvoke $r18.<init>("The parent of target path is a file");
+
+        throw $r18;
+
+     label08:
+(2)     goto label12;
+
+     label09:
+        $i0 = r8.getType();
+
+(3)     if $i0 != 1 goto label12;
+
+        $r15 = r8.getPath();
+
+        $r16 = r7.getPath();
+
+        $z3 = $r15.equals($r16);
+
+        if $z3 == 0 goto label11;
+
+        z4 = 0;
+
+     label10:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r35);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r36);
+
+        return z4;
+
+     label11:
+        $r17 = r7.getName();
+
+(4)     r34_2 = org.gjt.sp.jedit.MiscUtilities.constructPath(r34, $r17);
+
+     label12:
+        r34_3 = Phi(r34_1 #2, r34 #3, r34_2 #4);
+
+(5)     $r11 = new java.io.BufferedInputStream;
+
+        $r12 = r1._createInputStream(r2, r3, 0, r6);
+
+        specialinvoke $r11.<init>($r12);
+
+(6)     r35_1 = $r11;
+
+        $r13 = new java.io.BufferedOutputStream;
+
+        $r14 = r4._createOutputStream(r5, r34_3, r6);
+
+        specialinvoke $r13.<init>($r14);
+
+(7)     r36_1 = $r13;
+
+        $i1 = org.gjt.sp.jedit.io.VFS.IOBUFSIZE;
+
+        z5 = org.gjt.sp.util.IOUtilities.copyStream($i1, r0, r35_1, r36_1, z0);
+
+        if z1 == 0 goto label13;
+
+        org.gjt.sp.jedit.io.VFSManager.sendVFSUpdate(r4, r34_3, 1);
+
+     label13:
+        z6 = z5;
+
+     label14:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r35_1);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r36_1);
+
+        return z6;
+
+     label15:
+        $r33 := @caughtexception;
+
+        r36 = Phi(r36 #0, r36_1 #7, r36 #8);
+
+        r35 = Phi(r35 #0, r35_1 #6, r35 #8);
+
+(8)     r34 = Phi(r34 #0, r34_1 #1, r34_2 #4, r34_3 #5, r34 #8);
+
+        r10 = $r33;
+
+     label16:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r35);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r36);
+
+        throw r10;
+
+        catch java.lang.Throwable from label03 to label10 with label15;
+        catch java.lang.Throwable from label11 to label14 with label15;
+        catch java.lang.Throwable from label15 to label16 with label15;
+    }
+
+    public static boolean copy(org.gjt.sp.util.ProgressObserver, java.lang.String, java.lang.String, java.awt.Component, boolean, boolean) throws java.io.IOException
+    {
+        org.gjt.sp.util.ProgressObserver r0;
+        java.lang.String r1, r2, $r12, $r18;
+        java.awt.Component r3;
+        boolean z0, z1, z2, z3, z4;
+        org.gjt.sp.jedit.io.VFS r4, r5;
+        java.lang.Throwable r6, $r19;
+        java.lang.StringBuilder $r7, $r8, $r9, $r10, $r11, $r13, $r14, $r15, $r16, $r17;
+        java.lang.Object r20, r21, r20_1, r21_1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        z0 := @parameter4;
+
+        z1 := @parameter5;
+
+        r4 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r1);
+
+        r5 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r2);
+
+        r20 = null;
+
+(0)     r21 = null;
+
+     label01:
+(1)     r20_1 = r4.createVFSSession(r1, r3);
+
+        if r20_1 != null goto label05;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<init>();
+
+        $r14 = $r13.append("Unable to get a valid session from ");
+
+        $r15 = $r14.append(r4);
+
+        $r16 = $r15.append(" for path ");
+
+        $r17 = $r16.append(r1);
+
+        $r18 = $r17.toString();
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/io/VFS", $r18);
+
+        z2 = 0;
+
+     label02:
+        if r20_1 == null goto label03;
+
+        r4._endVFSSession(r20_1, r3);
+
+     label03:
+        if r21 == null goto label04;
+
+        r5._endVFSSession(r21, r3);
+
+     label04:
+        return z2;
+
+     label05:
+(2)     r21_1 = r5.createVFSSession(r2, r3);
+
+        if r21_1 != null goto label09;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<init>();
+
+        $r8 = $r7.append("Unable to get a valid session from ");
+
+        $r9 = $r8.append(r5);
+
+        $r10 = $r9.append(" for path ");
+
+        $r11 = $r10.append(r2);
+
+        $r12 = $r11.toString();
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/io/VFS", $r12);
+
+        z3 = 0;
+
+     label06:
+        if r20_1 == null goto label07;
+
+        r4._endVFSSession(r20_1, r3);
+
+     label07:
+        if r21_1 == null goto label08;
+
+        r5._endVFSSession(r21_1, r3);
+
+     label08:
+        return z3;
+
+     label09:
+        z4 = org.gjt.sp.jedit.io.VFS.copy(r0, r4, r20_1, r1, r5, r21_1, r2, r3, z0, z1);
+
+     label10:
+        if r20_1 == null goto label11;
+
+        r4._endVFSSession(r20_1, r3);
+
+     label11:
+        if r21_1 == null goto label12;
+
+        r5._endVFSSession(r21_1, r3);
+
+     label12:
+        return z4;
+
+     label13:
+        $r19 := @caughtexception;
+
+        r20 = Phi(r20 #0, r20_1 #1, r20 #3);
+
+(3)     r21 = Phi(r21 #0, r21_1 #2, r21 #3);
+
+        r6 = $r19;
+
+     label14:
+        if r20 == null goto label15;
+
+        r4._endVFSSession(r20, r3);
+
+     label15:
+        if r21 == null goto label16;
+
+        r5._endVFSSession(r21, r3);
+
+     label16:
+        throw r6;
+
+        catch java.lang.Throwable from label01 to label02 with label13;
+        catch java.lang.Throwable from label05 to label06 with label13;
+        catch java.lang.Throwable from label09 to label10 with label13;
+        catch java.lang.Throwable from label13 to label14 with label13;
+    }
+
+    public static boolean copy(org.gjt.sp.util.ProgressObserver, java.lang.String, java.lang.String, java.awt.Component, boolean) throws java.io.IOException
+    {
+        org.gjt.sp.util.ProgressObserver r0;
+        java.lang.String r1, r2;
+        java.awt.Component r3;
+        boolean z0, $z1;
+
+        r0 := @parameter0;
+
+        r1 := @parameter1;
+
+        r2 := @parameter2;
+
+        r3 := @parameter3;
+
+        z0 := @parameter4;
+
+        $z1 = org.gjt.sp.jedit.io.VFS.copy(r0, r1, r2, r3, z0, 1);
+
+        return $z1;
+    }
+
+    public boolean insert(org.gjt.sp.jedit.View, org.gjt.sp.jedit.Buffer, java.lang.String)
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        org.gjt.sp.jedit.View r1;
+        org.gjt.sp.jedit.Buffer r2;
+        java.lang.String r3, $r7;
+        java.lang.Object r4;
+        int $i0, $i1;
+        org.gjt.sp.jedit.bufferio.BufferInsertRequest $r5;
+        java.lang.String[] $r6;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $i0 = r0.getCapabilities();
+
+        $i1 = $i0 & 1;
+
+        if $i1 != 0 goto label1;
+
+        $r6 = newarray (java.lang.String)[1];
+
+        $r7 = r0.name;
+
+        $r6[0] = $r7;
+
+        org.gjt.sp.jedit.io.VFSManager.error(r1, r3, "vfs.not-supported.load", $r6);
+
+        return 0;
+
+     label1:
+        r4 = r0.createVFSSession(r3, r1);
+
+        if r4 != null goto label2;
+
+        return 0;
+
+     label2:
+        $r5 = new org.gjt.sp.jedit.bufferio.BufferInsertRequest;
+
+        specialinvoke $r5.<init>(r1, r2, r4, r0, r3);
+
+        org.gjt.sp.util.ThreadUtilities.runInBackground($r5);
+
+        return 1;
+    }
+
+    public java.lang.String _canonPath(java.lang.Object, java.lang.String, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        java.lang.String r2;
+        java.awt.Component r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        return r2;
+    }
+
+    public java.lang.String[] _listDirectory(java.lang.Object, java.lang.String, java.lang.String, boolean, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        java.lang.String r2, r3;
+        boolean z0;
+        java.awt.Component r4;
+        java.lang.String[] r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        z0 := @parameter3;
+
+        r4 := @parameter4;
+
+        r5 = r0._listDirectory(r1, r2, r3, z0, r4, 1, 0);
+
+        return r5;
+    }
+
+    public java.lang.String[] _listDirectory(java.lang.Object, java.lang.String, java.lang.String, boolean, java.awt.Component, boolean, boolean) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        java.lang.String r2, r3;
+        boolean z0, z1, z2;
+        java.awt.Component r4;
+        org.gjt.sp.jedit.io.GlobVFSFileFilter r5, $r6;
+        java.lang.String[] $r7;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        z0 := @parameter3;
+
+        r4 := @parameter4;
+
+        z1 := @parameter5;
+
+        z2 := @parameter6;
+
+        $r6 = new org.gjt.sp.jedit.io.GlobVFSFileFilter;
+
+        specialinvoke $r6.<init>(r3);
+
+        r5 = $r6;
+
+        $r7 = r0._listDirectory(r1, r2, r5, z0, r4, z1, z2);
+
+        return $r7;
+    }
+
+    public java.lang.String[] _listDirectory(java.lang.Object, java.lang.String, org.gjt.sp.jedit.io.VFSFileFilter, boolean, java.awt.Component, boolean, boolean) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        java.lang.String r2;
+        org.gjt.sp.jedit.io.VFSFileFilter r3;
+        boolean z0, z1, z2;
+        java.awt.Component r4;
+        java.util.ArrayList r5, $r7;
+        java.lang.String[] r6, $r9;
+        java.util.HashSet $r8;
+        int $i0;
+        java.lang.Object[] $r10;
+        org.gjt.sp.util.StandardUtilities$StringCompare $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        z0 := @parameter3;
+
+        r4 := @parameter4;
+
+        z1 := @parameter5;
+
+        z2 := @parameter6;
+
+        $r7 = new java.util.ArrayList;
+
+        specialinvoke $r7.<init>(100);
+
+        r5 = $r7;
+
+        $r8 = new java.util.HashSet;
+
+        specialinvoke $r8.<init>();
+
+        specialinvoke r0.listFiles(r1, $r8, r5, r2, r3, z0, r4, z1, z2);
+
+        $i0 = r5.size();
+
+        $r9 = newarray (java.lang.String)[$i0];
+
+        $r10 = r5.toArray($r9);
+
+        r6 = (java.lang.String[]) $r10;
+
+        $r11 = new org.gjt.sp.util.StandardUtilities$StringCompare;
+
+        specialinvoke $r11.<init>(1);
+
+        java.util.Arrays.sort(r6, $r11);
+
+        return r6;
+    }
+
+    public org.gjt.sp.jedit.io.VFSFile[] _listFiles(java.lang.Object, java.lang.String, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        java.lang.String r2, $r5;
+        java.awt.Component r3;
+        java.lang.String[] $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = newarray (java.lang.String)[1];
+
+        $r5 = r0.name;
+
+        $r4[0] = $r5;
+
+        org.gjt.sp.jedit.io.VFSManager.error(r3, r2, "vfs.not-supported.list", $r4);
+
+        return null;
+    }
+
+    public org.gjt.sp.jedit.io.VFSFile _getFile(java.lang.Object, java.lang.String, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        java.lang.String r2;
+        java.awt.Component r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        return null;
+    }
+
+    public boolean _delete(java.lang.Object, java.lang.String, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        java.lang.String r2;
+        java.awt.Component r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        return 0;
+    }
+
+    public boolean _rename(java.lang.Object, java.lang.String, java.lang.String, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        java.lang.String r2, r3;
+        java.awt.Component r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        return 0;
+    }
+
+    public boolean _mkdir(java.lang.Object, java.lang.String, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        java.lang.String r2;
+        java.awt.Component r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        return 0;
+    }
+
+    public void _backup(java.lang.Object, java.lang.String, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0, r4, r7;
+        java.lang.Object r1, r8;
+        java.lang.String r2, $r11, $r12, $r13, $r20, $r27, $r32;
+        java.awt.Component r3;
+        java.io.File r5, r6;
+        java.lang.Throwable r9, $r33;
+        org.gjt.sp.jedit.io.VFSFile $r10;
+        boolean $z0, $z1;
+        java.lang.StringBuilder $r14, $r15, $r16, $r17, $r18, $r19, $r21, $r22, $r23, $r24, $r25, $r26, $r28, $r29, $r30, $r31;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r2);
+
+        $r10 = r4._getFile(r1, r2, r3);
+
+        if null != $r10 goto label1;
+
+        return;
+
+     label1:
+        r5 = org.gjt.sp.jedit.MiscUtilities.prepareBackupDirectory(r2);
+
+        if r5 != null goto label2;
+
+        $r28 = new java.lang.StringBuilder;
+
+        specialinvoke $r28.<init>();
+
+        $r29 = $r28.append("Backup of remote file ");
+
+        $r30 = $r29.append(r2);
+
+        $r31 = $r30.append(" failed, because there is no backup directory.");
+
+        $r32 = $r31.toString();
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/io/VFS", $r32);
+
+        return;
+
+     label2:
+        $z0 = r5.exists();
+
+        if $z0 != 0 goto label3;
+
+        $r21 = new java.lang.StringBuilder;
+
+        specialinvoke $r21.<init>();
+
+        $r22 = $r21.append("Backup of file ");
+
+        $r23 = $r22.append(r2);
+
+        $r24 = $r23.append(" failed. Directory ");
+
+        $r25 = $r24.append(r5);
+
+        $r26 = $r25.append(" does not exist.");
+
+        $r27 = $r26.toString();
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/io/VFS", $r27);
+
+        return;
+
+     label3:
+        r6 = org.gjt.sp.jedit.MiscUtilities.prepareBackupFile(r2, r5);
+
+        if r6 != null goto label4;
+
+        return;
+
+     label4:
+        $r11 = r6.getPath();
+
+        r7 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath($r11);
+
+        $r12 = r6.getPath();
+
+        r8 = r7.createVFSSessionSafe($r12, r3);
+
+        if r8 != null goto label5;
+
+        return;
+
+     label5:
+        $r13 = r6.getPath();
+
+        $z1 = org.gjt.sp.jedit.io.VFS.copy(null, r4, r1, r2, r7, r8, $r13, r3, 1);
+
+        if $z1 != 0 goto label6;
+
+        $r14 = new java.lang.StringBuilder;
+
+        specialinvoke $r14.<init>();
+
+        $r15 = $r14.append("Backup of file ");
+
+        $r16 = $r15.append(r2);
+
+        $r17 = $r16.append(" failed. Copy to ");
+
+        $r18 = $r17.append(r6);
+
+        $r19 = $r18.append(" failed.");
+
+        $r20 = $r19.toString();
+
+        org.gjt.sp.util.Log.log(7, class "org/gjt/sp/jedit/io/VFS", $r20);
+
+     label6:
+        r7._endVFSSession(r8, r3);
+
+        goto label9;
+
+     label7:
+        $r33 := @caughtexception;
+
+        r9 = $r33;
+
+     label8:
+        r7._endVFSSession(r8, r3);
+
+        throw r9;
+
+     label9:
+        return;
+
+        catch java.lang.Throwable from label5 to label6 with label7;
+        catch java.lang.Throwable from label7 to label8 with label7;
+    }
+
+    public java.io.InputStream _createInputStream(java.lang.Object, java.lang.String, boolean, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        java.lang.String r2, $r5;
+        boolean z0;
+        java.awt.Component r3;
+        java.lang.String[] $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        z0 := @parameter2;
+
+        r3 := @parameter3;
+
+        $r4 = newarray (java.lang.String)[1];
+
+        $r5 = r0.name;
+
+        $r4[0] = $r5;
+
+        org.gjt.sp.jedit.io.VFSManager.error(r3, r2, "vfs.not-supported.load", $r4);
+
+        return null;
+    }
+
+    public java.io.OutputStream _createOutputStream(java.lang.Object, java.lang.String, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        java.lang.String r2, $r5;
+        java.awt.Component r3;
+        java.lang.String[] $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        $r4 = newarray (java.lang.String)[1];
+
+        $r5 = r0.name;
+
+        $r4[0] = $r5;
+
+        org.gjt.sp.jedit.io.VFSManager.error(r3, r2, "vfs.not-supported.save", $r4);
+
+        return null;
+    }
+
+    public void _saveComplete(java.lang.Object, org.gjt.sp.jedit.Buffer, java.lang.String, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        org.gjt.sp.jedit.Buffer r2;
+        java.lang.String r3;
+        java.awt.Component r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        return;
+    }
+
+    public void _finishTwoStageSave(java.lang.Object, org.gjt.sp.jedit.Buffer, java.lang.String, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        org.gjt.sp.jedit.Buffer r2;
+        java.lang.String r3;
+        java.awt.Component r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        return;
+    }
+
+    public void _endVFSSession(java.lang.Object, java.awt.Component) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        java.awt.Component r2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        return;
+    }
+
+    public static java.awt.Color getDefaultColorFor(java.lang.String)
+    {
+        java.lang.String r0;
+        java.lang.Object r1, $r5, $r8;
+        java.util.Iterator r2;
+        org.gjt.sp.jedit.io.VFS$ColorEntry r3;
+        java.lang.Throwable r4, $r12;
+        java.util.List $r6, $r7;
+        boolean $z0, $z1;
+        java.util.regex.Pattern $r9;
+        java.util.regex.Matcher $r10;
+        java.awt.Color $r11;
+
+        r0 := @parameter0;
+
+        $r5 = org.gjt.sp.jedit.io.VFS.lock;
+
+        r1 = $r5;
+
+        entermonitor $r5;
+
+     label1:
+        $r6 = org.gjt.sp.jedit.io.VFS.colors;
+
+        if $r6 != null goto label2;
+
+        org.gjt.sp.jedit.io.VFS.loadColors();
+
+     label2:
+        $r7 = org.gjt.sp.jedit.io.VFS.colors;
+
+        r2 = $r7.iterator();
+
+     label3:
+        $z0 = r2.hasNext();
+
+        if $z0 == 0 goto label6;
+
+        $r8 = r2.next();
+
+        r3 = (org.gjt.sp.jedit.io.VFS$ColorEntry) $r8;
+
+        $r9 = r3.re;
+
+        $r10 = $r9.matcher(r0);
+
+        $z1 = $r10.matches();
+
+        if $z1 == 0 goto label5;
+
+        $r11 = r3.color;
+
+        exitmonitor r1;
+
+     label4:
+        return $r11;
+
+     label5:
+        goto label3;
+
+     label6:
+        exitmonitor r1;
+
+     label7:
+        return null;
+
+     label8:
+        $r12 := @caughtexception;
+
+        r4 = $r12;
+
+        exitmonitor r1;
+
+     label9:
+        throw r4;
+
+        catch java.lang.Throwable from label1 to label4 with label8;
+        catch java.lang.Throwable from label5 to label7 with label8;
+        catch java.lang.Throwable from label8 to label9 with label8;
+    }
+
+    private void listFiles(java.lang.Object, java.util.Collection, java.util.List, java.lang.String, org.gjt.sp.jedit.io.VFSFileFilter, boolean, java.awt.Component, boolean, boolean) throws java.io.IOException
+    {
+        org.gjt.sp.jedit.io.VFS r0;
+        java.lang.Object r1;
+        java.util.Collection r2;
+        java.util.List r3;
+        java.lang.String r4, $r9, $r10, $r12, $r15, $r16, $r20, r22, r24;
+        org.gjt.sp.jedit.io.VFSFileFilter r5;
+        boolean z0, z1, z2, $z3, $z4, $z6, $z7, $z8, $z9, $z10, $z11;
+        java.awt.Component r6;
+        org.gjt.sp.jedit.io.VFSFile r7;
+        int $i0, $i1, $i2, $i3, i4;
+        java.lang.Thread $r8;
+        java.lang.StringBuilder $r11, $r13, $r14, $r17, $r18, $r19;
+        java.io.IOException $r21, r25;
+        org.gjt.sp.jedit.io.VFSFile[] r23;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        z0 := @parameter5;
+
+        r6 := @parameter6;
+
+        z1 := @parameter7;
+
+        z2 := @parameter8;
+
+        if z0 == 0 goto label02;
+
+        $z9 = org.gjt.sp.jedit.MiscUtilities.isURL(r4);
+
+        if $z9 != 0 goto label02;
+
+        r22 = org.gjt.sp.jedit.MiscUtilities.resolveSymlinks(r4);
+
+        $z10 = r4.equals(r22);
+
+        if $z10 != 0 goto label02;
+
+        $z11 = r2.contains(r22);
+
+        if $z11 == 0 goto label01;
+
+        $r17 = new java.lang.StringBuilder;
+
+        specialinvoke $r17.<init>();
+
+        $r18 = $r17.append("Recursion in listFiles(): ");
+
+        $r19 = $r18.append(r4);
+
+        $r20 = $r19.toString();
+
+        org.gjt.sp.util.Log.log(9, r0, $r20);
+
+        return;
+
+     label01:
+        r2.add(r22);
+
+     label02:
+        r23 = r0._listFiles(r1, r4, r6);
+
+        if r23 == null goto label03;
+
+        $i0 = lengthof r23;
+
+        if $i0 != 0 goto label04;
+
+     label03:
+        return;
+
+     label04:
+(0)     i4 = 0;
+
+     label05:
+        i4 = Phi(i4 #0, i4 #1);
+
+        $i1 = lengthof r23;
+
+        if i4 >= $i1 goto label17;
+
+        $r8 = java.lang.Thread.currentThread();
+
+        $z3 = $r8.isInterrupted();
+
+        if $z3 == 0 goto label06;
+
+        goto label17;
+
+     label06:
+        r7 = r23[i4];
+
+        if z2 == 0 goto label07;
+
+        $z7 = r7.isHidden();
+
+        if $z7 != 0 goto label16;
+
+        $r16 = r7.getName();
+
+        $z8 = org.gjt.sp.jedit.MiscUtilities.isBackup($r16);
+
+        if $z8 == 0 goto label07;
+
+        goto label16;
+
+     label07:
+        $z4 = r5.accept(r7);
+
+        if $z4 != 0 goto label08;
+
+        goto label16;
+
+     label08:
+        $i2 = r7.getType();
+
+        if $i2 == 1 goto label09;
+
+        $i3 = r7.getType();
+
+        if $i3 != 2 goto label10;
+
+     label09:
+        if z0 == 0 goto label16;
+
+        $r9 = r7.getPath();
+
+        r24 = r0._canonPath(r1, $r9, r6);
+
+        specialinvoke r0.listFiles(r1, r2, r3, r24, r5, z0, r6, z1, z2);
+
+        goto label16;
+
+     label10:
+        if z1 == 0 goto label15;
+
+     label11:
+        $z6 = r7.isBinary(r1);
+
+        if $z6 == 0 goto label13;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<init>();
+
+        $r12 = r7.getPath();
+
+        $r13 = $r11.append($r12);
+
+        $r14 = $r13.append(": skipped as a binary file");
+
+        $r15 = $r14.toString();
+
+        org.gjt.sp.util.Log.log(5, r0, $r15);
+
+     label12:
+        goto label16;
+
+     label13:
+        goto label15;
+
+     label14:
+        $r21 := @caughtexception;
+
+        r25 = $r21;
+
+        org.gjt.sp.util.Log.log(9, r0, r25);
+
+     label15:
+        $r10 = r7.getPath();
+
+        r3.add($r10);
+
+     label16:
+        i4 = i4 + 1;
+
+(1)     goto label05;
+
+     label17:
+        return;
+
+        catch java.io.IOException from label11 to label12 with label14;
+    }
+
+    private static void loadColors()
+    {
+        java.lang.Object r0, $r4;
+        java.lang.String r1, $r10, $r11, $r14, $r20, $r28;
+        java.util.regex.PatternSyntaxException r2, $r24;
+        java.lang.Throwable r3, $r23;
+        java.util.ArrayList $r5;
+        boolean $z0;
+        java.lang.StringBuilder $r6, $r7, $r8, $r9, $r16, $r17, $r18, $r19, $r25, $r26, $r27;
+        org.gjt.sp.jedit.io.VFS$ColorEntry $r12;
+        java.util.List $r13;
+        java.util.regex.Pattern $r15;
+        java.awt.Color $r21, $r22;
+        int i0;
+
+        $r4 = org.gjt.sp.jedit.io.VFS.lock;
+
+        r0 = $r4;
+
+(0)     entermonitor $r4;
+
+     label01:
+        $r5 = new java.util.ArrayList;
+
+        specialinvoke $r5.<init>();
+
+        org.gjt.sp.jedit.io.VFS.colors = $r5;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("vfs.browser.colorize");
+
+        if $z0 != 0 goto label03;
+
+        exitmonitor r0;
+
+     label02:
+        return;
+
+     label03:
+(1)     i0 = 0;
+
+     label04:
+        i0 = Phi(i0 #1, i0 #3);
+
+(2)     $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<init>();
+
+        $r7 = $r6.append("vfs.browser.colors.");
+
+        $r8 = $r7.append(i0);
+
+        $r9 = $r8.append(".glob");
+
+        $r10 = $r9.toString();
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty($r10);
+
+        r1 = $r11;
+
+        if $r11 == null goto label09;
+
+     label05:
+        $r13 = org.gjt.sp.jedit.io.VFS.colors;
+
+        $r12 = new org.gjt.sp.jedit.io.VFS$ColorEntry;
+
+        $r14 = org.gjt.sp.util.StandardUtilities.globToRE(r1);
+
+        $r15 = java.util.regex.Pattern.compile($r14);
+
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<init>();
+
+        $r17 = $r16.append("vfs.browser.colors.");
+
+        $r18 = $r17.append(i0);
+
+        $r19 = $r18.append(".color");
+
+        $r20 = $r19.toString();
+
+        $r21 = java.awt.Color.black;
+
+        $r22 = org.gjt.sp.jedit.jEdit.getColorProperty($r20, $r21);
+
+        specialinvoke $r12.<init>($r15, $r22);
+
+        $r13.add($r12);
+
+     label06:
+        goto label08;
+
+     label07:
+        $r24 := @caughtexception;
+
+        r2 = $r24;
+
+        $r25 = new java.lang.StringBuilder;
+
+        specialinvoke $r25.<init>();
+
+        $r26 = $r25.append("Invalid regular expression: ");
+
+        $r27 = $r26.append(r1);
+
+        $r28 = $r27.toString();
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/io/VFS", $r28);
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/io/VFS", r2);
+
+     label08:
+        i0 = i0 + 1;
+
+(3)     goto label04;
+
+     label09:
+        exitmonitor r0;
+
+     label10:
+        goto label13;
+
+     label11:
+        $r23 := @caughtexception;
+
+(4)     i0 = Phi(i0 #0, i0 #2, i0 #4);
+
+        r3 = $r23;
+
+        exitmonitor r0;
+
+     label12:
+        throw r3;
+
+     label13:
+        return;
+
+        catch java.util.regex.PatternSyntaxException from label05 to label06 with label07;
+        catch java.lang.Throwable from label01 to label02 with label11;
+        catch java.lang.Throwable from label03 to label10 with label11;
+        catch java.lang.Throwable from label11 to label12 with label11;
+    }
+
+    static java.lang.Object access$000()
+    {
+        java.lang.Object $r0;
+
+        $r0 = org.gjt.sp.jedit.io.VFS.lock;
+
+        return $r0;
+    }
+
+    static java.util.List access$102(java.util.List)
+    {
+        java.util.List r0;
+
+        r0 := @parameter0;
+
+        org.gjt.sp.jedit.io.VFS.colors = r0;
+
+        return r0;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Object $r0;
+        org.gjt.sp.jedit.io.VFS$1 $r1;
+
+        org.gjt.sp.jedit.io.VFS.IOBUFSIZE = 32678;
+
+        $r0 = new java.lang.Object;
+
+        specialinvoke $r0.<init>();
+
+        org.gjt.sp.jedit.io.VFS.lock = $r0;
+
+        $r1 = new org.gjt.sp.jedit.io.VFS$1;
+
+        specialinvoke $r1.<init>();
+
+        org.gjt.sp.jedit.EditBus.addToBus($r1);
+
+        return;
+    }
+}

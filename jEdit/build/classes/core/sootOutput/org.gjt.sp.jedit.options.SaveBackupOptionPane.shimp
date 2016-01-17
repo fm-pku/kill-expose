@@ -1,0 +1,430 @@
+public class org.gjt.sp.jedit.options.SaveBackupOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private javax.swing.JCheckBox saveAsUsesFSB;
+    private javax.swing.JCheckBox twoStageSave;
+    private javax.swing.JCheckBox confirmSaveAll;
+    private javax.swing.JTextField autosave;
+    private javax.swing.JCheckBox autosaveUntitled;
+    private javax.swing.JCheckBox suppressNotSavedConfirmUntitled;
+    private javax.swing.JCheckBox useMD5forDirtyCalculation;
+    private javax.swing.JTextField backups;
+    private javax.swing.JTextField backupDirectory;
+    private javax.swing.JTextField backupPrefix;
+    private javax.swing.JTextField backupSuffix;
+    private javax.swing.JCheckBox backupEverySave;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.SaveBackupOptionPane r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("save-back");
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.SaveBackupOptionPane r0;
+        javax.swing.JButton r1, $r45;
+        javax.swing.JPanel r2, $r47;
+        javax.swing.JCheckBox $r3, $r5, $r6, $r8, $r9, $r11, $r12, $r14, $r15, $r17, $r18, $r23, $r25, $r26, $r27, $r29, $r31, $r32, $r33, $r35, $r37, $r38, $r60, $r62, $r63;
+        java.lang.String $r4, $r7, $r10, $r13, $r16, $r20, $r21, $r24, $r28, $r30, $r34, $r36, $r40, $r41, $r44, $r51, $r53, $r54, $r57, $r58, $r61;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6;
+        org.gjt.sp.jedit.gui.NumericTextField $r19, $r39;
+        javax.swing.JTextField $r22, $r42, $r43, $r49, $r52, $r55, $r56, $r59;
+        org.gjt.sp.jedit.options.SaveBackupOptionPane$MyActionListener $r46;
+        java.awt.BorderLayout $r48;
+
+        r0 := @this;
+
+        $r3 = new javax.swing.JCheckBox;
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.saveAsUsesFSB");
+
+        specialinvoke $r3.<init>($r4);
+
+        r0.saveAsUsesFSB = $r3;
+
+        $r5 = r0.saveAsUsesFSB;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("saveAsUsesFSB");
+
+        $r5.setSelected($z0);
+
+        $r6 = r0.saveAsUsesFSB;
+
+        $r7 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.saveAsUsesFSB.tooltip");
+
+        $r6.setToolTipText($r7);
+
+        $r8 = r0.saveAsUsesFSB;
+
+        r0.addComponent($r8);
+
+        $r9 = new javax.swing.JCheckBox;
+
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.twoStageSave");
+
+        specialinvoke $r9.<init>($r10);
+
+        r0.twoStageSave = $r9;
+
+        $r11 = r0.twoStageSave;
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("twoStageSave");
+
+        $r11.setSelected($z1);
+
+        $r12 = r0.twoStageSave;
+
+        $r13 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.twoStageSave.tooltip");
+
+        $r12.setToolTipText($r13);
+
+        $r14 = r0.twoStageSave;
+
+        r0.addComponent($r14);
+
+        $r15 = new javax.swing.JCheckBox;
+
+        $r16 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.confirmSaveAll");
+
+        specialinvoke $r15.<init>($r16);
+
+        r0.confirmSaveAll = $r15;
+
+        $r17 = r0.confirmSaveAll;
+
+        $z2 = org.gjt.sp.jedit.jEdit.getBooleanProperty("confirmSaveAll");
+
+        $r17.setSelected($z2);
+
+        $r18 = r0.confirmSaveAll;
+
+        r0.addComponent($r18);
+
+        $r19 = new org.gjt.sp.jedit.gui.NumericTextField;
+
+        $r20 = org.gjt.sp.jedit.jEdit.getProperty("autosave");
+
+        specialinvoke $r19.<init>($r20, 1);
+
+        r0.autosave = $r19;
+
+        $r21 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.autosave");
+
+        $r22 = r0.autosave;
+
+        r0.addComponent($r21, $r22);
+
+        $r23 = new javax.swing.JCheckBox;
+
+        $r24 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.autosaveUntitled");
+
+        specialinvoke $r23.<init>($r24);
+
+        r0.autosaveUntitled = $r23;
+
+        $r25 = r0.autosaveUntitled;
+
+        $z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty("autosaveUntitled");
+
+        $r25.setSelected($z3);
+
+        $r26 = r0.autosaveUntitled;
+
+        r0.addComponent($r26);
+
+        $r27 = new javax.swing.JCheckBox;
+
+        $r28 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.suppressNotSavedConfirmUntitled");
+
+        specialinvoke $r27.<init>($r28);
+
+        r0.suppressNotSavedConfirmUntitled = $r27;
+
+        $r29 = r0.suppressNotSavedConfirmUntitled;
+
+        $r30 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.suppressNotSavedConfirmUntitled.tooltip");
+
+        $r29.setToolTipText($r30);
+
+        $r31 = r0.suppressNotSavedConfirmUntitled;
+
+        $z4 = org.gjt.sp.jedit.jEdit.getBooleanProperty("suppressNotSavedConfirmUntitled");
+
+        $r31.setSelected($z4);
+
+        $r32 = r0.suppressNotSavedConfirmUntitled;
+
+        r0.addComponent($r32);
+
+        $r33 = new javax.swing.JCheckBox;
+
+        $r34 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.useMD5forDirtyCalculation");
+
+        specialinvoke $r33.<init>($r34);
+
+        r0.useMD5forDirtyCalculation = $r33;
+
+        $r35 = r0.useMD5forDirtyCalculation;
+
+        $r36 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.useMD5forDirtyCalculation.tooltip");
+
+        $r35.setToolTipText($r36);
+
+        $r37 = r0.useMD5forDirtyCalculation;
+
+        $z5 = org.gjt.sp.jedit.jEdit.getBooleanProperty("useMD5forDirtyCalculation");
+
+        $r37.setSelected($z5);
+
+        $r38 = r0.useMD5forDirtyCalculation;
+
+        r0.addComponent($r38);
+
+        $r39 = new org.gjt.sp.jedit.gui.NumericTextField;
+
+        $r40 = org.gjt.sp.jedit.jEdit.getProperty("backups");
+
+        specialinvoke $r39.<init>($r40, 1);
+
+        r0.backups = $r39;
+
+        $r41 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.backups");
+
+        $r42 = r0.backups;
+
+        r0.addComponent($r41, $r42);
+
+        $r43 = new javax.swing.JTextField;
+
+        $r44 = org.gjt.sp.jedit.jEdit.getProperty("backup.directory");
+
+        specialinvoke $r43.<init>($r44);
+
+        r0.backupDirectory = $r43;
+
+        $r45 = new javax.swing.JButton;
+
+        specialinvoke $r45.<init>("...");
+
+        r1 = $r45;
+
+        $r46 = new org.gjt.sp.jedit.options.SaveBackupOptionPane$MyActionListener;
+
+        specialinvoke $r46.<init>(r0, null);
+
+        r1.addActionListener($r46);
+
+        $r47 = new javax.swing.JPanel;
+
+        $r48 = new java.awt.BorderLayout;
+
+        specialinvoke $r48.<init>();
+
+        specialinvoke $r47.<init>($r48);
+
+        r2 = $r47;
+
+        $r49 = r0.backupDirectory;
+
+        r2.add($r49);
+
+        r2.add(r1, "East");
+
+        $r51 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.backupDirectory");
+
+        r0.addComponent($r51, r2);
+
+        $r52 = new javax.swing.JTextField;
+
+        $r53 = org.gjt.sp.jedit.jEdit.getProperty("backup.prefix");
+
+        specialinvoke $r52.<init>($r53);
+
+        r0.backupPrefix = $r52;
+
+        $r54 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.backupPrefix");
+
+        $r55 = r0.backupPrefix;
+
+        r0.addComponent($r54, $r55);
+
+        $r56 = new javax.swing.JTextField;
+
+        $r57 = org.gjt.sp.jedit.jEdit.getProperty("backup.suffix");
+
+        specialinvoke $r56.<init>($r57);
+
+        r0.backupSuffix = $r56;
+
+        $r58 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.backupSuffix");
+
+        $r59 = r0.backupSuffix;
+
+        r0.addComponent($r58, $r59);
+
+        $r60 = new javax.swing.JCheckBox;
+
+        $r61 = org.gjt.sp.jedit.jEdit.getProperty("options.save-back.backupEverySave");
+
+        specialinvoke $r60.<init>($r61);
+
+        r0.backupEverySave = $r60;
+
+        $r62 = r0.backupEverySave;
+
+        $z6 = org.gjt.sp.jedit.jEdit.getBooleanProperty("backupEverySave");
+
+        $r62.setSelected($z6);
+
+        $r63 = r0.backupEverySave;
+
+        r0.addComponent($r63);
+
+        return;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.options.SaveBackupOptionPane r0;
+        boolean z0, z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8;
+        org.gjt.sp.jedit.Buffer[] r1, r2;
+        int i0, $i1, i2;
+        org.gjt.sp.jedit.Buffer r3;
+        javax.swing.JCheckBox $r4, $r5, $r6, $r17, $r18, $r19, $r20;
+        javax.swing.JTextField $r7, $r9, $r11, $r13, $r15;
+        java.lang.String $r8, $r10, $r12, $r14, $r16;
+
+        r0 := @this;
+
+        $r4 = r0.saveAsUsesFSB;
+
+        $z2 = $r4.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("saveAsUsesFSB", $z2);
+
+        $r5 = r0.twoStageSave;
+
+        $z3 = $r5.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("twoStageSave", $z3);
+
+        $r6 = r0.confirmSaveAll;
+
+        $z4 = $r6.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("confirmSaveAll", $z4);
+
+        $r7 = r0.autosave;
+
+        $r8 = $r7.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("autosave", $r8);
+
+        $r9 = r0.backups;
+
+        $r10 = $r9.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("backups", $r10);
+
+        $r11 = r0.backupDirectory;
+
+        $r12 = $r11.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("backup.directory", $r12);
+
+        $r13 = r0.backupPrefix;
+
+        $r14 = $r13.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("backup.prefix", $r14);
+
+        $r15 = r0.backupSuffix;
+
+        $r16 = $r15.getText();
+
+        org.gjt.sp.jedit.jEdit.setProperty("backup.suffix", $r16);
+
+        $r17 = r0.backupEverySave;
+
+        $z5 = $r17.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("backupEverySave", $z5);
+
+        $r18 = r0.autosaveUntitled;
+
+        z0 = $r18.isSelected();
+
+        z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("autosaveUntitled");
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("autosaveUntitled", z0);
+
+        $r19 = r0.suppressNotSavedConfirmUntitled;
+
+        $z6 = $r19.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("suppressNotSavedConfirmUntitled", $z6);
+
+        $r20 = r0.useMD5forDirtyCalculation;
+
+        $z7 = $r20.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("useMD5forDirtyCalculation", $z7);
+
+        if z0 == 0 goto label1;
+
+        $i1 = org.gjt.sp.jedit.jEdit.getIntegerProperty("autosave", 0);
+
+(0)     if $i1 != 0 goto label4;
+
+     label1:
+(1)     if z1 == 0 goto label4;
+
+        r1 = org.gjt.sp.jedit.jEdit.getBuffers();
+
+        r2 = r1;
+
+        i0 = lengthof r2;
+
+(2)     i2 = 0;
+
+     label2:
+        i2 = Phi(i2 #2, i2 #4);
+
+(3)     if i2 >= i0 goto label4;
+
+        r3 = r2[i2];
+
+        $z8 = r3.isUntitled();
+
+        if $z8 == 0 goto label3;
+
+        r3.removeAutosaveFile();
+
+     label3:
+        i2 = i2 + 1;
+
+(4)     goto label2;
+
+     label4:
+        i2 = Phi(i2 #0, i2 #1, i2 #3);
+
+        return;
+    }
+
+    static javax.swing.JTextField access$100(org.gjt.sp.jedit.options.SaveBackupOptionPane)
+    {
+        org.gjt.sp.jedit.options.SaveBackupOptionPane r0;
+        javax.swing.JTextField $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.backupDirectory;
+
+        return $r1;
+    }
+}

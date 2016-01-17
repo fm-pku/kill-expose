@@ -1,0 +1,59 @@
+class org.gjt.sp.jedit.options.GeneralOptionPane$1 extends java.lang.Object implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.options.GeneralOptionPane this$0;
+
+    void <init>(org.gjt.sp.jedit.options.GeneralOptionPane)
+    {
+        org.gjt.sp.jedit.options.GeneralOptionPane$1 r0;
+        org.gjt.sp.jedit.options.GeneralOptionPane r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.options.GeneralOptionPane$1 r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.options.GeneralOptionPane $r2, $r4, $r6, $r8;
+        javax.swing.JCheckBox $r3, $r5, $r7, $r9;
+        boolean $z0, $z1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.this$0;
+
+        $r3 = org.gjt.sp.jedit.options.GeneralOptionPane.access$100($r2);
+
+        $r4 = r0.this$0;
+
+        $r5 = org.gjt.sp.jedit.options.GeneralOptionPane.access$000($r4);
+
+        $z0 = $r5.isSelected();
+
+        $r3.setEnabled($z0);
+
+        $r6 = r0.this$0;
+
+        $r7 = org.gjt.sp.jedit.options.GeneralOptionPane.access$200($r6);
+
+        $r8 = r0.this$0;
+
+        $r9 = org.gjt.sp.jedit.options.GeneralOptionPane.access$000($r8);
+
+        $z1 = $r9.isSelected();
+
+        $r7.setEnabled($z1);
+
+        return;
+    }
+}

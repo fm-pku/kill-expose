@@ -1,0 +1,869 @@
+class org.gjt.sp.jedit.pluginmgr.Roster$Install extends org.gjt.sp.jedit.pluginmgr.Roster$Operation
+{
+    int size;
+    private java.lang.String installed;
+    private final java.lang.String url;
+    private java.lang.String installDirectory;
+    private java.lang.String path;
+    final org.gjt.sp.jedit.pluginmgr.Roster this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.Roster, java.lang.String, java.lang.String, java.lang.String, int)
+    {
+        org.gjt.sp.jedit.pluginmgr.Roster$Install r0;
+        org.gjt.sp.jedit.pluginmgr.Roster r1;
+        java.lang.String r2, r3, r4;
+        int i0;
+        java.lang.NullPointerException $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        i0 := @parameter4;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        if r3 != null goto label1;
+
+        $r5 = new java.lang.NullPointerException;
+
+        specialinvoke $r5.<init>();
+
+        throw $r5;
+
+     label1:
+        r0.installed = r2;
+
+        r0.url = r3;
+
+        r0.installDirectory = r4;
+
+        r0.size = i0;
+
+        return;
+    }
+
+    public int getMaximum()
+    {
+        org.gjt.sp.jedit.pluginmgr.Roster$Install r0;
+        int $i0;
+
+        r0 := @this;
+
+        $i0 = r0.size;
+
+        return $i0;
+    }
+
+    public void runInWorkThread(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress)
+    {
+        org.gjt.sp.jedit.pluginmgr.Roster$Install r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r1;
+        java.lang.String r2, $r3, $r4, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = r0.url;
+
+        r2 = org.gjt.sp.jedit.MiscUtilities.getFileName($r3);
+
+        $r4 = r0.url;
+
+        $r5 = specialinvoke r0.download(r1, r2, $r4);
+
+        r0.path = $r5;
+
+        return;
+    }
+
+    public void runInAWTThread(java.awt.Component)
+    {
+        org.gjt.sp.jedit.pluginmgr.Roster$Install r0;
+        java.awt.Component r1;
+        java.io.File r2, $r10, $r14, $r16, $r49, $r53, $r56, $r59, $r63;
+        java.lang.Throwable r3, r4, $r62, $r65;
+        java.io.IOException r5, $r51, $r52, $r58, $r66, $r67, $r68, $r71, r82, r84, r86, r87, r89, r91;
+        java.lang.String $r6, $r7, $r9, $r11, $r13, $r15, $r17, $r19, $r20, $r23, $r27, $r30, $r33, $r34, $r36, $r44, $r46, $r50, $r54, $r57, $r60, $r64, $r70, r75, r79;
+        java.util.zip.ZipFile $r8, r76;
+        boolean $z0, $z1, $z3, $z6, $z12, $z13, $z15, $z17, $z19, $z21;
+        java.lang.Object $r12, $r39;
+        char $c0;
+        java.io.FileOutputStream $r18, r81;
+        org.gjt.sp.jedit.pluginmgr.Roster $r21, $r41;
+        java.util.List $r22;
+        java.util.zip.ZipException $r24, $r47, r85;
+        java.lang.StringBuilder $r25, $r26, $r28, $r29, $r31, $r32, $r42, $r43, $r45;
+        java.util.LinkedList $r35, r73;
+        java.util.Collection $r37, $r38;
+        org.gjt.sp.jedit.pluginmgr.Roster$Remove $r40;
+        java.lang.Object[] $r48;
+        java.io.InterruptedIOException $r55, r83;
+        java.lang.Exception $r61, r90;
+        java.lang.String[] $r69, r88;
+        org.gjt.sp.jedit.PluginJAR r72;
+        java.util.Iterator r74;
+        java.util.Enumeration r77;
+        java.util.zip.ZipEntry r78;
+        java.io.InputStream r80;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r6 = r0.path;
+
+        if $r6 != null goto label01;
+
+        return;
+
+     label01:
+        $r7 = r0.installed;
+
+        if $r7 == null goto label05;
+
+        $r34 = r0.installed;
+
+        r72 = org.gjt.sp.jedit.jEdit.getPluginJAR($r34);
+
+        $r35 = new java.util.LinkedList;
+
+        specialinvoke $r35.<init>();
+
+        r73 = $r35;
+
+        $r36 = r0.installed;
+
+        r73.add($r36);
+
+        if r72 != null goto label02;
+
+        $r42 = new java.lang.StringBuilder;
+
+        specialinvoke $r42.<init>();
+
+        $r43 = $r42.append("unable to get PluginJAR for ");
+
+        $r44 = r0.installed;
+
+        $r45 = $r43.append($r44);
+
+        $r46 = $r45.toString();
+
+        org.gjt.sp.util.Log.log(9, class "org/gjt/sp/jedit/pluginmgr/Roster$Remove", $r46);
+
+        goto label03;
+
+     label02:
+        $r37 = r72.getJars();
+
+        r73.addAll($r37);
+
+        $r38 = r72.getFiles();
+
+        r73.addAll($r38);
+
+     label03:
+        r74 = r73.iterator();
+
+     label04:
+        $z12 = r74.hasNext();
+
+        if $z12 == 0 goto label05;
+
+        $r39 = r74.next();
+
+        r75 = (java.lang.String) $r39;
+
+        $r40 = new org.gjt.sp.jedit.pluginmgr.Roster$Remove;
+
+        $r41 = r0.this$0;
+
+        specialinvoke $r40.<init>($r41, r75);
+
+        $r40.runInAWTThread(r1);
+
+        goto label04;
+
+     label05:
+(0)     r76 = null;
+
+     label06:
+(1)     $r8 = new java.util.zip.ZipFile;
+
+(2)     $r9 = r0.path;
+
+        specialinvoke $r8.<init>($r9);
+
+        r76 = $r8;
+
+(3)     r77 = r76.entries();
+
+     label07:
+        r80 = Phi(r80 #3, r80 #11);
+
+        r81 = Phi(r81 #3, r81 #11);
+
+        r76 = Phi(r76 #3, r76 #11);
+
+(4)     $z0 = r77.hasMoreElements();
+
+        if $z0 == 0 goto label16;
+
+        $r12 = r77.nextElement();
+
+        r78 = (java.util.zip.ZipEntry) $r12;
+
+        $r13 = r78.getName();
+
+        $c0 = java.io.File.separatorChar;
+
+        r79 = $r13.replace(47, $c0);
+
+        $r14 = new java.io.File;
+
+        $r15 = r0.installDirectory;
+
+        specialinvoke $r14.<init>($r15, r79);
+
+        r2 = $r14;
+
+        $z3 = r78.isDirectory();
+
+        if $z3 == 0 goto label08;
+
+        r2.mkdirs();
+
+(5)     goto label15;
+
+     label08:
+        $r16 = new java.io.File;
+
+        $r17 = r2.getParent();
+
+        specialinvoke $r16.<init>($r17);
+
+        $r16.mkdirs();
+
+        r80 = null;
+
+(6)     r81 = null;
+
+     label09:
+        r80 = r76.getInputStream(r78);
+
+        if r80 != null goto label10;
+
+        $r24 = new java.util.zip.ZipException;
+
+        $r25 = new java.lang.StringBuilder;
+
+        specialinvoke $r25.<init>();
+
+        $r26 = $r25.append("Entry ");
+
+        $r27 = r78.getName();
+
+        $r28 = $r26.append($r27);
+
+        $r29 = $r28.append(" from archive ");
+
+        $r30 = r76.getName();
+
+        $r31 = $r29.append($r30);
+
+        $r32 = $r31.append(" could not be processed.");
+
+        $r33 = $r32.toString();
+
+        specialinvoke $r24.<init>($r33);
+
+        throw $r24;
+
+     label10:
+        $r18 = new java.io.FileOutputStream;
+
+        specialinvoke $r18.<init>(r2);
+
+        r81 = $r18;
+
+        org.gjt.sp.util.IOUtilities.copyStream(4096, null, r80, r81, 0);
+
+     label11:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r80);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r81);
+
+        goto label14;
+
+     label12:
+        $r65 := @caughtexception;
+
+        r80 = Phi(r80 #6, r80 #7);
+
+        r81 = Phi(r81 #6, r81 #7);
+
+(7)     r76 = Phi(r76 #6, r76 #7);
+
+(8)     r3 = $r65;
+
+     label13:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r80);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r81);
+
+        throw r3;
+
+     label14:
+        $r19 = r2.getName();
+
+        $r20 = $r19.toLowerCase();
+
+        $z6 = $r20.endsWith(".jar");
+
+(9)     if $z6 == 0 goto label15;
+
+        $r21 = r0.this$0;
+
+        $r22 = org.gjt.sp.jedit.pluginmgr.Roster.access$000($r21);
+
+        $r23 = r2.getPath();
+
+(10)    $r22.add($r23);
+
+     label15:
+        r80 = Phi(r80 #5, r80 #9, r80 #10);
+
+        r81 = Phi(r81 #5, r81 #9, r81 #10);
+
+(11)    goto label07;
+
+     label16:
+        if r76 == null goto label17;
+
+        r76.close();
+
+     label17:
+        goto label19;
+
+     label18:
+        $r51 := @caughtexception;
+
+        r82 = $r51;
+
+        org.gjt.sp.util.Log.log(9, r0, r82);
+
+     label19:
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("plugin-manager.deleteDownloads");
+
+(12)    if $z1 == 0 goto label46;
+
+        $r10 = new java.io.File;
+
+        $r11 = r0.path;
+
+        specialinvoke $r10.<init>($r11);
+
+        $r10.delete();
+
+(13)    goto label46;
+
+     label20:
+        $r55 := @caughtexception;
+
+        r80 = Phi(r80 #2, r80 #4, r80 #8);
+
+        r81 = Phi(r81 #2, r81 #4, r81 #8);
+
+(14)    r76 = Phi(r76 #2, r76 #4, r76 #8);
+
+        r83 = $r55;
+
+     label21:
+        if r76 == null goto label22;
+
+        r76.close();
+
+     label22:
+        goto label24;
+
+     label23:
+        $r67 := @caughtexception;
+
+        r84 = $r67;
+
+        org.gjt.sp.util.Log.log(9, r0, r84);
+
+     label24:
+        $z17 = org.gjt.sp.jedit.jEdit.getBooleanProperty("plugin-manager.deleteDownloads");
+
+(15)    if $z17 == 0 goto label46;
+
+        $r56 = new java.io.File;
+
+        $r57 = r0.path;
+
+        specialinvoke $r56.<init>($r57);
+
+        $r56.delete();
+
+(16)    goto label46;
+
+     label25:
+        $r47 := @caughtexception;
+
+        r80 = Phi(r80 #2, r80 #4, r80 #8);
+
+        r81 = Phi(r81 #2, r81 #4, r81 #8);
+
+(17)    r76 = Phi(r76 #2, r76 #4, r76 #8);
+
+        r85 = $r47;
+
+        org.gjt.sp.util.Log.log(9, r0, r85);
+
+        $r48 = newarray (java.lang.Object)[1];
+
+        $r48[0] = "";
+
+        org.gjt.sp.jedit.GUIUtilities.error(null, "plugin-error-download", $r48);
+
+     label26:
+        if r76 == null goto label27;
+
+        r76.close();
+
+     label27:
+        goto label29;
+
+     label28:
+        $r66 := @caughtexception;
+
+        r86 = $r66;
+
+        org.gjt.sp.util.Log.log(9, r0, r86);
+
+     label29:
+        $z13 = org.gjt.sp.jedit.jEdit.getBooleanProperty("plugin-manager.deleteDownloads");
+
+(18)    if $z13 == 0 goto label46;
+
+        $r49 = new java.io.File;
+
+        $r50 = r0.path;
+
+        specialinvoke $r49.<init>($r50);
+
+        $r49.delete();
+
+(19)    goto label46;
+
+     label30:
+        $r68 := @caughtexception;
+
+        r80 = Phi(r80 #2, r80 #4, r80 #8);
+
+        r81 = Phi(r81 #2, r81 #4, r81 #8);
+
+(20)    r76 = Phi(r76 #2, r76 #4, r76 #8);
+
+        r87 = $r68;
+
+        org.gjt.sp.util.Log.log(9, r0, r87);
+
+        $r69 = newarray (java.lang.String)[1];
+
+        $r70 = r87.getMessage();
+
+        $r69[0] = $r70;
+
+        r88 = $r69;
+
+        org.gjt.sp.jedit.GUIUtilities.error(null, "ioerror", r88);
+
+     label31:
+        if r76 == null goto label32;
+
+        r76.close();
+
+     label32:
+        goto label34;
+
+     label33:
+        $r52 := @caughtexception;
+
+        r89 = $r52;
+
+        org.gjt.sp.util.Log.log(9, r0, r89);
+
+     label34:
+        $z15 = org.gjt.sp.jedit.jEdit.getBooleanProperty("plugin-manager.deleteDownloads");
+
+(21)    if $z15 == 0 goto label46;
+
+        $r53 = new java.io.File;
+
+        $r54 = r0.path;
+
+        specialinvoke $r53.<init>($r54);
+
+        $r53.delete();
+
+(22)    goto label46;
+
+     label35:
+        $r61 := @caughtexception;
+
+        r80 = Phi(r80 #4, r80 #8, r80 #1);
+
+        r81 = Phi(r81 #4, r81 #8, r81 #1);
+
+(23)    r76 = Phi(r76 #4, r76 #8, r76 #1);
+
+        r90 = $r61;
+
+        org.gjt.sp.util.Log.log(9, r0, r90);
+
+     label36:
+        if r76 == null goto label37;
+
+        r76.close();
+
+     label37:
+        goto label39;
+
+     label38:
+        $r58 := @caughtexception;
+
+        r91 = $r58;
+
+        org.gjt.sp.util.Log.log(9, r0, r91);
+
+     label39:
+        $z19 = org.gjt.sp.jedit.jEdit.getBooleanProperty("plugin-manager.deleteDownloads");
+
+(24)    if $z19 == 0 goto label46;
+
+        $r59 = new java.io.File;
+
+        $r60 = r0.path;
+
+        specialinvoke $r59.<init>($r60);
+
+        $r59.delete();
+
+(25)    goto label46;
+
+     label40:
+        $r62 := @caughtexception;
+
+        r80 = Phi(r80 #4, r80 #8, r80 #0, r80 #14, r80 #17, r80 #20, r80 #23, r80 #26);
+
+        r81 = Phi(r81 #4, r81 #8, r81 #0, r81 #14, r81 #17, r81 #20, r81 #23, r81 #26);
+
+(26)    r76 = Phi(r76 #4, r76 #8, r76 #0, r76 #14, r76 #17, r76 #20, r76 #23, r76 #26);
+
+        r4 = $r62;
+
+     label41:
+        if r76 == null goto label42;
+
+        r76.close();
+
+     label42:
+        goto label44;
+
+     label43:
+        $r71 := @caughtexception;
+
+        r5 = $r71;
+
+        org.gjt.sp.util.Log.log(9, r0, r5);
+
+     label44:
+        $z21 = org.gjt.sp.jedit.jEdit.getBooleanProperty("plugin-manager.deleteDownloads");
+
+        if $z21 == 0 goto label45;
+
+        $r63 = new java.io.File;
+
+        $r64 = r0.path;
+
+        specialinvoke $r63.<init>($r64);
+
+        $r63.delete();
+
+     label45:
+        throw r4;
+
+     label46:
+        r80 = Phi(r80 #12, r80 #13, r80 #15, r80 #16, r80 #18, r80 #19, r80 #21, r80 #22, r80 #24, r80 #25);
+
+        r81 = Phi(r81 #12, r81 #13, r81 #15, r81 #16, r81 #18, r81 #19, r81 #21, r81 #22, r81 #24, r81 #25);
+
+        r76 = Phi(r76 #12, r76 #13, r76 #15, r76 #16, r76 #18, r76 #19, r76 #21, r76 #22, r76 #24, r76 #25);
+
+        return;
+
+        catch java.lang.Throwable from label09 to label11 with label12;
+        catch java.lang.Throwable from label12 to label13 with label12;
+        catch java.io.IOException from label16 to label17 with label18;
+        catch java.io.InterruptedIOException from label06 to label16 with label20;
+        catch java.io.IOException from label21 to label22 with label23;
+        catch java.util.zip.ZipException from label06 to label16 with label25;
+        catch java.io.IOException from label26 to label27 with label28;
+        catch java.io.IOException from label06 to label16 with label30;
+        catch java.io.IOException from label31 to label32 with label33;
+        catch java.lang.Exception from label06 to label16 with label35;
+        catch java.io.IOException from label36 to label37 with label38;
+        catch java.lang.Throwable from label06 to label16 with label40;
+        catch java.lang.Throwable from label20 to label21 with label40;
+        catch java.lang.Throwable from label25 to label26 with label40;
+        catch java.lang.Throwable from label30 to label31 with label40;
+        catch java.lang.Throwable from label35 to label36 with label40;
+        catch java.io.IOException from label41 to label42 with label43;
+        catch java.lang.Throwable from label40 to label41 with label40;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        org.gjt.sp.jedit.pluginmgr.Roster$Install r0, $r2;
+        java.lang.Object r1;
+        boolean $z0, $z1, $z2, $z2_1, $z2_2;
+        java.lang.String $r3, $r4;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $z0 = r1 instanceof org.gjt.sp.jedit.pluginmgr.Roster$Install;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = (org.gjt.sp.jedit.pluginmgr.Roster$Install) r1;
+
+        $r4 = $r2.url;
+
+        $r3 = r0.url;
+
+        $z1 = $r4.equals($r3);
+
+        if $z1 == 0 goto label1;
+
+        $z2 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z2_1 = 0;
+
+     label2:
+        $z2_2 = Phi($z2 #0, $z2_1 #1);
+
+        return $z2_2;
+    }
+
+    private java.lang.String download(org.gjt.sp.jedit.pluginmgr.PluginManagerProgress, java.lang.String, java.lang.String)
+    {
+        org.gjt.sp.jedit.pluginmgr.Roster$Install r0;
+        org.gjt.sp.jedit.pluginmgr.PluginManagerProgress r1;
+        java.lang.String r2, r3, r4, $r7, $r10, r19, r19_1, r19_2;
+        java.net.URLConnection r5;
+        java.lang.Throwable r6, $r16;
+        java.net.URL $r8;
+        java.lang.String[] $r9;
+        java.io.FileOutputStream $r11, r21, r21_1;
+        boolean $z0, $z1;
+        java.io.IOException $r12, r23;
+        org.gjt.sp.jedit.pluginmgr.Roster$Install$2 $r13;
+        java.lang.Exception $r14, r24;
+        java.io.InterruptedIOException $r15;
+        java.io.FileNotFoundException $r17, r22;
+        org.gjt.sp.jedit.pluginmgr.Roster$Install$1 $r18;
+        java.io.InputStream r20, r20_1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+(0)     r3 := @parameter2;
+
+     label01:
+        r19 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.mirror.id");
+
+        if r19 == null goto label02;
+
+        $z1 = r19.equals("NONE");
+
+(1)     if $z1 == 0 goto label03;
+
+     label02:
+(2)     r19_1 = "default";
+
+     label03:
+        r19_2 = Phi(r19 #1, r19_1 #2);
+
+(3)     $r7 = org.gjt.sp.jedit.pluginmgr.Roster.access$100();
+
+        r4 = org.gjt.sp.jedit.MiscUtilities.constructPath($r7, r2);
+
+        $r8 = new java.net.URL;
+
+        specialinvoke $r8.<init>(r3);
+
+        r5 = $r8.openConnection();
+
+        $r9 = newarray (java.lang.String)[2];
+
+        $r9[0] = r2;
+
+        $r9[1] = r19_2;
+
+        $r10 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.progress", $r9);
+
+        r1.setStatus($r10);
+
+        r20 = null;
+
+(4)     r21 = null;
+
+     label04:
+(5)     r20_1 = r5.getInputStream();
+
+        $r11 = new java.io.FileOutputStream;
+
+        specialinvoke $r11.<init>(r4);
+
+(6)     r21_1 = $r11;
+
+        $z0 = org.gjt.sp.util.IOUtilities.copyStream(r1, r20_1, r21_1, 1);
+
+(7)     if $z0 != 0 goto label07;
+
+     label05:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r20_1);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r21_1);
+
+     label06:
+        return null;
+
+     label07:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r20_1);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r21_1);
+
+        goto label10;
+
+     label08:
+        $r16 := @caughtexception;
+
+        r19 = Phi(r19_2 #4, r19 #8);
+
+        r20 = Phi(r20 #4, r20_1 #5, r20 #8);
+
+(8)     r21 = Phi(r21 #4, r21_1 #6, r21 #8);
+
+(9)     r6 = $r16;
+
+     label09:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r20);
+
+        org.gjt.sp.util.IOUtilities.closeQuietly(r21);
+
+        throw r6;
+
+     label10:
+        return r4;
+
+     label11:
+        $r15 := @caughtexception;
+
+        r19 = Phi(r19 #0, r19_1 #2, r19_2 #3, r19 #9);
+
+        r20 = Phi(r20 #0, r20_1 #7, r20 #9);
+
+        r21 = Phi(r21 #0, r21_1 #7, r21 #9);
+
+        return null;
+
+     label12:
+        $r17 := @caughtexception;
+
+        r19 = Phi(r19 #0, r19_1 #2, r19_2 #3, r19 #9);
+
+        r20 = Phi(r20 #0, r20_1 #7, r20 #9);
+
+        r21 = Phi(r21 #0, r21_1 #7, r21 #9);
+
+        r22 = $r17;
+
+        org.gjt.sp.util.Log.log(9, r0, r22);
+
+        $r18 = new org.gjt.sp.jedit.pluginmgr.Roster$Install$1;
+
+        specialinvoke $r18.<init>(r0);
+
+        javax.swing.SwingUtilities.invokeLater($r18);
+
+        return null;
+
+     label13:
+        $r12 := @caughtexception;
+
+        r19 = Phi(r19 #0, r19_1 #2, r19_2 #3, r19 #9);
+
+        r20 = Phi(r20 #0, r20_1 #7, r20 #9);
+
+        r21 = Phi(r21 #0, r21_1 #7, r21 #9);
+
+        r23 = $r12;
+
+        org.gjt.sp.util.Log.log(9, r0, r23);
+
+        $r13 = new org.gjt.sp.jedit.pluginmgr.Roster$Install$2;
+
+        specialinvoke $r13.<init>(r0, r23);
+
+        javax.swing.SwingUtilities.invokeLater($r13);
+
+        return null;
+
+     label14:
+        $r14 := @caughtexception;
+
+        r19 = Phi(r19 #0, r19_1 #2, r19_2 #3, r19 #9);
+
+        r20 = Phi(r20 #0, r20_1 #7, r20 #9);
+
+        r21 = Phi(r21 #0, r21_1 #7, r21 #9);
+
+        r24 = $r14;
+
+        org.gjt.sp.util.Log.log(9, r0, r24);
+
+        return null;
+
+        catch java.lang.Throwable from label04 to label05 with label08;
+        catch java.lang.Throwable from label08 to label09 with label08;
+        catch java.io.InterruptedIOException from label01 to label06 with label11;
+        catch java.io.InterruptedIOException from label07 to label10 with label11;
+        catch java.io.FileNotFoundException from label01 to label06 with label12;
+        catch java.io.FileNotFoundException from label07 to label10 with label12;
+        catch java.io.IOException from label01 to label06 with label13;
+        catch java.io.IOException from label07 to label10 with label13;
+        catch java.lang.Exception from label01 to label06 with label14;
+        catch java.lang.Exception from label07 to label10 with label14;
+    }
+}

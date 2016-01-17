@@ -1,0 +1,298 @@
+class org.gjt.sp.jedit.pluginmgr.ManagePanel$SaveButton extends org.gjt.sp.jedit.gui.RolloverButton implements java.awt.event.ActionListener
+{
+    final org.gjt.sp.jedit.pluginmgr.ManagePanel this$0;
+
+    void <init>(org.gjt.sp.jedit.pluginmgr.ManagePanel)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$SaveButton r0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel r1;
+        java.lang.String $r2;
+        javax.swing.Icon $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.this$0 = r1;
+
+        specialinvoke r0.<init>();
+
+        $r2 = org.gjt.sp.jedit.jEdit.getProperty("manage-plugins.save.icon");
+
+        $r3 = org.gjt.sp.jedit.GUIUtilities.loadIcon($r2);
+
+        r0.setIcon($r3);
+
+        r0.setToolTipText("Save Currently Checked Plugins Set");
+
+        r0.addActionListener(r0);
+
+        r0.setEnabled(1);
+
+        return;
+    }
+
+    void saveState(java.lang.String, java.util.List)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$SaveButton r0;
+        java.lang.String r1, $r11, $r13, $r14, $r16, r25;
+        java.util.List r2;
+        java.lang.StringBuilder r3, $r5, $r15, $r17, $r19;
+        java.lang.Throwable r4, $r21;
+        boolean $z0;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r7, $r8;
+        java.io.BufferedWriter $r9, r28;
+        java.io.OutputStreamWriter $r10;
+        java.lang.Object $r12, r27;
+        char $c0;
+        int $i1, $i2;
+        java.lang.Exception $r22, r30;
+        java.util.Iterator r23;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r24;
+        org.gjt.sp.jedit.io.VFS r26;
+        java.io.OutputStream r29;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<init>("<pluginset>\n ");
+
+        r3 = $r5;
+
+        r23 = r2.iterator();
+
+     label1:
+        $z0 = r23.hasNext();
+
+        if $z0 == 0 goto label2;
+
+        $r12 = r23.next();
+
+        r24 = (org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry) $r12;
+
+        $r14 = r24.jar;
+
+        $r13 = r24.jar;
+
+        $c0 = java.io.File.separatorChar;
+
+        $i1 = $r13.lastIndexOf($c0);
+
+        $i2 = 1 + $i1;
+
+        r25 = $r14.substring($i2);
+
+        $r15 = r3.append("   <plugin name=\"");
+
+        $r16 = r24.name;
+
+        $r17 = $r15.append($r16);
+
+        $r17.append("\" jar=\"");
+
+        $r19 = r3.append(r25);
+
+        $r19.append("\" />\n ");
+
+        goto label1;
+
+     label2:
+        r3.append("</pluginset>\n");
+
+        r26 = org.gjt.sp.jedit.io.VFSManager.getVFSForPath(r1);
+
+        $r7 = r0.this$0;
+
+        r27 = r26.createVFSSession(r1, $r7);
+
+(0)     r28 = null;
+
+     label3:
+        $r8 = r0.this$0;
+
+        r29 = r26._createOutputStream(r27, r1, $r8);
+
+        $r9 = new java.io.BufferedWriter;
+
+        $r10 = new java.io.OutputStreamWriter;
+
+        specialinvoke $r10.<init>(r29, "utf-8");
+
+        specialinvoke $r9.<init>($r10);
+
+        r28 = $r9;
+
+        $r11 = r3.toString();
+
+        r28.write($r11);
+
+     label4:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r28);
+
+(1)     goto label9;
+
+     label5:
+        $r22 := @caughtexception;
+
+        r28 = Phi(r28 #0);
+
+        r30 = $r22;
+
+        org.gjt.sp.util.Log.log(9, r0, "Saving State Error", r30);
+
+     label6:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r28);
+
+(2)     goto label9;
+
+     label7:
+        $r21 := @caughtexception;
+
+(3)     r28 = Phi(r28 #0, r28 #3);
+
+        r4 = $r21;
+
+     label8:
+        org.gjt.sp.util.IOUtilities.closeQuietly(r28);
+
+        throw r4;
+
+     label9:
+        r28 = Phi(r28 #1, r28 #2);
+
+        return;
+
+        catch java.lang.Exception from label3 to label4 with label5;
+        catch java.lang.Throwable from label3 to label4 with label7;
+        catch java.lang.Throwable from label5 to label6 with label7;
+        catch java.lang.Throwable from label7 to label8 with label7;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$SaveButton r0;
+        java.awt.event.ActionEvent r1;
+        java.lang.String r2, $r11, $r13, $r15, $r21, $r22;
+        org.gjt.sp.jedit.browser.VFSFileChooserDialog r3, $r16;
+        java.lang.String[] r4;
+        java.util.ArrayList r5, $r20;
+        org.gjt.sp.jedit.PluginJAR[] r6, r7;
+        int i0, $i1, i2;
+        org.gjt.sp.jedit.PluginJAR r8;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry r9, $r26;
+        java.lang.StringBuilder $r10, $r12, $r14;
+        org.gjt.sp.jedit.pluginmgr.ManagePanel $r17, $r27;
+        org.gjt.sp.jedit.pluginmgr.PluginManager $r18, $r24;
+        org.gjt.sp.jedit.View $r19;
+        org.gjt.sp.jedit.msg.PropertiesChanged $r23;
+        org.gjt.sp.jedit.EditPlugin $r25;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<init>();
+
+        $r11 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        $r12 = $r10.append($r11);
+
+        $r13 = java.io.File.separator;
+
+        $r14 = $r12.append($r13);
+
+        $r15 = $r14.toString();
+
+        r2 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.pluginset.path", $r15);
+
+        $r16 = new org.gjt.sp.jedit.browser.VFSFileChooserDialog;
+
+        $r17 = r0.this$0;
+
+        $r18 = org.gjt.sp.jedit.pluginmgr.ManagePanel.access$1000($r17);
+
+        $r19 = org.gjt.sp.jedit.jEdit.getActiveView();
+
+        specialinvoke $r16.<init>($r18, $r19, r2, 1, 0, 1);
+
+        r3 = $r16;
+
+        r4 = r3.getSelectedFiles();
+
+        $r20 = new java.util.ArrayList;
+
+        specialinvoke $r20.<init>();
+
+        r5 = $r20;
+
+        if r4 == null goto label1;
+
+        $i1 = lengthof r4;
+
+        if $i1 == 1 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        r6 = org.gjt.sp.jedit.jEdit.getPluginJARs();
+
+        r7 = r6;
+
+        i0 = lengthof r7;
+
+(0)     i2 = 0;
+
+     label3:
+        i2 = Phi(i2 #0, i2 #1);
+
+        if i2 >= i0 goto label5;
+
+        r8 = r7[i2];
+
+        $r25 = r8.getPlugin();
+
+        if $r25 == null goto label4;
+
+        $r26 = new org.gjt.sp.jedit.pluginmgr.ManagePanel$Entry;
+
+        $r27 = r0.this$0;
+
+        specialinvoke $r26.<init>($r27, r8);
+
+        r9 = $r26;
+
+        r5.add(r9);
+
+     label4:
+        i2 = i2 + 1;
+
+(1)     goto label3;
+
+     label5:
+        $r21 = r4[0];
+
+        r0.saveState($r21, r5);
+
+        $r22 = r4[0];
+
+        org.gjt.sp.jedit.jEdit.setProperty("plugin-manager.pluginset.path", $r22);
+
+        $r23 = new org.gjt.sp.jedit.msg.PropertiesChanged;
+
+        $r24 = org.gjt.sp.jedit.pluginmgr.PluginManager.getInstance();
+
+        specialinvoke $r23.<init>($r24);
+
+        org.gjt.sp.jedit.EditBus.send($r23);
+
+        return;
+    }
+}

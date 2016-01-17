@@ -1,0 +1,73 @@
+final class org.gjt.sp.jedit.GUIUtilities$7 extends java.lang.Object implements java.lang.Runnable
+{
+    final int[] val$retValue;
+    final java.awt.Component val$comp;
+    final java.lang.String val$name;
+    final java.lang.String[] val$args;
+    final java.lang.Object[] val$listModel;
+
+    void <init>(int[], java.awt.Component, java.lang.String, java.lang.String[], java.lang.Object[])
+    {
+        org.gjt.sp.jedit.GUIUtilities$7 r0;
+        int[] r1;
+        java.awt.Component r2;
+        java.lang.String r3;
+        java.lang.String[] r4;
+        java.lang.Object[] r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r3 := @parameter2;
+
+        r4 := @parameter3;
+
+        r5 := @parameter4;
+
+        r0.val$retValue = r1;
+
+        r0.val$comp = r2;
+
+        r0.val$name = r3;
+
+        r0.val$args = r4;
+
+        r0.val$listModel = r5;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public void run()
+    {
+        org.gjt.sp.jedit.GUIUtilities$7 r0;
+        java.lang.Object[] $r1;
+        java.lang.String[] $r2;
+        java.lang.String $r3;
+        java.awt.Component $r4;
+        int[] $r5;
+        int $i0;
+
+        r0 := @this;
+
+        $r5 = r0.val$retValue;
+
+        $r4 = r0.val$comp;
+
+        $r3 = r0.val$name;
+
+        $r2 = r0.val$args;
+
+        $r1 = r0.val$listModel;
+
+        $i0 = org.gjt.sp.jedit.GUIUtilities.listConfirm($r4, $r3, $r2, $r1);
+
+        $r5[0] = $i0;
+
+        return;
+    }
+}

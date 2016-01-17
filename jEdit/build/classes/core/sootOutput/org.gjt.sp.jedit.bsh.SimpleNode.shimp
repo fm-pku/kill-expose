@@ -1,0 +1,483 @@
+class org.gjt.sp.jedit.bsh.SimpleNode extends java.lang.Object implements org.gjt.sp.jedit.bsh.Node
+{
+    public static org.gjt.sp.jedit.bsh.SimpleNode JAVACODE;
+    protected org.gjt.sp.jedit.bsh.Node parent;
+    protected org.gjt.sp.jedit.bsh.Node[] children;
+    protected int id;
+    org.gjt.sp.jedit.bsh.Token firstToken;
+    org.gjt.sp.jedit.bsh.Token lastToken;
+    java.lang.String sourceFile;
+
+    public void <init>(int)
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+        int i0;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        specialinvoke r0.<init>();
+
+        r0.id = i0;
+
+        return;
+    }
+
+    public void jjtOpen()
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+
+        r0 := @this;
+
+        return;
+    }
+
+    public void jjtClose()
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+
+        r0 := @this;
+
+        return;
+    }
+
+    public void jjtSetParent(org.gjt.sp.jedit.bsh.Node)
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+        org.gjt.sp.jedit.bsh.Node r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.parent = r1;
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.Node jjtGetParent()
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+        org.gjt.sp.jedit.bsh.Node $r1;
+
+        r0 := @this;
+
+        $r1 = r0.parent;
+
+        return $r1;
+    }
+
+    public void jjtAddChild(org.gjt.sp.jedit.bsh.Node, int)
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+        org.gjt.sp.jedit.bsh.Node r1;
+        int i0, $i1, $i2, $i3, $i4;
+        org.gjt.sp.jedit.bsh.Node[] r2, $r3, $r4, $r5, $r6, $r7, $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        i0 := @parameter1;
+
+        $r3 = r0.children;
+
+        if $r3 != null goto label1;
+
+        $i4 = i0 + 1;
+
+        $r8 = newarray (org.gjt.sp.jedit.bsh.Node)[$i4];
+
+        r0.children = $r8;
+
+        goto label2;
+
+     label1:
+        $r4 = r0.children;
+
+        $i1 = lengthof $r4;
+
+        if i0 < $i1 goto label2;
+
+        $i2 = i0 + 1;
+
+        r2 = newarray (org.gjt.sp.jedit.bsh.Node)[$i2];
+
+        $r7 = r0.children;
+
+        $r6 = r0.children;
+
+        $i3 = lengthof $r6;
+
+        java.lang.System.arraycopy($r7, 0, r2, 0, $i3);
+
+        r0.children = r2;
+
+     label2:
+        $r5 = r0.children;
+
+        $r5[i0] = r1;
+
+        return;
+    }
+
+    public org.gjt.sp.jedit.bsh.Node jjtGetChild(int)
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+        int i0;
+        org.gjt.sp.jedit.bsh.Node[] $r1;
+        org.gjt.sp.jedit.bsh.Node $r2;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.children;
+
+        $r2 = $r1[i0];
+
+        return $r2;
+    }
+
+    public org.gjt.sp.jedit.bsh.SimpleNode getChild(int)
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0, $r2;
+        int i0;
+        org.gjt.sp.jedit.bsh.Node $r1;
+
+        r0 := @this;
+
+        i0 := @parameter0;
+
+        $r1 = r0.jjtGetChild(i0);
+
+        $r2 = (org.gjt.sp.jedit.bsh.SimpleNode) $r1;
+
+        return $r2;
+    }
+
+    public int jjtGetNumChildren()
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+        org.gjt.sp.jedit.bsh.Node[] $r1, $r2;
+        int $i0, $i0_1, $i0_2;
+
+        r0 := @this;
+
+        $r1 = r0.children;
+
+        if $r1 != null goto label1;
+
+        $i0 = 0;
+
+(0)     goto label2;
+
+     label1:
+        $r2 = r0.children;
+
+(1)     $i0_1 = lengthof $r2;
+
+     label2:
+        $i0_2 = Phi($i0 #0, $i0_1 #1);
+
+        return $i0_2;
+    }
+
+    public java.lang.String toString()
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+        int $i0;
+        java.lang.String[] $r1;
+        java.lang.String $r2;
+
+        r0 := @this;
+
+        $r1 = org.gjt.sp.jedit.bsh.ParserTreeConstants.jjtNodeName;
+
+        $i0 = r0.id;
+
+        $r2 = $r1[$i0];
+
+        return $r2;
+    }
+
+    public java.lang.String toString(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+        java.lang.String r1, $r4, $r6;
+        java.lang.StringBuilder $r2, $r3, $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r3 = $r2.append(r1);
+
+        $r4 = r0.toString();
+
+        $r5 = $r3.append($r4);
+
+        $r6 = $r5.toString();
+
+        return $r6;
+    }
+
+    public void dump(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0, r2;
+        java.lang.String r1, $r4, $r12;
+        java.io.PrintStream $r3;
+        org.gjt.sp.jedit.bsh.Node[] $r5, $r6, $r7;
+        int $i0, i1;
+        org.gjt.sp.jedit.bsh.Node $r8;
+        java.lang.StringBuilder $r9, $r10, $r11;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r3 = java.lang.System.out;
+
+        $r4 = r0.toString(r1);
+
+        $r3.println($r4);
+
+        $r5 = r0.children;
+
+(0)     if $r5 == null goto label3;
+
+(1)     i1 = 0;
+
+     label1:
+        i1 = Phi(i1 #1, i1 #3);
+
+        $r6 = r0.children;
+
+        $i0 = lengthof $r6;
+
+(2)     if i1 >= $i0 goto label3;
+
+        $r7 = r0.children;
+
+        $r8 = $r7[i1];
+
+        r2 = (org.gjt.sp.jedit.bsh.SimpleNode) $r8;
+
+        if r2 == null goto label2;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<init>();
+
+        $r10 = $r9.append(r1);
+
+        $r11 = $r10.append(" ");
+
+        $r12 = $r11.toString();
+
+        r2.dump($r12);
+
+     label2:
+        i1 = i1 + 1;
+
+(3)     goto label1;
+
+     label3:
+        i1 = Phi(i1 #0, i1 #2);
+
+        return;
+    }
+
+    public void prune()
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+
+        r0 := @this;
+
+        r0.jjtSetParent(null);
+
+        return;
+    }
+
+    public java.lang.Object eval(org.gjt.sp.jedit.bsh.CallStack, org.gjt.sp.jedit.bsh.Interpreter) throws org.gjt.sp.jedit.bsh.EvalError
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+        org.gjt.sp.jedit.bsh.CallStack r1;
+        org.gjt.sp.jedit.bsh.Interpreter r2;
+        org.gjt.sp.jedit.bsh.InterpreterError $r3;
+        java.lang.StringBuilder $r4, $r5, $r8;
+        java.lang.Class $r6;
+        java.lang.String $r7, $r9;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = new org.gjt.sp.jedit.bsh.InterpreterError;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<init>();
+
+        $r5 = $r4.append("Unimplemented or inappropriate for ");
+
+        $r6 = r0.getClass();
+
+        $r7 = $r6.getName();
+
+        $r8 = $r5.append($r7);
+
+        $r9 = $r8.toString();
+
+        specialinvoke $r3.<init>($r9);
+
+        throw $r3;
+    }
+
+    public void setSourceFile(java.lang.String)
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+        java.lang.String r1;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r0.sourceFile = r1;
+
+        return;
+    }
+
+    public java.lang.String getSourceFile()
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0, $r5;
+        java.lang.String $r1, $r2, $r6;
+        org.gjt.sp.jedit.bsh.Node $r3, $r4;
+
+        r0 := @this;
+
+        $r1 = r0.sourceFile;
+
+        if $r1 != null goto label2;
+
+        $r3 = r0.parent;
+
+        if $r3 == null goto label1;
+
+        $r4 = r0.parent;
+
+        $r5 = (org.gjt.sp.jedit.bsh.SimpleNode) $r4;
+
+        $r6 = $r5.getSourceFile();
+
+        return $r6;
+
+     label1:
+        return "<unknown file>";
+
+     label2:
+        $r2 = r0.sourceFile;
+
+        return $r2;
+    }
+
+    public int getLineNumber()
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+        org.gjt.sp.jedit.bsh.Token $r1;
+        int $i0;
+
+        r0 := @this;
+
+        $r1 = r0.firstToken;
+
+        $i0 = $r1.beginLine;
+
+        return $i0;
+    }
+
+    public java.lang.String getText()
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode r0;
+        java.lang.StringBuilder r1, $r2;
+        java.lang.String $r3, $r4, $r6, $r8, $r9;
+        boolean $z0, $z1, $z2;
+        org.gjt.sp.jedit.bsh.Token $r7, r11;
+
+        r0 := @this;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        r1 = $r2;
+
+(0)     r11 = r0.firstToken;
+
+     label1:
+        r11 = Phi(r11 #0, r11 #1);
+
+        if r11 == null goto label4;
+
+        $r4 = r11.image;
+
+        r1.append($r4);
+
+        $r6 = r11.image;
+
+        $z0 = $r6.equals(".");
+
+        if $z0 != 0 goto label2;
+
+        r1.append(" ");
+
+     label2:
+        $r7 = r0.lastToken;
+
+        if r11 == $r7 goto label4;
+
+        $r8 = r11.image;
+
+        $z1 = $r8.equals("{");
+
+        if $z1 != 0 goto label4;
+
+        $r9 = r11.image;
+
+        $z2 = $r9.equals(";");
+
+        if $z2 == 0 goto label3;
+
+        goto label4;
+
+     label3:
+        r11 = r11.next;
+
+(1)     goto label1;
+
+     label4:
+        $r3 = r1.toString();
+
+        return $r3;
+    }
+
+    static void <clinit>()
+    {
+        org.gjt.sp.jedit.bsh.SimpleNode$1 $r0;
+
+        $r0 = new org.gjt.sp.jedit.bsh.SimpleNode$1;
+
+        specialinvoke $r0.<init>(-1);
+
+        org.gjt.sp.jedit.bsh.SimpleNode.JAVACODE = $r0;
+
+        return;
+    }
+}

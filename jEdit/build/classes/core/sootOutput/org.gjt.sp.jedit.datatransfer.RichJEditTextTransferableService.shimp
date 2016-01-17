@@ -1,0 +1,70 @@
+public class org.gjt.sp.jedit.datatransfer.RichJEditTextTransferableService extends java.lang.Object implements org.gjt.sp.jedit.datatransfer.JEditTransferableService
+{
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.datatransfer.RichJEditTextTransferableService r0;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>();
+
+        return;
+    }
+
+    public boolean accept(org.gjt.sp.jedit.textarea.TextArea, java.lang.String)
+    {
+        org.gjt.sp.jedit.datatransfer.RichJEditTextTransferableService r0;
+        org.gjt.sp.jedit.textarea.TextArea r1;
+        java.lang.String r2;
+        boolean $z0, $z0_1, $z0_2;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        if r1 == null goto label1;
+
+        $z0 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z0_1 = 0;
+
+     label2:
+        $z0_2 = Phi($z0 #0, $z0_1 #1);
+
+        return $z0_2;
+    }
+
+    public java.awt.datatransfer.Transferable getTransferable(org.gjt.sp.jedit.textarea.TextArea, java.lang.String)
+    {
+        org.gjt.sp.jedit.datatransfer.RichJEditTextTransferableService r0;
+        org.gjt.sp.jedit.textarea.TextArea r1;
+        java.lang.String r2, $r6;
+        org.gjt.sp.jedit.datatransfer.RichTextTransferable $r3;
+        org.gjt.sp.jedit.buffer.JEditBuffer $r4;
+        org.gjt.sp.jedit.Mode $r5;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        $r3 = new org.gjt.sp.jedit.datatransfer.RichTextTransferable;
+
+        $r4 = r1.getBuffer();
+
+        $r5 = $r4.getMode();
+
+        $r6 = $r5.getName();
+
+        specialinvoke $r3.<init>(r2, $r6);
+
+        return $r3;
+    }
+}

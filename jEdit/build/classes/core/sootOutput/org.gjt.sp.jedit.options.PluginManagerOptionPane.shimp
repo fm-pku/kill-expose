@@ -1,0 +1,618 @@
+public class org.gjt.sp.jedit.options.PluginManagerOptionPane extends org.gjt.sp.jedit.AbstractOptionPane
+{
+    private javax.swing.JLabel mirrorLabel;
+    private javax.swing.JCheckBox disableObsolete;
+    private javax.swing.JRadioButton settingsDir;
+    private javax.swing.JCheckBox downloadSource;
+    private javax.swing.JCheckBox deleteDownloads;
+    private javax.swing.JSpinner cacheForSpinner;
+    private javax.swing.SpinnerNumberModel spinnerModel;
+    private org.gjt.sp.jedit.options.PluginManagerOptionPane$MirrorModel miraModel;
+    private javax.swing.JList miraList;
+    private javax.swing.JButton updateMirrors;
+    private final javax.swing.JLabel updateStatus;
+
+    public void <init>()
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane r0;
+        javax.swing.JLabel $r1;
+
+        r0 := @this;
+
+        specialinvoke r0.<init>("plugin-manager");
+
+        $r1 = new javax.swing.JLabel;
+
+        specialinvoke $r1.<init>();
+
+        r0.updateStatus = $r1;
+
+        return;
+    }
+
+    protected void _init()
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane r0;
+        javax.swing.JPanel r1, r2, r4, $r7, $r31, $r62, $r88, r97, r97_1, r97_2;
+        javax.swing.ButtonGroup r3, $r60;
+        java.awt.BorderLayout $r5;
+        javax.swing.JLabel $r6, $r18, $r35, $r90;
+        javax.swing.BoxLayout $r8, $r63, $r89;
+        java.lang.String $r9, $r11, $r12, $r13, $r26, $r41, $r47, $r53, $r61, $r64, $r66, $r72, $r81, $r83, $r84, $r91;
+        javax.swing.JRadioButton $r10, $r73, $r74, $r78, $r80, $r82, r98;
+        javax.swing.JList $r14, $r17, $r21;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$MirrorModel $r15;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$SingleSelectionModel $r16;
+        javax.swing.JScrollPane $r20;
+        java.awt.Component $r23, $r38, $r58, $r69, $r76, $r95;
+        javax.swing.JButton $r25, $r28, $r29, $r33;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$ActionHandler $r27;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread $r30;
+        java.awt.FlowLayout $r32;
+        javax.swing.JCheckBox $r40, $r42, $r43, $r44, $r46, $r48, $r49, $r50, $r52, $r54, $r55, $r56;
+        boolean $z0, $z1, $z2, $z3;
+        javax.swing.border.TitledBorder $r65;
+        javax.swing.SpinnerNumberModel $r85, $r87;
+        javax.swing.JSpinner $r86, $r93;
+        int i0;
+
+        r0 := @this;
+
+        $r5 = new java.awt.BorderLayout;
+
+        specialinvoke $r5.<init>();
+
+        r0.setLayout($r5);
+
+        $r6 = new javax.swing.JLabel;
+
+        specialinvoke $r6.<init>();
+
+        r0.mirrorLabel = $r6;
+
+        specialinvoke r0.updateMirrorLabel();
+
+        $r7 = new javax.swing.JPanel;
+
+        specialinvoke $r7.<init>();
+
+        r1 = $r7;
+
+        $r8 = new javax.swing.BoxLayout;
+
+        specialinvoke $r8.<init>(r1, 1);
+
+        r1.setLayout($r8);
+
+        r97 = null;
+
+        $r9 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+(0)     if $r9 == null goto label1;
+
+        $r80 = new javax.swing.JRadioButton;
+
+        $r81 = org.gjt.sp.jedit.jEdit.getProperty("options.plugin-manager.settings-dir");
+
+        specialinvoke $r80.<init>($r81);
+
+        r0.settingsDir = $r80;
+
+        $r82 = r0.settingsDir;
+
+        $r83 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        $r84 = org.gjt.sp.jedit.MiscUtilities.constructPath($r83, "jars");
+
+        $r82.setToolTipText($r84);
+
+        i0 = org.gjt.sp.jedit.jEdit.getIntegerProperty("plugin-manager.list-cache.minutes", 10);
+
+        $r85 = new javax.swing.SpinnerNumberModel;
+
+        specialinvoke $r85.<init>(i0, 0, 240, 5);
+
+        r0.spinnerModel = $r85;
+
+        $r86 = new javax.swing.JSpinner;
+
+        $r87 = r0.spinnerModel;
+
+        specialinvoke $r86.<init>($r87);
+
+        r0.cacheForSpinner = $r86;
+
+        $r88 = new javax.swing.JPanel;
+
+        specialinvoke $r88.<init>();
+
+        r97_1 = $r88;
+
+        $r89 = new javax.swing.BoxLayout;
+
+        specialinvoke $r89.<init>(r97_1, 0);
+
+        r97_1.setLayout($r89);
+
+        $r90 = new javax.swing.JLabel;
+
+        $r91 = org.gjt.sp.jedit.jEdit.getProperty("options.plugin-manager.list-cache.minutes");
+
+        specialinvoke $r90.<init>($r91);
+
+        r97_1.add($r90);
+
+        $r93 = r0.cacheForSpinner;
+
+        r97_1.add($r93);
+
+        $r95 = javax.swing.Box.createGlue();
+
+(1)     r97_1.add($r95);
+
+     label1:
+        r97_2 = Phi(r97 #0, r97_1 #1);
+
+        $r10 = new javax.swing.JRadioButton;
+
+        $r11 = org.gjt.sp.jedit.jEdit.getProperty("options.plugin-manager.app-dir");
+
+        specialinvoke $r10.<init>($r11);
+
+        r98 = $r10;
+
+        $r12 = org.gjt.sp.jedit.jEdit.getJEditHome();
+
+        $r13 = org.gjt.sp.jedit.MiscUtilities.constructPath($r12, "jars");
+
+        r98.setToolTipText($r13);
+
+        $r14 = new javax.swing.JList;
+
+        $r15 = new org.gjt.sp.jedit.options.PluginManagerOptionPane$MirrorModel;
+
+        specialinvoke $r15.<init>();
+
+        r0.miraModel = $r15;
+
+        specialinvoke $r14.<init>($r15);
+
+        r0.miraList = $r14;
+
+        $r17 = r0.miraList;
+
+        $r16 = new org.gjt.sp.jedit.options.PluginManagerOptionPane$SingleSelectionModel;
+
+        specialinvoke $r16.<init>();
+
+        $r17.setSelectionModel($r16);
+
+        $r18 = r0.mirrorLabel;
+
+        r0.add("North", $r18);
+
+        $r20 = new javax.swing.JScrollPane;
+
+        $r21 = r0.miraList;
+
+        specialinvoke $r20.<init>($r21);
+
+        r0.add("Center", $r20);
+
+        $r23 = javax.swing.Box.createVerticalStrut(6);
+
+        r1.add($r23);
+
+        $r25 = new javax.swing.JButton;
+
+        $r26 = org.gjt.sp.jedit.jEdit.getProperty("options.plugin-manager.updateMirrors");
+
+        specialinvoke $r25.<init>($r26);
+
+        r0.updateMirrors = $r25;
+
+        $r28 = r0.updateMirrors;
+
+        $r27 = new org.gjt.sp.jedit.options.PluginManagerOptionPane$ActionHandler;
+
+        specialinvoke $r27.<init>(r0);
+
+        $r28.addActionListener($r27);
+
+        $r29 = r0.updateMirrors;
+
+        $r29.setEnabled(0);
+
+        $r30 = new org.gjt.sp.jedit.options.PluginManagerOptionPane$UpdateMirrorsThread;
+
+        specialinvoke $r30.<init>(r0, 0);
+
+        org.gjt.sp.util.ThreadUtilities.runInBackground($r30);
+
+        $r31 = new javax.swing.JPanel;
+
+        $r32 = new java.awt.FlowLayout;
+
+        specialinvoke $r32.<init>(0);
+
+        specialinvoke $r31.<init>($r32);
+
+        r2 = $r31;
+
+        $r33 = r0.updateMirrors;
+
+        r2.add($r33);
+
+        if r97_2 == null goto label2;
+
+        r2.add(r97_2);
+
+     label2:
+        $r35 = r0.updateStatus;
+
+        r2.add($r35);
+
+        r2.setAlignmentX(0.0F);
+
+        r1.add(r2);
+
+        $r38 = javax.swing.Box.createVerticalStrut(6);
+
+        r1.add($r38);
+
+        $r40 = new javax.swing.JCheckBox;
+
+        $r41 = org.gjt.sp.jedit.jEdit.getProperty("options.plugin-manager.downloadSource");
+
+        specialinvoke $r40.<init>($r41);
+
+        r0.downloadSource = $r40;
+
+        $r42 = r0.downloadSource;
+
+        $z0 = org.gjt.sp.jedit.jEdit.getBooleanProperty("plugin-manager.downloadSource");
+
+        $r42.setSelected($z0);
+
+        $r43 = r0.downloadSource;
+
+        $r43.setAlignmentX(0.0F);
+
+        $r44 = r0.downloadSource;
+
+        r1.add($r44);
+
+        $r46 = new javax.swing.JCheckBox;
+
+        $r47 = org.gjt.sp.jedit.jEdit.getProperty("options.plugin-manager.deleteDownloads");
+
+        specialinvoke $r46.<init>($r47);
+
+        r0.deleteDownloads = $r46;
+
+        $r48 = r0.deleteDownloads;
+
+        $z1 = org.gjt.sp.jedit.jEdit.getBooleanProperty("plugin-manager.deleteDownloads");
+
+        $r48.setSelected($z1);
+
+        $r49 = r0.deleteDownloads;
+
+        $r49.setAlignmentX(0.0F);
+
+        $r50 = r0.deleteDownloads;
+
+        r1.add($r50);
+
+        $r52 = new javax.swing.JCheckBox;
+
+        $r53 = org.gjt.sp.jedit.jEdit.getProperty("options.plugin-manager.disable-obsolete");
+
+        specialinvoke $r52.<init>($r53);
+
+        r0.disableObsolete = $r52;
+
+        $r54 = r0.disableObsolete;
+
+        $z2 = org.gjt.sp.jedit.jEdit.getBooleanProperty("plugin-manager.disable-obsolete", 1);
+
+        $r54.setSelected($z2);
+
+        $r55 = r0.disableObsolete;
+
+        $r55.setAlignmentX(0.0F);
+
+        $r56 = r0.disableObsolete;
+
+        r1.add($r56);
+
+        $r58 = javax.swing.Box.createVerticalStrut(6);
+
+        r1.add($r58);
+
+        $r60 = new javax.swing.ButtonGroup;
+
+        specialinvoke $r60.<init>();
+
+        r3 = $r60;
+
+        $r61 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        if $r61 == null goto label3;
+
+        $r78 = r0.settingsDir;
+
+        r3.add($r78);
+
+     label3:
+        r3.add(r98);
+
+        $r62 = new javax.swing.JPanel;
+
+        specialinvoke $r62.<init>();
+
+        r4 = $r62;
+
+        $r63 = new javax.swing.BoxLayout;
+
+        specialinvoke $r63.<init>(r4, 1);
+
+        r4.setLayout($r63);
+
+        $r64 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        if $r64 == null goto label4;
+
+        $r74 = r0.settingsDir;
+
+        r4.add($r74);
+
+        $r76 = javax.swing.Box.createVerticalStrut(3);
+
+        r4.add($r76);
+
+     label4:
+        $r65 = new javax.swing.border.TitledBorder;
+
+        $r66 = org.gjt.sp.jedit.jEdit.getProperty("options.plugin-manager.location");
+
+        specialinvoke $r65.<init>($r66);
+
+        r4.setBorder($r65);
+
+        r4.add(r98);
+
+        r4.setAlignmentX(0.0F);
+
+        r1.add(r4);
+
+        $r69 = javax.swing.Box.createGlue();
+
+        r1.add($r69);
+
+        r0.add("South", r1);
+
+        $z3 = org.gjt.sp.jedit.jEdit.getBooleanProperty("plugin-manager.installUser");
+
+        if $z3 == 0 goto label5;
+
+        $r72 = org.gjt.sp.jedit.jEdit.getSettingsDirectory();
+
+        if $r72 == null goto label5;
+
+        $r73 = r0.settingsDir;
+
+        $r73.setSelected(1);
+
+        goto label6;
+
+     label5:
+        r98.setSelected(1);
+
+     label6:
+        return;
+    }
+
+    protected void _save()
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane r0;
+        java.lang.String r1, r2, $r15;
+        javax.swing.JRadioButton $r3, $r16;
+        javax.swing.JCheckBox $r4, $r5, $r8;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z5_1, $z5_2;
+        javax.swing.SpinnerNumberModel $r6;
+        java.lang.Number $r7;
+        int $i0, $i1, $i2, $i3;
+        javax.swing.JList $r9, $r10, $r12;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$MirrorModel $r11, $r13;
+        java.lang.Object $r14;
+
+        r0 := @this;
+
+        $r3 = r0.settingsDir;
+
+        if $r3 == null goto label1;
+
+        $r16 = r0.settingsDir;
+
+        $z4 = $r16.isSelected();
+
+        if $z4 == 0 goto label1;
+
+        $z5 = 1;
+
+(0)     goto label2;
+
+     label1:
+(1)     $z5_1 = 0;
+
+     label2:
+        $z5_2 = Phi($z5 #0, $z5_1 #1);
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("plugin-manager.installUser", $z5_2);
+
+        $r4 = r0.downloadSource;
+
+        $z0 = $r4.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("plugin-manager.downloadSource", $z0);
+
+        $r5 = r0.deleteDownloads;
+
+        $z1 = $r5.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("plugin-manager.deleteDownloads", $z1);
+
+        $r6 = r0.spinnerModel;
+
+        $r7 = $r6.getNumber();
+
+        $i0 = $r7.intValue();
+
+        org.gjt.sp.jedit.jEdit.setIntegerProperty("plugin-manager.list-cache.minutes", $i0);
+
+        $r8 = r0.disableObsolete;
+
+        $z2 = $r8.isSelected();
+
+        org.gjt.sp.jedit.jEdit.setBooleanProperty("plugin-manager.disable-obsolete", $z2);
+
+        $r9 = r0.miraList;
+
+        $i1 = $r9.getSelectedIndex();
+
+        if $i1 == -1 goto label3;
+
+        $r11 = r0.miraModel;
+
+        $r10 = r0.miraList;
+
+        $i2 = $r10.getSelectedIndex();
+
+        r1 = $r11.getID($i2);
+
+        r2 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.mirror.id");
+
+        $z3 = r2.equals(r1);
+
+        if $z3 != 0 goto label3;
+
+        org.gjt.sp.jedit.jEdit.setProperty("plugin-manager.mirror.id", r1);
+
+        $r13 = r0.miraModel;
+
+        $r12 = r0.miraList;
+
+        $i3 = $r12.getSelectedIndex();
+
+        $r14 = $r13.getElementAt($i3);
+
+        $r15 = (java.lang.String) $r14;
+
+        org.gjt.sp.jedit.jEdit.setProperty("plugin-manager.mirror.name", $r15);
+
+        specialinvoke r0.updateMirrorLabel();
+
+     label3:
+        return;
+    }
+
+    private void updateMirrorLabel()
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane r0;
+        java.lang.String r1, $r4, $r8, r9, r9_1, r9_2, r9_3;
+        boolean $z0;
+        java.lang.StringBuilder $r2, $r5, $r6, $r7;
+        javax.swing.JLabel $r3;
+
+        r0 := @this;
+
+        r1 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.mirror.id");
+
+        $z0 = r1.equals("NONE");
+
+        if $z0 == 0 goto label1;
+
+        r9 = "Plugin Central default";
+
+(0)     goto label2;
+
+     label1:
+        r9_1 = org.gjt.sp.jedit.jEdit.getProperty("plugin-manager.mirror.name");
+
+(1)     if r9_1 != null goto label2;
+
+(2)     r9_2 = r1;
+
+     label2:
+        r9_3 = Phi(r9 #0, r9_1 #1, r9_2 #2);
+
+        $r3 = r0.mirrorLabel;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<init>();
+
+        $r4 = org.gjt.sp.jedit.jEdit.getProperty("options.plugin-manager.mirror");
+
+        $r5 = $r2.append($r4);
+
+        $r6 = $r5.append(32);
+
+        $r7 = $r6.append(r9_3);
+
+        $r8 = $r7.toString();
+
+        $r3.setText($r8);
+
+        return;
+    }
+
+    static javax.swing.JButton access$000(org.gjt.sp.jedit.options.PluginManagerOptionPane)
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane r0;
+        javax.swing.JButton $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.updateMirrors;
+
+        return $r1;
+    }
+
+    static javax.swing.JLabel access$100(org.gjt.sp.jedit.options.PluginManagerOptionPane)
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane r0;
+        javax.swing.JLabel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.updateStatus;
+
+        return $r1;
+    }
+
+    static org.gjt.sp.jedit.options.PluginManagerOptionPane$MirrorModel access$200(org.gjt.sp.jedit.options.PluginManagerOptionPane)
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane r0;
+        org.gjt.sp.jedit.options.PluginManagerOptionPane$MirrorModel $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.miraModel;
+
+        return $r1;
+    }
+
+    static javax.swing.JList access$300(org.gjt.sp.jedit.options.PluginManagerOptionPane)
+    {
+        org.gjt.sp.jedit.options.PluginManagerOptionPane r0;
+        javax.swing.JList $r1;
+
+        r0 := @parameter0;
+
+        $r1 = r0.miraList;
+
+        return $r1;
+    }
+}

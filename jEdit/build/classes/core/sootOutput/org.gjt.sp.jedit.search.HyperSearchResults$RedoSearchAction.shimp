@@ -1,0 +1,68 @@
+class org.gjt.sp.jedit.search.HyperSearchResults$RedoSearchAction extends javax.swing.AbstractAction
+{
+    private final org.gjt.sp.jedit.search.HyperSearchOperationNode hyperSearchOperationNode;
+    final org.gjt.sp.jedit.search.HyperSearchResults this$0;
+
+    void <init>(org.gjt.sp.jedit.search.HyperSearchResults, org.gjt.sp.jedit.search.HyperSearchOperationNode)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$RedoSearchAction r0;
+        org.gjt.sp.jedit.search.HyperSearchResults r1;
+        org.gjt.sp.jedit.search.HyperSearchOperationNode r2;
+        java.lang.String $r3;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        r2 := @parameter1;
+
+        r0.this$0 = r1;
+
+        $r3 = org.gjt.sp.jedit.jEdit.getProperty("hypersearch-results.redo");
+
+        specialinvoke r0.<init>($r3);
+
+        r0.hyperSearchOperationNode = r2;
+
+        return;
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent)
+    {
+        org.gjt.sp.jedit.search.HyperSearchResults$RedoSearchAction r0;
+        java.awt.event.ActionEvent r1;
+        org.gjt.sp.jedit.search.HyperSearchOperationNode $r2, $r4;
+        java.lang.String $r3;
+        org.gjt.sp.jedit.search.SearchMatcher $r5;
+        org.gjt.sp.jedit.search.HyperSearchResults $r6, $r7;
+        org.gjt.sp.jedit.View $r8;
+
+        r0 := @this;
+
+        r1 := @parameter0;
+
+        $r2 = r0.hyperSearchOperationNode;
+
+        $r3 = $r2.getSearchString();
+
+        org.gjt.sp.jedit.search.SearchAndReplace.setSearchString($r3);
+
+        $r4 = r0.hyperSearchOperationNode;
+
+        $r5 = $r4.getSearchMatcher();
+
+        org.gjt.sp.jedit.search.SearchAndReplace.setSearchMatcher($r5);
+
+        $r6 = r0.this$0;
+
+        org.gjt.sp.jedit.search.HyperSearchResults.access$1200($r6);
+
+        $r7 = r0.this$0;
+
+        $r8 = org.gjt.sp.jedit.search.HyperSearchResults.access$1300($r7);
+
+        org.gjt.sp.jedit.search.SearchAndReplace.hyperSearch($r8, 0);
+
+        return;
+    }
+}
